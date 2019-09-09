@@ -1,0 +1,424 @@
+body.is-dark-mode {
+    --c-bg-1: hsl(300, 0%, 11%);
+    --c-bg-2: hsl(300, 0%, 14%);
+    --c-bg-3: hsl(300, 0%, 16%);
+    --c-bg-4: hsl(300, 0%, 20%);
+    --c-text-1: hsl(300, 0%, 42%);
+    --c-text-2: hsl(300, 0%, 59%);
+    --c-text-3: hsl(300, 0%, 83%);
+    --c-green: hsl(160, 100%, 30%);
+    --c-yellow: hsl(37, 58%, 51%);
+    --c-streak: hsl(25, 81%, 23%);
+    --c-streak-bg: hsl(25, 82%, 73%);
+    background: var(--c-bg-1) !important;
+    color: var(--c-text-2) !important;
+
+    .ListView .Sidebar {
+        background-color: var(--c-bg-2);
+    }
+
+    .ListView .ProductLink.active,
+    .ListView .ProductLink:hover,
+    .ListView .Tag.active,
+    .ListView .Tag:hover {
+        background-color: var(--c-bg-3);
+    }
+
+    .StreakPage {
+        background: var(--c-bg-1);
+    }
+
+    .MilestoneMedia:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+        color: var(--c-bg-5);
+    }
+
+    .button {
+        border: 0;
+    }
+
+    .LinkWrapped {
+        color: var(--c-bg-5) !important;
+    }
+
+    .settings-header {
+        border-color: var(--c-bg-2);
+    }
+
+    .MilestoneMedia {
+        color: var(--c-bg-5) !important;
+
+        p {
+            color: var(--c-bg-5) !important;
+        }
+    }
+
+    .ProfileActions a,
+    .ProfileActions .icon,
+    .ProfileActions a strong {
+        color: hsl(300, 0%, 90%) !important;
+    }
+
+    .ProfileModal,
+    .Modal-Content,
+    .navbar.is-dark,
+    .card,
+    .SidebarMenu,
+    .delete-button,
+    #footer {
+        background-color: var(--c-bg-2) !important;
+        border-color: var(--c-bg-2);
+    }
+
+    .content {
+        color: var(--c-bg-5);
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            color: var(--c-bg-5);
+        }
+
+        blockquote {
+            background-color: var(--c-bg-3);
+            border-color: var(--c-bg-4);
+        }
+    }
+
+    .navbar.translucent-navbar {
+        background-color: transparent !important;
+    }
+
+    .navbar.is-white,
+    .table,
+    .box,
+    .gfJOVN .card-footer {
+        background-color: var(--c-bg-3) !important;
+        color: var(--c-text-3) !important;
+        -webkit-transition: all 0.4s ease;
+    }
+
+    .Entry {
+        background-color: hsla(0, 0%, 0%, 0) !important;
+    }
+
+    .media .tag:not(body) {
+        background-color: var(--c-bg-4) !important;
+        color: var(--c-text-3);
+    }
+
+    .card {
+        color: var(--c-text-2) !important;
+        border-color: var(--c-bg-2);
+    }
+
+    .card-header {
+        color: var(--c-text-2) !important;
+        background-color: var(--c-bg-3) !important;
+        border-bottom: 1px solid var(--c-bg-1) !important;
+    }
+
+    .card-footer,
+    .card-footer-item:not(:last-child) {
+        border-color: var(--c-bg-1) !important;
+        background-color: var(--c-bg-2) !important;
+    }
+
+    .badge.is-badge-white:not([data-badge])::after,
+    .badge.is-badge-white[data-badge]::after {
+        background: var(--c-streak-bg);
+        box-shadow: 0 0 0 0.1rem var(--c-streak-bg);
+        color: var(--c-streak);
+        line-height: 1;
+        padding-right: 5px;
+    }
+
+    .is-avatar-badge.badge.is-badge-small[data-badge]::after {
+        padding: 0 4px 0 0 !important;
+        font-size: 11px !important;
+    }
+
+    .Entry a {
+        color: var(--c-green) !important;
+    }
+
+    a strong,
+    .subtitle {
+        color: var(--c-text-2) !important;
+    }
+
+    .task-content {
+        padding-left: 5px;
+    }
+
+    .eLkRbl {
+        color: var(--c-text-2) !important;
+        border-color: var(--c-text-2) !important;
+        border-bottom-width: 1px !important;
+    }
+
+    .InProgressCard .eLkRbl {
+        color: var(--c-text-3) !important;
+        border-color: var(--c-text-3) !important;
+    }
+
+    .card div .heading {
+        color: var(--c-text-3);
+    }
+
+    .column .card div:not(:first-child) .heading {
+        border-top: 1px solid var(--c-bg-1);
+    }
+
+    .RecentQuestionsList h2,
+    .title:not(.has-text-primary) {
+        color: var(--c-text-3) !important;
+    }
+
+    .KanbanView .KanbanProject > .title-card,
+    .KanbanTask,
+    .KanbanTask > .hover-panel,
+    .ProjectTaskList .KanbanTask > .hover-panel a {
+        background: var(--c-bg-3) !important;
+    }
+
+    .card .RecentQuestionsList > a > div:hover {
+        background-color: var(--c-bg-3) !important;
+    }
+
+    hr {
+        background-color: var(--c-bg-3) !important;
+    }
+
+    .level-item.has-text-grey-light {
+        color: var(--c-text-1) !important;
+    }
+
+    input[type="button" i],
+    input[type="submit" i],
+    input[type="reset" i],
+    input[type="file" i]::-webkit-file-upload-button,
+    button:not(.is-primary, .btn-onboard) {
+        background-color: var(--c-bg-3) !important;
+        color: var(--c-text-1) !important;
+    }
+
+    .button:not(.is-primary),
+    .button:not(.is-primary):hover,
+    .button.is-hovered {
+        border-color: var(--c-bg-1) !important;
+        color: var(--c-text-3) !important;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .button.is-text {
+        border-color: transparent !important;
+    }
+
+    .InProgressCard .card-content {
+        background-color: var(--c-yellow) !important;
+        border-radius: 6px !important;
+    }
+
+    .AllProductsTab .ProductMedia {
+        margin-bottom: 20px !important;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--c-bg-1);
+    }
+
+    .media + .media,
+    .table td,
+    .table th,
+    .quickview-footer {
+        border-color: var(--c-bg-1) !important;
+    }
+
+    .table th,
+    .table thead td,
+    .table thead th {
+        color: var(--c-text-1) !important;
+    }
+
+    .notifications-header,
+    .quickview-footer,
+    div.quickview-body {
+        background-color: var(--c-bg-1) !important;
+    }
+
+    .ProfileModal-Header {
+        background: var(--c-green) !important;
+    }
+
+    .hero-body .subtitle,
+    .ProfileModal-Header .subtitle {
+        color: var(--c-text-3) !important;
+    }
+
+    .button.is-primary {
+        background-color: var(--c-green) !important;
+        color: hsl(0, 100%, 100%) !important;
+    }
+
+    @media screen and (min-width: 1024px) {
+        .navbar.is-white .navbar-start > .navbar-item,
+        .navbar.is-white .navbar-start .navbar-link,
+        .navbar.is-white .navbar-end > .navbar-item,
+        .navbar.is-white .navbar-end .navbar-link {
+            color: var(--c-text-3) !important;
+        }
+
+        .navbar.is-white .navbar-start > a.navbar-item:hover,
+        .navbar.is-white .navbar-start > a.navbar-item.is-active,
+        .navbar.is-white .navbar-start .navbar-link:hover,
+        .navbar.is-white .navbar-start .navbar-link.is-active,
+        .navbar.is-white .navbar-end > a.navbar-item:hover,
+        .navbar.is-white .navbar-end > a.navbar-item.is-active,
+        .navbar.is-white .navbar-end .navbar-link:hover,
+        .navbar.is-white .navbar-end .navbar-link.is-active {
+            background-color: var(--c-bg-3) !important;
+            color: var(--c-green) !important;
+        }
+
+        .navbar-secondary a.navbar-item.is-active {
+            border-color: transparent !important;
+        }
+    }
+
+    .file-label,
+    .file,
+    .file-cta,
+    input,
+    .CreateProductForm textarea,
+    .input,
+    .textarea {
+        background-color: var(--c-bg-4) !important;
+        border-color: var(--c-bg-3) !important;
+    }
+
+    label,
+    .file-label {
+        color: var(--c-text-3) !important;
+    }
+
+    ::-webkit-input-placeholder {
+        color: var(--c-text-1) !important;
+        opacity: 0.6;
+    }
+
+    ::placeholder {
+        color: var(--c-text-1) !important;
+        opacity: 0.6;
+    }
+
+    .input {
+        color: var(--c-text-3) !important;
+    }
+
+    .hero-body * {
+        color: hsl(0, 100%, 100%) !important;
+    }
+
+    .ThreadStreamItem > div:hover {
+        background-color: var(--c-bg-3) !important;
+    }
+
+    .Thread .card div:not(:first-child) .heading {
+        border-top: none !important;
+        padding-top: 0;
+    }
+
+    .button.is-loading {
+        color: transparent !important;
+        pointer-events: none;
+    }
+
+    .UserCard {
+        background-color: var(--c-bg-3);
+    }
+
+    .Editor .icon {
+        background-color: var(--c-bg-4);
+    }
+
+    .Editor .editor-flex {
+        background-color: var(--c-bg-4);
+    }
+
+    .select > select {
+        color: white;
+        background-color: var(--c-bg-4);
+        border: var(--c-bg-5);
+    }
+
+    .Editor .date-preview {
+        border: 0;
+        background-color: var(--c-bg-4);
+    }
+
+    input,
+    textarea {
+        color: white;
+    }
+
+    .PageCard * {
+        color: hsl(0, 100%, 100%) !important;
+    }
+
+    .MobileNav {
+        background-color: var(--c-bg-3);
+    }
+
+    .Notification a button.button {
+        border: 1px solid var(--c-text-3) !important;
+    }
+
+    li img {
+        border-color: var(--c-bg-2);
+    }
+
+    .table.is-hoverable tbody tr:not(.is-selected):hover {
+        background-color: var(--c-bg-4);
+    }
+
+    .btn-onboard {
+        background-color: #00bc7b !important;
+        border-radius: 30px;
+        padding: 6px 30px 9px;
+        color: #fff !important;
+        border: 0;
+        font-size: 23px;
+        line-height: 1;
+        cursor: pointer;
+        margin-top: 30px;
+
+        &.prev {
+            background: #fff !important;
+            color: #999 !important;
+        }
+    }
+
+    .chrome-picker input {
+        background: #fff !important;
+    }
+
+    .MobileNav .item button,
+    .MobileNav .item button:active {
+        border-color: var(--c-green) !important;
+        background-color: var(--c-green) !important;
+        color: var(--c-lightest) !important;
+    }
+
+    .MobileNav {
+        border-top-color: var(--c-bg-4);
+    }
+
+    img,
+    .user-card-container figure {
+        border-color: var(--c-bg-3) !important;
+    }
+
+    .SettingsPage form .svg-inline--fa {
+        color: var(--c-text-4) !important;
+    }
+}

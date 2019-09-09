@@ -1,0 +1,87 @@
+.Toast {
+    background-color: rgba(38, 50, 56, 0.95);
+    border-radius: 5px;
+    min-width: 400px;
+    max-width: 400px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    color: white;
+    cursor: pointer;
+
+    &.error {
+        background-color: rgba(255, 56, 96, 0.951);
+
+        .toast-title .time {
+            color: whitesmoke !important;
+        }
+    }
+
+    &.success {
+        background-color: rgba(35, 209, 96, 0.951);
+    }
+
+    &.dev {
+        background-color: rgba(54, 54, 54, 0.951);
+    }
+
+    &.warning {
+        background-color: rgba(255, 221, 87, 0.951);
+        color: #000;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .toast-title {
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+
+        .title-item {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .level {
+            margin-bottom: 0px;
+        }
+
+        .level-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time {
+            font-size: 14px;
+        }
+
+        &:last-child {
+            border-radius: 5px !important;
+        }
+    }
+
+    .toast-body {
+        padding: 10px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+}
+
+.Toast-enter {
+    transform: translate(100%);
+}
+.Toast-enter.Toast-enter-active {
+    transform: translate(0%);
+    transition: transform 400ms ease;
+}
+.Toast-exit {
+    transform: translate(0%);
+}
+.Toast-exit.Toast-exit-active {
+    transform: translate(150%);
+    transition: transform 400ms ease;
+}
