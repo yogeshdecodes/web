@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Emoji from "components/Emoji";
+import Emoji from "./Emoji";
 
 const Tda = ({ tda }) => (
     <>

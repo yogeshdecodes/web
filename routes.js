@@ -5,4 +5,4 @@ const routes = require("next-routes");
 // 2. url
 // 3. route name
 
-module.exports = routes().add("index", "", "home");
+module.exports = routes().add("home", "", "home");
