@@ -10,7 +10,7 @@ import {
 } from "mobx";
 import { getUser, login, setTimezone } from "../lib/auth";
 
-import Router from "next/router";
+import {Router} from "~/routes";
 import axios from "~/lib/axios";
 import { isServer } from "~/config";
 import nookies from "nookies";
@@ -60,7 +60,6 @@ class AuthStore extends BaseStore {
 
   silentSync = flow(function*() {
     try {
-      console.log("Hermes/Users: Silently syncing.");
       let user = yield getUser();
       this.user = user;
     } catch (e) {}

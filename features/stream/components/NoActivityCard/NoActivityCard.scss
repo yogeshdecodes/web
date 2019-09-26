@@ -1,0 +1,15 @@
+@import "../../../../styles/_variables";
+
+.NoActivityCard {
+	.CtaButton {
+		@extend %poppins;
+		margin-bottom: 10px;
+		border: none !important;
+		background: #3ed194;
+
+		&:hover {
+			background: #32bc83;
+		}
+	}
+}
+

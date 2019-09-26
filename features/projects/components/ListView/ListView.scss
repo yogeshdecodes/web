@@ -1,0 +1,87 @@
+@import "../../../../styles/_variables";
+
+.ListView {
+    .InProgressCard {
+        @extend %transition-bg;
+        color: $c-lightest;
+        background: $c-in-progress;
+
+        &.empty {
+            background: $c-main;
+        }
+
+        .Entry {
+            background: transparent;
+            font-size: 1.5em;
+            color: $c-lightest;
+            cursor: pointer;
+
+            svg {
+                color: $c-lightest;
+            }
+        }
+
+        h3,
+        h4 {
+            color: $c-lightest;
+        }
+
+        h4 {
+            font-size: 0.688rem;
+            letter-spacing: 1px;
+            margin: 0 0 5px;
+            text-transform: uppercase;
+        }
+
+        .flex {
+            align-items: center;
+
+            > div:first-of-type {
+                flex: 1 1 auto;
+                width: calc(100% - 250px);
+            }
+
+            > div:nth-of-type(2) {
+                flex: 0 1 auto;
+                width: 230px;
+            }
+        }
+    }
+
+    .toggle-done {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding-right: 2px;
+    }
+
+    .ProjectTaskList-Header {
+        cursor: pointer;
+
+        .flex {
+            align-items: center;
+        }
+
+        h4 {
+            @extend %poppins;
+            font-size: 1.25rem;
+            flex: 1 1 auto;
+            padding: 0 1rem;
+        }
+    }
+
+    .ProjectLink {
+        border-radius: 2px;
+        color: $c-text;
+        cursor: pointer;
+        display: block;
+        padding: 0.5em 0.75em;
+        text-decoration: none;
+        width: 100%;
+        border: 0;
+        text-align: left;
+        outline: none;
+        font-size: 0.938rem;
+    }
+}

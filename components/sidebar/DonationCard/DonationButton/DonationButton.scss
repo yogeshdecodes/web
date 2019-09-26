@@ -1,0 +1,31 @@
+@import "../../../../styles/_variables";
+
+.bmc-button {
+	@extend %poppins;
+	@extend %corners;
+	@extend %transition;
+	text-decoration: none;
+	display: inline-flex;
+	color: $c-lightest;
+	background: $c-main-btn;
+	border: 0;
+	padding: 20px;
+	font-size: 1.1rem;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+
+	img {
+		width: 20px;
+		margin-bottom: 1px;
+	}
+
+	&:hover, 
+	&:active,
+	&:focus {
+		text-decoration: none;
+		box-shadow: 0 1px 2px 2px hsla(0, 0%, 75%, 0.5);
+		opacity: 0.85;
+		color: $c-lightest;
+	}
+}

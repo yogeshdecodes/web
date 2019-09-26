@@ -1,0 +1,39 @@
+.EventMedia {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 0px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+    &.large {
+        // min-height: 300px;
+    }
+
+    .title,
+    .subtitle {
+    }
+
+    .title.no-margin {
+        margin-bottom: 0px;
+    }
+
+    &:hover {
+        transform: scale(1.03);
+    }
+
+    img {
+        border-radius: 4px;
+    }
+
+    .EventToolbar {
+        margin-top: 30px;
+
+        p {
+            color: gray;
+            font-size: 14px;
+        }
+    }
+}

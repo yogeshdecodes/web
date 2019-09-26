@@ -1,0 +1,14 @@
+.UserHero {
+	min-height: 20vh;
+
+	.UserHero-Avatar {
+		padding-right: 30px;
+
+		> img {
+			max-width: 20vh;
+			max-height: 20vh;
+			border: 5px solid white;
+			border-radius: 50%;
+		}
+	}
+}

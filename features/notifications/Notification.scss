@@ -1,0 +1,127 @@
+@import "../../styles/_variables";
+
+.quickview.is-active {
+    z-index: 1000 !important;
+}
+
+.quickview-body {
+    background: $c-bg;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.quickview-footer {
+    justify-content: center;
+}
+
+.Notification {
+    @extend %corners;
+    @extend %shadow;
+    background: $c-lightest;
+    display: flex;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    overflow-wrap: break-word;
+
+    &.read {
+        opacity: 0.5;
+    }
+
+    > div {
+        margin-right: 1rem;
+
+        img {
+            width: 32px;
+            height: 32px;
+            max-width: none;
+        }
+    }
+
+    .Entry {
+        padding: 1rem 0;
+    }
+
+    .note {
+        @extend %note;
+        margin: 0.8rem 0 0.2rem;
+    }
+}
+
+.notifications-header {
+    background: $c-bg-darkest;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    height: 60px;
+
+    h1 {
+        @extend %poppins;
+        color: $c-lightest;
+        margin: 0;
+        font-size: 1.25rem;
+        line-height: 1;
+    }
+
+    .delete {
+        @extend %round;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        background: hsla(0, 0%, 4%, 0.2);
+        border: 0;
+        cursor: pointer;
+        display: inline-block;
+        flex-grow: 0;
+        flex-shrink: 0;
+        font-size: 0;
+        height: 20px;
+        max-height: 20px;
+        max-width: 20px;
+        min-height: 20px;
+        min-width: 20px;
+        outline: none;
+        position: relative;
+        vertical-align: top;
+        width: 20px;
+
+        &::before {
+            height: 2px;
+            width: 50%;
+        }
+
+        &::after {
+            height: 50%;
+            width: 2px;
+        }
+
+        &::after,
+        &::before {
+            content: "";
+            background: $c-lightest;
+            display: block;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+            transform: translateX(-50%) translateY(-50%) rotate(45deg);
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+        }
+    }
+}
+
+.tag {
+    @extend %rounded;
+    display: inline-flex;
+}
+
+@media only screen and (max-width: 768px) {
+    .notifications-quickview {
+        width: 100vw;
+    }
+}

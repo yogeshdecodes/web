@@ -1,0 +1,16 @@
+.NoActivityCard {
+}
+
+.NoActivityCard .CtaButton {
+    border: none !important;
+    background-color: white;
+    transition: all 0.3s ease;
+    overflow: visible;
+    color: #32bc83;
+}
+
+.NoActivityCard .CtaButton:hover {
+    background-color: #32bc83;
+    transform: scale(0.95);
+    color: white;
+}

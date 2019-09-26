@@ -1,0 +1,37 @@
+@import "../../styles/_variables";
+
+.InProgressCard {
+    @extend %transition-bg;
+    color: $c-lightest;
+    background: $c-in-progress;
+
+    * {
+        color: $c-lightest;
+    }
+
+    &.empty {
+        background: $c-main;
+    }
+
+    .Entry {
+        background: transparent;
+        cursor: pointer;
+
+        svg {
+            color: $c-lightest;
+            height: 1.4rem;
+        }
+
+        .task-content {
+            font-size: 1.4rem;
+        }
+    }
+}
+
+.color-circle {
+    @extend %round;
+    background: $c-lightest;
+    border: 4px solid red;
+    height: 15px;
+    width: 15px;
+}

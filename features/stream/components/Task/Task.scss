@@ -1,0 +1,116 @@
+@import "../../../../styles/_variables";
+
+@keyframes fadeIn {
+    from {
+        opacity: 0.6;
+    }
+}
+
+.pulse:hover {
+    animation: none;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+        box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+}
+
+.Entry {
+    .fa {
+        margin-right: 8px;
+        font-size: 0.813rem;
+    }
+
+    .done {
+        background-color: #2ecc71;
+    }
+
+    &.remaining {
+        opacity: 0.8;
+    }
+
+    &.in-progress .task-content {
+        animation: fadeIn 1s infinite alternate;
+    }
+
+    &.in-progress > svg {
+        @extend %round;
+        animation: pulse 2s infinite;
+        box-shadow: 0 0 5px #f4a324;
+    }
+
+    .emoji {
+        margin-right: 6px;
+        font-size: 0.813rem;
+    }
+
+    .attachment {
+        @extend %corners;
+        margin-top: 0 !important;
+        max-width: 400px;
+
+        > img {
+            @extend %corners;
+            border: 1px solid transparent;
+            cursor: pointer;
+            max-height: 300px;
+            width: auto;
+            object-fit: contain;
+        }
+    }
+
+    &.launch {
+        font-weight: bold;
+        color: #3e8d5b;
+
+        > .emoji {
+            font-size: 18px;
+            margin-right: 0;
+        }
+    }
+
+    .editing {
+        @extend %corners;
+        background: transparent;
+        font-size: 1.125rem;
+        padding: 3px;
+    }
+
+    input.editing {
+        width: 90%;
+        outline: none;
+        border: 1px solid $c-border;
+        box-shadow: none;
+    }
+}
+
+.Praisable {
+    user-select: none;
+    display: inline;
+}
+
+.hidden {
+    display: none !important;
+}

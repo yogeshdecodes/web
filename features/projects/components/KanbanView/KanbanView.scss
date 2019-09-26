@@ -1,0 +1,152 @@
+@import "../../../../styles/_variables";
+
+.KanbanView {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: $gap;
+
+    .KanbanProject {
+        .title-card {
+            @extend %corners;
+            @extend %poppins;
+            background: $c-lightest;
+            padding: $gap/2;
+            width: 100%;
+            margin-bottom: $gap;
+            font-size: 1.3rem;
+            line-height: 1;
+
+            span {
+                color: $c-border;
+            }
+
+            .color-circle {
+                background: $c-lightest;
+                border: 4px solid red;
+                height: 15px;
+                width: 15px;
+            }
+        }
+    }
+
+    .KanbanTaskList {
+        height: 73vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .KanbanTask {
+        @extend %corners;
+        background: $c-lightest;
+        padding: 0.8em;
+        font-size: 1.1rem;
+        position: relative;
+        word-wrap: break-word;
+
+        .task-actions button {
+            @extend %corners;
+            background: $c-main;
+            color: $c-lightest;
+            padding: 5px;
+        }
+
+        .hover-panel {
+            background: white;
+            position: absolute;
+            top: 0;
+            left: -4px;
+            bottom: 0;
+            width: calc(100% + 4px);
+            border-radius: 5px;
+            overflow: hidden;
+            opacity: 0;
+            display: grid;
+            transition: opacity 0.25s;
+            grid-auto-flow: column;
+
+            a {
+                text-decoration: none;
+                color: $c-lightest;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0.8em;
+
+                &.mark-done {
+                    background: green;
+                }
+
+                &.mark-in-progress {
+                    background: orange;
+                }
+
+                &.mark-remaining {
+                    background: darkorange;
+                }
+
+                &.edit-button {
+                    background: rgb(243, 156, 18);
+                }
+
+                &.delete-button {
+                    background: red;
+                }
+            }
+        }
+
+        &:hover .hover-panel {
+            opacity: 1;
+        }
+
+        &.remaining {
+            border-left: 4px solid rgb(243, 156, 18);
+        }
+
+        &.done {
+            border-left: 4px solid $c-main;
+            color: $c-gray;
+
+            .task-content {
+                text-decoration: line-through;
+            }
+        }
+    }
+
+    .KanbanTask .time-ago {
+        @extend %note;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .task-fade-enter {
+        opacity: 0.01;
+    }
+
+    .task-fade-enter.task-fade-enter-active {
+        opacity: 1;
+        transition: opacity 200ms ease-in;
+    }
+
+    .task-fade-leave {
+        opacity: 1;
+    }
+
+    .task-fade-leave.task-fade-leave-active {
+        opacity: 0.01;
+        transition: opacity 500ms ease-in-out;
+    }
+
+    .Kanban-ListItem {
+        margin-bottom: 10px;
+    }
+}

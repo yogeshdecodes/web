@@ -1,0 +1,35 @@
+.Avatar {
+
+}
+
+.Avatar > img {
+	border-radius: 50%;
+}
+
+.Aura {
+	padding: 10px;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.Aura.basic {
+	background: rgb(71, 224, 160);
+	background: -moz-linear-gradient(4deg, rgba(71, 224, 160, 1) 0%, rgba(255, 255, 255, 1) 83%);
+	background: -webkit-linear-gradient(4deg, rgba(71, 224, 160, 1) 0%, rgba(255, 255, 255, 1) 83%);
+	background: linear-gradient(4deg, rgba(71, 224, 160, 1) 0%, rgba(255, 255, 255, 1) 83%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#47e0a0", endColorstr="#ffffff", GradientType=1);
+
+}
+
+.Aura.long-streak {
+	background: rgb(255, 171, 145);
+	background: -moz-linear-gradient(0deg, rgba(255, 171, 145, 1) 0%, rgba(255, 255, 255, 0) 100%);
+	background: -webkit-linear-gradient(0deg, rgba(255, 171, 145, 1) 0%, rgba(255, 255, 255, 0) 100%);
+	background: linear-gradient(0deg, rgba(255, 171, 145, 1) 0%, rgba(255, 255, 255, 0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffab91", endColorstr="#ffffff", GradientType=1);
+}
+
+.Aura.gold {
+	background: rgb(229, 193, 0);
+	background: linear-gradient(0deg, rgba(229, 193, 0, 1) 0%, rgba(229, 193, 0, 0) 100%);
+}

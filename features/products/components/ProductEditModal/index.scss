@@ -1,0 +1,47 @@
+@import "../../../../styles/_variables";
+
+.ProductEditModal {
+	> .Modal-Content {
+		@extend %corners;
+		background: $c-lightest;
+		padding: 1px;
+	}
+
+	.col-right > div:not(:last-child) {
+		padding-right: $gap;
+	}
+
+	.SidebarMenu {
+		display: flex;
+		background: $c-bg-light;
+		flex-flow: column nowrap;
+		justify-content: space-between;
+		padding: 1rem 0.5rem;
+
+		div {
+			&:nth-child(1)	{
+				flex: 1 1 auto;
+			}
+
+			&:nth-child(2)	{
+				text-align: center;
+
+				button {
+					margin-bottom: 10px;
+				}
+
+				.btn-link	{
+					color: $c-gray;
+				}
+			}
+		}
+	}
+
+	.ModalForm	{
+		padding: 2rem 2.25rem 2rem 1.25rem;
+
+		textarea	{
+			min-height: 120px;
+		}
+	}
+}

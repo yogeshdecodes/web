@@ -1,0 +1,13 @@
+@import "../../../../styles/_variables";
+
+.LargeAvatar {
+	> img {
+		@extend %corners;
+		cursor: pointer;
+		position: relative;
+	}
+
+	> figcaption {
+		font-weight: bold;
+	}
+}

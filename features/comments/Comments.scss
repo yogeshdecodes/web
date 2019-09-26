@@ -1,0 +1,40 @@
+@import "../../styles/_variables";
+
+.Comment {
+    margin: 10px 0;
+
+    .card-content {
+        display: inline-block;
+    }
+
+    .CommentsBox {
+        width: 100%;
+        max-height: 50vh;
+        overflow-y: scroll;
+    }
+
+    .CommentsBox::-webkit-scrollbar {
+        width: 0 !important;
+    }
+
+    .Comment:first-child {
+        margin-top: 0;
+    }
+
+    .Comment:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .CommentInfo {
+        line-height: 1;
+    }
+
+    .box {
+        display: inline-block;
+
+        > .content {
+            display: inline-block;
+        }
+    }
+}

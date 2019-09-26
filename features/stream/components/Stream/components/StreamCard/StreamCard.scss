@@ -1,0 +1,23 @@
+@import "../../../../../../styles/_variables";
+
+.StreamCard {
+    border-color: transparent;
+    box-shadow: none;
+
+    .card-content, header {
+        padding: 1rem !important;
+    }
+
+    .projects ul > li {
+        display: inline-block;
+        padding: 0 3px;
+    }
+
+    .cardHeaderOptions {
+        padding-left: 0.5rem;
+
+        div {
+            padding-left: 0.5rem;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+@import "../../styles/_variables";
+
+.HomePageIntro {
+	.hero {
+		overflow: hidden;
+		padding: 3.3rem 0;
+		position: relative;
+		background: linear-gradient(63deg, hsla(126, 33%, 55%, 0.5) 0%, hsla(175, 80%, 33%, 0.5) 100%), url("/assets/img/hero.jpg");
+
+		.container {
+			grid-template-columns: repeat(1, auto);
+		}
+
+		h2 {
+			font-size: 2rem;
+			margin: 0;
+			line-height: 1;
+		}
+
+		h3 {
+			font-size: 1.25rem;
+			font-weight: normal;
+			margin: 0 0 1.5rem;
+		}
+
+		a {
+			@extend %rounded;
+			padding: 0.5rem 1rem;
+			background: $c-lightest;
+			color: $c-title;
+		}
+	}
+}

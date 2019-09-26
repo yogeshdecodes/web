@@ -1,0 +1,49 @@
+
+
+.Comment {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.Comment .card-content {
+    display: inline-block;
+}
+
+.Comment .content {
+}
+
+.Comment .content img {
+    max-height: 300px;
+    border-radius: 8px;
+}
+
+
+.CommentsBox {
+    width: 100%;
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+.CommentsBox::-webkit-scrollbar { width: 0 !important }
+
+.Comment:first-child  {
+    margin-top: 0px;
+}
+
+.Comment:last-child  {
+    border-bottom: none;
+
+    margin-bottom: 0px;
+}
+
+.CommentInfo {
+    margin-bottom: 3px !important;
+}
+
+.Comment .box {
+    display: inline-block;
+}
+
+.Comment .box > .content {
+    display: inline-block;
+}

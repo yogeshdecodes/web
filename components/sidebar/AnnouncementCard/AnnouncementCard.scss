@@ -1,0 +1,7 @@
+@import "../../../styles/variables";
+
+.AnnouncementCard	{
+	@extend %transition-bg;
+	color: $c-lightest;
+	background: $gradient-green;
+}

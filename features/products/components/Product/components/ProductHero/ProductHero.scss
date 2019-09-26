@@ -1,0 +1,17 @@
+@import "../../../../../../styles/_variables";
+
+.ProductHero {
+	.ProductHero-Icon {
+		img {
+			@extend %corners;
+			border: 5px solid $c-lightest;
+		}
+	}
+
+    .ProductHero-Media {
+        .media {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

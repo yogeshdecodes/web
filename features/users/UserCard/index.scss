@@ -1,0 +1,67 @@
+.UserCard {
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: white;
+
+    .contents {
+        padding: 3vh;
+
+        .button {
+            margin-bottom: 3vh;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+    }
+
+    .cover {
+        border: 1px solid transparent;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding: 3vh;
+        min-height: 18vh;
+        background: #00b77a;
+        width: 100%;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        grid-template-columns: 48px auto;
+
+        .Avatar img {
+            max-height: 48px;
+            max-width: 48px;
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .details {
+            margin-left: 12px;
+
+            .stats {
+                font-size: 13px;
+                display: flex;
+                flex-direction: row;
+
+                & > div,
+                & > span {
+                    margin-right: 10px;
+                    color: white;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .title,
+        .subtitle {
+            color: white;
+        }
+    }
+}

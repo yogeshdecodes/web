@@ -1,0 +1,14 @@
+@import "../../../styles/_variables";
+
+.FaceStack {
+    display: inline-flex;
+
+    span:not(:first-child) {
+        margin-left: -11px;
+    }
+
+    span.img-avatar img {
+        @extend %round;
+        border: 2px solid $c-lightest;
+    }
+}

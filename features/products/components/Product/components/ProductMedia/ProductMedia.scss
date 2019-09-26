@@ -1,0 +1,26 @@
+@import "../../../../../../styles/_variables";
+
+.ProductMedia {
+	border-radius: 5px;
+	box-shadow: none;
+	border-top: none !important;
+	padding-top: 0 !important;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+
+	&.lazy {
+		opacity: 0.6;
+	}
+
+	img {
+		@extend %round;
+		width: 48px;
+		height: 48px;
+	}
+
+	.tag {
+		@extend %rounded;
+		display: inline-flex;
+	}
+}

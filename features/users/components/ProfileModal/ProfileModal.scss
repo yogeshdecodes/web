@@ -1,0 +1,107 @@
+@import "../../../../styles/_variables";
+
+@keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+body.ReactModal__Body--open #root {
+	/* filter: blur(2px); */
+}
+
+.ProfileModalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: hsla(0, 0%, 0%, 0.5);
+}
+
+.ProfileModal {
+	@extend %corners;
+	position: absolute;
+	min-width: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	outline: none;
+	animation: fadein 0.5s;
+	background-color: $c-lightest;
+	max-height: 90vh;
+	display: block;
+	overflow: auto;
+
+	.ProfileModal-Container {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.ProfileModal-Column {
+		flex: 1;
+	}
+
+	.columns > .column.ProfileModal-Header {
+		padding: 0;
+	}
+
+	.ProfileModal-Header {
+		min-height: 400px;
+		padding: 20px;
+		background: $gradient-brand;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		> div,
+		> div h1 {
+			text-align: center;
+			color: $c-lightest;
+
+			h5 {
+				color: $c-lightest;
+			}
+		}
+	}
+
+	.ProfileModal-Avatar {
+		@extend %round;
+		height: 100px;
+		width: 100px;
+		border: 4px solid $c-lightest;
+		margin-bottom: 10px;
+	}
+
+	.ProfileModal-Content {
+		padding: 30px;
+		max-width: 50%;
+	}
+}
+
+
+
+@media only screen and (max-width: $breakpoint-tablet) {
+	.ProfileModal {
+		width: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.ProfileModal-Container {
+		flex-direction: row;
+	}
+}
+
+@media only screen and (max-width: $breakpoint-mobile) {
+	.ProfileModal {
+		width: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.ProfileModal-Container {
+		flex-direction: column;
+	}
+}
