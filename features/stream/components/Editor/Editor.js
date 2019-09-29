@@ -1,24 +1,24 @@
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect } from "~/routes";
 
-import { Button } from "vendor/bulma";
+import { Button } from "~/vendor/bulma";
 import Dropzone from "react-dropzone";
-import Emoji from "../../../../components/Emoji";
-import ErrorMessageList from "components/forms/ErrorMessageList";
+import Emoji from "~/components/Emoji";
+import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import GoldCtaButton from "../../../../components/GoldCtaButton";
+import GoldCtaButton from "~/components/GoldCtaButton";
 import { HotKeys } from "react-hotkeys";
-import Modal from "components/Modal";
-import ProjectLink from "components/ProjectLink";
+import Modal from "~/components/Modal";
+import ProjectLink from "~/components/ProjectLink";
 import React from "react";
-import Spinner from "../../../../components/Spinner";
+import Spinner from "~/components/Spinner";
 import { ThreadTypeSelect } from "~/features/discussions/ThreadTypeSelect";
 import chrono from "chrono-node";
 import { connect } from "react-redux";
-import { createMilestone } from "../../../../lib/milestones";
-import { createThread } from "../../../../lib/discussions";
-import { actions as editorActions } from "ducks/editor";
+import { createMilestone } from "~/lib/milestones";
+import { createThread } from "~/lib/discussions";
+import { actions as editorActions } from "~/ducks/editor";
 import { format } from "date-fns";
-import { getMyProducts } from "../../../../lib/products";
+import { getMyProducts } from "~/lib/products";
 import processString from "react-process-string";
 
 class ProductSelectorDropdown extends React.Component {

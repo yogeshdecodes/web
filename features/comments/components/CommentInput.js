@@ -1,13 +1,13 @@
 import React from "react";
-import { Media, SubTitle } from "vendor/bulma";
-import { Link } from "react-router-dom";
-import { postComment } from "lib/comments";
-import { Avatar, withCurrentUser } from "features/users";
-import Spinner from "components/Spinner";
+import { Media, SubTitle } from "~/vendor/bulma";
+import { Link } from "~/routes";
+import { postComment } from "~/lib/comments";
+import { Avatar, withCurrentUser } from "~/features/users";
+import Spinner from "~/components/Spinner";
 import AutoTextarea from "react-textarea-autosize";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Selector } from "react-giphy-selector";
+//import { Selector } from "react-giphy-selector";
 import "./CommentInput.scss";
 
 const GifPicker = styled.div``;
@@ -113,6 +113,15 @@ class CommentInput extends React.Component {
                             ) : null}
                         </div>
                     </form>
+                </div>
+            </div>
+        );
+    }
+}
+
+/*
+
+
                     <div>
                         <button
                             className={"btn-small"}
@@ -121,8 +130,6 @@ class CommentInput extends React.Component {
                             GIF
                         </button>
                     </div>
-                </div>
-
                 {this.state.gifOpen && (
                     <GifPicker>
                         <Selector
@@ -142,10 +149,7 @@ class CommentInput extends React.Component {
                         />
                     </GifPicker>
                 )}
-            </div>
-        );
-    }
-}
+*/
 
 CommentInput = withCurrentUser(CommentInput);
 

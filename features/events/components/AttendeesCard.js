@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getLiveParticipants, getTopParticipants } from "../../../lib/events";
 
-import Emoji from "components/Emoji";
+import Emoji from "~/components/Emoji";
 import Spinner from "../../../components/Spinner";
 import { UserRow } from "../../users";
 import { isOcurring } from "../../../lib/utils/events";

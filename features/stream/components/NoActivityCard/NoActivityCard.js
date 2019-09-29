@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "~/routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { actions as editorActions } from "../../../../ducks/editor";
 import { connect } from "react-redux";
 
-import { GlobalStream } from "features/stream";
+import { GlobalStream } from "~/features/stream";
 
 import styled from "styled-components";
 import OutboundLink from "../../../../components/OutboundLink";

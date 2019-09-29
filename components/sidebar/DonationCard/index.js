@@ -1,3 +1,3 @@
-import DonationCard from './DonationCard';
+import DonationCard from "./DonationCard";
 
 export default DonationCard;

@@ -1,7 +1,7 @@
 import React from "react";
 import Page from "layouts/Page";
 import styled from "styled-components";
-import UserContainer from "features/users/containers/UserContainer";
+import UserContainer from "~/features/users/containers/UserContainer";
 
 const HomeHero = styled.div`
     color: ${props => props.theme.primaryDarker} !important;

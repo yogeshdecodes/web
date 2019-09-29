@@ -7,7 +7,7 @@ import { Scrollbars } from "react-custom-scrollbars";
 import Spinner from "../../../../components/Spinner";
 import mapDispatchToProps from "../../containers/mapDispatchToProps";
 import KanbanTask from "./KanbanTask";
-import { isEqual } from "lodash-es";
+import isEqual from "lodash/isEqual";
 
 /*<div style={{ borderColor: colorFromProject(project) }} className={"color-circle"}></div>*/
 

@@ -12,12 +12,12 @@ import {
     actions as streamActions,
     types as streamTypes
 } from "../ducks/stream";
-import { types as editorTypes } from "ducks/editor";
-import { actions as tasksActions } from "ducks/tasks";
-import { getStreamMetadata } from "lib/tasks";
+import { types as editorTypes } from "~/ducks/editor";
+import { actions as tasksActions } from "~/ducks/tasks";
+import { getStreamMetadata } from "~/lib/tasks";
 import RWS from "reconnecting-websocket";
 import { fetchNextUrl } from "../lib/tasks";
-import pickBy from "lodash-es/pickBy";
+import pickBy from "lodash/pickBy";
 import { getTimezone } from "../lib/utils/timezone";
 
 export const getStreamState = state => state.stream;

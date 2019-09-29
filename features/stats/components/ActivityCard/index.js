@@ -1,6 +1,3 @@
-import {ActivityCard, ActivityCardPanel} from './ActivityCard';
+import { ActivityCard, ActivityCardPanel } from "./ActivityCard";
 
-export {
-	ActivityCard,
-	ActivityCardPanel
-}
+export { ActivityCard, ActivityCardPanel };

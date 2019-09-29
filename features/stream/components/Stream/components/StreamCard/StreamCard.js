@@ -1,16 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { uniqBy } from "lodash-es";
-import { groupTasksByDone, orderByDate } from "lib/utils/tasks";
+import { groupTasksByDone, orderByDate } from "~/lib/utils/tasks";
 import EntryList from "../../../EntryList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import withCurrentUser from "~/features/users/containers/withCurrentUser";
 import { Tooltip } from "react-tippy";
 // import { StreamCard as Card } from "./styled";
-import { UserMedia } from "features/users";
+import { UserMedia } from "~/features/users";
 import { UserBadges } from "~/components/badges";
 import OutboundLink from "~/components/OutboundLink";
-import { MilestoneMedia } from "features/milestones";
+import { MilestoneMedia } from "~/features/milestones";
 
 class StreamCard extends React.Component {
     state = {

@@ -1,6 +1,6 @@
 import Page from "layouts/Page";
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect } from "~/routes";
 import axios from "axios";
 import { axiosWrapper } from "../lib/utils/error";
 

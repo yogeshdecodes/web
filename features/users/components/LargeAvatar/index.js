@@ -1,3 +1,3 @@
-import LargeAvatar from './LargeAvatar';
+import LargeAvatar from "./LargeAvatar";
 
 export default LargeAvatar;

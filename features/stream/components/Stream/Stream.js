@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "vendor/bulma";
-import { CSSTransitionGroup } from "react-transition-group";
+import { Button } from "~/vendor/bulma";
+//import { CSSTransitionGroup } from "react-transition-group";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StreamSection from "./components/StreamSection/index";
 import NoActivityCard from "../NoActivityCard";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { sortStreamByActivity } from "~/lib/utils/tasks";
 import StreamFinished from "./components/StreamFinished/index";
 import Spinner from "~/components/Spinner";
@@ -46,25 +46,19 @@ class Stream extends React.Component {
                 hasMore={this.props.hasMore}
                 style={{ overflow: "none" }}
             >
-                <CSSTransitionGroup
-                    transitionName="fade"
-                    transitionEnterTimeout={200}
-                    transitionLeaveTimeout={200}
-                >
-                    {Object.keys(data).map(date => {
-                        return (
-                            <StreamSection
-                                key={date}
-                                position={Object.keys(data).indexOf(date)}
-                                canSwitchType={this.props.canSwitchType}
-                                isFollowingFeed={this.props.isFollowingFeed}
-                                onSwitch={this.props.onSwitch}
-                                date={date}
-                                activityData={data[date]}
-                            />
-                        );
-                    })}
-                </CSSTransitionGroup>
+                {Object.keys(data).map(date => {
+                    return (
+                        <StreamSection
+                            key={date}
+                            position={Object.keys(data).indexOf(date)}
+                            canSwitchType={this.props.canSwitchType}
+                            isFollowingFeed={this.props.isFollowingFeed}
+                            onSwitch={this.props.onSwitch}
+                            date={date}
+                            activityData={data[date]}
+                        />
+                    );
+                })}
 
                 {this.props.hasMore && (
                     <div className={"center"}>

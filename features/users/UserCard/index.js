@@ -10,16 +10,14 @@ import ProductList from "../../products/components/ProductList";
 import ProductsContainer from "../../products/containers/ProductsContainer";
 import GatedFollowButton from "../components/GatedFollowButton";
 import UserActivityGraph from "../../stats/components/UserActivityGraph";
-import { Link } from "react-router-dom";
+import { Link } from "~/routes";
 
 const UserCard = ({ user }) => {
     let style = { color: "inherit", textDecoration: "none" };
     if (user.header) {
         style[
             "background-image"
-        ] = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${
-            user.header
-        })`;
+        ] = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${user.header})`;
         style["background-size"] = "cover";
     }
 

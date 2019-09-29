@@ -1,9 +1,7 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {actions as streamActions} from 'ducks/stream';
-import Stream from '../../components/Stream';
-import isEmpty from "lodash-es/isEmpty";
-import overEvery from "lodash-es/overEvery";
+import React from "react";
+import { connect } from "react-redux";
+import { actions as streamActions } from "~/ducks/stream";
+import Stream from "../../components/Stream";
 
 class FollowingStream extends React.Component {
     componentDidMount() {
@@ -22,7 +20,10 @@ class FollowingStream extends React.Component {
 
     componentDidUpdate(prevProps) {
         // Typical usage (don't forget to compare props):
-        if (this.props.initialLoaded === false && prevProps.initialLoaded === true) {
+        if (
+            this.props.initialLoaded === false &&
+            prevProps.initialLoaded === true
+        ) {
             this.props.disconnect();
             this.props.init();
             this.props.connect();
@@ -30,27 +31,29 @@ class FollowingStream extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.disconnect()
+        this.props.disconnect();
     }
 
     render() {
-        return <Stream
-            isSyncing={this.props.isSyncing}
-            loadMore={this.props.loadMore}
-            hasMore={this.props.hasMore}
-            tasks={this.props.tasks}
-            milestones={this.props.milestones}
-            canSwitchType={true}
-            isFollowingFeed={this.props.isFollowingFeed}
-            onSwitch={this.props.toggleStreamType}
-        />
+        return (
+            <Stream
+                isSyncing={this.props.isSyncing}
+                loadMore={this.props.loadMore}
+                hasMore={this.props.hasMore}
+                tasks={this.props.tasks}
+                milestones={this.props.milestones}
+                canSwitchType={true}
+                isFollowingFeed={this.props.isFollowingFeed}
+                onSwitch={this.props.toggleStreamType}
+            />
+        );
     }
 }
 
-FollowingStream.propTypes = {}
+FollowingStream.propTypes = {};
 
-const mapStateToProps = (state) => {
-    console.info(state.stream.nextUrl)
+const mapStateToProps = state => {
+    console.info(state.stream.nextUrl);
     return {
         isNewUser: state.app.isNewUser,
         isFollowingFeed: state.stream.isFollowingFeed,
@@ -61,22 +64,22 @@ const mapStateToProps = (state) => {
         fetchFailed: state.stream.fetchFailed,
         initialLoaded: state.stream.initialLoaded,
         allLoaded: state.stream.allLoaded,
-        hasMore: state.stream.initialLoaded ? !state.stream.allLoaded : false, // rely on the nextUrl being truthy
-    }
-}
+        hasMore: state.stream.initialLoaded ? !state.stream.allLoaded : false // rely on the nextUrl being truthy
+    };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
         init: () => dispatch(streamActions.init()),
         connect: () => dispatch(streamActions.connect()),
         sync: () => {
-            dispatch(streamActions.sync())
+            dispatch(streamActions.sync());
         },
         disconnect: () => dispatch(streamActions.disconnect()),
         loadMore: () => dispatch(streamActions.loadMore()),
         toggleStreamType: () => dispatch(streamActions.toggleStreamType())
-    }
-}
+    };
+};
 
 export default connect(
     mapStateToProps,

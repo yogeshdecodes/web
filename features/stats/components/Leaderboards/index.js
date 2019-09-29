@@ -1,4 +1,4 @@
-import Leaderboards from './Leaderboards';
-import './Leaderboards.scss';
+import Leaderboards from "./Leaderboards";
+import "./Leaderboards.scss";
 
 export default Leaderboards;

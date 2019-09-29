@@ -1,23 +1,23 @@
 import "~/styles/theme.scss";
 import "~/vendor/fa";
-//import "react-tippy/dist/tippy.css";
 
 import App, { Container } from "next/app";
-import { Provider, useStaticRendering } from "mobx-react";
 import { isServer } from "~/config";
-import { configureMobx, rehydrate } from "~/vendor/mobx";
 
 import ErrorPage from "next/error";
 import Head from "~/layouts/Head";
-// import LiveChat from "../components/LiveChat/index";
 import NProgressContainer from "../vendor/nprogress";
 import Page from "~/layouts/Page";
-import config from "~/stores";
-import { configure } from "mobx";
-import { onStoreInit } from "../stores";
 
-configure({ enforceActions: "observed" });
-useStaticRendering(isServer);
+import { history, persistor } from "~/store";
+import Spinner from "~/components/Spinner";
+import { Provider } from "react-redux";
+import { store } from "~/store";
+import Reactor from "~/components/Reactor";
+import withRedux from "next-redux-wrapper";
+import withReduxSaga from "next-redux-saga";
+
+import createStore from "~/store";
 
 class Artemis extends App {
     static async getInitialProps({ Component, ctx }) {
@@ -34,10 +34,10 @@ class Artemis extends App {
         Do not touch this initialization code unless you know what you're doing.
         */
 
-        if (onStoreInit && isServer) {
-            // Loads onServerLoad - this is the place to put your cookie things.
-            await onStoreInit(ctx);
-        }
+        //if (onStoreInit && isServer) {
+        // Loads onServerLoad - this is the place to put your cookie things.
+        //await onStoreInit(ctx);
+        //}
 
         if (typeof Component.getInitialProps === "function") {
             pageProps = await Component.getInitialProps(ctx);
@@ -47,12 +47,12 @@ class Artemis extends App {
     }
 
     componentDidMount() {
-        rehydrate(config, () => {
+        /*rehydrate(config, () => {
             if (this.props.store && this.props.store.app) {
                 console.log("Artemis: ready.");
                 this.props.store.app.setAppReady();
             }
-        });
+        });*/
     }
 
     render() {
@@ -67,14 +67,19 @@ class Artemis extends App {
             <Container>
                 <Head />
                 <NProgressContainer />
-                <Provider {...store}>
-                    <Page {...pageProps.layout}>
-                        <Component {...pageProps} />
-                    </Page>
+
+                <Provider store={store}>
+                    <div>
+                        <Page {...pageProps.layout}>
+                            <Component {...pageProps} />
+                        </Page>
+
+                        <Reactor />
+                    </div>
                 </Provider>
             </Container>
         );
     }
 }
 
-export default configureMobx(config, Artemis);
+export default withRedux(createStore)(withReduxSaga(Artemis));

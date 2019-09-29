@@ -4,12 +4,12 @@ import FullName from "../FullName";
 import Tda from "../../../../components/Tda";
 import Streak from "../../../../components/Streak";
 import "./UserMedia.scss";
-import Emoji from "components/Emoji";
+import Emoji from "~/components/Emoji";
 import Avatar from "../Avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProfileModalAction from "../../containers/ProfileModalAction";
 import MakerScore from "../../../../components/MakerScore";
-import { Link } from "react-router-dom";
+import { Link } from "~/routes";
 
 const Badge = props => (
     <span

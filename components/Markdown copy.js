@@ -1,19 +1,29 @@
-import React, {Component} from 'react';
-import ReactDOMServer from 'react-dom/server'
-import MDit from 'vendor/remarkable-regexp/MarkdownIt';
-import Plugin from 'vendor/remarkable-regexp';
+import React, { Component } from "react";
+import ReactDOMServer from "react-dom/server";
+import MDit from "~/vendor/remarkable-regexp/MarkdownIt";
+import Plugin from "~/vendor/remarkable-regexp";
 
 const mentions = new Plugin(
-	// regexp to match
-	/(^| )@[a-z0-9_-]+/gi,
+    // regexp to match
+    /(^| )@[a-z0-9_-]+/gi,
 
-	// this function will be called when something matches
-	function (match, utils) {
-		return ReactDOMServer.renderToStaticMarkup(
-			<a href={`/${utils.escape(match[0]).trim().toLowerCase()}`} target="_blank" rel="noopener noreferrer" key={match[0]}>{utils.escape(match[0])}</a>
-		)
-	}
-)
+    // this function will be called when something matches
+    function(match, utils) {
+        return ReactDOMServer.renderToStaticMarkup(
+            <a
+                href={`/${utils
+                    .escape(match[0])
+                    .trim()
+                    .toLowerCase()}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={match[0]}
+            >
+                {utils.escape(match[0])}
+            </a>
+        );
+    }
+);
 
 /*
 const tasks = new Plugin(
@@ -66,11 +76,9 @@ function processTaskString(task) {
 } */
 
 class Markdown extends Component {
-	render() {
-		return (
-			<MDit source={this.props.body} plugins={[mentions]}/>
-		);
-	}
+    render() {
+        return <MDit source={this.props.body} plugins={[mentions]} />;
+    }
 }
 
 export default Markdown;

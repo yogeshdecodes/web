@@ -1,7 +1,7 @@
 import "./index.scss";
 
 import { Input, Media, Title } from "../../../../vendor/bulma";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { Link, NavLink, withRouter } from "~/routes";
 import {
     searchDiscussions,
     searchProducts,
@@ -12,14 +12,14 @@ import {
 import Avatar from "../../../users/components/Avatar/Avatar";
 import { StreamCard as Card } from "../../../stream/components/Stream/components/StreamCard/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Icon } from "vendor/bulma";
-import { ProductList } from "features/products";
+import { Icon } from "~/vendor/bulma";
+import { ProductList } from "~/features/products";
 import React from "react";
 import { Task } from "../../../stream";
 import ThreadList from "../../../discussions/ThreadList";
 import UserMediaList from "../../../users/components/UserMediaList/UserMediaList";
-import debounce from "lodash-es/debounce";
-import orderBy from "lodash-es/orderBy";
+import debounce from "lodash/debounce";
+import orderBy from "lodash/orderBy";
 
 class GlobalSearchBar extends React.Component {
     state = {

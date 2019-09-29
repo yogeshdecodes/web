@@ -1,3 +1,3 @@
-import FollowingList from './FollowingList';
+import FollowingList from "./FollowingList";
 
 export default FollowingList;

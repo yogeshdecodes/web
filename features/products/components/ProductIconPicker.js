@@ -1,5 +1,5 @@
 import Dropzone from "react-dropzone";
-import Emoji from "components/Emoji";
+import Emoji from "~/components/Emoji";
 import React from "react";
 
 class ProductIconPicker extends React.Component {

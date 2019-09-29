@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-// import {Card} from "vendor/bulma";
+// import {Card} from "~/vendor/bulma";
 import { darker } from "styles/colors";
 
 const StreamCard = styled.div`

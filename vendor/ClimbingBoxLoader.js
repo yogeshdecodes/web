@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {css, keyframes} from 'emotion';
-import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
+import React from "react";
+import PropTypes from "prop-types";
+import { css, keyframes } from "emotion";
+import onlyUpdateForKeys from "recompose/onlyUpdateForKeys";
 
 const climbingBox = keyframes`
   0% {transform:translate(0, -1em) rotate(-45deg)} 
@@ -21,73 +21,87 @@ class Loader extends React.Component {
     style = () => {
         const { color } = this.props;
 
-        return css`{   
-            position: absolute;
-            left: 0;
-            bottom: -0.1em;
-            height: 1em;
-            width: 1em;
-            background-color: transparent;
-            border-radius: 15%;
-            border: 0.25em solid ${color};
-            transform: translate(0, -1em) rotate(-45deg);
-            animation-fill-mode: both;
-            animation: ${climbingBox} 2.5s infinite cubic-bezier(.79, 0, .47, .97);
-        }`;
+        return css`
+             {
+                position: absolute;
+                left: 0;
+                bottom: -0.1em;
+                height: 1em;
+                width: 1em;
+                background-color: transparent;
+                border-radius: 15%;
+                border: 0.25em solid ${color};
+                transform: translate(0, -1em) rotate(-45deg);
+                animation-fill-mode: both;
+                animation: ${climbingBox} 2.5s infinite
+                    cubic-bezier(0.79, 0, 0.47, 0.97);
+            }
+        `;
     };
 
     wrapper = () => {
         const { size, sizeUnit } = this.props;
 
-        return css`{        
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -2.7em;
-            margin-left: -2.7em;
-            width: 5.4em;
-            height: 5.4em;
-            font-size: ${`${size}${sizeUnit}`};
-        }`;
+        return css`
+             {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -2.7em;
+                margin-left: -2.7em;
+                width: 5.4em;
+                height: 5.4em;
+                font-size: ${`${size}${sizeUnit}`};
+            }
+        `;
     };
-
 
     hill = () => {
         const { color } = this.props;
 
-        return css`{
-            position: absolute;
-            width: 7.1em;
-            height: 7.1em;
-            top: 1.7em;
-            left: 1.7em;
-            border-left: 0.25em solid ${color};
-            transform: rotate(45deg);
-        }`;
+        return css`
+             {
+                position: absolute;
+                width: 7.1em;
+                height: 7.1em;
+                top: 1.7em;
+                left: 1.7em;
+                border-left: 0.25em solid ${color};
+                transform: rotate(45deg);
+            }
+        `;
     };
 
     container = () => {
         const { className } = this.props;
 
-        const container = css`{
-            position: relative;
-            width: 7.1em;
-            height: 7.1em;
-        }`;
+        const container = css`
+             {
+                position: relative;
+                width: 7.1em;
+                height: 7.1em;
+            }
+        `;
 
-        return className ? css`${container};${className}` : container;
+        return className
+            ? css`
+                  ${container};
+                  ${className}
+              `
+            : container;
     };
 
     render() {
         const { loading } = this.props;
 
-        return loading ?
+        return loading ? (
             <div className={this.container()}>
                 <div className={this.wrapper()}>
                     <div className={this.style()} />
                     <div className={this.hill()} />
                 </div>
-            </div> : null;
+            </div>
+        ) : null;
     }
 }
 
@@ -101,12 +115,18 @@ Loader.propTypes = {
 
 Loader.defaultProps = {
     loading: true,
-    color: '#000000',
+    color: "#000000",
     size: 15,
-    sizeUnit: 'px',
-    className: ''
+    sizeUnit: "px",
+    className: ""
 };
 
-const Component = onlyUpdateForKeys(['loading', 'color', 'size', 'sizeUnit', 'className'])(Loader);
+const Component = onlyUpdateForKeys([
+    "loading",
+    "color",
+    "size",
+    "sizeUnit",
+    "className"
+])(Loader);
 Component.defaultProps = Loader.defaultProps;
 export default Component;

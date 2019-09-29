@@ -1,5 +1,3 @@
-import MilestoneMedia from './components/MilestoneMedia';
+import MilestoneMedia from "./components/MilestoneMedia";
 
-export {
-    MilestoneMedia
-}
+export { MilestoneMedia };

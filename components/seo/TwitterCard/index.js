@@ -1,4 +1,4 @@
-import TwitterCard from './TwitterCard';
-import './TwitterCard.scss';
+import TwitterCard from "./TwitterCard";
+import "./TwitterCard.scss";
 
 export default TwitterCard;

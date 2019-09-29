@@ -1,4 +1,4 @@
-import ProductMedia from './ProductMedia';
-import './ProductMedia.scss';
+import ProductMedia from "./ProductMedia";
+import "./ProductMedia.scss";
 
 export default ProductMedia;

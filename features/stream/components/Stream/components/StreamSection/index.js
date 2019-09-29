@@ -1,4 +1,4 @@
-import StreamSection from './StreamSection';
-import './StreamSection.scss';
+import StreamSection from "./StreamSection";
+import "./StreamSection.scss";
 
 export default StreamSection;

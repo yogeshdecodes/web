@@ -2,7 +2,7 @@ import React from "react";
 import { processTaskString } from "../../../../lib/utils/tasks";
 import { connect } from "react-redux";
 import TimeAgo from "react-timeago";
-import { TaskDetailModal } from "features/stream";
+import { TaskDetailModal } from "~/features/stream";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mapDispatchToProps from "../../containers/mapDispatchToProps";
 

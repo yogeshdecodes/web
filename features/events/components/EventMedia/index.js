@@ -2,20 +2,18 @@ import "./index.scss";
 
 import React, { Component } from "react";
 import { format, toDate } from "date-fns-tz";
-import { hasClosed, hasEnded, isOcurring } from "../../../../lib/utils/events";
+import { hasClosed, hasEnded, isOcurring } from "~/lib/utils/events";
 
-import DueCountdown from "../../../../components/DueCountdown";
-import Emoji from "components/Emoji";
+import DueCountdown from "~/components/DueCountdown";
+import Emoji from "~/components/Emoji";
 import EventFaces from "../EventFaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link } from "~/routes";
 
 function getCss(event) {
     if (event.header) {
         return {
-            background: `linear-gradient(90deg, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0.46262254901960786) 100%), url('${
-                event.header
-            }')`,
+            background: `linear-gradient(90deg, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0.46262254901960786) 100%), url('${event.header}')`,
             backgroundSize: "cover",
             backgroundPosition: "center center"
         };

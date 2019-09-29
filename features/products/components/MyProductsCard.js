@@ -1,9 +1,9 @@
 import React from "react";
-import Spinner from "components/Spinner";
-import { getMyProducts } from "lib/products";
-import { Link } from "react-router-dom";
-import { ProductList } from "features/products";
-import Emoji from "components/Emoji";
+import Spinner from "~/components/Spinner";
+import { getMyProducts } from "~/lib/products";
+import { Link } from "~/routes";
+import { ProductList } from "~/features/products";
+import Emoji from "~/components/Emoji";
 
 const ProductsCardContainer = props => (
     <div className={"card"}>

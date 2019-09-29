@@ -4,7 +4,7 @@ import Emoji from "~/components/Emoji";
 import SocialMediaLevel from "~/components/SocialMediaLevel";
 import ProductPeople from "../../../ProductPeople";
 import ProductStatsContainer from "~/features/products/containers/ProductStatsContainer";
-import Tda from "components/Tda";
+import Tda from "~/components/Tda";
 
 class ProductHero extends React.Component {
     renderHero = product => (

@@ -1,3 +1,3 @@
-import ProfileModalAction from './ProfileModalAction';
+import ProfileModalAction from "./ProfileModalAction";
 
 export default ProfileModalAction;

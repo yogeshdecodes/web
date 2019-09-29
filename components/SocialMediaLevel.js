@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FollowButton } from "features/users";
+import { FollowButton } from "~/features/users";
 import { getHostname, normalizeUrl } from "../lib/utils/products";
 
 class SocialMediaLevel extends React.Component {

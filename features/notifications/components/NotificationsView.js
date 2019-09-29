@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Spinner from "components/Spinner";
-import { getNotifications, markAllRead } from "lib/notifications";
-import { actions as appActions } from "ducks/app";
+import Spinner from "~/components/Spinner";
+import { getNotifications, markAllRead } from "~/lib/notifications";
+import { actions as appActions } from "~/ducks/app";
 import Notification from "./Notification";
 import { connect } from "react-redux";
 

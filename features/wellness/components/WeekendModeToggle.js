@@ -1,8 +1,8 @@
-import React from 'react';
-import Switch from 'react-switch';
+import React from "react";
+import Switch from "react-switch";
 import Emoji from "../../../components/Emoji";
 
-const WeekendModeToggle = (props) => (
+const WeekendModeToggle = props => (
     <Switch
         onClick={props.onChange}
         checkedIcon={
@@ -17,7 +17,8 @@ const WeekendModeToggle = (props) => (
                 }}
             >
                 <Emoji emoji="🧘‍♂️" />
-            </div>}
+            </div>
+        }
         uncheckedIcon={
             <div
                 style={{
@@ -30,7 +31,8 @@ const WeekendModeToggle = (props) => (
                 }}
             >
                 <Emoji emoji="🔥" />
-            </div>}
+            </div>
+        }
         onColor="#47E0A0"
         height={30}
         width={60}
@@ -38,6 +40,6 @@ const WeekendModeToggle = (props) => (
         checked={props.checked}
         onChange={props.onChange}
     />
-)
+);
 
 export default WeekendModeToggle;

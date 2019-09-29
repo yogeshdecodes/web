@@ -1,5 +1,5 @@
-import React from 'react';
-import StreamCard from '../StreamCard/index';
+import React from "react";
+import StreamCard from "../StreamCard/index";
 import StreamDateHeader from "./StreamDateHeader";
 
 class StreamSection extends React.Component {
@@ -17,16 +17,19 @@ class StreamSection extends React.Component {
                     onSwitch={this.props.onSwitch}
                 />
 
-                {Object.keys(activity).map(
-                    (key) => {
-                        return <StreamCard key={activity[key][0].id} activity={activity[key]} />
-                    }
-                )}
+                {Object.keys(activity).map(key => {
+                    return (
+                        <StreamCard
+                            key={activity[key][0].id}
+                            activity={activity[key]}
+                        />
+                    );
+                })}
             </section>
-        )
+        );
     }
 }
 
-StreamSection.propTypes = {}
+StreamSection.propTypes = {};
 
 export default StreamSection;

@@ -1,13 +1,13 @@
 import React from "react";
 import { groupTasksByDone, orderByDate } from "../../../../lib/utils/tasks";
-import { Button } from "vendor/bulma";
+import { Button } from "~/vendor/bulma";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import mapDispatchToProps from "../../containers/mapDispatchToProps";
 import InProgressCard from "../InProgressCard";
 import { colorFromProject, joinProjectsWithTasks } from "../../utils";
 import KanbanTask from "../KanbanView/KanbanTask";
-import { CSSTransitionGroup } from "react-transition-group";
+//import { CSSTransitionGroup } from "react-transition-group";
 import Emoji from "../../../../components/Emoji";
 import Switch from "react-switch";
 import { actions as editorActions } from "../../../../ducks/editor";
@@ -134,43 +134,34 @@ class ProjectTaskList extends React.Component {
                             >
                                 <FontAwesomeIcon icon={"trash"} />{" "}
                                 {this.state.confirmDelete &&
-                                    `Are you sure? You will lose ${
-                                        this.props.tasks.length
-                                    } tasks.`}
+                                    `Are you sure? You will lose ${this.props.tasks.length} tasks.`}
                             </Button>
                         </div>
                     </div>
                 </div>
-
-                <CSSTransitionGroup
-                    transitionName="fade"
-                    transitionEnterTimeout={200}
-                    transitionLeaveTimeout={200}
-                >
-                    {this.props.tasks.length === 0 && (
-                        <div className={"card"}>
-                            <div className={"card-content"}>
-                                <h4>
-                                    No tasks yet. <Emoji emoji={"🌻"} />
-                                </h4>
-                            </div>
+                {this.props.tasks.length === 0 && (
+                    <div className={"card"}>
+                        <div className={"card-content"}>
+                            <h4>
+                                No tasks yet. <Emoji emoji={"🌻"} />
+                            </h4>
                         </div>
-                    )}
-                    {tasks.in_progress.length > 0 && (
-                        <div>
-                            {tasks.in_progress.map(task => (
-                                <ProjectTask task={task} />
-                            ))}
-                            <hr />
-                        </div>
-                    )}
-                    {tasks.remaining.map(task => (
-                        <ProjectTask task={task} />
-                    ))}
-                    {tasks.done.map(task => (
-                        <ProjectTask task={task} />
-                    ))}
-                </CSSTransitionGroup>
+                    </div>
+                )}
+                {tasks.in_progress.length > 0 && (
+                    <div>
+                        {tasks.in_progress.map(task => (
+                            <ProjectTask task={task} />
+                        ))}
+                        <hr />
+                    </div>
+                )}
+                {tasks.remaining.map(task => (
+                    <ProjectTask task={task} />
+                ))}
+                {tasks.done.map(task => (
+                    <ProjectTask task={task} />
+                ))}
             </div>
         );
     }

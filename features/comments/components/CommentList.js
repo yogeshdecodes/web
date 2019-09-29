@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import Comment from "./Comment";
-import {orderByDate} from "../../../lib/utils/tasks";
+import { orderByDate } from "../../../lib/utils/tasks";
 
 class CommentList extends React.Component {
     render() {
@@ -8,11 +8,11 @@ class CommentList extends React.Component {
             return null;
         }
 
-        const comments = orderByDate(this.props.comments, 'asc');
+        const comments = orderByDate(this.props.comments, "asc");
 
-        return comments.map((c) => (
+        return comments.map(c => (
             <Comment indexUrl={this.props.indexUrl} key={c.id} comment={c} />
-        ))
+        ));
     }
 }
 

@@ -1,0 +1,163 @@
+.Modal {
+    position: absolute;
+    min-width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    outline: none;
+    animation: fadein 0.5s;
+    background-color: white;
+    border-radius: 8px;
+    max-height: 100%;
+    overflow-y: auto;
+    display: block;
+    overflow: auto;
+    width: 50%;
+    max-height: 100vh;
+}
+
+.Modal-Container {
+    display: flex;
+    flex-direction: row;
+}
+
+.Modal-Column {
+    flex: 1;
+}
+
+.Modal > .columns {
+    margin-right: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.Modal > .columns > .column.Modal-Header {
+    padding: 0px;
+}
+
+.Modal-Header {
+    min-height: 500px;
+    padding: 20px;
+    background: #56ccf2; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to top,
+        #2f80ed,
+        #56ccf2
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to top,
+        #2f80ed,
+        #56ccf2
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Modal-Header > div {
+    text-align: center;
+    color: white;
+}
+
+.Modal-Header > div > div > .tag {
+    font-size: 15px;
+}
+
+.Modal-Header > div > h1 {
+    text-align: center;
+    color: white;
+}
+
+.Modal-Header > div > .upload-button {
+    margin-top: 20px;
+}
+
+.Modal-Header > div > .subtitle {
+    color: white;
+}
+
+strong {
+    color: inherit !important;
+}
+
+.Modal-Header > div > p > strong {
+    color: white;
+}
+
+.Modal-Header > div > p {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.Modal-Header > div > h5 {
+    color: white;
+}
+
+.Modal-Avatar {
+    height: 100px;
+    width: 100px;
+    border: 4px solid white;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.Modal-Content {
+    padding: 30px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+@media only screen and (max-width: 1024px) {
+    .Modal {
+        left: 0;
+        width: 100% !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .Modal-Container {
+        flex-direction: row;
+    }
+
+    .Modal-Content {
+        border-radius: 0px !important;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .Modal {
+        left: 0;
+        width: 100% !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .Modal-Container {
+        flex-direction: column;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.ReactModal__Body--open > #root {
+    /* Performance broski */
+    /* filter: blur(1.5px); */
+}
+
+.ModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 100;
+}

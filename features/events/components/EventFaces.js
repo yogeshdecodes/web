@@ -1,4 +1,4 @@
-import { FaceStack } from "features/users";
+import { FaceStack } from "~/features/users";
 import React from "react";
 import { getLatestParticipants } from "../../../lib/events";
 

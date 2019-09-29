@@ -1,9 +1,9 @@
-import React from 'react';
-import {LoggedOutOnly, PeopleCard} from '~/features/users';
+import React from "react";
+import { LoggedOutOnly, PeopleCard } from "~/features/users";
 import TrendingDiscussionsCard from "~/components/sidebar/TrendingDiscussionsCard";
 import AdCard from "~/components/sidebar/AdCard";
 import RegisterCard from "~/components/sidebar/RegisterCard";
-import Sticky from 'react-stickynode';
+import Sticky from "react-stickynode";
 
 const Sidebar = () => {
     return (
@@ -21,6 +21,6 @@ const Sidebar = () => {
             </Sticky>
         </div>
     );
-}
+};
 
 export default Sidebar;

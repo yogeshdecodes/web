@@ -3,9 +3,9 @@ import {
     getHostname,
     normalizeUrl
 } from "../../../../../../lib/utils/products";
-import { isFunction } from "lodash-es";
+import isFunction from "lodash/isFunction";
 import ProductEditModal from "../../../ProductEditModal";
-import { Link } from "react-router-dom";
+import { Link } from "~/routes";
 import withCurrentUser from "../../../../../users/containers/withCurrentUser";
 import Emoji from "../../../../../../components/Emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

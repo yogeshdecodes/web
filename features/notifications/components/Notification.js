@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import Emoji from "components/Emoji";
-import { Entry } from "features/stream";
+import { Link } from "~/routes";
+import Emoji from "~/components/Emoji";
+import { Entry } from "~/features/stream";
 import TimeAgo from "react-timeago";
-import { Product } from "features/products";
-import uniqBy from "lodash-es/uniqBy";
+import { Product } from "~/features/products";
+import uniqBy from "lodash/uniqBy";
 import MilestoneMedia from "../../milestones/components/MilestoneMedia";
 
 function renderPolymorphicPraise(n) {
@@ -307,9 +307,7 @@ const Notification = ({ notification, grouped = false }) => {
                         {notification.target_type === "milestone" && (
                             <div>
                                 <Link
-                                    to={`/milestones/${
-                                        notification.target.slug
-                                    }`}
+                                    to={`/milestones/${notification.target.slug}`}
                                     className={"btn"}
                                 >
                                     View milestone

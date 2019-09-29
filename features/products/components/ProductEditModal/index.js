@@ -6,22 +6,21 @@ import {
     getEventsForUser,
     removeProductFromEvent
 } from "../../../../lib/events";
-import { deleteProduct, editProduct, leaveProduct } from "lib/products";
+import { deleteProduct, editProduct, leaveProduct } from "~/lib/products";
 
-import EventMedia from "../../../events/components/EventMedia";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GeneralTab from "./components/GeneralTab";
-import { Link } from "react-router-dom";
-import Modal from "components/Modal/Modal";
+import { Link } from "~/routes";
+import Modal from "~/components/Modal";
 import React from "react";
-import SidebarLink from "components/Modal/SidebarLink";
-import Spinner from "components/Spinner";
+import SidebarLink from "~/components/SidebarLink";
+import Spinner from "~/components/Spinner";
 import TeamSelector from "../TeamSelector";
 import { createProject } from "../../../../lib/projects";
-import { getProjects } from "lib/projects";
+import { getProjects } from "~/lib/projects";
 import { hasEnded } from "../../../../lib/utils/events";
-import { isFunction } from "lodash-es";
-import withCurrentUser from "features/users/containers/withCurrentUser";
+import isFunction from "lodash/isFunction";
+import withCurrentUser from "~/features/users/containers/withCurrentUser";
 
 class EventsTab extends React.Component {
     state = {

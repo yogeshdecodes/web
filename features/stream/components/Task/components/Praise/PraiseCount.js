@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "vendor/bulma";
-import Emoji from "components/Emoji";
+import { Button } from "~/vendor/bulma";
+import Emoji from "~/components/Emoji";
 
 const PraiseCount = ({ amount, button = false }) => {
     if (amount) {

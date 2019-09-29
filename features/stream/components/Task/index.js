@@ -1,4 +1,4 @@
-import Task from './Task';
-import './Task.scss';
+import Task from "./Task";
+import "./Task.scss";
 
 export default Task;

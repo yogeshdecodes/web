@@ -1,28 +1,26 @@
-import { Button, Icon, Level, Media, Title } from "../../../../vendor/bulma";
 import { getLiveEvents, getUpcomingEvents } from "../../../../lib/events";
 
 import Avatar from "../Avatar/Avatar";
-import { Card } from "vendor/bulma";
 import Emoji from "../../../../components/Emoji";
 import EventMedia from "../../../events/components/EventMedia";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FullName from "../FullName";
-import { Link } from "react-router-dom";
-import OutboundLink from "components/OutboundLink";
+import { Link } from "~/routes";
+import OutboundLink from "~/components/OutboundLink";
 import ProductList from "../../../products/components/ProductList/ProductList";
 import PropTypes from "prop-types";
 import React from "react";
 import RecentDiscussionList from "../../../discussions/RecentDiscussionList";
 import Spinner from "../../../../components/Spinner";
 import TrendingDiscussionList from "../../../discussions/TrendingDiscussionList";
-import { UserMedia } from "features/users";
+import { UserMedia } from "~/features/users";
 import UserRow from "../UserRow";
-import config from "config.js";
+import config from "~/config";
 import { fetchStreamers } from "../../../../lib/integrations/shipstreams";
-import { getFollowing } from "lib/user";
+import { getFollowing } from "~/lib/user";
 import { getRecentlyLaunched } from "../../../../lib/products";
 import { getWorldStats } from "../../../../lib/stats";
-import { orderBy } from "lodash-es";
+import orderBy from "lodash/orderBy";
 
 const WelcomeTweet = ({ user }) => {
     const text = `Welcome to @getmakerlog, @${user.twitter_handle}! #TogetherWeMake`;

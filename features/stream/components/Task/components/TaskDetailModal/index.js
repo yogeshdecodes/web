@@ -1,4 +1,4 @@
-import TaskDetailModal from './TaskDetailModal';
-import './TaskDetailModal.scss';
+import TaskDetailModal from "./TaskDetailModal";
+import "./TaskDetailModal.scss";
 
 export default TaskDetailModal;

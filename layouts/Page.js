@@ -1,7 +1,7 @@
 import Nav from "./Nav";
 import React from "react";
-import Reactor from "../components/Reactor";
-import ToastList from "~/features/toasts/ToastList";
+//import Reactor from "../components/Reactor";
+//import ToastList from "~/features/toasts/ToastList";
 
 export default ({
     nav = true,
@@ -22,8 +22,5 @@ export default ({
         )}
 
         {props.children}
-
-        <Reactor />
-        <ToastList />
     </div>
 );

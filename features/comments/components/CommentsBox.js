@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getComments } from "lib/comments";
-import { withCurrentUser } from "features/users";
+import { getComments } from "~/lib/comments";
+import { withCurrentUser } from "~/features/users";
 import CommentList from "./CommentList";
 import CommentInput from "./CommentInput";
 // import { StreamCard as Card } from "../../stream/components/Stream/components/StreamCard/styled";
 import Emoji from "../../../components/Emoji";
-import { Link } from "react-router-dom";
+import { Link } from "~/routes";
 
 class CommentsBox extends React.Component {
     state = {

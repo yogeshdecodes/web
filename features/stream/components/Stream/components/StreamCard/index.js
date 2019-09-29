@@ -1,4 +1,4 @@
-import StreamCard from './StreamCard';
-import './StreamCard.scss';
+import StreamCard from "./StreamCard";
+import "./StreamCard.scss";
 
 export default StreamCard;

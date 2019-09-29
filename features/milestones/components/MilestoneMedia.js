@@ -1,16 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Markdown from "../../../components/Markdown";
-import Emoji from "../../../components/Emoji";
-import { Button, Input } from "vendor/bulma";
+import { Link } from "~/routes";
+import Markdown from "~/components/Markdown";
+import Emoji from "~/components/Emoji";
+import { Button, Input } from "~/vendor/bulma";
+import { truncate } from "~/lib/utils/random";
+import { Praisable } from "~/features/stream/components/Task/components/Praise";
+import withCurrentUser from "~/features/users/containers/withCurrentUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { deleteMilestone, editMilestone } from "~/lib/milestones";
 
 import "./MilestoneMedia.scss";
-import { truncate } from "../../../lib/utils/random";
-import { Praisable } from "../../stream/components/Task/components/Praise";
-import withCurrentUser from "../../users/containers/withCurrentUser";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
-import { deleteProject } from "../../../lib/projects";
-import { deleteMilestone, editMilestone } from "../../../lib/milestones";
 
 class MilestoneMediaComponent extends React.Component {
     constructor(props) {

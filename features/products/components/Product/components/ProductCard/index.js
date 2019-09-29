@@ -1,4 +1,4 @@
-import ProductCard from './ProductCard';
-import './ProductCard.scss';
+import ProductCard from "./ProductCard";
+import "./ProductCard.scss";
 
 export default ProductCard;

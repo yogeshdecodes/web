@@ -1,4 +1,4 @@
-import MakerList from './MakerList';
-import './MakerList.scss';
+import MakerList from "./MakerList";
+import "./MakerList.scss";
 
 export default MakerList;

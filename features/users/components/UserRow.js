@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "./Avatar/index";
-import { Link } from "react-router-dom";
+import { Link } from "~/routes";
 import "./UserRow.scss";
 import Streak from "../../../components/Streak";
 

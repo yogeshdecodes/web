@@ -1,9 +1,5 @@
-import React from 'react';
+import React from "react";
 
-const Content = (props) => (
-	<div>
-		{props.children}
-	</div>
-)
+const Content = props => <div>{props.children}</div>;
 
 export default Content;

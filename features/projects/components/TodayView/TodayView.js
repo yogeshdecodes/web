@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { actions as tasksActions } from "ducks/tasks";
-import { applySearchTerms } from "lib/utils/tasks";
+import { actions as tasksActions } from "~/ducks/tasks";
+import { applySearchTerms } from "~/lib/utils/tasks";
 import differenceInHours from "date-fns/differenceInHours";
-import { Task } from "features/stream";
+import { Task } from "~/features/stream";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Emoji from "../../../../components/Emoji";
@@ -58,12 +58,8 @@ class TodayView extends React.Component {
     };
 
     renderTweetButton = () => {
-        const text = `Today I completed ${
-            this.props.doneToday
-        } tasks on @getmakerlog! 💪 \n #TogetherWeMake`;
-        const url = `${process.env.REACT_APP_BASE_URL}/@${
-            this.props.me.username
-        }`;
+        const text = `Today I completed ${this.props.doneToday} tasks on @getmakerlog! 💪 \n #TogetherWeMake`;
+        const url = `${process.env.REACT_APP_BASE_URL}/@${this.props.me.username}`;
 
         return (
             <OutboundLink

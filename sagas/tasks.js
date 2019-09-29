@@ -1,22 +1,22 @@
-import {call, put, race, select, take, takeLatest} from 'redux-saga/effects';
-import {actions as tasksActions, types as tasksTypes} from '../ducks/tasks';
+import { call, put, race, select, take, takeLatest } from "redux-saga/effects";
+import { actions as tasksActions, types as tasksTypes } from "../ducks/tasks";
 import {
     createTask as createTaskModel,
     deleteTask as deleteTaskModel,
     smartCreateTask as smartCreateTaskModel,
     syncTasks as syncTasksModel,
     updateTask as updateTaskModel
-} from 'lib/tasks';
-import {actions as streamActions} from 'ducks/stream';
-import {actions as appActions} from 'ducks/app';
-import {eventChannel} from "redux-saga";
+} from "~/lib/tasks";
+import { actions as streamActions } from "~/ducks/stream";
+import { actions as appActions } from "~/ducks/app";
+import { eventChannel } from "redux-saga";
 import RWS from "reconnecting-websocket/dist/reconnecting-websocket";
-import {actions as statsActions} from "../ducks/stats";
+import { actions as statsActions } from "../ducks/stats";
 
-const getTasksState = (state) => state.tasks
+const getTasksState = state => state.tasks;
 
-const getAppState = (state) => state.app
-const getUserState = (state) => state.user
+const getAppState = state => state.app;
+const getUserState = state => state.user;
 
 function* syncTasks(action) {
     try {
@@ -29,62 +29,52 @@ function* syncTasks(action) {
     }
 }
 
-
 function* createTask(action) {
     try {
         const task = yield call(
             action.smart ? smartCreateTaskModel : createTaskModel,
-            action.content)
-        ;
+            action.content
+        );
         yield put(tasksActions.createTaskSuccess(task));
         yield put(statsActions.fetchStats(true));
         // get rid of onboarding
         let appState = yield select(getAppState);
         if (appState.isNewUser) {
-            yield put(appActions.toggleNewUser())
+            yield put(appActions.toggleNewUser());
         }
-    } catch(e) {
-        yield put(tasksActions.createTaskFailed(action.id))
+    } catch (e) {
+        yield put(tasksActions.createTaskFailed(action.id));
     }
 }
 
 function* deleteTask(action) {
     try {
-        yield call(
-            deleteTaskModel,
-            action.id
-        )
-        yield put(tasksActions.deleteTaskSucceed())
-        yield put(streamActions.removeTask(action.id))
+        yield call(deleteTaskModel, action.id);
+        yield put(tasksActions.deleteTaskSucceed());
+        yield put(streamActions.removeTask(action.id));
         yield put(statsActions.fetchStats(true));
-    } catch(e) {
-        yield put(tasksActions.deleteTaskFailed(e.message))
+    } catch (e) {
+        yield put(tasksActions.deleteTaskFailed(e.message));
     }
 }
 
 function* updateTask(action) {
     try {
-        const task = yield call(
-            updateTaskModel,
-            action.id,
-            action.payload
-        )
-        yield put(tasksActions.updateTaskSucceed(task))
-    } catch(e) {
-        yield put(tasksActions.updateTaskFailed(e.message))
+        const task = yield call(updateTaskModel, action.id, action.payload);
+        yield put(tasksActions.updateTaskSucceed(task));
+    } catch (e) {
+        yield put(tasksActions.updateTaskFailed(e.message));
     }
 }
 
-
 function getTasksSocketUrl(id) {
     let path = `/users/${id}/stream/`;
-    return `${process.env.REACT_APP_WS_URL}${path}`
+    return `${process.env.REACT_APP_WS_URL}${path}`;
 }
-
 
 function* sendListener(socket) {
     while (true) {
-        yield take('TASKS_SEND_SOCKET');
+        yield take("TASKS_SEND_SOCKET");
         // socket.send(JSON.stringify({ type: 'setTask', status: 'open' }))
     }
 }
@@ -98,20 +88,25 @@ function* receiveListener(socketChannel) {
 }
 
 function listen(socket) {
-    return eventChannel((emit) => {
+    return eventChannel(emit => {
         socket.onopen = () => {
-            console.log("Makerlog: Tasks connection established.")
+            console.log("Makerlog: Tasks connection established.");
         };
-        socket.onmessage = (event) => {
+        socket.onmessage = event => {
             const data = JSON.parse(event.data);
-            console.log(`Makerlog: Event received through WS. (${data.type})`)
-            switch(data.type) {
-                case 'task.created':
-                case 'task.updated':
-                    emit(tasksActions.loadTasksSuccess([data.payload], data.payload.created_at))
+            console.log(`Makerlog: Event received through WS. (${data.type})`);
+            switch (data.type) {
+                case "task.created":
+                case "task.updated":
+                    emit(
+                        tasksActions.loadTasksSuccess(
+                            [data.payload],
+                            data.payload.created_at
+                        )
+                    );
                     break;
 
-                case 'task.deleted':
+                case "task.deleted":
                     break;
 
                 default:
@@ -132,7 +127,7 @@ function* tasksSocketWatcher(action) {
         user = yield select(getUserState);
         yield take();
     }
-    console.log("Makerlog: Store loaded.")
+    console.log("Makerlog: Store loaded.");
     while (true) {
         let user = yield select(getUserState);
         yield take("TASKS_SOCKET_OPEN");
@@ -140,10 +135,10 @@ function* tasksSocketWatcher(action) {
         const socketChannel = yield call(listen, socket);
         const { cancel } = yield race({
             task: [
-                call(receiveListener, socketChannel),  // listen to receive msg
+                call(receiveListener, socketChannel), // listen to receive msg
                 call(sendListener, socket) // listen to send new msg
             ],
-            cancel: take('TASKS_SOCKET_CLOSE')
+            cancel: take("TASKS_SOCKET_CLOSE")
         });
         if (cancel) {
             socketChannel.close();
@@ -151,19 +146,16 @@ function* tasksSocketWatcher(action) {
     }
 }
 
-
 function* tasksSaga() {
-    yield takeLatest([
-        tasksTypes.TASKS_SYNC_REQUEST
-    ], syncTasks);
+    yield takeLatest([tasksTypes.TASKS_SYNC_REQUEST], syncTasks);
 }
 
 function* updateTaskSaga() {
-    yield takeLatest(tasksTypes.TASKS_UPDATE_REQUEST, updateTask)
+    yield takeLatest(tasksTypes.TASKS_UPDATE_REQUEST, updateTask);
 }
 
 function* deleteTaskSaga() {
-    yield takeLatest(tasksTypes.TASKS_DELETE_REQUEST, deleteTask)
+    yield takeLatest(tasksTypes.TASKS_DELETE_REQUEST, deleteTask);
 }
 
 function* createTaskSaga() {
@@ -175,5 +167,5 @@ export {
     createTaskSaga,
     deleteTaskSaga,
     updateTaskSaga,
-    tasksSocketWatcher,
-}
+    tasksSocketWatcher
+};

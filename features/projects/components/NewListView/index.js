@@ -20,15 +20,15 @@ import {
 import CelebratoryThing from "../CelebratoryThing";
 import DueCountdown from "../../../../components/DueCountdown";
 import Emoji from "../../../../components/Emoji";
-import Link from "react-router-dom/es/Link";
+import Link from "~/routes/es/Link";
 import React from "react";
 import Spinner from "../../../../components/Spinner";
 import TaskDetailModal from "../../../stream/components/Task/components/TaskDetailModal/TaskDetailModal";
-import { applySearchTerms } from "lib/utils/tasks";
+import { applySearchTerms } from "~/lib/utils/tasks";
 import { connect } from "react-redux";
 import { actions as editorActions } from "../../../../ducks/editor";
 import { getMyProducts } from "../../../../lib/products";
-import { actions as tasksActions } from "ducks/tasks";
+import { actions as tasksActions } from "~/ducks/tasks";
 
 const mapStateToProps = state => {
     return {

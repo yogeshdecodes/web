@@ -1,4 +1,4 @@
-import WeeklyStream from './WeeklyStream';
-import './WeeklyStream.scss';
+import WeeklyStream from "./WeeklyStream";
+import "./WeeklyStream.scss";
 
 export default WeeklyStream;

@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "components/Modal";
+import Modal from "~/components/Modal";
 import { StreamCard } from "../features/stream/components/Stream/components/StreamCard/styled";
 import Emoji from "./Emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";

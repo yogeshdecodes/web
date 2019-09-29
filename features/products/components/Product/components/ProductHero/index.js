@@ -1,4 +1,4 @@
-import ProductHero from './ProductHero';
-import './ProductHero.scss';
+import ProductHero from "./ProductHero";
+import "./ProductHero.scss";
 
 export default ProductHero;

@@ -1,32 +1,27 @@
-import {call, put, race, take, takeLatest} from 'redux-saga/effects';
-import {actions as authActions, types as authTypes} from '../ducks/auth';
-import {actions as userActions, types as userTypes} from 'ducks/user';
-import axios from 'axios';
-import {getToken} from 'lib/auth';
-
+import { call, put, race, take, takeLatest } from "redux-saga/effects";
+import { actions as authActions, types as authTypes } from "../ducks/auth";
+import { actions as userActions, types as userTypes } from "~/ducks/user";
+import axios from "axios";
+import { getToken } from "~/lib/auth";
 
 function* fetchToken(action) {
-	try {
-		let token = null;
+    try {
+        let token = null;
 
-		if (action.token) {
-			token = action.token
-		} else {
-            token = yield call(
-                getToken,
-                action.username,
-                action.password
-            );
-		}
+        if (action.token) {
+            token = action.token;
+        } else {
+            token = yield call(getToken, action.username, action.password);
+        }
 
-		axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+        axios.defaults.headers.common["Authorization"] = `Token ${token}`;
 
         yield put(userActions.loadUser());
 
         const { error } = yield race({
             success: take(userTypes.USER_SUCCESS),
-            error: take(userTypes.USER_FAILED),
-        })
+            error: take(userTypes.USER_FAILED)
+        });
 
         if (error) {
             console.log("!!!FETCH TOKEN RACE CONDITION!!!");
@@ -34,19 +29,16 @@ function* fetchToken(action) {
             throw new Error("Race condition fetching user.");
         }
 
-		yield put(authActions.loginSuccess(token));
-	} catch (e) {
-		let action = null;
-		action = authActions.loginFailed(e.message)
-		yield put(action)
-	}
+        yield put(authActions.loginSuccess(token));
+    } catch (e) {
+        let action = null;
+        action = authActions.loginFailed(e.message);
+        yield put(action);
+    }
 }
-
 
 function* loginSaga() {
-	yield takeLatest(authTypes.LOGIN_REQUESTED, fetchToken)
+    yield takeLatest(authTypes.LOGIN_REQUESTED, fetchToken);
 }
 
-export {
-	loginSaga
-}
+export { loginSaga };

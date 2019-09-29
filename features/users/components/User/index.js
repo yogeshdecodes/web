@@ -1,4 +1,4 @@
-import User from './User';
-import './User.scss';
+import User from "./User";
+import "./User.scss";
 
 export default User;

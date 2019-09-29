@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link } from "~/routes";
 import Emoji from "../../../../../../components/Emoji";
 import {
     getHostname,
@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { push } from "react-router-redux";
 import { connect } from "react-redux";
-import { truncate } from "lib/utils/random";
+import { truncate } from "~/lib/utils/random";
 
 class ProductMedia extends React.Component {
     renderMedium() {

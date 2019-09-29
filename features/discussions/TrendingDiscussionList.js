@@ -1,6 +1,6 @@
 import React from "react";
 import { getTrendingThreads } from "../../lib/discussions";
-import { Link } from "react-router-dom";
+import { Link } from "~/routes";
 import Spinner from "../../components/Spinner";
 import ReplyFaces from "./ReplyFaces";
 

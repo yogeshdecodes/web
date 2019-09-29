@@ -1,3 +1,3 @@
-import ActivitySparklines from './ActivitySparklines';
+import ActivitySparklines from "./ActivitySparklines";
 
 export default ActivitySparklines;
