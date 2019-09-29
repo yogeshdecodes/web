@@ -7,7 +7,7 @@ const port = parseInt(process.env.PORT, 10) || 3000;
 // With express
 const express = require("express");
 app.prepare().then(() => {
-  express()
-    .use(handler)
-    .listen(port);
+    express()
+        .use(handler)
+        .listen(port);
 });
