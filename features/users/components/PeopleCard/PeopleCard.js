@@ -1,11 +1,11 @@
-import { getLiveEvents, getUpcomingEvents } from "../../../../lib/events";
+import {getLiveEvents, getUpcomingEvents} from "../../../../lib/events";
 
 import Avatar from "../Avatar/Avatar";
 import Emoji from "../../../../components/Emoji";
 import EventMedia from "../../../events/components/EventMedia";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import FullName from "../FullName";
-import { Link } from "~/routes";
+import {Link} from "~/routes";
 import OutboundLink from "~/components/OutboundLink";
 import ProductList from "../../../products/components/ProductList/ProductList";
 import PropTypes from "prop-types";
@@ -13,13 +13,13 @@ import React from "react";
 import RecentDiscussionList from "../../../discussions/RecentDiscussionList";
 import Spinner from "../../../../components/Spinner";
 import TrendingDiscussionList from "../../../discussions/TrendingDiscussionList";
-import { UserMedia } from "~/features/users";
+import {UserMedia} from "~/features/users";
 import UserRow from "../UserRow";
 import config from "~/config";
-import { fetchStreamers } from "../../../../lib/integrations/shipstreams";
-import { getFollowing } from "~/lib/user";
-import { getRecentlyLaunched } from "../../../../lib/products";
-import { getWorldStats } from "../../../../lib/stats";
+import {fetchStreamers} from "../../../../lib/integrations/shipstreams";
+import {getFollowing} from "~/lib/user";
+import {getRecentlyLaunched} from "../../../../lib/products";
+import {getWorldStats} from "../../../../lib/stats";
 import orderBy from "lodash/orderBy";
 
 const WelcomeTweet = ({ user }) => {
@@ -309,7 +309,10 @@ class PeopleCard extends React.Component {
                 {this.state.streamers.map(user => (
                     <div className={"flex flex-gap"}>
                         <div>
-                            <Link to={`/@${user.username}`}>
+                            <Link
+                                route="profile-page"
+                                params={{ username: user.username }}
+                            >
                                 <Avatar is={48} user={user} />
                             </Link>
                         </div>
@@ -318,8 +321,10 @@ class PeopleCard extends React.Component {
                                 <FullName user={user} />
                             </strong>
                             <br />
-                            <Link className={"btn-small btn-gray"} to={`/live`}>
-                                Watch now
+                            <Link route={`live`}>
+                                <a className={"btn-small btn-gray"}>
+                                    Watch now
+                                </a>
                             </Link>
                         </div>
                     </div>

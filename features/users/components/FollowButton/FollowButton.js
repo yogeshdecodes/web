@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "~/vendor/bulma";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { follow, isFollowing, unfollow } from "~/lib/user";
+import {Button} from "~/vendor/bulma";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {follow, isFollowing, unfollow} from "~/lib/user";
 
 class FollowButton extends React.Component {
     state = {

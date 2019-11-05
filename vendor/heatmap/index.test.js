@@ -1,9 +1,9 @@
 import React from "react";
-import Enzyme, { shallow } from "enzyme";
+import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import CalendarHeatmap from "../src";
-import { dateNDaysAgo, shiftDate } from "../src/helpers";
+import {dateNDaysAgo, shiftDate} from "../src/helpers";
 
 Enzyme.configure({ adapter: new Adapter() });
 

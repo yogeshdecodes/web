@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { groupTasksByDone } from "../../../../lib/utils/tasks";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { Scrollbars } from "react-custom-scrollbars";
+import {connect} from "react-redux";
+import {groupTasksByDone} from "../../../../lib/utils/tasks";
+import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
+import {Scrollbars} from "react-custom-scrollbars";
 import Spinner from "../../../../components/Spinner";
 import mapDispatchToProps from "../../containers/mapDispatchToProps";
 import KanbanTask from "./KanbanTask";

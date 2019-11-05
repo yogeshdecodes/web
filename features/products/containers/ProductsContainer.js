@@ -1,11 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Spinner from "~/components/Spinner";
-import {
-    getMyProducts,
-    getProducts,
-    getRecentlyLaunched
-} from "../../../lib/products";
+import {getMyProducts, getProducts, getRecentlyLaunched} from "../../../lib/products";
 
 class ProductsContainer extends React.Component {
     state = {

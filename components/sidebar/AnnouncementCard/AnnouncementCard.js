@@ -1,6 +1,4 @@
 import React from "react";
-import Emoji from "../../Emoji";
-import styled from "styled-components";
 
 export default props => (
     <div className={"card AnnouncementCard"}>

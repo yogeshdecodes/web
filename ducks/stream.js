@@ -1,7 +1,7 @@
 import uniqBy from "lodash/uniqBy";
-import { errorArray } from "../lib/utils/error";
+import {errorArray} from "../lib/utils/error";
 import omit from "lodash/omit";
-import { orderByDate } from "../lib/utils/tasks";
+import {orderByDate} from "../lib/utils/tasks";
 
 const initialState = {
     isFollowingFeed: false,

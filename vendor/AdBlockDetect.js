@@ -1,7 +1,7 @@
-import { Component } from "react";
+import {Component} from "react";
 import PropTypes from "prop-types";
 
-import { detected } from "adblockdetect";
+import {detected} from "adblockdetect";
 
 const { node } = PropTypes;
 

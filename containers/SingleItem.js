@@ -1,8 +1,8 @@
 import Page from "layouts/Page";
 import React from "react";
-import { Redirect } from "~/routes";
-import axios from "axios";
-import { axiosWrapper } from "../lib/utils/error";
+import {Redirect} from "~/routes";
+import axios from "~/lib/axios";
+import {axiosWrapper} from "../lib/utils/error";
 
 class SingleItem extends React.Component {
     state = {

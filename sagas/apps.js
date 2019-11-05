@@ -1,6 +1,6 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { actions as appsActions, types as appsTypes } from "../ducks/apps";
-import { getApps } from "~/lib/apps";
+import {call, put, takeLatest} from "redux-saga/effects";
+import {actions as appsActions, types as appsTypes} from "../ducks/apps";
+import {getApps} from "~/lib/apps";
 
 function* fetchApps(action) {
     try {

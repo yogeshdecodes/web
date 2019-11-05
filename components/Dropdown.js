@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "~/routes";
+import {Link as NavLink} from "~/routes";
 
 /*
     <Dropdown className="navbar-item" trigger={() => ()}>
@@ -63,23 +63,29 @@ class NavbarDropdown extends Dropdown {
         const Link = this.props.link;
         return (
             <NavLink
-                to={this.props.to}
+                route={this.props.route}
+                params={this.props.params}
                 onClick={e => {
                     e.preventDefault();
                 }}
                 activeClassName={"is-located"}
-                className={
-                    "navbar-item has-dropdown " +
-                    (this.state.open ? "is-active" : "")
-                }
             >
-                {
-                    // eslint-disable-next-line
-                }{" "}
-                <span className="navbar-link" onClick={this.onClick}>
-                    <Link />
-                </span>
-                <div className={"navbar-dropdown"}>{this.props.children}</div>
+                <a
+                    className={
+                        "navbar-item has-dropdown " +
+                        (this.state.open ? "is-active" : "")
+                    }
+                >
+                    {
+                        // eslint-disable-next-line
+                    }{" "}
+                    <span className="navbar-link" onClick={this.onClick}>
+                        <Link />
+                    </span>
+                    <div className={"navbar-dropdown"}>
+                        {this.props.children}
+                    </div>
+                </a>
             </NavLink>
         );
     }

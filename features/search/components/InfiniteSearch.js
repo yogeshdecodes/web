@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Button } from "../../../vendor/bulma";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {Button} from "../../../vendor/bulma";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Spinner from "../../../components/Spinner";
 import orderBy from "lodash/orderBy";
 import debounce from "lodash/debounce";
-import axios from "axios";
+import axios from "~/lib/axios";
 
 class InfiniteSearch extends React.Component {
     state = {

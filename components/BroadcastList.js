@@ -1,6 +1,5 @@
 import React from "react";
-import Emoji from "./Emoji";
-import { getBroadcasts } from "../lib/broadcasts";
+import {getBroadcasts} from "../lib/broadcasts";
 import OutboundLink from "./OutboundLink";
 
 export const Broadcast = ({ broadcast }) => (

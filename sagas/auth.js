@@ -1,8 +1,8 @@
-import { call, put, race, take, takeLatest } from "redux-saga/effects";
-import { actions as authActions, types as authTypes } from "../ducks/auth";
-import { actions as userActions, types as userTypes } from "~/ducks/user";
-import axios from "axios";
-import { getToken } from "~/lib/auth";
+import {call, put, race, take, takeLatest} from "redux-saga/effects";
+import {actions as authActions, types as authTypes} from "../ducks/auth";
+import {actions as userActions, types as userTypes} from "~/ducks/user";
+import axios from "~/lib/axios";
+import {getToken} from "~/lib/auth";
 
 function* fetchToken(action) {
     try {

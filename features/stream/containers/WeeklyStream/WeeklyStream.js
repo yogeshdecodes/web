@@ -3,10 +3,10 @@ import uniqBy from "lodash/uniqBy";
 import ReconnectingWebSocket from "reconnecting-websocket";
 
 import Stream from "../../components/Stream";
-import { socketUrl } from "../../../../lib/utils/random";
+import {socketUrl} from "../../../../lib/utils/random";
 import pickBy from "lodash/pickBy";
-import { fetchNextUrl } from "../../../../lib/tasks";
-import { hasMore } from "../../../../lib/utils/stream";
+import {fetchNextUrl} from "../../../../lib/tasks";
+import {hasMore} from "../../../../lib/utils/stream";
 
 class WeeklyStream extends React.Component {
     initialState = {

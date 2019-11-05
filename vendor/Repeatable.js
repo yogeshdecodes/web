@@ -1,6 +1,6 @@
 import chainedFunction from "chained-function";
 import PropTypes from "prop-types";
-import React, { PureComponent } from "react";
+import React, {PureComponent} from "react";
 
 class Repeatable extends PureComponent {
     static propTypes = {

@@ -1,5 +1,5 @@
 import React from "react";
-import { getCommentsPeople } from "../../../lib/comments";
+import {getCommentsPeople} from "../../../lib/comments";
 import FaceStack from "../../users/components/FaceStack";
 
 class CommentFaces extends React.Component {

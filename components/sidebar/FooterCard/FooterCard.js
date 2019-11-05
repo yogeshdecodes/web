@@ -1,13 +1,15 @@
 import React from "react";
-import { withTheme } from "styled-components";
-import { Link } from "~/routes";
+import {withTheme} from "styled-components";
+import {Link} from "~/routes";
 import OutboundLink from "../../OutboundLink";
 
 const FooterCard = props => (
     <ul className={"LinksFooter flex"}>
         <li className={"has-text-grey"}>&copy; Makerlog</li>
         <li>
-            <Link to={"/about"}>About</Link>
+            <Link route={"about"}>
+                <a>About</a>
+            </Link>
         </li>
         <li>
             <OutboundLink to={"https://gold.getmakerlog.com"}>

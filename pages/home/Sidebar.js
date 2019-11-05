@@ -1,5 +1,5 @@
 import React from "react";
-import { LoggedOutOnly, PeopleCard } from "~/features/users";
+import {LoggedOutOnly, PeopleCard} from "~/features/users";
 import TrendingDiscussionsCard from "~/components/sidebar/TrendingDiscussionsCard";
 import AdCard from "~/components/sidebar/AdCard";
 import RegisterCard from "~/components/sidebar/RegisterCard";

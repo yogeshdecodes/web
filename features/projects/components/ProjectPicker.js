@@ -1,6 +1,6 @@
 import React from "react";
-import { getProjects } from "../../../lib/user";
-import { createProject } from "../../../lib/projects";
+import {getProjects} from "../../../lib/user";
+import {createProject} from "../../../lib/projects";
 import Spinner from "../../../components/Spinner";
 
 class ProjectPicker extends React.Component {

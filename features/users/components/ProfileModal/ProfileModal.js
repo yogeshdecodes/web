@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
-import { Link } from "~/routes";
-import { connect } from "react-redux";
+import {Link} from "~/routes";
+import {connect} from "react-redux";
 import ActivitySparklines from "~/features/stats/components/ActivitySparklines";
 import FullName from "../FullName";
 import GatedFollowButton from "../GatedFollowButton";
-import { ProductList, ProductsContainer } from "~/features/products";
+import {ProductList, ProductsContainer} from "~/features/products";
 
 // make low performance css and include conditionally
 
@@ -20,7 +20,10 @@ const ProfileModal = props => (
         <div className="ProfileModal-Container">
             <div className="ProfileModal-Column ProfileModal-Header">
                 <div>
-                    <Link to={`/@${props.user.username}`}>
+                    <Link
+                        route="profile-page"
+                        params={{ username: props.user.username }}
+                    >
                         <img
                             className="ProfileModal-Avatar"
                             src={props.user.avatar}
@@ -52,8 +55,11 @@ const ProfileModal = props => (
                 />
                 <hr />
                 <div className={"center"}>
-                    <Link to={`/@${props.user.username}`}>
-                        View full profile &raquo;
+                    <Link
+                        route="profile-page"
+                        params={{ username: props.user.username }}
+                    >
+                        <a>View full profile &raquo;</a>
                     </Link>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ActivitySparklines from "./ActivitySparklines";
 import Spinner from "~/components/Spinner";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
 const UserActivitySparklines = props => {
     if (props.isLoading) {

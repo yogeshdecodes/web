@@ -1,7 +1,7 @@
 import React from "react";
 import Emoji from "../../Emoji";
 import OutboundLink from "../../OutboundLink";
-import { UserContainer } from "~/features/users";
+import {UserContainer} from "~/features/users";
 import Avatar from "../../../features/users/components/Avatar/Avatar";
 import "./AppCard.scss";
 

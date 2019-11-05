@@ -1,5 +1,5 @@
 import moment from "moment";
-import { FORMAT } from "../constants";
+import {FORMAT} from "../constants";
 
 /**
  * Computes the duration between two dates.

@@ -1,6 +1,6 @@
 import React from "react";
 import Emoji from "../Emoji";
-import { Link } from "~/routes";
+import {Link} from "~/routes";
 
 export default () => (
     <div className={"card"}>
@@ -11,8 +11,8 @@ export default () => (
             Join Makerlog to post tasks, share your work, and meet fellow
             makers.
             <p>
-                <Link className={"btn-primary"} to={"/begin"}>
-                    Get started &raquo;
+                <Link route="begin">
+                    <a className={"btn-primary"}>Get started</a>
                 </Link>
             </p>
         </div>

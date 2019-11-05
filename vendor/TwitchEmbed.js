@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 const EMBED_URL = "https://embed.twitch.tv/embed/v1.js";

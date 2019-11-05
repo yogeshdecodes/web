@@ -1,6 +1,6 @@
 import CalendarBase from "./CalendarBase";
-import { URL } from "./constants";
-import { toQueryString } from "./utils/data";
+import {URL} from "./constants";
+import {toQueryString} from "./utils/data";
 
 /**
  * Generates a an Outlook Calendar url.

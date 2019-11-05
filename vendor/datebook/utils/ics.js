@@ -1,6 +1,6 @@
 import FileSaver from "file-saver";
-import { toIcsParamString } from "./data";
-import { formatTime } from "./time";
+import {toIcsParamString} from "./data";
+import {formatTime} from "./time";
 import safariFileSave from "./safariFileSave";
 
 /**

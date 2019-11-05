@@ -4,13 +4,11 @@ import FullName from "../components/FullName";
 import "./index.scss";
 import Streak from "../../../components/Streak";
 import MakerScore from "../../../components/MakerScore";
-import Tda from "../../../components/Tda";
-import Emoji from "../../../components/Emoji";
 import ProductList from "../../products/components/ProductList";
 import ProductsContainer from "../../products/containers/ProductsContainer";
 import GatedFollowButton from "../components/GatedFollowButton";
 import UserActivityGraph from "../../stats/components/UserActivityGraph";
-import { Link } from "~/routes";
+import {Link} from "~/routes";
 
 const UserCard = ({ user }) => {
     let style = { color: "inherit", textDecoration: "none" };
@@ -23,19 +21,21 @@ const UserCard = ({ user }) => {
 
     return (
         <div className={"UserCard"}>
-            <Link to={`/@${user.username}`} className={"cover"} style={style}>
-                <Avatar is={48} user={user} />
-                <div className={"details"}>
-                    <h1>
-                        <FullName user={user} />
-                    </h1>
+            <Link route="profile-page" params={{ username: user.username }}>
+                <span className={"cover"} style={style}>
+                    <Avatar is={48} user={user} />
+                    <div className={"details"}>
+                        <h1>
+                            <FullName user={user} />
+                        </h1>
 
-                    <h2>{user.description}</h2>
-                    <div className={"stats"}>
-                        {user.streak > 0 && <Streak days={user.streak} />}
-                        <MakerScore score={user.maker_score} />
+                        <h2>{user.description}</h2>
+                        <div className={"stats"}>
+                            {user.streak > 0 && <Streak days={user.streak} />}
+                            <MakerScore score={user.maker_score} />
+                        </div>
                     </div>
-                </div>
+                </span>
             </Link>
 
             <div className={"contents is-hidden-mobile"}>

@@ -1,21 +1,12 @@
 import "./index.scss";
-
-import { Input, Media, Title } from "../../../../vendor/bulma";
-import { Link, NavLink, withRouter } from "~/routes";
-import {
-    searchDiscussions,
-    searchProducts,
-    searchTasks,
-    searchUsers
-} from "../../../../lib/search";
+import {Link} from "~/routes";
+import {searchDiscussions, searchProducts, searchTasks, searchUsers} from "../../../../lib/search";
 
 import Avatar from "../../../users/components/Avatar/Avatar";
-import { StreamCard as Card } from "../../../stream/components/Stream/components/StreamCard/styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Icon } from "~/vendor/bulma";
-import { ProductList } from "~/features/products";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {ProductList} from "~/features/products";
 import React from "react";
-import { Task } from "../../../stream";
+import {Task} from "../../../stream";
 import ThreadList from "../../../discussions/ThreadList";
 import UserMediaList from "../../../users/components/UserMediaList/UserMediaList";
 import debounce from "lodash/debounce";
@@ -169,14 +160,21 @@ class GlobalSearchBar extends React.Component {
                                     </div>
                                     <footer>
                                         <Link
-                                            onClick={this.toggle}
-                                            to={`/search/products?q=${this.state.query}`}
-                                            className={
-                                                "button is-text is-small"
-                                            }
-                                            href={"#"}
+                                            route="search"
+                                            params={{
+                                                type: "products",
+                                                query: this.state.query
+                                            }}
                                         >
-                                            See all products &raquo;
+                                            <a
+                                                onClick={this.toggle}
+                                                className={
+                                                    "button is-text is-small"
+                                                }
+                                            >
+                                                {" "}
+                                                See all products &raquo;
+                                            </a>
                                         </Link>
                                     </footer>
                                 </div>
@@ -193,14 +191,20 @@ class GlobalSearchBar extends React.Component {
                                     </div>
                                     <footer>
                                         <Link
-                                            onClick={this.toggle}
-                                            to={`/search/makers?q=${this.state.query}`}
-                                            className={
-                                                "button is-text is-small"
-                                            }
-                                            href={"#"}
+                                            route="search"
+                                            params={{
+                                                type: "makers",
+                                                query: this.state.query
+                                            }}
                                         >
-                                            See all makers &raquo;
+                                            <a
+                                                onClick={this.toggle}
+                                                className={
+                                                    "button is-text is-small"
+                                                }
+                                            >
+                                                See all makers &raquo;
+                                            </a>
                                         </Link>
                                     </footer>
                                 </div>
@@ -227,14 +231,20 @@ class GlobalSearchBar extends React.Component {
                                     </div>
                                     <footer>
                                         <Link
-                                            onClick={this.toggle}
-                                            to={`/search/tasks?q=${this.state.query}`}
-                                            className={
-                                                "button is-text is-small"
-                                            }
-                                            href={"#"}
+                                            route="search"
+                                            params={{
+                                                type: "tasks",
+                                                query: this.state.query
+                                            }}
                                         >
-                                            See all tasks &raquo;
+                                            <a
+                                                onClick={this.toggle}
+                                                className={
+                                                    "button is-text is-small"
+                                                }
+                                            >
+                                                See all tasks &raquo;
+                                            </a>
                                         </Link>
                                     </footer>
                                 </div>
@@ -249,14 +259,20 @@ class GlobalSearchBar extends React.Component {
                                     </div>
                                     <footer>
                                         <Link
-                                            onClick={this.toggle}
-                                            to={`/search/discussions?q=${this.state.query}`}
-                                            className={
-                                                "button is-text is-small"
-                                            }
-                                            href={"#"}
+                                            route="search"
+                                            params={{
+                                                type: "discussions",
+                                                query: this.state.query
+                                            }}
                                         >
-                                            See all discussions &raquo;
+                                            <a
+                                                onClick={this.toggle}
+                                                className={
+                                                    "button is-text is-small"
+                                                }
+                                            >
+                                                See all discussions &raquo;
+                                            </a>
                                         </Link>
                                     </footer>
                                 </div>
@@ -286,4 +302,4 @@ class GlobalSearchBar extends React.Component {
     }
 }
 
-export default withRouter(GlobalSearchBar);
+export default GlobalSearchBar;

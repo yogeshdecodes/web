@@ -1,20 +1,16 @@
-import * as pluralize from "pluralize";
-
-import { Button, Icon } from "../../../../vendor/bulma";
-
 import CommentFaces from "../../../comments/components/CommentFaces";
 import DueCountdown from "../../../../components/DueCountdown";
 import Emoji from "~/components/Emoji";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Lightbox } from "react-modal-image";
-import { Link } from "~/routes";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Lightbox} from "react-modal-image";
+import {Link} from "~/routes";
 import Linkify from "react-linkify";
-import { Praisable } from "./components/Praise";
+import {Praisable} from "./components/Praise";
 import PropTypes from "prop-types";
 import React from "react";
 import TaskDetailModal from "./components/TaskDetailModal";
-import { getAppIcon } from "~/lib/apps";
-import { processTaskString } from "~/lib/utils/tasks";
+import {getAppIcon} from "~/lib/apps";
+import {processTaskString} from "~/lib/utils/tasks";
 import startsWith from "lodash/startsWith";
 
 function findWord(word, str) {
@@ -262,12 +258,11 @@ class Task extends React.Component {
         ) {
             return (
                 <span style={{ marginLeft: 5, marginRight: 5 }}>
-                    <Link
-                        to={"/live"}
-                        className={"button is-small is-primary is-rounded"}
-                    >
-                        <FontAwesomeIcon icon={"play"} />{" "}
-                        <span>Watch on Makerlog Live</span>
+                    <Link route={"live"}>
+                        <a className={"button is-small is-primary is-rounded"}>
+                            <FontAwesomeIcon icon={"play"} />{" "}
+                            <span>Watch on Makerlog Live</span>
+                        </a>
                     </Link>
                 </span>
             );

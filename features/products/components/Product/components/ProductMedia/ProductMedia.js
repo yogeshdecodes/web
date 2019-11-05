@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "~/routes";
 import Emoji from "../../../../../../components/Emoji";
 import {
@@ -7,23 +6,12 @@ import {
     normalizeUrl
 } from "../../../../../../lib/utils/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { push } from "react-router-redux";
-import { connect } from "react-redux";
 import { truncate } from "~/lib/utils/random";
 
 class ProductMedia extends React.Component {
     renderMedium() {
         return (
-            <div
-                className={"ProductMedia"}
-                onClick={() => {
-                    if (this.props.linked) {
-                        this.props.navigate(
-                            `/products/${this.props.product.slug}`
-                        );
-                    }
-                }}
-            >
+            <div className={"ProductMedia"}>
                 <div className={"flex"}>
                     {this.props.product.icon && (
                         <div>
@@ -34,8 +22,8 @@ class ProductMedia extends React.Component {
                     )}
                     <div>
                         <Link
-                            to={`/products/${this.props.product.slug}`}
-                            style={{ textDecoration: "none", color: "inherit" }}
+                            route="product-page"
+                            params={{ slug: this.props.product.slug }}
                         >
                             <strong>
                                 {this.props.product.name}{" "}
@@ -84,8 +72,8 @@ class ProductMedia extends React.Component {
             return (
                 <div className={"ProductMedia"}>
                     <LinkComponent
-                        to={`/products/${this.props.product.slug}`}
-                        style={{ textDecoration: "none", color: "inherit" }}
+                        route="product-page"
+                        params={{ slug: this.props.product.slug }}
                     >
                         <div className={"flex"}>
                             <div>
@@ -120,8 +108,8 @@ class ProductMedia extends React.Component {
         return (
             <div className={"ProductMedia"}>
                 <LinkComponent
-                    to={`/products/${this.props.product.slug}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
+                    route="product-page"
+                    params={{ slug: this.props.product.slug }}
                 >
                     <div className={"flex"}>
                         <div>
@@ -163,15 +151,4 @@ class ProductMedia extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    navigate: route => dispatch(push(route))
-});
-
-ProductMedia.propTypes = {
-    product: PropTypes.object.isRequired
-};
-
-export default connect(
-    null,
-    mapDispatchToProps
-)(ProductMedia);
+export default ProductMedia;

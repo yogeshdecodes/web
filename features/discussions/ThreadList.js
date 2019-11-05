@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "~/routes";
+import {Link} from "~/routes";
 import ReplyFaces from "./ReplyFaces";
 
 export default props => {
     return (
         <div className={"RecentQuestionsList"}>
             {props.threads.map(thread => (
-                <Link to={`/discussions/${thread.slug}`}>
+                <Link route={"discussion-page"} params={{ slug: thread.slug }}>
                     <div>
                         <h2 className={"topic-title"}>{thread.title}</h2>
                         <div className={"flex flex-gap"}>

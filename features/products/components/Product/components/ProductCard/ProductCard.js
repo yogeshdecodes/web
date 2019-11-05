@@ -1,14 +1,11 @@
 import React from "react";
-import {
-    getHostname,
-    normalizeUrl
-} from "../../../../../../lib/utils/products";
+import {getHostname, normalizeUrl} from "../../../../../../lib/utils/products";
 import isFunction from "lodash/isFunction";
 import ProductEditModal from "../../../ProductEditModal";
-import { Link } from "~/routes";
+import {Link} from "~/routes";
 import withCurrentUser from "../../../../../users/containers/withCurrentUser";
 import Emoji from "../../../../../../components/Emoji";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ProductPeople from "../../../ProductPeople";
 
 class ProductCard extends React.Component {
@@ -51,23 +48,31 @@ class ProductCard extends React.Component {
                 <div className={"card-content"}>
                     {product.icon && (
                         <div>
-                            <Link to={`/products/${product.slug}`}>
+                            <Link
+                                route="product-page"
+                                params={{ slug: product.slug }}
+                            >
                                 <img src={product.icon} alt={product.name} />
                             </Link>
                         </div>
                     )}
                     <div className={"flex col-right"}>
                         <div>
-                            <Link to={`/products/${product.slug}`}>
-                                <h2>
-                                    {product.name}
-                                    {product.launched && (
-                                        <span>
-                                            <Emoji emoji={"🚀"} /> Launched
-                                        </span>
-                                    )}
-                                </h2>
-                                {product.description}
+                            <Link
+                                route="product-page"
+                                params={{ slug: product.slug }}
+                            >
+                                <a>
+                                    <h2>
+                                        {product.name}
+                                        {product.launched && (
+                                            <span>
+                                                <Emoji emoji={"🚀"} /> Launched
+                                            </span>
+                                        )}
+                                    </h2>
+                                    {product.description}
+                                </a>
                             </Link>
                         </div>
                         {this.isMyProduct() && (

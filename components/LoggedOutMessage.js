@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "~/routes";
-import { LoggedOutOnly } from "~/features/users";
+import {Link} from "~/routes";
+import {LoggedOutOnly} from "~/features/users";
 import Emoji from "~/components/Emoji";
 
 const LoggedOutMessage = props => (
@@ -23,13 +23,14 @@ const LoggedOutMessage = props => (
                 <strong>ship faster</strong> through <strong>feedback</strong>{" "}
                 and <strong>good vibes.</strong>
                 <p style={{ marginTop: 10 }}>
-                    <Link
-                        className={
-                            "button is-primary has-text-weight-bold is-rounded"
-                        }
-                        to={"/begin"}
-                    >
-                        Join us &raquo;
+                    <Link route={"begin"}>
+                        <button
+                            className={
+                                "button is-primary has-text-weight-bold is-rounded"
+                            }
+                        >
+                            Join us
+                        </button>
                     </Link>
                 </p>
             </div>

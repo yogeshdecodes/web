@@ -1,6 +1,6 @@
 import NextHead from "next/head";
 import React from "react";
-import { string } from "prop-types";
+import {string} from "prop-types";
 
 const defaultDescription = "";
 const defaultOGURL = "";

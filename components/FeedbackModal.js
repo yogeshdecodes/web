@@ -1,8 +1,8 @@
 import React from "react";
 import Modal from "~/components/Modal";
-import { StreamCard } from "../features/stream/components/Stream/components/StreamCard/styled";
+import {StreamCard} from "../features/stream/components/Stream/components/StreamCard/styled";
 import Emoji from "./Emoji";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
 
 class FeedbackModal extends React.Component {
     render() {

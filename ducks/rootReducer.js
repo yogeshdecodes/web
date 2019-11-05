@@ -1,16 +1,16 @@
-import { combineReducers } from "redux";
-import { persistReducer } from "redux-persist";
-import { routerReducer } from "react-router-redux";
+import {combineReducers} from "redux";
+import {persistReducer} from "redux-persist";
+import {routerReducer} from "react-router-redux";
 import storage from "redux-persist/lib/storage";
-import { authReducer, types as authTypes } from "./auth";
-import { streamReducer } from "./stream";
-import { editorReducer } from "./editor";
-import { userReducer } from "./user";
-import { tasksReducer } from "./tasks";
-import { statsReducer } from "./stats";
-import { appsReducer } from "./apps";
-import { appReducer } from "./app";
-import { projectsReducer } from "./projects";
+import {authReducer, types as authTypes} from "./auth";
+import {streamReducer} from "./stream";
+import {editorReducer} from "./editor";
+import {userReducer} from "./user";
+import {tasksReducer} from "./tasks";
+import {statsReducer} from "./stats";
+import {appsReducer} from "./apps";
+import {appReducer} from "./app";
+import {projectsReducer} from "./projects";
 
 /*
 

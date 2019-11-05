@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ProjectTag } from "~/features/projects";
+import {ProjectTag} from "~/features/projects";
 
 const Projects = ({ projects }) => (
     <div className={"projects"}>

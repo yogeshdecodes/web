@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import ReactDOMServer from "react-dom/server";
 import MDit from "~/vendor/remarkable-regexp/MarkdownIt";
 import Plugin from "~/vendor/remarkable-regexp";

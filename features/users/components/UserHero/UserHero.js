@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import FullName from "../FullName";
 import Tda from "~/components/Tda";
 import Streak from "~/components/Streak";
 import Emoji from "~/components/Emoji";
 import SocialMediaLevel from "~/components/SocialMediaLevel";
-import { getUserStats } from "~/lib/stats";
+import {getUserStats} from "~/lib/stats";
 
 class UserHero extends React.Component {
     state = {

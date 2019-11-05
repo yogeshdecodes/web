@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Modal from "~/components/Modal";
-import { CommentsBox } from "~/features/comments";
+import {CommentsBox} from "~/features/comments";
 import EntryDetail from "./TaskDetail";
 import withCurrentUser from "~/features/users/containers/withCurrentUser";
 

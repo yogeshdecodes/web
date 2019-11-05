@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { css, keyframes } from "emotion";
+import {css, keyframes} from "emotion";
 import onlyUpdateForKeys from "recompose/onlyUpdateForKeys";
 
 const climbingBox = keyframes`

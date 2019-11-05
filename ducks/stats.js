@@ -1,4 +1,4 @@
-import { errorArray } from "~/lib/utils/error";
+import {errorArray} from "~/lib/utils/error";
 
 const initialState = {
     ready: false,

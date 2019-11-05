@@ -1,4 +1,4 @@
-import { ActivityCard } from "./components/ActivityCard";
+import {ActivityCard} from "./components/ActivityCard";
 import ActivitySparklines from "./components/ActivitySparklines";
 import StatsLevel from "./components/StatsLevel";
 import UserActivitySparklines from "./components/UserActivitySparklines";

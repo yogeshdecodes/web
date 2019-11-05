@@ -3,7 +3,6 @@ import CarbonAd from "~/vendor/CarbonAd";
 import withCurrentUser from "~/features/users/containers/withCurrentUser";
 import Emoji from "../Emoji";
 import GoldIcon from "~/components/icons/GoldIcon";
-import Sticky from "react-stickynode";
 
 // Disable ads for gold users.
 

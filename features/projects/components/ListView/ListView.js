@@ -1,19 +1,19 @@
 import React from "react";
-import { groupTasksByDone, orderByDate } from "../../../../lib/utils/tasks";
-import { Button } from "~/vendor/bulma";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { connect } from "react-redux";
+import {groupTasksByDone, orderByDate} from "../../../../lib/utils/tasks";
+import {Button} from "~/vendor/bulma";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {connect} from "react-redux";
 import mapDispatchToProps from "../../containers/mapDispatchToProps";
 import InProgressCard from "../InProgressCard";
-import { colorFromProject, joinProjectsWithTasks } from "../../utils";
+import {colorFromProject, joinProjectsWithTasks} from "../../utils";
 import KanbanTask from "../KanbanView/KanbanTask";
 //import { CSSTransitionGroup } from "react-transition-group";
 import Emoji from "../../../../components/Emoji";
 import Switch from "react-switch";
-import { actions as editorActions } from "../../../../ducks/editor";
-import { actions as tasksActions } from "../../../../ducks/tasks";
-import { actions as projectsActions } from "../../../../ducks/projects";
-import { deleteProject } from "../../../../lib/projects";
+import {actions as editorActions} from "../../../../ducks/editor";
+import {actions as tasksActions} from "../../../../ducks/tasks";
+import {actions as projectsActions} from "../../../../ducks/projects";
+import {deleteProject} from "../../../../lib/projects";
 import styled from "styled-components";
 
 let ProjectTask = ({ task, markDone, markInProgress, markRemaining }) => (

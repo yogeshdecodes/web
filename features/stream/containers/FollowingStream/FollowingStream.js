@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
-import { actions as streamActions } from "~/ducks/stream";
+import {connect} from "react-redux";
+import {actions as streamActions} from "~/ducks/stream";
 import Stream from "../../components/Stream";
 
 class FollowingStream extends React.Component {

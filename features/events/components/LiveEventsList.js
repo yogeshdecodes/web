@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 import EventMedia from "./EventMedia/index";
 import Spinner from "../../../components/Spinner";
-import { getLiveEvents } from "../../../lib/events";
+import {getLiveEvents} from "../../../lib/events";
 
 class LiveEventsList extends Component {
     state = {

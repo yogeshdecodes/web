@@ -1,12 +1,10 @@
 import React from "react";
-import { Media, SubTitle } from "~/vendor/bulma";
-import { Link } from "~/routes";
-import { postComment } from "~/lib/comments";
-import { Avatar, withCurrentUser } from "~/features/users";
+import {Link} from "~/routes";
+import {postComment} from "~/lib/comments";
+import {Avatar, withCurrentUser} from "~/features/users";
 import Spinner from "~/components/Spinner";
-import AutoTextarea from "react-textarea-autosize";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 //import { Selector } from "react-giphy-selector";
 import "./CommentInput.scss";
 
@@ -69,8 +67,10 @@ class CommentInput extends React.Component {
         if (!this.props.isLoggedIn) {
             return (
                 <h3>
-                    <Link to={"/begin"}>Sign in or join</Link> to post a
-                    comment.
+                    <Link route={"begin"}>
+                        <a>Sign in or join</a>
+                    </Link>{" "}
+                    to post a comment.
                 </h3>
             );
         }
@@ -81,8 +81,18 @@ class CommentInput extends React.Component {
                     <form onSubmit={this.onSubmit} style={{ width: "100%" }}>
                         <div className={"flex CommentInput"}>
                             <div>
-                                <Link to={`/@${this.props.user.username}`}>
-                                    <Avatar is={24} user={this.props.user} />
+                                <Link
+                                    route={"profile-page"}
+                                    params={{
+                                        username: this.props.user.username
+                                    }}
+                                >
+                                    <a>
+                                        <Avatar
+                                            is={24}
+                                            user={this.props.user}
+                                        />
+                                    </a>
                                 </Link>
                             </div>
                             <div>

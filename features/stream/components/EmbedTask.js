@@ -1,5 +1,5 @@
 import React from "react";
-import { getTask } from "~/lib/tasks";
+import {getTask} from "~/lib/tasks";
 import Spinner from "~/components/Spinner";
 import Entry from "./Task";
 

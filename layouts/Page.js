@@ -1,4 +1,4 @@
-import Nav from "./Nav";
+import Nav from "./Navbar";
 import React from "react";
 //import Reactor from "../components/Reactor";
 //import ToastList from "~/features/toasts/ToastList";
@@ -12,7 +12,10 @@ export default ({
     showNavItems = true,
     ...props
 }) => (
-    <div className={"Page " + className + (gradient ? " hero-gradient" : "")}>
+    <div
+        className={"Page " + className + (gradient ? " hero-gradient" : "")}
+        id="page"
+    >
         {nav && (
             <Nav
                 transparent={transparent}
@@ -21,6 +24,6 @@ export default ({
             />
         )}
 
-        {props.children}
+        <div id="page-content">{props.children}</div>
     </div>
 );

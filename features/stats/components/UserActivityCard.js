@@ -1,6 +1,6 @@
 import React from "react";
-import { ActivityCard, ActivityCardPanel } from "./ActivityCard";
-import { connect } from "react-redux";
+import {ActivityCard, ActivityCardPanel} from "./ActivityCard";
+import {connect} from "react-redux";
 import Spinner from "~/components/Spinner";
 
 const UserActivityCard = props => {

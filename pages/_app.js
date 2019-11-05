@@ -1,23 +1,19 @@
 import "~/styles/theme.scss";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "~/vendor/fa";
 
 import App, { Container } from "next/app";
-import { isServer } from "~/config";
 
 import ErrorPage from "next/error";
 import Head from "~/layouts/Head";
 import NProgressContainer from "../vendor/nprogress";
 import Page from "~/layouts/Page";
 
-import { history, persistor } from "~/store";
-import Spinner from "~/components/Spinner";
+import createStore from "~/store";
 import { Provider } from "react-redux";
-import { store } from "~/store";
 import Reactor from "~/components/Reactor";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
-
-import createStore from "~/store";
 
 class Artemis extends App {
     static async getInitialProps({ Component, ctx }) {

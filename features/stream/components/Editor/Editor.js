@@ -1,24 +1,24 @@
-import { Link, Redirect } from "~/routes";
+import {Link, Redirect} from "~/routes";
 
-import { Button } from "~/vendor/bulma";
+import {Button} from "~/vendor/bulma";
 import Dropzone from "react-dropzone";
 import Emoji from "~/components/Emoji";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GoldCtaButton from "~/components/GoldCtaButton";
-import { HotKeys } from "react-hotkeys";
+import {HotKeys} from "react-hotkeys";
 import Modal from "~/components/Modal";
 import ProjectLink from "~/components/ProjectLink";
 import React from "react";
 import Spinner from "~/components/Spinner";
-import { ThreadTypeSelect } from "~/features/discussions/ThreadTypeSelect";
+import {ThreadTypeSelect} from "~/features/discussions/ThreadTypeSelect";
 import chrono from "chrono-node";
-import { connect } from "react-redux";
-import { createMilestone } from "~/lib/milestones";
-import { createThread } from "~/lib/discussions";
-import { actions as editorActions } from "~/ducks/editor";
-import { format } from "date-fns";
-import { getMyProducts } from "~/lib/products";
+import {connect} from "react-redux";
+import {createMilestone} from "~/lib/milestones";
+import {createThread} from "~/lib/discussions";
+import {actions as editorActions} from "~/ducks/editor";
+import {format} from "date-fns";
+import {getMyProducts} from "~/lib/products";
 import processString from "react-process-string";
 
 class ProductSelectorDropdown extends React.Component {
@@ -889,20 +889,21 @@ class Editor extends React.Component {
                                         Post a topic
                                     </div>
                                 </div>
-                                <Link
-                                    to={"/products"}
-                                    className={"column"}
-                                    onClick={this.props.onClose}
-                                >
-                                    <div>
-                                        <Emoji emoji={"🚢"} />
-                                    </div>
+                                <Link route={"products"}>
                                     <div
-                                        className={
-                                            "title is-5 is-hidden-mobile"
-                                        }
+                                        className={"column"}
+                                        onClick={this.props.onClose}
                                     >
-                                        Add a product
+                                        <div>
+                                            <Emoji emoji={"🚢"} />
+                                        </div>
+                                        <div
+                                            className={
+                                                "title is-5 is-hidden-mobile"
+                                            }
+                                        >
+                                            Add a product
+                                        </div>
                                     </div>
                                 </Link>
                             </div>

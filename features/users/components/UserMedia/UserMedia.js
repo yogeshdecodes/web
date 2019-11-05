@@ -6,10 +6,10 @@ import Streak from "../../../../components/Streak";
 import "./UserMedia.scss";
 import Emoji from "~/components/Emoji";
 import Avatar from "../Avatar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ProfileModalAction from "../../containers/ProfileModalAction";
 import MakerScore from "../../../../components/MakerScore";
-import { Link } from "~/routes";
+import {Link} from "~/routes";
 
 const Badge = props => (
     <span
@@ -137,7 +137,7 @@ class UserMedia extends React.Component {
 
         if (this.props.xs) {
             return (
-                <Link to={`@${user.username}`}>
+                <Link route="profile-page" params={{ username: user.username }}>
                     <div
                         className={
                             "flex flex-gap UserMedia xs" +
@@ -162,8 +162,39 @@ class UserMedia extends React.Component {
 
         if (this.props.medium) {
             return (
-                <Link
-                    to={`@${user.username}`}
+                <Link route="profile-page" params={{ username: user.username }}>
+                    <a
+                        className={
+                            "grid-streamcard UserMedia " +
+                            (!this.props.user.streak ||
+                            !this.props.user.week_tda
+                                ? "lazy"
+                                : "")
+                        }
+                    >
+                        <div>
+                            <Avatar is={48} user={this.props.user} />
+                        </div>
+                        <div>
+                            <h5>
+                                <FullName user={user} />
+                            </h5>
+                            <span className={"note"}>{user.description}</span>
+                        </div>
+                        <div className={"stats-case"}>
+                            {user.streak > 0 && <Streak days={user.streak} />}
+                            {user.streak === 100 && <Emoji emoji={"🎉"} />}
+                            <MakerScore score={user.maker_score} />
+                            <Tda tda={user.week_tda} />
+                        </div>
+                    </a>
+                </Link>
+            );
+        }
+
+        return (
+            <Link route="profile-page" params={{ username: user.username }}>
+                <a
                     className={
                         "grid-streamcard UserMedia " +
                         (!this.props.user.streak || !this.props.user.week_tda
@@ -172,55 +203,27 @@ class UserMedia extends React.Component {
                     }
                 >
                     <div>
-                        <Avatar is={48} user={this.props.user} />
+                        <Avatar is={32} user={this.props.user} />
                     </div>
-                    <div>
-                        <h5>
+                    <div className={"flex v-center"}>
+                        <h4>
                             <FullName user={user} />
-                        </h5>
-                        <span className={"note"}>{user.description}</span>
+                        </h4>{" "}
+                        {user.verified && <VerifiedIcon />}
                     </div>
                     <div className={"stats-case"}>
+                        {user.is_live && (
+                            <span>
+                                <Emoji emoji={"🔴"} />{" "}
+                                <span className={"has-text-danger"}>LIVE</span>
+                            </span>
+                        )}
                         {user.streak > 0 && <Streak days={user.streak} />}
                         {user.streak === 100 && <Emoji emoji={"🎉"} />}
                         <MakerScore score={user.maker_score} />
                         <Tda tda={user.week_tda} />
                     </div>
-                </Link>
-            );
-        }
-
-        return (
-            <Link
-                to={`/@${user.username}`}
-                className={
-                    "grid-streamcard UserMedia " +
-                    (!this.props.user.streak || !this.props.user.week_tda
-                        ? "lazy"
-                        : "")
-                }
-            >
-                <div>
-                    <Avatar is={32} user={this.props.user} />
-                </div>
-                <div className={"flex v-center"}>
-                    <h4>
-                        <FullName user={user} />
-                    </h4>{" "}
-                    {user.verified && <VerifiedIcon />}
-                </div>
-                <div className={"stats-case"}>
-                    {user.is_live && (
-                        <span>
-                            <Emoji emoji={"🔴"} />{" "}
-                            <span className={"has-text-danger"}>LIVE</span>
-                        </span>
-                    )}
-                    {user.streak > 0 && <Streak days={user.streak} />}
-                    {user.streak === 100 && <Emoji emoji={"🎉"} />}
-                    <MakerScore score={user.maker_score} />
-                    <Tda tda={user.week_tda} />
-                </div>
+                </a>
             </Link>
         );
     }

@@ -1,14 +1,7 @@
-import { mockRandomForEach } from "jest-mock-random";
-import { RECURRENCE } from "../../constants";
-import {
-    formatText,
-    getBlob,
-    getFileName,
-    getUid,
-    getRrule,
-    download
-} from "../ics";
-import { formatTime } from "../time";
+import {mockRandomForEach} from "jest-mock-random";
+import {RECURRENCE} from "../../constants";
+import {download, formatText, getBlob, getFileName, getRrule, getUid} from "../ics";
+import {formatTime} from "../time";
 import FileSaver from "file-saver";
 import safariFileSave from "../safariFileSave";
 

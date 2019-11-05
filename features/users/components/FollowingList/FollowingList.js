@@ -1,11 +1,11 @@
 import React from "react";
-import { getFollowing } from "~/lib/user";
+import {getFollowing} from "~/lib/user";
 import Spinner from "../../../../components/Spinner";
 import orderBy from "lodash/orderBy";
 import UserMedia from "../UserMedia";
-import { getWorldStats } from "../../../../lib/stats";
-import { Link } from "~/routes";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {getWorldStats} from "../../../../lib/stats";
+import {Link} from "~/routes";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const FollowingCard = ({ hasFollows, children }) => (
     <div className={"card"}>
@@ -26,9 +26,11 @@ const FollowingCard = ({ hasFollows, children }) => (
         </div>
         {!hasFollows && (
             <footer className={"card-footer"}>
-                <Link to={"/explore/makers"}>
-                    <FontAwesomeIcon icon={"users"} />
-                    Discover more makers &raquo;
+                <Link route="explore-makers">
+                    <a>
+                        <FontAwesomeIcon icon={"users"} />
+                        Discover more makers &raquo;
+                    </a>
                 </Link>
             </footer>
         )}

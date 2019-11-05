@@ -1,8 +1,8 @@
 import React from "react";
-import { getProductPeople } from "~/lib/products";
-import { getByUsername } from "~/lib/user";
+import {getProductPeople} from "~/lib/products";
+import {getByUsername} from "~/lib/user";
 import uniqBy from "lodash/uniqBy";
-import { UserMediaList, withCurrentUser } from "~/features/users";
+import {UserMediaList, withCurrentUser} from "~/features/users";
 import Spinner from "~/components/Spinner";
 
 class UserGroupSelector extends React.Component {

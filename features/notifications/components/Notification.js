@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "~/routes";
+import {Link} from "~/routes";
 import Emoji from "~/components/Emoji";
-import { Entry } from "~/features/stream";
+import {Entry} from "~/features/stream";
 import TimeAgo from "react-timeago";
-import { Product } from "~/features/products";
+import {Product} from "~/features/products";
 import uniqBy from "lodash/uniqBy";
 import MilestoneMedia from "../../milestones/components/MilestoneMedia";
 
@@ -61,8 +61,13 @@ const Notification = ({ notification, grouped = false }) => {
                                 <Emoji emoji={"👏"} /> You've got praise!
                             </strong>{" "}
                             <br />
-                            <Link to={`/@${notification.actor.username}`}>
-                                @{notification.actor.username}
+                            <Link
+                                route={"profile-page"}
+                                params={{
+                                    username: notification.actor.username
+                                }}
+                            >
+                                <a>@{notification.actor.username}</a>
                             </Link>{" "}
                             {notification.verb}
                             {renderPolymorphicPraise(notification)}
@@ -81,8 +86,13 @@ const Notification = ({ notification, grouped = false }) => {
                         <h3>
                             <Emoji emoji={"👀"} /> You got a follower
                         </h3>
-                        <Link to={`/@${notification.actor.username}`}>
-                            @{notification.actor.username}
+                        <Link
+                            route={"profile-page"}
+                            params={{
+                                username: notification.actor.username
+                            }}
+                        >
+                            <a>@{notification.actor.username}</a>
                         </Link>{" "}
                         {notification.verb}.
                         <p className={"note"}>
@@ -105,22 +115,23 @@ const Notification = ({ notification, grouped = false }) => {
                             get you started.
                         </p>
                         <div className={"buttons"}>
-                            <Link
-                                to={"/explore"}
-                                className={"button is-primary"}
-                            >
-                                Explore Makerlog
+                            <Link route={"explore"}>
+                                <a className={"button is-primary is-rounded"}>
+                                    Explore Makerlog
+                                </a>
                             </Link>
                             <a
-                                className={"button"}
+                                className={"button is-rounded"}
                                 target={"_blank"}
                                 rel="noopener noreferrer"
-                                href={"https://makerskitchen.xyz"}
+                                href={"https://t.me/makerlog"}
                             >
-                                Join Slack
+                                Join Telegram
                             </a>
-                            <Link to={"/settings"} className={"button"}>
-                                Edit your bio
+                            <Link route={"settings"}>
+                                <a className={"button is-rounded"}>
+                                    Edit your profile
+                                </a>
                             </Link>
                         </div>
                     </div>
@@ -162,7 +173,10 @@ const Notification = ({ notification, grouped = false }) => {
                             @{notification.actor.username} posted a topic titled
                             "{notification.target.title}".
                         </p>
-                        <Link to={`/discussions/${notification.target.slug}`}>
+                        <Link
+                            route={"discussion-page"}
+                            params={{ slug: notification.target.slug }}
+                        >
                             <button className={"btn"}>View thread</button>
                         </Link>
                     </div>
@@ -177,7 +191,8 @@ const Notification = ({ notification, grouped = false }) => {
                             <Emoji emoji={"✏️"} /> @
                             {notification.actor.username} replied to{" "}
                             <Link
-                                to={`/discussions/${notification.target.slug}`}
+                                route={"discussion-page"}
+                                params={{ slug: notification.target.slug }}
                             >
                                 {notification.target.title}
                             </Link>
@@ -187,7 +202,10 @@ const Notification = ({ notification, grouped = false }) => {
                             @{notification.actor.username} replied to a thread
                             you're in.
                         </p>
-                        <Link to={`/discussions/${notification.target.slug}`}>
+                        <Link
+                            route={"discussion-page"}
+                            params={{ slug: notification.target.slug }}
+                        >
                             <button className={"btn"}>View thread</button>
                         </Link>
                     </div>
@@ -201,8 +219,11 @@ const Notification = ({ notification, grouped = false }) => {
                         <strong>
                             <Emoji emoji={"✏️"} /> @
                             {notification.actor.username} replied to{" "}
-                            <Link to={`/tasks/${notification.target.id}`}>
-                                a task.
+                            <Link
+                                route={"task-page"}
+                                params={{ id: notification.target.id }}
+                            >
+                                <a>a task.</a>
                             </Link>{" "}
                         </strong>{" "}
                         <br />
@@ -222,9 +243,10 @@ const Notification = ({ notification, grouped = false }) => {
                             <Emoji emoji={"✏️"} /> @
                             {notification.actor.username} replied to{" "}
                             <Link
-                                to={`/milestones/${notification.target.slug}`}
+                                route={"milestone-page"}
+                                params={{ slug: notification.target.slug }}
                             >
-                                a milestone.
+                                <a>a milestone.</a>
                             </Link>{" "}
                         </strong>{" "}
                         <br />
@@ -247,8 +269,11 @@ const Notification = ({ notification, grouped = false }) => {
                         <h3>
                             <Emoji emoji={"🚀️"} /> @
                             {notification.actor.username} launched{" "}
-                            <Link to={`/products/${notification.target.slug}`}>
-                                a product.
+                            <Link
+                                route={"product-page"}
+                                params={{ slug: notification.target.slug }}
+                            >
+                                <a> a product.</a>
                             </Link>
                         </h3>
                         <p>
@@ -268,8 +293,11 @@ const Notification = ({ notification, grouped = false }) => {
                         <h3>
                             <Emoji emoji={"🚀️"} /> @
                             {notification.actor.username} added{" "}
-                            <Link to={`/products/${notification.target.slug}`}>
-                                a product.
+                            <Link
+                                route={"product-page"}
+                                params={{ slug: notification.target.slug }}
+                            >
+                                <a>a product.</a>
                             </Link>
                         </h3>
                         <p>
@@ -292,14 +320,22 @@ const Notification = ({ notification, grouped = false }) => {
                         </strong>{" "}
                         <br />
                         <p>
-                            <Link to={`/@${notification.actor.username}`}>
-                                @{notification.actor.username}
+                            <Link
+                                route="profile-page"
+                                params={{
+                                    username: notification.actor.username
+                                }}
+                            >
+                                <a>@{notification.actor.username}</a>
                             </Link>{" "}
                             {notification.verb}.
                         </p>
                         {notification.target_type === "task" && (
                             <div>
-                                <Link to={`/tasks/${notification.target.id}`}>
+                                <Link
+                                    params={{ id: notification.target.id }}
+                                    route="task-page"
+                                >
                                     <button>View task</button>
                                 </Link>
                             </div>
@@ -307,10 +343,10 @@ const Notification = ({ notification, grouped = false }) => {
                         {notification.target_type === "milestone" && (
                             <div>
                                 <Link
-                                    to={`/milestones/${notification.target.slug}`}
-                                    className={"btn"}
+                                    params={{ slug: notification.target.slug }}
+                                    route="milestone-page"
                                 >
-                                    View milestone
+                                    <a className="button">View milestone</a>
                                 </Link>
                             </div>
                         )}
@@ -331,16 +367,21 @@ const Notification = ({ notification, grouped = false }) => {
                         </strong>{" "}
                         <br />
                         <p>
-                            <Link to={`/@${notification.actor.username}`}>
-                                @{notification.actor.username}
+                            <Link
+                                route={"profile-page"}
+                                params={{
+                                    username: notification.actor.username
+                                }}
+                            >
+                                <a>@{notification.actor.username}</a>
                             </Link>{" "}
                             {notification.verb}.
                         </p>
                         <Link
-                            to={`/discussions/${notification.target.slug}`}
-                            className={"btn"}
+                            route={"discussion-page"}
+                            params={{ slug: notification.target.slug }}
                         >
-                            View thread
+                            <a className="btn">View thread</a>
                         </Link>
                         <p className={"note"}>
                             <TimeAgo date={notification.created} />
@@ -361,8 +402,8 @@ const Notification = ({ notification, grouped = false }) => {
                             Check your task list and get things done.{" "}
                             <Emoji emoji={"💪"} />
                         </p>
-                        <Link to={`/tasks`} className={"btn"}>
-                            Check your tasks
+                        <Link route={`tasks`}>
+                            <a className="btn">Check your tasks</a>
                         </Link>
                         <p className={"note"}>
                             <TimeAgo date={notification.created} />

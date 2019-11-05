@@ -1,6 +1,6 @@
 import uniqBy from "lodash/uniqBy";
 import findIndex from "lodash/findIndex";
-import { errorArray } from "~/lib/utils/error";
+import {errorArray} from "~/lib/utils/error";
 
 const initialState = {
     ready: false,

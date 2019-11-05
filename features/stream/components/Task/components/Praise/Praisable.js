@@ -1,13 +1,13 @@
 import React from "react";
 import debounce from "lodash/debounce";
 import PraiseCount from "./PraiseCount";
-import { withCurrentUser } from "~/features/users";
-import { setPraise } from "~/lib/praise";
+import {withCurrentUser} from "~/features/users";
+import {setPraise} from "~/lib/praise";
 import Repeatable from "react-repeatable";
 import Emoji from "../../../../../../components/Emoji";
-import { incrementPraise } from "../../../../../../lib/praise";
+import {incrementPraise} from "../../../../../../lib/praise";
 import styled from "styled-components";
-import { Redirect } from "~/routes";
+import {Redirect} from "~/routes";
 
 const PraiseButton = styled.button``;
 

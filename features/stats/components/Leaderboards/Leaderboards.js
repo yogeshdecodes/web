@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import Emoji from "../../../../components/Emoji";
 import FullName from "../../../users/components/FullName";
 import Streak from "../../../../components/Streak";

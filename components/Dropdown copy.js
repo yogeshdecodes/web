@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "~/routes";
+import {NavLink} from "~/routes";
 
 /*
     <Dropdown className="navbar-item" trigger={() => ()}>

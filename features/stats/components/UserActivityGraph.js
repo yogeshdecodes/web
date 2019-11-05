@@ -1,7 +1,7 @@
 import React from "react";
 import CalendarHeatmap from "~/vendor/heatmap";
 import "~/vendor/heatmap/styles.css";
-import { getUserActivityGraph } from "../../../lib/stats";
+import {getUserActivityGraph} from "../../../lib/stats";
 import Spinner from "~/components/Spinner";
 
 function scaleBetween(unscaledNum, minAllowed, maxAllowed, min, max) {

@@ -1,4 +1,4 @@
-import { toIcsParamString, toParamString, toQueryString } from "../data";
+import {toIcsParamString, toParamString, toQueryString} from "../data";
 
 describe("DataUtil", () => {
     let params;

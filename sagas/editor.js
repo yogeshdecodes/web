@@ -1,8 +1,8 @@
-import { call, put, select, takeLatest } from "redux-saga/effects";
-import { actions as editorActions, types as editorTypes } from "~/ducks/editor";
-import { actions as statsActions } from "~/ducks/stats";
-import { smartCreateTask as createTaskModel } from "~/lib/tasks";
-import { actions as appActions } from "~/ducks/app";
+import {call, put, select, takeLatest} from "redux-saga/effects";
+import {actions as editorActions, types as editorTypes} from "~/ducks/editor";
+import {actions as statsActions} from "~/ducks/stats";
+import {smartCreateTask as createTaskModel} from "~/lib/tasks";
+import {actions as appActions} from "~/ducks/app";
 
 export const getEditorState = state => state.editor;
 const getAppState = state => state.app;

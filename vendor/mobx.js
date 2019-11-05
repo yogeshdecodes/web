@@ -1,9 +1,8 @@
 import App from "next/app";
-import { create } from "mobx-persist";
-import { isServer } from "~/config";
-import { onStoreInit } from "~/stores";
+import {create} from "mobx-persist";
+import {isServer} from "~/config";
 import storeConfig from "../stores";
-import { withMobx } from "next-mobx-wrapper";
+import {withMobx} from "next-mobx-wrapper";
 
 export function configureMobx(config, app) {
     const getStores = config.stores;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Avatar } from "~/features/users";
+import {Avatar} from "~/features/users";
 import "./FaceStack.scss";
 
 const FaceStack = styled.div``;

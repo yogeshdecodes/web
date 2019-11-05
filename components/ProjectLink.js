@@ -1,8 +1,8 @@
 import React from "react";
-import { Tooltip } from "react-tippy";
-import { getRelatedData } from "~/lib/projects";
+import {Tooltip} from "react-tippy";
+import {getRelatedData} from "~/lib/projects";
 import Spinner from "./Spinner";
-import { ProductList } from "~/features/products";
+import {ProductList} from "~/features/products";
 import styled from "styled-components";
 
 export const UnderlinedText = styled.span`

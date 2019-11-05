@@ -1,6 +1,6 @@
 import React from "react";
 import Spinner from "../../../components/Spinner";
-import { getSkipDayBalance, getSkipDays } from "../../../lib/wellness";
+import {getSkipDayBalance, getSkipDays} from "../../../lib/wellness";
 import format from "date-fns/format";
 
 class RestDayList extends React.Component {

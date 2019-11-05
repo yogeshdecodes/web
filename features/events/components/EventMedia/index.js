@@ -1,14 +1,14 @@
 import "./index.scss";
 
-import React, { Component } from "react";
-import { format, toDate } from "date-fns-tz";
-import { hasClosed, hasEnded, isOcurring } from "~/lib/utils/events";
+import React, {Component} from "react";
+import {format, toDate} from "date-fns-tz";
+import {hasClosed, hasEnded, isOcurring} from "~/lib/utils/events";
 
 import DueCountdown from "~/components/DueCountdown";
 import Emoji from "~/components/Emoji";
 import EventFaces from "../EventFaces";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "~/routes";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "~/routes";
 
 function getCss(event) {
     if (event.header) {
@@ -97,7 +97,7 @@ class EventMedia extends Component {
 
         if (small)
             return (
-                <Link to={`/events/${event.slug}`}>
+                <Link route={"event-page"} params={{ slug: event.slug }}>
                     <div className="media">
                         <div className="media-left">
                             <figure className="image is-square is-32x32">
@@ -115,70 +115,74 @@ class EventMedia extends Component {
             );
 
         return (
-            <Link
-                to={`/events/${event.slug}`}
-                className={"EventMedia card" + (large ? " large" : "")}
-                style={getCss(event)}
-            >
-                <div className="card-content">
-                    <div className="flex flex-gap">
-                        {event.icon && (
+            <Link route={"event-page"} params={{ slug: event.slug }}>
+                <a
+                    style={getCss(event)}
+                    className={"EventMedia card" + (large ? " large" : "")}
+                >
+                    <div className="card-content">
+                        <div className="flex flex-gap">
+                            {event.icon && (
+                                <div>
+                                    <figure class={"img-48"}>
+                                        <img src={event.icon} />
+                                    </figure>
+                                </div>
+                            )}
                             <div>
-                                <figure class={"img-48"}>
-                                    <img src={event.icon} />
-                                </figure>
-                            </div>
-                        )}
-                        <div>
-                            <h1>{event.title}</h1>
-                            <p>{event.description}</p>
+                                <h1>{event.title}</h1>
+                                <p>{event.description}</p>
 
-                            <div className="join-bar">
-                                <nav className="EventToolbar level">
-                                    <div className="level-left">
-                                        {!isOcurring(event) &&
-                                            !hasClosed(event) && (
-                                                <>
-                                                    <div className="level-item">
-                                                        <button className="button is-primary is-rounded">
-                                                            <span className="icon">
+                                <div className="join-bar">
+                                    <nav className="EventToolbar level">
+                                        <div className="level-left">
+                                            {!isOcurring(event) &&
+                                                !hasClosed(event) && (
+                                                    <>
+                                                        <div className="level-item">
+                                                            <button className="button is-primary is-rounded">
+                                                                <span className="icon">
+                                                                    {event.user_joined ? (
+                                                                        <FontAwesomeIcon icon="calendar-check" />
+                                                                    ) : (
+                                                                        <FontAwesomeIcon icon="users" />
+                                                                    )}
+                                                                </span>{" "}
+                                                                &nbsp;
                                                                 {event.user_joined ? (
-                                                                    <FontAwesomeIcon icon="calendar-check" />
+                                                                    <span>
+                                                                        Attendee
+                                                                        panel
+                                                                    </span>
                                                                 ) : (
-                                                                    <FontAwesomeIcon icon="users" />
+                                                                    <span>
+                                                                        Join
+                                                                        this
+                                                                        event
+                                                                    </span>
                                                                 )}
-                                                            </span>{" "}
-                                                            &nbsp;
-                                                            {event.user_joined ? (
-                                                                <span>
-                                                                    Attendee
-                                                                    panel
-                                                                </span>
-                                                            ) : (
-                                                                <span>
-                                                                    Join this
-                                                                    event
-                                                                </span>
-                                                            )}
-                                                        </button>
-                                                    </div>
+                                                            </button>
+                                                        </div>
 
-                                                    <div className="level-item">
-                                                        <EventFaces
-                                                            size={32}
-                                                            slug={event.slug}
-                                                        />
-                                                    </div>
-                                                </>
-                                            )}
-                                    </div>
-                                </nav>
+                                                        <div className="level-item">
+                                                            <EventFaces
+                                                                size={32}
+                                                                slug={
+                                                                    event.slug
+                                                                }
+                                                            />
+                                                        </div>
+                                                    </>
+                                                )}
+                                        </div>
+                                    </nav>
+                                </div>
+
+                                <EventToolbar event={event} />
                             </div>
-
-                            <EventToolbar event={event} />
                         </div>
                     </div>
-                </div>
+                </a>
             </Link>
         );
     }

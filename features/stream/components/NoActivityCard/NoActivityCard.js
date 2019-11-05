@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "~/routes";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { actions as editorActions } from "../../../../ducks/editor";
-import { connect } from "react-redux";
+import {Link} from "~/routes";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {actions as editorActions} from "../../../../ducks/editor";
+import {connect} from "react-redux";
 
-import { GlobalStream } from "~/features/stream";
+import {GlobalStream} from "~/features/stream";
 
 import styled from "styled-components";
 import OutboundLink from "../../../../components/OutboundLink";
@@ -158,11 +158,10 @@ const NoActivityCard = props => (
                                         workflow. Find an app that makes you
                                         more productive!
                                     </strong>
-                                    <Link
-                                        className={"button is-rounded"}
-                                        to={"/apps"}
-                                    >
-                                        Discover apps
+                                    <Link route={"apps"}>
+                                        <a className={"button is-rounded"}>
+                                            Discover apps
+                                        </a>
                                     </Link>
                                 </div>
                             </div>

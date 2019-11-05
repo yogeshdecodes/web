@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getComments } from "~/lib/comments";
-import { withCurrentUser } from "~/features/users";
+import {getComments} from "~/lib/comments";
+import {withCurrentUser} from "~/features/users";
 import CommentList from "./CommentList";
 import CommentInput from "./CommentInput";
 // import { StreamCard as Card } from "../../stream/components/Stream/components/StreamCard/styled";
 import Emoji from "../../../components/Emoji";
-import { Link } from "~/routes";
+import {Link} from "~/routes";
 
 class CommentsBox extends React.Component {
     state = {
@@ -61,7 +61,9 @@ class CommentsBox extends React.Component {
                             this.state.comments.length === 0 && (
                                 <h4 className={"center"}>
                                     No comments yet.{" "}
-                                    <Link to={"/begin"}>Sign in or join</Link>{" "}
+                                    <Link route={"begin"}>
+                                        <a>Sign in or join</a>
+                                    </Link>{" "}
                                     to post a comment!
                                 </h4>
                             )}

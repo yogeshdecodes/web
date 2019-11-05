@@ -1,6 +1,6 @@
 import React from "react";
 import Product from "./Product";
-import { Tooltip } from "react-tippy";
+import {Tooltip} from "react-tippy";
 
 const ProductTooltipHtml = ({ product }) => (
     <div className={"panel-tooltip"}>

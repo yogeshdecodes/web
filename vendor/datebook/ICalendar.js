@@ -1,7 +1,7 @@
-import { download, formatText, getRrule, getUid } from "./utils/ics";
+import {download, formatText, getRrule, getUid} from "./utils/ics";
 
 import CalendarBase from "./CalendarBase";
-import { getTimeCreated } from "./utils/time";
+import {getTimeCreated} from "./utils/time";
 
 /**
  * Generates a downloadable ICS file.

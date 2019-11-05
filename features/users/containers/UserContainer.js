@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getById } from "~/lib/user";
+import {getById} from "~/lib/user";
 import Spinner from "~/components/Spinner";
-import { getByUsername } from "../../../lib/user";
-import axios from "axios";
+import {getByUsername} from "../../../lib/user";
+import axios from "~/lib/axios";
 
 class UserContainer extends React.Component {
     state = {

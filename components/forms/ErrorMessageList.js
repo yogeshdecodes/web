@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Message } from "~/vendor/bulma";
+import {Message} from "~/vendor/bulma";
 
 const renderFieldErrors = fieldErrors => {
     console.log(fieldErrors);

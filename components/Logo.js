@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 const Logo = ({ width = 33, height = 33 }) => {
     return (

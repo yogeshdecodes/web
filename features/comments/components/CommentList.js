@@ -1,6 +1,6 @@
 import React from "react";
 import Comment from "./Comment";
-import { orderByDate } from "../../../lib/utils/tasks";
+import {orderByDate} from "../../../lib/utils/tasks";
 
 class CommentList extends React.Component {
     render() {

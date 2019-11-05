@@ -1,21 +1,7 @@
 import "./index.scss";
 
-import {
-    Button,
-    Card,
-    Container,
-    Image,
-    Level,
-    Media,
-    SubTitle,
-    Title
-} from "../../../../vendor/bulma";
-import {
-    groupTasksByDone,
-    isDueSoon,
-    orderByDate,
-    processTaskString
-} from "../../../../lib/utils/tasks";
+import {Button} from "../../../../vendor/bulma";
+import {groupTasksByDone, isDueSoon, orderByDate, processTaskString} from "../../../../lib/utils/tasks";
 
 import CelebratoryThing from "../CelebratoryThing";
 import DueCountdown from "../../../../components/DueCountdown";
@@ -24,11 +10,11 @@ import Link from "~/routes/es/Link";
 import React from "react";
 import Spinner from "../../../../components/Spinner";
 import TaskDetailModal from "../../../stream/components/Task/components/TaskDetailModal/TaskDetailModal";
-import { applySearchTerms } from "~/lib/utils/tasks";
-import { connect } from "react-redux";
-import { actions as editorActions } from "../../../../ducks/editor";
-import { getMyProducts } from "../../../../lib/products";
-import { actions as tasksActions } from "~/ducks/tasks";
+import {applySearchTerms} from "~/lib/utils/tasks";
+import {connect} from "react-redux";
+import {actions as editorActions} from "../../../../ducks/editor";
+import {getMyProducts} from "../../../../lib/products";
+import {actions as tasksActions} from "~/ducks/tasks";
 
 const mapStateToProps = state => {
     return {
@@ -391,11 +377,10 @@ class ListView extends React.Component {
                             activeProduct={activeProduct}
                         />
                         <br />
-                        <Link
-                            to={"/products"}
-                            className={"btn-primary btn-small"}
-                        >
-                            + Add a product
+                        <Link route={"products"}>
+                            <button className={"btn-primary btn-small"}>
+                                + Add a product
+                            </button>
                         </Link>
                     </div>
 

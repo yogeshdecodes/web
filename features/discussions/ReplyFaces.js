@@ -1,6 +1,6 @@
 import React from "react";
-import { getThreadRepliers } from "~/lib/discussions";
-import { FaceStack } from "~/features/users";
+import {getThreadRepliers} from "~/lib/discussions";
+import {FaceStack} from "~/features/users";
 
 class ReplyFaces extends React.Component {
     state = {

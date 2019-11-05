@@ -1,11 +1,8 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import {
-    actions as projectsActions,
-    types as projectsTypes
-} from "../ducks/projects";
-import { getProjects } from "../lib/projects";
-import { types as editorTypes } from "../ducks/editor";
-import { types as tasksTypes } from "../ducks/tasks";
+import {call, put, takeLatest} from "redux-saga/effects";
+import {actions as projectsActions, types as projectsTypes} from "../ducks/projects";
+import {getProjects} from "../lib/projects";
+import {types as editorTypes} from "../ducks/editor";
+import {types as tasksTypes} from "../ducks/tasks";
 
 function* fetchProjects(action) {
     try {

@@ -1,6 +1,6 @@
 import React from "react";
-import { getRecentQuestions } from "../../lib/discussions";
-import { Link } from "~/routes";
+import {getRecentQuestions} from "../../lib/discussions";
+import {Link} from "~/routes";
 import Avatar from "../users/components/Avatar/Avatar";
 import Spinner from "../../components/Spinner";
 
@@ -53,7 +53,10 @@ class RecentQuestionsList extends React.Component {
             return (
                 <div className={"RecentQuestionsList"}>
                     {this.state.data.map(thread => (
-                        <Link to={`/discussions/${thread.slug}`}>
+                        <Link
+                            route={"discussion-page"}
+                            params={{ slug: thread.slug }}
+                        >
                             <div>
                                 <h2 className={"topic-title"}>
                                     {thread.title}

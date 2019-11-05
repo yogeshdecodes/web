@@ -1,8 +1,8 @@
 import React from "react";
 import Spinner from "~/components/Spinner";
-import { getMyProducts } from "~/lib/products";
-import { Link } from "~/routes";
-import { ProductList } from "~/features/products";
+import {getMyProducts} from "~/lib/products";
+import {Link} from "~/routes";
+import {ProductList} from "~/features/products";
 import Emoji from "~/components/Emoji";
 
 const ProductsCardContainer = props => (
@@ -67,8 +67,8 @@ class MyProductsCard extends React.Component {
                 {this.state.products.length === 0 && (
                     <div>
                         <h3>You haven't added any products yet.</h3>
-                        <Link className="btn-small btn-gray" to="/products">
-                            Add a product
+                        <Link route="products">
+                            <a className="btn-small btn-gray">Add a product</a>
                         </Link>
                     </div>
                 )}

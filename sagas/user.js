@@ -1,7 +1,7 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { actions as userActions, types as userTypes } from "../ducks/user";
-import { me } from "~/lib/user";
-import { syncTimezone } from "../lib/user";
+import {call, put, takeLatest} from "redux-saga/effects";
+import {actions as userActions, types as userTypes} from "../ducks/user";
+import {me} from "~/lib/user";
+import {syncTimezone} from "../lib/user";
 import ReactGA from "react-ga";
 
 function* fetchUser(action) {

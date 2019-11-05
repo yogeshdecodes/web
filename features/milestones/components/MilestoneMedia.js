@@ -1,13 +1,13 @@
 import React from "react";
-import { Link } from "~/routes";
+import {Link} from "~/routes";
 import Markdown from "~/components/Markdown";
 import Emoji from "~/components/Emoji";
-import { Button, Input } from "~/vendor/bulma";
-import { truncate } from "~/lib/utils/random";
-import { Praisable } from "~/features/stream/components/Task/components/Praise";
+import {Button, Input} from "~/vendor/bulma";
+import {truncate} from "~/lib/utils/random";
+import {Praisable} from "~/features/stream/components/Task/components/Praise";
 import withCurrentUser from "~/features/users/containers/withCurrentUser";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { deleteMilestone, editMilestone } from "~/lib/milestones";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {deleteMilestone, editMilestone} from "~/lib/milestones";
 
 import "./MilestoneMedia.scss";
 
@@ -183,11 +183,14 @@ class MilestoneMediaComponent extends React.Component {
                             />
 
                             <Link
-                                to={`/milestones/${milestone.slug}`}
-                                className={"button is-small is-rounded"}
+                                route={"milestone-page"}
+                                params={{ slug: milestone.slug }}
                             >
-                                <Emoji emoji={"💬"} />
-                                &nbsp; {milestone.comment_count}
+                                <a>
+                                    {" "}
+                                    <Emoji emoji={"💬"} />
+                                    &nbsp; {milestone.comment_count}
+                                </a>
                             </Link>
                             {this.props.me.id === milestone.user.id &&
                                 !(this.props.xs || this.props.stream) && (
@@ -241,10 +244,12 @@ export default ({ linked = true, ...props }) => {
     if (linked) {
         return (
             <Link
-                className={"LinkWrapped"}
-                to={`/milestones/${props.milestone.slug}`}
+                route={"milestone-page"}
+                params={{ slug: props.milestone.slug }}
             >
-                <MilestoneMediaComponent {...props} />
+                <a className={"LinkWrapped"}>
+                    <MilestoneMediaComponent {...props} />
+                </a>
             </Link>
         );
     } else {

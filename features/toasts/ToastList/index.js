@@ -2,8 +2,8 @@ import "./index.scss";
 
 import React from "react";
 import Toast from "../Toast";
-import { inject, observer } from "mobx-react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import {inject, observer} from "mobx-react";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 const ToastList = ({ toasts, ...props }) => {
     return (

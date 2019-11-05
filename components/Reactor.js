@@ -1,8 +1,8 @@
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import axios from "axios/index";
 
-import { actions as statsActions } from "~/ducks/stats";
-import { actions as tasksActions } from "~/ducks/tasks";
+import {actions as statsActions} from "~/ducks/stats";
+import {actions as tasksActions} from "~/ducks/tasks";
 
 const RehydrateToken = props => {
     if (props.token) {

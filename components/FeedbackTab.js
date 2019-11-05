@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
-import { connect } from "react-redux";
-import { actions as appActions } from "~/ducks/app";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
+import {connect} from "react-redux";
+import {actions as appActions} from "~/ducks/app";
 
 const FeedbackTabStyle = styled.button`
     background-color: ${props => props.theme.primaryDarker};

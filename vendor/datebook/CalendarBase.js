@@ -1,4 +1,4 @@
-import { FORMAT } from "./constants";
+import {FORMAT} from "./constants";
 import moment from "moment";
 
 /**

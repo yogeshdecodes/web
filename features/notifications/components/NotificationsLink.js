@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { connect } from "react-redux";
-import { actions as appActions } from "~/ducks/app";
-import { socketUrl } from "../../../lib/utils/random";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {connect} from "react-redux";
+import {actions as appActions} from "~/ducks/app";
+import {socketUrl} from "../../../lib/utils/random";
 import ReconnectingWebSocket from "reconnecting-websocket/dist/reconnecting-websocket";
 
 class NotificationsLink extends React.Component {

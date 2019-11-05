@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "~/routes";
-import { FullName, withCurrentUser } from "~/features/users";
+import {Link} from "~/routes";
+import {FullName, withCurrentUser} from "~/features/users";
 import TimeAgo from "react-timeago";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Markdown from "~/components/Markdown";
-import { deleteComment, editComment } from "../../../lib/comments";
+import {deleteComment, editComment} from "../../../lib/comments";
 
 class CommentEditor extends React.Component {
     constructor(props) {
@@ -105,12 +105,17 @@ class Comment extends React.Component {
             <div className={"Comment"}>
                 <div className={"flex flex-gap"}>
                     <div>
-                        <Link to={`/@${props.comment.user.username}`}>
-                            <img
-                                className={"img-avatar img-32"}
-                                src={props.comment.user.avatar}
-                                alt={"avatar"}
-                            />
+                        <Link
+                            route={"profile-page"}
+                            params={{ username: props.comment.user.username }}
+                        >
+                            <a>
+                                <img
+                                    className={"img-avatar img-32"}
+                                    src={props.comment.user.avatar}
+                                    alt={"avatar"}
+                                />
+                            </a>
                         </Link>
                     </div>
                     <div className={"CommentInfo is-hidden-touch"}>

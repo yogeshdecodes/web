@@ -1,6 +1,6 @@
-import { FaceStack } from "~/features/users";
+import {FaceStack} from "~/features/users";
 import React from "react";
-import { getLatestParticipants } from "../../../lib/events";
+import {getLatestParticipants} from "../../../lib/events";
 
 class EventFaces extends React.Component {
     state = {

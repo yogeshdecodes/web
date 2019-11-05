@@ -1,7 +1,6 @@
 import React from "react";
-import Page from "~/layouts/Page";
-import { Link } from "~/routes";
-import { GlobalStream } from "~/features/stream";
+import {Link} from "~/routes";
+import {GlobalStream} from "~/features/stream";
 import Sidebar from "./Sidebar";
 import "./index.scss";
 
@@ -17,7 +16,7 @@ export default () => (
                     2,000+ creators get things done.
                 </h3>
                 <div>
-                    <Link to="/begin">Get started</Link>
+                    <Link route="begin">Get started</Link>
                 </div>
             </div>
         </div>

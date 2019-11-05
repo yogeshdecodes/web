@@ -1,5 +1,5 @@
 import React from "react";
-import { getWorldStats } from "../../../../lib/stats";
+import {getWorldStats} from "../../../../lib/stats";
 import PropTypes from "prop-types";
 import Spinner from "../../../../components/Spinner";
 
