@@ -1,8 +1,10 @@
-import {call, put, race, take, takeLatest} from "redux-saga/effects";
-import {actions as authActions, types as authTypes} from "../ducks/auth";
-import {actions as userActions, types as userTypes} from "~/ducks/user";
+import { call, put, race, take, takeLatest } from "redux-saga/effects";
+import { actions as authActions, types as authTypes } from "../ducks/auth";
+import { actions as userActions, types as userTypes } from "~/ducks/user";
 import axios from "~/lib/axios";
-import {getToken} from "~/lib/auth";
+import { getToken } from "~/lib/auth";
+import { setCookie } from "nookies";
+import { isServer } from "~/config";
 
 function* fetchToken(action) {
     try {
@@ -14,6 +16,7 @@ function* fetchToken(action) {
             token = yield call(getToken, action.username, action.password);
         }
 
+        // mhm
         axios.defaults.headers.common["Authorization"] = `Token ${token}`;
 
         yield put(userActions.loadUser());
@@ -27,6 +30,10 @@ function* fetchToken(action) {
             console.log("!!!FETCH TOKEN RACE CONDITION!!!");
             console.log("This was screwed with for the obj error warning.");
             throw new Error("Race condition fetching user.");
+        }
+
+        if (!isServer) {
+            setCookie({}, "token", token);
         }
 
         yield put(authActions.loginSuccess(token));

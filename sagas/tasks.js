@@ -1,5 +1,5 @@
-import {call, put, race, select, take, takeLatest} from "redux-saga/effects";
-import {actions as tasksActions, types as tasksTypes} from "../ducks/tasks";
+import { call, put, race, select, take, takeLatest } from "redux-saga/effects";
+import { actions as tasksActions, types as tasksTypes } from "../ducks/tasks";
 import {
     createTask as createTaskModel,
     deleteTask as deleteTaskModel,
@@ -7,11 +7,11 @@ import {
     syncTasks as syncTasksModel,
     updateTask as updateTaskModel
 } from "~/lib/tasks";
-import {actions as streamActions} from "~/ducks/stream";
-import {actions as appActions} from "~/ducks/app";
-import {eventChannel} from "redux-saga";
+import { actions as streamActions } from "~/ducks/stream";
+import { actions as appActions } from "~/ducks/app";
+import { eventChannel } from "redux-saga";
 import RWS from "reconnecting-websocket/dist/reconnecting-websocket";
-import {actions as statsActions} from "../ducks/stats";
+import { actions as statsActions } from "../ducks/stats";
 
 const getTasksState = state => state.tasks;
 
@@ -25,6 +25,7 @@ function* syncTasks(action) {
         const data = yield call(syncTasksModel, lastSynced);
         yield put(tasksActions.loadTasksSuccess(data.data, data.sync_date));
     } catch (e) {
+        console.log(e);
         yield put(tasksActions.loadTasksFailed(e.message));
     }
 }

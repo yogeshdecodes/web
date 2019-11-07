@@ -1,10 +1,12 @@
-import {call, put, select, take, takeEvery} from "redux-saga/effects";
-import {actions as appActions, types as appTypes} from "../ducks/app";
-import {actions as statsActions} from "../ducks/stats";
-import {actions as tasksActions} from "../ducks/tasks";
-import {actions as userActions} from "../ducks/user";
-import {actions as projectsActions} from "../ducks/projects";
-import {checkApiHealth} from "../lib/app";
+import { call, put, select, take, takeEvery } from "redux-saga/effects";
+import { actions as appActions, types as appTypes } from "../ducks/app";
+import { actions as statsActions } from "../ducks/stats";
+import { actions as tasksActions } from "../ducks/tasks";
+import { actions as userActions } from "../ducks/user";
+import { actions as projectsActions } from "../ducks/projects";
+import { checkApiHealth } from "~/lib/app";
+import { syncTimezone } from "~/lib/user";
+import axios from "~/lib/axios";
 
 // const getAuth = state => state.auth;
 const getStats = state => state.stats;
@@ -16,7 +18,8 @@ function* takeoff(action) {
         "color: #47e0a0; font-size:30px; font-family: 'Poppins', sans-serif;"
     );
     console.log("Makerlog: Taking off...");
-    yield put(appActions.requestApiHealth());
+    //todo: move
+    //yield put(appActions.requestApiHealth());
 
     while (token === "") {
         // Wait for system to load token.
@@ -24,11 +27,17 @@ function* takeoff(action) {
         yield take();
     }
 
-    // token is now available.
+    // token is now available. set it on client side.
     console.log("Makerlog: We have an authentication token.");
+    axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+
     yield put(tasksActions.loadTasks());
     yield put(projectsActions.fetchProjects());
-    yield put(userActions.loadUser());
+
+    // Set timezone
+    // todo; prevent call by diffing.
+    yield call(syncTimezone);
+    //yield put(userActions.loadUser());
 
     // To ease loading times, if we already have stats persisted, silently update them.
     const stats = (token = yield select(getStats));

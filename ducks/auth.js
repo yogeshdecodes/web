@@ -1,4 +1,6 @@
-import {errorArray} from "~/lib/utils/error";
+import { errorArray } from "~/lib/utils/error";
+import { isServer } from "~/config";
+import { setCookie, destroyCookie } from "nookies";
 
 const initialState = {
     loggedIn: false, // TODO: remove this, it's computed instead
@@ -79,8 +81,9 @@ export const actions = {
         };
     },
 
-    logout: () => {
+    logout: (ctx = null) => {
         // persistor.purge();
+        destroyCookie(ctx ? ctx : {}, "token");
         return {
             type: types.LOGOUT
         };

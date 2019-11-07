@@ -1,16 +1,16 @@
-import {combineReducers} from "redux";
-import {persistReducer} from "redux-persist";
-import {routerReducer} from "react-router-redux";
-import storage from "redux-persist/lib/storage";
-import {authReducer, types as authTypes} from "./auth";
-import {streamReducer} from "./stream";
-import {editorReducer} from "./editor";
-import {userReducer} from "./user";
-import {tasksReducer} from "./tasks";
-import {statsReducer} from "./stats";
-import {appsReducer} from "./apps";
-import {appReducer} from "./app";
-import {projectsReducer} from "./projects";
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import { routerReducer } from "react-router-redux";
+import { default as storage } from "localforage";
+import { authReducer, types as authTypes } from "./auth";
+import { streamReducer } from "./stream";
+import { editorReducer } from "./editor";
+import { userReducer } from "./user";
+import { tasksReducer } from "./tasks";
+import { statsReducer } from "./stats";
+import { appsReducer } from "./apps";
+import { appReducer } from "./app";
+import { projectsReducer } from "./projects";
 
 /*
 
@@ -18,17 +18,6 @@ Begin configuring redux-persist.
 Set blacklists for specific keys to be excluded from this, and create our persist reducer.
 
 */
-
-const authPersistConfig = {
-    key: "auth",
-    storage: storage,
-    blacklist: ["errorMessages"]
-};
-
-const userPersistConfig = {
-    key: "user",
-    storage: storage
-};
 
 const statsPersistConfig = {
     key: "stats",
@@ -73,8 +62,8 @@ const rootReducer = combineReducers({
     tasks: persistReducer(tasksPersistConfig, tasksReducer),
     projects: persistReducer(projectsPersistConfig, projectsReducer),
     stats: persistReducer(statsPersistConfig, statsReducer),
-    user: persistReducer(userPersistConfig, userReducer),
-    auth: persistReducer(authPersistConfig, authReducer)
+    user: userReducer,
+    auth: authReducer
 });
 
 export default (state, action) => {
