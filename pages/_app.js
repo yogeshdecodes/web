@@ -20,13 +20,17 @@ import { actions as authActions } from "~/ducks/auth";
 import { actions as userActions } from "~/ducks/user";
 import { actions as appActions } from "~/ducks/app";
 import { PersistGate } from "redux-persist/integration/react";
+import axios from "~/lib/axios";
 
 async function onStoreInit(ctx) {
     // ctx.store.dispatch(actions.reauthenticate(getCookie('token', ctx.req)));
     const { token } = parseCookies(ctx);
     if (token && token !== "" && token !== "null") {
+        axios.defaults.headers.common["Authorization"] = `Token ${token}`;
         ctx.store.dispatch(authActions.loginSuccess(token));
         ctx.store.dispatch(userActions.loadUser());
+    } else {
+        delete axios.defaults.headers.common["Authorization"];
     }
 }
 
@@ -82,8 +86,8 @@ class Artemis extends App {
 
                 <Provider store={store}>
                     <PersistGate
+                        loading={<div>loadign</div>}
                         persistor={store.__PERSISTOR}
-                        loading={<div>loading</div>}
                     >
                         <div>
                             <Page {...pageProps.layout}>

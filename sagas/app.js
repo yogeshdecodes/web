@@ -7,6 +7,7 @@ import { actions as projectsActions } from "../ducks/projects";
 import { checkApiHealth } from "~/lib/app";
 import { syncTimezone } from "~/lib/user";
 import axios from "~/lib/axios";
+import { isServer } from "~/config";
 
 // const getAuth = state => state.auth;
 const getStats = state => state.stats;

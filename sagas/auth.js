@@ -34,6 +34,8 @@ function* fetchToken(action) {
 
         if (!isServer) {
             setCookie({}, "token", token);
+            //sync auth across windows
+            window.localStorage.setItem("authSync_login", Date.now());
         }
 
         yield put(authActions.loginSuccess(token));

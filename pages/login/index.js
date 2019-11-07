@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { actions as authActions } from "~/ducks/auth";
 import "./index.scss";
 import LoginForm from "./components/LoginForm";
+import { requireUnauthed } from "~/lib/auth";
 
 const mapStateToProps = state => {
     return {
@@ -86,4 +87,4 @@ class LoginPage extends React.Component {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoginPage);
+)(requireUnauthed(LoginPage));
