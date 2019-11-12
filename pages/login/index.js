@@ -1,26 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
-import { actions as authActions } from "~/ducks/auth";
 import "./index.scss";
 import LoginForm from "./components/LoginForm";
 import { requireUnauthed } from "~/lib/auth";
-
-const mapStateToProps = state => {
-    return {
-        token: state.auth.token,
-        ready: state.auth.ready,
-        isLoading: state.auth.isLoading,
-        errorMessages: state.auth.errorMessages
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onClickLogin: (username, password) => {
-            dispatch(authActions.login(username, password));
-        }
-    };
-};
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -31,24 +12,6 @@ class LoginPage extends React.Component {
             password: ""
         };
     }
-
-    async componentDidMount() {
-        this.injectCss();
-    }
-
-    componentWillUnmount() {
-        this.removeCss();
-    }
-
-    injectCss = () => {
-        const nav = document.getElementById("main-navbar");
-        nav.classList.add("transparent-navbar");
-    };
-
-    removeCss = () => {
-        const nav = document.getElementById("main-navbar");
-        nav.classList.remove("transparent-navbar");
-    };
 
     render() {
         return (
@@ -84,7 +47,4 @@ class LoginPage extends React.Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(requireUnauthed(LoginPage));
+export default requireUnauthed(LoginPage);

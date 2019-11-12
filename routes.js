@@ -7,4 +7,5 @@ const routes = require("next-routes");
 
 module.exports = routes()
     .add("home", "/", "home")
+    .add("log", "/log", "log")
     .add("login", "/login", "login");

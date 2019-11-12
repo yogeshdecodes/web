@@ -5,7 +5,26 @@ import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import { Button, Control, Field, Input, Level } from "~/vendor/bulma";
 import { validateEmail } from "~/lib/utils/random";
 import { Tooltip } from "react-tippy";
+import { connect } from "react-redux";
+import { actions as authActions } from "~/ducks/auth";
 import { Link } from "~/routes";
+
+const mapStateToProps = state => {
+    return {
+        token: state.auth.token,
+        ready: state.auth.ready,
+        isLoading: state.auth.isLoading,
+        errorMessages: state.auth.errorMessages
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onClickLogin: (username, password) => {
+            dispatch(authActions.login(username, password));
+        }
+    };
+};
 
 const LoginForm = props => {
     if (props.isLoading) {
@@ -98,4 +117,7 @@ LoginForm.propTypes = {
     onPasswordChange: PropTypes.func.isRequired
 };
 
-export default LoginForm;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(LoginForm);
