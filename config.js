@@ -12,9 +12,17 @@ const BASE_URL = process.env.BASE_URL
     ? process.env.BASE_URL
     : "https://getmakerlog.com";
 
+const STREAM_TYPES = (following = true) => ({
+    tasks: following ? "/stream" : "/explore/stream/",
+    milestones: following
+        ? "/stream/milestones/"
+        : "/explore/stream/milestones/"
+});
+
 const config = {
     API_URL,
     WS_URL,
-    BASE_URL
+    BASE_URL,
+    STREAM_TYPES
 };
 export default config;
