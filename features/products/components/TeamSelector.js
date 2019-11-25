@@ -1,9 +1,11 @@
 import React from "react";
-import {getProductPeople} from "~/lib/products";
-import {getByUsername} from "~/lib/user";
+import { getProductPeople } from "~/lib/products";
+import { getByUsername } from "~/lib/user";
 import uniqBy from "lodash/uniqBy";
-import {UserMediaList, withCurrentUser} from "~/features/users";
+import { UserMediaList } from "~/features/users";
 import Spinner from "~/components/Spinner";
+import { connect } from "react-redux";
+import { mapStateToProps } from "~/ducks/user";
 
 class UserGroupSelector extends React.Component {
     state = {
@@ -149,4 +151,4 @@ class UserGroupSelector extends React.Component {
     }
 }
 
-export default withCurrentUser(UserGroupSelector);
+export default connect(mapStateToProps)(UserGroupSelector);

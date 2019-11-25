@@ -1,7 +1,7 @@
 import React from "react";
-import {getRecentDiscussions} from "../../lib/discussions";
-import {Link} from "~/routes";
-import Spinner from "../../components/Spinner";
+import { getRecentDiscussions } from "~/lib/discussions";
+import { Link } from "~/routes";
+import Spinner from "~/components/Spinner";
 import ReplyFaces from "./ReplyFaces";
 
 class RecentDiscussionList extends React.Component {

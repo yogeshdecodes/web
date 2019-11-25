@@ -86,6 +86,8 @@ export const mapStateToProps = state => {
     return {
         isLoading: state.user.isLoading,
         failed: state.user.failed,
-        me: state.user.me
+        me: state.user.me,
+        user: state.user.me,
+        isLoggedIn: state.auth.loggedIn
     };
 };

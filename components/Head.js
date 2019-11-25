@@ -1,6 +1,6 @@
 import NextHead from "next/head";
 import React from "react";
-import {string} from "prop-types";
+import { string } from "prop-types";
 
 const defaultDescription = "";
 const defaultOGURL = "";
@@ -96,14 +96,21 @@ const Head = props => (
         <meta property="og:url" content={props.url || defaultOGURL} />
         <meta
             property="og:title"
-            content={props.title || "The maker community."}
+            content={
+                props.title || "The world's most supportive maker community."
+            }
         />
         <meta
             property="og:description"
             content={props.description || defaultDescription}
         />
         <meta name="twitter:site" content={props.url || defaultOGURL} />
-        <meta name="twitter:card" content="summary_large_image" />
+        {props.ogLargeImage ? (
+            <meta name="twitter:card" content="summary_large_image" />
+        ) : (
+            <meta name="twitter:card" content={"summary"} />
+        )}
+        <meta name="twitter:site" content="@getmakerlog" />
         <meta name="twitter:image" content={props.ogImage || defaultOGImage} />
         <meta property="og:image" content={props.ogImage || defaultOGImage} />
         <meta property="og:image:width" content="1200" />

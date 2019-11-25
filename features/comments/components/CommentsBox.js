@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getComments} from "~/lib/comments";
-import {withCurrentUser} from "~/features/users";
+import { getComments } from "~/lib/comments";
+import { mapStateToProps } from "~/ducks/user";
 import CommentList from "./CommentList";
 import CommentInput from "./CommentInput";
 // import { StreamCard as Card } from "../../stream/components/Stream/components/StreamCard/styled";
 import Emoji from "../../../components/Emoji";
-import {Link} from "~/routes";
+import { Link } from "~/routes";
+import { connect } from "react-redux";
 
 class CommentsBox extends React.Component {
     state = {
@@ -105,4 +106,4 @@ CommentsBox.propTypes = {
     task: PropTypes.object
 };
 
-export default withCurrentUser(CommentsBox);
+export default connect(mapStateToProps)(CommentsBox);

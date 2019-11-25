@@ -5,6 +5,8 @@ import { FollowingStream } from "~/features/stream";
 import Page from "~/layouts/Page";
 import StreamHeader from "./components/StreamHeader";
 import Sidebar from "./components/Sidebar";
+import { requireUnauthed } from "~/lib/auth";
+import { requireAuthed } from "../../lib/auth";
 
 class StreamPage extends React.Component {
     isNewUser = () =>
@@ -46,4 +48,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(StreamPage);
+export default requireAuthed(connect(mapStateToProps)(StreamPage));

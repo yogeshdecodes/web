@@ -1,11 +1,15 @@
 import React from "react";
-import {getHostname, normalizeUrl} from "../../../../../../lib/utils/products";
+import {
+    getHostname,
+    normalizeUrl
+} from "../../../../../../lib/utils/products";
 import isFunction from "lodash/isFunction";
 import ProductEditModal from "../../../ProductEditModal";
-import {Link} from "~/routes";
-import withCurrentUser from "../../../../../users/containers/withCurrentUser";
+import { Link } from "~/routes";
+import { mapStateToProps } from "~/ducks/user";
+import { connect } from "react-redux";
 import Emoji from "../../../../../../components/Emoji";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProductPeople from "../../../ProductPeople";
 
 class ProductCard extends React.Component {
@@ -126,4 +130,4 @@ class ProductCard extends React.Component {
     }
 }
 
-export default withCurrentUser(ProductCard);
+export default connect(mapStateToProps)(ProductCard);

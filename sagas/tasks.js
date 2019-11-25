@@ -128,7 +128,6 @@ function* tasksSocketWatcher(action) {
         user = yield select(getUserState);
         yield take();
     }
-    console.log("Makerlog: Store loaded.");
     while (true) {
         let user = yield select(getUserState);
         yield take("TASKS_SOCKET_OPEN");

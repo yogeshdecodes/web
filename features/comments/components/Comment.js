@@ -1,10 +1,12 @@
 import React from "react";
-import {Link} from "~/routes";
-import {FullName, withCurrentUser} from "~/features/users";
+import { Link } from "~/routes";
+import { FullName } from "~/features/users";
 import TimeAgo from "react-timeago";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Markdown from "~/components/Markdown";
-import {deleteComment, editComment} from "../../../lib/comments";
+import { deleteComment, editComment } from "../../../lib/comments";
+import { connect } from "react-redux";
+import { mapStateToProps } from "~/ducks/user";
 
 class CommentEditor extends React.Component {
     constructor(props) {
@@ -184,4 +186,4 @@ class Comment extends React.Component {
     }
 }
 
-export default withCurrentUser(Comment);
+export default connect(mapStateToProps)(Comment);

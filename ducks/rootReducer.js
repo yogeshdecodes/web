@@ -30,7 +30,7 @@ const statsPersistConfig = {
 const tasksPersistConfig = {
     key: "tasks",
     storage: storage,
-    blacklist: ["errorMessages", "searchTerms", "settingsOpen"]
+    blacklist: ["errorMessages", "searchTerms", "settingsOpen", "isSyncing"]
 };
 
 const projectsPersistConfig = {

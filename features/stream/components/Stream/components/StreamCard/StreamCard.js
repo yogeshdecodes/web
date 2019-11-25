@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {groupTasksByDone, orderByDate} from "~/lib/utils/tasks";
+import { groupTasksByDone, orderByDate } from "~/lib/utils/tasks";
 import EntryList from "../../../EntryList";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import withCurrentUser from "~/features/users/containers/withCurrentUser";
-import {Tooltip} from "react-tippy";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Tooltip } from "react-tippy";
 // import { StreamCard as Card } from "./styled";
-import {UserMedia} from "~/features/users";
-import {UserBadges} from "~/components/badges";
+import { UserMedia } from "~/features/users";
+import { UserBadges } from "~/components/badges";
 import OutboundLink from "~/components/OutboundLink";
-import {MilestoneMedia} from "~/features/milestones";
+import { MilestoneMedia } from "~/features/milestones";
+import { connect } from "react-redux";
+import { mapStateToProps } from "~/ducks/user";
 
 class StreamCard extends React.Component {
     state = {
@@ -37,7 +38,7 @@ class StreamCard extends React.Component {
             : this.getUser().username;
         let text = `Done today by ${name} on @GetMakerlog:\n`;
 
-        if (this.props.me.id === this.getUser().id) {
+        if (this.props.me && this.props.me.id === this.getUser().id) {
             text = `Done today on @GetMakerlog:\n`;
         }
 
@@ -53,6 +54,8 @@ class StreamCard extends React.Component {
         let tasks = this.getGroupedTasks();
         let milestones = this.getMilestones();
         let user = this.getUser();
+
+        console.log("SC props", this.props);
 
         return (
             <div className={"card StreamCard"}>
@@ -135,4 +138,4 @@ StreamCard.propTypes = {
     activity: PropTypes.array.isRequired
 };
 
-export default withCurrentUser(StreamCard);
+export default connect(mapStateToProps)(StreamCard);

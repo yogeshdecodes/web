@@ -1,24 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {connect} from "react-redux";
-import {actions as appActions} from "~/ducks/app";
-import {socketUrl} from "../../../lib/utils/random";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
+import { actions as appActions } from "~/ducks/app";
+import { socketUrl } from "../../../lib/utils/random";
 import ReconnectingWebSocket from "reconnecting-websocket/dist/reconnecting-websocket";
+import Router from "next/router";
 
 class NotificationsLink extends React.Component {
     state = {
-        unreadCount: 0
+        unreadCount: 0,
+        initialTitle: null
     };
 
     async componentDidMount() {
+        if (!this.state.initialTitle) {
+            this.setInitialTitle();
+        }
+
         if (this.props.token) {
             this.connect();
         }
+
+        Router.events.on("routeChangeComplete", this.forceTitleRefresh);
     }
+
+    forceTitleRefresh = () => {
+        alert("test");
+        this.setInitialTitle(() => this.setCount(this.state.unreadCount));
+    };
+
+    setInitialTitle = (callback = () => {}) => {
+        this.setState({ initialTitle: document.title }, callback);
+    };
 
     componentWillUnmount() {
         this.disconnect();
+        Router.events.off("routeChangeComplete", this.forceTitleRefresh);
     }
 
     connect = () => {
@@ -67,9 +85,9 @@ class NotificationsLink extends React.Component {
     setCount = count => {
         if (count !== this.state.unreadCount) {
             if (count > 0) {
-                document.title = `(${count}) Makerlog`;
+                document.title = `(${count}) ${this.state.initialTitle}`;
             } else {
-                document.title = `Makerlog`;
+                document.title = this.state.initialTitle;
             }
             this.setState({
                 unreadCount: count
@@ -130,7 +148,4 @@ const mapDispatchToProps = dispatch => ({
     closeHandler: () => dispatch(appActions.toggleNotifications())
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(NotificationsLink);
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationsLink);

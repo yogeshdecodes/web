@@ -1,21 +1,27 @@
 import "./index.scss";
 
-import {addProductToEvent, getEventsForProduct, getEventsForUser, removeProductFromEvent} from "../../../../lib/events";
-import {deleteProduct, editProduct, leaveProduct} from "~/lib/products";
+import {
+    addProductToEvent,
+    getEventsForProduct,
+    getEventsForUser,
+    removeProductFromEvent
+} from "../../../../lib/events";
+import { deleteProduct, editProduct, leaveProduct } from "~/lib/products";
 
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GeneralTab from "./components/GeneralTab";
-import {Link} from "~/routes";
+import { Link } from "~/routes";
 import Modal from "~/components/Modal";
 import React from "react";
 import SidebarLink from "~/components/SidebarLink";
 import Spinner from "~/components/Spinner";
 import TeamSelector from "../TeamSelector";
-import {createProject} from "../../../../lib/projects";
-import {getProjects} from "~/lib/projects";
-import {hasEnded} from "../../../../lib/utils/events";
+import { createProject } from "../../../../lib/projects";
+import { getProjects } from "~/lib/projects";
+import { hasEnded } from "../../../../lib/utils/events";
 import isFunction from "lodash/isFunction";
-import withCurrentUser from "~/features/users/containers/withCurrentUser";
+import { mapStateToProps } from "~/ducks/user";
+import { connect } from "react-redux";
 
 class EventsTab extends React.Component {
     state = {
@@ -709,7 +715,7 @@ class ProductEditForm extends React.Component {
     }
 }
 
-ProductEditForm = withCurrentUser(ProductEditForm);
+ProductEditForm = connect(mapStateToProps)(ProductEditForm);
 
 const ProductEditModal = props => (
     <Modal

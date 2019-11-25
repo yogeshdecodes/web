@@ -1,0 +1,70 @@
+@import "../../styles/_variables";
+
+.ProductPage {
+    .hero {
+        margin-bottom: $gap;
+    }
+
+    .ProductHero {
+        min-height: 20vh;
+        background: linear-gradient(to right, #2f80ed, #56ccf2);
+    }
+
+    .ProductHero-Icon {
+        padding-right: 30px;
+    }
+
+    .ProductHero-Icon > img {
+        max-width: 20vh;
+        max-height: 20vh;
+    }
+
+    .ProductHero-Media {
+        h2 {
+            font-size: 1.5rem;
+            margin: 0 !important;
+            display: flex;
+            align-items: center;
+
+            span {
+                @extend %corners;
+                display: inline-block;
+                background: $c-bg-light;
+                font-size: 0.75rem;
+                line-height: 1;
+                font-weight: normal;
+                margin-left: 4px;
+                padding: 2px 4px 2px 0;
+                color: $c-title;
+
+                .emoji {
+                    padding-right: 1px;
+                }
+            }
+        }
+
+        h3 {
+            margin-top: 0 !important;
+        }
+    }
+
+    .ProductHero-Stats {
+        display: flex;
+        justify-content: flex-end;
+        align-items: start;
+
+        .hero-item {
+            flex-grow: 1;
+        }
+    }
+
+    button {
+        border: 1px solid $c-lightest;
+        background: transparent;
+        color: $c-lightest;
+        font-size: 1rem;
+        line-height: 1.5;
+        height: 2.25em;
+        padding: calc(0.375em - 1px) 0.75em;
+    }
+}

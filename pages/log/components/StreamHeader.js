@@ -3,7 +3,6 @@ import { StatsLevel } from "~/features/stats";
 import { connect } from "react-redux";
 import { actions as editorActions } from "~/ducks/editor";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { withTheme } from "styled-components";
 import Greeting from "~/components/Greeting";
 import { FullName } from "~/features/users";
 import HeaderTrend from "./HeaderTrend";
@@ -11,7 +10,7 @@ import DayProgressBar from "./DayProgressBar";
 import { isDueSoon } from "~/lib/utils/tasks";
 import Emoji from "~//components/Emoji";
 
-const StreamHeader = withTheme(props => (
+const StreamHeader = props => (
     <div className={"hero"}>
         <div className={"container"}>
             <div>
@@ -36,7 +35,7 @@ const StreamHeader = withTheme(props => (
         </div>
         <DayProgressBar />
     </div>
-));
+);
 
 /*
 Code for trend bar
@@ -61,7 +60,4 @@ const mapStateToProps = state => ({
         : 0
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(StreamHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(StreamHeader);

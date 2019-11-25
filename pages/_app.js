@@ -5,7 +5,7 @@ import "~/vendor/fa";
 import App, { Container } from "next/app";
 
 import ErrorPage from "next/error";
-import Head from "~/layouts/Head";
+import Head from "~/components/Head";
 import NProgressContainer from "../vendor/nprogress";
 import Page from "~/layouts/Page";
 
@@ -23,12 +23,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import axios from "~/lib/axios";
 
 async function onStoreInit(ctx) {
-    // ctx.store.dispatch(actions.reauthenticate(getCookie('token', ctx.req)));
     const { token } = parseCookies(ctx);
     if (token && token !== "" && token !== "null") {
         axios.defaults.headers.common["Authorization"] = `Token ${token}`;
-        ctx.store.dispatch(authActions.loginSuccess(token));
-        ctx.store.dispatch(userActions.loadUser());
+        ctx.store.dispatch(authActions.login(null, null, token));
     } else {
         delete axios.defaults.headers.common["Authorization"];
     }
@@ -80,25 +78,17 @@ class Artemis extends App {
         }
 
         return (
-            <Container>
+            <Provider store={store}>
                 <Head />
                 <NProgressContainer />
+                <div>
+                    <Page {...pageProps.layout}>
+                        <Component {...pageProps} />
+                    </Page>
 
-                <Provider store={store}>
-                    <PersistGate
-                        loading={<div>loadign</div>}
-                        persistor={store.__PERSISTOR}
-                    >
-                        <div>
-                            <Page {...pageProps.layout}>
-                                <Component {...pageProps} />
-                            </Page>
-
-                            <Reactor />
-                        </div>
-                    </PersistGate>
-                </Provider>
-            </Container>
+                    <Reactor />
+                </div>
+            </Provider>
         );
     }
 }

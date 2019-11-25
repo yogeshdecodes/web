@@ -1,12 +1,14 @@
 import React from "react";
-import {Link} from "~/routes";
-import {postComment} from "~/lib/comments";
-import {Avatar, withCurrentUser} from "~/features/users";
+import { Link } from "~/routes";
+import { postComment } from "~/lib/comments";
+import { Avatar } from "~/features/users";
 import Spinner from "~/components/Spinner";
 import styled from "styled-components";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { Selector } from "react-giphy-selector";
 import "./CommentInput.scss";
+import { connect } from "react-redux";
+import { mapStateToProps } from "~/ducks/user";
 
 const GifPicker = styled.div``;
 
@@ -161,6 +163,6 @@ class CommentInput extends React.Component {
                 )}
 */
 
-CommentInput = withCurrentUser(CommentInput);
+CommentInput = connect(mapStateToProps)(CommentInput);
 
 export default CommentInput;

@@ -6,6 +6,7 @@ import { MyProductsCard } from "~/features/products";
 import BroadcastList from "~/components/BroadcastList";
 import Sticky from "react-stickynode";
 import FooterCard from "~/components/sidebar/FooterCard";
+import { isServer } from "~/config";
 
 export default props => (
     <>
@@ -17,7 +18,7 @@ export default props => (
         <MyProductsCard />
         <hr />
 
-        <Sticky enabled={window.innerWidth >= 728} top={20}>
+        <Sticky enabled={!isServer ? window.innerWidth >= 728 : false} top={20}>
             <AdCard />
             <FooterCard />
         </Sticky>

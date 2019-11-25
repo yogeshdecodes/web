@@ -14,7 +14,6 @@ import UserRow from "./components/UserRow";
 import MakerList from "./containers/MakerList";
 import ProfileModalAction from "./containers/ProfileModalAction";
 import UserContainer from "./containers/UserContainer";
-import withCurrentUser from "./containers/withCurrentUser";
 import FollowingList from "./components/FollowingList";
 import LoggedInOnly from "./containers/LoggedInOnly";
 import LoggedOutOnly from "./containers/LoggedOutOnly";
@@ -34,7 +33,6 @@ export {
     MakerList,
     ProfileModalAction,
     UserContainer,
-    withCurrentUser,
     FollowingList,
     FaceStack,
     LoggedOutOnly,

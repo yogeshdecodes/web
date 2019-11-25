@@ -1,13 +1,14 @@
 import React from "react";
-import {Link} from "~/routes";
+import { Link } from "~/routes";
 import Markdown from "~/components/Markdown";
 import Emoji from "~/components/Emoji";
-import {Button, Input} from "~/vendor/bulma";
-import {truncate} from "~/lib/utils/random";
-import {Praisable} from "~/features/stream/components/Task/components/Praise";
-import withCurrentUser from "~/features/users/containers/withCurrentUser";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {deleteMilestone, editMilestone} from "~/lib/milestones";
+import { Button, Input } from "~/vendor/bulma";
+import { truncate } from "~/lib/utils/random";
+import { Praisable } from "~/features/stream/components/Task/components/Praise";
+import { mapStateToProps } from "~/ducks/user";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { deleteMilestone, editMilestone } from "~/lib/milestones";
+import { connect } from "react-redux";
 
 import "./MilestoneMedia.scss";
 
@@ -192,7 +193,8 @@ class MilestoneMediaComponent extends React.Component {
                                     &nbsp; {milestone.comment_count}
                                 </a>
                             </Link>
-                            {this.props.me.id === milestone.user.id &&
+                            {this.props.me &&
+                                this.props.me.id === milestone.user.id &&
                                 !(this.props.xs || this.props.stream) && (
                                     <Button
                                         onClick={e =>
@@ -211,25 +213,26 @@ class MilestoneMediaComponent extends React.Component {
                                         <FontAwesomeIcon icon={"edit"} />
                                     </Button>
                                 )}
-                            {this.props.me.id === milestone.user.id && (
-                                <Button
-                                    loading={this.state.deleting}
-                                    onClick={this.delete}
-                                    small
-                                    danger={this.state.confirmDelete}
-                                    className={
-                                        "is-rounded" +
-                                        (this.props.xs || this.props.stream
-                                            ? " hidden-button"
-                                            : "")
-                                    }
-                                >
-                                    <FontAwesomeIcon icon={"trash"} />{" "}
-                                    {this.state.confirmDelete
-                                        ? "Are you sure?"
-                                        : ""}
-                                </Button>
-                            )}
+                            {this.props.me &&
+                                this.props.me.id === milestone.user.id && (
+                                    <Button
+                                        loading={this.state.deleting}
+                                        onClick={this.delete}
+                                        small
+                                        danger={this.state.confirmDelete}
+                                        className={
+                                            "is-rounded" +
+                                            (this.props.xs || this.props.stream
+                                                ? " hidden-button"
+                                                : "")
+                                        }
+                                    >
+                                        <FontAwesomeIcon icon={"trash"} />{" "}
+                                        {this.state.confirmDelete
+                                            ? "Are you sure?"
+                                            : ""}
+                                    </Button>
+                                )}
                         </div>
                     )}
                 </div>
@@ -238,7 +241,7 @@ class MilestoneMediaComponent extends React.Component {
     }
 }
 
-MilestoneMediaComponent = withCurrentUser(MilestoneMediaComponent);
+MilestoneMediaComponent = connect(mapStateToProps)(MilestoneMediaComponent);
 
 export default ({ linked = true, ...props }) => {
     if (linked) {

@@ -1,0 +1,65 @@
+@import "../../styles/_variables";
+
+.ForgotPage {
+    section {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        align-items: stretch;
+        justify-content: center;
+        min-height: 100vh;
+        color: $c-lightest;
+        background: $gradient-green;
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: column nowrap;
+            padding: 0 3rem 3rem;
+        }
+
+        div:first-of-type {
+            background: #0a0a0a;
+        }
+
+        h1,
+        blockquote {
+            @extend %poppins;
+            color: $c-lightest;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        h3 {
+            color: $c-lightest;
+        }
+
+        cite {
+            font-size: 1.5rem;
+            font-style: normal;
+            display: block;
+        }
+
+        input[type="password"],
+        input[type="email"] {
+            @extend %poppins;
+            background: transparent;
+            outline: 0;
+            font-size: 1rem;
+            color: $c-lightest;
+            border-radius: 0;
+            border: solid $c-lightest;
+            border-width: 0 0 1px;
+            padding: 0.75rem 0;
+        }
+
+        button {
+            @extend %poppins;
+            color: $c-brand;
+            background: transparent;
+            border: 0;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+    }
+}

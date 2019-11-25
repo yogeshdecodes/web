@@ -1,13 +1,24 @@
-import {all, call, put, race, select, take, takeLatest} from "redux-saga/effects";
-import {eventChannel} from "redux-saga";
-import {actions as streamActions, types as streamTypes} from "../ducks/stream";
-import {types as editorTypes} from "~/ducks/editor";
-import {actions as tasksActions} from "~/ducks/tasks";
-import {getStreamMetadata} from "~/lib/tasks";
+import {
+    all,
+    call,
+    put,
+    race,
+    select,
+    take,
+    takeLatest
+} from "redux-saga/effects";
+import { eventChannel } from "redux-saga";
+import {
+    actions as streamActions,
+    types as streamTypes
+} from "../ducks/stream";
+import { types as editorTypes } from "~/ducks/editor";
+import { actions as tasksActions } from "~/ducks/tasks";
+import { getStreamMetadata } from "~/lib/tasks";
 import RWS from "reconnecting-websocket";
-import {fetchNextUrl} from "../lib/tasks";
+import { fetchNextUrl } from "../lib/tasks";
 import pickBy from "lodash/pickBy";
-import {getTimezone} from "../lib/utils/timezone";
+import { getTimezone } from "../lib/utils/timezone";
 
 export const getStreamState = state => state.stream;
 export const getUserState = state => state.user;
@@ -219,7 +230,6 @@ function* streamSocketWatcher(action) {
         user = yield select(getUserState);
         yield take();
     }
-    console.log("Makerlog: Store loaded.");
 
     while (true) {
         let streamState = yield select(getStreamState);

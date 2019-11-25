@@ -1,16 +1,16 @@
 import React from "react";
-import {connect} from "react-redux";
-import {actions as tasksActions} from "~/ducks/tasks";
-import {applySearchTerms} from "~/lib/utils/tasks";
+import { connect } from "react-redux";
+import { actions as tasksActions } from "~/ducks/tasks";
+import { applySearchTerms } from "~/lib/utils/tasks";
 import differenceInHours from "date-fns/differenceInHours";
-import {Task} from "~/features/stream";
+import { Task } from "~/features/stream";
 import styled from "styled-components";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Emoji from "../../../../components/Emoji";
-import OutboundLink from "../../../../components/OutboundLink";
-import {Tooltip} from "react-tippy";
-import {actions as editorActions} from "../../../../ducks/editor";
-import "./TodayView.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Emoji from "~/components/Emoji";
+import OutboundLink from "~/components/OutboundLink";
+import { Tooltip } from "react-tippy";
+import { actions as editorActions } from "~/ducks/editor";
+import "./index.scss";
 
 const TodayPage = styled.div`
     min-height: ${props => (props.focusMode ? "100vh" : "calc(100vh - 120px)")};
