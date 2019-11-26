@@ -16,7 +16,7 @@ import Spinner from "~/components/Spinner";
 import TimeAgo from "react-timeago";
 import Textarea from "react-autosize-textarea";
 import { Avatar } from "~/features/users";
-import { mapUserToProps } from "~/ducks/users";
+import { mapUserToProps } from "~/ducks/user";
 import Emoji from "~/components/Emoji";
 import FullName from "~/features/users/components/FullName";
 import config from "~/config";
