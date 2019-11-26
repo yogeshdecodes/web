@@ -38,6 +38,8 @@ function* fetchToken(action) {
             window.localStorage.setItem("authSync_login", Date.now());
         }
 
+        console.log("Makerlog: signedin");
+
         yield put(authActions.loginSuccess(token));
     } catch (e) {
         let action = null;
