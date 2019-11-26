@@ -1,11 +1,11 @@
-import {getLiveEvents, getUpcomingEvents} from "../../../../lib/events";
+import { getLiveEvents, getUpcomingEvents } from "../../../../lib/events";
 
 import Avatar from "../Avatar/Avatar";
 import Emoji from "../../../../components/Emoji";
 import EventMedia from "../../../events/components/EventMedia";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FullName from "../FullName";
-import {Link} from "~/routes";
+import { Link } from "~/routes";
 import OutboundLink from "~/components/OutboundLink";
 import ProductList from "../../../products/components/ProductList/ProductList";
 import PropTypes from "prop-types";
@@ -13,13 +13,13 @@ import React from "react";
 import RecentDiscussionList from "../../../discussions/RecentDiscussionList";
 import Spinner from "../../../../components/Spinner";
 import TrendingDiscussionList from "../../../discussions/TrendingDiscussionList";
-import {UserMedia} from "~/features/users";
+import { UserMedia } from "~/features/users";
 import UserRow from "../UserRow";
 import config from "~/config";
-import {fetchStreamers} from "../../../../lib/integrations/shipstreams";
-import {getFollowing} from "~/lib/user";
-import {getRecentlyLaunched} from "../../../../lib/products";
-import {getWorldStats} from "../../../../lib/stats";
+import { fetchStreamers } from "../../../../lib/integrations/shipstreams";
+import { getFollowing } from "~/lib/user";
+import { getRecentlyLaunched } from "../../../../lib/products";
+import { getWorldStats } from "../../../../lib/stats";
 import orderBy from "lodash/orderBy";
 
 const WelcomeTweet = ({ user }) => {
@@ -395,10 +395,6 @@ class PeopleCard extends React.Component {
         );
     }
 }
-
-PeopleCard.propTypes = {
-    worldStats: PropTypes.object.isRequired
-};
 
 PeopleCard.defaultProps = {
     withFeaturedMaker: true,

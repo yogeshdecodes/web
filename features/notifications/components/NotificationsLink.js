@@ -27,7 +27,7 @@ class NotificationsLink extends React.Component {
 
     forceTitleRefresh = () => {
         alert("test");
-        this.setInitialTitle(() => this.setCount(this.state.unreadCount));
+        this.setInitialTitle(() => this.setCount(this.state.unreadCount, true));
     };
 
     setInitialTitle = (callback = () => {}) => {
@@ -82,8 +82,8 @@ class NotificationsLink extends React.Component {
         }
     };
 
-    setCount = count => {
-        if (count !== this.state.unreadCount) {
+    setCount = (count, force = false) => {
+        if (count !== this.state.unreadCount || force) {
             if (count > 0) {
                 document.title = `(${count}) ${this.state.initialTitle}`;
             } else {

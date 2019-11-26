@@ -17,20 +17,27 @@ let config = {
         config.node = {
             fs: "empty"
         };
+        config.stats = {
+            ...config.stats,
+            warningsFilter: warn =>
+                warn.indexOf("Conflicting order between:") > -1
+        };
 
         config.plugins = [
             ...config.plugins,
-            new CircularDependencyPlugin({
+            /*new CircularDependencyPlugin({
                 // exclude detection of files based on a RegExp
                 exclude: /a\.js|node_modules/,
                 // add errors to webpack instead of warnings
                 failOnError: false,
                 // allow import cycles that include an asyncronous import,
-                // e.g. via import(/* webpackMode: "weak" */ './file.js')
+                // e.g.
                 allowAsyncCycles: false,
                 // set the current working directory for displaying module paths
                 cwd: process.cwd()
             }),
+            */
+
             // Read the .env file
             new Dotenv({
                 path: path.join(__dirname, ".env"),

@@ -19,11 +19,12 @@ import { parseCookies } from "nookies";
 import { actions as authActions } from "~/ducks/auth";
 import { actions as userActions } from "~/ducks/user";
 import { actions as appActions } from "~/ducks/app";
-import { PersistGate } from "redux-persist/integration/react";
 import axios from "~/lib/axios";
+import DownPage from "~/layouts/DownPage";
 
 async function onStoreInit(ctx) {
     const { token } = parseCookies(ctx);
+    ctx.store.dispatch(appActions.requestApiHealth());
     if (token && token !== "" && token !== "null") {
         axios.defaults.headers.common["Authorization"] = `Token ${token}`;
         ctx.store.dispatch(authActions.login(null, null, token));
@@ -72,6 +73,8 @@ class Artemis extends App {
     render() {
         const { Component, pageProps, store } = this.props;
         const { statusCode } = pageProps;
+
+        if (!store.getState().app.healthy) return <DownPage />;
 
         if (statusCode && statusCode >= 400) {
             return <ErrorPage statusCode={statusCode} />;
