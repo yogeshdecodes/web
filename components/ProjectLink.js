@@ -1,9 +1,9 @@
 import React from "react";
-import {Tooltip} from "react-tippy";
-import {getRelatedData} from "~/lib/projects";
+import { Tooltip } from "react-tippy";
+import { getRelatedData } from "~/lib/projects";
 import Spinner from "./Spinner";
-import {ProductList} from "~/features/products";
 import styled from "styled-components";
+import ProductMedia from "../features/products/components/Product/components/ProductMedia";
 
 export const UnderlinedText = styled.span`
     display: inline-block;
@@ -67,9 +67,10 @@ class ProjectRelated extends React.Component {
                 {!this.state.productsReady && <Spinner small color={"white"} />}
                 {this.state.productsReady &&
                     this.state.products &&
-                    this.state.products.length > 0 && (
-                        <ProductList xs media products={this.state.products} />
-                    )}
+                    this.state.products.length > 0 &&
+                    this.state.products.map(product => (
+                        <ProductMedia product={product} />
+                    ))}
                 {this.state.products && this.state.products.length === 0 && (
                     <span>No products linked.</span>
                 )}

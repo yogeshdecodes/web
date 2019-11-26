@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { groupTasksByDone } from "../../../../lib/utils/tasks";
+import { groupTasksByDone } from "~/lib/utils/tasks";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Scrollbars } from "react-custom-scrollbars";
-import Spinner from "../../../../components/Spinner";
+import Spinner from "~/components/Spinner";
 import mapDispatchToProps from "../../containers/mapDispatchToProps";
 import KanbanTask from "./components/KanbanTask";
 import isEqual from "lodash/isEqual";
@@ -156,10 +156,7 @@ class KanbanView extends React.Component {
     }
 }
 
-KanbanView = connect(
-    null,
-    mapDispatchToProps
-)(KanbanView);
+KanbanView = connect(null, mapDispatchToProps)(KanbanView);
 
 KanbanView.propTypes = {
     projects: PropTypes.array.isRequired,

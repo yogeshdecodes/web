@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
-import {Link} from "~/routes";
-import {connect} from "react-redux";
+import { Link } from "~/routes";
+import { connect } from "react-redux";
 import ActivitySparklines from "~/features/stats/components/ActivitySparklines";
 import FullName from "../FullName";
 import GatedFollowButton from "../GatedFollowButton";
-import {ProductList, ProductsContainer} from "~/features/products";
+import ProductList from "~/features/products/components/ProductList";
+import ProductsContainer from "~/features/products/containers/ProductsContainer";
 
 // make low performance css and include conditionally
 

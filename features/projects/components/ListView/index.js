@@ -4,9 +4,9 @@ import { Button } from "../../../../vendor/bulma";
 import {
     groupTasksByDone,
     isDueSoon,
-    orderByDate,
-    processTaskString
+    orderByDate
 } from "../../../../lib/utils/tasks";
+import { processTaskString } from "~/lib/utils/parsers";
 
 import CelebratoryThing from "../CelebratoryThing";
 import DueCountdown from "../../../../components/DueCountdown";
@@ -200,10 +200,7 @@ class CheckableTask extends React.Component {
     }
 }
 
-CheckableTask = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CheckableTask);
+CheckableTask = connect(mapStateToProps, mapDispatchToProps)(CheckableTask);
 
 const Tasks = ({ tasks, showDone, toggleDoneTasks, me }) => {
     const groupedTasks = groupTasksByDone(tasks);
@@ -403,7 +400,4 @@ class ListView extends React.Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ListView);
+export default connect(mapStateToProps, mapDispatchToProps)(ListView);

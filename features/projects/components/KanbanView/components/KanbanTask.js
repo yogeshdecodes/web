@@ -1,5 +1,5 @@
 import React from "react";
-import { processTaskString } from "~/lib/utils/tasks";
+import { processTaskString } from "~/lib/utils/parsers";
 import { connect } from "react-redux";
 import TimeAgo from "react-timeago";
 import { TaskDetailModal } from "~/features/stream";
@@ -80,7 +80,4 @@ class KanbanTask extends React.Component {
     }
 }
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(KanbanTask);
+export default connect(null, mapDispatchToProps)(KanbanTask);

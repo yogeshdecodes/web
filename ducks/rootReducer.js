@@ -12,7 +12,6 @@ import { appsReducer } from "./apps";
 import { appReducer } from "./app";
 import { projectsReducer } from "./projects";
 import { isServer } from "~/config";
-import store from "~/store";
 
 /*
 
@@ -76,8 +75,8 @@ export default (state, action) => {
             // 1. sync across windows
             window.localStorage.setItem("authSync_logout", Date.now());
             // 2. flush storage
-            if (store.__PERSISTOR) {
-                store.__PERSISTOR.purge();
+            if (storage) {
+                storage.purge();
             }
             // 3. reload
             window.location.reload();
