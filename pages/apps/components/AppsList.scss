@@ -1,0 +1,58 @@
+@import "../../../styles/_variables";
+
+.grid-apps.AppsList	{
+	grid-column: 1 / span 3;
+	border-top: 1px solid $c-border;
+	padding-top: $gap;
+
+	h2, h3 {
+		color: $c-lightest;
+	}
+
+	.card	{
+		div:nth-child(1) {
+			flex-grow: 2;
+		}
+
+		div:nth-child(2) {
+			flex-grow: 1;
+			text-align: right;
+		}
+	}
+}
+
+.TodoistCard	{
+	background-color: #f22613;
+}
+
+.SlackCard	{
+	background-color: #e6186d;
+}
+
+.TrelloCard	{
+	background-color: #0079bf;
+}
+
+.GitHubCard	{
+	background-color: black;
+}
+
+.GitLabCard	{
+	background-color: #fc6d26;
+}
+
+.NodeHostCard	{
+	background-color: #3498db;
+}
+
+.WebhooksCard	{
+	background-color: #37985e;
+}
+
+.ShipstreamsCard	{
+	background-color: #4B8bff;
+}
+
+.TelegramCard	{
+	background-color: #0088cc;
+}

@@ -15,4 +15,6 @@ module.exports = routes()
     .add("profile-page", "/@:username", "profile-page")
     .add("discussions", "/discussions", "discussions")
     .add("discussion-page", "/discussions/:slug", "discussions")
+    .add("apps", "/apps", "apps")
+    .add("app-page", "/apps/:slug", "apps")
     .add("products", "/products", "products");

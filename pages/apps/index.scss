@@ -1,0 +1,186 @@
+@import "../../styles/_variables";
+
+.AppsPage {
+	.grid-apps {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-gap: $gap;
+	}
+
+	h2, h3 {
+		padding-right: $gap/2;
+	}
+
+	h2	{
+		font-size: 1.25rem;
+		line-height: 1.1;
+	}
+
+	h3 {
+		margin: $gap/4 0;
+		font-weight: normal;
+		font-size: 1rem;
+		line-height: 1.2;
+	}
+
+	.card {
+		margin-bottom: 0;
+
+		.card-content {
+			width: 100%;
+		}
+
+		> div:nth-child(1) {
+			flex-grow: 2;
+			align-self: center;
+		}
+
+		> div:nth-child(2) {
+			flex-grow: 1;
+			text-align: right;
+		}
+	}
+
+	.emoji	{
+		font-size: 3rem;
+	}
+
+	.AppHero {
+		@extend %corners;
+		background-image: linear-gradient(141deg, #37985e, #53af87 71%, #5fbda4);
+		grid-column: 1 / span 2;
+		position: relative;
+		padding: 0;
+
+		.flex > div:first-of-type	{
+			padding: $gap-card*2 0 $gap-card*2 $gap-card;
+			flex-grow: 1;
+		}
+
+		.flex > div:last-child	{
+			align-self: flex-end;
+		}
+
+		h2, h3, a {
+			color: $c-lightest;
+		}
+
+		h2	{
+			margin: 0;
+		}
+
+		.heading	{
+			margin: 0 0 $gap-card/5;
+		}
+
+		h3	{
+			font-weight: 300;
+			font-size: 1rem;
+			margin: 0 0 $gap-card;
+		}
+
+		a {
+			text-decoration: underline;
+		}
+
+		img	{
+			display: block;
+			margin-right: $gap-card;
+		}
+	}
+
+	.PageHero {
+		margin-bottom: 30px;
+		background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(221deg, rgba(71, 224, 160, 0.9), rgba(0, 167, 97, 0.9), rgba(0, 151, 167, 0.9), rgba(0, 99, 167, 0.9), rgba(92, 0, 167, 0.9));
+		background-size: 1000% 1000%;
+		-webkit-animation: makerlog-2018 30s ease infinite;
+		animation: makerlog-2018 30s ease infinite;
+
+		@-webkit-keyframes makerlog-2018 {
+			0% {
+				background-position: 82% 0
+			}
+			50% {
+				background-position: 19% 100%
+			}
+			100% {
+				background-position: 82% 0
+			}
+		}
+		@-moz-keyframes makerlog-2018 {
+			0% {
+				background-position: 82% 0
+			}
+			50% {
+				background-position: 19% 100%
+			}
+			100% {
+				background-position: 82% 0
+			}
+		}
+		@keyframes makerlog-2018 {
+			0% {
+				background-position: 82% 0
+			}
+			50% {
+				background-position: 19% 100%
+			}
+			100% {
+				background-position: 82% 0
+			}
+		}
+	}
+
+	.MenubarCard {
+		background-image: url(/assets/img/mojave-night.jpg);
+		background-size: cover;
+		color: $c-lightest;
+		height: 100%;
+		display: flex;
+		align-items: center;
+
+		h2, h3 {
+			color: $c-lightest;
+		}
+	}
+
+	.GoogleAssistantCard {
+		background: $c-lightest;
+
+		h2, h3 {
+			color: #4885ed;
+		}
+	}
+
+	.MakerlogSearchCard {
+		background: $c-lightest;
+	}
+
+	.TodayForMakerlogCard {
+		background: $c-lightest;
+
+		img {
+			@extend %round;
+		}
+
+		h2, h3 {
+			color: #00b77a;
+		}
+	}
+}
+
+@media (max-width: $breakpoint-tablet) {
+	.grid-apps {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: $breakpoint-mobile) {
+	.grid-apps {
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	.AppHero {
+		grid-column: 1 / span 1;
+	}
+}
