@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {Button} from "../../../vendor/bulma";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Button } from "../../../vendor/bulma";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Spinner from "../../../components/Spinner";
 import orderBy from "lodash/orderBy";
 import debounce from "lodash/debounce";
@@ -33,7 +33,6 @@ class InfiniteSearch extends React.Component {
             items = [];
             ready = false;
         }
-        console.log(initial);
         this.setState({ loading: true, failed: false, items, ready });
         try {
             if (!initial && !this.state.next) {

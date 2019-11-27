@@ -23,6 +23,7 @@ import axios from "~/lib/axios";
 import DownPage from "~/layouts/DownPage";
 
 async function onStoreInit(ctx) {
+    // only the sagas here are run on the server side; no async dependencies.
     const { token } = parseCookies(ctx);
     ctx.store.dispatch(appActions.requestApiHealth());
     if (token && token !== "" && token !== "null") {

@@ -66,7 +66,6 @@ class Praisable extends React.Component {
         if (this.props.user.id === this.getUserObject().id) {
             return false;
         }
-        console.log(this.state.amount, this.getUserPraise(), this.state.total);
 
         if (
             this.getUserPraise() > this.maxPraise ||
@@ -219,7 +218,6 @@ class Praisable extends React.Component {
     );
 
     render() {
-        console.log(this.props);
         return (
             <>
                 {!this.props.button && <>{this.props.children} &nbsp;</>}{" "}

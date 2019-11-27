@@ -1,11 +1,12 @@
 import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Emoji from "../../../components/Emoji";
 import OutboundLink from "../../../components/OutboundLink";
+import config from "../../../config";
 
 const renderTweetButton = user => {
     const text = `I completed all my tasks on @getmakerlog! 💪 \n #TogetherWeMake`;
-    const url = `${process.env.REACT_APP_BASE_URL}/@${user.username}`;
+    const url = `${config.BASE_URL}/@${user.username}`;
 
     return (
         <OutboundLink

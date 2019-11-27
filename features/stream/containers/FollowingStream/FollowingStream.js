@@ -1,6 +1,6 @@
 import React from "react";
-import {connect} from "react-redux";
-import {actions as streamActions} from "~/ducks/stream";
+import { connect } from "react-redux";
+import { actions as streamActions } from "~/ducks/stream";
 import Stream from "../../components/Stream";
 
 class FollowingStream extends React.Component {
@@ -53,7 +53,6 @@ class FollowingStream extends React.Component {
 FollowingStream.propTypes = {};
 
 const mapStateToProps = state => {
-    console.info(state.stream.nextUrl);
     return {
         isNewUser: state.app.isNewUser,
         isFollowingFeed: state.stream.isFollowingFeed,
@@ -81,7 +80,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(FollowingStream);
+export default connect(mapStateToProps, mapDispatchToProps)(FollowingStream);

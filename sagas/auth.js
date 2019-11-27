@@ -1,10 +1,13 @@
-import { call, put, race, take, takeLatest } from "redux-saga/effects";
+import { call, put, race, take, takeLatest, select } from "redux-saga/effects";
 import { actions as authActions, types as authTypes } from "../ducks/auth";
 import { actions as userActions, types as userTypes } from "~/ducks/user";
 import axios from "~/lib/axios";
 import { getToken } from "~/lib/auth";
 import { setCookie } from "nookies";
 import { isServer } from "~/config";
+import { fetchUser } from "./user";
+
+const getUserState = state => state.user;
 
 function* fetchToken(action) {
     try {
@@ -19,29 +22,24 @@ function* fetchToken(action) {
         // mhm
         axios.defaults.headers.common["Authorization"] = `Token ${token}`;
 
-        yield put(userActions.loadUser());
+        yield* fetchUser(); // wait for saga
+        let userState = yield select(getUserState);
+        const error = userState.failed;
 
-        const { error } = yield race({
-            success: take(userTypes.USER_SUCCESS),
-            error: take(userTypes.USER_FAILED)
-        });
+        if (!error && userState.me) {
+            console.log(
+                `Makerlog: Request processed for ${userState.me.username}.`
+            );
+            yield put(authActions.loginSuccess(token));
 
-        if (error) {
-            console.log("!!!FETCH TOKEN RACE CONDITION!!!");
-            console.log("This was screwed with for the obj error warning.");
-            throw new Error("Race condition fetching user.");
+            if (!isServer) {
+                setCookie({}, "token", token);
+                //sync auth across windows
+                window.localStorage.setItem("authSync_login", Date.now());
+            }
         }
-
-        if (!isServer) {
-            setCookie({}, "token", token);
-            //sync auth across windows
-            window.localStorage.setItem("authSync_login", Date.now());
-        }
-
-        console.log("Makerlog: signedin");
-
-        yield put(authActions.loginSuccess(token));
     } catch (e) {
+        console.log(e);
         let action = null;
         action = authActions.loginFailed(e.message);
         yield put(action);

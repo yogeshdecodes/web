@@ -6,7 +6,6 @@ import { actions as tasksActions } from "~/ducks/tasks";
 
 const RehydrateToken = props => {
     if (props.token) {
-        console.log("Makerlog: Rehydrating auth token store...");
         axios.defaults.headers.common["Authorization"] = `Token ${props.token}`;
     } else {
         delete axios.defaults.headers.common["Authorization"];
@@ -31,7 +30,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(RehydrateToken);
+export default connect(mapStateToProps, mapDispatchToProps)(RehydrateToken);

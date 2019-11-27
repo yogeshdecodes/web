@@ -1,8 +1,6 @@
 import React from "react";
 
 function hasErrors(errorMessages, name) {
-    console.log(errorMessages);
-
     return (
         (errorMessages &&
             errorMessages.field_errors &&

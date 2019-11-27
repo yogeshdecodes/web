@@ -1,6 +1,5 @@
 import React from "react";
-import {withTheme} from "styled-components";
-import {Link} from "~/routes";
+import { Link } from "~/routes";
 import OutboundLink from "../../OutboundLink";
 
 const FooterCard = props => (
@@ -42,4 +41,4 @@ const FooterCard = props => (
     </ul>
 );
 
-export default withTheme(FooterCard);
+export default FooterCard;

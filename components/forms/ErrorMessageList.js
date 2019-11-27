@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Message} from "~/vendor/bulma";
+import { Message } from "~/vendor/bulma";
 
 const renderFieldErrors = fieldErrors => {
     console.log(fieldErrors);
@@ -41,23 +41,22 @@ const renderFieldErrors = fieldErrors => {
     return null;
 };
 
-const ErrorMessageList = ({ errorMessages, fieldErrors }) =>
-    console.log(errorMessages, fieldErrors) || (
-        <Message danger>
-            <Message.Body>
-                <ul>
-                    <b>
-                        {errorMessages &&
-                            errorMessages.map(message => (
-                                <li key={message}>{message}</li>
-                            ))}
-                    </b>
-                    {errorMessages && fieldErrors && <hr />}
-                    {fieldErrors && <div>{renderFieldErrors(fieldErrors)}</div>}
-                </ul>
-            </Message.Body>
-        </Message>
-    );
+const ErrorMessageList = ({ errorMessages, fieldErrors }) => (
+    <Message danger>
+        <Message.Body>
+            <ul>
+                <b>
+                    {errorMessages &&
+                        errorMessages.map(message => (
+                            <li key={message}>{message}</li>
+                        ))}
+                </b>
+                {errorMessages && fieldErrors && <hr />}
+                {fieldErrors && <div>{renderFieldErrors(fieldErrors)}</div>}
+            </ul>
+        </Message.Body>
+    </Message>
+);
 
 ErrorMessageList.propTypes = {
     errorMessages: PropTypes.array.isRequired

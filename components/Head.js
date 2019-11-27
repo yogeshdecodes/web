@@ -115,6 +115,10 @@ const Head = props => (
         <meta property="og:image" content={props.ogImage || defaultOGImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Poppins:700&amp;subset=latin-ext"
+            rel="stylesheet"
+        />
     </NextHead>
 );
 

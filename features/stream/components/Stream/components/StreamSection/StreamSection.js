@@ -18,7 +18,6 @@ class StreamSection extends React.Component {
                 />
 
                 {Object.keys(activity).map(key => {
-                    console.log(activity[key][0].id);
                     return (
                         <StreamCard
                             key={activity[key][0].id}

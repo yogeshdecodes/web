@@ -1,13 +1,14 @@
 import React from "react";
-import {Link} from "~/routes";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {actions as editorActions} from "../../../../ducks/editor";
-import {connect} from "react-redux";
+import { Link } from "~/routes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { actions as editorActions } from "../../../../ducks/editor";
+import { connect } from "react-redux";
 
-import {GlobalStream} from "~/features/stream";
+import { GlobalStream } from "~/features/stream";
 
 import styled from "styled-components";
 import OutboundLink from "../../../../components/OutboundLink";
+import config from "../../../../config";
 
 const mapDispatchToProps = dispatch => ({
     toggleEditor: () => dispatch(editorActions.toggleEditor())
@@ -76,7 +77,7 @@ const FirstTaskCard = styled.div`
 
 const renderTweetButton = user => {
     const text = `I just joined @GetMakerlog! 👋 \n #TogetherWeMake`;
-    const url = `${process.env.REACT_APP_BASE_URL}/@${user.username}`;
+    const url = `${config.BASE_URL}/@${user.username}`;
 
     return (
         <OutboundLink

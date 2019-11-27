@@ -1,16 +1,10 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { actions as userActions, types as userTypes } from "../ducks/user";
 import { me } from "~/lib/user";
-import ReactGA from "react-ga";
 
-function* fetchUser(action) {
+export function* fetchUser(action) {
     try {
         const user = yield call(me);
-
-        if (process.env.NODE_ENV === "production") {
-            ReactGA.set({ userId: user.id });
-        }
-
         yield put(userActions.userSuccess(user));
     } catch (e) {
         console.log(e);

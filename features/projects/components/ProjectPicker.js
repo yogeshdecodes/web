@@ -1,6 +1,6 @@
 import React from "react";
-import {getProjects} from "../../../lib/user";
-import {createProject} from "../../../lib/projects";
+import { getProjects } from "../../../lib/user";
+import { createProject } from "../../../lib/projects";
 import Spinner from "../../../components/Spinner";
 
 class ProjectPicker extends React.Component {
@@ -65,10 +65,6 @@ class ProjectPicker extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.selectedProjects !== this.state.selectedProjects) {
-            console.log([
-                ...this.state.selectedProjects,
-                ...this.state.otherProjectsToInject
-            ]);
             this.props.onProjectSelect([
                 ...this.state.selectedProjects,
                 ...this.state.otherProjectsToInject

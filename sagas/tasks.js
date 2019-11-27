@@ -12,6 +12,7 @@ import { actions as appActions } from "~/ducks/app";
 import { eventChannel } from "redux-saga";
 import RWS from "reconnecting-websocket/dist/reconnecting-websocket";
 import { actions as statsActions } from "../ducks/stats";
+import { socketUrl } from "../lib/utils/random";
 
 const getTasksState = state => state.tasks;
 
@@ -70,7 +71,7 @@ function* updateTask(action) {
 
 function getTasksSocketUrl(id) {
     let path = `/users/${id}/stream/`;
-    return `${process.env.REACT_APP_WS_URL}${path}`;
+    return socketUrl(path);
 }
 
 function* sendListener(socket) {

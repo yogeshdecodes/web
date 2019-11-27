@@ -1,8 +1,8 @@
 import Page from "layouts/Page";
 import React from "react";
-import {Redirect} from "~/routes";
+import { Redirect } from "~/routes";
 import axios from "~/lib/axios";
-import {axiosWrapper} from "../lib/utils/error";
+import { axiosWrapper } from "../lib/utils/error";
 
 class SingleItem extends React.Component {
     state = {
@@ -31,7 +31,6 @@ class SingleItem extends React.Component {
         });
         try {
             const item = await axiosWrapper(axios.get, this.props.url);
-            console.log(item);
             this.setState({ item: item.data, loading: false });
         } catch (e) {
             if (e.status_code && e.status_code === 404) {

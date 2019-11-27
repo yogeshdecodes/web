@@ -1,4 +1,4 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InfiniteScroll from "react-infinite-scroll-component";
 import PropTypes from "prop-types";
 import React from "react";
@@ -6,7 +6,7 @@ import ReconnectingWebSocket from "reconnecting-websocket";
 import Spinner from "~/components/Spinner";
 import axios from "~/lib/axios";
 import debounce from "lodash/debounce";
-import {socketUrl} from "../lib/utils/random";
+import { socketUrl } from "../lib/utils/random";
 import uniqBy from "lodash/uniqBy";
 
 class InfiniteResults extends React.Component {
@@ -85,7 +85,6 @@ class InfiniteResults extends React.Component {
             items = [];
             ready = false;
         }
-        console.log(initial);
         this.setState({ loading: true, failed: false, items, ready });
         try {
             if (!initial && !this.state.next) {

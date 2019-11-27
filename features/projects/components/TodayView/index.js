@@ -11,6 +11,7 @@ import OutboundLink from "~/components/OutboundLink";
 import { Tooltip } from "react-tippy";
 import { actions as editorActions } from "~/ducks/editor";
 import "./index.scss";
+import config from "../../../../config";
 
 const TodayPage = styled.div`
     min-height: ${props => (props.focusMode ? "100vh" : "calc(100vh - 120px)")};
@@ -59,7 +60,7 @@ class TodayView extends React.Component {
 
     renderTweetButton = () => {
         const text = `Today I completed ${this.props.doneToday} tasks on @getmakerlog! 💪 \n #TogetherWeMake`;
-        const url = `${process.env.REACT_APP_BASE_URL}/@${this.props.me.username}`;
+        const url = `${config.BASE_URL}/@${this.props.me.username}`;
 
         return (
             <OutboundLink
@@ -226,7 +227,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TodayView);
+export default connect(mapStateToProps, mapDispatchToProps)(TodayView);

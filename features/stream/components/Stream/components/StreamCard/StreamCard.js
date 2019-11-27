@@ -55,8 +55,6 @@ class StreamCard extends React.Component {
         let milestones = this.getMilestones();
         let user = this.getUser();
 
-        console.log("SC props", this.props);
-
         return (
             <div className={"card StreamCard"}>
                 <header>

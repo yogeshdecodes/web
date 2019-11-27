@@ -50,12 +50,12 @@ function* takeoff(action) {
 }
 
 function* checkHealth() {
-    console.log("Makerlog: Checking API health...");
     try {
         const health = yield call(checkApiHealth);
         if (health.healthy) {
             yield put(appActions.apiHealthy());
         } else {
+            console.log("Makerlog: API is unhealthy.");
             yield put(appActions.apiUnhealthy("API reports unhealthy state."));
         }
     } catch (e) {

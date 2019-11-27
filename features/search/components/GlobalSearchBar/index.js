@@ -1,12 +1,17 @@
 import "./index.scss";
-import {Link} from "~/routes";
-import {searchDiscussions, searchProducts, searchTasks, searchUsers} from "../../../../lib/search";
+import { Link } from "~/routes";
+import {
+    searchDiscussions,
+    searchProducts,
+    searchTasks,
+    searchUsers
+} from "../../../../lib/search";
 
 import Avatar from "../../../users/components/Avatar/Avatar";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {ProductList} from "~/features/products";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ProductList } from "~/features/products";
 import React from "react";
-import {Task} from "../../../stream";
+import { Task } from "../../../stream";
 import ThreadList from "../../../discussions/ThreadList";
 import UserMediaList from "../../../users/components/UserMediaList/UserMediaList";
 import debounce from "lodash/debounce";
@@ -48,7 +53,6 @@ class GlobalSearchBar extends React.Component {
     };
 
     override = e => {
-        console.log(e.target);
         if (e.target.matches("#results")) {
             this.toggle();
         } else {

@@ -15,7 +15,7 @@ const bindMiddleware = middleware => {
     return applyMiddleware(...middleware);
 };
 
-function configureStore(initialState = {}) {
+function configureStore(initialState = {}, { isServer, req = null }) {
     let store;
     const sagaMiddleware = createSagaMiddleware();
 
@@ -37,7 +37,9 @@ function configureStore(initialState = {}) {
         );
     }
 
-    store.sagaTask = sagaMiddleware.run(rootSaga);
+    if (req || !isServer) {
+        store.sagaTask = sagaMiddleware.run(rootSaga);
+    }
 
     return store;
 }

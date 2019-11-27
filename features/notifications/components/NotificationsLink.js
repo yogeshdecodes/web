@@ -9,15 +9,10 @@ import Router from "next/router";
 
 class NotificationsLink extends React.Component {
     state = {
-        unreadCount: 0,
-        initialTitle: null
+        unreadCount: 0
     };
 
     async componentDidMount() {
-        if (!this.state.initialTitle) {
-            this.setInitialTitle();
-        }
-
         if (this.props.token) {
             this.connect();
         }
@@ -26,12 +21,10 @@ class NotificationsLink extends React.Component {
     }
 
     forceTitleRefresh = () => {
-        alert("test");
-        this.setInitialTitle(() => this.setCount(this.state.unreadCount, true));
-    };
-
-    setInitialTitle = (callback = () => {}) => {
-        this.setState({ initialTitle: document.title }, callback);
+        // https://github.com/zeit/next.js/issues/6025
+        setTimeout(() => {
+            this.setCount(this.state.unreadCount, true);
+        }, 0);
     };
 
     componentWillUnmount() {
@@ -83,11 +76,15 @@ class NotificationsLink extends React.Component {
     };
 
     setCount = (count, force = false) => {
+        let initialTitle = document.title
+            .substring(document.title.indexOf(")") + 1)
+            .trim();
         if (count !== this.state.unreadCount || force) {
             if (count > 0) {
-                document.title = `(${count}) ${this.state.initialTitle}`;
+                // remove any previous parentheses. still a hack.
+                document.title = `(${count}) ${initialTitle}`;
             } else {
-                document.title = this.state.initialTitle;
+                document.title = initialTitle;
             }
             this.setState({
                 unreadCount: count

@@ -19,6 +19,7 @@ import RWS from "reconnecting-websocket";
 import { fetchNextUrl } from "../lib/tasks";
 import pickBy from "lodash/pickBy";
 import { getTimezone } from "../lib/utils/timezone";
+import { socketUrl } from "../lib/utils/random";
 
 export const getStreamState = state => state.stream;
 export const getUserState = state => state.user;
@@ -92,7 +93,7 @@ function getStreamSocketUrl(following, token = null) {
     if (following) {
         path = `/stream/?token=${token}&timezone=${getTimezone()}`;
     }
-    return `${process.env.REACT_APP_WS_URL}${path}`;
+    return socketUrl(path);
 }
 
 function getLastUpdatedTime(streamState) {
@@ -204,7 +205,6 @@ function listen(socket, user) {
 
                 case "milestone.created":
                 case "milestone.updated":
-                    console.log("received event");
                     emit(streamActions.mergeMilestones([data.payload]));
                     break;
 
