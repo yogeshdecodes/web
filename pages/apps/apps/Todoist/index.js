@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "vendor/bulma";
-import { mapDispatchToProps, mapStateToProps } from "ducks/apps";
-import Spinner from "components/Spinner";
-import { getProjects } from "lib/user";
-import InstallCard from "../../../TasksPage/screens/AppsTab/components/InstallCard";
+import { Button } from "~/vendor/bulma";
+import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
+import Spinner from "~/components/Spinner";
+import { getProjects } from "~/lib/user";
+import InstallCard from "../../components/InstallCard";
 import {
     deleteLink,
     getInstallUrl,
@@ -13,11 +13,11 @@ import {
     installApp,
     linkProjects,
     uninstallApp
-} from "../../../../lib/integrations/todoist";
-import { errorArray } from "../../../../lib/utils/error";
-import ErrorMessageList from "../../../../components/forms/ErrorMessageList";
+} from "~/lib/integrations/todoist";
+import { errorArray } from "~/lib/utils/error";
+import ErrorMessageList from "~/components/forms/ErrorMessageList";
 
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class TodoistProjectLinker extends React.Component {
     state = {
@@ -287,8 +287,8 @@ class Todoist extends React.Component {
     }
 
     async componentWillMount() {
-        const params = new URLSearchParams(this.props.location.search);
-        const code = params.get("code");
+        const params = this.props.query;
+        const code = params.code;
         if (code) {
             this.setState({ installing: true });
             try {
@@ -413,7 +413,4 @@ class Todoist extends React.Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Todoist);
+export default connect(mapStateToProps, mapDispatchToProps)(Todoist);

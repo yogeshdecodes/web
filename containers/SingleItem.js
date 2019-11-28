@@ -1,8 +1,8 @@
-import Page from "layouts/Page";
 import React from "react";
-import { Redirect } from "~/routes";
 import axios from "~/lib/axios";
-import { axiosWrapper } from "../lib/utils/error";
+import { axiosWrapper } from "~/lib/utils/error";
+import { Router } from "~/routes";
+import Spinner from "~/components/Spinner";
 
 class SingleItem extends React.Component {
     state = {
@@ -47,11 +47,11 @@ class SingleItem extends React.Component {
         const Component = this.props.component;
 
         if (this.state.notFound) {
-            return <Redirect to="/404" />;
+            Router.pushRoute("/404");
         }
 
         if (this.state.loading) {
-            return <Page loading={true} />;
+            return <Spinner />;
         }
 
         if (this.state.failed) {

@@ -1,14 +1,14 @@
 import "./index.scss";
 
-import React, {Component} from "react";
-import {format, toDate} from "date-fns-tz";
-import {hasClosed, hasEnded, isOcurring} from "~/lib/utils/events";
+import React, { Component } from "react";
+import { format, toDate } from "date-fns-tz";
+import { hasClosed, hasEnded, isOcurring } from "~/lib/utils/events";
 
 import DueCountdown from "~/components/DueCountdown";
 import Emoji from "~/components/Emoji";
 import EventFaces from "../EventFaces";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Link} from "~/routes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "~/routes";
 
 function getCss(event) {
     if (event.header) {
@@ -78,7 +78,7 @@ const EventToolbar = ({ event }) => {
                                 <FontAwesomeIcon color="gray" icon="clock" />{" "}
                                 {format(
                                     toDate(event.starts_at),
-                                    "MMMM d, YYYY h:m",
+                                    "MMMM d, yyyy h:m",
                                     { awareOfUnicodeTokens: true }
                                 ).toString()}{" "}
                                 UTC

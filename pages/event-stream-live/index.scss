@@ -1,0 +1,15 @@
+@import "../../styles/_variables";
+
+.LiveLogo {
+    a {
+        @extend %poppins;
+        position: fixed;
+        color: #3fdb96;
+        font-size: 20px;
+
+        width: 100%;
+
+        top: 20px;
+        left: 20px;
+    }
+}

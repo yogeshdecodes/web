@@ -9,7 +9,9 @@ import debounce from "lodash/debounce";
 import axios from "~/lib/axios";
 
 class InfiniteSearch extends React.Component {
-    state = {
+    _isMounted = false;
+
+    initialState = {
         ready: false,
         loading: false,
         hasMore: true,
@@ -18,12 +20,28 @@ class InfiniteSearch extends React.Component {
         failed: false
     };
 
+    constructor(props) {
+        super(props);
+        this.state = this.initialState;
+    }
+
     componentDidMount() {
         this.loadMore(true);
+        this._isMounted = true;
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.query !== this.props.query) this.loadMore(true);
+        if (prevProps.searchFunc !== this.props.searchFunc) {
+            if (!this._isMounted) return;
+            this.setState(this.initialState, () => {
+                this.loadMore(true);
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     loadMore = debounce(async (initial = false) => {
@@ -33,6 +51,7 @@ class InfiniteSearch extends React.Component {
             items = [];
             ready = false;
         }
+        if (!this._isMounted) return;
         this.setState({ loading: true, failed: false, items, ready });
         try {
             if (!initial && !this.state.next) {
@@ -45,6 +64,7 @@ class InfiniteSearch extends React.Component {
             } else {
                 result = await this.props.searchFunc(this.props.query);
             }
+            if (!this._isMounted) return;
             this.setState({
                 ready: true,
                 loading: false,

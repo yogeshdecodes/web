@@ -1,11 +1,7 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
 import { connect } from "react-redux";
-import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
-import { mapDispatchToProps as mapUserToProps } from "~/ducks/user";
-import Emoji from "components/Emoji";
-import AppList from "./components/AppList";
+import { actions as appActions, mapStateToProps } from "~/ducks/apps";
+import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import GitHub from "./apps/GitHub";
 import Slack from "./apps/Slack";
 import Trello from "./apps/Trello";
@@ -16,195 +12,49 @@ import Todoist from "./apps/Todoist";
 import Shipstreams from "./apps/Shipstreams";
 import Telegram from "./apps/Telegram";
 import "./index.scss";
+import Shop from "./components/Shop";
 import { requireAuthed } from "~/lib/auth";
 
-const PageHero = styled.div`
-    background-color: ${props => props.theme.primaryDarker} !important;
-`;
-
-const Shop = props => {
-    return (
-        <div className={"AppsPage"}>
-            <PageHero className={"hero dark PageHero"}>
-                <div className={"container"}>
-                    <div>
-                        <h2>Apps for Makerlog</h2>
-                        <h3>
-                            Integrations, apps, community creations, and more!
-                        </h3>
-                    </div>
-                </div>
-            </PageHero>
-
-            <section className={"container grid-apps"}>
-                <div className={"AppHero"}>
-                    <div className={"flex"}>
-                        <div>
-                            <h3 className={"heading"}>
-                                <FontAwesomeIcon icon={["far", "star"]} />{" "}
-                                Featured app
-                            </h3>
-                            <h2>Logger for Makerlog</h2>
-                            <h3>
-                                The unofficial Makerlog client for Android, by
-                                maker{" "}
-                                <Link
-                                    route="profile-page"
-                                    params={{ username: "arnav" }}
-                                >
-                                    <a>Arnav Puri</a>
-                                </Link>
-                                .
-                            </h3>
-                            <div>
-                                <a href="https://play.google.com/store/apps/details?id=com.brownfingers.getmakerlog">
-                                    <img
-                                        alt={"Play Store"}
-                                        style={{ height: 40 }}
-                                        src="/assets/img/play-store.png"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                        <div>
-                            <img
-                                className="is-hidden-mobile"
-                                style={{ height: 200 }}
-                                alt="app screenshot"
-                                src="/assets/img/makerlog-app.png"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div className={"card MenubarCard"}>
-                    <div className={"card-content"}>
-                        <h2 className="has-text-white">Makerlog Menubar</h2>
-                        <h3 className="has-text-white">
-                            A super fast menubar app for macOS.
-                        </h3>
-                        <a
-                            href="https://menubar.getmakerlog.com/"
-                            className="btn-light"
-                        >
-                            Get it now
-                        </a>
-                    </div>
-                </div>
-
-                <div className="card GoogleAssistantCard">
-                    <div className={"card-content flex"}>
-                        <div>
-                            <h2>Makerlog for Google Assistant</h2>
-                            <h3>Productivity right from your assistant.</h3>
-                            <a
-                                href="https://assistant.getmakerlog.com/"
-                                className="btn-light"
-                            >
-                                Get it now
-                            </a>
-                        </div>
-                        <div>
-                            <img
-                                src={"/assets/img/google-assistant.png"}
-                                width={80}
-                                alt={"Google Assistant"}
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="card TodayForMakerlogCard">
-                    <div className={"card-content flex"}>
-                        <div>
-                            <h2>Today for Makerlog</h2>
-                            <h3>A simple task manager for Makerlog.</h3>
-                            <a
-                                href="https://today.jipfr.nl/"
-                                className="btn-light"
-                            >
-                                Get it now
-                            </a>
-                        </div>
-                        <div>
-                            <img
-                                src={
-                                    "https://today.jipfr.nl/apple-touch-icon.png"
-                                }
-                                width={80}
-                                alt={"Today logo"}
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="card MakerlogSearchCard">
-                    <div className={"card-content flex"}>
-                        <div>
-                            <h2>Makerlog CLI</h2>
-                            <h3>Log straight from Terminal. It's seamless.</h3>
-                            <a
-                                href="https://github.com/MihaiVoinea/makerlog-cli/"
-                                className="btn-light"
-                            >
-                                Get it now
-                            </a>
-                        </div>
-                        <div>
-                            <Emoji emoji={"🖥"} />
-                        </div>
-                    </div>
-                </div>
-
-                {
-                    // Begin official integrations
-                }
-
-                <AppList />
-            </section>
-        </div>
-    );
-};
-
 class AppsPage extends React.Component {
-    static async getInitialProps({ query }) {
+    static async getInitialProps({ query, ...ctx }) {
+        ctx.store.dispatch(appActions.fetchApps());
+
         return {
-            view: query.view ? query.view : null
+            app: query.app ? query.app : null,
+            query
         };
     }
 
-    componentDidMount() {
-        this.props.fetchApps();
-    }
-
     render() {
-        switch (this.props.view) {
+        const { app, query } = this.props;
+
+        switch (app) {
             case "slack":
-                return <Slack />;
+                return <Slack query={query} />;
 
             case "trello":
-                return <Trello />;
+                return <Trello query={query} />;
 
             case "github":
-                return <GitHub />;
+                return <GitHub query={query} />;
 
             case "gitlab":
-                return <GitLab />;
+                return <GitLab query={query} />;
 
             case "webhooks":
-                return <Webhooks />;
+                return <Webhooks query={query} />;
 
             case "nodehost":
-                return <NodeHost />;
+                return <NodeHost query={query} />;
 
             case "todoist":
-                return <Todoist />;
+                return <Todoist query={query} />;
 
             case "shipstreams":
-                return <Shipstreams />;
+                return <Shipstreams query={query} />;
 
             case "telegram":
-                return <Telegram />;
+                return <Telegram query={query} />;
 
             default:
                 return <Shop />;
@@ -213,8 +63,7 @@ class AppsPage extends React.Component {
 }
 
 // TODO: make /apps page unauthed, individual views authed
-export default requireAuthed(
-    connect(state => {
-        return { ...mapStateToProps(state), ...mapUserToProps(state) };
-    }, mapDispatchToProps)(AppsPage)
-);
+const passCombinedState = state => {
+    return { ...mapStateToProps(state), ...mapUserToProps(state) };
+};
+export default connect(passCombinedState)(requireAuthed(AppsPage));

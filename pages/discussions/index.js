@@ -312,7 +312,7 @@ const Thread = connect(mapUserToProps)(
         };
 
         async componentDidUpdate(prevProps) {
-            if (this.props.thread !== prevProps.thread) {
+            if (this.props.thread.slug !== prevProps.thread.slug) {
                 this.setState({
                     body: this.props.thread.body
                 });
@@ -953,7 +953,18 @@ class Discussion extends React.Component {
     };
 
     render() {
-        if (this.state.isLoading) {
+        const thread = this.state.thread
+            ? this.state.thread
+            : this.props.thread;
+
+        const replies = this.state.replies
+            ? this.state.replies
+            : this.props.replies;
+
+        if (
+            this.state.isLoading ||
+            (!this.state.thread && !this.props.thread && !this.state.failed)
+        ) {
             return (
                 <div className="center">
                     <Spinner text={"Loading discussion..."} />
@@ -961,25 +972,22 @@ class Discussion extends React.Component {
             );
         }
 
-        if (
-            this.state.failed ||
-            (!this.state.isLoading && !this.state.thread)
-        ) {
+        if (this.state.failed) {
             return <div>Failed to load thread.</div>;
         }
 
         return (
             <div>
                 <Head
-                    title={`${this.state.thread.title} | Makerlog`}
-                    description={truncate(this.state.thread.body, 10, "...")}
-                    ogImage={this.state.thread.owner.avatar || null}
+                    title={`${thread.title} | Makerlog`}
+                    description={truncate(thread.body, 10, "...")}
+                    ogImage={thread.owner.avatar || null}
                 />
 
                 <Thread
-                    thread={this.state.thread}
+                    thread={thread}
                     showActions={false}
-                    replies={this.state.replies}
+                    replies={replies}
                     onCreateReply={this.onCreateReply}
                 />
             </div>

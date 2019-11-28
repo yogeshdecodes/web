@@ -166,7 +166,7 @@ class GlobalSearchBar extends React.Component {
                                         <Link
                                             route="search"
                                             params={{
-                                                type: "products",
+                                                view: "products",
                                                 query: this.state.query
                                             }}
                                         >
@@ -197,7 +197,7 @@ class GlobalSearchBar extends React.Component {
                                         <Link
                                             route="search"
                                             params={{
-                                                type: "makers",
+                                                view: "makers",
                                                 query: this.state.query
                                             }}
                                         >
@@ -237,7 +237,7 @@ class GlobalSearchBar extends React.Component {
                                         <Link
                                             route="search"
                                             params={{
-                                                type: "tasks",
+                                                view: "tasks",
                                                 query: this.state.query
                                             }}
                                         >
@@ -265,7 +265,7 @@ class GlobalSearchBar extends React.Component {
                                         <Link
                                             route="search"
                                             params={{
-                                                type: "discussions",
+                                                view: "discussions",
                                                 query: this.state.query
                                             }}
                                         >

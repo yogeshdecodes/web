@@ -6,10 +6,10 @@ import Streak from "../../../../components/Streak";
 import "./UserMedia.scss";
 import Emoji from "~/components/Emoji";
 import Avatar from "../Avatar";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProfileModalAction from "../../containers/ProfileModalAction";
 import MakerScore from "../../../../components/MakerScore";
-import {Link} from "~/routes";
+import { Link } from "~/routes";
 
 const Badge = props => (
     <span
@@ -102,7 +102,10 @@ class UserMedia extends React.Component {
         if (this.props.large) {
             return (
                 <div style={this.props.style}>
-                    <ProfileModalAction user={this.props.user}>
+                    <Link
+                        route="profile-page"
+                        params={{ username: user.username }}
+                    >
                         <div className={"card"}>
                             <div className={"card-content"}>
                                 <div className={"flex"}>
@@ -130,7 +133,7 @@ class UserMedia extends React.Component {
                                 <StatBar user={this.props.user} />
                             </footer>
                         </div>
-                    </ProfileModalAction>
+                    </Link>
                 </div>
             );
         }

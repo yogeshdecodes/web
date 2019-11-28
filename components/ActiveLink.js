@@ -1,7 +1,7 @@
-import React, {Children} from "react";
-import routes, {Link} from "~/routes";
+import React, { Children } from "react";
+import routes, { Link } from "~/routes";
 
-import {withRouter} from "next/router";
+import { withRouter } from "next/router";
 
 const ActiveLink = ({ router, children, ...props }) => {
     const child = Children.only(children);

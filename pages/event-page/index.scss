@@ -1,0 +1,287 @@
+.EventPage {
+    //overflow-x: hidden;
+    min-height: 100vh;
+
+    &.hackathon {
+        background: #edf0f1 !important;
+    }
+
+    .event-panel {
+        padding-left: 2.5vw !important;
+        padding-right: 2.5vw !important;
+        padding-top: 70px !important;
+        padding-bottom: 70px !important;
+    }
+
+    .event-hero {
+        font-size: 22px;
+        line-height: 29px;
+
+        h1 {
+            font-size: 50px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+                sans-serif;
+        }
+
+        h1 {
+            line-height: 69px;
+            color: #fff;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 29px;
+            margin-bottom: 20px;
+        }
+
+        h2,
+        h3 {
+            font-size: 30px;
+            line-height: 43px;
+            color: #222;
+        }
+    }
+
+    .grid-event {
+        display: grid;
+        grid-template-columns: 56vw 44vw;
+        justify-content: center;
+        align-items: stretch;
+        min-height: 100vh;
+        width: 100vw;
+        color: #727272;
+
+        > div {
+            display: grid;
+            justify-content: stretch;
+            width: 100%;
+            align-items: center;
+            padding: 5vw;
+            position: relative;
+            z-index: 3;
+
+            > div {
+            }
+
+            &:first-of-type {
+                background-size: cover;
+                color: #f9f9f9;
+            }
+
+            .markdown.content {
+                padding-top: 60px;
+            }
+
+            &:nth-of-type(2) {
+                max-height: 100vh;
+                background: #edf0f1;
+                color: #333;
+                justify-self: start;
+                overflow-y: auto;
+
+                > div {
+                    align-self: center;
+                }
+
+                .event-side,
+                .container-event-header {
+                    p {
+                        font-weight: bold;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 6px 0;
+                        font-size: 20px;
+
+                        svg {
+                            fill: #51b47f;
+                            width: 24px;
+                            height: 24px;
+                            margin-right: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .btn-event {
+        background: #00bc7b;
+        border-radius: 30px;
+        padding: 11px 26px 13px 22px;
+        color: #fff;
+        border: 0;
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 1.6rem;
+            height: 1.6rem;
+            fill: #fff;
+            margin-right: 10px;
+        }
+
+        &.small {
+            padding: 8px 16px 9px;
+            font-size: 18px;
+        }
+
+        &.prev {
+            background: #fff;
+            color: #999;
+            font-size: 17px;
+
+            &:before {
+                content: "\2190";
+                padding-right: 5px;
+            }
+        }
+    }
+
+    .event-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: hsla(0, 0%, 7%, 0.822);
+        z-index: -1;
+    }
+
+    .already-joined {
+        display: flex;
+        font-size: 16px;
+        line-height: 22px;
+        margin-top: 60px;
+        align-items: center;
+
+        ul {
+            padding: 0 30px 0 0 !important;
+            margin: 0;
+            list-style-type: none;
+
+            img {
+                border: 0 !important;
+            }
+        }
+
+        div.joined-text {
+            margin-left: 10px;
+            font-size: 15px;
+        }
+    }
+
+    .shipping-now {
+        background: #ececec;
+        position: fixed;
+        bottom: 0;
+        left: 56vw;
+        width: 44vw;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        max-width: none !important;
+        font-size: 18px;
+
+        div {
+            flex-grow: 1;
+        }
+    }
+
+    .event-header {
+        .container-event-header {
+            width: 100%;
+            max-width: 1344px;
+            margin: 0 auto;
+        }
+
+        background-size: cover;
+        color: #f9f9f9;
+        position: relative;
+        z-index: 3;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+
+        h1 {
+            font-size: 48px;
+            line-height: 57px;
+            color: #fff;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            margin: 10px 0 20px;
+            font-size: 20px;
+        }
+
+        .already-joined {
+            margin-top: 0px !important;
+
+            .button {
+                margin-right: 30px !important;
+            }
+        }
+    }
+
+    .container-event {
+        padding: 60px 0;
+    }
+
+    .event-fullpage {
+        background-size: cover;
+        color: #f9f9f9;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 3;
+        text-align: center;
+
+        h1 {
+            font-size: 48px;
+            line-height: 57px;
+            color: #fff;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            margin: 10px 0 20px;
+        }
+
+        .event-buttons {
+            display: inline-grid;
+            grid-template-columns: auto auto auto;
+            grid-column-gap: 14px;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .grid-event {
+        grid-template-columns: repeat(1, 100%) !important;
+    }
+}
+
+.JoinModal {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    hr {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { actions as appActions } from "~/ducks/app";
 import { socketUrl } from "../../../lib/utils/random";
 import ReconnectingWebSocket from "reconnecting-websocket/dist/reconnecting-websocket";
-import Router from "next/router";
+import Router from "next/router"; // yes this is correct
 
 class NotificationsLink extends React.Component {
     state = {
@@ -22,12 +22,15 @@ class NotificationsLink extends React.Component {
 
     forceTitleRefresh = () => {
         // https://github.com/zeit/next.js/issues/6025
-        setTimeout(() => {
+        this.timeout = setTimeout(() => {
             this.setCount(this.state.unreadCount, true);
         }, 0);
     };
 
     componentWillUnmount() {
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+        }
         this.disconnect();
         Router.events.off("routeChangeComplete", this.forceTitleRefresh);
     }

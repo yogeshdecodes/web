@@ -12,6 +12,7 @@ import { appsReducer } from "./apps";
 import { appReducer } from "./app";
 import { projectsReducer } from "./projects";
 import { isServer } from "~/config";
+import { purgeStoredState } from "redux-persist";
 
 /*
 
@@ -76,7 +77,7 @@ export default (state, action) => {
             window.localStorage.setItem("authSync_logout", Date.now());
             // 2. flush storage
             if (storage) {
-                storage.purge();
+                purgeStoredState();
             }
             // 3. reload
             window.location.reload();

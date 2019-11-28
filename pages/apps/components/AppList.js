@@ -1,19 +1,21 @@
 import React from "react";
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { LoggedOutOnly, withCurrentUser } from "features/users";
+import LoggedOutOnly from "~/features/users/containers/LoggedOutOnly";
 import { connect } from "react-redux";
-import { mapStateToProps, mapDispatchToProps } from "ducks/apps";
+import { mapStateToProps, mapDispatchToProps } from "~/ducks/apps";
+import { mapStateToProps as mapUserToProps } from "~/ducks/user";
+import { Link } from "~/routes";
 import "./AppsList.scss";
 
 const SignedInSection = styled.div`
     opacity: ${props => (props.isLoggedIn ? "1" : "0.3")};
 `;
 
-const InstallButton = ({ to, installed }) => (
+const InstallButton = ({ app, installed }) => (
     <Link
-        to={to}
+        route={"apps"}
+        params={{ app }}
         className={"btn-light" + (installed ? " btn-light transparent" : "")}
     >
         {installed ? "Settings" : "Install"}
@@ -29,8 +31,8 @@ const AppList = props => {
                         <h2 className={"has-text-grey"}>
                             You must be signed in to use the following apps.
                         </h2>
-                        <Link to={"/begin"} className={"btn-primary"}>
-                            Get started
+                        <Link route={"begin"}>
+                            <a className={"btn-primary"}>Get started</a>
                         </Link>
                     </div>
                 </div>
@@ -47,7 +49,7 @@ const AppList = props => {
                                 <h2>Todoist</h2>
                                 <h3>Log done tasks straight from Todoist.</h3>
                                 <InstallButton
-                                    to={"/apps/todoist"}
+                                    app="todoist"
                                     installed={
                                         props.apps && props.apps["todoist"]
                                             ? props.apps["todoist"].installed
@@ -75,7 +77,7 @@ const AppList = props => {
                                     Log tasks and see your stats with Makebot.
                                 </h3>
                                 <InstallButton
-                                    to={"/apps/slack"}
+                                    app="slack"
                                     installed={
                                         props.apps && props.apps["slack"]
                                             ? props.apps["slack"].installed
@@ -101,7 +103,7 @@ const AppList = props => {
                                 <h2>Trello</h2>
                                 <h3>Log tasks from your Trello boards.</h3>
                                 <InstallButton
-                                    to={"/apps/trello"}
+                                    app="trello"
                                     installed={
                                         props.apps && props.apps["trello"]
                                             ? props.apps["trello"].installed
@@ -129,7 +131,7 @@ const AppList = props => {
                                     Log your daily commit counts from GitHub.
                                 </h3>
                                 <InstallButton
-                                    to={"/apps/github"}
+                                    app="github"
                                     installed={
                                         props.apps && props.apps["github"]
                                             ? props.apps["github"].installed
@@ -157,7 +159,7 @@ const AppList = props => {
                                     Log your daily commit counts from GitLab.
                                 </h3>
                                 <InstallButton
-                                    to={"/apps/gitlab"}
+                                    app="gitlab"
                                     installed={
                                         props.apps && props.apps["gitlab"]
                                             ? props.apps["gitlab"].installed
@@ -183,7 +185,7 @@ const AppList = props => {
                                 <h2>NodeHost</h2>
                                 <h3>Auto post tasks from NodeHost.</h3>
                                 <InstallButton
-                                    to={"/apps/nodehost"}
+                                    app="nodehost"
                                     installed={
                                         props.apps && props.apps["nodehost"]
                                             ? props.apps["nodehost"].installed
@@ -212,7 +214,7 @@ const AppList = props => {
                                     Makerlog truly yours.
                                 </h3>
                                 <InstallButton
-                                    to={"/apps/webhooks"}
+                                    app="webhooks"
                                     installed={
                                         props.apps && props.apps["webhooks"]
                                             ? props.apps["webhooks"].installed
@@ -241,7 +243,7 @@ const AppList = props => {
                                     streams!
                                 </h3>
                                 <InstallButton
-                                    to={"/apps/shipstreams"}
+                                    app="shipstreams"
                                     installed={
                                         props.apps && props.apps["shipstreams"]
                                             ? props.apps["shipstreams"]
@@ -268,7 +270,7 @@ const AppList = props => {
                                 <h2>Telegram</h2>
                                 <h3>The official Makerlog bot & community</h3>
                                 <InstallButton
-                                    to={"/apps/telegram"}
+                                    app="telegram"
                                     installed={
                                         props.apps && props.apps["telegram"]
                                             ? props.apps["telegram"].installed
@@ -291,7 +293,6 @@ const AppList = props => {
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withCurrentUser(AppList));
+export default connect(state => {
+    return { ...mapStateToProps(state), ...mapUserToProps(state) };
+}, mapDispatchToProps)(AppList);

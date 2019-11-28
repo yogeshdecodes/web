@@ -9,6 +9,7 @@ import { incrementPraise } from "../../../../../../lib/praise";
 import styled from "styled-components";
 import { Redirect } from "~/routes";
 import { connect } from "react-redux";
+import { isServer } from "~/config";
 
 const PraiseButton = styled.button``;
 
@@ -157,6 +158,7 @@ class Praisable extends React.Component {
     };
 
     shouldAlwaysShowButton = () => {
+        if (isServer) return true;
         return window.matchMedia("only screen and (max-width: 760px)").matches;
     };
 

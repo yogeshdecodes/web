@@ -13,6 +13,10 @@
                 "loose": true
             }
         ],
-        ["babel-plugin-root-import"]
+        ["babel-plugin-root-import"],
+        [
+            "styled-components",
+            { "ssr": true, "displayName": true, "preprocess": false }
+        ]
     ]
 }

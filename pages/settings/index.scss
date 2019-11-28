@@ -1,0 +1,88 @@
+@import "../../styles/_variables";
+
+.SettingsPage {
+    h2 {
+        @extend %poppins;
+        font-size: 1.6rem;
+        margin: 0 0 $gap;
+    }
+
+    section.settings-header {
+        border-bottom: 1px solid $c-bg-light;
+        padding-bottom: 10px;
+        margin-bottom: $gap;
+
+        h2,
+        p.note {
+            margin: 0;
+        }
+    }
+
+    button[disabled] {
+        border-radius: $rounded-corner 0 0 $rounded-corner;
+        border-color: $c-border;
+        height: 90%;
+
+        svg {
+            margin-right: 0;
+        }
+    }
+
+    .has-addons {
+        input[type="text"] {
+            height: 90%;
+        }
+    }
+
+    .help {
+        display: block;
+        font-size: 0.75rem;
+        margin: 0 0 1rem;
+    }
+
+    .SidebarMenu button {
+        @extend %transition-bg;
+        @extend %corners;
+        background: transparent;
+        width: 100%;
+        border: 0;
+        outline: none;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        text-align: left;
+        padding: 0.813rem;
+        font-size: 1.1rem;
+        margin-bottom: 2px;
+        cursor: pointer;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            color: $c-lightest;
+        }
+
+        > .menu-icon {
+            flex: 1;
+            margin-right: 5px;
+        }
+
+        > span {
+            flex: 6;
+        }
+    }
+
+    .is-gold {
+        background-color: #e5c100 !important;
+        color: #fff;
+    }
+
+    .GoldSettings.disabled {
+        pointer-events: none;
+        position: relative;
+        margin-top: 30px;
+        opacity: 0.5;
+    }
+}

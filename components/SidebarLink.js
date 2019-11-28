@@ -10,7 +10,7 @@ const SidebarLink = styled.button`
     text-align: left;
     padding: 13px;
     font-size: 18px;
-    color: ${props => (props.active ? props.theme.primaryDarker : "gray")};
+    color: ${props => (props.active ? "#1ca96e" : "gray")};
     font-weight: ${props => (props.active ? "bold" : "normal")};
     transition: background-color 0.3s ease;
     border-radius: 5px;
@@ -21,9 +21,14 @@ const SidebarLink = styled.button`
         "Helvetica Neue", sans-serif;
     align-items: center;
 
+    &.active {
+        color: #1ca96e;
+        font-weight: bold;
+    }
+
     &:hover {
         color: white;
-        background-color: ${props => props.theme.primaryDarker} !important;
+        background-color: #1ca96e !important;
     }
 
     &:last-child {

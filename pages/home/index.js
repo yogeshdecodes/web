@@ -1,10 +1,11 @@
 import React from "react";
-import {Link} from "~/routes";
-import {GlobalStream} from "~/features/stream";
+import { Link } from "~/routes";
+import { GlobalStream } from "~/features/stream";
 import Sidebar from "./Sidebar";
 import "./index.scss";
+import { requireUnauthed } from "~/lib/auth";
 
-export default () => (
+export default requireUnauthed(() => (
     <div>
         <div className={"hero"}>
             <div className="ThumbnailCover" />
@@ -31,4 +32,4 @@ export default () => (
             </div>
         </section>
     </div>
-);
+));

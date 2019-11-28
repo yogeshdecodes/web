@@ -1,0 +1,17 @@
+.StreakPage {
+    background: rgb(103, 178, 111);
+    background: linear-gradient(
+        63deg,
+        rgba(103, 178, 111, 1) 0%,
+        rgba(17, 153, 142, 1) 100%
+    );
+    padding-bottom: 30px;
+}
+
+.StreakPage > .container {
+    margin-top: 90px;
+}
+
+.StreakPage .card {
+    margin-top: 60px;
+}
