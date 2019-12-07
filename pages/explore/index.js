@@ -1,6 +1,6 @@
-import AllProductsTab from "./components/AllProductsTab";
-import Navigation from "./components/Navigation";
-import PopularTab from "./components/PopularTab";
+import AllProductsTab from "../../features/discovery/components/AllProductsTab";
+import Navigation from "../../features/discovery/components/Navigation";
+import PopularTab from "../../features/discovery/components/PopularTab";
 import React from "react";
 import { getWorldStats } from "~/lib/stats";
 import "./index.scss";

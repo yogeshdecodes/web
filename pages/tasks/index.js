@@ -1,5 +1,5 @@
 import React from "react";
-import Navigation from "./components/Navigation";
+import Navigation from "../../features/tasks/components/Navigation";
 import { connect } from "react-redux";
 import { actions as tasksActions } from "~/ducks/tasks";
 import { applySearchTerms } from "~/lib/utils/tasks";

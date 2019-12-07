@@ -5,15 +5,16 @@ import { actions as editorActions } from "~/ducks/editor";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Greeting from "~/components/Greeting";
 import { FullName } from "~/features/users";
-import HeaderTrend from "./HeaderTrend";
-import DayProgressBar from "./DayProgressBar";
+import HeaderTrend from "../HeaderTrend";
+import DayProgressBar from "../DayProgressBar";
 import { isDueSoon } from "~/lib/utils/tasks";
-import Emoji from "~//components/Emoji";
+import Emoji from "~/components/Emoji";
+import "./index.scss";
 
 const StreamHeader = props => (
-    <div className={"hero"}>
+    <div className={"StreamHeader hero"}>
         <div className={"container"}>
-            <div>
+            <div className="title-text">
                 <h2>
                     {props.dueTaskCount > 0 ? (
                         <>
@@ -27,13 +28,9 @@ const StreamHeader = props => (
                         </>
                     )}
                 </h2>
-                <button onClick={props.toggleEditor} className={"btn-hero"}>
-                    <FontAwesomeIcon icon="plus-square" /> Add a new task
-                </button>
             </div>
             <StatsLevel importantOnly />
         </div>
-        <DayProgressBar />
     </div>
 );
 
@@ -47,6 +44,7 @@ Code for trend bar
         />
     </div>
 )} */
+// <DayProgressBar />;
 
 const mapDispatchToProps = dispatch => ({
     toggleEditor: () => dispatch(editorActions.toggleEditor())

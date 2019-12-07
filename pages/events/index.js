@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InfiniteResults from "~/components/InfiniteResults";
 import LiveEventsList from "~/features/events/components/LiveEventsList";
 import React from "react";
-import Sidebar from "~/features/events/components/Sidebar";
+import Sidebar from "~/components/sidebar/HomeSidebar";
 import { isOcurring } from "~/lib/utils/events";
 import orderBy from "lodash/orderBy";
 import { Link } from "~/routes";

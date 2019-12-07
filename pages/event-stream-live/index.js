@@ -1,6 +1,6 @@
 import "./index.scss";
 
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import ReconnectingWebSocket from "reconnecting-websocket/dist/reconnecting-websocket";
 import Spinner from "~/components/Spinner";

@@ -10,7 +10,7 @@ import Markdown from "~/components/Markdown";
 import Modal from "~/components/Modal";
 import OutboundLink from "~/components/OutboundLink";
 import React from "react";
-import Sidebar from "~/features/events/components/Sidebar";
+import Sidebar from "~/components/sidebar/HomeSidebar";
 import SingleItem from "~/containers/SingleItem";
 import Spinner from "~/components/Spinner";
 import { WeeklyStream } from "~/features/stream";

@@ -1,10 +1,11 @@
-import {Link as NavLink} from "~/routes";
+//import { Link as NavLink } from "~/routes";
+import NavLink from "~/components/ActiveLink";
 
 import Chip from "~/components/Chip";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GlobalSearchBar from "~/features/search/components/GlobalSearchBar";
-import {NavbarDropdown} from "~/components/Dropdown";
-import {NotificationsLink} from "~/features/notifications";
+import { NavbarDropdown } from "~/components/Dropdown";
+import { NotificationsLink } from "~/features/notifications";
 import PropTypes from "prop-types";
 import React from "react";
 import Streak from "~/components/Streak";
@@ -16,94 +17,67 @@ const LoggedInMenu = props => (
         onClick={props.onToggleExpand}
     >
         <div className="navbar-start">
-            <NavLink route="log">
+            <NavLink route="log" activeClassName="is-active">
                 <a className="navbar-item">
-                    <FontAwesomeIcon icon={"check-square"} />
-                    Log
+                    <span>Log</span>
                 </a>
             </NavLink>
+            <NavLink route="products" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Products</span>
+                </a>
+            </NavLink>
+            <NavLink route="makers" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Makers</span>
+                </a>
+            </NavLink>
+            <NavLink route="events" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Events</span>
+                </a>
+            </NavLink>
+
             <NavbarDropdown
+                hoverable
                 to="/tasks"
                 link={() => (
-                    <a>
-                        <FontAwesomeIcon icon={"check"} />
-                        Tasks
-                    </a>
+                    <>
+                        <FontAwesomeIcon icon="ellipsis-v" />
+                    </>
                 )}
             >
-                <NavLink route="tasks">
+                <NavLink route="tasks" activeClassName="is-active">
                     <a className="navbar-item">
-                        <FontAwesomeIcon icon={"tasks"} />
                         <span>Tasks</span>
                     </a>
                 </NavLink>
 
-                <NavLink route="products">
+                <NavLink route="products" activeClassName="is-active">
                     <a className="navbar-item">
-                        <FontAwesomeIcon icon={"ship"} />
                         <span>Products</span>
                     </a>
                 </NavLink>
 
-                <NavLink route="apps">
+                <NavLink route="apps" activeClassName="is-active">
                     <a className="navbar-item">
-                        <FontAwesomeIcon icon={"plug"} />
                         <span>Integrations</span>
                     </a>
                 </NavLink>
 
-                <NavLink route="wellness">
+                <NavLink route="wellness" activeClassName="is-active">
                     <a className="navbar-item">
-                        <FontAwesomeIcon icon={"fire"} />
                         <span>Wellness</span>
-                    </a>
-                </NavLink>
-            </NavbarDropdown>
-
-            <NavLink activeClassName="is-active" route="discussions">
-                <a className="navbar-item">
-                    <FontAwesomeIcon icon={"comment"} />
-                    Talk
-                </a>
-            </NavLink>
-
-            <NavbarDropdown
-                route="explore"
-                link={() => (
-                    <a>
-                        <FontAwesomeIcon icon={"globe-americas"} />
-                        More
-                    </a>
-                )}
-            >
-                <NavLink activeClassName="is-active" route="events">
-                    <a className="navbar-item">
-                        <FontAwesomeIcon icon={"check-circle"} />
-                        <span>Events</span>
-                    </a>
-                </NavLink>
-                <NavLink activeClassName="is-active" route="explore">
-                    <a className="navbar-item">
-                        <FontAwesomeIcon icon={"fire"} />
-                        <span>Popular</span>
-                    </a>
-                </NavLink>
-                <NavLink activeClassName="is-active" route="live">
-                    <a className="navbar-item">
-                        <FontAwesomeIcon icon={"play"} />
-                        <span>Live</span>
-                    </a>
-                </NavLink>
-                <NavLink activeClassName="is-active" route="explore-products">
-                    <a className="navbar-item">
-                        <FontAwesomeIcon icon={"ship"} />
-                        <span>Products</span>
                     </a>
                 </NavLink>
             </NavbarDropdown>
         </div>
         <div className="navbar-end">
             <GlobalSearchBar />
+
+            <a className="TodoLink navbar-item">
+                <FontAwesomeIcon icon="check-square" />
+            </a>
 
             <NotificationsLink />
 

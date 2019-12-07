@@ -5,7 +5,7 @@ import AdCard from "~/components/sidebar/AdCard";
 import RegisterCard from "~/components/sidebar/RegisterCard";
 import Sticky from "react-stickynode";
 
-const Sidebar = () => {
+const HomeSidebar = () => {
     return (
         <div>
             <PeopleCard withDiscussions={false} recentlyLaunched />
@@ -23,4 +23,4 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
+export default HomeSidebar;

@@ -2,17 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import { actions as appActions, mapStateToProps } from "~/ducks/apps";
 import { mapStateToProps as mapUserToProps } from "~/ducks/user";
-import GitHub from "./apps/GitHub";
-import Slack from "./apps/Slack";
-import Trello from "./apps/Trello";
-import GitLab from "./apps/GitLab";
-import Webhooks from "./apps/Webhooks";
-import NodeHost from "./apps/NodeHost";
-import Todoist from "./apps/Todoist";
-import Shipstreams from "./apps/Shipstreams";
-import Telegram from "./apps/Telegram";
+import GitHub from "~/features/apps/apps/GitHub";
+import Slack from "~/features/apps/apps/Slack";
+import Trello from "~/features/apps/apps/Trello";
+import GitLab from "~/features/apps/apps/GitLab";
+import Webhooks from "~/features/apps/apps/Webhooks";
+import NodeHost from "~/features/apps/apps/NodeHost";
+import Todoist from "~/features/apps/apps/Todoist";
+import Shipstreams from "~/features/apps/apps/Shipstreams";
+import Telegram from "~/features/apps/apps/Telegram";
 import "./index.scss";
-import Shop from "./components/Shop";
+import Shop from "~/features/apps/components/Shop";
 import { requireAuthed } from "~/lib/auth";
 
 class AppsPage extends React.Component {

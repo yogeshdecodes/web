@@ -1,7 +1,7 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GlobalSearchBar from "~/features/search/components/GlobalSearchBar/index";
-import {Link as NavLink} from "~/routes";
-import {NavbarDropdown} from "~/components/Dropdown";
+import { Link as NavLink } from "~/routes";
+import { NavbarDropdown } from "~/components/Dropdown";
 import React from "react";
 
 const LoggedOutMenu = props => (
@@ -12,49 +12,31 @@ const LoggedOutMenu = props => (
     >
         <div className="navbar-start">
             <NavLink activeClassName="is-active" route="home">
-                <a className="navbar-item">
-                    <FontAwesomeIcon icon={"home"} />
-                    Home
-                </a>
+                <a className="navbar-item">Home</a>
             </NavLink>
 
             <NavLink activeClassName="is-active" route="discussions">
-                <a className="navbar-item">
-                    <FontAwesomeIcon icon={"comment"} />
-                    Talk
-                </a>
+                <a className="navbar-item">Talk</a>
             </NavLink>
 
-            <NavbarDropdown
-                route="explore"
-                link={() => (
-                    <a>
-                        <FontAwesomeIcon icon={"globe-americas"} />
-                        More
-                    </a>
-                )}
-            >
+            <NavbarDropdown route="explore" link={() => <a>More</a>}>
                 <NavLink activeClassName="is-active" route="events">
                     <a className="navbar-item">
-                        <FontAwesomeIcon icon={"check-circle"} />
                         <span>Events</span>
                     </a>
                 </NavLink>
                 <NavLink activeClassName="is-active" route="explore">
                     <a className="navbar-item">
-                        <FontAwesomeIcon icon={"fire"} />
                         <span>Popular</span>
                     </a>
                 </NavLink>
                 <NavLink activeClassName="is-active" route="live">
                     <a className="navbar-item">
-                        <FontAwesomeIcon icon={"play"} />
                         <span>Live</span>
                     </a>
                 </NavLink>
                 <NavLink activeClassName="is-active" route="explore-products">
                     <a className="navbar-item">
-                        <FontAwesomeIcon icon={"ship"} />
                         <span>Products</span>
                     </a>
                 </NavLink>

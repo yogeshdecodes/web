@@ -33,6 +33,8 @@ export default ({ date, ...props }) => {
         strongText = <strong>{calendarDate}</strong>;
     }
 
+    if (humanDate === "Today") return null;
+
     return (
         <h4 className="StreamDateHeader">
             {strongText}

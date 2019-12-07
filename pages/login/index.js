@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.scss";
-import LoginForm from "./components/LoginForm";
+import LoginForm from "../../features/users/components/LoginForm";
 import { requireUnauthed } from "~/lib/auth";
 
 class LoginPage extends React.Component {

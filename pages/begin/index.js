@@ -8,7 +8,6 @@ import OutboundLink from "~/components/OutboundLink";
 import PhoneInput from "react-phone-number-input";
 import ReCaptcha from "react-google-recaptcha";
 import React from "react";
-import { RegisterPageLayout } from "./styled";
 import Spinner from "~/components/Spinner";
 import { StreamCard } from "~/features/stream/components/Stream/components/StreamCard/styled";
 import { actions as appActions } from "~/ducks/app";
@@ -20,6 +19,23 @@ import { validateEmail } from "~/lib/utils/random";
 import "./index.scss";
 import { Router } from "~/routes";
 import { requireUnauthed } from "~/lib/auth";
+import styled from "styled-components";
+
+const RegisterPageLayout = styled.div`
+    .columns {
+        min-height: 100vh;
+        margin: 0;
+        height: 100%;
+    }
+    .card {
+        border: none !important;
+    }
+
+    .card-footer {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+`;
 
 const mapDispatchToProps = dispatch => {
     return {

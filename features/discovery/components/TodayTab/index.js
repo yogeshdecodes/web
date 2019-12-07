@@ -2,7 +2,7 @@ import React from "react";
 import LoggedOutMessage from "~/components/LoggedOutMessage";
 
 import { GlobalStream } from "~/features/stream";
-import Sidebar from "~/pages/home/Sidebar";
+import Sidebar from "~/components/sidebar/HomeSidebar";
 import "./index.scss";
 
 const TodayTab = props => (

@@ -1,17 +1,29 @@
 @import "../../styles/_variables";
 
 #main-navbar {
-    @extend %poppins;
+    font-family: "Work Sans", $font;
     font-size: 0.875rem;
-    background: $c-bg-dark;
-    height: 60px;
+    background: #ffffff;
+    height: 79px;
     position: relative;
     z-index: 999;
+    border-bottom: 0.2px solid #ececec;
+
+    .navbar-end {
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .container {
+        display: flex;
+    }
 
     .tag:not(body) {
         align-items: center;
-        background-color: $c-bg-light;
-        color: $c-text;
+        background-color: $c-main;
+        color: $c-lightest;
         display: inline-flex;
         font-size: 0.75rem;
         height: 2em;
@@ -20,12 +32,12 @@
         padding-left: 0.75em;
         padding-right: 0.75em;
         white-space: nowrap;
-        border-radius: 50%;
+        border-radius: 500px;
         margin-left: 4px;
     }
 
     .navbar-menu {
-        height: 60px;
+        height: 79px;
         width: 100%;
         display: grid;
         align-items: stretch;
@@ -33,40 +45,63 @@
         grid-template-columns: repeat(2, auto);
     }
 
+    .navbar-brand {
+        width: 55px;
+    }
+
     .brand {
-        color: $c-brand;
         font-size: 1.15rem;
         transition: none;
-        order: 2;
         align-self: center;
-        font-weight: 700;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        z-index: 101;
-        position: absolute;
-        text-align: center;
-        margin-left: -60px;
-        left: 50%;
         display: flex;
         align-items: center;
-        height: 60px;
+        height: 79px;
+
+        #brand-gradient-parent {
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        svg {
+            height: 35px;
+            width: 35px;
+
+            path {
+                fill: url(#brand-gradient) $c-brand;
+            }
+        }
     }
 
     .navbar-item,
     .navbar-link {
-        color: $c-lightest;
+        color: $c-text;
+        // font-weight: regular;
+        font-size: 16px;
         line-height: 1.5;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 2rem;
         position: relative;
         cursor: pointer !important;
+
+        // this otherwise animations are crazy slow.
+        transition: background-color 0.3s ease !important;
+    }
+
+    .navbar-item:hover {
+        background: rgba(0, 173, 113, 0.05);
     }
 
     .navbar-link {
-        padding-right: 2.5em;
+        color: $c-text;
     }
 
     .navbar-item.has-dropdown {
         padding: 0;
+
+        &.is-active a,
+        &.is-active span {
+            color: $c-main;
+        }
     }
 
     svg {
@@ -120,7 +155,7 @@
             &:active,
             &.is-located,
             &.is-active {
-                background: hsla(0, 0%, 0%, 0.2);
+                background: rgba(0, 173, 113, 0.05);
             }
         }
 
@@ -134,24 +169,33 @@
 
     .navbar-start {
         .navbar-item.is-active {
-            background: rgba(0, 0, 0, 0.2);
+            background: linear-gradient(
+                180deg,
+                rgba(0, 173, 113, 0.05) 0%,
+                rgba(0, 173, 113, 0) 100%
+            );
             color: $c-main;
         }
 
         a.navbar-item,
         .navbar-item.has-dropdown,
         a.navbar-link {
-            &:hover,
             &:active,
             &.is-located,
             &.is-active {
-                background: rgba(0, 0, 0, 0.2);
+                margin: 0;
+                box-shadow: 0 2px 0 #00ad71 inset;
+                background: linear-gradient(
+                    180deg,
+                    rgba(0, 173, 113, 0.05) 0%,
+                    rgba(0, 173, 113, 0) 100%
+                );
                 color: $c-main;
             }
         }
 
         > .navbar-item:first-of-type {
-            margin-left: -1rem;
+            // margin-left: -1rem;
         }
 
         .navbar-dropdown {
@@ -163,27 +207,17 @@
     }
 
     .navbar-end {
+        .navbar-item {
+            padding: 0.5rem 0rem;
+        }
         > .navbar-item:last-child {
-            margin-right: -1rem;
+            // margin-right: -1rem;
         }
 
         > a {
             svg {
                 margin: 0 !important;
-                color: $c-lightest;
-            }
-
-            &:hover,
-            &:active,
-            &.is-located,
-            &.is-active {
-                background: rgba(0, 0, 0, 0.2);
-                color: $c-main;
-
-                svg {
-                    margin: 0 !important;
-                    color: $c-lightest;
-                }
+                //color: $c-lightest;
             }
         }
 
@@ -192,7 +226,7 @@
             &:active,
             &.is-located,
             &.is-active {
-                background: rgba(0, 0, 0, 0.2);
+                background: rgba(0, 173, 113, 0.05);
                 color: $c-main;
             }
         }
@@ -215,7 +249,7 @@
     }
 
     #navChip {
-        color: $c-lightest;
+        color: $c-text;
         height: 28px;
         cursor: default;
         border: 0;
@@ -232,7 +266,7 @@
         vertical-align: middle;
         justify-content: center;
         text-decoration: none;
-        background: hsla(0, 0%, 0%, 0.2);
+        background: rgba(0, 173, 113, 0.05);
 
         img {
             @extend %round;
@@ -278,7 +312,6 @@
     }
 
     strong {
-        @extend %poppins;
         @extend %uppercase;
     }
 
@@ -317,7 +350,7 @@
 
     .navbar-start {
         > .navbar-item:first-of-type {
-            margin-left: -1rem;
+            // margin-left: -1rem; why?
         }
 
         .navbar-item {
@@ -362,7 +395,7 @@
 
         .navbar-end {
             display: grid;
-            grid-template-columns: 1fr 1fr 1.5fr;
+            grid-template-columns: 0.8fr 0.8fr 0.8fr 1.5fr;
             justify-content: end;
 
             .navbar-item {
@@ -411,13 +444,13 @@
         }
 
         .navbar-dropdown {
-            border-radius: 0 0 5px 5px;
+            border-radius: 5px 5px 5px 5px;
             box-shadow: 6px 2px 64px -16px hsla(0, 0%, 0%, 0.75);
             display: none;
             left: 0;
             min-width: 100%;
             position: absolute;
-            top: 60px;
+            top: 70px;
             z-index: 20;
 
             .navbar-item {
@@ -433,7 +466,7 @@
             min-width: 100%;
 
             a.navbar-item {
-                color: $c-text;
+                color: $c-text !important;
                 padding: 0.375rem 3rem 0.375rem 1rem;
                 display: flex;
 
@@ -443,7 +476,7 @@
 
                 &:hover,
                 &:active {
-                    background: $c-main;
+                    background: rgba(0, 173, 113, 0.5);
                     color: $c-lightest;
                 }
             }
@@ -526,7 +559,16 @@
 
 .navbar-item.is-active,
 .navbar-item.is-located {
-    background: rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 173, 113, 0.05) 0%,
+        rgba(0, 173, 113, 0) 100%
+    );
+}
+
+.navbar-dropdown .navbar-item {
+    font-weight: normal !important;
 }
 
 .navbar-burger {
@@ -541,14 +583,6 @@
 
 .navbar-dropdown {
     box-shadow: 6px 2px 64px -16px rgba(0, 0, 0, 0.75) !important;
-}
-
-@media screen and (max-width: 1200px) {
-    .navbar-brand .brand {
-        position: relative !important;
-        margin-left: 1rem !important;
-        left: auto !important;
-    }
 }
 
 @media screen and (max-width: 1023px) {
@@ -632,7 +666,7 @@
 }
 
 #navbarUserChip {
-    color: $c-lightest;
+    color: $c-text;
     height: 28px;
     display: inline-flex;
     outline: none;
@@ -645,7 +679,7 @@
     border-radius: 16px;
     vertical-align: middle;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 173, 113, 0.2);
 
     img {
         border-radius: 50%;

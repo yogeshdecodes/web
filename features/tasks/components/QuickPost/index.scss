@@ -1,0 +1,66 @@
+@import "../../../../styles/_variables";
+
+.QuickPost {
+    box-shadow: 0px 30px 66px -47px rgba(0, 0, 0, 0.25) !important;
+
+    header {
+        background: white;
+        padding-top: 1rem;
+
+        button {
+            @extend %transition;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #979797;
+            background-color: white;
+
+            .emoji {
+                font-size: 11px;
+                margin-right: 5px;
+            }
+
+            &.is-active {
+                color: #636363;
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+
+            &:first-of-type {
+                //padding-left: 0px;
+            }
+        }
+    }
+
+    footer {
+        background: rgba(149, 171, 177, 0.1);
+        height: 0px;
+        overflow: hidden;
+        transition: height 0.3s ease;
+        padding: 0px;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    &.is-active {
+        footer {
+            height: 50px;
+        }
+
+        input {
+            border-radius: 0px;
+        }
+    }
+
+    .input-container input {
+        padding: 1.5rem;
+        padding-left: 1.5rem;
+        padding-top: 0px;
+        font-size: 20px;
+        // @extend %worksans;
+        background: white;
+        border: none;
+        width: 100%;
+        @extend %corners;
+    }
+}

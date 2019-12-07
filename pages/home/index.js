@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "~/routes";
 import { GlobalStream } from "~/features/stream";
-import Sidebar from "./Sidebar";
+import HomeSidebar from "../../components/sidebar/HomeSidebar";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
 
@@ -27,7 +27,7 @@ export default requireUnauthed(() => (
                     <GlobalStream />
                 </div>
                 <div className={"sidebar"}>
-                    <Sidebar />
+                    <HomeSidebar />
                 </div>
             </div>
         </section>

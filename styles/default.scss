@@ -4,6 +4,11 @@ html {
     font-size: $font-size;
 }
 
+* {
+    //-webkit-font-smoothing: antialiased;
+    //-moz-osx-font-smoothing: grayscale;
+}
+
 body {
     @extend %transition-bg;
     font-family: $font;
@@ -286,7 +291,7 @@ a.btn-light {
     background: $c-lightest;
     color: $c-text !important;
     border: 1px solid $c-border;
-    margin-top: 1rem;
+    // margin-top: 1rem; why?
 
     &.transparent {
         background: transparent;
@@ -363,7 +368,7 @@ h6 {
 
 h1,
 h2:not(.topic-title) {
-    @extend %poppins;
+    @extend %worksans;
 }
 
 h1.page-title,
@@ -647,7 +652,7 @@ h2 {
     }
 
     h2 {
-        @extend %poppins;
+        @extend %worksans;
         font-size: 1.2rem;
         margin: 0 0 0.75rem;
     }
@@ -715,7 +720,7 @@ h2 {
 
 .hero-item {
     color: $c-lightest;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
     padding: 0 0 0 1.5rem;
 
@@ -731,7 +736,7 @@ h2 {
     }
 
     div {
-        @extend %poppins;
+        @extend %worksans;
         line-height: 1;
         margin-top: 5px;
     }
@@ -747,10 +752,16 @@ h2 {
         background: hsla(192, 15%, 64%, 0.1);
         box-shadow: none !important;
         padding: $gap-card;
+        @extend %corners;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
 
     footer {
         padding: 0 $gap-card $gap-card;
+        @extend %corners;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
     }
 
     .card-content {
@@ -776,7 +787,7 @@ h2 {
         h1,
         h2,
         h3 {
-            @extend %poppins;
+            @extend %worksans;
             margin: 0;
         }
 
@@ -832,7 +843,7 @@ h2 {
 
 .Broadcast {
     h2 {
-        @extend %poppins;
+        @extend %worksans;
         font-size: 1rem !important;
         margin: 0;
     }
@@ -876,7 +887,7 @@ h2 {
             grid-template-columns: repeat(2, 48px calc(100% - 48px));
 
             h5 {
-                @extend %poppins;
+                @extend %worksans;
                 font-size: 0.938rem;
                 margin: 0;
             }

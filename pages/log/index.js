@@ -2,11 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import NoActivityCard from "~/features/stream/components/NoActivityCard";
 import { FollowingStream } from "~/features/stream";
-import Page from "~/layouts/Page";
-import StreamHeader from "./components/StreamHeader";
-import Sidebar from "./components/Sidebar";
-import { requireUnauthed } from "~/lib/auth";
+import StreamHeader from "../../features/stream/components/StreamHeader";
+import Sidebar from "../../features/stream/components/Sidebar";
 import { requireAuthed } from "../../lib/auth";
+import QuickPost from "~/features/tasks/components/QuickPost";
 
 class StreamPage extends React.Component {
     isNewUser = () =>
@@ -22,12 +21,15 @@ class StreamPage extends React.Component {
                 <section className={"container"}>
                     <div className={"grid-c-s"}>
                         <div>
+                            <QuickPost />
+
                             {this.isNewUser() ? (
                                 <NoActivityCard />
                             ) : (
                                 <FollowingStream />
                             )}
                         </div>
+
                         <div className={"sidebar is-hidden-mobile"}>
                             <Sidebar />
                         </div>

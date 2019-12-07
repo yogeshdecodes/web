@@ -1,4 +1,4 @@
-import "./nav.scss";
+import "./index.scss";
 
 import { Link as NavLink, Link } from "~/routes";
 
@@ -11,6 +11,8 @@ import Spinner from "~/components/Spinner";
 import Streak from "~/components/Streak";
 import { actions as authActions } from "~/ducks/auth";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { withRouter } from "next/router";
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -41,14 +43,26 @@ class Navbar extends React.Component {
                     <div className="navbar-brand">
                         <NavLink route="home">
                             <a className="brand">
-                                Makerlog <LocalOnly>Dev</LocalOnly>{" "}
-                                {this.props.isSyncing && (
-                                    <span
-                                        style={{ marginTop: 8, marginLeft: 3 }}
+                                <svg
+                                    id="brand-gradient-parent"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                >
+                                    <linearGradient
+                                        id="brand-gradient"
+                                        x1="100.37%"
+                                        y1="99.62%"
+                                        x2="-0.37%"
+                                        y2="0.38%"
                                     >
-                                        <Spinner small color={"white"} />
-                                    </span>
-                                )}
+                                        <stop stop-color="#00ad71" />
+                                        <stop
+                                            offset="1.24"
+                                            stop-color="#47e0a0"
+                                        />
+                                    </linearGradient>
+                                </svg>
+                                <FontAwesomeIcon icon="check-circle" />
                             </a>
                         </NavLink>
                         <button
@@ -134,7 +148,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Navbar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
