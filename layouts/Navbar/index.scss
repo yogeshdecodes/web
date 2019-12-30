@@ -402,16 +402,13 @@
         }
 
         .navbar-end {
-            display: grid;
-            grid-template-columns: 0.8fr 0.8fr 0.8fr 1.5fr;
+            display: flex;
+            flex-flow: row nowrap;
             justify-content: end;
 
             .navbar-item {
                 justify-content: center;
-            }
-
-            .navbar-item:last-child {
-                // justify-content: end;
+                margin-left: 2rem;
             }
         }
 
