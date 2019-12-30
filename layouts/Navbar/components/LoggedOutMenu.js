@@ -3,6 +3,7 @@ import GlobalSearchBar from "~/features/search/components/GlobalSearchBar/index"
 import NavLink from "~/components/ActiveLink";
 import { NavbarDropdown } from "~/components/Dropdown";
 import React from "react";
+import { Link } from "~/routes";
 
 const LoggedOutMenu = props => (
     <div
@@ -48,11 +49,13 @@ const LoggedOutMenu = props => (
             <NavLink activeClassName="is-active" route="login">
                 <a className="navbar-item">Sign in</a>
             </NavLink>
-            <NavLink activeClassName="is-active" route="begin">
-                <div className="navbar-item">
-                    <a className="btn is-rounded is-primary">Get started</a>
-                </div>
-            </NavLink>
+            <div className="navbar-item">
+                <Link route="begin">
+                    <a className="btn has-text-bold is-rounded is-primary">
+                        Get started
+                    </a>
+                </Link>
+            </div>
         </div>
     </div>
 );
