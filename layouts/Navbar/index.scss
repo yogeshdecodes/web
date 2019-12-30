@@ -87,7 +87,7 @@
         transition: background-color 0.3s ease !important;
     }
 
-    .navbar-item:hover {
+    .navbar-item:not(div):hover {
         background: rgba(0, 173, 113, 0.05);
     }
 
@@ -104,9 +104,12 @@
         }
     }
 
-    .navbar-item > .btn {
+    .navbar-item > .btn,
+    .navbar-item > button {
         margin-left: 5px;
         margin-right: 5px;
+        font-family: inherit;
+        font-weight: bold;
     }
 
     svg {
@@ -156,7 +159,7 @@
         a.navbar-item,
         .navbar-item.has-dropdown,
         a.navbar-link {
-            &:hover,
+            &:not(div):hover,
             &:active,
             &.is-located,
             &.is-active {
@@ -226,7 +229,7 @@
             }
         }
 
-        > div {
+        > .navbar-item:not(div) {
             &:hover,
             &:active,
             &.is-located,
@@ -362,7 +365,7 @@
             border: solid transparent;
             border-width: 3px 0;
 
-            &:not([class^="btn"]):hover,
+            &:not(div):hover,
             &:active,
             &.is-located,
             &.is-active {

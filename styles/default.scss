@@ -201,6 +201,11 @@ a[class^="btn"] {
     -ms-user-select: none;
     user-select: none;
     text-align: center;
+    transition: transform 0.1s ease;
+
+    &:not([disabled]):active {
+        transform: scale(0.95);
+    }
 
     svg {
         margin-right: 0.5em;
@@ -317,9 +322,9 @@ hr {
     margin: $gap-card 0;
 }
 
-a,
+a:not(.btn),
 a:not(.btn):active,
-a:visited,
+a:not(.btn):visited,
 a:not(.btn):hover {
     @extend %transition;
     color: $c-main;
