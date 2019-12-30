@@ -104,6 +104,11 @@
         }
     }
 
+    .navbar-item > .btn {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
     svg {
         width: auto;
         margin: 0 0.5rem 0 0;
@@ -357,7 +362,7 @@
             border: solid transparent;
             border-width: 3px 0;
 
-            &:hover,
+            &:not([class^="btn"]):hover,
             &:active,
             &.is-located,
             &.is-active {
@@ -403,7 +408,7 @@
             }
 
             .navbar-item:last-child {
-                justify-content: end;
+                // justify-content: end;
             }
         }
 

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GlobalSearchBar from "~/features/search/components/GlobalSearchBar/index";
-import { Link as NavLink } from "~/routes";
+import NavLink from "~/components/ActiveLink";
 import { NavbarDropdown } from "~/components/Dropdown";
 import React from "react";
 
@@ -44,18 +44,14 @@ const LoggedOutMenu = props => (
         </div>
         <div className="navbar-end">
             <GlobalSearchBar />
-            <NavLink activeClassName="is-active" route="begin">
-                <a className="navbar-item is-brand-green">
-                    <FontAwesomeIcon icon={"rocket"} />
-                    Join us
-                </a>
-            </NavLink>
 
             <NavLink activeClassName="is-active" route="login">
-                <a className="navbar-item">
-                    <FontAwesomeIcon icon={"sign-in-alt"} />
-                    Log in
-                </a>
+                <a className="navbar-item">Sign in</a>
+            </NavLink>
+            <NavLink activeClassName="is-active" route="begin">
+                <div className="navbar-item">
+                    <a className="btn is-rounded is-primary">Get started</a>
+                </div>
             </NavLink>
         </div>
     </div>

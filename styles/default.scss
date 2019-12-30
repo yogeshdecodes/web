@@ -320,7 +320,7 @@ hr {
 a,
 a:active,
 a:visited,
-a:hover {
+a:not(.btn):hover {
     @extend %transition;
     color: $c-main;
     text-decoration: none;
