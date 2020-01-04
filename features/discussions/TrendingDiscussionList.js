@@ -1,6 +1,6 @@
 import React from "react";
-import {getTrendingThreads} from "../../lib/discussions";
-import {Link} from "~/routes";
+import { getTrendingThreads } from "../../lib/discussions";
+import { Link } from "~/routes";
 import Spinner from "../../components/Spinner";
 import ReplyFaces from "./ReplyFaces";
 
@@ -57,7 +57,7 @@ class TrendingDiscussionList extends React.Component {
                             route={"discussion-page"}
                             params={{ slug: thread.slug }}
                         >
-                            <div>
+                            <div className="ThreadMedia">
                                 <h2 className={"topic-title"}>
                                     {thread.title}
                                 </h2>

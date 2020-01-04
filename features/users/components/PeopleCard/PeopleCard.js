@@ -285,7 +285,7 @@ class PeopleCard extends React.Component {
                 </h4>
                 <>
                     <ProductList
-                        products={this.state.recentlyLaunched.slice(0, 6)}
+                        products={this.state.recentlyLaunched.slice(0, 5)}
                         thumbnail
                     />
                 </>

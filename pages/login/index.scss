@@ -1,0 +1,41 @@
+@import "../../styles/_variables";
+
+.LoginPage {
+    min-height: 100vh;
+    background: $gradient-green;
+
+    #main-navbar.translucent-navbar {
+        background: none;
+
+        #logo {
+            color: $c-lightest;
+        }
+    }
+
+    .form-card {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 200px 0;
+
+        .card {
+            padding: 1.5rem 1.2rem;
+        }
+
+        h2 {
+            color: $c-lightest;
+            margin: 0 0 1.5rem;
+            font-size: 3rem;
+        }
+
+        a {
+            color: $c-main;
+        }
+
+        .grid {
+            grid-template-columns: auto auto;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+    }
+}
