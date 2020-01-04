@@ -479,8 +479,6 @@ class RegisterForm extends React.Component {
         if (this.state.loading && !this.state.failedPreflight)
             return <Spinner text={"Getting ready..."} />;
 
-        return this.renderFinishedStep();
-
         return (
             <>
                 <h1>Let's get started.</h1>

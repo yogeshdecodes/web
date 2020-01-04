@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { persistReducer } from "redux-persist";
+import { persistReducer, getPersistor } from "redux-persist";
 import { routerReducer } from "react-router-redux";
 import { default as storage } from "localforage";
 import { authReducer, types as authTypes } from "./auth";
@@ -12,7 +12,6 @@ import { appsReducer } from "./apps";
 import { appReducer } from "./app";
 import { projectsReducer } from "./projects";
 import { isServer } from "~/config";
-import { purgeStoredState } from "redux-persist";
 
 /*
 
@@ -69,19 +68,24 @@ const rootReducer = combineReducers({
 });
 
 export default (state, action) => {
-    if (action.type === authTypes.LOGOUT) {
-        state = undefined;
-        if (!isServer) {
-            // total hack
-            // 1. sync across windows
-            window.localStorage.setItem("authSync_logout", Date.now());
-            // 2. flush storage
-            if (storage) {
-                purgeStoredState();
+    try {
+        if (action.type === authTypes.LOGOUT) {
+            state = undefined;
+            if (!isServer) {
+                // total hack
+                // 1. sync across windows
+                window.localStorage.setItem("authSync_logout", Date.now());
+                // 2. flush storage
+                if (storage) {
+                    storage.clear();
+                }
+                // 3. reload
+                window.location.reload();
             }
-            // 3. reload
-            window.location.reload();
         }
+    } catch (e) {
+        console.log("ERROR LOGGING OUT!");
+        console.log(e);
     }
 
     return rootReducer(state, action);

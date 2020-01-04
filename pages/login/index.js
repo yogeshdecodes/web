@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.scss";
-import AuthModal from "../../features/users/components/AuthModal";
+import { AuthModalCard } from "../../features/users/components/AuthModal";
 import { requireUnauthed } from "~/lib/auth";
 
 class LoginPage extends React.Component {
@@ -13,7 +13,7 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div className="container">
-                <AuthModal login params={this.props.query} />
+                <AuthModalCard login params={this.props.query} />
             </div>
         );
     }

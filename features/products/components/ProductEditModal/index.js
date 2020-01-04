@@ -732,7 +732,7 @@ const ProductEditModal = props => (
             alignItems: "center",
             justifyContent: "center"
         }}
-        className="ProductEditModal"
+        className="AuthModalContainer"
     >
         <Modal.Content verticallyCentered={true}>
             <ProductEditForm

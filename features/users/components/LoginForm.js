@@ -52,6 +52,7 @@ const LoginForm = props => {
                 props.onClickLogin(props.username, props.password);
             }}
         >
+            <h1>Welcome back.</h1>
             {props.errorMessages && (
                 <ErrorMessageList errorMessages={props.errorMessages} />
             )}

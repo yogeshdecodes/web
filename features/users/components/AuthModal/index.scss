@@ -87,8 +87,8 @@
         animation: animatedBackground 500s linear infinite;
         background: linear-gradient(
                 63deg,
-                rgba(17, 180, 107, 0.8) 0%,
-                rgba(17, 180, 107, 0.8) 100%
+                rgba(17, 180, 107, 0.9) 0%,
+                rgba(17, 180, 107, 0.9) 100%
             ),
             url("/img/hero.jpg");
     }
@@ -107,5 +107,12 @@
         color: gray;
         text-align: center;
         padding: 10px;
+    }
+}
+
+.AuthModal.begin {
+    > div:last-of-type {
+        justify-content: center;
+        align-items: center;
     }
 }

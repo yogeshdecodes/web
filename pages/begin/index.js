@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.scss";
-import AuthModal from "../../features/users/components/AuthModal";
+import { AuthModalCard } from "../../features/users/components/AuthModal";
 import { requireUnauthed } from "~/lib/auth";
 
 class RegisterPage extends React.Component {
@@ -13,7 +13,7 @@ class RegisterPage extends React.Component {
     render() {
         return (
             <div className="container">
-                <AuthModal begin params={this.props.query} />
+                <AuthModalCard begin params={this.props.query} />
             </div>
         );
     }
