@@ -74,8 +74,8 @@ class NProgressContainer extends React.Component {
                     display: ${spinner ? "block" : "none"};
                     position: fixed;
                     z-index: 1031;
-                    top: 15px;
-                    right: 15px;
+                    top: 30px;
+                    right: 30px;
                 }
                 #nprogress .spinner-icon {
                     width: 18px;
