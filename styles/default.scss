@@ -1532,3 +1532,28 @@ figure.img-circle {
         padding: 0 0.3em;
     }
 }
+
+.a-unstyled {
+    &,
+    &:link,
+    &:visited,
+    &:hover,
+    &:active,
+    &:active:hover {
+        color: inherit;
+        text-decoration: none;
+        /*font-style: inherit;
+      background-color: transparent;
+      font-size: inherit;
+      font-variant: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      font-family: inherit;
+      border-radius: inherit;
+      border: inherit;
+      outline: inherit;
+      box-shadow: inherit;
+      padding: inherit;
+      vertical-align: inherit;*/
+    }
+}

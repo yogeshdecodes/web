@@ -1,5 +1,60 @@
+@import "../../../../styles/_variables";
+
+@keyframes loadingShimmer {
+    0% {
+        background-position: -30vw 0;
+    }
+    100% {
+        background-position: 70vw 0;
+    }
+}
+
 .StreamHeader.hero {
+    --streamheader-bg: $c-brand;
     padding: 1.5rem 2rem;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        var(--streamheader-bg),
+        linear-gradient(0deg, rgba($c-brand, 1), rgba($c-brand, 1));
+    background-size: cover;
+    background-position: center;
+
+    &.loading {
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: loadingShimmer;
+        animation-timing-function: linear;
+        background-color: $c-main;
+        background: linear-gradient(
+            to right,
+            $c-main 8%,
+            $c-secondary 18%,
+            $c-main 33%
+        );
+        height: 100%;
+        width: 100%;
+        position: relative;
+        padding-top: 50px;
+        -webkit-backface-visibility: hidden;
+    }
+
+    &.blurred {
+        position: relative;
+    }
+
+    &.blurred::after {
+        z-index: -1;
+        position: absolute;
+        backdrop-filter: blur(3px);
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
 
     .title-text {
         display: flex;
