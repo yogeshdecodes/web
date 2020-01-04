@@ -20,7 +20,9 @@ const LoggedOutMenu = props => (
                 <a className="navbar-item">Talk</a>
             </NavLink>
 
-            <NavbarDropdown route="explore" link={() => <a>More</a>}>
+            <GlobalSearchBar />
+
+            <NavbarDropdown route="explore" link={() => <FontAwesomeIcon size="lg" icon={"bars"} />}>
                 <NavLink activeClassName="is-active" route="events">
                     <a className="navbar-item">
                         <span>Events</span>
@@ -44,10 +46,9 @@ const LoggedOutMenu = props => (
             </NavbarDropdown>
         </div>
         <div className="navbar-end">
-            <GlobalSearchBar />
 
             <NavLink activeClassName="is-active" route="login">
-                <a className="navbar-item">Sign in</a>
+                <a className="navbar-item">Login</a>
             </NavLink>
             <div className="navbar-item">
                 <Link route="begin">

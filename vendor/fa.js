@@ -74,6 +74,7 @@ import {faCog} from "@fortawesome/free-solid-svg-icons/faCog";
 import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
 import {faCalendarAlt} from "@fortawesome/free-solid-svg-icons/faCalendarAlt";
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons/faExclamationTriangle";
+import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
 
 library.add(
     faInstagram,
@@ -150,5 +151,6 @@ library.add(
     faMugHot,
     faExternalLinkAlt,
     faCalendarAlt,
-    faExclamationTriangle
+    faExclamationTriangle,
+    faBars
 );
