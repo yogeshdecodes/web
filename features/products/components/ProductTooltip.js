@@ -4,7 +4,6 @@ import ProductMedia from "./Product/components/ProductMedia";
 
 const ProductTooltipHtml = ({ product }) => (
     <div className={"panel-tooltip"}>
-        <h2>Product details</h2>
         <ProductMedia product={product} />
     </div>
 );

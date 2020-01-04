@@ -875,6 +875,12 @@ h2 {
             font-size: 0.688rem;
             margin: 1.5rem 0 1rem;
         }
+
+        > .card-content > .heading {
+            &:first-of-type {
+                margin-top: 0px !important;
+            }
+        }
     }
 
     img {
@@ -1555,5 +1561,48 @@ figure.img-circle {
       box-shadow: inherit;
       padding: inherit;
       vertical-align: inherit;*/
+    }
+}
+
+.sidebar-card {
+}
+
+// TODO: move this!
+.ThreadMedia {
+    cursor: pointer;
+
+    &:first-child {
+        margin-top: 0px;
+    }
+
+    &:hover {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    margin-top: 10px;
+}
+
+.media {
+    // todo: make standard media elem... that way we have less .flex and more fun
+    &:hover {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }

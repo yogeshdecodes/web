@@ -7,12 +7,13 @@ import Head from "~/components/Head";
 export default props => (
     <div className={"DownOverlay"}>
         <Head />
-        <h1 className={"brand"}>Makerlog</h1>
+        <img src="https://images.emojiterra.com/google/android-10/512px/1f96d.png" />
+        <h2 className={"brand"}>Makerlog</h2>
         <div className={"center has-text-centered"}>
-            <h2>Uh oh, something went wrong.</h2>
-            <h3>Makerlog is a little overloaded or down due to maintenance.</h3>
+            <h1>Uh oh, something went wrong.</h1>
+            <p>Makerlog is a little overloaded or down due to maintenance.</p>
             <br />
-            <div className={"flex"}>
+            <div className={"button-row"}>
                 <div>
                     <OutboundLink
                         className={"button is-text"}

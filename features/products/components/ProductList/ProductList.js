@@ -45,6 +45,8 @@ class ProductList extends React.Component {
 
         if (this.props.grid) {
             return <ProductGrid>{elems}</ProductGrid>;
+        } else if (this.props.thumbnail) {
+            return <div className="ProductList grid-thumbnails">{elems}</div>;
         } else {
             return elems;
         }

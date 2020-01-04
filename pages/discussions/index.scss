@@ -164,3 +164,13 @@
         margin-top: $gap;
     }
 }
+
+.ThreadMedia {
+    cursor: pointer;
+
+    &:first-child {
+        margin-top: 0px;
+    }
+
+    margin-top: 10px;
+}

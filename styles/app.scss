@@ -2,7 +2,6 @@ html {
     --font: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica,
         Arial, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
         "Segoe UI", sans-serif;
-    --font-poppins: "Poppins", var(--font);
     margin: 0;
 }
 
@@ -19,11 +18,6 @@ body {
 
 pre {
     white-space: pre-wrap;
-}
-
-h1 {
-    font-family: var(--font-poppins);
-    font-weight: 700 !important;
 }
 
 #page {

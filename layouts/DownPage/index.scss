@@ -9,13 +9,25 @@
     background-color: white;
     color: black;
 
+    & > img {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        height: 100px;
+    }
+
+    h1 {
+        margin: none !important;
+    }
+
     .center {
         flex-direction: column;
     }
-}
 
-.DownOverlay .title {
-    font-family: $font;
+    .button-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 .DownOverlay .brand {
@@ -27,8 +39,9 @@
     transform: translate(-50%, 0);
 }
 
-.DownOverlay .subtitle {
-    margin-top: -0.7rem !important;
+.DownOverlay p {
+    margin-top: -1rem !important;
+    font-size: 1.3em;
 }
 
 .DownOverlay .button {

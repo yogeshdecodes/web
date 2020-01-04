@@ -98,17 +98,17 @@ class EventMedia extends Component {
         if (small)
             return (
                 <Link route={"event-page"} params={{ slug: event.slug }}>
-                    <div className="media">
-                        <div className="media-left">
-                            <figure className="image is-square is-32x32">
-                                <img src={event.icon} />
-                            </figure>
-                        </div>
-                        <div className="media-content">
-                            <h3 className="title is-6">{event.title}</h3>
-                            <h3 className="subtitle is-7">
-                                {event.description}
-                            </h3>
+                    <div className="EventMedia">
+                        <div className="flex flex-gap v-center">
+                            <div>
+                                <figure className=" img-32">
+                                    <img src={event.icon} />
+                                </figure>
+                            </div>
+                            <div className="flex-grow">
+                                <h5>{event.title}</h5>
+                                <p>{event.description}</p>
+                            </div>
                         </div>
                     </div>
                 </Link>

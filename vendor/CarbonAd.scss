@@ -3,6 +3,7 @@
 .nonGold {
     .placeholder-text {
         padding-right: 15px;
+        font-size: 14px;
     }
 
     .placeholder_button {
@@ -10,9 +11,10 @@
         white-space: nowrap;
         background: $c-secondary;
         color: $c-lightest !important;
-        padding: 0.5rem 1.3em;
+        padding: 0.2rem 1.3em;
         height: auto;
-        margin-top: 1rem;
+        font-size: 15px;
+        //margin-top: 1rem;
     }
 
     .intravert-card {

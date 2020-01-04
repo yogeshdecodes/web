@@ -11,6 +11,14 @@ class CarbonAd extends React.Component {
         // s.src = `https://cdn.carbonads.com/carbon.js?serve=CK7DC5QJ&placement=${this.props.placement}`;
         s.src = `https://intravert.co/serve/0359e0d7b3.3.js`;
         this.instance.appendChild(s);
+        this.sc = s;
+    }
+
+    componentWillUnmount() {
+        //this.instance.innerHTML = "";
+        if (this.sc) {
+            this.instance.removeChild(this.sc);
+        }
     }
 
     render() {
