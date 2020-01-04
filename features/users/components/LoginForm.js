@@ -2,12 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import Spinner from "~/components/Spinner";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
-import { Button, Control, Field, Input, Level } from "~/vendor/bulma";
+import { Button, Field, Input, Control } from "~/vendor/bulma";
 import { validateEmail } from "~/lib/utils/random";
 import { Tooltip } from "react-tippy";
 import { connect } from "react-redux";
 import { actions as authActions } from "~/ducks/auth";
 import { Link } from "~/routes";
+
+function getSpinnerText() {
+    const strs = [
+        "Go change the world.",
+        "It's mango time. 🥭",
+        "Loading the makerness..."
+    ];
+    var randomIndex = Math.floor(Math.random() * strs.length);
+    return strs[randomIndex];
+}
 
 const mapStateToProps = state => {
     return {
@@ -30,7 +40,7 @@ const LoginForm = props => {
     if (props.isLoading) {
         return (
             <center>
-                <Spinner text="Go change the world." />
+                <Spinner text={getSpinnerText()} />
             </center>
         );
     }
@@ -81,29 +91,25 @@ const LoginForm = props => {
                     />
                 </Control>
             </Field>
-            <Level>
-                <Level.Left>
+            <div className="flex">
+                <div className="v-center">
                     <Link route={"forgot"}>Forgot?</Link>
-                </Level.Left>
-                <Level.Right>
-                    <Control>
-                        <Button
-                            className={"is-rounded"}
-                            onClick={() =>
-                                props.onClickLogin(
-                                    props.username,
-                                    props.password
-                                )
-                            }
-                            type="submit"
-                            loading={props.isLoading}
-                            primary
-                        >
-                            Login
-                        </Button>
-                    </Control>
-                </Level.Right>
-            </Level>
+                </div>
+                <div className="stretch"></div>
+                <div>
+                    <Button
+                        className={"is-rounded"}
+                        onClick={() =>
+                            props.onClickLogin(props.username, props.password)
+                        }
+                        type="submit"
+                        loading={props.isLoading}
+                        primary
+                    >
+                        Login
+                    </Button>
+                </div>
+            </div>
         </form>
     );
 };
@@ -117,7 +123,4 @@ LoginForm.propTypes = {
     onPasswordChange: PropTypes.func.isRequired
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

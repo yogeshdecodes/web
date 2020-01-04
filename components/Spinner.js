@@ -25,9 +25,9 @@ const Spinner = ({ color = "#2F2F2F", small = false, text = null }) => {
         );
     } else {
         return (
-            <div className={"center"}>
+            <div className={"flex flex-column v-center"}>
                 <ClimbingBoxLoader color={color} />
-                <p style={{ color: color }}>{text}</p>
+                <p style={{ color: color, fontWeight: "bold" }}>{text}</p>
             </div>
         );
     }

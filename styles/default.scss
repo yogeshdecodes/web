@@ -222,6 +222,16 @@ a[class^="btn"] {
         margin: 0;
     }
 
+    &.btn-xl {
+        font-weight: bold;
+        padding: 0.8rem 1.6rem !important;
+        margin: 0;
+    }
+
+    &.btn-block {
+        width: 100%;
+    }
+
     &.btn-small {
         font-size: 0.75rem;
     }
@@ -522,6 +532,10 @@ h2 {
 
 .flex {
     display: flex;
+
+    &.flex-column {
+        flex-direction: column;
+    }
 
     &.col-right {
         width: 100%;
@@ -1605,4 +1619,104 @@ figure.img-circle {
             }
         }
     }
+}
+
+.alert {
+    background-color: rgba(38, 50, 56, 0.95);
+    border-radius: 5px;
+    min-width: 100%;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    color: white;
+    cursor: pointer;
+    display: flex;
+
+    flex-direction: row;
+
+    .alert-icon {
+        display: block;
+        background-color: rgba(0, 0, 0, 0.2);
+        //height: 100%;
+        max-width: 50px;
+        min-height: 50px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    &.is-danger {
+        background-color: rgba(255, 56, 96, 0.951);
+
+        .alert-title .time {
+            color: whitesmoke !important;
+        }
+    }
+
+    &.success {
+        background-color: rgba(35, 209, 96, 0.951);
+
+        time {
+            color: whitesmoke;
+        }
+    }
+
+    &.dev {
+        background-color: rgba(54, 54, 54, 0.951);
+    }
+
+    &.warning {
+        background-color: rgba(255, 221, 87, 0.951);
+        color: #000;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .alert-title {
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+
+        .title-item {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .level {
+            margin-bottom: 0px;
+        }
+
+        .level-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time {
+            font-size: 14px;
+        }
+
+        &:last-child {
+            border-radius: 5px !important;
+        }
+    }
+
+    .alert-body {
+        font-size: 14px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        text-align: left;
+
+        ul {
+            padding-left: 0px;
+        }
+    }
+}
+
+.help {
+    margin-top: 0px;
+    font-size: 12px;
 }

@@ -22,6 +22,19 @@ class CarbonAd extends React.Component {
     }
 
     render() {
+        if (this.props.bare) {
+            return (
+                <div className="nonGold">
+                    <h3 className={"heading mt0"}>
+                        <Emoji emoji={"🤘"} /> Indie Ad
+                    </h3>
+
+                    <div ref={el => (this.instance = el)} />
+                    <div className="intravert-space" id={"space-0359e0d7b33"} />
+                </div>
+            );
+        }
+
         return (
             <div className={"card nonGold"}>
                 <div className={"card-content"}>
