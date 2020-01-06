@@ -31,7 +31,26 @@ const LoggedOutMenu = props => (
                 <a className="navbar-item">Talk</a>
             </NavLink>
 
-            <NavbarDropdown route="explore" link={() => <a>More</a>}>
+            <NavLink route="products" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Products</span>
+                </a>
+            </NavLink>
+            <NavLink route="makers" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Makers</span>
+                </a>
+            </NavLink>
+            <NavLink route="events" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Events</span>
+                </a>
+            </NavLink>
+
+            <NavbarDropdown
+                route="explore"
+                link={() => <FontAwesomeIcon icon="ellipsis-v" />}
+            >
                 <NavLink activeClassName="is-active" route="events">
                     <a className="navbar-item">
                         <span>Events</span>

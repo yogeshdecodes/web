@@ -7,9 +7,7 @@
 }
 
 .search-bar input::placeholder {
-    color: whitesmoke;
-    opacity: 0.2;
-    font-size: 0.9rem;
+    color: gray !important;
 }
 
 .GlobalSearchBar input {
@@ -18,7 +16,7 @@
 
 .GlobalSearchBar-overlay {
     transition: all 0.3s ease;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.7);
     height: 100%;
     top: 0;
     position: fixed;
@@ -39,8 +37,8 @@
 }
 
 .GlobalSearchBar-overlay .nav-cover {
-    background-color: #263238;
-    height: 60px;
+    background-color: white;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,6 +47,7 @@
 .GlobalSearchBar-overlay .form-case {
     display: flex;
     width: 100%;
+    align-items: center;
 }
 
 .GlobalSearchBar-overlay .control {
@@ -57,14 +56,14 @@
 }
 
 .GlobalSearchBar-overlay .control .input {
-    @extend %poppins;
+    @extend %worksans;
     background-color: transparent;
     width: 100%;
     height: 100%;
-    color: white;
+    color: $c-title;
     border: 0;
     padding: 0.8rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     box-shadow: none;
 }
 
@@ -77,7 +76,7 @@
 }
 
 .GlobalSearchBar-overlay button.search-button {
-    @extend %poppins;
+    @extend %worksans;
     background-color: transparent !important;
     max-width: 90px;
     height: 100%;
@@ -91,6 +90,11 @@
     animation: fadein 0.3s ease;
     margin-top: 20px;
     font-family: $font;
+    flex-direction: column;
+
+    h3 {
+        color: white;
+    }
 }
 
 .GlobalSearchBar-overlay .title {

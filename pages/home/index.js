@@ -4,6 +4,7 @@ import { GlobalStream } from "~/features/stream";
 import HomeSidebar from "../../components/sidebar/HomeSidebar";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
+import GetStartedLink from "~/components/GetStartedLink";
 
 export default requireUnauthed(() => (
     <div className="HomePage">
@@ -17,7 +18,9 @@ export default requireUnauthed(() => (
                     4,000+ creators get things done.
                 </h3>
                 <div>
-                    <Link route="begin">Get started</Link>
+                    <GetStartedLink>
+                        <a>Get started</a>
+                    </GetStartedLink>
                 </div>
             </div>
         </div>

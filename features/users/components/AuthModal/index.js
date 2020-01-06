@@ -16,8 +16,8 @@ function getLoveTweetId() {
         "1213509362611826688",
         "1208132962690224128",
         "1207689746517872641",
-        "1207688319456415745"
-        //"1213597639159275521"
+        //"1207688319456415745",
+        "1213597639159275521"
     ];
     var randomIndex = Math.floor(Math.random() * strs.length);
     return strs[randomIndex];
