@@ -9,7 +9,7 @@
 
         button {
             @extend %transition;
-            border-radius: 4px;
+            border-radius: 100px;
             font-size: 14px;
             color: #979797;
             background-color: white;
@@ -21,11 +21,18 @@
 
             &.is-active {
                 color: #636363;
-                background-color: rgba(0, 0, 0, 0.1);
+                background-color: rgba(0, 0, 0, 0.08);
             }
 
             &:first-of-type {
                 //padding-left: 0px;
+            }
+
+            &:active {
+                transition: transform 0.1s ease;
+                transform: scale(0.8);
+                //color: #636363;
+                //background-color: rgba(0, 0, 0, 0.1);
             }
         }
     }
