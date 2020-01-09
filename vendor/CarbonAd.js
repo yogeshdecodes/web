@@ -11,9 +11,30 @@ class CarbonAd extends React.Component {
         // s.src = `https://cdn.carbonads.com/carbon.js?serve=CK7DC5QJ&placement=${this.props.placement}`;
         s.src = `https://intravert.co/serve/0359e0d7b3.3.js`;
         this.instance.appendChild(s);
+        this.sc = s;
+    }
+
+    componentWillUnmount() {
+        //this.instance.innerHTML = "";
+        if (this.sc) {
+            this.instance.removeChild(this.sc);
+        }
     }
 
     render() {
+        if (this.props.bare) {
+            return (
+                <div className="nonGold">
+                    <h3 className={"heading mt0"}>
+                        <Emoji emoji={"🤘"} /> Indie Ad
+                    </h3>
+
+                    <div ref={el => (this.instance = el)} />
+                    <div className="intravert-space" id={"space-0359e0d7b33"} />
+                </div>
+            );
+        }
+
         return (
             <div className={"card nonGold"}>
                 <div className={"card-content"}>

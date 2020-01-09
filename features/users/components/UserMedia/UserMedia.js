@@ -166,9 +166,9 @@ class UserMedia extends React.Component {
         if (this.props.medium) {
             return (
                 <Link route="profile-page" params={{ username: user.username }}>
-                    <a
+                    <div
                         className={
-                            "grid-streamcard UserMedia " +
+                            "a-unstyled grid-streamcard UserMedia " +
                             (!this.props.user.streak ||
                             !this.props.user.week_tda
                                 ? "lazy"
@@ -190,14 +190,14 @@ class UserMedia extends React.Component {
                             <MakerScore score={user.maker_score} />
                             <Tda tda={user.week_tda} />
                         </div>
-                    </a>
+                    </div>
                 </Link>
             );
         }
 
         return (
             <Link route="profile-page" params={{ username: user.username }}>
-                <a
+                <div
                     className={
                         "grid-streamcard UserMedia " +
                         (!this.props.user.streak || !this.props.user.week_tda
@@ -226,7 +226,7 @@ class UserMedia extends React.Component {
                         <MakerScore score={user.maker_score} />
                         <Tda tda={user.week_tda} />
                     </div>
-                </a>
+                </div>
             </Link>
         );
     }

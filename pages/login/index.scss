@@ -1,0 +1,9 @@
+@import "../../styles/_variables";
+
+.LoginPage {
+    #page-content {
+        margin-top: calc(25vh - 80px);
+    }
+    @extend %transition-bg;
+    @extend %hero-gradient;
+}

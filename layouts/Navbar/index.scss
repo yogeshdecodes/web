@@ -6,7 +6,7 @@
     background: #ffffff;
     height: 79px;
     position: relative;
-    z-index: 999;
+    //z-index: 999;
     border-bottom: 0.2px solid #ececec;
 
     .navbar-end {
@@ -87,7 +87,7 @@
         transition: background-color 0.3s ease !important;
     }
 
-    .navbar-item:hover {
+    .navbar-item:not(div):hover {
         background: rgba(0, 173, 113, 0.05);
     }
 
@@ -102,6 +102,14 @@
         &.is-active span {
             color: $c-main;
         }
+    }
+
+    .navbar-item > .btn,
+    .navbar-item > button {
+        margin-left: 5px;
+        margin-right: 5px;
+        font-family: inherit;
+        font-weight: bold;
     }
 
     svg {
@@ -128,13 +136,13 @@
         }
     }
 
-    .spinner {
+    /*.spinner {
         position: absolute;
         height: 30px;
         width: 30px;
         left: calc(50% + 4rem);
         top: 1rem;
-    }
+    }*/
 
     &.translucent-navbar {
         position: absolute;
@@ -151,7 +159,7 @@
         a.navbar-item,
         .navbar-item.has-dropdown,
         a.navbar-link {
-            &:hover,
+            &:not(div):hover,
             &:active,
             &.is-located,
             &.is-active {
@@ -180,7 +188,7 @@
         a.navbar-item,
         .navbar-item.has-dropdown,
         a.navbar-link {
-            &:active,
+            //&:active,
             &.is-located,
             &.is-active {
                 margin: 0;
@@ -221,7 +229,7 @@
             }
         }
 
-        > div {
+        > .navbar-item:not(div) {
             &:hover,
             &:active,
             &.is-located,
@@ -357,7 +365,7 @@
             border: solid transparent;
             border-width: 3px 0;
 
-            &:hover,
+            &:not(div):hover,
             &:active,
             &.is-located,
             &.is-active {
@@ -394,16 +402,13 @@
         }
 
         .navbar-end {
-            display: grid;
-            grid-template-columns: 0.8fr 0.8fr 0.8fr 1.5fr;
+            display: flex;
+            flex-flow: row nowrap;
             justify-content: end;
 
             .navbar-item {
                 justify-content: center;
-            }
-
-            .navbar-item:last-child {
-                justify-content: end;
+                margin-left: 2rem;
             }
         }
 

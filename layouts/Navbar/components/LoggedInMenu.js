@@ -22,6 +22,12 @@ const LoggedInMenu = props => (
                     <span>Log</span>
                 </a>
             </NavLink>
+
+            <NavLink route="events" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Talk</span>
+                </a>
+            </NavLink>
             <NavLink route="products" activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Products</span>
@@ -40,7 +46,6 @@ const LoggedInMenu = props => (
 
             <NavbarDropdown
                 hoverable
-                to="/tasks"
                 link={() => (
                     <>
                         <FontAwesomeIcon icon="ellipsis-v" />
@@ -52,13 +57,6 @@ const LoggedInMenu = props => (
                         <span>Tasks</span>
                     </a>
                 </NavLink>
-
-                <NavLink route="products" activeClassName="is-active">
-                    <a className="navbar-item">
-                        <span>Products</span>
-                    </a>
-                </NavLink>
-
                 <NavLink route="apps" activeClassName="is-active">
                     <a className="navbar-item">
                         <span>Integrations</span>

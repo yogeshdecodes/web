@@ -1,33 +1,82 @@
 @import "../../styles/_variables";
 
-.HomePageIntro {
-	.hero {
-		overflow: hidden;
-		padding: 3.3rem 0;
-		position: relative;
-		background: linear-gradient(63deg, hsla(126, 33%, 55%, 0.5) 0%, hsla(175, 80%, 33%, 0.5) 100%), url("/assets/img/hero.jpg");
+/*
 
-		.container {
-			grid-template-columns: repeat(1, auto);
-		}
+    .ThumbnailCover {
+        display: flex;
+        position: absolute;
+        right: 0px;
+        width: 100%;
+        flex-wrap: wrap;
+        top: 0px;
+        overflow: hidden;
+        height: 100%;
+        z-index: 6;
+        background-color: rgba(83, 175, 135, 0.9);
+    }
 
-		h2 {
-			font-size: 2rem;
-			margin: 0;
-			line-height: 1;
-		}
+    .ThumbnailGrid {
+        display: flex;
+        position: absolute;
+        right: 0px;
+        width: 100%;
+        flex-wrap: wrap;
+        top: 0px;
+        height: 100%;
+        z-index: 4;
+        background-image: url(https://i.imgur.com/llKaQpR.jpg);
+        background-position: center;
+        overflow: hidden;
 
-		h3 {
-			font-size: 1.25rem;
-			font-weight: normal;
-			margin: 0 0 1.5rem;
-		}
+        .image {
+            flex: 1;
+            min-height: 40px;
+            min-width: 40px;
+            max-height: 40px;
+            max-width: 40px;
+            height: auto;
+            overflow: hidden;
+        }
+        .image > img {
+            min-height: 40px;
+            min-width: 40px;
+            height: auto;
+        }
+    }*/
 
-		a {
-			@extend %rounded;
-			padding: 0.5rem 1rem;
-			background: $c-lightest;
-			color: $c-title;
-		}
-	}
+.HomePage {
+    .hero {
+        overflow: hidden;
+        padding: 3.3rem 0;
+        position: relative;
+        background: linear-gradient(
+                63deg,
+                hsla(126, 33%, 55%, 0.9) 0%,
+                hsla(175, 39%, 59%, 0.9) 100%
+            ),
+            url("/img/hero.jpg");
+
+        .container {
+            grid-template-columns: repeat(1, auto);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 0;
+            line-height: 1;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: normal;
+            margin: 0 0 1.5rem;
+        }
+
+        a {
+            @extend %rounded;
+            padding: 0.5rem 1rem;
+            background: $c-lightest;
+            color: $c-title;
+        }
+    }
 }

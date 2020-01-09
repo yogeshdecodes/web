@@ -74,7 +74,6 @@ class StreamCard extends React.Component {
                                 size={"small"}
                             >
                                 <a
-                                    className="twitter-share-button"
                                     target={"_blank"}
                                     href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                                         this.generateTweetText(

@@ -113,7 +113,11 @@ class Navbar extends React.Component {
                     {!this.props.isLoggedIn && (
                         <LoggedOutMenu
                             expanded={this.state.expanded}
+                            toggleAuthModal={this.props.onToggleAuthModal}
                             onToggleExpand={this.onToggleExpand}
+                            authModalOpen={this.props.authModalOpen}
+                            authModalType={this.props.authModalType}
+                            onToggleAuthModal={this.props.onToggleAuthModal}
                         />
                     )}
 
@@ -136,7 +140,9 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.auth.loggedIn,
         user: state.user.me,
-        isSyncing: state.tasks.isSyncing || state.projects.isSyncing
+        isSyncing: state.tasks.isSyncing || state.projects.isSyncing,
+        authModalType: state.auth.authModalType,
+        authModalOpen: state.auth.authModalOpen
     };
 };
 
@@ -144,6 +150,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onClickLogout: () => {
             dispatch(authActions.logout());
+        },
+        onToggleAuthModal: (type = "login") => {
+            dispatch(authActions.toggleModal(type));
         }
     };
 };

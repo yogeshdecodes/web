@@ -4,9 +4,10 @@ import { GlobalStream } from "~/features/stream";
 import HomeSidebar from "../../components/sidebar/HomeSidebar";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
+import GetStartedLink from "~/components/GetStartedLink";
 
 export default requireUnauthed(() => (
-    <div>
+    <div className="HomePage">
         <div className={"hero"}>
             <div className="ThumbnailCover" />
             <div className="ThumbnailGrid" />
@@ -14,10 +15,12 @@ export default requireUnauthed(() => (
                 <h2>Get things done with us.</h2>
                 <h3>
                     Makerlog is the collaborative task log that helps over
-                    2,000+ creators get things done.
+                    4,000+ creators get things done.
                 </h3>
                 <div>
-                    <Link route="begin">Get started</Link>
+                    <GetStartedLink>
+                        <a>Get started</a>
+                    </GetStartedLink>
                 </div>
             </div>
         </div>

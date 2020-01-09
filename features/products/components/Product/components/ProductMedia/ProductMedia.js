@@ -71,13 +71,13 @@ class ProductMedia extends React.Component {
         if (this.props.xs) {
             return (
                 <div className={"ProductMedia"}>
-                    <LinkComponent
+                    <Link
                         route="product-page"
                         params={{ slug: this.props.product.slug }}
                     >
                         <div className={"flex"}>
                             <div>
-                                <figure className="image is-32x32 img-rounded">
+                                <figure className="img-32">
                                     <img
                                         src={
                                             this.props.product.icon
@@ -88,7 +88,7 @@ class ProductMedia extends React.Component {
                                     />
                                 </figure>
                             </div>
-                            <div>
+                            <p>
                                 <strong>{this.props.product.name}</strong>
                                 <br />
                                 <small>
@@ -98,16 +98,16 @@ class ProductMedia extends React.Component {
                                         "..."
                                     )}
                                 </small>
-                            </div>
+                            </p>
                         </div>
-                    </LinkComponent>
+                    </Link>
                 </div>
             );
         }
 
         return (
             <div className={"ProductMedia"}>
-                <LinkComponent
+                <Link
                     route="product-page"
                     params={{ slug: this.props.product.slug }}
                 >
@@ -145,7 +145,7 @@ class ProductMedia extends React.Component {
                             </div>
                         </div>
                     </div>
-                </LinkComponent>
+                </Link>
             </div>
         );
     }

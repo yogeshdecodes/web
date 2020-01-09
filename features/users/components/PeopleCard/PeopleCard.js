@@ -193,12 +193,12 @@ class PeopleCard extends React.Component {
         if (!this.state.topUsers || !this.state.topUsers.length) return null;
 
         return (
-            <div>
+            <>
                 <h4 className={"heading"}>
                     <Emoji emoji="🔥" /> Top streaks
                 </h4>
                 <UserRow users={this.state.topUsers} />
-            </div>
+            </>
         );
     }
 
@@ -285,7 +285,7 @@ class PeopleCard extends React.Component {
                 </h4>
                 <>
                     <ProductList
-                        products={this.state.recentlyLaunched.slice(0, 6)}
+                        products={this.state.recentlyLaunched.slice(0, 5)}
                         thumbnail
                     />
                 </>
@@ -382,7 +382,6 @@ class PeopleCard extends React.Component {
             <div className="card">
                 <div className={"card-content"}>
                     {this.renderBroadcasts()}
-                    {this.renderFeaturedMaker()}
                     {this.renderTopUsers()}
                     {this.renderStreamers()}
                     {this.renderNewUsers()}
