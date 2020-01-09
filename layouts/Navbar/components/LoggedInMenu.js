@@ -46,7 +46,6 @@ const LoggedInMenu = props => (
 
             <NavbarDropdown
                 hoverable
-                to="/tasks"
                 link={() => (
                     <>
                         <FontAwesomeIcon icon="ellipsis-v" />

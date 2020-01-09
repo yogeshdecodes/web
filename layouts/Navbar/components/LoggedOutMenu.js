@@ -48,7 +48,7 @@ const LoggedOutMenu = props => (
             </NavLink>
 
             <NavbarDropdown
-                route="explore"
+                hoverable
                 link={() => <FontAwesomeIcon icon="ellipsis-v" />}
             >
                 <NavLink activeClassName="is-active" route="events">

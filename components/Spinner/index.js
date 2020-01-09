@@ -5,12 +5,7 @@ import styled from "styled-components";
 import { ClassicSpinner } from "react-spinners-kit";
 import "./index.scss";
 
-const Spinner = ({
-    color = "#2F2F2F",
-    small = false,
-    text = null,
-    size = 15
-}) => {
+const Spinner = ({ color = null, small = false, text = null, size = 15 }) => {
     if (small) {
         if (text)
             return (
@@ -25,16 +20,25 @@ const Spinner = ({
                 </span>
             );
         return (
-            <ClassicSpinner
-                color={color ? color : "gray"}
-                size={parseInt(size ? size : "50")}
-            />
+            <center>
+                <ClassicSpinner
+                    color={color ? color : "gray"}
+                    size={parseInt(size ? size : "50")}
+                />
+            </center>
         );
     } else {
         return (
             <div className={"flex flex-column v-center"}>
-                <ClimbingBoxLoader color={color} />
-                <p style={{ color: color, fontWeight: "bold" }}>{text}</p>
+                <ClimbingBoxLoader color={color ? color : "#2F2F2F"} />
+                <p
+                    style={{
+                        color: color ? color : "#2F2F2F",
+                        fontWeight: "bold"
+                    }}
+                >
+                    {text}
+                </p>
             </div>
         );
     }
