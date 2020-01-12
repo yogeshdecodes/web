@@ -72,6 +72,8 @@ export default (state, action) => {
         if (action.type === authTypes.LOGOUT) {
             state = undefined;
             if (!isServer) {
+                Router.pushRoute("/");
+
                 // total hack
                 // 1. sync across windows
                 window.localStorage.setItem("authSync_logout", Date.now());
@@ -79,6 +81,7 @@ export default (state, action) => {
                 if (storage) {
                     storage.clear();
                 }
+
                 // 3. reload
                 window.location.reload();
             }
