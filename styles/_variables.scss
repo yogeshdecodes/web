@@ -113,6 +113,23 @@ $breakpoint-mobile: 960px;
     box-shadow: inset 0 1px 2px hsla(0, 0%, 4%, 0.1);
 }
 
+%hero-bg {
+    background: linear-gradient(
+            63deg,
+            hsla(126, 33%, 55%, 0.9) 0%,
+            hsla(175, 39%, 59%, 0.9) 100%
+        ),
+        url("/img/hero.jpg");
+}
+
+%hero-gradient {
+    background: linear-gradient(
+        63deg,
+        hsla(126, 33%, 55%, 0.9) 0%,
+        hsla(175, 39%, 59%, 0.9) 100%
+    );
+}
+
 %uppercase {
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -132,4 +149,35 @@ $breakpoint-mobile: 960px;
 %note {
     font-size: 0.875rem;
     color: hsl(0, 0%, 48%);
+}
+
+%long-shadow {
+    box-shadow: 0px 16px 67px -25px rgba(0, 0, 0, 0.75) !important;
+}
+
+%brand-underline {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+    text-decoration-skip: objects;
+    -webkit-text-decoration-color: #3fdb96;
+    text-decoration-color: #3fdb96;
+}
+
+%brand-animated-bg {
+    @keyframes BrandGradientAnim {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    background: linear-gradient(271deg, #00ad71, #41c38c, #17aa77, #62c8a5);
+    background-size: 800% 800%;
+
+    animation: BrandGradientAnim 17s ease infinite;
 }

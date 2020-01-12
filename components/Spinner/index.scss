@@ -1,0 +1,55 @@
+.Spinner {
+    &.splash {
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #ecf0f1;
+        z-index: 100;
+        font-weight: bold;
+
+        .Spinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            span {
+                margin-top: 30px;
+            }
+        }
+    }
+
+    &.small {
+        border-radius: 50%;
+        width: 7em;
+        height: 7em;
+        margin: 60px auto;
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border: 1.1em solid rgba(243, 255, 253, 0.2);
+        border-left-color: #f3fffd;
+        transform: translateZ(0);
+        animation: load8 1.1s infinite linear;
+
+        &::after {
+            border-radius: 50%;
+            width: 7em;
+            height: 7em;
+        }
+    }
+
+    &.with-text {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+
+        span:nth-of-type(2) {
+            margin-left: 10px;
+        }
+    }
+}

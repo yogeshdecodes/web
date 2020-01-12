@@ -4,7 +4,7 @@
     font-size: 0.875rem;
     background: #ffffff;
     position: relative;
-    z-index: 999;
+    //z-index: 999;
     border-bottom: 0.2px solid #ececec;
     padding: 0.5rem 0;
 
@@ -126,13 +126,13 @@
         }
     }
 
-    .spinner {
+    /*.spinner {
         position: absolute;
         height: 30px;
         width: 30px;
         left: calc(50% + 4rem);
         top: 1rem;
-    }
+    }*/
 
     &.translucent-navbar {
         position: absolute;

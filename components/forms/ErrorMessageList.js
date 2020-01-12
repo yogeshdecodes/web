@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Message } from "~/vendor/bulma";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./ErrorMessageList.scss";
 
 const renderFieldErrors = fieldErrors => {
     console.log(fieldErrors);
@@ -41,22 +42,31 @@ const renderFieldErrors = fieldErrors => {
     return null;
 };
 
-const ErrorMessageList = ({ errorMessages, fieldErrors }) => (
-    <Message danger>
-        <Message.Body>
-            <ul>
-                <b>
-                    {errorMessages &&
-                        errorMessages.map(message => (
-                            <li key={message}>{message}</li>
-                        ))}
-                </b>
-                {errorMessages && fieldErrors && <hr />}
-                {fieldErrors && <div>{renderFieldErrors(fieldErrors)}</div>}
-            </ul>
-        </Message.Body>
-    </Message>
-);
+const ErrorMessageList = ({ errorMessages, fieldErrors }) =>
+    (errorMessages && errorMessages.length > 0) ||
+    (fieldErrors && fieldErrors.length > 0) ? (
+        <div className="alert is-danger">
+            <div className="alert-icon">
+                <FontAwesomeIcon icon="exclamation-triangle" />
+            </div>
+            <div className="alert-body">
+                <ul>
+                    <b>
+                        {errorMessages &&
+                            errorMessages.length > 1 &&
+                            errorMessages.map(message => (
+                                <li key={message}>{message}</li>
+                            ))}
+                        {errorMessages && errorMessages.length == 1 && (
+                            <span>{errorMessages[0]}</span>
+                        )}
+                    </b>
+                    {errorMessages && fieldErrors && <hr />}
+                    {fieldErrors && <div>{renderFieldErrors(fieldErrors)}</div>}
+                </ul>
+            </div>
+        </div>
+    ) : null;
 
 ErrorMessageList.propTypes = {
     errorMessages: PropTypes.array.isRequired

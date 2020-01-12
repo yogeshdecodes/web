@@ -16,6 +16,7 @@ import ThreadList from "../../../discussions/ThreadList";
 import UserMediaList from "../../../users/components/UserMediaList/UserMediaList";
 import debounce from "lodash/debounce";
 import orderBy from "lodash/orderBy";
+import Spinner from "~/components/Spinner";
 
 class GlobalSearchBar extends React.Component {
     state = {
@@ -122,10 +123,10 @@ class GlobalSearchBar extends React.Component {
                     onKeyUp={this.esc}
                 >
                     <div className={"nav-cover"}>
-                        <div className={"container form-case"}>
+                        <div className={"container form-case v-center"}>
                             <div
                                 className={
-                                    "control" +
+                                    " search-bar control" +
                                     (this.state.loading ? " is-loading" : "")
                                 }
                             >
@@ -139,12 +140,16 @@ class GlobalSearchBar extends React.Component {
                                     }
                                 />
                             </div>
-                            <button
-                                className={"search-button"}
-                                onClick={this.navigateToSearch}
-                            >
-                                Search
-                            </button>
+                            {this.state.loading ? (
+                                <Spinner small color="gray" />
+                            ) : (
+                                <button
+                                    className={"search-button"}
+                                    onClick={this.navigateToSearch}
+                                >
+                                    Search
+                                </button>
+                            )}
                         </div>
                     </div>
                     <div

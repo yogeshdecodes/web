@@ -4,6 +4,7 @@ import NavLink from "~/components/ActiveLink";
 import { NavbarDropdown } from "~/components/Dropdown";
 import React from "react";
 import { Link } from "~/routes";
+import AuthModal from "~/features/users/components/AuthModal";
 
 const LoggedOutMenu = props => (
     <div
@@ -11,6 +12,16 @@ const LoggedOutMenu = props => (
         onClick={props.onToggleExpand}
         id="navMenu"
     >
+        <AuthModal
+            login={props.authModalType === "login"}
+            begin={props.authModalType === "begin"}
+            open={
+                props.authModalOpen &&
+                (props.authModalType === "login" ||
+                    props.authModalType === "begin")
+            }
+            onClose={props.onToggleAuthModal}
+        />
         <div className="navbar-start">
             <NavLink activeClassName="is-active" route="home">
                 <a className="navbar-item">Home</a>
@@ -20,9 +31,26 @@ const LoggedOutMenu = props => (
                 <a className="navbar-item">Talk</a>
             </NavLink>
 
-            <GlobalSearchBar />
+            <NavLink route="products" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Products</span>
+                </a>
+            </NavLink>
+            <NavLink route="makers" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Makers</span>
+                </a>
+            </NavLink>
+            <NavLink route="events" activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Events</span>
+                </a>
+            </NavLink>
 
-            <NavbarDropdown route="explore" link={() => <FontAwesomeIcon size="lg" icon={"bars"} />}>
+            <NavbarDropdown
+                hoverable
+                link={() => <FontAwesomeIcon icon="ellipsis-v" />}
+            >
                 <NavLink activeClassName="is-active" route="events">
                     <a className="navbar-item">
                         <span>Events</span>
@@ -46,16 +74,25 @@ const LoggedOutMenu = props => (
             </NavbarDropdown>
         </div>
         <div className="navbar-end">
+            <GlobalSearchBar />
 
-            <NavLink activeClassName="is-active" route="login">
-                <a className="navbar-item">Login</a>
-            </NavLink>
+            <a
+                onClick={() => {
+                    props.onToggleAuthModal("login");
+                }}
+                className="navbar-item"
+            >
+                Sign in
+            </a>
             <div className="navbar-item">
-                <Link route="begin">
-                    <button className="has-text-bold is-rounded is-primary">
-                        Get started
-                    </button>
-                </Link>
+                <button
+                    onClick={() => {
+                        props.onToggleAuthModal("begin");
+                    }}
+                    className="has-text-bold is-rounded is-primary"
+                >
+                    Get started
+                </button>
             </div>
         </div>
     </div>
