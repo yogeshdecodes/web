@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "~/routes";
 import OutboundLink from "../../OutboundLink";
 
-const FooterCard = props => (
+const SmallFooter = props => (
     <ul className={"LinksFooter flex"}>
         <li className={"has-text-grey"}>&copy; Makerlog</li>
         <li>
@@ -41,4 +41,4 @@ const FooterCard = props => (
     </ul>
 );
 
-export default FooterCard;
+export default SmallFooter;

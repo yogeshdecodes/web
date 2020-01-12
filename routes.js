@@ -2,7 +2,7 @@ const routes = require("next-routes");
 
 // order of arguments
 // 1. route name
-// 2. url
+// 2. url 
 // 3. file path
 
 module.exports = routes()

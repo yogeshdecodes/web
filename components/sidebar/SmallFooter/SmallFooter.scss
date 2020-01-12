@@ -1,0 +1,16 @@
+@import "../../../styles/_variables";
+
+.LinksFooter {
+    margin: 0px !important;
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    padding-top: 0px !important;
+
+    li {
+        display: inline-block;
+        flex-grow: 1;
+        padding-right: 13px;
+        font-size: 13.5px;
+    }
+}
