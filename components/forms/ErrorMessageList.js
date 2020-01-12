@@ -42,13 +42,17 @@ const renderFieldErrors = fieldErrors => {
     return null;
 };
 
+/*
+
+            <div className="alert-icon">
+                <FontAwesomeIcon icon="exclamation-triangle" />
+            </div>
+*/
+
 const ErrorMessageList = ({ errorMessages, fieldErrors }) =>
     (errorMessages && errorMessages.length > 0) ||
     (fieldErrors && fieldErrors.length > 0) ? (
         <div className="alert is-danger">
-            <div className="alert-icon">
-                <FontAwesomeIcon icon="exclamation-triangle" />
-            </div>
             <div className="alert-body">
                 <ul>
                     <b>
