@@ -1,6 +1,6 @@
 import AdCard from "~/components/sidebar/AdCard";
 import AttendeesCard from "./AttendeesCard";
-import FooterCard from "../../../components/sidebar/FooterCard";
+import SmallFooter from "../../../components/sidebar/SmallFooter";
 import React from "react";
 import Sticky from "react-stickynode";
 import { isServer } from "~/config";
@@ -15,7 +15,7 @@ export default props => (
                 </>
             )}
             <AdCard />
-            <FooterCard />
+            <SmallFooter />
         </Sticky>
     </>
 );

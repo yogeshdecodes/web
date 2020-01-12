@@ -63,7 +63,7 @@ class ProjectRelated extends React.Component {
                     textAlign: "left"
                 }}
             >
-                <h3 className={"heading"}>Linked products</h3>
+                <h3 className={"heading has-text-white"}>Linked products</h3>
                 {!this.state.productsReady && <Spinner small color={"white"} />}
                 {this.state.productsReady &&
                     this.state.products &&
