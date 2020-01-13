@@ -7,9 +7,9 @@ import Head from "~/components/Head";
 export default props => (
     <div className={"DownOverlay"}>
         <Head />
-        <img src="https://images.emojiterra.com/google/android-10/512px/1f96d.png" />
         <h2 className={"brand"}>Makerlog</h2>
         <div className={"center has-text-centered"}>
+            <img src="https://i.imgur.com/KTffPs2.png" />
             <h1>Uh oh, something went wrong.</h1>
             <p>Makerlog is a little overloaded or down due to maintenance.</p>
             <br />
