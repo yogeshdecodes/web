@@ -73,7 +73,7 @@ const AuthModalCard = connect(
                                 errorMessages={this.props.errorMessages}
                             />
                         </div>
-                        <div></div>
+                        <div className="is-hidden-touch"></div>
                     </div>
                 );
             }
@@ -122,7 +122,7 @@ const AuthModalCard = connect(
                             </Link>
                         </div>
                     </div>
-                    <div></div>
+                    <div className="is-hidden-touch"></div>
                 </div>
             );
         }
