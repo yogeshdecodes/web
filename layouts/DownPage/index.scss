@@ -9,11 +9,17 @@
     background-color: white;
     color: black;
 
-    & > img {
-        position: fixed;
-        bottom: 30px;
-        left: 30px;
-        height: 100px;
+    .center {
+        margin-top: -100px;
+        align-items: center;
+    }
+
+    & img {
+        //  position: fixed;
+        //bottom: 30px;
+        //left: 30px;
+        height: 150px;
+        width: 150px;
     }
 
     h1 {
@@ -27,6 +33,7 @@
     .button-row {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 15px;
     }
 }
 

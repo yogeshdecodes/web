@@ -57,6 +57,10 @@
         }
     }
 
+    .controls {
+        padding-left: 0.5rem;
+    }
+
     .input-container input {
         padding: 0 1.5rem 1.5rem;
         font-size: 20px;
@@ -64,5 +68,72 @@
         border: none;
         width: 100%;
         @extend %corners;
+    }
+
+    .task-input-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .task-input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 1rem;
+        padding-top: 0px;
+        position: relative;
+        opacity: 0.5;
+
+        transition: opacity 0.3s ease;
+
+        &.active {
+            opacity: 1;
+        }
+
+        &:first-of-type {
+            padding-top: 0px;
+        }
+
+        .help {
+            position: absolute;
+            bottom: 0px;
+            color: lightgray;
+            left: calc(1rem + 25px);
+        }
+        & > div.check-case {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            div {
+                border-radius: 2px;
+                height: 18px;
+                width: 18px;
+                background: $c-main;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            svg {
+                width: 0.8em;
+            }
+        }
+
+        & > div.input {
+            width: 100%;
+            > input {
+                //padding: 1.5rem;
+                padding-left: 0.6rem;
+                padding-top: 0px;
+                font-size: 20px;
+                // @extend %worksans;
+                background: white;
+                border: none;
+                width: 100%;
+                @extend %corners;
+                height: 100%;
+            }
+        }
     }
 }

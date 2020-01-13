@@ -20,7 +20,11 @@ function getStyles(user) {
 
 const StreamHeader = props => {
     if (props.loading) {
-        return <div className={"StreamHeader hero blurred loading"}></div>;
+        return (
+            <div className={"StreamHeader hero blurred loading"}>
+                <Spinner small color="white" text="Syncing your tasks..." />
+            </div>
+        );
     }
 
     return (

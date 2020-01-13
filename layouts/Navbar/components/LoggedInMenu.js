@@ -23,7 +23,7 @@ const LoggedInMenu = props => (
                 </a>
             </NavLink>
 
-            <NavLink route="events" activeClassName="is-active">
+            <NavLink route="discussions" activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Talk</span>
                 </a>

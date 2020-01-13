@@ -34,8 +34,11 @@
         height: 100%;
         width: 100%;
         position: relative;
-        padding-top: 50px;
+        padding: 30px;
         -webkit-backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     &.blurred {
