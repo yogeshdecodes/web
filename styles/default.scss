@@ -844,6 +844,7 @@ h2 {
 }
 
 .heading {
+    font-family: $font !important;
     @extend %uppercase;
     margin: 0 0 5px;
     padding: 0;
