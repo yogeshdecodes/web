@@ -6,11 +6,15 @@
 	border-top: none !important;
 	padding-top: 0 !important;
 	margin-top: 10px;
-	margin-bottom: 10px;
 	cursor: pointer;
 
 	&.lazy {
 		opacity: 0.6;
+	}
+
+	figure	{
+		margin: 0 1rem 0 0;
+		padding: 0;
 	}
 
 	img {
