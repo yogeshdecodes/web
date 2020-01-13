@@ -154,9 +154,9 @@ class UserMedia extends React.Component {
                             <Avatar is={32} user={this.props.user} />
                         </div>
                         <div>
-                            <h4>
+                            <strong>
                                 <FullName user={this.props.user} />
-                            </h4>
+                            </strong>
                         </div>
                     </div>
                 </Link>
