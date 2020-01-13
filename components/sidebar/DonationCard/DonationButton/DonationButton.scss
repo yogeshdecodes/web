@@ -1,7 +1,7 @@
 @import "../../../../styles/_variables";
 
 .bmc-button {
-	@extend %poppins;
+	@extend %bold;
 	@extend %corners;
 	@extend %transition;
 	text-decoration: none;

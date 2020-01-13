@@ -8,7 +8,7 @@
     .KanbanProject {
         .title-card {
             @extend %corners;
-            @extend %poppins;
+            @extend %bold;
             background: $c-lightest;
             padding: $gap/2;
             width: 100%;

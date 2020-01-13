@@ -383,7 +383,7 @@ h6 {
 
 h1,
 h2:not(.topic-title) {
-    @extend %worksans;
+    @extend %bold;
 }
 
 h1.page-title,
@@ -671,7 +671,7 @@ h2 {
     }
 
     h2 {
-        @extend %worksans;
+        @extend %bold;
         font-size: 1.2rem;
         margin: 0 0 0.75rem;
     }
@@ -755,7 +755,7 @@ h2 {
     }
 
     div {
-        @extend %worksans;
+        @extend %bold;
         line-height: 1;
         margin-top: 5px;
     }
@@ -806,7 +806,7 @@ h2 {
         h1,
         h2,
         h3 {
-            @extend %worksans;
+            @extend %bold;
             margin: 0;
         }
 
@@ -862,7 +862,7 @@ h2 {
 
 .Broadcast {
     h2 {
-        @extend %worksans;
+        @extend %bold;
         font-size: 1rem !important;
         margin: 0;
     }
@@ -912,7 +912,7 @@ h2 {
             grid-template-columns: repeat(2, 48px calc(100% - 48px));
 
             h5 {
-                @extend %worksans;
+                @extend %bold;
                 font-size: 0.938rem;
                 margin: 0;
             }

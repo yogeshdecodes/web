@@ -56,7 +56,7 @@
     height: 60px;
 
     h1 {
-        @extend %poppins;
+        @extend %bold;
         color: $c-lightest;
         margin: 0;
         font-size: 1.25rem;

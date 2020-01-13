@@ -46,7 +46,7 @@
 		align-items: center;
 
 		a	{
-			@extend %poppins;
+			@extend %bold;
 			font-size: 1.25rem;
 			color: $c-secondary;
 		}

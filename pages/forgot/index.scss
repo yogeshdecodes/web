@@ -24,7 +24,7 @@
 
         h1,
         blockquote {
-            @extend %poppins;
+            @extend %bold;
             color: $c-lightest;
             font-size: 2.5rem;
             margin: 0;
@@ -42,7 +42,7 @@
 
         input[type="password"],
         input[type="email"] {
-            @extend %poppins;
+            @extend %bold;
             background: transparent;
             outline: 0;
             font-size: 1rem;
@@ -54,7 +54,7 @@
         }
 
         button {
-            @extend %poppins;
+            @extend %bold;
             color: $c-brand;
             background: transparent;
             border: 0;

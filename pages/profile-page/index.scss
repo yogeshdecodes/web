@@ -138,6 +138,6 @@
     }
 
     .hero-item:not(p) {
-        @extend %poppins;
+        @extend %bold;
     }
 }

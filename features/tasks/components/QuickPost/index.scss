@@ -39,12 +39,10 @@
 
     footer {
         background: rgba(149, 171, 177, 0.1);
-        height: 0px;
+        height: 0;
         overflow: hidden;
         transition: height 0.3s ease;
-        padding: 0px;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        padding: 0 1.5rem;
         display: flex;
         align-items: center;
     }
@@ -55,16 +53,13 @@
         }
 
         input {
-            border-radius: 0px;
+            border-radius: 0;
         }
     }
 
     .input-container input {
-        padding: 1.5rem;
-        padding-left: 1.5rem;
-        padding-top: 0px;
+        padding: 0 1.5rem 1.5rem;
         font-size: 20px;
-        // @extend %worksans;
         background: white;
         border: none;
         width: 100%;

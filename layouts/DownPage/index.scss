@@ -31,7 +31,7 @@
 }
 
 .DownOverlay .brand {
-    @extend %poppins;
+    @extend %bold;
     color: $c-brand;
     position: fixed;
     top: 30px;

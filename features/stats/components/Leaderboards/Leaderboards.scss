@@ -4,7 +4,7 @@
 	cursor: pointer;
 
 	.Leaderboards-Row {
-		@extend %poppins;
+		@extend %bold;
 		font-size: 1.563rem;
 		display: grid;
 		grid-template-columns: 60px 6fr 3fr 2fr 2fr;

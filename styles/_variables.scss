@@ -1,5 +1,5 @@
 // Typography
-$font: "Work Sans", -apple-system, system-ui, sans-serif;
+$font: -apple-system, system-ui, sans-serif;
 $font-size: 16px;
 
 // Colors -- texts
@@ -72,15 +72,7 @@ $breakpoint-tablet: 1200px;
 $breakpoint-mobile: 960px;
 
 // Extensions
-%worksans {
-    font-family: "Work Sans", $font;
-    font-weight: 700;
-    //-webkit-font-smoothing: antialiased;
-    //-moz-osx-font-smoothing: grayscale;
-}
-
-%poppins {
-    font-family: "Poppins", $font;
+%bold {
     font-weight: 700;
 }
 
