@@ -344,7 +344,7 @@ a:not(.btn):hover {
 .gray-link-with-icon {
     @extend %corners;
     font-size: 0.75rem;
-    color: $c-text;
+    color: $c-text !important;
     text-decoration: underline;
     display: inline-flex;
     justify-content: center;
