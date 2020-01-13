@@ -379,11 +379,7 @@ h4,
 h5,
 h6 {
     @extend %title;
-}
-
-h1,
-h2:not(.topic-title) {
-    @extend %bold;
+    font-family: $font-title;
 }
 
 h1.page-title,
