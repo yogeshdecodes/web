@@ -178,8 +178,7 @@ input[type="search"] {
     }
 }
 
-button:not(.edit-button),
-button:not(.delete-button),
+button:not(.edit-button,.delete-button,.gray-link-with-icon),
 div[class^="btn"],
 a[class^="btn"] {
     @extend %rounded;
@@ -348,7 +347,7 @@ a:not(.btn):hover {
 }
 
 .gray-link-with-icon {
-    @extend %corners;
+    @extend %rounded;
     font-size: 0.75rem;
     color: $c-text !important;
     text-decoration: underline;
@@ -363,10 +362,12 @@ a:not(.btn):hover {
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
-    padding: 4px;
     text-align: center;
     white-space: nowrap;
     background: $c-lightest;
+    border: 0;
+    padding: 4px 1em;
+    height: 2.25em;
 
     &:hover {
         background: $c-bg-light;
