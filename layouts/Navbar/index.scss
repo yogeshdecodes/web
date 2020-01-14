@@ -200,32 +200,37 @@
             background: rgba(0, 173, 113, 0.05);
         }
 
+
+
         a.navbar-item,
-        .navbar-item.has-dropdown,
         a.navbar-link {
-            //&:active,
-            &.is-located,
-            &.is-active {
-                margin: 0;
-                box-shadow: 0 2px 0 #00ad71 inset;
-                background: linear-gradient(
-                    180deg,
-                    rgba(0, 173, 113, 0.05) 0%,
-                    rgba(0, 173, 113, 0) 100%
-                );
-                color: $c-main;
 
-                .navbar-dropdown .navbar-item   {
-                    box-shadow: none !important;
-                    background: #fff;
+            &:not(.has-dropdown) {
+                .is-located,
+                .is-active {
+                    margin: 0;
+                    box-shadow: 0 2px 0 #00ad71 inset;
+                    background: linear-gradient(
+                                    180deg,
+                                    rgba(0, 173, 113, 0.05) 0%,
+                                    rgba(0, 173, 113, 0) 100%
+                    );
+                    color: $c-main;
 
-                    &:hover,
-                    &:active    {
-                        background: linear-gradient(
-                                        180deg,
-                                        rgba(0, 173, 113, 0.05) 0%,
-                                        rgba(0, 173, 113, 0) 100%
-                        );
+                    .navbar-dropdown .navbar-item {
+                        background: #fff;
+                        box-shadow: none !important;
+
+                        &.is-active,
+                        &:hover,
+                        &:active {
+                            box-shadow: none !important;
+                            background: linear-gradient(
+                                            180deg,
+                                            rgba(0, 173, 113, 0.05) 0%,
+                                            rgba(0, 173, 113, 0) 100%
+                            );
+                        }
                     }
                 }
             }
