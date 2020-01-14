@@ -446,22 +446,6 @@
             display: none;
         }
 
-        .navbar-link::after {
-            content: "";
-            border: solid $c-lightest;
-            border-width: 0 0 1px 1px;
-            display: block;
-            height: 0.5em;
-            pointer-events: none;
-            position: absolute;
-            transform: rotate(-45deg);
-            transform-origin: center;
-            width: 0.5em;
-            margin-top: -0.375em;
-            right: 1.125em;
-            top: 50%;
-        }
-
         .navbar-dropdown.is-right {
             left: auto;
             right: 0;
