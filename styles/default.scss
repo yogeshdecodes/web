@@ -1179,7 +1179,6 @@ button[disabled] {
 
     &.gtd {
         background: $c-gtd;
-        color: $c-lightest;
     }
 
     &.donor {
@@ -1217,6 +1216,10 @@ button[disabled] {
 
     &.fifty {
         background: $c-fifty;
+
+        .emoji {
+            text-shadow: 0 0 3px $c-lightest;
+        }
     }
 
     .emoji {
