@@ -60,9 +60,7 @@
             border-radius: 5px;
             overflow: hidden;
             opacity: 0;
-            display: grid;
             transition: opacity 0.25s;
-            grid-auto-flow: column;
 
             a {
                 text-decoration: none;
@@ -88,11 +86,19 @@
                 }
 
                 &.edit-button {
-                    background: rgb(243, 156, 18);
+                    background: #f39c12;
+                    font-size: 1rem;
+                    grid-column-start: auto;
+                    grid-column-end: auto;
+                    font-weight: 700;
                 }
 
                 &.delete-button {
                     background: red;
+                    font-size: 1rem;
+                    grid-column-start: auto;
+                    grid-column-end: auto;
+                    font-weight: 700;
                 }
             }
         }

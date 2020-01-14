@@ -57,11 +57,11 @@ class KanbanTask extends React.Component {
                     task={this.props.task}
                 />
 
-                <div className="hover-panel">
+                <div className="hover-panel flex center v-center">
                     {this.props.extraButtons}
                     <a
                         onClick={this.toggleEditing}
-                        className="btn btn-small btn-gray"
+                        className="edit-button"
                     >
                         <FontAwesomeIcon icon={"edit"} /> Edit
                     </a>
@@ -70,7 +70,7 @@ class KanbanTask extends React.Component {
                         onClick={() =>
                             this.props.deleteTask(this.props.task.id)
                         }
-                        className="btn btn-delete"
+                        className="delete-button"
                     >
                         <FontAwesomeIcon icon={"trash"} /> Delete
                     </a>
