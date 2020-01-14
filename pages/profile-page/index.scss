@@ -7,7 +7,6 @@
         background-position: center;
         background-attachment: fixed;
         padding-top: 10rem;
-        padding-bottom: 2.5rem;
 
         .container {
             display: flex;
@@ -21,10 +20,10 @@
 
         .grid-s-c {
             width: 100%;
-            min-height: 90px;
-            max-height: 10vh;
+            height: 180px;
             position: relative;
             white-space: nowrap;
+            margin-bottom: -45px;
         }
     }
 

@@ -6,33 +6,26 @@ import Emoji from "~/components/Emoji";
 const LoggedOutMessage = props => (
     <LoggedOutOnly>
         <article
-            className="message is-medium is-primary"
+            className="panel-message is-medium is-primary"
             style={{ borderColor: "#16A085" }}
         >
-            <div
-                className="message-header"
-                style={{ backgroundColor: "#16A085", borderColor: "#16A085" }}
-            >
-                <p>
-                    <Emoji emoji={"✌"} /> Welcome, guest!
-                </p>
+            <div className="message-header">
+                <Emoji emoji={"✌"} /> Welcome, guest!
             </div>
             <div className="message-body">
-                <strong>Makerlog</strong> is a{" "}
+                <p><strong>Makerlog</strong> is a{" "}
                 <strong>community of makers</strong> helping each other{" "}
                 <strong>ship faster</strong> through <strong>feedback</strong>{" "}
-                and <strong>good vibes.</strong>
-                <p style={{ marginTop: 10 }}>
-                    <Link route={"begin"}>
-                        <button
-                            className={
-                                "button is-primary has-text-weight-bold is-rounded"
-                            }
-                        >
-                            Join us
-                        </button>
-                    </Link>
-                </p>
+                and <strong>good vibes.</strong></p>
+                <Link route={"begin"}>
+                    <button
+                        className={
+                            "button is-primary has-text-weight-bold is-rounded"
+                        }
+                    >
+                        Join us
+                    </button>
+                </Link>
             </div>
         </article>
     </LoggedOutOnly>

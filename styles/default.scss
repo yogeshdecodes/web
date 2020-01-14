@@ -398,6 +398,7 @@ h2 {
     font-family: $font;
     font-weight: bold;
     font-size: 1rem;
+    line-height: 1.2;
 }
 
 .page-title {
@@ -966,6 +967,30 @@ h2 {
 
     &.info {
         color: $c-info;
+    }
+
+    &.is-medium {
+        text-align: left;
+        background: #fff;
+        padding: 0;
+        font-size: 1.25rem;
+
+        .message-header {
+            border-radius: 5px 5px 0 0;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1.7rem;
+            background: #16A085;
+        }
+
+        .message-body   {
+            padding: 1.5rem 2rem;
+
+            p {
+                margin: 0 0 0.3rem;
+            }
+        }
     }
 
     h2 {
