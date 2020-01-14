@@ -272,13 +272,6 @@ a[class^="btn"] {
         color: $c-text;
     }
 
-    &.btn-praise {
-        background: transparent !important;
-        border: 1px solid $c-border-lightest;
-        color: $c-text;
-        font-size: 0.75rem;
-    }
-
     &.btn-hero {
         @extend %transition;
         font-size: 1.2rem;
@@ -290,6 +283,13 @@ a[class^="btn"] {
             transform: scale(1.07);
         }
     }
+}
+
+.btn-praise {
+    background: transparent !important;
+    border: 1px solid $c-border-lightest;
+    color: $c-text;
+    font-size: 0.75rem;
 }
 
 .btn-primary,
@@ -765,7 +765,8 @@ h2 {
     background: #fff;
 
     header {
-        background: hsla(192, 15%, 64%, 0.1);
+        //background: hsla(192, 15%, 64%, 0.1);
+        background: hsla(0, 0%, 0%, 0.05);
         box-shadow: none !important;
         padding: $gap-card;
         @extend %corners;
