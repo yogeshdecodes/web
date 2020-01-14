@@ -53,12 +53,9 @@
             }
         }
 
-        &:hover {
-            background-color: $c-bg-light;
-        }
-
+        &:hover,
         &.active {
-            background-color: $c-bg-light;
+            background-color: $c-card-header;
         }
 
         img {

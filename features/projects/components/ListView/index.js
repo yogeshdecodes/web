@@ -378,12 +378,14 @@ class ListView extends React.Component {
                             taskGroups={taskGroups}
                             activeProduct={activeProduct}
                         />
-                        <br />
+
                         <Link route={"products"}>
                             <button className={"btn-primary btn-small"}>
                                 + Add a product
                             </button>
                         </Link>
+                        <br />
+                        <br />
                     </div>
 
                     <div>
