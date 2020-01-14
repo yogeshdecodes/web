@@ -86,10 +86,10 @@ class TodayView extends React.Component {
             <TodayPage
                 user={this.props.me}
                 focusMode={this.state.focusMode}
-                className={"columns"}
+                className={"container narrow"}
             >
                 <div className={"overlay"} />
-                <div className="card column is-one-third is-offset-one-third">
+                <div className="card" style={{marginTop: 40}}>
                     <div className={"card-content"}>
                         <div className={"flex col-right mbGap"}>
                             <div>
@@ -137,7 +137,7 @@ class TodayView extends React.Component {
                                     this.props.doneToday > 0 && (
                                         <div
                                             className={
-                                                "message-container flex center"
+                                                "message-container flex columns center v-center"
                                             }
                                         >
                                             <h3 className={"mt0"}>
@@ -180,10 +180,10 @@ class TodayView extends React.Component {
                                 ))}
                             </div>
                         </div>
-                        <div className={"flex is-hidden-mobile"}>
+                        <div className={"flex flex-gap is-hidden-mobile"}>
                             <div>
                                 <button
-                                    className={"toggleModes"}
+                                    className={"toggleModes btn-gray btn-small"}
                                     onClick={this.toggleFocusMode}
                                 >
                                     <FontAwesomeIcon icon={"eye"} />
@@ -194,7 +194,7 @@ class TodayView extends React.Component {
                             </div>
                             <div>
                                 <button
-                                    className={"toggleModes"}
+                                    className={"toggleModes btn-gray btn-small"}
                                     onClick={this.toggleFullScreen}
                                 >
                                     <FontAwesomeIcon icon={"arrows-alt"} />
