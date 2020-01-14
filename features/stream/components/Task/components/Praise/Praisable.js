@@ -198,11 +198,11 @@ class Praisable extends React.Component {
             componentClass={PraiseButton}
             className={
                 this.state.isPraising
-                    ? "btn-praise praising"
-                    : "btn-praise btn-gray"
+                    ? "btn btn-praise praising"
+                    : "btn btn-praise btn-gray"
             }
         >
-            <Emoji emoji={"👏"} /> &nbsp;
+            <Emoji emoji={"👏"} />
             {this.state.isPraising &&
                 !this.state.loggedOutError &&
                 !this.state.tooMuchPraise &&
