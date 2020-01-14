@@ -72,8 +72,7 @@
         }
     }
 
-    .navbar-item,
-    .navbar-link {
+    .navbar-item {
         color: $c-text;
         // font-weight: regular;
         font-size: 16px;
@@ -182,6 +181,19 @@
                 rgba(0, 173, 113, 0) 100%
             );
             color: $c-main;
+        }
+
+        .navbar-link {
+            color: $c-text;
+            // font-weight: regular;
+            font-size: 16px;
+            line-height: 1.5;
+            padding: 0.5rem 2rem;
+            position: relative;
+            cursor: pointer !important;
+
+            // this otherwise animations are crazy slow.
+            transition: background-color 0.3s ease !important;
         }
 
         .navbar-item:not(div):hover {
@@ -413,7 +425,7 @@
             flex-flow: row nowrap;
             justify-content: end;
 
-            .navbar-item {
+            > .navbar-item {
                 justify-content: center;
                 margin-left: 2rem;
             }
