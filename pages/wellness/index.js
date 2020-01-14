@@ -14,57 +14,75 @@ export default connect(mapStateToProps)(
         if (!props.user) return <Spinner />;
         return (
             <div className={"StreakPage grid"}>
-                <div className={"has-text-centered"}>
-                    <h3 className={"has-text-white"}>
-                        You have a <Emoji emoji={"🔥"} /> {props.user.streak}{" "}
-                        day streak.
-                    </h3>
-                    <h4 className={"has-text-white"}>
-                        Remember to take breaks! Streaks should keep you
-                        productive, not burn you out.
-                    </h4>
-                </div>
+                <div className={"container narrow"}>
+                    <div className={"has-text-centered"}>
+                        <h1>
+                            You have a <Emoji emoji={"🔥"} /> {props.user.streak}{" "}
+                            day streak.
+                        </h1>
+                        <h3>
+                            Remember to take breaks.<br/>Stay productive, not burnout!
+                        </h3>
+                    </div>
 
-                <div className={"streak-content"}>
-                    <div className={"columns"}>
-                        <div className={"column is-6 is-offset-3"}>
-                            <div className="card">
-                                <div className={"card-content"}>
-                                    <h3>
-                                        <Emoji emoji={"🔥️"} /> Hardcore mode
-                                    </h3>
-                                    <h4>
-                                        Hardcore mode means rest days won't be
-                                        automatically applied if you forget to
-                                        post or take a break. Rest days are
-                                        vacation days you can spend! You earn
-                                        one day for every 10 streak days.
-                                    </h4>
+                    <div className={"streak-content"}>
+                        <div className="card">
+                            <div className={"card-content"}>
+                                <h3>
+                                    <Emoji emoji={"🔥️"} /> Hardcore mode
+                                </h3>
+                                <p>
+                                    For details about rest days, see the info box in "Rest days taken" section below.
+                                </p>
 
-                                    <RestDaySettings />
-
-                                    <hr />
-
-                                    <h3>
-                                        <Emoji emoji={"😸️"} /> Weekend mode
-                                    </h3>
-                                    <h4>
-                                        Weekend mode allows you to take breaks
-                                        on weekends. They won't count in your
-                                        streak, but they won't break it either!
-                                    </h4>
-
-                                    <WeekendModeSettings />
-
-                                    <hr />
-
-                                    <h3>
-                                        <Emoji emoji={"🥰"} /> Rest days taken
-                                    </h3>
-                                    <h4>Here's a history of your breaks.</h4>
-
-                                    <RestDayList />
+                                <div className={"panel-message info"}>
+                                    <div className={"message-body"}>
+                                        If active, your rest days won't be
+                                        automatically applied.
+                                    </div>
                                 </div>
+
+                                <RestDaySettings />
+
+                                <hr />
+
+                                <h3>
+                                    <Emoji emoji={"😸️"} /> Weekend mode
+                                </h3>
+                                <p>
+                                    Weekend mode allows you to take breaks on
+                                    weekends. They won't count in your streak,
+                                    but they won't break it either!
+                                </p>
+
+                                <div className={"panel-message danger"}>
+                                    <div className={"message-body"}>
+                                        Note that weekend mode works
+                                        retroactively, so ALL past weekends in
+                                        your current streak will be subtracted.
+                                    </div>
+                                </div>
+
+                                <WeekendModeSettings />
+
+                                <hr />
+
+                                <h3>
+                                    <Emoji emoji={"😴"} /> Rest days taken
+                                </h3>
+
+                                <p>Below is the history of the rest days you've taken.</p>
+
+                                <div className={"panel-message info"}>
+                                    <div className={"message-body"}>
+                                        Rest days are vacation days that apply
+                                        automatically when you don't log (unless
+                                        Hardcore Mode is on). You earn one rest
+                                        day for every 10 streak days.
+                                    </div>
+                                </div>
+
+                                <RestDayList />
                             </div>
                         </div>
                     </div>

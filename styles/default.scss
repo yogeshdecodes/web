@@ -530,6 +530,10 @@ h2 {
     max-width: 1340px;
     margin: 0 auto;
     position: relative;
+
+    &.narrow    {
+        max-width: 700px;
+    }
 }
 
 .flex {
@@ -958,12 +962,14 @@ h2 {
 
 .panel-message {
     @extend %corners;
-    padding: $gap-card;
     margin: 2rem 0;
-    text-align: center;
 
     &.danger {
         color: $c-danger;
+
+        .message-body   {
+            background: #fff5f7;
+        }
     }
 
     &.success {
@@ -972,6 +978,16 @@ h2 {
 
     &.info {
         color: $c-info;
+
+        .message-body   {
+            background: #f6fbfe;
+        }
+    }
+
+    .message-body {
+        border: 1px solid;
+        border-radius: 3px;
+        padding: 1em 1.25em;
     }
 
     &.is-medium {
@@ -1270,53 +1286,6 @@ button[disabled] {
     display: flex;
     justify-content: center;
 }
-
-//.PageCard {
-//	color: white !important;
-//	background: #67B26F; /* fallback for old browsers */
-//	background: -webkit-linear-gradient(to right, #4ca2cd, #67B26F);
-//	background: linear-gradient(to right, #4ca2cd, #67B26F);
-//	transition: background-color .25s;
-//}
-//
-//.PageCard.yellow {
-//	background: #FDC830; /* fallback for old browsers */
-//	background: -webkit-linear-gradient(to left, #F37335, #FDC830);
-//	background: linear-gradient(to left, #F37335, #FDC830);
-//}
-//
-//.site-container {
-//	display: flex;
-//	flex-direction: column;
-//	min-height: 100vh;
-//}
-//
-//.content-container {
-//	flex: 1;
-//}
-//
-//
-//.button.is-brand-green.is-outlined {
-//	background-color: transparent;
-//	color: #47e0a0 !important;
-//	border-color: #47e0a0 !important;
-//}
-//
-//.button.is-brand-green.is-loading {
-//	color: transparent !important;
-//}
-//
-//.is-brand-green.is-inverted {
-//	background-color: #47e0a0 !important;
-//	color: white !important;
-//	border-color: #47e0a0 !important;
-//}
-//
-//.button.is-brand-green.is-outlined:hover, .button.is-primary.is-outlined:focus {
-//	background-color: #47e0a0 !important;
-//	border-color: #47e0a0 !important;
-//	color: white !important;
-//}
 
 .img-circle {
     @extend %round;

@@ -49,11 +49,6 @@ class RestDayList extends React.Component {
         return (
             <div>
                 <table className="table is-fullwidth">
-                    <thead>
-                        <tr>
-                            <th>Day</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         {daysTaken.map(skip => (
                             <tr>
