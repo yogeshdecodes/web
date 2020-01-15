@@ -176,7 +176,7 @@ class TodayView extends React.Component {
                         <div className={"flex actions"}>
                             <div>
                                 <button
-                                    className={"toggleModes"}
+                                    className={"toggleModes btn-gray btn-small"}
                                     onClick={this.toggleFocusMode}
                                 >
                                     <FontAwesomeIcon icon={"eye"} />
@@ -187,7 +187,7 @@ class TodayView extends React.Component {
                             </div>
                             <div>
                                 <button
-                                    className={"toggleModes"}
+                                    className={"toggleModes btn-gray btn-small"}
                                     onClick={this.toggleFullScreen}
                                 >
                                     <FontAwesomeIcon icon={"arrows-alt"} />{" "}
