@@ -178,7 +178,7 @@ input[type="search"] {
     }
 }
 
-button:not(.edit-button,.delete-button,.gray-link-with-icon),
+button:not(.edit-button):not(.delete-button):not(.gray-link-with-icon),
 div[class^="btn"],
 a[class^="btn"] {
     @extend %rounded;
