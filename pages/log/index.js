@@ -17,7 +17,6 @@ class StreamPage extends React.Component {
     render() {
         return (
             <>
-                <StreamHeader />
                 <section className={"container"}>
                     <div className={"grid-c-s"}>
                         <div>
