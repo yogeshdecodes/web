@@ -84,7 +84,7 @@ class Artemis extends App {
         return (
             <Provider store={store}>
                 <Head />
-                <NProgressContainer />
+                <NProgressContainer spinner={false} />
                 <div>
                     <Page {...pageProps.layout}>
                         <Component {...pageProps} />
