@@ -1,0 +1,48 @@
+#wall-of-love {
+    margin-top: 3rem;
+    columns: 300px 3;
+    column-gap: 1rem;
+    -moz-column-fill: balance;
+    column-fill: balance;
+    display: block;
+
+    .twitter-tweet {
+        margin: 0px !important;
+    }
+
+    div {
+        -webkit-column-break-inside: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin: 1rem 0 0;
+
+        &:first-of-type {
+            margin: 0 0 0 !important;
+        }
+    }
+
+    @for $i from 2 through 99 {
+        div:nth-child(#{$i}) {
+            $h: (random(400) + 100) + px;
+            line-height: $h;
+        }
+    }
+
+    > div:first-of-type {
+        h3 {
+            color: #d93025;
+            font-size: 1.8rem;
+        }
+
+        p {
+            width: 80%;
+            margin: 0 auto 2rem;
+
+            span {
+                font-size: 2rem;
+                display: block;
+                text-align: right;
+            }
+        }
+    }
+}

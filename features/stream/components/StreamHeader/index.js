@@ -11,6 +11,7 @@ import { isDueSoon } from "~/lib/utils/tasks";
 import Emoji from "~/components/Emoji";
 import "./index.scss";
 import Spinner from "~/components/Spinner";
+import PageNavigation from "~/components/ui/PageNavigation";
 
 function getStyles(user) {
     if (user.header) return { "--streamheader-bg": `url(${user.header})` };
@@ -26,6 +27,16 @@ const StreamHeader = props => {
             </div>
         );
     }
+
+    return (
+        <PageNavigation
+            title={
+                <>
+                    <Greeting withEmoji />, <FullName user={props.user} />
+                </>
+            }
+        />
+    );
 
     return (
         <div

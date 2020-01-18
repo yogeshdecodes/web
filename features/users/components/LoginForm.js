@@ -52,46 +52,48 @@ const LoginForm = props => {
                 props.onClickLogin(props.username, props.password);
             }}
         >
-            <h1>Welcome back.</h1>
+            <h1>Sign in</h1>
             {props.errorMessages && (
                 <ErrorMessageList errorMessages={props.errorMessages} />
             )}
 
-            <Field>
-                <Control>
-                    <Tooltip
-                        // options
-                        open={validateEmail(props.username)}
-                        html={
-                            <small className={"has-text-white"}>
-                                <strong className={"is-brand-green"}>
-                                    Heads up!
-                                </strong>
-                                <br /> This field is your{" "}
-                                <strong>username</strong>, not email.
-                            </small>
-                        }
-                        position="bottom"
-                        trigger="click"
-                    >
+            <section>
+                <Field>
+                    <Control>
+                        <Tooltip
+                            // options
+                            open={validateEmail(props.username)}
+                            html={
+                                <small className={"has-text-white"}>
+                                    <strong className={"is-brand-green"}>
+                                        Heads up!
+                                    </strong>
+                                    <br /> This field is your{" "}
+                                    <strong>username</strong>, not email.
+                                </small>
+                            }
+                            position="bottom"
+                            trigger="click"
+                        >
+                            <Input
+                                value={props.username}
+                                onChange={props.onUsernameChange}
+                                placeholder="Username"
+                            />
+                        </Tooltip>
+                    </Control>
+                </Field>
+                <Field>
+                    <Control>
                         <Input
-                            value={props.username}
-                            onChange={props.onUsernameChange}
-                            placeholder="Username"
+                            type="password"
+                            value={props.password}
+                            onChange={props.onPasswordChange}
+                            placeholder="Password"
                         />
-                    </Tooltip>
-                </Control>
-            </Field>
-            <Field>
-                <Control>
-                    <Input
-                        type="password"
-                        value={props.password}
-                        onChange={props.onPasswordChange}
-                        placeholder="Password"
-                    />
-                </Control>
-            </Field>
+                    </Control>
+                </Field>
+            </section>
             <div className="flex">
                 <div className="v-center">
                     <Link route={"forgot"}>Forgot?</Link>
@@ -99,7 +101,7 @@ const LoginForm = props => {
                 <div className="stretch"></div>
                 <div>
                     <Button
-                        className={"is-rounded"}
+                        className={"is-rounded is-secondary"}
                         onClick={() =>
                             props.onClickLogin(props.username, props.password)
                         }

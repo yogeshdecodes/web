@@ -403,8 +403,7 @@ class RegisterForm extends React.Component {
                     </div>
                     <p className="help" style={{ marginTop: 10 }}>
                         <strong>
-                            We don't keep your phone number, only its SHA-512
-                            hash.
+                            We only store its irreversible SHA-512 hash.
                         </strong>
                     </p>
                 </div>
@@ -488,7 +487,9 @@ class RegisterForm extends React.Component {
                         <button onClick={this.getPreflight}>Retry</button>
                     </div>
                 )}
-                {this.shouldRenderForm() && this.renderForm()}
+                <section>
+                    {this.shouldRenderForm() && this.renderForm()}
+                </section>
                 {!this.state.registrationsOpen && (
                     <div className="has-text-centered">
                         Sorry, registrations aren't open right now. <br />{" "}
@@ -513,11 +514,11 @@ class RegisterForm extends React.Component {
                     />
                 )}
                 {this.shouldRenderForm() && (
-                    <div className={"flex"}>
+                    <div className={"flex v-center"}>
                         <div>
                             {this.state.smsMode && (
                                 <button
-                                    className={"btn-small"}
+                                    className={"btn-small btn-link"}
                                     onClick={this.props.onSmsActivation}
                                 >
                                     <FontAwesomeIcon icon={"lock"} /> Have a
@@ -525,11 +526,16 @@ class RegisterForm extends React.Component {
                                 </button>
                             )}
                         </div>
+                        <div className="stretch"></div>
                         <div>
                             <button
-                                className={"btn-primary"}
+                                className={
+                                    "btn-secondary" +
+                                    (this.state.isRegistering
+                                        ? " is-loading"
+                                        : "")
+                                }
                                 disabled={!this.isFormValid()}
-                                loading={this.state.isRegistering}
                                 onClick={this.submitForm}
                             >
                                 <FontAwesomeIcon icon={"arrow-circle-right"} />

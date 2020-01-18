@@ -15,6 +15,7 @@ import UserActivityGraph from "../../../features/stats/components/UserActivityGr
 
 const quotes = [
     { text: "It's mango time.", from: "Fajar Siddiq" },
+    { text: "Ship that sh*t.", from: "Sergio Mattei" },
     {
         text: "The only people who never fail are those who never try.",
         from: "Ilka Chase"

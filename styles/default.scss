@@ -116,7 +116,7 @@ input[type="search"] {
 }
 
 .label {
-    color: #363636;
+    color: $c-text;
     display: block;
     font-size: 1rem;
     font-weight: 700;
@@ -226,7 +226,7 @@ a[class^="btn"] {
     align-items: center;
     position: relative;
     white-space: nowrap;
-    height: 2.25em;
+    min-height: 2.25em;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -256,6 +256,12 @@ a[class^="btn"] {
     &.is-secondary {
         background: $c-secondary;
         color: $c-text !important;
+
+        &.is-loading::after {
+            border-color: $c-text;
+            border-right-color: transparent;
+            border-top-color: transparent;
+        }
     }
 
     &:not([disabled]):active {

@@ -113,6 +113,15 @@ $navbar-height: 68px;
     box-shadow: inset 0 1px 2px hsla(0, 0%, 4%, 0.1);
 }
 
+%people-bg {
+    background: linear-gradient(
+            63deg,
+            rgba(17, 180, 107, 0.9) 0%,
+            rgba(17, 180, 107, 0.9) 100%
+        ),
+        url("/img/hero.jpg");
+}
+
 %hero-gradient {
     background: linear-gradient(
         63deg,
@@ -135,6 +144,10 @@ $navbar-height: 68px;
     color: $c-title;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+%title-margin {
+    margin-bottom: 1rem;
 }
 
 %note {

@@ -2,8 +2,56 @@
 
 .RegisterPage {
     #page-content {
-        margin-top: calc(25vh - 80px);
+        //margin-top: calc(25vh - 80px);
     }
-    @extend %transition-bg;
-    @extend %hero-gradient;
+
+    h4 {
+        text-align: center;
+    }
+
+    div.form-section {
+        @extend %people-bg;
+        @extend %transition-bg;
+        margin-bottom: 3rem;
+    }
+
+    div.pitch {
+        margin-bottom: 3rem;
+    }
+
+    div.bottom-cta {
+        h2 {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .form-card {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 200px 0;
+
+        .card {
+            padding: 1.5rem 1.2rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: $c-title !important;
+            margin: 0 0 1.5rem;
+        }
+
+        a {
+            color: $c-main;
+        }
+
+        .grid {
+            grid-template-columns: auto auto;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+    }
 }
