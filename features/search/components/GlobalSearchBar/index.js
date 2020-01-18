@@ -45,8 +45,12 @@ class GlobalSearchBar extends React.Component {
                 },
                 false
             );
+            document.documentElement.style.overflow = "hidden";
+            document.body.scroll = "no";
         } else {
             if (this.sc) document.removeEventListener("scroll", this.sc);
+            document.documentElement.style.overflow = "scroll";
+            document.body.scroll = "yes";
         }
         this.setState({
             open
@@ -114,199 +118,194 @@ class GlobalSearchBar extends React.Component {
     render() {
         const { users, products, tasks, query, discussions } = this.state;
 
-        if (this.state.open) {
-            return (
-                <div
-                    className={"GlobalSearchBar-overlay"}
-                    id={"GlobalSearchBar"}
-                    onClick={this.override}
-                    onKeyUp={this.esc}
-                >
-                    <div className={"nav-cover"}>
-                        <div className={"container form-case v-center"}>
-                            <div
-                                className={
-                                    " search-bar control" +
-                                    (this.state.loading ? " is-loading" : "")
-                                }
-                            >
-                                <input
-                                    className={"input is-large"}
-                                    onChange={this.onType}
-                                    value={query}
-                                    autoFocus={true}
-                                    placeholder={
-                                        "Search makers, discussions, tasks, and products..."
-                                    }
-                                />
-                            </div>
-                            {this.state.loading ? (
-                                <Spinner small color="gray" />
-                            ) : (
+        return (
+            <>
+                {this.state.open && (
+                    <div
+                        className={"GlobalSearchBar-overlay"}
+                        id={"GlobalSearchBar"}
+                        onClick={this.override}
+                        onKeyUp={this.esc}
+                    >
+                        <div className={"nav-cover"}>
+                            <div className={"container form-case v-center"}>
+                                <div className={"search-bar control"}>
+                                    <input
+                                        className={"input is-large"}
+                                        onChange={this.onType}
+                                        value={query}
+                                        autoFocus={true}
+                                        placeholder={
+                                            "Search makers, discussions, tasks, and products..."
+                                        }
+                                    />
+                                </div>
                                 <button
-                                    className={"search-button"}
+                                    className={
+                                        "btn-light " +
+                                        (this.state.loading ? "is-loading" : "")
+                                    }
                                     onClick={this.navigateToSearch}
                                 >
                                     Search
                                 </button>
+                            </div>
+                        </div>
+                        <div
+                            className={"container results"}
+                            id={"results"}
+                            onClick={this.override}
+                        >
+                            {products && products.length > 0 && (
+                                <>
+                                    <h3 className={"is-6"}>Products</h3>
+                                    <div className={"card"}>
+                                        <div className={"card-content"}>
+                                            <ProductList
+                                                media
+                                                products={this.state.products}
+                                            />
+                                        </div>
+                                        <footer>
+                                            <Link
+                                                route="search"
+                                                params={{
+                                                    view: "products",
+                                                    query: this.state.query
+                                                }}
+                                            >
+                                                <a
+                                                    onClick={this.toggle}
+                                                    className={
+                                                        "button is-text is-small"
+                                                    }
+                                                >
+                                                    {" "}
+                                                    See all products &raquo;
+                                                </a>
+                                            </Link>
+                                        </footer>
+                                    </div>
+                                </>
+                            )}
+                            {users && users.length > 0 && (
+                                <>
+                                    <h3 className={"is-6"}>Makers</h3>
+                                    <div className={"card"}>
+                                        <div className={"card-content"}>
+                                            <UserMediaList
+                                                users={this.state.users}
+                                            />
+                                        </div>
+                                        <footer>
+                                            <Link
+                                                route="search"
+                                                params={{
+                                                    view: "makers",
+                                                    query: this.state.query
+                                                }}
+                                            >
+                                                <a
+                                                    onClick={this.toggle}
+                                                    className={
+                                                        "button is-text is-small"
+                                                    }
+                                                >
+                                                    See all makers &raquo;
+                                                </a>
+                                            </Link>
+                                        </footer>
+                                    </div>
+                                </>
+                            )}
+                            {tasks && tasks.length > 0 && (
+                                <>
+                                    <h3 className={"is-6"}>Tasks</h3>
+                                    <div className={"card"}>
+                                        <div className={"card-content"}>
+                                            {tasks.map(t => (
+                                                <div
+                                                    className={"flex"}
+                                                    key={t.id}
+                                                >
+                                                    <div>
+                                                        <Avatar
+                                                            user={t.user}
+                                                            is={32}
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <Task task={t} />
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <footer>
+                                            <Link
+                                                route="search"
+                                                params={{
+                                                    view: "tasks",
+                                                    query: this.state.query
+                                                }}
+                                            >
+                                                <a
+                                                    onClick={this.toggle}
+                                                    className={
+                                                        "button is-text is-small"
+                                                    }
+                                                >
+                                                    See all tasks &raquo;
+                                                </a>
+                                            </Link>
+                                        </footer>
+                                    </div>
+                                </>
+                            )}
+                            {discussions && discussions.length > 0 && (
+                                <>
+                                    <h3 className={"is-6"}>Discussions</h3>
+                                    <div className={"card"}>
+                                        <div className={"card-content"}>
+                                            <ThreadList threads={discussions} />
+                                        </div>
+                                        <footer>
+                                            <Link
+                                                route="search"
+                                                params={{
+                                                    view: "discussions",
+                                                    query: this.state.query
+                                                }}
+                                            >
+                                                <a
+                                                    onClick={this.toggle}
+                                                    className={
+                                                        "button is-text is-small"
+                                                    }
+                                                >
+                                                    See all discussions &raquo;
+                                                </a>
+                                            </Link>
+                                        </footer>
+                                    </div>
+                                </>
                             )}
                         </div>
                     </div>
-                    <div
-                        className={"container results"}
-                        id={"results"}
-                        onClick={this.override}
-                    >
-                        {products && products.length > 0 && (
-                            <>
-                                <h3 className={"is-6"}>Products</h3>
-                                <div className={"card"}>
-                                    <div className={"card-content"}>
-                                        <ProductList
-                                            media
-                                            products={this.state.products}
-                                        />
-                                    </div>
-                                    <footer>
-                                        <Link
-                                            route="search"
-                                            params={{
-                                                view: "products",
-                                                query: this.state.query
-                                            }}
-                                        >
-                                            <a
-                                                onClick={this.toggle}
-                                                className={
-                                                    "button is-text is-small"
-                                                }
-                                            >
-                                                {" "}
-                                                See all products &raquo;
-                                            </a>
-                                        </Link>
-                                    </footer>
-                                </div>
-                            </>
-                        )}
-                        {users && users.length > 0 && (
-                            <>
-                                <h3 className={"is-6"}>Makers</h3>
-                                <div className={"card"}>
-                                    <div className={"card-content"}>
-                                        <UserMediaList
-                                            users={this.state.users}
-                                        />
-                                    </div>
-                                    <footer>
-                                        <Link
-                                            route="search"
-                                            params={{
-                                                view: "makers",
-                                                query: this.state.query
-                                            }}
-                                        >
-                                            <a
-                                                onClick={this.toggle}
-                                                className={
-                                                    "button is-text is-small"
-                                                }
-                                            >
-                                                See all makers &raquo;
-                                            </a>
-                                        </Link>
-                                    </footer>
-                                </div>
-                            </>
-                        )}
-                        {tasks && tasks.length > 0 && (
-                            <>
-                                <h3 className={"is-6"}>Tasks</h3>
-                                <div className={"card"}>
-                                    <div className={"card-content"}>
-                                        {tasks.map(t => (
-                                            <div className={"flex"} key={t.id}>
-                                                <div>
-                                                    <Avatar
-                                                        user={t.user}
-                                                        is={32}
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <Task task={t} />
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <footer>
-                                        <Link
-                                            route="search"
-                                            params={{
-                                                view: "tasks",
-                                                query: this.state.query
-                                            }}
-                                        >
-                                            <a
-                                                onClick={this.toggle}
-                                                className={
-                                                    "button is-text is-small"
-                                                }
-                                            >
-                                                See all tasks &raquo;
-                                            </a>
-                                        </Link>
-                                    </footer>
-                                </div>
-                            </>
-                        )}
-                        {discussions && discussions.length > 0 && (
-                            <>
-                                <h3 className={"is-6"}>Discussions</h3>
-                                <div className={"card"}>
-                                    <div className={"card-content"}>
-                                        <ThreadList threads={discussions} />
-                                    </div>
-                                    <footer>
-                                        <Link
-                                            route="search"
-                                            params={{
-                                                view: "discussions",
-                                                query: this.state.query
-                                            }}
-                                        >
-                                            <a
-                                                onClick={this.toggle}
-                                                className={
-                                                    "button is-text is-small"
-                                                }
-                                            >
-                                                See all discussions &raquo;
-                                            </a>
-                                        </Link>
-                                    </footer>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </div>
-            );
-        }
+                )}
 
-        if (this.props.mobile) {
-            return (
-                <a onClick={this.toggle} className="item">
-                    <span className={"icon"}>
-                        <FontAwesomeIcon icon={"search"} />
-                    </span>
-                    <span>Search</span>
-                </a>
-            );
-        }
-
-        return (
-            <a className="navbar-item" onClick={this.toggle}>
-                <FontAwesomeIcon size="lg" icon={"search"} />
-            </a>
+                {this.props.mobile ? (
+                    <a onClick={this.toggle} className="item">
+                        <span className={"icon"}>
+                            <FontAwesomeIcon icon={"search"} />
+                        </span>
+                        <span>Search</span>
+                    </a>
+                ) : (
+                    <a className="navbar-item is-icon" onClick={this.toggle}>
+                        <FontAwesomeIcon size="lg" icon={"search"} />
+                    </a>
+                )}
+            </>
         );
     }
 }
