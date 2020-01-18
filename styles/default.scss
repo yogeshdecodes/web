@@ -5,8 +5,8 @@ html {
 }
 
 * {
-    //-webkit-font-smoothing: antialiased;
-    //-moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -52,6 +52,30 @@ iframe {
 input,
 textarea {
     font-family: $font;
+}
+
+// make it compatible with whatever you want to make it work with
+.is-loading::after {
+    @keyframes spinAround {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(359deg);
+        }
+    }
+
+    // spinny thing stuff
+    animation: spinAround 500ms infinite linear;
+    border: 2px solid #dbdbdb;
+    border-radius: 290486px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    content: "";
+    display: block;
+    height: 1em;
+    position: relative;
+    width: 1em;
 }
 
 input[type="text"],
@@ -203,9 +227,32 @@ a[class^="btn"] {
     user-select: none;
     text-align: center;
     transition: transform 0.1s ease;
+    &.btn-light {
+        background: $c-lightest;
+        color: $c-text !important;
+        border: 1px solid $c-border;
+        // margin-top: 1rem; why?
+
+        &.transparent {
+            background: transparent;
+            color: $c-lightest !important;
+        }
+    }
+
+    &.btn-primary,
+    &.is-primary {
+        background: $c-main;
+        color: $c-lightest !important;
+    }
+
+    &.btn-secondary,
+    &.is-secondary {
+        background: $c-secondary;
+        color: $c-text !important;
+    }
 
     &:not([disabled]):active {
-        transform: scale(0.95);
+        //transform: scale(0.95);
     }
 
     svg {
@@ -295,38 +342,19 @@ a[class^="btn"] {
             transform: scale(1.07);
         }
     }
-}
 
-.btn-primary,
-a.btn-primary {
-    background: $c-secondary;
-    color: $c-lightest !important;
-    padding: 0 1.3em;
-    height: auto;
-    margin-top: 1rem;
-}
-
-.btn-light,
-a.btn-light {
-    background: $c-lightest;
-    color: $c-text !important;
-    border: 1px solid $c-border;
-    // margin-top: 1rem; why?
-
-    &.transparent {
-        background: transparent;
-        color: $c-lightest !important;
+    &.is-loading {
+        content: "";
+        color: transparent !important;
     }
-}
 
-.btn-loading {
-    background: $c-lightest !important;
-    border: 1px solid $c-border !important;
-    color: $c-text !important;
-    cursor: pointer;
-    justify-content: center;
-    padding: calc(0.375em - 1px) 0.75em;
-    white-space: nowrap;
+    &.is-loading::after {
+        // button specific things
+        position: absolute;
+        left: calc(50% - (1em / 2));
+        top: calc(50% - (1em / 2));
+        position: absolute !important;
+    }
 }
 
 hr {
@@ -342,7 +370,7 @@ a:not(.btn):active,
 a:not(.btn):visited,
 a:not(.btn):hover {
     @extend %transition;
-    color: $c-main;
+    color: $c-link;
     text-decoration: none;
 }
 
@@ -533,7 +561,7 @@ h2 {
     margin: 0 auto;
     position: relative;
 
-    &.narrow    {
+    &.narrow {
         max-width: 700px;
     }
 }
@@ -712,19 +740,6 @@ h2 {
         position: absolute;
         height: 100%;
         width: 100%;
-    }
-
-    button {
-        @extend %rounded;
-        background: $c-main-btn;
-        padding: 0.688rem 1.7rem;
-        font-size: 1.2rem;
-        font-weight: bold;
-        border: 0;
-        text-shadow: 0 2px 0 hsla(0, 0%, 0%, 0.1);
-        display: inline-flex;
-        align-items: center;
-        -webkit-appearance: none;
     }
 
     &.UserHero {
@@ -969,7 +984,7 @@ h2 {
     &.danger {
         color: $c-danger;
 
-        .message-body   {
+        .message-body {
             background: #fff5f7;
         }
     }
@@ -981,7 +996,7 @@ h2 {
     &.info {
         color: $c-info;
 
-        .message-body   {
+        .message-body {
             background: #f6fbfe;
         }
     }
@@ -1004,10 +1019,10 @@ h2 {
             display: flex;
             align-items: center;
             padding: 0.5rem 1.7rem;
-            background: #16A085;
+            background: #16a085;
         }
 
-        .message-body   {
+        .message-body {
             padding: 1.5rem 2rem;
 
             p {
@@ -1804,4 +1819,9 @@ figure.img-circle {
     .is-hidden-fullhd {
         display: none !important;
     }
+}
+
+strong.heading {
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }

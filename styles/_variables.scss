@@ -1,8 +1,8 @@
 @import url("https://rsms.me/inter/inter.css");
 
 // Typography
-$font: "Inter UI", -apple-system, system-ui, sans-serif;
-$font-title: "Inter UI", -apple-system, system-ui, sans-serif;
+$font: "Inter", -apple-system, system-ui, sans-serif;
+$font-title: "Inter", -apple-system, system-ui, sans-serif;
 $font-size: 16px;
 
 // Colors -- texts
@@ -13,9 +13,9 @@ $c-gray: #808080;
 
 // Colors -- accent colors
 $c-brand: #47e0a0;
-$c-main: #00b87a;
-$c-main-btn: #00ad71;
-$c-secondary: #00ad71;
+$c-main: #00a676;
+$c-secondary: #a2e1cb;
+$c-link: #0b6e4f;
 
 // Colors -- backgrounds
 $c-bg: #f6f6f6;
@@ -26,6 +26,7 @@ $c-bg-overlay: hsla(0, 0%, 0%, 0.65);
 $c-in-progress: #f39c12;
 $c-done: #00ad71;
 $c-card-header: hsla(0, 0%, 0%, 0.06);
+$c-secondary-navbar: #f4f4f4;
 
 // Colors -- gradients
 $gradient-green: linear-gradient(63deg, #66b26e, #11978c);
@@ -75,17 +76,21 @@ $breakpoint-desktop: 1201px;
 $breakpoint-tablet: 1200px;
 $breakpoint-mobile: 960px;
 
+// Other
+$height-navbar: 68px;
+
 // Extensions
 %bold {
     font-weight: 700;
 }
 
 %transition {
-    transition: all 0.3s ease-in-out;
+    // `all` causes performance issues and artifacts.
+    transition: background-color 0.3s ease-in-out;
 }
 
 %transition-bg {
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.1s ease-in-out;
 }
 
 %corners {
