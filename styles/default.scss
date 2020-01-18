@@ -84,9 +84,10 @@ input[type="email"],
 input[type="url"],
 input[type="search"],
 textarea {
-    @extend %corners;
-    @extend %shadow-inset;
-    border: 1px solid $c-border;
+    //@extend %corners;
+    // @extend %shadow-inset;
+    border: none;
+    border-bottom: 1px solid $c-border;
     max-width: 100%;
     width: 100%;
     padding: 0.5rem;
@@ -1822,6 +1823,5 @@ figure.img-circle {
 }
 
 strong.heading {
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    @extend %uppercase;
 }

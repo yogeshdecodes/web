@@ -21,6 +21,7 @@ import { actions as userActions } from "~/ducks/user";
 import { actions as appActions } from "~/ducks/app";
 import axios from "~/lib/axios";
 import DownPage from "~/layouts/DownPage";
+import NotificationsView from "~/features/notifications/components/NotificationsView";
 
 async function onStoreInit(ctx) {
     // only the sagas here are run on the server side; no async dependencies.
@@ -91,6 +92,7 @@ class Artemis extends App {
                     </Page>
 
                     <Reactor />
+                    <NotificationsView />
                 </div>
             </Provider>
         );

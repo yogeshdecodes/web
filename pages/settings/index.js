@@ -15,6 +15,7 @@ import SidebarLink from "~/components/SidebarLink";
 import { requireAuthed } from "~/lib/auth";
 import "./index.scss";
 import { isServer } from "~/config";
+import PageNavigation from "~/components/ui/PageNavigation";
 
 class SecuritySettings extends React.Component {
     state = {
@@ -406,78 +407,52 @@ class SettingsPage extends React.Component {
     };
 
     renderTabLink = (name, index, icon = null) => (
-        <SidebarLink
+        <a
             onClick={() => this.switchToTab(index)}
-            active={this.state.activeTab === index}
+            className={
+                "navbar-item" +
+                (this.state.activeTab === index ? " is-active" : "")
+            }
         >
-            <span className={"menu-icon"}>
-                <FontAwesomeIcon icon={icon} />
-            </span>
             <span>{name}</span>
-        </SidebarLink>
+        </a>
     );
 
     render() {
         return (
-            <div className="SettingsPage container">
-                <div className={"grid-s-c"}>
-                    <div>
-                        <Sticky
-                            enabled={
-                                !isServer ? window.innerWidth >= 728 : false
-                            }
-                            top={30}
-                        >
-                            <div className={"card"}>
-                                <div className={"card-content SidebarMenu"}>
-                                    {this.renderTabLink(
-                                        "You",
-                                        1,
-                                        "user-circle"
-                                    )}
-                                    {this.renderTabLink(
-                                        "Gold",
-                                        7,
-                                        "check-circle"
-                                    )}
-                                    {this.renderTabLink("Embeds", 6, "code")}
-                                    {this.renderTabLink("Security", 2, "lock")}
-                                    {this.renderTabLink("Data", 3, "tasks")}
-                                </div>
-                            </div>
-                        </Sticky>
-                    </div>
-                    <div>
-                        <div className={"card"}>
-                            <div className={"card-content"}>
-                                {this.state.activeTab === 1 && (
-                                    <ProfileTab
-                                        updateUser={this.props.updateUser}
-                                    />
-                                )}
-                                {this.state.activeTab === 2 && (
-                                    <SecuritySettings />
-                                )}
-                                {this.state.activeTab === 3 && <DataSettings />}
-                                {this.state.activeTab === 4 && (
-                                    <ManagementPanel />
-                                )}
-                                {this.state.activeTab === 5 && (
-                                    <ExperimentalSettings />
-                                )}
-                                {this.state.activeTab === 6 && (
-                                    <EmbedSettings />
-                                )}
-                                {this.state.activeTab === 7 && (
-                                    <GoldTab
-                                        user={this.props.user}
-                                        updateUser={this.props.updateUser}
-                                    />
-                                )}
-                            </div>
+            <div className="SettingsPage">
+                <PageNavigation title="Settings">
+                    {this.renderTabLink("You", 1)}
+                    {this.renderTabLink("Gold", 7)}
+                    {this.renderTabLink("Security", 2)}
+                    {this.renderTabLink("Streaks", 8)}
+                    {this.renderTabLink("Developers", 6)}
+                    {this.renderTabLink("Data", 3)}
+                </PageNavigation>
+                <section className={"container"}>
+                    <div className={"card"}>
+                        <div className={"card-content"}>
+                            {this.state.activeTab === 1 && (
+                                <ProfileTab
+                                    updateUser={this.props.updateUser}
+                                />
+                            )}
+                            {this.state.activeTab === 2 && <SecuritySettings />}
+                            {this.state.activeTab === 3 && <DataSettings />}
+                            {this.state.activeTab === 4 && <ManagementPanel />}
+                            {this.state.activeTab === 5 && (
+                                <ExperimentalSettings />
+                            )}
+                            {this.state.activeTab === 6 && <EmbedSettings />}
+                            {this.state.activeTab === 7 && (
+                                <GoldTab
+                                    user={this.props.user}
+                                    updateUser={this.props.updateUser}
+                                />
+                            )}
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         );
     }

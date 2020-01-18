@@ -20,8 +20,6 @@ class StreamPage extends React.Component {
                 <section className={"container"}>
                     <div className={"grid-c-s"}>
                         <div>
-                            <QuickPost />
-
                             {this.isNewUser() ? (
                                 <NoActivityCard />
                             ) : (
