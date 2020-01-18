@@ -1,7 +1,18 @@
 @import "../../styles/_variables";
 
-.quickview.is-active {
+.quickview {
     z-index: 1000 !important;
+}
+
+.quickview-overlay {
+    @extend %transition-bg;
+    background: $c-bg-overlay;
+    position: fixed;
+    z-index: 999;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
 }
 
 .quickview-body {
@@ -48,18 +59,18 @@
 }
 
 .notifications-header {
-    background: $c-bg-darkest;
+    background: $c-lightest;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
-    height: 60px;
+    height: $navbar-height;
 
     h1 {
-        @extend %bold;
-        color: $c-lightest;
+        @extend %uppercase;
+        color: $c-title;
         margin: 0;
-        font-size: 1.25rem;
+        font-size: 1rem;
         line-height: 1;
     }
 

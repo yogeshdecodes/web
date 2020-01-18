@@ -9,7 +9,7 @@
     background-color: $c-bg-overlay;
     height: 100%;
     // never cover the fucking navbar
-    top: $height-navbar;
+    top: $navbar-height;
     position: fixed;
     width: 100%;
     left: 0;
@@ -28,7 +28,7 @@
 
 .GlobalSearchBar-overlay .nav-cover {
     background-color: $c-secondary-navbar;
-    height: $height-navbar;
+    height: $navbar-height;
     display: flex;
     align-items: center;
     justify-content: center;

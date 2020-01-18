@@ -81,50 +81,44 @@ class NotificationsView extends React.Component {
 
     render() {
         return (
-            <div
-                className={
-                    this.props.open
-                        ? "notifications-quickview quickview is-active"
-                        : "quickview"
-                }
-            >
-                <header className="notifications-header">
-                    <h1>Notifications</h1>
-                    <span
-                        className="delete"
-                        onClick={this.props.closeHandler}
-                    />
-                </header>
+            <>
+                {this.props.open && <div className="quickview-overlay"></div>}
+                <div
+                    className={
+                        this.props.open
+                            ? "notifications-quickview quickview is-active"
+                            : "quickview"
+                    }
+                >
+                    <header className="notifications-header">
+                        <h1 className="page-heading">Notifications</h1>
+                        <span
+                            className="delete"
+                            onClick={this.props.closeHandler}
+                        />
+                    </header>
 
-                <div className="quickview-body">
-                    {this.state.isLoading && <Spinner small />}
+                    <div className="quickview-body">
+                        {this.state.isLoading && <Spinner small />}
 
-                    {this.state.failed && (
-                        <div className={"panel-message danger"}>
-                            Failed to load notifications.{" "}
-                            <button
-                                className={"btn"}
-                                onClick={this.fetchNotifications}
-                            >
-                                Retry.
-                            </button>
-                        </div>
-                    )}
+                        {this.state.failed && (
+                            <div className={"panel-message danger"}>
+                                Failed to load notifications.{" "}
+                                <button
+                                    className={"btn"}
+                                    onClick={this.fetchNotifications}
+                                >
+                                    Retry.
+                                </button>
+                            </div>
+                        )}
 
-                    {!this.state.isLoading &&
-                        this.state.notifications &&
-                        this.renderNotifications()}
+                        {!this.state.isLoading &&
+                            this.state.notifications &&
+                            this.renderNotifications()}
+                    </div>
                 </div>
-
-                <footer className="quickview-footer">
-                    <button
-                        className={"btn rounded"}
-                        onClick={this.props.closeHandler}
-                    >
-                        Close
-                    </button>
-                </footer>
-            </div>
+            </>
         );
     }
 }
