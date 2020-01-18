@@ -24,7 +24,7 @@ import ShareBar from "~/components/ShareBar";
 import Linkify from "react-linkify";
 import Markdown from "~/components/Markdown";
 import ReplyFaces from "~/features/discussions/ReplyFaces";
-import RecentDiscussionsCard from "~/components/sidebar/componentsRecentDiscussionsCard";
+import RecentDiscussionsCard from "~/components/sidebar/components/RecentDiscussionsCard";
 import styled from "styled-components";
 import { truncate } from "~/lib/utils/random";
 import InfiniteResults from "~/components/InfiniteResults";
