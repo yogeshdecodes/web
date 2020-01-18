@@ -1,7 +1,7 @@
 import React from "react";
-import {LoggedOutOnly, PeopleCard} from "~/features/users";
-import TrendingDiscussionsCard from "~/components/sidebar/TrendingDiscussionsCard";
-import AdCard from "~/components/sidebar/AdCard";
+import { LoggedOutOnly, PeopleCard } from "~/features/users";
+import TrendingDiscussionsCard from "~/components/sidebar/components/TrendingDiscussionsCard";
+import AdCard from "~/components/sidebar/components/AdCard";
 import RegisterCard from "~/components/sidebar/RegisterCard";
 import Sticky from "react-stickynode";
 

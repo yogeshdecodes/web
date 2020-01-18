@@ -6,6 +6,7 @@ import StreamHeader from "../../features/stream/components/StreamHeader";
 import Sidebar from "../../features/stream/components/Sidebar";
 import { requireAuthed } from "../../lib/auth";
 import QuickPost from "~/features/tasks/components/QuickPost";
+import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 
 class StreamPage extends React.Component {
     isNewUser = () =>
@@ -28,7 +29,7 @@ class StreamPage extends React.Component {
                         </div>
 
                         <div className={"sidebar is-hidden-mobile"}>
-                            <Sidebar />
+                            <ExploreSidebar data={this.props.data} />
                         </div>
                     </div>
                 </section>
@@ -36,6 +37,7 @@ class StreamPage extends React.Component {
         );
     }
 }
+StreamPage.getInitialProps = prefetchData;
 
 // Pass a few props from state simply because we need to detect new user-hood
 const mapStateToProps = state => {

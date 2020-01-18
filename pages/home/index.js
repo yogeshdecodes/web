@@ -1,22 +1,28 @@
 import React from "react";
 import { Link } from "~/routes";
 import { GlobalStream } from "~/features/stream";
-import HomeSidebar from "../../components/sidebar/HomeSidebar";
+import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
 import GetStartedLink from "~/components/GetStartedLink";
 
-export default requireUnauthed(() => (
-    <div className="HomePage">
-        <section className={"container"}>
-            <div className="grid-c-s">
-                <div>
-                    <GlobalStream />
+function Home(props) {
+    return (
+        <div className="HomePage">
+            <section className={"container"}>
+                <div className="grid-c-s">
+                    <div>
+                        <GlobalStream />
+                    </div>
+                    <div className={"sidebar"}>
+                        <ExploreSidebar data={props.data} />
+                    </div>
                 </div>
-                <div className={"sidebar"}>
-                    <HomeSidebar />
-                </div>
-            </div>
-        </section>
-    </div>
-));
+            </section>
+        </div>
+    );
+}
+
+Home.getInitialProps = prefetchData;
+
+export default requireUnauthed(Home);

@@ -1,12 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
 import memoizeOne from "memoize-one";
-import {DAY_LABELS, DAYS_IN_WEEK, MILLISECONDS_IN_ONE_DAY, MONTH_LABELS} from "./constants";
-import {convertToDate, dateNDaysAgo, getBeginningTimeForDate, getRange, shiftDate} from "./helpers";
+import {
+    DAYS_IN_WEEK,
+    MILLISECONDS_IN_ONE_DAY,
+    DAY_LABELS,
+    MONTH_LABELS
+} from "./constants";
+import {
+    dateNDaysAgo,
+    shiftDate,
+    getBeginningTimeForDate,
+    convertToDate,
+    getRange
+} from "./helpers";
 
 const SQUARE_SIZE = 10;
 const MONTH_LABEL_GUTTER_SIZE = 4;
 const CSS_PSEDUO_NAMESPACE = "react-calendar-heatmap-";
+
+// MODDED FOR ML
+
+const datesAreOnSameDay = (first, second) =>
+    first.getFullYear() === second.getFullYear() &&
+    first.getMonth() === second.getMonth() &&
+    first.getDate() === second.getDate();
 
 class CalendarHeatmap extends React.Component {
     getDateDifferenceInDays() {
@@ -29,7 +47,8 @@ class CalendarHeatmap extends React.Component {
     getMonthLabelSize() {
         if (!this.props.showMonthLabels) {
             return 0;
-        } else if (this.props.horizontal) {
+        }
+        if (this.props.horizontal) {
             return SQUARE_SIZE + MONTH_LABEL_GUTTER_SIZE;
         }
         return 2 * (SQUARE_SIZE + MONTH_LABEL_GUTTER_SIZE);
@@ -38,7 +57,8 @@ class CalendarHeatmap extends React.Component {
     getWeekdayLabelSize() {
         if (!this.props.showWeekdayLabels) {
             return 0;
-        } else if (this.props.horizontal) {
+        }
+        if (this.props.horizontal) {
             return 30;
         }
         return SQUARE_SIZE * 1.5;
@@ -250,6 +270,10 @@ class CalendarHeatmap extends React.Component {
         }
         const [x, y] = this.getSquareCoordinates(dayIndex);
         const value = this.getValueForIndex(index);
+        let today = false;
+        if (value && datesAreOnSameDay(value.date, new Date())) {
+            today = true;
+        }
         const rect = (
             // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
             <rect
@@ -258,7 +282,12 @@ class CalendarHeatmap extends React.Component {
                 height={SQUARE_SIZE}
                 x={x}
                 y={y}
-                className={this.getClassNameForIndex(index)}
+                rx={this.props.rounded ? "50" : "0"}
+                ry={this.props.rounded ? "50" : "0"}
+                className={
+                    this.getClassNameForIndex(index) +
+                    (today ? " is-today" : "")
+                }
                 onClick={() => this.handleClick(value)}
                 onMouseOver={e => this.handleMouseOver(e, value)}
                 onMouseLeave={e => this.handleMouseLeave(e, value)}

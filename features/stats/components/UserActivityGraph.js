@@ -1,7 +1,7 @@
 import React from "react";
 import CalendarHeatmap from "~/vendor/heatmap";
 import "~/vendor/heatmap/styles.css";
-import {getUserActivityGraph} from "../../../lib/stats";
+import { getUserActivityGraph } from "../../../lib/stats";
 import Spinner from "~/components/Spinner";
 
 function scaleBetween(unscaledNum, minAllowed, maxAllowed, min, max) {
@@ -64,6 +64,7 @@ class UserActivityGraph extends React.Component {
 
         return (
             <CalendarHeatmap
+                rounded
                 classForValue={v => {
                     if (!v || v === 0) return `color-scale-0`;
                     const scale = scaleBetween(v.count, 0, 4, 0, graph.max);

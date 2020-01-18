@@ -1,6 +1,6 @@
 import React from "react";
 import TrendingDiscussionList from "~/features/discussions/TrendingDiscussionList";
-import Emoji from "../Emoji";
+import Emoji from "../../Emoji";
 
 export default () => (
     <div className={"card"}>

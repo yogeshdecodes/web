@@ -1,5 +1,4 @@
-import "~/styles/theme.scss";
-import "@fortawesome/fontawesome-svg-core/styles.css";
+import "~/styles/index.scss";
 import "~/vendor/fa";
 
 import App, { Container } from "next/app";

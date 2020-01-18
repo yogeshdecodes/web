@@ -2,6 +2,13 @@
 
 html {
     font-size: $font-size;
+    font-family: "Inter", sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+    html {
+        font-family: "Inter var", sans-serif;
+    }
 }
 
 * {
@@ -11,7 +18,6 @@ html {
 
 body {
     @extend %transition-bg;
-    font-family: $font;
     font-size: 1rem;
     line-height: 1.5;
     color: $c-text;
@@ -1425,24 +1431,28 @@ figure.img-circle {
 }
 
 .react-calendar-heatmap {
+    .is-today {
+        stroke: $c-gray;
+    }
+
     .color-scale-0 {
-        fill: #e2e2e2;
+        fill: #eee;
     }
 
     .color-scale-1 {
-        fill: #85e1b7;
+        fill: #b3e8d8;
     }
 
     .color-scale-2 {
-        fill: #53af87;
+        fill: #80d9be;
     }
 
     .color-scale-3 {
-        fill: #1c7f5a;
+        fill: #33c297;
     }
 
     .color-scale-4 {
-        fill: #106748;
+        fill: #008f64;
     }
 }
 
@@ -1824,4 +1834,10 @@ figure.img-circle {
 
 strong.heading {
     @extend %uppercase;
+}
+
+.subtitle {
+    margin-top: 0px !important;
+    font-weight: normal;
+    //margin-top: -;
 }

@@ -5,7 +5,7 @@ import { getPopularTasks } from "~/lib/stats";
 import Spinner from "~/components/Spinner";
 import { Avatar, PeopleCard } from "~/features/users";
 import { Entry } from "~/features/stream";
-import AdCard from "~/components/sidebar/AdCard";
+import AdCard from "~/components/sidebar/components/AdCard";
 import "./index.scss";
 
 class PopularTaskList extends React.Component {

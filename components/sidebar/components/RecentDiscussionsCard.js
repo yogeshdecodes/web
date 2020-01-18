@@ -1,5 +1,5 @@
 import React from "react";
-import Emoji from "../Emoji";
+import Emoji from "../../Emoji";
 import RecentDiscussionList from "~/features/discussions/RecentDiscussionList";
 
 export default () => (

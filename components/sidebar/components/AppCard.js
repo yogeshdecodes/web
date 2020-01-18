@@ -1,6 +1,6 @@
 import React from "react";
-import Emoji from "../Emoji";
-import OutboundLink from "../OutboundLink";
+import Emoji from "../../Emoji";
+import OutboundLink from "../../OutboundLink";
 
 export default () => (
     <div className={"card"}>

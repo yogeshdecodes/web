@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "~/routes";
-import OutboundLink from "../../OutboundLink";
+import OutboundLink from "../../../OutboundLink";
 
 const SmallFooter = props => (
     <ul className={"LinksFooter flex"}>
@@ -11,13 +11,13 @@ const SmallFooter = props => (
             </Link>
         </li>
         <li>
-            <OutboundLink to={"https://gold.getmakerlog.com"}>
-                Gold
+            <OutboundLink href={"https://status.getmakerlog.com/"}>
+                Status
             </OutboundLink>
         </li>
         <li>
-            <OutboundLink href={"https://intravert.co/book/0359e0d7b3/3/"}>
-                Advertise
+            <OutboundLink to={"https://gold.getmakerlog.com"}>
+                Gold
             </OutboundLink>
         </li>
         <li>
@@ -28,11 +28,6 @@ const SmallFooter = props => (
         <li>
             <OutboundLink href={"https://twitter.com/getmakerlog/"}>
                 Twitter
-            </OutboundLink>
-        </li>
-        <li>
-            <OutboundLink href={"https://status.getmakerlog.com/"}>
-                Status
             </OutboundLink>
         </li>
         <li>
