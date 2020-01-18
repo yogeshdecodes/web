@@ -14,14 +14,21 @@ const LoggedOutMenu = props => (
     >
         <div className="navbar-start">
             <NavLink activeClassName="is-active" route="home">
-                <a className="navbar-item">Home</a>
+                <a className="navbar-item">Explore</a>
             </NavLink>
 
             <NavLink activeClassName="is-active" route="discussions">
-                <a className="navbar-item">Talk</a>
+                <a className="navbar-item">Discuss</a>
             </NavLink>
 
-            <NavbarDropdown route="explore" link={() => <a>More</a>}>
+            <NavLink activeClassName="is-active" route="products">
+                <a className="navbar-item">Products</a>
+            </NavLink>
+
+            <NavbarDropdown
+                hoverable
+                link={() => <FontAwesomeIcon icon="ellipsis-v" />}
+            >
                 <NavLink activeClassName="is-active" route="events">
                     <a className="navbar-item">
                         <span>Events</span>
@@ -45,8 +52,6 @@ const LoggedOutMenu = props => (
             </NavbarDropdown>
         </div>
         <div className="navbar-end">
-            <GlobalSearchBar />
-
             <NavLink activeClassName="is-active" route="login">
                 <a className="navbar-item">Sign in</a>
             </NavLink>

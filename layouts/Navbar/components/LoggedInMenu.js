@@ -19,13 +19,13 @@ const LoggedInMenu = props => (
         <div className="navbar-start">
             <NavLink route="log" activeClassName="is-active">
                 <a className="navbar-item">
-                    <span>Log</span>
+                    <span>Explore</span>
                 </a>
             </NavLink>
 
             <NavLink route="discussions" activeClassName="is-active">
                 <a className="navbar-item">
-                    <span>Talk</span>
+                    <span>Discuss</span>
                 </a>
             </NavLink>
             <NavLink route="products" activeClassName="is-active">
@@ -33,14 +33,9 @@ const LoggedInMenu = props => (
                     <span>Products</span>
                 </a>
             </NavLink>
-            <NavLink route="makers" activeClassName="is-active">
+            <NavLink route="tasks" activeClassName="is-active">
                 <a className="navbar-item">
-                    <span>Makers</span>
-                </a>
-            </NavLink>
-            <NavLink route="events" activeClassName="is-active">
-                <a className="navbar-item">
-                    <span>Events</span>
+                    <span>Tasks</span>
                 </a>
             </NavLink>
 
@@ -52,9 +47,9 @@ const LoggedInMenu = props => (
                     </>
                 )}
             >
-                <NavLink route="tasks" activeClassName="is-active">
+                <NavLink route="events" activeClassName="is-active">
                     <a className="navbar-item">
-                        <span>Tasks</span>
+                        <span>Events</span>
                     </a>
                 </NavLink>
                 <NavLink route="apps" activeClassName="is-active">
@@ -71,11 +66,13 @@ const LoggedInMenu = props => (
             </NavbarDropdown>
         </div>
         <div className="navbar-end">
-            <GlobalSearchBar />
+            <div className="navbar-item">
+                <button className="has-text-bold is-small is-rounded is-primary">
+                    New
+                </button>
+            </div>
 
-            <a className="TodoLink navbar-item">
-                <FontAwesomeIcon icon="check-square" />
-            </a>
+            <GlobalSearchBar />
 
             <NotificationsLink />
 
