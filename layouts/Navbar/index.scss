@@ -3,7 +3,7 @@
 #main-navbar {
     font-size: 0.875rem;
     background: #ffffff;
-    height: $height-navbar;
+    height: $navbar-height;
     position: relative;
     z-index: 999;
     border-bottom: 0.2px solid #ececec;
@@ -41,7 +41,7 @@
     }
 
     .navbar-menu {
-        height: $height-navbar;
+        height: $navbar-height;
         width: 100%;
         display: grid;
         align-items: stretch;
@@ -59,7 +59,7 @@
         align-self: center;
         display: flex;
         align-items: center;
-        height: $height-navbar;
+        height: $navbar-height;
 
         #brand-gradient-parent {
             width: 0;
@@ -290,8 +290,9 @@
 
 .navbar-secondary {
     font-size: 1rem;
-    height: 60px;
-    background: $c-lightest;
+    height: $navbar-height;
+    background: $c-secondary-navbar;
+    border-bottom: 0.2px solid #ececec;
 
     svg {
         margin-right: 0.5rem;
@@ -304,7 +305,7 @@
     }
 
     .navbar-menu {
-        height: 60px;
+        height: $navbar-height;
         width: 100%;
         display: grid;
         align-items: stretch;
@@ -319,6 +320,7 @@
     }
 
     .navbar-item {
+        height: $navbar-height;
         display: flex;
         align-items: center;
     }
@@ -327,7 +329,7 @@
     .navbar-link {
         color: $c-title !important;
         line-height: 1.5;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 1.3rem;
         position: relative;
         cursor: pointer;
     }
@@ -343,14 +345,15 @@
 
         .navbar-item {
             border: solid transparent;
-            border-width: 3px 0;
+            border-width: 2px 0;
+            color: $c-text;
 
-            &:not(div):hover,
-            &:active,
+            // &:not(div):hover,
+            //&:active,
             &.is-located,
             &.is-active {
-                background: $c-bg-light;
-                border-bottom-color: $c-brand;
+                color: $c-main !important;
+                border-bottom-color: $c-main;
             }
         }
     }
@@ -467,6 +470,21 @@
 }
 
 @media screen and (max-width: $breakpoint-tablet) {
+    .navbar-secondary {
+        .flex.flex-gap-big > div:not(:last-child) {
+            margin-right: 0.5rem !important;
+        }
+
+        .flex.flex-gap-big {
+            // make elements swipe-able
+            overflow: auto;
+        }
+
+        strong {
+            display: none;
+        }
+    }
+
     #main-navbar {
         #logo {
             padding: 0.8rem 0 0 1.5rem;
