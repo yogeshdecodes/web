@@ -112,23 +112,18 @@ class NotificationsLink extends React.Component {
         }
 
         return (
-            <React.Fragment>
-                {
-                    // eslint-disable-next-line
-                }{" "}
-                <a className="navbar-item" onClick={this.toggleNotifications}>
-                    <FontAwesomeIcon
-                        size="lg"
-                        icon={[
-                            this.state.unreadCount > 0 ? "fas" : "far",
-                            "bell"
-                        ]}
-                    />
-                    {this.state.unreadCount > 0 && (
-                        <div className={"tag"}>{this.state.unreadCount}</div>
-                    )}
-                </a>
-            </React.Fragment>
+            <a
+                className={
+                    "NotificationsLink navbar-item is-icon" +
+                    (this.state.unreadCount > 0 && " unread")
+                }
+                onClick={this.toggleNotifications}
+            >
+                <FontAwesomeIcon size="lg" icon={["fas", "bell"]} />
+                {this.state.unreadCount > 0 && (
+                    <div className={"count"}>{this.state.unreadCount}</div>
+                )}
+            </a>
         );
     }
 }
