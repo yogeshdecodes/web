@@ -23,6 +23,8 @@ body {
     color: $c-text;
     background: $c-bg;
     margin: 0;
+
+    overscroll-behavior-y: none;
 }
 
 *,
@@ -1317,6 +1319,10 @@ button[disabled] {
     justify-content: center;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .img-circle {
     @extend %round;
     height: auto;
@@ -1846,4 +1852,8 @@ strong.heading {
     margin-top: 0px !important;
     font-weight: normal;
     //margin-top: -;
+}
+
+.react-phone-number-input__icon {
+    line-height: 0px;
 }

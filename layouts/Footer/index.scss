@@ -1,0 +1,24 @@
+@import "../../styles/_variables";
+
+.Footer {
+    margin-top: 1.5em;
+    border-top: 1px solid $c-border-lightest;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    font-size: 13.5px;
+
+    ul {
+        margin: 0px !important;
+        display: block;
+        width: 100%;
+        padding-top: 1rem;
+        padding-top: 0px !important;
+
+        li {
+            display: inline-block;
+            flex-grow: 1;
+            padding-right: 13px;
+            font-size: 13.5px;
+        }
+    }
+}

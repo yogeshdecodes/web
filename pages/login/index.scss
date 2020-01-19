@@ -5,8 +5,11 @@
         //margin-top: calc(25vh - 80px);
     }
 
-    @extend %people-bg;
-    @extend %transition-bg;
+    div.form-section {
+        @extend %people-bg;
+        @extend %transition-bg;
+        min-height: calc(100vh - #{$navbar-height});
+    }
 
     .form-card {
         max-width: 500px;

@@ -32,12 +32,10 @@ class RegisterPage extends React.Component {
         return (
             <>
                 <div className="form-section">
-                    <div className="container">
-                        <div className="form-card">
-                            <div className="card">
-                                <div className="card-content">
-                                    <RegisterForm {...this.props.query} />
-                                </div>
+                    <div className="form-card">
+                        <div className="card">
+                            <div className="card-content">
+                                <RegisterForm {...this.props.query} />
                             </div>
                         </div>
                     </div>

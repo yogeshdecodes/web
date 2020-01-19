@@ -1,38 +1,9 @@
 import React from "react";
-import { Link } from "~/routes";
-import OutboundLink from "../../../OutboundLink";
+import FooterLinks from "~/layouts/Footer/links";
 
 const SmallFooter = props => (
     <ul className={"LinksFooter flex"}>
-        <li className={"has-text-grey"}>&copy; Makerlog</li>
-        <li>
-            <Link route={"about"}>
-                <a>About</a>
-            </Link>
-        </li>
-        <li>
-            <OutboundLink href={"https://status.getmakerlog.com/"}>
-                Status
-            </OutboundLink>
-        </li>
-        <li>
-            <OutboundLink to={"https://gold.getmakerlog.com"}>
-                Gold
-            </OutboundLink>
-        </li>
-        <li>
-            <OutboundLink href={"https://api.getmakerlog.com/"}>
-                API
-            </OutboundLink>
-        </li>
-        <li>
-            <OutboundLink href={"https://twitter.com/getmakerlog/"}>
-                Twitter
-            </OutboundLink>
-        </li>
-        <li>
-            <OutboundLink href={"https://pm.mattei.dev/"}>Bugs</OutboundLink>
-        </li>
+        <FooterLinks />
     </ul>
 );
 

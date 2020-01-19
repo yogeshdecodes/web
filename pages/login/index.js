@@ -12,32 +12,34 @@ class LoginPage extends React.Component {
     };
 
     static async getInitialProps({ query }) {
-        const layout = { className: "LoginPage" };
+        const layout = { className: "LoginPage", footer: false };
 
         return { layout, query };
     }
 
     render() {
         return (
-            <div className="form-card">
-                <div className="card">
-                    <div className="card-content">
-                        <LoginForm
-                            username={this.state.username}
-                            password={this.state.password}
-                            onUsernameChange={e =>
-                                this.setState({
-                                    username: e.target.value
-                                })
-                            }
-                            onPasswordChange={e =>
-                                this.setState({
-                                    password: e.target.value
-                                })
-                            }
-                            onClickLogin={this.props.onClickLogin}
-                            errorMessages={this.props.errorMessages}
-                        />
+            <div className="form-section">
+                <div className="form-card">
+                    <div className="card">
+                        <div className="card-content">
+                            <LoginForm
+                                username={this.state.username}
+                                password={this.state.password}
+                                onUsernameChange={e =>
+                                    this.setState({
+                                        username: e.target.value
+                                    })
+                                }
+                                onPasswordChange={e =>
+                                    this.setState({
+                                        password: e.target.value
+                                    })
+                                }
+                                onClickLogin={this.props.onClickLogin}
+                                errorMessages={this.props.errorMessages}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

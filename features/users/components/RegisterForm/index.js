@@ -116,7 +116,7 @@ class AccountActivator extends React.Component {
 
     renderSmsForm = () => {
         return (
-            <div className={"center"}>
+            <div className={"flex text-center flex-column center"}>
                 <h3>
                     One last thing... <Emoji emoji={"📱"} />
                 </h3>

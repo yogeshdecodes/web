@@ -1,7 +1,6 @@
 import Nav from "./Navbar";
 import React from "react";
-//import Reactor from "../components/Reactor";
-//import ToastList from "~/features/toasts/ToastList";
+import Footer from "~/layouts/Footer";
 
 export default ({
     nav = true,
@@ -10,6 +9,7 @@ export default ({
     gradient = false,
     className = "",
     showNavItems = true,
+    footer = true,
     ...props
 }) => (
     <div
@@ -25,5 +25,7 @@ export default ({
         )}
 
         <div id="page-content">{props.children}</div>
+
+        {footer && <Footer />}
     </div>
 );
