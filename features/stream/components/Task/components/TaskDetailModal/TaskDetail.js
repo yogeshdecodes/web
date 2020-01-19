@@ -1,16 +1,16 @@
 import React from "react";
-import {connect} from "react-redux";
-import {Button} from "~/vendor/bulma";
+import { connect } from "react-redux";
+import { Button } from "~/vendor/bulma";
 import Task from "../../Task";
-import {RIEInput} from "riek";
-import {actions as tasksActions} from "~/ducks/tasks";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {actions as streamActions} from "~/ducks/stream";
+import { RIEInput } from "riek";
+import { actions as tasksActions } from "~/ducks/tasks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { actions as streamActions } from "~/ducks/stream";
 import Embed from "~/components/Embed";
 import config from "~/config";
 import ShareBar from "~/components/ShareBar";
-import {Dropdown} from "~/components/Dropdown";
-import {UserMedia} from "~/features/users";
+import { Dropdown } from "~/components/Dropdown";
+import { UserMedia } from "~/features/users";
 
 class TaskDetail extends React.Component {
     constructor(props) {
@@ -246,56 +246,18 @@ class TaskDetail extends React.Component {
         const user = this.props.task.user;
 
         return (
-            <div
-                className={"card"}
-                highlighted={
-                    (this.props.me ? user.id === this.props.me.id : false) ||
-                    user.gold
-                }
-                accent={user.accent}
-            >
-                <header>
-                    <UserMedia user={this.props.task.user} />
-                </header>
+            <div>
+                {this.renderActionBar()}
 
-                <div className={"card-content"}>
-                    {this.state.editing ? (
-                        this.renderEditingState()
-                    ) : this.props.me.id === this.props.task.user.id ? (
-                        <Task
-                            task={this.props.task}
-                            withDetailModal={false}
-                            withTooltip={false}
-                            contentWrapper={() => (
-                                <RIEInput
-                                    value={this.props.task.content}
-                                    className={"editing"}
-                                    propName={"content"}
-                                    change={this.onEdit}
-                                />
-                            )}
+                {this.state.embedOpen && (
+                    <div style={{ width: "50%" }}>
+                        <br />
+                        <Embed
+                            task
+                            url={`/tasks/${this.props.task.id}/embed`}
                         />
-                    ) : (
-                        <Task
-                            task={this.props.task}
-                            withDetailModal={false}
-                            withTooltip={false}
-                        />
-                    )}
-                </div>
-                <footer>
-                    {this.renderActionBar()}
-
-                    {this.state.embedOpen && (
-                        <div style={{ width: "50%" }}>
-                            <br />
-                            <Embed
-                                task
-                                url={`/tasks/${this.props.task.id}/embed`}
-                            />
-                        </div>
-                    )}
-                </footer>
+                    </div>
+                )}
             </div>
         );
     }
@@ -307,16 +269,13 @@ const mapStateToProps = state => ({
     isLoggedIn: state.auth.loggedIn
 });
 
-export default connect(
-    mapStateToProps,
-    dispatch => ({
-        updateTask: (id, payload) => {
-            dispatch(tasksActions.updateTask(id, payload));
-        },
-        deleteTask: id => dispatch(tasksActions.deleteTask(id)),
-        removeFromStream: id => dispatch(streamActions.removeTask(id)),
-        markDone: id => dispatch(tasksActions.markDone(id)),
-        markInProgress: id => dispatch(tasksActions.markInProgress(id)),
-        markRemaining: id => dispatch(tasksActions.markRemaining(id))
-    })
-)(TaskDetail);
+export default connect(mapStateToProps, dispatch => ({
+    updateTask: (id, payload) => {
+        dispatch(tasksActions.updateTask(id, payload));
+    },
+    deleteTask: id => dispatch(tasksActions.deleteTask(id)),
+    removeFromStream: id => dispatch(streamActions.removeTask(id)),
+    markDone: id => dispatch(tasksActions.markDone(id)),
+    markInProgress: id => dispatch(tasksActions.markInProgress(id)),
+    markRemaining: id => dispatch(tasksActions.markRemaining(id))
+}))(TaskDetail);

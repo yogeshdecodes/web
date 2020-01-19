@@ -15,6 +15,7 @@ import startsWith from "lodash/startsWith";
 import Avatar from "../../../users/components/Avatar";
 import FullName from "../../../users/components/FullName";
 import CommentsBox from "~/features/comments/components/CommentsBox";
+import TaskDetail from "./components/TaskDetailModal/TaskDetail";
 
 function findWord(word, str) {
     return str
@@ -248,7 +249,10 @@ class Task extends React.Component {
                         </div>
                     )}
                 {this.state.detailsOpen && (
-                    <div>
+                    <div className="task-details">
+                        <div className="action-bar">
+                            <TaskDetail task={this.props.task} />
+                        </div>
                         <CommentsBox
                             initialCommentCount={this.props.task.comment_count}
                             task={this.props.task}

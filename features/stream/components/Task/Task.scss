@@ -70,6 +70,7 @@
 
     .attachments-container {
         .image-preview {
+            margin-left: 8px;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -101,6 +102,26 @@
                 }
             }
         }
+    }
+
+    .task-details {
+        margin-left: 8px;
+        border-left: 1px solid $c-border;
+        //padding: 5px;
+        //background-color: $c-bg;
+
+        .comments-box {
+            border-left: none;
+        }
+    }
+
+    .action-bar {
+        //border-top: 1px solid $c-border-lightest;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        //border-right: 1px solid $c-border-lightest;
+        //border-left: 1px solid $c-border-lightest;
+        margin-bottom: -0.5rem; //compensate for commentsbar margin
     }
 
     .attachment {
