@@ -1,0 +1,9 @@
+@import "../../../../styles/_variables";
+
+.user-line {
+    font-size: calc(#{$font-size} - 4px);
+    .username {
+        font-weight: normal !important;
+        color: $c-gray !important;
+    }
+}

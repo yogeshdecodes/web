@@ -68,12 +68,12 @@ class CommentInput extends React.Component {
     render() {
         if (!this.props.isLoggedIn) {
             return (
-                <h3>
+                <div className="input-container">
                     <Link route={"begin"}>
                         <a>Sign in or join</a>
                     </Link>{" "}
-                    to post a comment.
-                </h3>
+                    &nbsp; to post a comment.
+                </div>
             );
         }
 

@@ -107,9 +107,7 @@ const Head = props => (
         <meta property="og:url" content={props.url || defaultOGURL} />
         <meta
             property="og:title"
-            content={
-                props.title || "The world's most supportive maker community."
-            }
+            content={props.title || "The home of the maker community."}
         />
         <meta
             property="og:description"

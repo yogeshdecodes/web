@@ -16,6 +16,17 @@ import UserActivityGraph from "../../../features/stats/components/UserActivityGr
 const quotes = [
     { text: "It's mango time.", from: "Fajar Siddiq" },
     { text: "Ship that sh*t.", from: "Sergio Mattei" },
+    { text: "To bake or not to make, that is the question.", from: "Ali" },
+    { text: "Why not start another side project?", from: "Arne" },
+    { text: "Hey Mom, I made it into the sidebar!", from: "Osamah" },
+    { text: "Shiptastic.", from: "James" },
+    { text: "Ship || die.", from: "Knightbenax" },
+    { text: "What are you waiting for?", from: "Rob" },
+    {
+        text:
+            "Indie products are the friendly, family-owned corner shops of the internet.",
+        from: "Ethan"
+    },
     {
         text: "The only people who never fail are those who never try.",
         from: "Ilka Chase"
@@ -163,7 +174,7 @@ const quotes = [
 ];
 
 function getQuote() {
-    return sample(quotes).text;
+    return sample(quotes);
 }
 
 const TopStreaksCard = ({ topUsers }) => {
@@ -222,11 +233,17 @@ const AdCard = () => {
 };
 
 const UserCard = ({ me }) => {
+    const quote = getQuote();
     return (
         <div className="UserCard sidebar-item">
             <h3>Hi, {me.first_name || me.username}</h3>
             {!isServer && (
-                <h4 className="subtitle has-text-grey">"{getQuote()}"</h4>
+                <h4 className="subtitle has-text-grey">
+                    "{quote.text}"{" "}
+                    {
+                        //  - {quote.from}}
+                    }
+                </h4>
             )}
             <div className="card">
                 <div className="card-content">

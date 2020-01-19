@@ -8,6 +8,7 @@ import { deleteComment, editComment } from "~/lib/comments";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import Avatar from "~/features/users/components/Avatar";
+import UserLine from "../../users/components/UserLine";
 
 class CommentEditor extends React.Component {
     constructor(props) {
@@ -111,14 +112,7 @@ class Comment extends React.Component {
                     <Avatar is={24} user={user} />
                 </div>
                 <div className="comment-body">
-                    <Link
-                        route={"profile-page"}
-                        params={{ username: props.comment.user.username }}
-                    >
-                        <a>
-                            <FullName user={user} />
-                        </a>
-                    </Link>
+                    <UserLine user={user} />
                     <Markdown body={this.state.body} />
                 </div>
             </div>
