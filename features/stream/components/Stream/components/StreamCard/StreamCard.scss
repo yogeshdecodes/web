@@ -3,8 +3,51 @@
 .StreamCard {
     border-color: transparent;
     box-shadow: none;
+    //align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem; // replaces missing .card margin bottom.
+    border-bottom: 1px solid $c-bg-light;
 
-    .card-content, header {
+    &:first-of-type {
+        padding-top: 0px;
+    }
+
+    &:last-of-type {
+        padding-bottom: 0px;
+        border-bottom: none;
+    }
+
+    &:only-child {
+        border-bottom: none;
+    }
+
+    .avatar-case {
+        margin-right: 20px;
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 0px !important;
+    }
+
+    .user-info-container {
+        //padding-top: 1rem;
+        //padding-left: 1rem;
+        padding-bottom: 1rem;
+        font-size: 14px;
+        color: $c-gray;
+
+        .name {
+            font-weight: bold;
+            color: $c-text;
+        }
+    }
+
+    .tasks-container {
+    }
+
+    .card-content,
+    header {
         padding: 1rem !important;
     }
 

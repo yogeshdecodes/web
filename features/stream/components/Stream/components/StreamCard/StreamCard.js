@@ -11,6 +11,9 @@ import OutboundLink from "~/components/OutboundLink";
 import { MilestoneMedia } from "~/features/milestones";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
+import Avatar from "~/features/users/components/Avatar";
+import Streak from "~/components/Streak";
+import FullName from "~/components/FullName";
 
 class StreamCard extends React.Component {
     state = {
@@ -56,80 +59,89 @@ class StreamCard extends React.Component {
         let user = this.getUser();
 
         return (
-            <div className={"card StreamCard"}>
-                <header>
-                    <div className={"flex col-right"}>
-                        <div>
-                            <UserMedia user={user} />
-                        </div>
+            <div className="StreamCard flex">
+                <div className="flex-grow">
+                    <div className="user-info-container">
+                        <UserMedia user={user} />
+                    </div>
 
-                        <UserBadges user={user} />
+                    {milestones.map(m => (
+                        <MilestoneMedia stream milestone={m} />
+                    ))}
 
-                        <div className={"flex v-center cardHeaderOptions"}>
-                            <Tooltip
-                                interactive
-                                useContext
-                                html={<span>Tweet these tasks</span>}
-                                position={"top"}
-                                size={"small"}
-                            >
-                                <a
-                                    target={"_blank"}
-                                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                                        this.generateTweetText(
-                                            orderByDate(tasks.done)
-                                        )
-                                    )}`}
-                                >
-                                    <FontAwesomeIcon
-                                        icon={["fab", "twitter"]}
-                                        color={"lightgray"}
-                                    />
-                                </a>
-                            </Tooltip>
-                            {this.props.me && this.props.me.is_staff && (
+                    {this.getTasks().length > 0 && (
+                        <div className={"tasks-container"}>
+                            {tasks.in_progress && (
                                 <div>
-                                    <OutboundLink
-                                        to={`https://api.getmakerlog.com/admin/accounts/user/${user.id}`}
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={"shield-alt"}
-                                            color={"lightgray"}
-                                        />
-                                    </OutboundLink>
+                                    <EntryList tasks={tasks.in_progress} />
+                                </div>
+                            )}
+                            {tasks.done && (
+                                <div>
+                                    <EntryList tasks={tasks.done} />
+                                </div>
+                            )}
+                            {tasks.remaining && (
+                                <div>
+                                    <EntryList tasks={tasks.remaining} />
                                 </div>
                             )}
                         </div>
-                    </div>
-                </header>
-
-                {milestones.map(m => (
-                    <MilestoneMedia stream milestone={m} />
-                ))}
-
-                {this.getTasks().length > 0 && (
-                    <div className={"card-content"}>
-                        {tasks.in_progress && (
-                            <div>
-                                <EntryList tasks={tasks.in_progress} />
-                            </div>
-                        )}
-                        {tasks.done && (
-                            <div>
-                                <EntryList tasks={tasks.done} />
-                            </div>
-                        )}
-                        {tasks.remaining && (
-                            <div>
-                                <EntryList tasks={tasks.remaining} />
-                            </div>
-                        )}
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         );
     }
 }
+
+/**
+ * 
+                    <header>
+                        <div className={"flex col-right"}>
+                            <div>
+                                <UserMedia user={user} />
+                            </div>
+
+                            <UserBadges user={user} />
+
+                            <div className={"flex v-center cardHeaderOptions"}>
+                                <Tooltip
+                                    interactive
+                                    useContext
+                                    html={<span>Tweet these tasks</span>}
+                                    position={"top"}
+                                    size={"small"}
+                                >
+                                    <a
+                                        target={"_blank"}
+                                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                                            this.generateTweetText(
+                                                orderByDate(tasks.done)
+                                            )
+                                        )}`}
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={["fab", "twitter"]}
+                                            color={"lightgray"}
+                                        />
+                                    </a>
+                                </Tooltip>
+                                {this.props.me && this.props.me.is_staff && (
+                                    <div>
+                                        <OutboundLink
+                                            to={`https://api.getmakerlog.com/admin/accounts/user/${user.id}`}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={"shield-alt"}
+                                                color={"lightgray"}
+                                            />
+                                        </OutboundLink>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </header>
+ */
 
 StreamCard.propTypes = {
     activity: PropTypes.array.isRequired

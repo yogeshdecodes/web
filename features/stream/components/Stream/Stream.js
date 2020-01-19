@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Button} from "~/vendor/bulma";
+import { Button } from "~/vendor/bulma";
 //import { CSSTransitionGroup } from "react-transition-group";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StreamSection from "./components/StreamSection/index";
 import NoActivityCard from "../NoActivityCard";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {sortStreamByActivity} from "~/lib/utils/tasks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { sortStreamByActivity } from "~/lib/utils/tasks";
 import StreamFinished from "./components/StreamFinished/index";
 import Spinner from "~/components/Spinner";
-import {assignModelType} from "../../../../lib/utils/tasks";
+import { assignModelType } from "../../../../lib/utils/tasks";
 
 /**
  * Stream Component
@@ -46,37 +46,43 @@ class Stream extends React.Component {
                 hasMore={this.props.hasMore}
                 style={{ overflow: "none" }}
             >
-                <div>
-                    {Object.keys(data).map(date => {
-                        return (
-                            <StreamSection
-                                key={date}
-                                position={Object.keys(data).indexOf(date)}
-                                canSwitchType={this.props.canSwitchType}
-                                isFollowingFeed={this.props.isFollowingFeed}
-                                onSwitch={this.props.onSwitch}
-                                date={date}
-                                activityData={data[date]}
-                            />
-                        );
-                    })}
+                <div className="card">
+                    <div className="card-content">
+                        {Object.keys(data).map(date => {
+                            return (
+                                <StreamSection
+                                    key={date}
+                                    position={Object.keys(data).indexOf(date)}
+                                    canSwitchType={this.props.canSwitchType}
+                                    isFollowingFeed={this.props.isFollowingFeed}
+                                    onSwitch={this.props.onSwitch}
+                                    date={date}
+                                    activityData={data[date]}
+                                />
+                            );
+                        })}
 
-                    {this.props.hasMore && (
-                        <div className={"center"}>
-                            <Button
-                                loading={this.props.isSyncing}
-                                className={"btn-loading"}
-                                onClick={this.props.loadMore}
-                            >
-                                <FontAwesomeIcon icon={"arrow-circle-down"} />{" "}
-                                Load more tasks...
-                            </Button>
-                        </div>
-                    )}
-                    {!this.props.hasMore && this.props.isSyncing && <Spinner />}
-                    {!this.props.hasMore && !this.props.isSyncing && (
-                        <StreamFinished />
-                    )}
+                        {this.props.hasMore && (
+                            <div className={"center"}>
+                                <Button
+                                    loading={this.props.isSyncing}
+                                    className={"btn-loading"}
+                                    onClick={this.props.loadMore}
+                                >
+                                    <FontAwesomeIcon
+                                        icon={"arrow-circle-down"}
+                                    />{" "}
+                                    Load more tasks...
+                                </Button>
+                            </div>
+                        )}
+                        {!this.props.hasMore && this.props.isSyncing && (
+                            <Spinner text="Loading the makerness..." />
+                        )}
+                        {!this.props.hasMore && !this.props.isSyncing && (
+                            <StreamFinished />
+                        )}
+                    </div>
                 </div>
             </InfiniteScroll>
         );

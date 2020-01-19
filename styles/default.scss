@@ -1857,3 +1857,12 @@ strong.heading {
 .react-phone-number-input__icon {
     line-height: 0px;
 }
+
+.streak-avatar {
+    position: relative;
+
+    .streak {
+        right: -1rem;
+        font-weight: normal;
+    }
+}

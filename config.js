@@ -1,4 +1,5 @@
 export const isServer = !process.browser;
+export const isDev = !(process.env.NODE_ENV === "production");
 
 const API_URL = process.env.API_URL
     ? process.env.API_URL

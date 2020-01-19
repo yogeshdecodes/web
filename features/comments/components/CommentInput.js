@@ -78,55 +78,31 @@ class CommentInput extends React.Component {
         }
 
         return (
-            <div className={"stretch"}>
-                <div className={"flex"}>
-                    <form onSubmit={this.onSubmit} style={{ width: "100%" }}>
-                        <div className={"flex CommentInput"}>
-                            <div>
-                                <Link
-                                    route={"profile-page"}
-                                    params={{
-                                        username: this.props.user.username
-                                    }}
-                                >
-                                    <a>
-                                        <Avatar
-                                            is={24}
-                                            user={this.props.user}
-                                        />
-                                    </a>
-                                </Link>
-                            </div>
-                            <div>
-                                <textarea
-                                    onKeyDown={this.keydownHandler}
-                                    placeholder={"Write a comment..."}
-                                    value={this.state.content}
-                                    onChange={e =>
-                                        this.setState({
-                                            content: e.target.value
-                                        })
-                                    }
-                                />
-                                {this.state.content.length > 0 && (
-                                    <div className={"help"}>
-                                        <FontAwesomeIcon
-                                            icon={["fab", "markdown"]}
-                                        />{" "}
-                                        Shift+Enter to add a new line. Enter to
-                                        finish.{" "}
-                                    </div>
-                                )}
-                            </div>
-                            {this.state.loading || this.props.isLoading ? (
-                                <div>
-                                    <Spinner small />
-                                </div>
-                            ) : null}
+            <form onSubmit={this.onSubmit} style={{ width: "100%" }}>
+                <div className="input-container flex">
+                    <div>
+                        <Avatar is={24} user={this.props.me} />
+                    </div>
+                    <div className="flex-grow">
+                        <textarea
+                            rows={1}
+                            onKeyDown={this.keydownHandler}
+                            placeholder={"Write a comment..."}
+                            value={this.state.content}
+                            onChange={e =>
+                                this.setState({
+                                    content: e.target.value
+                                })
+                            }
+                        />
+                    </div>
+                    {this.state.loading || this.props.isLoading ? (
+                        <div className="spinner-container">
+                            <Spinner small />
                         </div>
-                    </form>
+                    ) : null}
                 </div>
-            </div>
+            </form>
         );
     }
 }

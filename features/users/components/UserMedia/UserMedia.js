@@ -209,22 +209,24 @@ class UserMedia extends React.Component {
                         <Avatar is={32} user={this.props.user} />
                     </div>
                     <div className={"flex v-center"}>
-                        <h4>
+                        <span className="name">
                             <FullName user={user} />
-                        </h4>{" "}
+                        </span>
+                        &nbsp;
                         {user.verified && <VerifiedIcon />}
                     </div>
                     <div className={"stats-case"}>
+                        <span className="username">@{user.username}</span>
+                        &nbsp;
+                        {user.streak !== null && <Streak days={user.streak} />}
+                        {user.streak === 100 && <Emoji emoji={"🎉"} />}
+                        &nbsp;
                         {user.is_live && (
                             <span>
                                 <Emoji emoji={"🔴"} />{" "}
                                 <span className={"has-text-danger"}>LIVE</span>
                             </span>
                         )}
-                        {user.streak > 0 && <Streak days={user.streak} />}
-                        {user.streak === 100 && <Emoji emoji={"🎉"} />}
-                        <MakerScore score={user.maker_score} />
-                        <Tda tda={user.week_tda} />
                     </div>
                 </div>
             </Link>

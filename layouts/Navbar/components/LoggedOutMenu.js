@@ -5,6 +5,7 @@ import { NavbarDropdown } from "~/components/Dropdown";
 import React from "react";
 import { Link } from "~/routes";
 import AuthModal from "~/features/users/components/AuthModal";
+import OutboundLink from "~/components/OutboundLink";
 
 const LoggedOutMenu = props => (
     <div
@@ -49,6 +50,13 @@ const LoggedOutMenu = props => (
                         <span>Products</span>
                     </a>
                 </NavLink>
+
+                <OutboundLink
+                    to="https://open.getmakerlog.com"
+                    className="navbar-item"
+                >
+                    <span>Open Startup</span>
+                </OutboundLink>
             </NavbarDropdown>
         </div>
         <div className="navbar-end">

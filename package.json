@@ -81,6 +81,7 @@
         "react-process-string": "^1.2.0",
         "react-repeatable": "^2.0.1",
         "react-router-redux": "^4.0.8",
+        "react-scroll": "^1.7.16",
         "react-spinners-kit": "^1.9.1",
         "react-stickynode": "^2.1.1",
         "react-switch": "^5.0.1",

@@ -83,7 +83,7 @@ class NavbarDropdown extends Dropdown {
                 route={this.props.route}
                 params={this.props.params}
                 onClick={e => {
-                    e.preventDefault();
+                    //e.preventDefault();
                 }}
                 activeClassName={"is-located"}
             >

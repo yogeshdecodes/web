@@ -1,40 +1,74 @@
 @import "../../styles/_variables";
 
-.Comment {
-    margin: 10px 0;
+.comments-box {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    //margin-left: 1.2rem;
+    background-color: $c-bg;
+    border: 1px solid $c-border;
 
-    .card-content {
-        display: inline-block;
+    .img-avatar {
+        margin-right: 10px;
     }
 
-    .CommentsBox {
-        width: 100%;
-        max-height: 50vh;
-        overflow-y: scroll;
+    div.comment {
+        font-size: calc(#{$font-size} - 2px);
+        margin-bottom: 0.5rem;
+
+        &:last-of-type {
+            margin-bottom: 0px;
+        }
+
+        .comment-body {
+            @extend %corners;
+            background-color: $c-lightest;
+            padding: 0.5rem;
+
+            a:first-of-type {
+                font-weight: bold;
+                margin-right: 5px;
+            }
+        }
     }
 
-    .CommentsBox::-webkit-scrollbar {
-        width: 0 !important;
+    & > div:first-of-type {
+        padding: 0.5rem;
+        padding-top: 0.8rem;
+        padding-bottom: 0.8rem;
+        min-height: 4rem;
+        max-height: 35vh;
+        overflow-y: auto;
     }
 
-    .Comment:first-child {
-        margin-top: 0;
-    }
+    .input-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: $c-lightest;
+        padding: 0.5rem;
+        border-top: 1px solid $c-border;
 
-    .Comment:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-    }
+        .spinner-container {
+            margin-left: 10px;
+        }
 
-    .CommentInfo {
-        line-height: 1;
-    }
+        &:only-child {
+            border-top: none;
+        }
 
-    .box {
-        display: inline-block;
+        .flex-grow {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
 
-        > .content {
-            display: inline-block;
+        textarea {
+            height: 100%;
+            width: 100%;
+            border-bottom: none;
+            margin-bottom: 0px;
         }
     }
 }

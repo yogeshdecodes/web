@@ -12,6 +12,9 @@ import TaskDetailModal from "./components/TaskDetailModal";
 import { getAppIcon } from "~/lib/apps";
 import { processTaskString } from "~/lib/utils/parsers";
 import startsWith from "lodash/startsWith";
+import Avatar from "../../../users/components/Avatar";
+import FullName from "../../../users/components/FullName";
+import CommentsBox from "~/features/comments/components/CommentsBox";
 
 function findWord(word, str) {
     return str
@@ -151,13 +154,18 @@ class Task extends React.Component {
             startsWith(this.props.task.attachment, "http")
         ) {
             return (
-                <div>
-                    <img
+                <div className="attachments-container">
+                    <div
                         onClick={this.toggleAttachment}
-                        className={"attachment"}
-                        src={this.props.task.attachment}
-                        alt={"attachment"}
-                    />
+                        className="image-preview"
+                        style={{
+                            backgroundImage: `url(${this.props.task.attachment})`
+                        }}
+                    >
+                        <div className="attachment-overlay">
+                            Click to open image
+                        </div>
+                    </div>
                     {this.state.attachmentOpen && (
                         <Lightbox
                             small={this.props.task.attachment}
@@ -240,11 +248,12 @@ class Task extends React.Component {
                         </div>
                     )}
                 {this.state.detailsOpen && (
-                    <TaskDetailModal
-                        open={this.state.detailsOpen}
-                        onClose={this.toggleDetails}
-                        task={this.props.task}
-                    />
+                    <div>
+                        <CommentsBox
+                            initialCommentCount={this.props.task.comment_count}
+                            task={this.props.task}
+                        />
+                    </div>
                 )}
             </>
         );

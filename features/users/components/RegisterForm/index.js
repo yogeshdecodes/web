@@ -165,27 +165,31 @@ class AccountActivator extends React.Component {
 AccountActivator = connect(null, mapDispatchToProps)(AccountActivator);
 
 class RegisterForm extends React.Component {
-    state = {
-        loading: true,
-        failedPreflight: false,
-        registered: false,
-        email: "",
-        emailPrefilled: false,
-        code: "",
-        username: "",
-        password: "",
-        showPassword: false,
-        repeat_password: "",
-        recaptchaToken: "",
-        showAdvanced: false,
-        isRegistering: false,
-        errorMessages: null,
-        joinSlack: true,
-        registrationsOpen: true,
-        smsMode: false,
-        phone_number: "",
-        sms_validation: ""
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            loading: this.props.preflight ? false : true,
+            failedPreflight: false,
+            registered: false,
+            email: "",
+            emailPrefilled: false,
+            code: "",
+            username: "",
+            password: "",
+            showPassword: false,
+            repeat_password: "",
+            recaptchaToken: "",
+            showAdvanced: false,
+            isRegistering: false,
+            errorMessages: null,
+            joinSlack: true,
+            registrationsOpen: true,
+            smsMode: false,
+            phone_number: "",
+            sms_validation: ""
+        };
+    }
 
     componentDidMount() {
         this.getPreflight();
@@ -198,6 +202,7 @@ class RegisterForm extends React.Component {
                 failedPreflight: false
             });
         }
+
         try {
             let data = null;
             if (!this.props.preflight) {
@@ -213,10 +218,11 @@ class RegisterForm extends React.Component {
                 loading: false
             });
 
-            if (data.method === "sms") {
+            if (data.method === "email" && this.captcha) {
                 this.captcha.execute();
             }
         } catch (e) {
+            console.log(e);
             this.setState({
                 failedPreflight: true
             });
@@ -560,20 +566,6 @@ class RegisterPath extends React.Component {
         errorMessages: null,
         params: {}
     };
-
-    static async getInitialProps({ query }) {
-        let preflight = null;
-        try {
-            preflight = await axios.get("/accounts/register_preflight/");
-        } catch (e) {}
-
-        return {
-            token: query.token ? query.token : null,
-            uid: query.uid ? query.uid : null,
-            next: query.next ? query.next : null,
-            preflight
-        };
-    }
 
     componentDidMount() {
         if (this.props.uid && this.props.token) {

@@ -9,17 +9,18 @@
     display: flex;
     align-items: center;
 
+    color: $c-gray;
+
+    .name {
+        font-weight: bold;
+        color: $c-text;
+    }
+
     &.grid-streamcard {
         display: inline-grid;
         grid-template-columns: repeat(2, auto);
         grid-template-rows: 1fr auto;
         grid-column-gap: 1rem;
-
-        h4 {
-            font-weight: bold;
-            font-size: 1rem;
-            margin: 0 4px 0 0;
-        }
 
         > div:first-of-type {
             grid-column: 1 / span 1;
@@ -33,13 +34,12 @@
 
         .stats-case {
             font-size: 0.75rem;
-            font-weight: bold;
             grid-column: 2 / span 1;
             grid-row: 2 / 3;
 
             .emoji:nth-child(2),
             .emoji:nth-child(3) {
-                margin-left: 1rem;
+                //margin-left: 1rem;
             }
         }
     }

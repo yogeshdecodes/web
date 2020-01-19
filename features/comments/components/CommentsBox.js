@@ -8,29 +8,66 @@ import CommentInput from "./CommentInput";
 import Emoji from "../../../components/Emoji";
 import { Link } from "~/routes";
 import { connect } from "react-redux";
+import Avatar from "~/features/users/components/Avatar";
+import FullName from "~/features/users/components/FullName";
+import { animateScroll } from "react-scroll";
+import Spinner from "~/components/Spinner";
+
+function revisedRandId() {
+    return Math.random()
+        .toString(36)
+        .replace(/[^a-z]+/g, "")
+        .substr(2, 10);
+}
 
 class CommentsBox extends React.Component {
     state = {
         loading: false,
-        comments: null,
+        comments: [],
         failed: false
     };
 
-    messagesEnd = React.createRef();
+    randId = 0;
 
     componentDidMount() {
+        if (
+            this.props.initialCommentCount &&
+            this.props.initialCommentCount === 0
+        )
+            return;
         this.getComments();
+
+        this.randId = revisedRandId();
     }
+
+    scrollToBottom = () => {
+        animateScroll.scrollToBottom({
+            containerId: this.getId(),
+            duration: 1000,
+            delay: 0,
+            smooth: "easeInOutQuint"
+        });
+    };
+
+    getIndexUrl = () => {
+        let indexUrl = this.props.indexUrl;
+        if (!indexUrl && this.props.task) {
+            indexUrl = `/tasks/${this.props.task.id}/`;
+        } else if (!indexUrl && this.props.milestone) {
+            indexUrl = `/milestones/${this.props.milestone.id}/`;
+        }
+        return indexUrl;
+    };
 
     getComments = async () => {
         this.setState({ loading: true });
         try {
-            const comments = await getComments(this.props.indexUrl);
+            const comments = await getComments(this.getIndexUrl());
             let failed = false;
             let loading = false;
             this.setState({ comments, failed, loading });
-            if (this.messagesEnd && comments.length) {
-                this.messagesEnd.current.scrollIntoView();
+            if (this.randId && comments.length) {
+                this.scrollToBottom();
             }
         } catch (e) {
             this.setState({ loading: false, failed: true });
@@ -39,22 +76,88 @@ class CommentsBox extends React.Component {
 
     onCreate = c => {
         this.setState({ comments: [...this.state.comments, c] });
-        if (this.messagesEnd) {
-            this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+        if (this.randId) {
+            this.scrollToBottom();
         }
+    };
+
+    getId = () => {
+        return `comment-box-${this.props.randId}`;
     };
 
     render() {
         return (
             <div>
-                {this.state.failed && (
-                    <div>
-                        Couldn't load comments.{" "}
-                        <button className={"btn"} onClick={this.getComments}>
-                            Retry
-                        </button>
-                    </div>
-                )}
+                <div className="comments-box">
+                    {this.state.loading && (
+                        <div>
+                            <Spinner small text="Loading comments..." />
+                        </div>
+                    )}
+                    {this.state.failed && (
+                        <div>
+                            Couldn't load comments.{" "}
+                            <button
+                                className={"btn btn-light btn-small"}
+                                onClick={this.getComments}
+                            >
+                                Retry
+                            </button>
+                        </div>
+                    )}
+                    {this.state.comments.length > 0 && (
+                        <div className="flex-grow" id={this.getId()}>
+                            <CommentList
+                                indexUrl={this.getIndexUrl()}
+                                comments={this.state.comments}
+                            />
+                        </div>
+                    )}
+                    <CommentInput
+                        indexUrl={this.getIndexUrl()}
+                        onCreate={this.onCreate}
+                        isLoading={this.state.loading}
+                    />
+                </div>
+            </div>
+        );
+    }
+}
+
+/*
+<div className="comment flex">
+                                <div className="comment-person">
+                                    <Avatar
+                                        is={24}
+                                        user={this.props.task.user}
+                                    />
+                                </div>
+                                <div className="comment-body">
+                                    <a>
+                                        <FullName user={this.props.task.user} />
+                                    </a>
+                                    This is a fake comment.
+                                </div>
+                            </div>
+                            <div className="comment flex">
+                                <div className="comment-person">
+                                    <Avatar
+                                        is={24}
+                                        user={this.props.task.user}
+                                    />
+                                </div>
+                                <div className="comment-body">
+                                    <a>
+                                        <FullName user={this.props.task.user} />
+                                    </a>
+                                    This is another fake comment.
+                                </div>
+                            </div>
+*/
+
+/*
+
+
                 <div className="card">
                     <div className={"card-content"}>
                         {this.state.comments &&
@@ -91,16 +194,11 @@ class CommentsBox extends React.Component {
                     </div>
                     <footer>
                         <CommentInput
-                            indexUrl={this.props.indexUrl}
-                            onCreate={this.onCreate}
-                            isLoading={this.state.loading}
+                            
                         />
                     </footer>
                 </div>
-            </div>
-        );
-    }
-}
+*/
 
 CommentsBox.propTypes = {
     task: PropTypes.object

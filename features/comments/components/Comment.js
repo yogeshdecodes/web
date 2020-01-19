@@ -7,6 +7,7 @@ import Markdown from "~/components/Markdown";
 import { deleteComment, editComment } from "~/lib/comments";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
+import Avatar from "~/features/users/components/Avatar";
 
 class CommentEditor extends React.Component {
     constructor(props) {
@@ -102,8 +103,31 @@ class Comment extends React.Component {
 
     render() {
         const props = this.props;
+        const { user } = this.props.comment;
 
         return (
+            <div className="comment flex">
+                <div className="comment-person">
+                    <Avatar is={24} user={user} />
+                </div>
+                <div className="comment-body">
+                    <Link
+                        route={"profile-page"}
+                        params={{ username: props.comment.user.username }}
+                    >
+                        <a>
+                            <FullName user={user} />
+                        </a>
+                    </Link>
+                    <Markdown body={this.state.body} />
+                </div>
+            </div>
+        );
+    }
+}
+
+/*
+
             <div className={"Comment"}>
                 <div className={"flex flex-gap"}>
                     <div>
@@ -182,8 +206,6 @@ class Comment extends React.Component {
                     </div>
                 </div>
             </div>
-        );
-    }
-}
+*/
 
 export default connect(mapStateToProps)(Comment);

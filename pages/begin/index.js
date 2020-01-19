@@ -6,6 +6,7 @@ import RegisterForm from "~/features/users/components/RegisterForm";
 import { TwitterTweetEmbed, TwitterTimelineEmbed } from "react-twitter-embed";
 import Spinner from "~/components/Spinner";
 import WallOfLove from "../../components/WallOfLove";
+import axios from "~/lib/axios";
 
 function getLoveTweetId() {
     const strs = [
@@ -24,8 +25,12 @@ function getLoveTweetId() {
 class RegisterPage extends React.Component {
     static async getInitialProps({ query }) {
         const layout = { className: "RegisterPage" };
-
-        return { layout, query };
+        let preflight = null;
+        try {
+            preflight = await axios.get("/accounts/register_preflight/");
+            preflight = preflight.data;
+        } catch (e) {}
+        return { layout, query, preflight };
     }
 
     render() {
@@ -35,7 +40,10 @@ class RegisterPage extends React.Component {
                     <div className="form-card">
                         <div className="card">
                             <div className="card-content">
-                                <RegisterForm {...this.props.query} />
+                                <RegisterForm
+                                    preflight={this.props.preflight}
+                                    {...this.props.query}
+                                />
                             </div>
                         </div>
                     </div>
