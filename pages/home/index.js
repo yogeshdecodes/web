@@ -12,7 +12,7 @@ function Home(props) {
             <section className={"container"}>
                 <div className="grid-c-s">
                     <div>
-                        <GlobalStream />
+                        <GlobalStream {...props.streamPrefetch} />
                     </div>
                     <div className={"sidebar"}>
                         <ExploreSidebar data={props.data} />
