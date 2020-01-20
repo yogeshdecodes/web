@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "~/routes";
-import { GlobalStream } from "~/features/stream";
+import GlobalStream, {
+    prefetch as prefetchStream
+} from "~/features/stream/containers/GlobalStream";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
-import GetStartedLink from "~/components/GetStartedLink";
 
 function Home(props) {
     return (
@@ -23,6 +23,11 @@ function Home(props) {
     );
 }
 
-Home.getInitialProps = prefetchData;
+Home.getInitialProps = async () => {
+    return {
+        ...(await prefetchData()),
+        streamPrefetch: await prefetchStream()
+    };
+};
 
 export default requireUnauthed(Home);

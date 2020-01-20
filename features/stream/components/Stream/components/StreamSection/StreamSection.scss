@@ -1,11 +1,13 @@
 @import "../../../../../../styles/_variables";
 
 .StreamSection {
-	margin-bottom: $gap;
+    padding-bottom: $gap;
+    margin-bottom: $gap;
+    border-bottom: 1px solid $c-border;
 
-	h4	{
-		font-size: 1.4rem;
-		font-weight: normal;
-		margin: 0 0 $gap;
-	}
+    h4 {
+        font-size: 1.4rem;
+        font-weight: normal;
+        margin: 0 0 $gap;
+    }
 }

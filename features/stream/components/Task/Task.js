@@ -214,6 +214,12 @@ class Task extends React.Component {
                         {this.props.task.comment_count}
                     </span>
                 ) : null}
+            </span>
+        );
+    };
+
+    /**
+     * 
                 {this.props.task.comment_count > 0 && (
                     <span>
                         <CommentFaces
@@ -221,9 +227,7 @@ class Task extends React.Component {
                         />
                     </span>
                 )}
-            </span>
-        );
-    };
+     */
 
     renderExtras = () => {
         return (
@@ -248,17 +252,20 @@ class Task extends React.Component {
                             </div>
                         </div>
                     )}
-                {this.state.detailsOpen && (
-                    <div className="task-details">
+                <div className="task-details">
+                    {this.state.detailsOpen && (
                         <div className="action-bar">
                             <TaskDetail task={this.props.task} />
                         </div>
+                    )}
+                    {(this.state.detailsOpen ||
+                        this.props.task.comment_count > 0) && (
                         <CommentsBox
                             initialCommentCount={this.props.task.comment_count}
                             task={this.props.task}
                         />
-                    </div>
-                )}
+                    )}
+                </div>
             </>
         );
     };

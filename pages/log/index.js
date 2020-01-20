@@ -7,8 +7,18 @@ import Sidebar from "../../features/stream/components/Sidebar";
 import { requireAuthed } from "../../lib/auth";
 import QuickPost from "~/features/tasks/components/QuickPost";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
+import GlobalStream, {
+    prefetch as prefetchStream
+} from "~/features/stream/containers/GlobalStream";
 
 class StreamPage extends React.Component {
+    static async getInitialProps() {
+        return {
+            ...(await prefetchData()),
+            streamPrefetch: await prefetchStream()
+        };
+    }
+
     isNewUser = () =>
         (this.props.tasks.length === 0 &&
             this.props.initialLoaded &&
@@ -24,7 +34,7 @@ class StreamPage extends React.Component {
                             {this.isNewUser() ? (
                                 <NoActivityCard />
                             ) : (
-                                <FollowingStream />
+                                <GlobalStream {...this.props.streamPrefetch} />
                             )}
                         </div>
 
@@ -37,7 +47,6 @@ class StreamPage extends React.Component {
         );
     }
 }
-StreamPage.getInitialProps = prefetchData;
 
 // Pass a few props from state simply because we need to detect new user-hood
 const mapStateToProps = state => {

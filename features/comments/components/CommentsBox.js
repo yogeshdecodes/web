@@ -113,11 +113,13 @@ class CommentsBox extends React.Component {
                             />
                         </div>
                     )}
-                    <CommentInput
-                        indexUrl={this.getIndexUrl()}
-                        onCreate={this.onCreate}
-                        isLoading={this.state.loading}
-                    />
+                    {this.props.showInput && (
+                        <CommentInput
+                            indexUrl={this.getIndexUrl()}
+                            onCreate={this.onCreate}
+                            isLoading={this.state.loading}
+                        />
+                    )}
                 </div>
             </div>
         );
@@ -202,6 +204,10 @@ class CommentsBox extends React.Component {
 
 CommentsBox.propTypes = {
     task: PropTypes.object
+};
+
+CommentsBox.defaultProps = {
+    showInput: true
 };
 
 export default connect(mapStateToProps)(CommentsBox);

@@ -8,7 +8,6 @@ const SubheaderButton = styled.a``;
 function getRelativeDate(date) {
     const diff = differenceInCalendarDays(new Date(), date);
     const dayOfWeek = format(date, "EEEE");
-    window.format = format;
 
     if (diff === 0) return "Today";
     if (diff === 1) return "Yesterday";
