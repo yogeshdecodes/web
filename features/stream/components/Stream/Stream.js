@@ -28,7 +28,10 @@ class Stream extends React.Component {
             milestones: this.props.milestones ? this.props.milestones : []
         });
 
-        data = sortStreamByActivity(data);
+        data = sortStreamByActivity(
+            data,
+            this.props.user ? this.props.user.timezone : null
+        );
 
         if (
             Object.keys(data).length === 0 &&

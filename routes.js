@@ -2,7 +2,7 @@ const routes = require("next-routes");
 
 // order of arguments
 // 1. route name
-// 2. url 
+// 2. url
 // 3. file path
 
 module.exports = routes()
@@ -26,6 +26,7 @@ module.exports = routes()
     .add("live", "/live", "live")
     .add("events", "/events", "events")
     .add("about", "/about", "about")
+    .add("deals", "/deals", "deals")
     .add("settings", "/settings", "settings")
     .add("event-page", "/events/:slug/", "event-page")
     .add("event-host", "/events/host/", "event-host")

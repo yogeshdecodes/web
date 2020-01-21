@@ -7,6 +7,8 @@ import { socketUrl } from "~/lib/utils/random";
 import pickBy from "lodash/pickBy";
 import { fetchNextUrl } from "../../../../lib/tasks";
 import { hasMore } from "../../../../lib/utils/stream";
+import { connect } from "react-redux";
+import { mapStateToProps } from "~/ducks/user";
 import "./index.scss";
 
 class WeeklyStream extends React.Component {
@@ -46,6 +48,11 @@ class WeeklyStream extends React.Component {
     async componentDidMount() {
         if (!this.state.initialLoaded) {
             await this.loadMore();
+        } else {
+            // We are server side rendered. However, the server timezone is not the local one.
+            // Show the user the data, then reorder it. Prevents later issues when commenting.
+            // This sucks. I don't want to show a spinner because the whole SSR magic is gone.
+            // this.forceUpdate();
         }
 
         this.connect();
@@ -193,6 +200,7 @@ class WeeklyStream extends React.Component {
     render() {
         return (
             <Stream
+                user={this.props.me}
                 isSyncing={this.state.isSyncing}
                 loadMore={this.loadMore}
                 hasMore={this.state.hasMore}
@@ -252,5 +260,5 @@ async function prefetchStream(tasksIndexUrl, milestonesIndexUrl) {
 
 WeeklyStream.propTypes = {};
 
-export default WeeklyStream;
+export default connect(mapStateToProps)(WeeklyStream);
 export { prefetchStream };

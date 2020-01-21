@@ -35,19 +35,19 @@ const LoggedOutMenu = props => (
                         <span>Events</span>
                     </a>
                 </NavLink>
-                <NavLink activeClassName="is-active" route="explore">
+                <NavLink route="deals" activeClassName="is-active">
                     <a className="navbar-item">
-                        <span>Popular</span>
+                        <span>Deals</span>
+                    </a>
+                </NavLink>
+                <NavLink route="apps" activeClassName="is-active">
+                    <a className="navbar-item">
+                        <span>Integrations</span>
                     </a>
                 </NavLink>
                 <NavLink activeClassName="is-active" route="live">
                     <a className="navbar-item">
                         <span>Live</span>
-                    </a>
-                </NavLink>
-                <NavLink activeClassName="is-active" route="explore-products">
-                    <a className="navbar-item">
-                        <span>Products</span>
                     </a>
                 </NavLink>
 

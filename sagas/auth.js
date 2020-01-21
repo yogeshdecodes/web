@@ -30,6 +30,9 @@ function* fetchToken(action) {
             console.log(
                 `Makerlog: Request processed for ${userState.me.username}.`
             );
+
+            axios.defaults.headers.common["X-App-Timezone"] =
+                userState.me.timezone;
             yield put(authActions.loginSuccess(token));
 
             if (!isServer) {

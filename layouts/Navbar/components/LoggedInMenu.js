@@ -52,17 +52,23 @@ const LoggedInMenu = props => (
                         <span>Events</span>
                     </a>
                 </NavLink>
+                <NavLink route="deals" activeClassName="is-active">
+                    <a className="navbar-item">
+                        <span>Deals</span>
+                    </a>
+                </NavLink>
                 <NavLink route="apps" activeClassName="is-active">
                     <a className="navbar-item">
                         <span>Integrations</span>
                     </a>
                 </NavLink>
 
-                <NavLink route="wellness" activeClassName="is-active">
-                    <a className="navbar-item">
-                        <span>Wellness</span>
-                    </a>
-                </NavLink>
+                <OutboundLink
+                    to="https://open.getmakerlog.com"
+                    className="navbar-item"
+                >
+                    <span>Open Startup</span>
+                </OutboundLink>
             </NavbarDropdown>
         </div>
         <div className="navbar-end">

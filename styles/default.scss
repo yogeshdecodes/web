@@ -219,6 +219,7 @@ a[class^="btn"] {
     border: 0;
     padding: 0 1em;
     background: $c-secondary;
+    text-decoration: none;
     color: $c-lightest;
     cursor: pointer;
     font-size: 1rem;
@@ -1669,8 +1670,14 @@ figure.img-circle {
     color: white;
     cursor: pointer;
     display: flex;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     flex-direction: row;
+
+    a.btn {
+        margin-top: 10px;
+    }
 
     .alert-icon {
         background-color: rgba(0, 0, 0, 0.2);
@@ -1679,6 +1686,22 @@ figure.img-circle {
         padding: 10px;
         display: flex;
         align-items: center;
+    }
+
+    &.is-info {
+        background-color: rgba(52, 152, 219, 0.1);
+        border-left: 4px solid rgba(52, 152, 219, 1);
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        color: rgba(52, 152, 219, 1);
+
+        .alert-icon {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .alert-title .time {
+            color: rgba(52, 152, 219, 1) !important;
+        }
     }
 
     &.is-danger {
