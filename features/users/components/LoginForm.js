@@ -45,6 +45,10 @@ const LoginForm = props => {
         );
     }
 
+    if (props.token) {
+        return <center>Taking you to the log page...</center>;
+    }
+
     return (
         <form
             onSubmit={e => {
