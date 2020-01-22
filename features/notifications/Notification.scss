@@ -27,8 +27,7 @@
 
 .Notification {
     @extend %corners;
-    @extend %shadow;
-    background: $c-lightest;
+    //background: $c-lightest;
     display: flex;
     padding: 1.25rem;
     margin-bottom: 1.5rem;
@@ -65,6 +64,7 @@
     align-items: center;
     padding: 0 1rem;
     height: $navbar-height;
+    border-bottom: 1px solid $c-border;
 
     h1 {
         @extend %uppercase;
@@ -187,5 +187,47 @@
         text-align: center;
         min-width: 1.2em;
         font-weight: bold;
+    }
+}
+
+.Notification-new {
+    padding: 1rem;
+    border-bottom: 1px solid $c-border;
+
+    &.new {
+        background: $c-secondary;
+    }
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+
+    figure {
+        margin-right: 20px;
+    }
+
+    .has-text-grey > a {
+        color: $c-link;
+        font-weight: bold;
+    }
+
+    .verb a {
+        font-weight: bold;
+    }
+
+    &.read {
+        opacity: 0.5;
+    }
+
+    .content-case {
+        padding-top: 1rem;
+    }
+
+    .actions {
+        padding-top: 1rem;
+    }
+
+    .InlineCollapse {
+        margin-top: 10px;
     }
 }

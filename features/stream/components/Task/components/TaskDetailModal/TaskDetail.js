@@ -101,13 +101,13 @@ class TaskDetail extends React.Component {
                     extraPermalinkText={` #${this.props.task.id}`}
                     extraItemsRight={() => (
                         <div>
-                            <button
+                            <a
                                 className={"gray-link-with-icon"}
                                 onClick={this.toggleEmbed}
                             >
                                 <FontAwesomeIcon icon={"code"} size={"sm"} />
                                 Embed
-                            </button>
+                            </a>
                         </div>
                     )}
                     extraItemsFirst={() => (
@@ -166,7 +166,7 @@ class TaskDetail extends React.Component {
                                         </a>
                                     </>
                                 )}
-                                <button
+                                <a
                                     className={"gray-link-with-icon"}
                                     onClick={this.toggleEditing}
                                 >
@@ -175,9 +175,9 @@ class TaskDetail extends React.Component {
                                         size={"sm"}
                                     />
                                     Edit
-                                </button>
+                                </a>
 
-                                <button
+                                <a
                                     className="gray-link-with-icon"
                                     onClick={this.onTryDelete}
                                 >
@@ -188,7 +188,7 @@ class TaskDetail extends React.Component {
                                             &nbsp;Click again to confirm.
                                         </span>
                                     )}
-                                </button>
+                                </a>
                             </div>
                         </>
                     )}
@@ -314,13 +314,13 @@ class TaskDetail extends React.Component {
                     extraPermalinkText={` #${this.props.task.id}`}
                     extraItemsLeft={() => (
                         <div>
-                            <button
+                            <a
                                 className={"gray-link-with-icon"}
                                 onClick={this.toggleEmbed}
                             >
                                 <FontAwesomeIcon icon={"code"} size={"sm"} />
                                 Embed
-                            </button>
+                            </a>
                         </div>
                     )}
                 />

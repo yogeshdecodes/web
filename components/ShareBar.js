@@ -26,7 +26,7 @@ class CopyLink extends React.Component {
 
     render() {
         return (
-            <span
+            <a
                 onClick={this.onClick}
                 className={"gray-link-with-icon " + this.state.copied}
             >
@@ -36,7 +36,7 @@ class CopyLink extends React.Component {
                         <Emoji emoji={"💫"} /> Copied!
                     </>
                 )}
-            </span>
+            </a>
         );
     }
 }

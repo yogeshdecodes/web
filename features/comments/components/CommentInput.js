@@ -5,12 +5,23 @@ import Avatar from "~/features/users/components/Avatar";
 import Spinner from "~/components/Spinner";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { Selector } from "react-giphy-selector";
 import "./CommentInput.scss";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
-
-const GifPicker = styled.div``;
+import dynamic from "next/dynamic";
+const GiphyPane = dynamic(
+    () => {
+        return import("react-giphy-selector").then(mod => mod.Selector);
+    },
+    {
+        ssr: false,
+        loading: () => (
+            <center>
+                <Spinner small />
+            </center>
+        )
+    }
+);
 
 class CommentInput extends React.Component {
     state = {
@@ -78,31 +89,68 @@ class CommentInput extends React.Component {
         }
 
         return (
-            <form onSubmit={this.onSubmit} style={{ width: "100%" }}>
-                <div className="input-container flex">
-                    <div>
-                        <Avatar is={24} user={this.props.me} />
+            <>
+                <form
+                    className="CommentInput"
+                    onSubmit={this.onSubmit}
+                    style={{ width: "100%" }}
+                >
+                    <div className="input-container flex">
+                        <div>
+                            <Avatar is={24} user={this.props.me} />
+                        </div>
+                        <div className="flex-grow">
+                            <textarea
+                                rows={1}
+                                onKeyDown={this.keydownHandler}
+                                placeholder={"Write a comment..."}
+                                value={this.state.content}
+                                onChange={e =>
+                                    this.setState({
+                                        content: e.target.value
+                                    })
+                                }
+                            />
+                        </div>
+
+                        <div>
+                            <a
+                                className={"gray-link-with-icon"}
+                                onClick={this.toggleGif}
+                            >
+                                GIF
+                            </a>
+                        </div>
+                        {this.state.loading || this.props.isLoading ? (
+                            <div className="spinner-container">
+                                <Spinner small />
+                            </div>
+                        ) : null}
                     </div>
-                    <div className="flex-grow">
-                        <textarea
-                            rows={1}
-                            onKeyDown={this.keydownHandler}
-                            placeholder={"Write a comment..."}
-                            value={this.state.content}
-                            onChange={e =>
-                                this.setState({
-                                    content: e.target.value
-                                })
-                            }
+                </form>
+
+                {this.state.gifOpen && (
+                    <div className="GiphyPane">
+                        <GiphyPane
+                            apiKey={"x1uFeisfpQoHzLea5vVZ0myZ9R43RmIY"}
+                            onGifSelected={this.onGifSelect}
+                            queryInputPlaceholder={"Search GIFs..."}
+                            queryFormInputClassName={"input"}
+                            queryFormSubmitClassName={"btn btn-light btn-small"}
+                            queryFormSubmitStyle={{
+                                marginLeft: 10,
+                                height: 40
+                            }}
+                            suggestions={[
+                                "yay 🎉",
+                                "ship 🚢",
+                                "productive ✅",
+                                "sad 😔"
+                            ]}
                         />
                     </div>
-                    {this.state.loading || this.props.isLoading ? (
-                        <div className="spinner-container">
-                            <Spinner small />
-                        </div>
-                    ) : null}
-                </div>
-            </form>
+                )}
+            </>
         );
     }
 }
@@ -110,32 +158,7 @@ class CommentInput extends React.Component {
 /*
 
 
-                    <div>
-                        <button
-                            className={"btn-small"}
-                            onClick={this.toggleGif}
-                        >
-                            GIF
-                        </button>
-                    </div>
-                {this.state.gifOpen && (
-                    <GifPicker>
-                        <Selector
-                            apiKey={"x1uFeisfpQoHzLea5vVZ0myZ9R43RmIY"}
-                            onGifSelected={this.onGifSelect}
-                            queryInputPlaceholder={"Search a topic..."}
-                            queryFormInputClassName={"input"}
-                            queryFormSubmitClassName={"button is-primary"}
-                            queryFormInputStyle={{
-                                borderTopRightRadius: 0,
-                                borderBottomRightRadius: 0
-                            }}
-                            queryFormSubmitStyle={{
-                                borderTopLeftRadius: 0,
-                                borderBottomLeftRadius: 0
-                            }}
-                        />
-                    </GifPicker>
+                
                 )}
 */
 

@@ -19,6 +19,7 @@ import { mapStateToProps } from "~/ducks/user";
 import Avatar from "~/features/users/components/Avatar";
 import Streak from "~/components/Streak";
 import FullName from "~/components/FullName";
+import InlineCollapse from "../../../../../../components/InlineCollapse";
 
 function containsWords(input, words) {
     return words.some(word => input.toLowerCase().includes(word.toLowerCase()));
@@ -194,57 +195,51 @@ class StreamCard extends React.Component {
 
                     {collapsedTasks.length > 0 && (
                         <div className={"lifelogs"}>
-                            <small>
-                                <a
-                                    className="has-text-grey-light"
-                                    onClick={this.toggleLifeLogs}
-                                >
-                                    {collapsedTasks.length}{" "}
-                                    {hasCollapsedIntegrations &&
-                                        "tasks from integrations "}{" "}
-                                    {hasCollapsedIntegrations &&
-                                        hasCollapsedLifelog &&
-                                        "& "}{" "}
-                                    {hasCollapsedLifelog && "lifelogs "}
-                                    collapsed{" "}
-                                    {this.state.lifelogsOpen ? (
-                                        <FontAwesomeIcon icon="caret-up" />
-                                    ) : (
-                                        <FontAwesomeIcon icon="caret-down" />
-                                    )}
-                                </a>
-                            </small>
-                            {this.state.lifelogsOpen && (
-                                <div className="subtasks-container">
-                                    {groupedCollapsedTasks.in_progress && (
-                                        <div>
-                                            <EntryList
-                                                tasks={
-                                                    groupedCollapsedTasks.in_progress
-                                                }
-                                            />
-                                        </div>
-                                    )}
-                                    {groupedCollapsedTasks.done && (
-                                        <div>
-                                            <EntryList
-                                                tasks={
-                                                    groupedCollapsedTasks.done
-                                                }
-                                            />
-                                        </div>
-                                    )}
-                                    {groupedCollapsedTasks.remaining && (
-                                        <div>
-                                            <EntryList
-                                                tasks={
-                                                    groupedCollapsedTasks.remaining
-                                                }
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                            )}
+                            <InlineCollapse
+                                text={
+                                    <small>
+                                        <a
+                                            className="has-text-grey-light"
+                                            onClick={this.toggleLifeLogs}
+                                        >
+                                            {collapsedTasks.length}{" "}
+                                            {hasCollapsedIntegrations &&
+                                                "tasks from integrations "}{" "}
+                                            {hasCollapsedIntegrations &&
+                                                hasCollapsedLifelog &&
+                                                "& "}{" "}
+                                            {hasCollapsedLifelog && "lifelogs "}
+                                            collapsed
+                                        </a>
+                                    </small>
+                                }
+                            >
+                                {groupedCollapsedTasks.in_progress && (
+                                    <div>
+                                        <EntryList
+                                            tasks={
+                                                groupedCollapsedTasks.in_progress
+                                            }
+                                        />
+                                    </div>
+                                )}
+                                {groupedCollapsedTasks.done && (
+                                    <div>
+                                        <EntryList
+                                            tasks={groupedCollapsedTasks.done}
+                                        />
+                                    </div>
+                                )}
+                                {groupedCollapsedTasks.remaining && (
+                                    <div>
+                                        <EntryList
+                                            tasks={
+                                                groupedCollapsedTasks.remaining
+                                            }
+                                        />
+                                    </div>
+                                )}
+                            </InlineCollapse>
                         </div>
                     )}
                 </div>

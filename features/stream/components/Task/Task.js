@@ -296,6 +296,20 @@ class Task extends React.Component {
             return null;
         }
 
+        if (this.props.plain) {
+            return (
+                <Link route="task-page" params={{ id: this.props.task.id }}>
+                    <div className={this.getClassNames()}>
+                        {this.renderIcon()}{" "}
+                        <span className={"task-content"}>
+                            {this.renderContent()}
+                        </span>{" "}
+                        {this.props.withAttachment && this.renderAttachments()}
+                    </div>
+                </Link>
+            );
+        }
+
         return (
             <div
                 onMouseEnter={this.onMouseEnter}
@@ -322,7 +336,8 @@ Task.defaultProps = {
     withCounts: true,
     withPraise: true,
     withAttachment: true,
-    withDueDates: true
+    withDueDates: true,
+    plain: false
 };
 
 export default Task;

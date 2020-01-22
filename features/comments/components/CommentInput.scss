@@ -1,35 +1,23 @@
 @import "../../../styles/_variables";
 
 .CommentInput {
-	input,
-	textarea	{
-		width: 100%;
-		border: 0;
-		box-shadow: none;
-		font-size: 1.1rem;
-		min-height: 2rem;
-		outline: none;
-		background: transparent;
-	}
-
-	textarea {
-		resize: none;
-	}
-
-	.help	{
-		font-size: 0.750rem;
-		color: $c-gray;
-	}
+    &:not(:last-child) {
+        border-bottom: 1px solid $c-border;
+    }
 }
 
-.stretch	{
-	width: 100%;
+.GiphyPane {
+    padding: 1rem;
+}
 
-	.btn-small	{
-		font-weight: bold;
-		letter-spacing: 1px;
-		color: $c-gray;
-		text-transform: uppercase;
-		text-decoration: none;
-	}
+.stretch {
+    width: 100%;
+
+    .btn-small {
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: $c-gray;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
 }

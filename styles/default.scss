@@ -345,6 +345,14 @@ a[class^="btn"] {
         &:hover {
             border-color: $c-border-light;
         }
+
+        &.praising {
+            font-weight: bold;
+            background-color: #ffd157 !important;
+            border-color: #de900e !important;
+            transform: scale(0.95);
+            color: white !important;
+        }
     }
 
     &.btn-hero {
@@ -1467,14 +1475,6 @@ figure.img-circle {
     .color-scale-4 {
         fill: #008f64;
     }
-}
-
-.praising {
-    font-weight: bold;
-    background-color: #ffd157 !important;
-    border-color: #de900e !important;
-    transform: scale(0.95);
-    color: white !important;
 }
 
 .twitchWrapper {
