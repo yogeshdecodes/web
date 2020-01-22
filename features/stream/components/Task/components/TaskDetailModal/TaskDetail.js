@@ -95,84 +95,170 @@ class TaskDetail extends React.Component {
         ) {
             return (
                 <ShareBar
-                    compact
+                    tweetText={this.generateTweetText()}
+                    permalink={this.getPermalink()}
                     rightAlignShare
+                    extraPermalinkText={` #${this.props.task.id}`}
+                    extraItemsRight={() => (
+                        <div>
+                            <button
+                                className={"gray-link-with-icon"}
+                                onClick={this.toggleEmbed}
+                            >
+                                <FontAwesomeIcon icon={"code"} size={"sm"} />
+                                Embed
+                            </button>
+                        </div>
+                    )}
+                    extraItemsFirst={() => (
+                        <>
+                            <div>
+                                {this.props.task.done && (
+                                    <>
+                                        <a
+                                            onClick={() => {
+                                                this.onChangeStatus();
+                                                this.props.markRemaining(
+                                                    this.props.task.id
+                                                );
+                                            }}
+                                            href={"#mark-remaining"}
+                                            className={"gray-link-with-icon"}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={"dot-circle"}
+                                            />{" "}
+                                            Mark remaining
+                                        </a>
+                                        <a
+                                            onClick={() => {
+                                                this.onChangeStatus();
+                                                this.props.markInProgress(
+                                                    this.props.task.id
+                                                );
+                                            }}
+                                            href={"#mark-in-progress"}
+                                            className={"gray-link-with-icon"}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={"dot-circle"}
+                                            />{" "}
+                                            Mark in progress
+                                        </a>
+                                    </>
+                                )}
+                                {!this.props.task.done && (
+                                    <>
+                                        <a
+                                            onClick={() => {
+                                                this.onChangeStatus();
+                                                this.props.markDone(
+                                                    this.props.task.id
+                                                );
+                                            }}
+                                            href={"#mark-remaining"}
+                                            className={"gray-link-with-icon"}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={"check-circle"}
+                                            />{" "}
+                                            Mark done
+                                        </a>
+                                    </>
+                                )}
+                                <button
+                                    className={"gray-link-with-icon"}
+                                    onClick={this.toggleEditing}
+                                >
+                                    <FontAwesomeIcon
+                                        icon={"edit"}
+                                        size={"sm"}
+                                    />
+                                    Edit
+                                </button>
+
+                                <button
+                                    className="gray-link-with-icon"
+                                    onClick={this.onTryDelete}
+                                >
+                                    <FontAwesomeIcon icon={"trash"} />
+                                    {!this.state.confirmDelete && "Delete"}
+                                    {this.state.confirmDelete && (
+                                        <span>
+                                            &nbsp;Click again to confirm.
+                                        </span>
+                                    )}
+                                </button>
+                            </div>
+                        </>
+                    )}
+                />
+            );
+
+            return (
+                <ShareBar
                     tweetText={this.generateTweetText()}
                     permalink={this.getPermalink()}
                     extraItemsFirst={() => (
                         <>
                             <div>
-                                <Dropdown
-                                    trigger={() => (
-                                        <button className={"btn-link"}>
+                                {this.props.task.done && (
+                                    <>
+                                        <a
+                                            onClick={() => {
+                                                this.onChangeStatus();
+                                                this.props.markRemaining(
+                                                    this.props.task.id
+                                                );
+                                            }}
+                                            href={"#mark-remaining"}
+                                            className={"gray-link-with-icon"}
+                                        >
                                             <FontAwesomeIcon
-                                                icon={"check"}
-                                                size={"sm"}
-                                            />
-                                            {this.state.marking
-                                                ? "Marking..."
-                                                : "Mark as..."}
-                                        </button>
-                                    )}
-                                >
-                                    {this.props.task.done && (
-                                        <>
-                                            <a
-                                                onClick={() => {
-                                                    this.onChangeStatus();
-                                                    this.props.markRemaining(
-                                                        this.props.task.id
-                                                    );
-                                                }}
-                                                href={"#mark-remaining"}
-                                                className={"dropdown-item"}
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={"dot-circle"}
-                                                />{" "}
-                                                Mark remaining
-                                            </a>
-                                            <a
-                                                onClick={() => {
-                                                    this.onChangeStatus();
-                                                    this.props.markInProgress(
-                                                        this.props.task.id
-                                                    );
-                                                }}
-                                                href={"#mark-in-progress"}
-                                                className={"dropdown-item"}
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={"dot-circle"}
-                                                />{" "}
-                                                Mark in progress
-                                            </a>
-                                        </>
-                                    )}
-                                    {!this.props.task.done && (
-                                        <>
-                                            <a
-                                                onClick={() => {
-                                                    this.onChangeStatus();
-                                                    this.props.markDone(
-                                                        this.props.task.id
-                                                    );
-                                                }}
-                                                href={"#mark-remaining"}
-                                                className={"dropdown-item"}
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={"check-circle"}
-                                                />{" "}
-                                                Mark done
-                                            </a>
-                                        </>
-                                    )}
-                                </Dropdown>
+                                                icon={"dot-circle"}
+                                            />{" "}
+                                            Mark remaining
+                                        </a>
+                                        <a
+                                            onClick={() => {
+                                                this.onChangeStatus();
+                                                this.props.markInProgress(
+                                                    this.props.task.id
+                                                );
+                                            }}
+                                            href={"#mark-in-progress"}
+                                            className={"gray-link-with-icon"}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={"dot-circle"}
+                                            />{" "}
+                                            Mark in progress
+                                        </a>
+                                    </>
+                                )}
+                                {!this.props.task.done && (
+                                    <>
+                                        <a
+                                            onClick={() => {
+                                                this.onChangeStatus();
+                                                this.props.markDone(
+                                                    this.props.task.id
+                                                );
+                                            }}
+                                            href={"#mark-remaining"}
+                                            className={"gray-link-with-icon"}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={"check-circle"}
+                                            />{" "}
+                                            Mark done
+                                        </a>
+                                    </>
+                                )}
                             </div>
                             <div>
                                 <button
-                                    className={"btn-link"}
+                                    className={"gray-link-with-icon"}
                                     onClick={this.toggleEditing}
                                 >
                                     <FontAwesomeIcon
@@ -187,11 +273,9 @@ class TaskDetail extends React.Component {
                     extraItemsLeft={() => (
                         <>
                             <div>
-                                <Button
-                                    small
-                                    text={!this.state.confirmDelete}
+                                <button
+                                    className="gray-link-with-icon"
                                     onClick={this.onTryDelete}
-                                    danger={this.state.confirmDelete}
                                 >
                                     <FontAwesomeIcon icon={"trash"} />
                                     {!this.state.confirmDelete && "Delete"}
@@ -200,7 +284,7 @@ class TaskDetail extends React.Component {
                                             &nbsp;Click again to confirm.
                                         </span>
                                     )}
-                                </Button>
+                                </button>
                             </div>
                         </>
                     )}
@@ -208,13 +292,14 @@ class TaskDetail extends React.Component {
                         <>
                             <div>
                                 <button
-                                    className={"btn-link"}
+                                    className={"gray-link-with-icon"}
                                     onClick={this.toggleEmbed}
                                 >
                                     <FontAwesomeIcon
                                         icon={"code"}
                                         size={"sm"}
                                     />
+                                    Embed
                                 </button>
                             </div>
                         </>
@@ -226,6 +311,7 @@ class TaskDetail extends React.Component {
                 <ShareBar
                     tweetText={this.generateTweetText()}
                     permalink={this.getPermalink()}
+                    extraPermalinkText={` #${this.props.task.id}`}
                     extraItemsLeft={() => (
                         <div>
                             <button

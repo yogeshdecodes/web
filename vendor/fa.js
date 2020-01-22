@@ -76,6 +76,8 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons/faCalendarAlt";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons/faExclamationTriangle";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons/faQuestion";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
+import { faCaretUp } from "@fortawesome/free-solid-svg-icons/faCaretUp";
 
 library.add(
     faInstagram,
@@ -154,5 +156,7 @@ library.add(
     faCalendarAlt,
     faExclamationTriangle,
     faBars,
-    faQuestion
+    faQuestion,
+    faCaretDown,
+    faCaretUp
 );

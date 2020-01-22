@@ -125,6 +125,17 @@
         //border-right: 1px solid $c-border-lightest;
         //border-left: 1px solid $c-border-lightest;
         margin-bottom: -0.5rem; //compensate for commentsbar margin
+
+        /*.action-bar-with-taskcontrols {
+            .ShareBar {
+                border-top: 1px solid $c-border-lightest;
+                padding-top: 0.5rem;
+            }
+
+            > div:first-of-type {
+                padding-bottom: 0.5rem; //compensate for commentsbar margin
+            }
+        }*/
     }
 
     .attachment {

@@ -41,9 +41,12 @@ class CommentsBox extends React.Component {
     }
 
     scrollToBottom = () => {
+        if (!(this.randId && this.state.comments.length)) return;
+
         animateScroll.scrollToBottom({
             containerId: this.getId(),
             duration: 1000,
+            isDynamic: true,
             delay: 0,
             smooth: "easeInOutQuint"
         });
@@ -65,10 +68,7 @@ class CommentsBox extends React.Component {
             const comments = await getComments(this.getIndexUrl());
             let failed = false;
             let loading = false;
-            this.setState({ comments, failed, loading });
-            if (this.randId && comments.length) {
-                this.scrollToBottom();
-            }
+            this.setState({ comments, failed, loading }, this.scrollToBottom);
         } catch (e) {
             this.setState({ loading: false, failed: true });
         }
@@ -82,7 +82,7 @@ class CommentsBox extends React.Component {
     };
 
     getId = () => {
-        return `comment-box-${this.props.randId}`;
+        return `comment-box-${this.randId}`;
     };
 
     render() {

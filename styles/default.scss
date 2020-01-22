@@ -1094,11 +1094,11 @@ button[disabled] {
 }
 
 .has-text-grey {
-    color: #7a7a7a;
+    color: #7a7a7a !important;
 }
 
 .has-text-grey-light {
-    color: #b5b5b5;
+    color: #b5b5b5 !important;
 }
 
 .has-text-centered {
@@ -1888,4 +1888,8 @@ strong.heading {
         right: -1rem;
         font-weight: normal;
     }
+}
+
+a {
+    cursor: pointer;
 }

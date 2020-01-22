@@ -1,5 +1,5 @@
 import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import copy from "clipboard-copy";
 import Emoji from "./Emoji";
 
@@ -49,6 +49,9 @@ class ShareBar extends React.Component {
                     <CopyLink url={this.props.permalink}>
                         <FontAwesomeIcon icon={"link"} size={"sm"} />
                         {!this.props.compact && "Permalink"}
+                        {this.props.extraPermalinkText
+                            ? this.props.extraPermalinkText
+                            : null}
                     </CopyLink>
                 </div>
             )}
@@ -80,6 +83,8 @@ class ShareBar extends React.Component {
                 {!this.props.rightAlignShare && this.renderShareButtons()}
 
                 {this.props.extraItemsLeft && this.props.extraItemsLeft()}
+
+                <div className="flex-grow"></div>
 
                 {this.props.rightAlignShare && this.renderShareButtons()}
                 {this.props.extraItemsRight && this.props.extraItemsRight()}

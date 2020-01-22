@@ -1,66 +1,87 @@
+@import "../../../styles/_variables";
+
 .MilestoneMedia {
-  border-top: none !important;
-  border-bottom: none !important;
-  width: 100%;
+    width: 100%;
+    flex-direction: column;
 
-  .heading {
-    border-top: none !important;
-    border-bottom: none !important;
-  }
-
-  &:hover {
-    .hidden-button {
-      display: block;
+    img {
+        margin-right: 10px;
     }
-  }
 
-  .heading {
-    color: grey !important;
-  }
+    .heading {
+        border-top: none !important;
+        border-bottom: none !important;
+    }
 
-  .title {
-    margin-bottom: 15px;
-  }
+    &:hover {
+        .hidden-button {
+            display: block;
+        }
+    }
 
-  .content {
-    color: #4a4a4a;
-    max-width: 600px;
-  }
+    .heading {
+        color: grey !important;
+    }
 
-  .buttons {
-    margin-top: 20px;
-  }
+    .title {
+        margin-bottom: 15px;
+    }
 
-  .hidden-button {
-    display: none;
-  }
+    .content {
+        color: #4a4a4a;
+        max-width: 600px;
+    }
+
+    .buttons {
+        margin-top: 20px;
+    }
+
+    .hidden-button {
+        display: none;
+    }
 }
 
 .MilestoneMedia.xs {
-  .title {
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
+    .title {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
 
-
-  .heading {
-    margin-bottom: 5px;
-  }
+    .heading {
+        margin-bottom: 5px;
+    }
 }
 
-
 .StreamCard .MilestoneMedia {
-  border-left: 3px solid #00b77a;
-  transition: all 0.3s ease;
-  padding: 1rem !important;
+    //border-left: 3px solid #00b77a;
+    border: 1px solid $c-border;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
 
-  &:hover {
-    background-color: whitesmoke;
-  }
+    & > div:first-of-type {
+        padding: 1rem !important;
+    }
+
+    .comments-box {
+        margin: 0 0 0 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+    }
+
+    h3 {
+        margin-bottom: 10px;
+    }
 }
 
 .StreamCard .LinkWrapped:last-child {
-  .MilestoneMedia {
-    border-bottom-left-radius: 8px;
-  }
+    .MilestoneMedia {
+        border-bottom-left-radius: 8px;
+    }
+}
+
+.LinkWrapped .MilestoneMedia {
+    &:hover {
+        background-color: whitesmoke;
+    }
 }

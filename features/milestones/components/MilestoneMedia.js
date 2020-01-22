@@ -11,6 +11,7 @@ import { deleteMilestone, editMilestone } from "~/lib/milestones";
 import { connect } from "react-redux";
 
 import "./MilestoneMedia.scss";
+import CommentsBox from "../../comments/components/CommentsBox";
 
 class MilestoneMediaComponent extends React.Component {
     constructor(props) {
@@ -96,18 +97,24 @@ class MilestoneMediaComponent extends React.Component {
 
         return (
             <div className={"flex MilestoneMedia" + (xs ? " xs" : "")}>
-                {milestone.icon && withIcon && (
-                    <div>
-                        <img
-                            className={"img-avatar img-48"}
-                            src={milestone.icon}
-                        />
-                    </div>
-                )}
                 <div>
-                    <h2 className={"heading"}>Milestone</h2>
-                    {!xs && !this.state.editing && <h4>{this.state.title}</h4>}
-                    {xs && !this.state.editing && <h4>{this.state.title}</h4>}
+                    <p className={"heading"}>Milestone</p>
+                    {!xs && !this.state.editing && (
+                        <Link
+                            route={"milestone-page"}
+                            params={{ slug: milestone.slug }}
+                        >
+                            <h3>{this.state.title}</h3>
+                        </Link>
+                    )}
+                    {xs && !this.state.editing && (
+                        <Link
+                            route={"milestone-page"}
+                            params={{ slug: milestone.slug }}
+                        >
+                            <h3>{this.state.title}</h3>
+                        </Link>
+                    )}
                     {!xs &&
                         !this.props.stream &&
                         !this.state.deleted &&
@@ -126,10 +133,7 @@ class MilestoneMediaComponent extends React.Component {
                         this.state.body && (
                             <p className={"content"}>
                                 <Markdown
-                                    body={
-                                        this.state.body.split("\n", 1)[0] +
-                                        "..."
-                                    }
+                                    body={this.state.body.split("\n", 1)[0]}
                                 />
                             </p>
                         )}
@@ -182,17 +186,6 @@ class MilestoneMediaComponent extends React.Component {
                                 initialAmount={milestone.praise}
                                 item={milestone}
                             />
-
-                            <Link
-                                route={"milestone-page"}
-                                params={{ slug: milestone.slug }}
-                            >
-                                <a>
-                                    {" "}
-                                    <Emoji emoji={"💬"} />
-                                    &nbsp; {milestone.comment_count}
-                                </a>
-                            </Link>
                             {this.props.me &&
                                 this.props.me.id === milestone.user.id &&
                                 !(this.props.xs || this.props.stream) && (
@@ -236,6 +229,8 @@ class MilestoneMediaComponent extends React.Component {
                         </div>
                     )}
                 </div>
+
+                <CommentsBox indexUrl={`/milestones/${milestone.slug}/`} />
             </div>
         );
     }
