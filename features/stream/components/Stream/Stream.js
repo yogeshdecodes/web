@@ -10,7 +10,6 @@ import { sortStreamByActivity } from "~/lib/utils/tasks";
 import StreamFinished from "./components/StreamFinished/index";
 import Spinner from "~/components/Spinner";
 import { assignModelType } from "../../../../lib/utils/tasks";
-import shortid from "shortid";
 
 /**
  * Stream Component
@@ -55,7 +54,7 @@ class Stream extends React.Component {
                         {Object.keys(data).map(date => {
                             return (
                                 <StreamSection
-                                    key={shortid.generate()}
+                                    key={Object.keys(data).indexOf(date)}
                                     position={Object.keys(data).indexOf(date)}
                                     canSwitchType={this.props.canSwitchType}
                                     isFollowingFeed={this.props.isFollowingFeed}

@@ -12,6 +12,7 @@ import Avatar from "~/features/users/components/Avatar";
 import FullName from "~/features/users/components/FullName";
 import { animateScroll } from "react-scroll";
 import Spinner from "~/components/Spinner";
+import scrollIntoView from "scroll-into-view-if-needed";
 
 function revisedRandId() {
     return Math.random()
@@ -27,10 +28,11 @@ class CommentsBox extends React.Component {
         failed: false
     };
 
-    randId = 0;
+    messagesEnd = React.createRef();
 
-    shouldComponentUpdate(nextProps) {
-        return this.props.indexUrl !== nextProps.indexUrl;
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.indexUrl !== nextProps.indexUrl) return true;
+        if (nextState !== this.state) return true;
     }
 
     componentDidMount() {
@@ -40,20 +42,16 @@ class CommentsBox extends React.Component {
         )
             return;
         this.getComments();
-
-        this.randId = revisedRandId();
     }
 
     scrollToBottom = () => {
-        if (!(this.randId && this.state.comments.length)) return;
+        if (!this.state.comments.length) return;
+        if (!this.messagesEnd.current) return;
 
-        animateScroll.scrollToBottom({
-            containerId: this.getId(),
-            duration: 1000,
-            isDynamic: true,
-            delay: 0,
-            smooth: "easeInOutQuint"
-        });
+        if (this.messagesEnd) {
+            let target = this.messagesEnd.current;
+            target.parentNode.scrollTop = target.offsetTop;
+        }
     };
 
     getIndexUrl = () => {
@@ -80,9 +78,7 @@ class CommentsBox extends React.Component {
 
     onCreate = c => {
         this.setState({ comments: [...this.state.comments, c] });
-        if (this.randId) {
-            this.scrollToBottom();
-        }
+        this.scrollToBottom();
     };
 
     getId = () => {
@@ -110,11 +106,12 @@ class CommentsBox extends React.Component {
                         </div>
                     )}
                     {this.state.comments.length > 0 && (
-                        <div className="flex-grow" id={this.getId()}>
+                        <div className="flex-grow">
                             <CommentList
                                 indexUrl={this.getIndexUrl()}
                                 comments={this.state.comments}
-                            />
+                            />{" "}
+                            <span ref={this.messagesEnd}></span>
                         </div>
                     )}
                     {this.props.showInput && (
