@@ -1,23 +1,18 @@
 import React from "react";
-import CarbonAd from "~/vendor/CarbonAd";
-import Emoji from "../../Emoji";
-import GoldIcon from "~/components/icons/GoldIcon";
-import { connect } from "react-redux";
-import { mapStateToProps } from "~/ducks/user";
+import Ad from "~/components/Ad";
 
-// Disable ads for gold users.
-
-export default connect(mapStateToProps)(props =>
-    props.user && props.user.gold ? (
-        <div className="card">
-            <div className={"card-content"}>
-                <div className={"note"}>
-                    No ads here! Thanks for buying Makerlog Gold. <GoldIcon />{" "}
-                    <Emoji emoji={"✌️"} />
+export default () => {
+    return (
+        <div className="AdCard sidebar-item">
+            <h3>Indie ad</h3>
+            <h4 className="subtitle has-text-grey">
+                <a>Put your product here!</a>
+            </h4>
+            <div className="card">
+                <div className="card-content">
+                    <Ad />
                 </div>
             </div>
         </div>
-    ) : (
-        <CarbonAd />
-    )
-);
+    );
+};

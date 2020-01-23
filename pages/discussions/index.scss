@@ -1,50 +1,8 @@
 @import "../../styles/_variables";
 
 .DiscussionsPage {
-    #page-content {
+    .container.grid-c-s {
         margin-top: 30px;
-    }
-
-    .ThreadStreamItem {
-        margin-bottom: 1rem;
-
-        .topicMid {
-            flex-grow: 1;
-        }
-
-        > .card.pinned {
-            border-left: 3px solid $c-main;
-        }
-
-        > .card {
-            @extend %transition-bg;
-            @extend %corners;
-            border: 0;
-            cursor: pointer;
-            padding: 20px;
-        }
-
-        > div:hover {
-            background: $c-bg-light;
-            border-color: $c-bg-light;
-        }
-
-        .heading-link > a {
-            color: $c-text;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-
-        .actions {
-            font-size: 13px;
-            margin-top: 10px;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
     }
 
     .flex {
@@ -64,14 +22,6 @@
         &.v-center {
             .FaceStack .img-avatar {
                 margin-right: 0;
-            }
-
-            h2,
-            h3 {
-                font-family: $font;
-                font-weight: bold;
-                font-size: 1rem;
-                margin: 0 0 4px;
             }
         }
     }
@@ -173,4 +123,53 @@
     }
 
     margin-top: 10px;
+}
+
+.ThreadStreamItem {
+    padding: 1rem;
+    //border-bottom: 1px solid $c-border;
+    //cursor: pointer;
+
+    h4 {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &:last-of-type {
+        margin-bottom: 0px;
+        border-bottom: none;
+    }
+
+    &:first-of-type {
+        padding-top: 0px;
+    }
+}
+
+.upvote-arrows {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    margin-right: 25px !important;
+    color: $c-border-light;
+
+    .up,
+    .down {
+        flex-shrink: 2;
+    }
+}
+
+.Thread {
+    .thread-head {
+        margin-bottom: 1rem;
+    }
+
+    .thread-actions {
+        margin-top: 1rem;
+    }
+
+    .thread-body {
+        //padding: 1rem;
+    }
 }

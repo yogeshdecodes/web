@@ -6,7 +6,7 @@ import UserRow from "~/features/users/components/UserRow";
 import { getLiveEvents, getUpcomingEvents } from "~/lib/events";
 import EventMedia from "~/features/events/components/EventMedia";
 import SmallFooter from "~/components/sidebar/components/SmallFooter";
-import Ad from "~/components/Ad";
+import AdCard from "~/components/sidebar/components/AdCard";
 import sample from "lodash/sample";
 import { isServer } from "~/config";
 
@@ -210,22 +210,6 @@ const UpcomingEventsCard = ({ upcomingEvents }) => {
                     {upcomingEvents.length === 0 && (
                         <button className="btn-light">Host an event</button>
                     )}
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const AdCard = () => {
-    return (
-        <div className="AdCard sidebar-item">
-            <h3>Indie ad</h3>
-            <h4 className="subtitle has-text-grey">
-                <a>Put your product here!</a>
-            </h4>
-            <div className="card">
-                <div className="card-content">
-                    <Ad />
                 </div>
             </div>
         </div>

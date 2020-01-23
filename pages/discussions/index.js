@@ -37,12 +37,16 @@ import { Link } from "~/routes";
 import "./index.scss";
 import { Router } from "~/routes";
 import Head from "~/components/Head";
+import PageNavigation from "~/components/ui/PageNavigation";
+import DiscussionsSidebar from "~/components/sidebar/discussions";
+import OutboundLink from "../../components/OutboundLink";
+import UserMedia from "~/features/users/components/UserMedia";
 
 const HelpText = styled.span``;
 
 function getThreadHeading(thread) {
     return (
-        <div className={"flex center spaced"}>
+        <small className={"flex center spaced v-center"}>
             {thread.pinned && (
                 <div className={"is-brand-green"}>
                     <strong>
@@ -50,15 +54,20 @@ function getThreadHeading(thread) {
                     </strong>
                 </div>
             )}
-            <div className={"has-text-grey"}>by @{thread.owner.username}</div>
             <div>
-                <FontAwesomeIcon icon={"comments"} /> {thread.reply_count}
+                <ReplyFaces threadSlug={thread.slug} withOwner={false} />
             </div>
             <div>
-                <FontAwesomeIcon icon={"clock"} />{" "}
+                <Link route={"discussion-page"} params={{ slug: thread.slug }}>
+                    <a>{thread.reply_count} comments</a>
+                </Link>
+            </div>
+            <div>20 points</div>
+            <div>
                 <TimeAgo date={thread.created_at} />
             </div>
-        </div>
+            <div>by @{thread.owner.username}</div>
+        </small>
     );
 }
 
@@ -88,34 +97,43 @@ class ThreadStreamItem extends React.Component {
     renderThread = () => {
         let thread = this.props.thread;
 
+        /**
+         * 
+                        <div>
+                            <ReplyFaces
+                                threadSlug={thread.slug}
+                                withOwner={false}
+                            />
+                        </div>
+         */
+
         switch (thread.type) {
             case "TEXT":
             case "QUESTION":
                 return (
-                    <div className={thread.pinned ? "card pinned" : "card"}>
-                        <div className={"flex v-center flex-gap"}>
-                            <div>
-                                <Avatar
-                                    is={"32"}
-                                    className={"img-avatar img-32"}
-                                    user={thread.owner}
-                                />
+                    <div className={"flex v-center flex-gap"}>
+                        <div className="upvote-arrows">
+                            <div className="up">
+                                <FontAwesomeIcon icon="arrow-up" />
                             </div>
-                            <div className={"topicMid"}>
-                                <h2>{thread.title}</h2>
-                                <div className={"note"}>
-                                    {truncate(thread.body, 25, "...")}
-                                </div>
-                                <span className={"has-text-grey-light"}>
-                                    {getThreadHeading(thread)}
-                                </span>
+                            <div className="down">
+                                <FontAwesomeIcon icon="arrow-down" />
                             </div>
-                            <div>
-                                <ReplyFaces
-                                    threadSlug={thread.slug}
-                                    withOwner={false}
-                                />
+                        </div>
+
+                        <div className={"topicMid"}>
+                            <Link
+                                route={"discussion-page"}
+                                params={{ slug: thread.slug }}
+                            >
+                                <h4>{thread.title}</h4>
+                            </Link>
+                            <div className="note">
+                                {truncate(thread.body, 15, "...")}
                             </div>
+                            <span className={"has-text-grey-light"}>
+                                {getThreadHeading(thread)}
+                            </span>
                         </div>
                     </div>
                 );
@@ -132,12 +150,9 @@ class ThreadStreamItem extends React.Component {
                                 />
                             </div>
                             <div>
-                                <h3>{thread.title}</h3>
-                                <div className={"note"}>
-                                    {thread.body.indexOf("://") === -1
-                                        ? "http://" + thread.body
-                                        : thread.body}
-                                </div>
+                                <OutboundLink to={thread.body}>
+                                    <h3>{thread.title}</h3>
+                                </OutboundLink>
                                 <span className={"has-text-grey-light"}>
                                     {getThreadHeading(thread)}
                                 </span>
@@ -160,15 +175,7 @@ class ThreadStreamItem extends React.Component {
     render() {
         let thread = this.props.thread;
 
-        return (
-            <Link route={"discussion-page"} params={{ slug: thread.slug }}>
-                <a>
-                    <div className={"ThreadStreamItem"}>
-                        {this.renderThread()}
-                    </div>
-                </a>
-            </Link>
-        );
+        return <div className={"ThreadStreamItem"}>{this.renderThread()}</div>;
     }
 }
 
@@ -373,41 +380,27 @@ const Thread = connect(mapUserToProps)(
 
             return (
                 <div className={"Thread"}>
-                    <div className={"flex col-right mbGap"}>
+                    <div className={"flex col-right mbGap v-center"}>
                         <div>
-                            <h1 className={"page-title"}>{thread.title}</h1>
+                            <h2>{thread.title}</h2>
                         </div>
                         <div>
-                            <a href={"#ReplyForm"} className={"btn"}>
-                                <FontAwesomeIcon icon={"plus-square"} /> Reply
+                            <a
+                                href={"#ReplyForm"}
+                                className={"btn btn-secondary"}
+                            >
+                                New reply
                             </a>
                         </div>
                     </div>
                     <div className={"card"}>
-                        <div className={"card-content flex flex-gap"}>
-                            <div>
-                                <Link
-                                    route="profile-page"
-                                    params={{ username: thread.owner.username }}
-                                >
-                                    <a>
-                                        <img
-                                            className="img-avatar img-48"
-                                            src={thread.owner.avatar}
-                                        />
-                                    </a>
-                                </Link>
+                        <div
+                            className={"card-content flex flex-column flex-gap"}
+                        >
+                            <div className="thread-head">
+                                <UserMedia user={thread.owner} />
                             </div>
-                            <div>
-                                <div className="flex flex-gap heading">
-                                    <div>
-                                        <FullName user={thread.owner} />
-                                    </div>
-                                    <div className={"has-text-grey-light"}>
-                                        <FontAwesomeIcon icon={"clock"} />{" "}
-                                        <TimeAgo date={thread.created_at} />
-                                    </div>
-                                </div>
+                            <div className="thread-body">
                                 {this.state.deleting && (
                                     <div className={"panel-message danger"}>
                                         <Spinner small /> Deleting...
@@ -441,6 +434,8 @@ const Thread = connect(mapUserToProps)(
                                         }
                                     />
                                 )}
+                            </div>
+                            <div className="thread-actions">
                                 <ShareBar
                                     permalink={this.getPermalink()}
                                     tweetText={this.generateTweetText()}
@@ -1001,10 +996,12 @@ const ThreadStream = ({ threads, compact = false }) => (
         withSockets
         socketTypePrefix={"thread"}
         component={({ items }) => (
-            <div className={"DiscussionsList timeline"}>
-                {items.map(t => (
-                    <ThreadStreamItem thread={t} />
-                ))}
+            <div className={"card"}>
+                <div className="card-content">
+                    {items.map(t => (
+                        <ThreadStreamItem thread={t} key={t.id} />
+                    ))}
+                </div>
             </div>
         )}
     />
@@ -1025,14 +1022,14 @@ let NewTopicButton = props => {
     if (!props.isLoggedIn) {
         return (
             <Link route={"begin"}>
-                <a className={"btn-primary btn-big"}>
+                <a className={"btn-secondary btn-big"}>
                     <FontAwesomeIcon icon={"plus-square"} /> New topic
                 </a>
             </Link>
         );
     }
     return (
-        <button className={"btn-primary btn-big"} onClick={props.openEditor}>
+        <button className={"btn-secondary btn-big"} onClick={props.openEditor}>
             <FontAwesomeIcon icon={"plus-square"} />
             New topic
         </button>
@@ -1065,9 +1062,9 @@ const GreetingCard = connect(mapUserToProps)(props => {
 const HeaderBar = ({ title, onCreate }) => (
     <div className={"flex col-right v-center mbGap"}>
         <div>
-            <h1 className={"page-title"}>{title}</h1>
+            <h2>{title}</h2>
         </div>
-        <NewTopicButton className={"btn-primary btn-big"} onCreate={onCreate} />
+        <NewTopicButton onCreate={onCreate} />
     </div>
 );
 
@@ -1113,21 +1110,34 @@ class DiscussionsPage extends React.Component {
         const { replies, thread } = this.props;
 
         return (
-            <div className={"container grid-c-s"}>
-                <div>
-                    {thread && replies ? (
-                        <Discussion thread={thread} replies={replies} />
-                    ) : (
-                        <div>
-                            <HeaderBar title={"Recent discussions"} />
-                            <ThreadStream />
-                        </div>
-                    )}
+            <>
+                <PageNavigation title="Discussions">
+                    <a href="" className="navbar-item">
+                        Top
+                    </a>{" "}
+                    <a href="" className="navbar-item">
+                        New
+                    </a>{" "}
+                    <a href="" className="navbar-item">
+                        Rising
+                    </a>
+                </PageNavigation>
+                <div className={"container grid-c-s"}>
+                    <div>
+                        {thread && replies ? (
+                            <Discussion thread={thread} replies={replies} />
+                        ) : (
+                            <div>
+                                <HeaderBar title="Top today" />
+                                <ThreadStream />
+                            </div>
+                        )}
+                    </div>
+                    <div className={"is-hidden-mobile"}>
+                        <DiscussionsSidebar />
+                    </div>
                 </div>
-                <div className={"is-hidden-mobile"}>
-                    <Sidebar />
-                </div>
-            </div>
+            </>
         );
     }
 }

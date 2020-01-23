@@ -78,6 +78,8 @@ import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons/faQuestion";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons/faCaretUp";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons/faArrowUp";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons/faArrowDown";
 
 library.add(
     faInstagram,
@@ -158,5 +160,7 @@ library.add(
     faBars,
     faQuestion,
     faCaretDown,
-    faCaretUp
+    faCaretUp,
+    faArrowUp,
+    faArrowDown
 );

@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import MDit from "~/vendor/remarkable-regexp/MarkdownIt";
 import Plugin from "~/vendor/remarkable-regexp";
@@ -78,7 +78,11 @@ function processTaskString(task) {
 
 class Markdown extends Component {
     render() {
-        return <MDit source={this.props.body} plugins={[mentions]} />;
+        return (
+            <div className="markdown-body">
+                <MDit source={this.props.body} plugins={[mentions]} />
+            </div>
+        );
     }
 }
 

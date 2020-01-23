@@ -144,7 +144,11 @@ class InfiniteResults extends React.Component {
                 {this.state.hasMore && (
                     <div className={"center"}>
                         <button
-                            className={"btn rounded"}
+                            className={
+                                this.state.loading
+                                    ? "btn btn-light is-loading"
+                                    : "btn btn-light"
+                            }
                             onClick={this.loadMore}
                         >
                             <FontAwesomeIcon icon={"arrow-circle-down"} />{" "}
