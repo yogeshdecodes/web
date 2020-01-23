@@ -1583,6 +1583,12 @@ figure.img-circle {
         display: none;
     }
 
+    #page-content {
+        & > .container {
+            width: 100%;
+        }
+    }
+
     .grid-s-c,
     .grid-c-s {
         grid-template-columns: repeat(1, 100%);

@@ -24,7 +24,7 @@ class PageNavigation extends React.Component {
         return (
             <nav
                 className="navbar navbar-secondary"
-                aria-label="main navigation"
+                aria-label="secondary navigation"
             >
                 <div className={"container"}>
                     <div className={"flex v-center flex-gap-big"}>
