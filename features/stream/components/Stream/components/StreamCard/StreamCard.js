@@ -170,7 +170,12 @@ class StreamCard extends React.Component {
                     </div>
 
                     {milestones.map(m => (
-                        <MilestoneMedia linked={false} stream milestone={m} />
+                        <MilestoneMedia
+                            key={m.id}
+                            linked={false}
+                            stream
+                            milestone={m}
+                        />
                     ))}
 
                     {this.getTasks().length > 0 && (
