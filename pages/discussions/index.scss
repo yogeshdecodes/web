@@ -2,7 +2,7 @@
 
 .DiscussionsPage {
     .container.grid-c-s {
-        margin-top: 30px;
+        margin-top: $gap;
     }
 
     .flex {
@@ -126,7 +126,8 @@
 }
 
 .ThreadStreamItem {
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     //border-bottom: 1px solid $c-border;
     //cursor: pointer;
 

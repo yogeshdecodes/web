@@ -29,6 +29,10 @@ class CommentsBox extends React.Component {
 
     randId = 0;
 
+    shouldComponentUpdate(nextProps) {
+        return this.props.indexUrl !== nextProps.indexUrl;
+    }
+
     componentDidMount() {
         if (
             this.props.initialCommentCount !== undefined &&
