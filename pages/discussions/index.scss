@@ -33,6 +33,7 @@
     .ReplyForm {
         .form-row {
             flex-grow: 1;
+            margin-bottom: 0px !important;
         }
 
         textarea {
@@ -41,13 +42,13 @@
             outline: 0;
             box-shadow: none;
             width: 100% !important;
-            min-height: 200px;
+            min-height: 100px;
             resize: vertical !important;
             display: block;
         }
 
         .action-container {
-            margin-top: 10px;
+            margin-top: 20px;
         }
     }
 
@@ -109,9 +110,9 @@
     //}
 
     .Reply:not(:first-of-type) {
-        border-top: 1px solid hsla(0, 0%, 85.9%, 0.5);
-        padding-top: $gap;
-        margin-top: $gap;
+        //border-top: 1px solid hsla(0, 0%, 85.9%, 0.5);
+        //padding-top: $gap;
+        //margin-top: $gap;
     }
 }
 
@@ -172,5 +173,57 @@
 
     .thread-body {
         //padding: 1rem;
+    }
+
+    .thread-replies {
+        h3 {
+            margin-bottom: $gap;
+        }
+
+        .alert {
+            margin-bottom: 10px;
+        }
+
+        .Reply {
+            padding-bottom: 15px;
+            padding-top: 15px;
+            //margin-bottom: $gap;
+        }
+
+        .ReplyList {
+        }
+    }
+}
+
+.Reply {
+    .reply-user {
+        margin-bottom: 0.5rem;
+    }
+
+    .reply-actions {
+        //margin-top: 0.5rem;
+
+        div:empty {
+            margin-right: 0px;
+        }
+    }
+
+    .ReplyForm {
+        border: 1px solid $c-border;
+        background-color: $c-bg;
+        //border-top: 1px solid $c-border;
+        //padding-top: $gap;
+        margin-top: 1rem;
+        padding: 1rem;
+    }
+
+    .reply-children {
+        margin-top: calc(#{$gap} / 2);
+        padding-left: 1rem;
+        border-left: 1px solid $c-border;
+
+        &:empty {
+            margin-top: 0px;
+        }
     }
 }

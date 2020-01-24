@@ -2,6 +2,7 @@
 
 .user-line {
     font-size: calc(#{$font-size} - 4px);
+    font-weight: bold;
     .username {
         font-weight: normal !important;
         color: $c-gray !important;

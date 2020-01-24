@@ -1,27 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Button} from "~/vendor/bulma";
+import { Button } from "~/vendor/bulma";
 import Emoji from "~/components/Emoji";
 
 const PraiseCount = ({ amount, button = false }) => {
-    if (amount) {
-        if (button) {
-            return (
-                <Button disabled className={"btn-praise btn-gray"}>
-                    <Emoji emoji={"👏"} />
-                    &nbsp;{amount}
-                </Button>
-            );
-        }
+    if (button) {
         return (
-            <span className={"PraiseCount has-text-grey-light"}>
+            <button disabled="true" className={"btn-praise btn-gray"}>
                 <Emoji emoji={"👏"} />
-                {amount}
-            </span>
+                &nbsp;{amount}
+            </button>
         );
-    } else {
-        return null;
     }
+    return (
+        <span className={"PraiseCount has-text-grey-light"}>
+            <Emoji emoji={"👏"} />
+            {amount}
+        </span>
+    );
 };
 
 PraiseCount.propTypes = {

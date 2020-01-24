@@ -22,6 +22,9 @@ const CreateCard = props => {
     );
 };
 
+// TODO: thread sidebar
+// props passed, just check
+
 const DiscussionsSidebar = ({ isLoggedIn, me, data }) => {
     //if (!data || data.failed) return null;
 

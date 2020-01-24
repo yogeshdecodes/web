@@ -41,8 +41,9 @@ import PageNavigation from "~/components/ui/PageNavigation";
 import DiscussionsSidebar from "~/components/sidebar/discussions";
 import OutboundLink from "../../components/OutboundLink";
 import UserMedia from "~/features/users/components/UserMedia";
-
-const HelpText = styled.span``;
+import MarkdownHelpText from "~/components/MarkdownHelpText";
+import UserLine from "../../features/users/components/UserLine";
+import sortBy from "lodash/sortBy";
 
 function getThreadHeading(thread) {
     return (
@@ -184,6 +185,7 @@ const BodyEditor = props => (
         <div className={"form-row"}>
             <div className="control">
                 <textarea
+                    cols={4}
                     value={props.value}
                     onChange={props.onChange}
                     placeholder={"Write something..."}
@@ -488,21 +490,24 @@ const Thread = connect(mapUserToProps)(
                         </div>
                     </div>
 
-                    <h4>{thread.reply_count} replies</h4>
-                    <ReplyList
-                        replies={replies}
-                        thread={thread}
-                        onCreateReply={onCreateReply}
-                    />
+                    <section className="thread-replies">
+                        <h3>{thread.reply_count} replies</h3>
 
-                    <div className="card">
-                        <div className={"card-content"}>
-                            <ReplyForm
-                                thread={thread}
-                                onCreateReply={onCreateReply}
-                            />
+                        <div className="card">
+                            <div className="card-content">
+                                <ReplyForm
+                                    thread={thread}
+                                    onCreateReply={onCreateReply}
+                                />
+                                <hr />
+                                <ReplyList
+                                    replies={replies}
+                                    thread={thread}
+                                    onCreateReply={onCreateReply}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             );
         }
@@ -571,47 +576,47 @@ const Reply = connect(mapUserToProps)(
                         </Link>
                     </div>
                     <div>
-                        <div className={"flex flex-gap heading"}>
-                            <div>
-                                <FullName user={reply.owner} />
-                            </div>
-                            <div className={"has-text-grey-light"}>
-                                <FontAwesomeIcon icon={"clock"} />{" "}
-                                <TimeAgo date={reply.created_at} />
-                            </div>
+                        <div className={"reply-user flex flex-gap"}>
+                            <UserLine user={reply.owner} />
                         </div>
-                        {this.state.deleting && (
-                            <Spinner small text={"One moment..."} />
-                        )}
-                        {this.state.deleted && (
-                            <em>This reply has been deleted.</em>
-                        )}
-                        {!this.state.editing && !this.state.deleted && (
-                            <div>
-                                <Linkify>
-                                    <Markdown body={this.state.body} />
-                                </Linkify>
-                            </div>
-                        )}
-                        {this.state.editing && (
-                            <ReplyEditor
-                                reply={reply}
-                                onFinish={body =>
-                                    this.setState({
-                                        body: body,
-                                        editing: false
-                                    })
-                                }
-                            />
-                        )}
-                        <div className={"flex flex-gap"}>
-                            <div>
-                                <Praisable
-                                    button
-                                    indexUrl={`/discussions/${reply.parent}/replies/${reply.id}`}
-                                    initialAmount={reply.praise}
-                                    item={reply}
+                        <div className="reply-body">
+                            {this.state.deleting && (
+                                <Spinner small text={"One moment..."} />
+                            )}
+                            {this.state.deleted && (
+                                <em>This reply has been deleted.</em>
+                            )}
+                            {!this.state.editing && !this.state.deleted && (
+                                <div>
+                                    <Linkify>
+                                        <Markdown body={this.state.body} />
+                                    </Linkify>
+                                </div>
+                            )}
+                            {this.state.editing && (
+                                <ReplyEditor
+                                    reply={reply}
+                                    onFinish={body =>
+                                        this.setState({
+                                            body: body,
+                                            editing: false
+                                        })
+                                    }
                                 />
+                            )}
+                        </div>
+
+                        <div className={"reply-actions flex flex-gap"}>
+                            <div>
+                                <small>
+                                    <Praisable
+                                        button
+                                        textForSameUser
+                                        indexUrl={`/discussions/${reply.parent}/replies/${reply.id}`}
+                                        initialAmount={reply.praise}
+                                        item={reply}
+                                    />
+                                </small>
                             </div>
                             <div>
                                 <button
@@ -658,6 +663,7 @@ const Reply = connect(mapUserToProps)(
                                 </>
                             )}
                         </div>
+
                         {this.props.children}
                     </div>
                 </div>
@@ -710,13 +716,15 @@ const ReplyForm = connect(mapUserToProps)(
         render() {
             if (!this.props.isLoggedIn) {
                 return (
-                    <div className={"panel-message primary"} id={"ReplyForm"}>
-                        You must be signed in to reply.{" "}
-                        <Link route="begin">
-                            <a className="button is-primary is-small is-rounded">
-                                Get started &raquo;
-                            </a>
-                        </Link>
+                    <div className={"alert is-info"} id={"ReplyForm"}>
+                        <div className="alert-body">
+                            <h4>You must be signed in to reply.</h4>
+                            <Link route="begin">
+                                <a className="btn btn-light btn-small is-rounded">
+                                    Get started
+                                </a>
+                            </Link>
+                        </div>
                     </div>
                 );
             }
@@ -726,9 +734,10 @@ const ReplyForm = connect(mapUserToProps)(
                     <div>
                         <Avatar user={this.props.me} is={32} />
                     </div>
-                    <div className="form-row">
+                    <div className="form-row mb0">
                         <div className="control">
                             <Textarea
+                                rows={"3"}
                                 innerRef={input =>
                                     input && this.props.focused && input.focus()
                                 }
@@ -746,23 +755,25 @@ const ReplyForm = connect(mapUserToProps)(
                                 placeholder={"Write a reply..."}
                             />
                         </div>
-                        {this.state.body.length > 0 && (
-                            <HelpText>
-                                <FontAwesomeIcon icon={["fab", "markdown"]} />{" "}
-                                Markdown is enabled. Cmd/Ctrl+Enter to finish.{" "}
-                            </HelpText>
-                        )}
-                        <div className={"action-container"}>
-                            <Button
-                                className={"is-rounded"}
-                                loading={this.state.isCreating}
-                                disabled={this.state.isCreating}
-                                onClick={this.onSubmit}
-                                primary
-                            >
-                                <FontAwesomeIcon icon={"reply"} />
-                                Post reply
-                            </Button>
+                        <div className={"action-container flex v-center"}>
+                            <div>
+                                <MarkdownHelpText />
+                            </div>
+                            <div className="flex-grow"></div>
+                            <div>
+                                <button
+                                    className={
+                                        "btn btn-light " +
+                                        (this.state.isCreating
+                                            ? "is-loading"
+                                            : "")
+                                    }
+                                    disabled={this.state.isCreating}
+                                    onClick={this.onSubmit}
+                                >
+                                    Post
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -803,58 +814,61 @@ class ReplyThread extends React.Component {
     render() {
         const { thread, reply, childrenReplies } = this.props;
         return (
-            <div className="card">
-                <div className={"card-content"}>
-                    <Reply reply={reply} onClickReply={this.onClickReply}>
-                        {orderBy(childrenReplies, "created_at", "asc").map(
-                            ch => (
-                                <Reply
-                                    child={true}
-                                    onClickReply={this.onClickChildReply}
-                                    reply={ch}
-                                />
-                            )
-                        )}
-                        {this.state.replying && (
-                            <ReplyForm
-                                focused
-                                prefillText={this.state.prefillText}
-                                parentReply={reply.id}
-                                thread={thread}
-                                onCreateReply={this.onCreateReply}
-                            />
-                        )}
-                    </Reply>
+            <Reply reply={reply} onClickReply={this.onClickReply}>
+                <div className="reply-children">
+                    {orderBy(childrenReplies, "created_at", "asc").map(ch => (
+                        <Reply
+                            child={true}
+                            onClickReply={this.onClickChildReply}
+                            reply={ch}
+                        />
+                    ))}
                 </div>
-            </div>
+                {this.state.replying && (
+                    <ReplyForm
+                        focused
+                        prefillText={this.state.prefillText}
+                        parentReply={reply.id}
+                        thread={thread}
+                        onCreateReply={this.onCreateReply}
+                    />
+                )}
+            </Reply>
         );
     }
 }
 
-const ReplyList = ({ replies, thread, onCreateReply = null }) => (
-    <div>
-        {replies.length === 0 && (
-            <div className="card">
-                <div className={"card-content"}>
+const ReplyList = connect(mapUserToProps)(
+    ({ replies, thread, onCreateReply = null, ...props }) => (
+        <div className="ReplyList">
+            {replies.length === 0 && (
+                <div className="nothing-yet">
                     <Emoji emoji={"🤔"} /> Nothing yet. Start the conversation!
                 </div>
-            </div>
-        )}
-        {orderBy(
-            replies.filter(rep => !rep.parent_reply),
-            "created_at",
-            "asc"
-        ).map(r => (
-            <ReplyThread
-                reply={r}
-                thread={thread}
-                childrenReplies={replies.filter(
-                    child => child.parent_reply === r.id
-                )}
-                onCreateReply={onCreateReply}
-            />
-        ))}
-    </div>
+            )}
+            {sortBy(
+                orderBy(
+                    replies.filter(rep => !rep.parent_reply),
+                    "created_at",
+                    "asc"
+                ),
+                r => {
+                    if (!props.isLoggedIn) return;
+                    // sortby works by converting to 0, 1
+                    return !(r.owner.id === props.me.id);
+                }
+            ).map(r => (
+                <ReplyThread
+                    reply={r}
+                    thread={thread}
+                    childrenReplies={replies.filter(
+                        child => child.parent_reply === r.id
+                    )}
+                    onCreateReply={onCreateReply}
+                />
+            ))}
+        </div>
+    )
 );
 
 class Discussion extends React.Component {
@@ -1134,7 +1148,7 @@ class DiscussionsPage extends React.Component {
                         )}
                     </div>
                     <div className={"is-hidden-mobile"}>
-                        <DiscussionsSidebar />
+                        <DiscussionsSidebar thread={thread} replies={replies} />
                     </div>
                 </div>
             </>

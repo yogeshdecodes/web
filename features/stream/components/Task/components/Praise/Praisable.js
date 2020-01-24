@@ -231,7 +231,9 @@ class Praisable extends React.Component {
                     this.renderPraiseButton()
                 ) : (
                     <PraiseCount
-                        button={this.props.button}
+                        button={
+                            !this.props.textForSameUser && this.props.button
+                        }
                         amount={this.state.total}
                     />
                 )}
@@ -239,5 +241,9 @@ class Praisable extends React.Component {
         );
     }
 }
+
+Praisable.defaultProps = {
+    textForSameUser: false
+};
 
 export default connect(mapStateToProps)(Praisable);
