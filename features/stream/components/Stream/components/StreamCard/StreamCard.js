@@ -44,7 +44,7 @@ class StreamCard extends React.Component {
         return this.props.activity[0].user;
     };
 
-    getTasks = (tagLifeLogs = true, tagToCollapse = true) => {
+    getTasks = (tagLifeLogs = false, tagToCollapse = true) => {
         let tasks = this.props.activity.filter(o => o.type === "tasks");
         if (tagLifeLogs) tasks = this.tagLifeLogs(tasks);
         if (tagToCollapse) tasks = this.tagToCollapse(tasks);

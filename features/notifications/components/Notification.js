@@ -263,7 +263,7 @@ function renderNotificationVerb(key, notification, grouped = false) {
                         route="profile-page"
                         params={{ username: notification.actor.username }}
                     >
-                        @{notification.actor.username}
+                        <a>@{notification.actor.username}</a>
                     </Link>{" "}
                     mentioned you.
                 </Container>
