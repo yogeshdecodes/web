@@ -104,7 +104,9 @@ class MilestoneMediaComponent extends React.Component {
                             route={"milestone-page"}
                             params={{ slug: milestone.slug }}
                         >
-                            <h3>{this.state.title}</h3>
+                            <a>
+                                <h3>{this.state.title}</h3>
+                            </a>
                         </Link>
                     )}
                     {xs && !this.state.editing && (

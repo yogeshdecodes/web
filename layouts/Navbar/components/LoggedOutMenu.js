@@ -18,7 +18,7 @@ const LoggedOutMenu = props => (
                 <a className="navbar-item">Explore</a>
             </NavLink>
 
-            <NavLink activeClassName="is-active" route="discussions">
+            <NavLink activeClassName="is-active" route="discussions-top">
                 <a className="navbar-item">Discuss</a>
             </NavLink>
 
