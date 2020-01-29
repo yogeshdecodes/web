@@ -11,7 +11,8 @@ const PraiseCount = ({ amount, button = false }) => {
                 &nbsp;{amount}
             </button>
         );
-    }
+    } else if (!amount) return null;
+
     return (
         <span className={"PraiseCount has-text-grey-light"}>
             <Emoji emoji={"👏"} />

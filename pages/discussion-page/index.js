@@ -7,7 +7,6 @@ import ReconnectingWebSocket from "reconnecting-websocket";
 import { socketUrl } from "~/lib/utils/random";
 import Head from "~/components/Head";
 import Thread from "~/features/discussions/Thread";
-import sortBy from "lodash/sortby";
 import DiscussionsPageLayout from "~/layouts/DiscussionsPage";
 import "./index.scss";
 

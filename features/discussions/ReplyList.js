@@ -4,6 +4,7 @@ import sortBy from "lodash/sortBy";
 import orderBy from "lodash/orderBy";
 import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import ReplyThread from "./ReplyThread";
+import Emoji from "~/components/Emoji";
 
 export default connect(mapUserToProps)(
     ({ replies, thread, onCreateReply = null, ...props }) => (

@@ -3153,6 +3153,11 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
+darkmode-js@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/darkmode-js/-/darkmode-js-1.5.4.tgz#c15d981b518d1a50f6ebecc362434d11e8fa38ce"
+  integrity sha512-Wr//3IDfHLnLIPsC6f9+26BG3dH7sqtJ/kIKaeR8yGCW6Nm7vTiEvUA3lm7eiUwqt+yXyPHrnfpanWo+rEtp7Q==
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"

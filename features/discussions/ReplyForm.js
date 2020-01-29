@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import Avatar from "~/features/users/components/Avatar";
-import Textarea from "react-autosize-textarea";
 import MarkdownHelpText from "~/components/MarkdownHelpText";
+import { postReply } from "~/lib/discussions";
 
 export default connect(mapUserToProps)(
     class ReplyForm extends React.Component {
@@ -69,7 +69,7 @@ export default connect(mapUserToProps)(
                     </div>
                     <div className="form-row mb0">
                         <div className="control">
-                            <Textarea
+                            <textarea
                                 rows={"3"}
                                 innerRef={input =>
                                     input && this.props.focused && input.focus()
@@ -79,14 +79,23 @@ export default connect(mapUserToProps)(
                                     if (
                                         e.keyCode === 13 &&
                                         (e.ctrlKey || e.metaKey)
-                                    )
+                                    ) {
+                                        e.preventDefault();
+
                                         this.onSubmit(e);
+                                    }
                                 }}
                                 onChange={e => {
                                     this.setState({ body: e.target.value });
                                 }}
                                 placeholder={"Write a reply..."}
                             />
+                            {this.state.failed && (
+                                <p className="help has-text-danger">
+                                    Something went wrong. Please try again
+                                    later.
+                                </p>
+                            )}
                         </div>
                         <div className={"action-container flex v-center"}>
                             <div>
