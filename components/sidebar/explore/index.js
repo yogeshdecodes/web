@@ -7,6 +7,7 @@ import { getLiveEvents, getUpcomingEvents } from "~/lib/events";
 import EventMedia from "~/features/events/components/EventMedia";
 import SmallFooter from "~/components/sidebar/components/SmallFooter";
 import AdCard from "~/components/sidebar/components/AdCard";
+import SocialCard from "~/components/sidebar/components/SocialCard";
 import sample from "lodash/sample";
 import { isServer } from "~/config";
 
@@ -249,6 +250,7 @@ const ExploreSidebar = ({ isLoggedIn, me, data }) => {
             <TopStreaksCard topUsers={data.topUsers} />
             <UpcomingEventsCard upcomingEvents={data.upcomingEvents} />
             <AdCard />
+            <SocialCard />
             <SmallFooter />
         </div>
     );

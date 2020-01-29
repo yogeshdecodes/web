@@ -1903,3 +1903,19 @@ a {
 .has-text-danger {
     color: $c-danger;
 }
+
+.has-text-twitter {
+    color: #38a1f3;
+
+    svg {
+        color: #38a1f3;
+    }
+}
+
+.has-text-instagram {
+    color: #833ab4;
+
+    svg {
+        color: #833ab4;
+    }
+}
