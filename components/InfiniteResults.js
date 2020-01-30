@@ -10,17 +10,33 @@ import { socketUrl } from "../lib/utils/random";
 import uniqBy from "lodash/uniqBy";
 
 class InfiniteResults extends React.Component {
-    state = {
-        ready: false,
-        loading: false,
-        hasMore: true,
-        next: null,
-        items: [],
-        failed: false
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = this.props.prefetchedData
+            ? {
+                  ready: true,
+                  loading: false,
+                  hasMore: this.props.prefetchedData.next !== null,
+                  next: this.props.prefetchedData.next,
+                  items: this.props.prefetchedData.results,
+                  failed: false
+              }
+            : {
+                  ready: false,
+                  loading: false,
+                  hasMore: true,
+                  next: null,
+                  items: [],
+                  failed: false
+              };
+    }
 
     componentDidMount() {
-        this.loadMore(true);
+        if (!this.state.ready) {
+            this.loadMore(true);
+        }
+
         if (this.props.withSockets && this.props.socketTypePrefix) {
             this.connect();
         }
@@ -78,20 +94,24 @@ class InfiniteResults extends React.Component {
         }
     };
 
-    loadMore = debounce(async (initial = false) => {
+    loadMore = debounce(async (initial = false, prefetchedData = null) => {
         let items = this.state.items;
         let ready = true;
         if (initial) {
             items = [];
             ready = false;
         }
+
         this.setState({ loading: true, failed: false, items, ready });
         try {
             if (!initial && !this.state.next) {
                 return;
             }
             let result = null;
-            if (!initial) {
+
+            if (prefetchedData && initial) {
+                result = { data: prefetchedData };
+            } else if (!initial) {
                 result = await axios.get(this.state.next);
             } else {
                 result = await axios.get(this.props.url);
