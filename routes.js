@@ -17,6 +17,11 @@ module.exports = routes()
     .add("milestone-page", "/milestones/:slug", "milestone-page")
     .add("product-page", "/products/:slug", "product-page")
     .add("profile-page", "/@:username", "profile-page")
+    .add(
+        "profile-page-updates",
+        "/@:username/updates",
+        "profile-page/updates-tab"
+    )
     .add("discussions-top", "/discussions", "discussions-top")
     .add("discussion-page", "/discussions/:slug", "discussion-page")
     .add("apps", "/apps/:app?", "apps")
