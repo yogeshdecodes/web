@@ -1,6 +1,7 @@
 import React from "react";
 import orderBy from "lodash/orderBy";
 import Reply from "./Reply";
+import ReplyForm from "./ReplyForm";
 
 export default class extends React.Component {
     state = {

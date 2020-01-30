@@ -14,16 +14,16 @@ export default props => (
             </div>
         </div>
         <div className={"action-container"}>
-            <Button
-                className={"is-rounded"}
-                loading={props.loading}
+            <button
+                className={
+                    props.loading ? "btn btn-light is-loading" : "btn btn-light"
+                }
                 disabled={props.loading}
                 onClick={props.onSubmit}
-                primary
             >
                 <FontAwesomeIcon icon={"reply"} />
                 Submit
-            </Button>
+            </button>
         </div>
     </div>
 );

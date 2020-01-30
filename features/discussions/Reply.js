@@ -8,6 +8,7 @@ import Linkify from "react-linkify";
 import UserLine from "~/features/users/components/UserLine";
 import Markdown from "~/components/Markdown";
 import Praisable from "~/features/stream/components/Task/components/Praise/Praisable";
+import ReplyEditor from "./ReplyEditor";
 
 export default connect(mapUserToProps)(
     class Reply extends React.Component {
