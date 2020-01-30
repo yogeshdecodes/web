@@ -11,6 +11,37 @@ import StaffTrophy from "../../../features/trophies/StaffTrophy";
 import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
 import Spinner from "~/components/Spinner";
 import { getNomadLocation } from "../../../lib/integrations/nomadlist";
+import ProductsContainer from "~/features/products/containers/ProductsContainer";
+import { ProductList } from "~/features/products";
+
+class MyProductsCard extends Component {
+    render() {
+        const { user } = this.props;
+
+        return (
+            <ProductsContainer
+                user={user.id}
+                component={({ products }) => {
+                    if (!products.length) return null;
+
+                    return (
+                        <div className="MyProductsCard sidebar-item">
+                            <h3>Products</h3>
+                            <div className="card">
+                                <div className="card-content">
+                                    <ProductList
+                                        thumbnail
+                                        products={products}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    );
+                }}
+            />
+        );
+    }
+}
 
 class NomadLocationCard extends Component {
     state = {
@@ -238,6 +269,7 @@ const ProfileSidebar = ({ user }) => {
             <BioCard user={user} />
             <TrophyCaseCard user={user} />
             <ActivityCard user={user} />
+            <MyProductsCard user={user} />
             {user.nomadlist_handle && <NomadLocationCard user={user} />}
 
             {!user.gold ? <AdCard /> : null}

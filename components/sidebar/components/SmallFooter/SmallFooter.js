@@ -2,7 +2,7 @@ import React from "react";
 import FooterLinks from "~/layouts/Footer/links";
 
 const SmallFooter = props => (
-    <ul className={"LinksFooter flex"}>
+    <ul className={"LinksFooter is-hidden-mobile flex"}>
         <FooterLinks />
     </ul>
 );

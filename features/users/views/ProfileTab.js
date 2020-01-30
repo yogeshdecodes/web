@@ -21,6 +21,7 @@ class ProfileTab extends React.Component {
         telegram_handle: "",
         product_hunt_handle: "",
         shipstreams_handle: "",
+        nomadlist_handle: "",
         bmc_handle: "",
         website: "",
         github_handle: "",
@@ -123,6 +124,7 @@ class ProfileTab extends React.Component {
                 telegram_handle: data.telegram_handle || "",
                 product_hunt_handle: data.product_hunt_handle || "",
                 shipstreams_handle: data.shipstreams_handle || "",
+                nomadlist_handle: data.nomadlist_handle || "",
                 github_handle: data.github_handle || "",
                 bmc_handle: data.bmc_handle || "",
                 website: data.website || "",
@@ -481,6 +483,37 @@ class ProfileTab extends React.Component {
                                 </Link>
                             </p>
                         </div>
+
+                        <label className="label">NomadList handle</label>
+                        <div className={"form-row"}>
+                            <div className={"has-addons"}>
+                                <div className={"control"}>
+                                    <button disabled>
+                                        <FontAwesomeIcon
+                                            icon={"location-arrow"}
+                                            color={"black"}
+                                        />
+                                    </button>
+                                </div>
+                                <div className={"control"}>
+                                    <input
+                                        type={"text"}
+                                        value={this.state.nomadlist_handle}
+                                        placeholder="levelsio"
+                                        onChange={e =>
+                                            this.setState({
+                                                nomadlist_handle: e.target.value
+                                            })
+                                        }
+                                    />
+                                </div>
+                            </div>
+                            <p className="help">
+                                This will turn on the NomadList integration in
+                                your profile page.
+                            </p>
+                        </div>
+
                         <label className="label">Buy Me A Coffee handle</label>
                         <div className={"form-row"}>
                             <div className={"has-addons"}>
