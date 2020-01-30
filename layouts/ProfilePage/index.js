@@ -7,6 +7,7 @@ import ProfileSidebar from "~/components/sidebar/profile-page";
 import "./index.scss";
 import { connect } from "react-redux";
 import NavLink from "~/components/ActiveLink";
+import { Link } from "~/routes";
 
 function getCoverStyle(user, isBackdrop = false) {
     if (user.header)
@@ -46,7 +47,9 @@ export default connect(mapStateToProps)(({ user, me = {}, ...props }) => {
                     end={
                         me.id === user.id ? (
                             <div className="navbar-item">
-                                <a className="btn btn-light">Edit</a>
+                                <Link route="settings">
+                                    <a className="btn btn-light">Edit</a>
+                                </Link>
                             </div>
                         ) : null
                     }
