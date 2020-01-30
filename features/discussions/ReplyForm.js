@@ -4,6 +4,7 @@ import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import Avatar from "~/features/users/components/Avatar";
 import MarkdownHelpText from "~/components/MarkdownHelpText";
 import { postReply } from "~/lib/discussions";
+import { Link } from "~/routes";
 
 export default connect(mapUserToProps)(
     class ReplyForm extends React.Component {
