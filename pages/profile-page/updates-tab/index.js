@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ProfilePageLayout from "~/layouts/ProfilePage";
-import { getProfileProps } from "../utils";
+import { getProfileProps } from "../index";
 
 class UpdatesTab extends Component {
     render() {
