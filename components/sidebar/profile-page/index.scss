@@ -1,0 +1,28 @@
+.BioCard .card > .card-content {
+    display: block !important;
+
+    .bio {
+        margin-bottom: 10px;
+
+        a {
+            display: block;
+        }
+    }
+
+    .links {
+        ul li {
+            list-style: none;
+        }
+    }
+}
+
+.TrophyCaseCard,
+.NomadLocationCard {
+    .card > .card-content {
+        display: block !important;
+    }
+
+    ul li {
+        list-style: none;
+    }
+}

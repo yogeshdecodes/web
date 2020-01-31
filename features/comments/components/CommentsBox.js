@@ -4,22 +4,8 @@ import { getComments } from "~/lib/comments";
 import { mapStateToProps } from "~/ducks/user";
 import CommentList from "./CommentList";
 import CommentInput from "./CommentInput";
-// import { StreamCard as Card } from "../../stream/components/Stream/components/StreamCard/styled";
-import Emoji from "../../../components/Emoji";
-import { Link } from "~/routes";
 import { connect } from "react-redux";
-import Avatar from "~/features/users/components/Avatar";
-import FullName from "~/features/users/components/FullName";
-import { animateScroll } from "react-scroll";
 import Spinner from "~/components/Spinner";
-import scrollIntoView from "scroll-into-view-if-needed";
-
-function revisedRandId() {
-    return Math.random()
-        .toString(36)
-        .replace(/[^a-z]+/g, "")
-        .substr(2, 10);
-}
 
 class CommentsBox extends React.Component {
     state = {

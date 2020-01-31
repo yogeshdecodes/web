@@ -4,6 +4,7 @@ import HeaderBar from "~/features/discussions/HeaderBar";
 import ThreadStream from "~/features/discussions/ThreadStream";
 import DiscussionsPageLayout from "~/layouts/DiscussionsPage";
 import "./index.scss";
+import { getDiscussions } from "../../lib/discussions";
 
 class DiscussionsPage extends React.Component {
     static async getInitialProps({ query }) {
@@ -15,7 +16,8 @@ class DiscussionsPage extends React.Component {
                 const replies = await getThreadReplies(query.slug);
                 return { thread, replies, layout };
             } else {
-                return { layout };
+                let threads = await getDiscussions();
+                return { threads, layout };
             }
         } catch (e) {
             if (e.status_code && e.status_code === 404) {
@@ -37,17 +39,15 @@ class DiscussionsPage extends React.Component {
     }
 
     render() {
-        const { replies, thread } = this.props;
+        const { replies, thread, threads } = this.props;
 
         return (
             <DiscussionsPageLayout>
                 <HeaderBar title="Top today" />
-                <ThreadStream />
+                <ThreadStream prefetchedData={threads} />
             </DiscussionsPageLayout>
         );
     }
 }
-
-DiscussionsPage.propTypes = {};
 
 export default DiscussionsPage;

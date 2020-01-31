@@ -1903,3 +1903,51 @@ a {
 .has-text-danger {
     color: $c-danger;
 }
+
+.has-text-twitter {
+    color: #38a1f3;
+
+    svg {
+        color: #38a1f3;
+    }
+}
+
+.has-text-instagram {
+    color: #833ab4;
+
+    svg {
+        color: #833ab4;
+    }
+}
+
+.SidebarBlogCard {
+    .card {
+        flex-direction: column;
+        .thumbnail {
+            min-height: 115px;
+            @extend %corners;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+    }
+}
+
+.blog-media {
+    p {
+        //color: white;
+    }
+    h4,
+    h5 {
+        margin-bottom: 10px;
+        //color: white;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .outbound {
+        display: block;
+        margin-top: 10px !important;
+    }
+}

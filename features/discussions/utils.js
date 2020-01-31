@@ -4,6 +4,10 @@ import TimeAgo from "react-timeago";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
 
+/*
+<div>20 points</div>
+*/
+
 export function getThreadInfoBar(thread) {
     return (
         <small className={"flex center spaced v-center"}>
@@ -22,7 +26,7 @@ export function getThreadInfoBar(thread) {
                     <a>{thread.reply_count} comments</a>
                 </Link>
             </div>
-            <div>20 points</div>
+
             <div>
                 <TimeAgo date={thread.created_at} />
             </div>

@@ -9,6 +9,7 @@ import ShareBar from "~/components/ShareBar";
 import config from "~/config";
 import ReplyForm from "./ReplyForm";
 import ReplyList from "./ReplyList";
+import { deleteThread } from "~/lib/discussions";
 
 export default connect(mapUserToProps)(
     class Thread extends React.Component {

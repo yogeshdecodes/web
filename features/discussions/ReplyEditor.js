@@ -1,4 +1,6 @@
 import React from "react";
+import BodyEditor from "./BodyEditor";
+import { updateReply } from "~/lib/discussions";
 
 export default class extends React.Component {
     state = {

@@ -3,6 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
 import { truncate } from "~/lib/utils/random";
 import { getThreadInfoBar } from "../utils";
+import OutboundLink from "~/components/OutboundLink";
+
+/**
+                <div className="upvote-arrows">
+                    <div className="up">
+                        <FontAwesomeIcon icon="arrow-up" />
+                    </div>
+                    <div className="down">
+                        <FontAwesomeIcon icon="arrow-down" />
+                    </div>
+                </div>
+ */
 
 export default class extends React.Component {
     renderActions = () => (
@@ -31,15 +43,6 @@ export default class extends React.Component {
         let thread = this.props.thread;
         return (
             <div className={"flex v-center flex-gap"}>
-                <div className="upvote-arrows">
-                    <div className="up">
-                        <FontAwesomeIcon icon="arrow-up" />
-                    </div>
-                    <div className="down">
-                        <FontAwesomeIcon icon="arrow-down" />
-                    </div>
-                </div>
-
                 <div className={"topicMid"}>
                     {thread.type === "LINK" ? (
                         <OutboundLink to={thread.body}>

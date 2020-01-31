@@ -1,0 +1,10 @@
+.SocialCard {
+    .card-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    iframe {
+        min-height: auto !important;
+    }
+}
