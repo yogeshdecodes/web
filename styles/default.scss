@@ -1924,7 +1924,7 @@ a {
     .card {
         flex-direction: column;
         .thumbnail {
-            min-height: 130px;
+            min-height: 115px;
             @extend %corners;
             border-bottom-left-radius: 0px;
             border-bottom-right-radius: 0px;
