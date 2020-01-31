@@ -80,13 +80,13 @@ class Artemis extends App {
         const currentUserState = this.props.store.getState().user.me;
         const currentAuthState = this.props.store.getState().auth;
 
-        if (config.GA_UA) {
+        if (!config.isDev && config.GA_UA) {
             ReactGA.initialize(config.GA_UA);
             if (config.GO_TAG) ReactGA.ga("require", config.GO_TAG);
             ReactGA.pageview(window.location.pathname + window.location.search);
 
             // Now set tracking code for sessions.
-            //!config.isDev &&
+            //!
             if (currentAuthState.loggedIn && !isEmpty(currentUserState)) {
                 gaSetUserId(currentUserState);
             }
