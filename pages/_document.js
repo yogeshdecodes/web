@@ -44,11 +44,12 @@ export default class Document extends NextDocument {
         if (config.GO_TAG) {
             properties = { optimize_id: config.GO_TAG };
             extra = `, ${JSON.stringify(properties)}`;
-            autoHideCode = `(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+            // Autohide significantly increases time to first paint, so idk..
+            /*autoHideCode = `(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
             h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
             (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
             })(window,document.documentElement,'async-hide','dataLayer',1500,
-            {'${config.GO_TAG}':true});`;
+            {'${config.GO_TAG}':true});`;*/
         }
 
         return (
