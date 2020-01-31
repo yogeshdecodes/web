@@ -13,7 +13,7 @@ import { Provider } from "react-redux";
 import Reactor from "~/components/Reactor";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
-import { isServer } from "~/config";
+import config, { isServer } from "~/config";
 import { parseCookies } from "nookies";
 import { actions as authActions } from "~/ducks/auth";
 import { actions as userActions } from "~/ducks/user";
@@ -21,6 +21,9 @@ import { actions as appActions } from "~/ducks/app";
 import axios from "~/lib/axios";
 import DownPage from "~/layouts/DownPage";
 import NotificationsView from "~/features/notifications/components/NotificationsView";
+import ReactGA from "react-ga";
+import isEmpty from "lodash/isEmpty";
+import { gaSetUserId } from "../vendor/ga";
 
 async function onStoreInit(ctx) {
     // only the sagas here are run on the server side; no async dependencies.
@@ -58,6 +61,10 @@ class Artemis extends App {
             pageProps = await Component.getInitialProps(ctx);
         }
 
+        if (!isServer) {
+            ReactGA.pageview(ctx.asPath);
+        }
+
         return { pageProps };
     }
 
@@ -69,6 +76,21 @@ class Artemis extends App {
                 this.props.store.app.setAppReady();
             }
         });*/
+        // client-side only, run once on mount
+        const currentUserState = this.props.store.getState().user.me;
+        const currentAuthState = this.props.store.getState().auth;
+
+        if (config.GA_UA) {
+            ReactGA.initialize(config.GA_UA);
+            if (config.GO_TAG) ReactGA.ga("require", config.GO_TAG);
+            ReactGA.pageview(window.location.pathname + window.location.search);
+
+            // Now set tracking code for sessions.
+            //!config.isDev &&
+            if (currentAuthState.loggedIn && !isEmpty(currentUserState)) {
+                gaSetUserId(currentUserState);
+            }
+        }
     }
 
     render() {

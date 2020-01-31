@@ -20,10 +20,18 @@ const STREAM_TYPES = (following = true) => ({
         : "/explore/stream/milestones/"
 });
 
+const GA_UA = process.env.GA_UA ? process.env.GA_UA : "UA-121772728-1";
+const GO_TAG = process.env.GO_TAG
+    ? process.env.GO_TAG
+    : { optimize_id: "GTM-TPWQXJ4" };
+
 const config = {
     API_URL,
     WS_URL,
     BASE_URL,
-    STREAM_TYPES
+    STREAM_TYPES,
+    GA_UA,
+    GO_TAG,
+    isDev
 };
 export default config;

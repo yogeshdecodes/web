@@ -6,6 +6,7 @@ import { getToken } from "~/lib/auth";
 import { setCookie } from "nookies";
 import { isServer } from "~/config";
 import { fetchUser } from "./user";
+import { gaSetUserId } from "../vendor/ga";
 
 const getUserState = state => state.user;
 
@@ -30,6 +31,10 @@ function* fetchToken(action) {
             console.log(
                 `Makerlog: Request processed for ${userState.me.username}.`
             );
+
+            if (!isServer) {
+                gaSetUserId(userState.me);
+            }
 
             axios.defaults.headers.common["X-App-Timezone"] =
                 userState.me.timezone;
