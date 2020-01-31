@@ -57,9 +57,19 @@ export default class Document extends NextDocument {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', '${config.GA_UA}'${extra});`
+                gtag('config', '${config.GA_UA}'${extra});
+                (function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+                h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+                (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+                })(window,document.documentElement,'async-hide','dataLayer',1500,
+                {'OPT_CONTAINER_ID':true});`
                     }}
                 ></script>
+                <style jsx global>{`
+                    .async-hide {
+                        opacity: 0 !important;
+                    }
+                `}</style>
             </>
         );
     };
