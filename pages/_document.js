@@ -40,9 +40,15 @@ export default class Document extends NextDocument {
         // Add extra Optimize code dynamically
         let properties = null;
         let extra = "";
+        let autoHideCode = "";
         if (config.GO_TAG) {
             properties = { optimize_id: config.GO_TAG };
             extra = `, ${JSON.stringify(properties)}`;
+            autoHideCode = `(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+            h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+            (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+            })(window,document.documentElement,'async-hide','dataLayer',1500,
+            {'${config.GO_TAG}':true});`;
         }
 
         return (
@@ -58,11 +64,7 @@ export default class Document extends NextDocument {
                 gtag('js', new Date());
 
                 gtag('config', '${config.GA_UA}'${extra});
-                (function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-                h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-                (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-                })(window,document.documentElement,'async-hide','dataLayer',1500,
-                {'${config.GO_TAG}':true});`
+                ${autoHideCode}`
                     }}
                 ></script>
                 <style jsx global>{`
