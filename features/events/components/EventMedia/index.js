@@ -104,12 +104,7 @@ class EventMedia extends Component {
                         <div className="flex flex-gap v-center">
                             <div>
                                 <figure className=" img-32">
-                                    <img
-                                        src={
-                                            `https://img.gs/${config.IMGOPT_KEY}/32x32,crop/` +
-                                            event.icon
-                                        }
-                                    />
+                                    <img src={imageUrl(event.icon, 32)} />
                                 </figure>
                             </div>
                             <div className="flex-grow">

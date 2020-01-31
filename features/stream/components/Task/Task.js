@@ -17,6 +17,7 @@ import FullName from "../../../users/components/FullName";
 import CommentsBox from "~/features/comments/components/CommentsBox";
 import TaskDetail from "./components/TaskDetailModal/TaskDetail";
 import config from "../../../../config";
+import { imageUrl } from "../../../../lib/utils/img";
 
 function findWord(word, str) {
     return str
@@ -155,13 +156,18 @@ class Task extends React.Component {
             this.props.task.attachment &&
             startsWith(this.props.task.attachment, "http")
         ) {
+            //to-imgoptim
             return (
                 <div className="attachments-container">
                     <div
                         onClick={this.toggleAttachment}
                         className="image-preview"
                         style={{
-                            backgroundImage: `url(https://img.gs/frjhpgbvwx/full/${this.props.task.attachment})`
+                            backgroundImage: `url(${imageUrl(
+                                this.props.task.attachment,
+                                null,
+                                true
+                            )})`
                         }}
                     >
                         <div className="attachment-overlay">
@@ -170,14 +176,12 @@ class Task extends React.Component {
                     </div>
                     {this.state.attachmentOpen && (
                         <Lightbox
-                            small={
-                                `https://img.gs/${config.IMGOPT_KEY}/full/` +
-                                this.props.task.attachment
-                            }
-                            large={
-                                `https://img.gs/${config.IMGOPT_KEY}/full,quality=lossless/` +
-                                this.props.task.attachment
-                            }
+                            small={imageUrl(
+                                this.props.task.attachment,
+                                null,
+                                true
+                            )}
+                            large={this.props.task.attachment}
                             alt={this.props.task.content}
                             onClose={this.toggleAttachment}
                         />

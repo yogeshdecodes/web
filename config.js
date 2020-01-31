@@ -20,9 +20,9 @@ const STREAM_TYPES = (following = true) => ({
         : "/explore/stream/milestones/"
 });
 
-const IMGOPT_KEY = process.env.IMGOPT_KEY
-    ? process.env.IMGOPT_KEY
-    : "frjhpgbvwx";
+const IMGOPT_ENABLED = process.env.IMGOPT_ENABLED
+    ? process.env.IMGOPT_ENABLED == 1
+    : true;
 const GA_UA = process.env.GA_UA ? process.env.GA_UA : "UA-121772728-1";
 const GO_TAG = process.env.GO_TAG ? process.env.GO_TAG : "GTM-TPWQXJ4";
 
@@ -33,7 +33,7 @@ const config = {
     STREAM_TYPES,
     GA_UA,
     GO_TAG,
-    IMGOPT_KEY,
+    IMGOPT_ENABLED,
     isDev
 };
 export default config;
