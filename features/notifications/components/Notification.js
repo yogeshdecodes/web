@@ -9,6 +9,7 @@ import uniqBy from "lodash/uniqBy";
 import MilestoneMedia from "../../milestones/components/MilestoneMedia";
 import orderBy from "lodash/orderBy";
 import InlineCollapse from "../../../components/InlineCollapse";
+import { imageUrl } from "../../../lib/utils/img";
 
 function renderPolymorphicPraise(n, withComments = true) {
     if (n.target_type === "task")
@@ -579,7 +580,10 @@ const Notification = ({ notification, grouped = false }) => {
         >
             <div>
                 <figure className="img-avatar img-48">
-                    <img className="img-circle" src={notificationImage} />
+                    <img
+                        className="img-circle"
+                        src={imageUrl(notificationImage, 48)}
+                    />
                 </figure>
             </div>
             <div className="flex-grow">{notificationHtml}</div>

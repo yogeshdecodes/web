@@ -10,6 +10,7 @@ import EventFaces from "../EventFaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
 import config from "../../../../config";
+import { imageUrl } from "../../../../lib/utils/img";
 
 function getCss(event) {
     if (event.header) {
@@ -131,7 +132,7 @@ class EventMedia extends Component {
                             {event.icon && (
                                 <div>
                                     <figure class={"img-48"}>
-                                        <img src={event.icon} />
+                                        <img src={imageUrl(event.icon, 48)} />
                                     </figure>
                                 </div>
                             )}

@@ -13,6 +13,7 @@ import { actions as authActions } from "~/ducks/auth";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withRouter } from "next/router";
+import { imageUrl } from "../../lib/utils/img";
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -94,7 +95,10 @@ class Navbar extends React.Component {
                                         <Chip>
                                             <img
                                                 alt={this.props.user.username}
-                                                src={this.props.user.avatar}
+                                                src={imageUrl(
+                                                    this.props.user.avatar,
+                                                    28
+                                                )}
                                             />
                                             <div>
                                                 <Streak

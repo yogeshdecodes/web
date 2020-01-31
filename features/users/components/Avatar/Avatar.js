@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import config from "../../../../config";
+import { imageUrl } from "../../../../lib/utils/img";
 
 class Avatar extends React.Component {
     getClassNames = () => {
@@ -32,10 +33,10 @@ class Avatar extends React.Component {
             >
                 <img
                     alt={this.props.user.username}
-                    src={
-                        `https://img.gs/${config.IMGOPT_KEY}/${this.props.is}x${this.props.is},crop/` +
-                        (this.props.user.avatar || this.props.src)
-                    }
+                    src={imageUrl(
+                        this.props.user.avatar || this.props.src,
+                        this.props.is
+                    )}
                 />
             </span>
         );

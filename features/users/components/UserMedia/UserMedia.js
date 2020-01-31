@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProfileModalAction from "../../containers/ProfileModalAction";
 import MakerScore from "../../../../components/MakerScore";
 import { Link } from "~/routes";
+import { imageUrl } from "../../../../lib/utils/img";
 
 const Badge = props => (
     <span
@@ -112,7 +113,10 @@ class UserMedia extends React.Component {
                                     <div>
                                         <img
                                             className={"img-48"}
-                                            src={this.props.user.avatar}
+                                            src={imageUrl(
+                                                this.props.user.avatar,
+                                                48
+                                            )}
                                             alt="User avatar"
                                         />
                                     </div>
