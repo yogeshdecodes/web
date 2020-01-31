@@ -9,6 +9,7 @@ import Emoji from "~/components/Emoji";
 import EventFaces from "../EventFaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
+import config from "../../../../config";
 
 function getCss(event) {
     if (event.header) {
@@ -102,7 +103,12 @@ class EventMedia extends Component {
                         <div className="flex flex-gap v-center">
                             <div>
                                 <figure className=" img-32">
-                                    <img src={event.icon} />
+                                    <img
+                                        src={
+                                            `https://img.gs/${config.IMGOPT_KEY}/32x32,crop/` +
+                                            event.icon
+                                        }
+                                    />
                                 </figure>
                             </div>
                             <div className="flex-grow">

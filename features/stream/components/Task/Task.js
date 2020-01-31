@@ -16,6 +16,7 @@ import Avatar from "../../../users/components/Avatar";
 import FullName from "../../../users/components/FullName";
 import CommentsBox from "~/features/comments/components/CommentsBox";
 import TaskDetail from "./components/TaskDetailModal/TaskDetail";
+import config from "../../../../config";
 
 function findWord(word, str) {
     return str
@@ -160,7 +161,7 @@ class Task extends React.Component {
                         onClick={this.toggleAttachment}
                         className="image-preview"
                         style={{
-                            backgroundImage: `url(${this.props.task.attachment})`
+                            backgroundImage: `url(https://img.gs/frjhpgbvwx/full/${this.props.task.attachment})`
                         }}
                     >
                         <div className="attachment-overlay">
@@ -169,8 +170,14 @@ class Task extends React.Component {
                     </div>
                     {this.state.attachmentOpen && (
                         <Lightbox
-                            small={this.props.task.attachment}
-                            large={this.props.task.attachment}
+                            small={
+                                `https://img.gs/${config.IMGOPT_KEY}/full/` +
+                                this.props.task.attachment
+                            }
+                            large={
+                                `https://img.gs/${config.IMGOPT_KEY}/full,quality=lossless/` +
+                                this.props.task.attachment
+                            }
                             alt={this.props.task.content}
                             onClose={this.toggleAttachment}
                         />

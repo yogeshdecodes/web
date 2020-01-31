@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import config from "../../../../config";
 
 class Avatar extends React.Component {
     getClassNames = () => {
@@ -31,7 +32,10 @@ class Avatar extends React.Component {
             >
                 <img
                     alt={this.props.user.username}
-                    src={this.props.user.avatar || this.props.src}
+                    src={
+                        `https://img.gs/${config.IMGOPT_KEY}/${this.props.is}x${this.props.is},crop/` +
+                        (this.props.user.avatar || this.props.src)
+                    }
                 />
             </span>
         );
