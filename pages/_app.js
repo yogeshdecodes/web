@@ -21,9 +21,9 @@ import { actions as appActions } from "~/ducks/app";
 import axios from "~/lib/axios";
 import DownPage from "~/layouts/DownPage";
 import NotificationsView from "~/features/notifications/components/NotificationsView";
-import ReactGA from "react-ga";
 import isEmpty from "lodash/isEmpty";
-import { gaSetUserId } from "../vendor/ga";
+import { gaSetUserId, isGaEnabled } from "../vendor/ga";
+import Router from "next/router"; // yes this is correct
 
 async function onStoreInit(ctx) {
     // only the sagas here are run on the server side; no async dependencies.
@@ -61,10 +61,6 @@ class Artemis extends App {
             pageProps = await Component.getInitialProps(ctx);
         }
 
-        if (!isServer) {
-            ReactGA.pageview(ctx.asPath);
-        }
-
         return { pageProps };
     }
 
@@ -80,16 +76,25 @@ class Artemis extends App {
         const currentUserState = this.props.store.getState().user.me;
         const currentAuthState = this.props.store.getState().auth;
 
-        if (!config.isDev && config.GA_UA) {
-            ReactGA.initialize(config.GA_UA);
-            if (config.GO_TAG) ReactGA.ga("require", config.GO_TAG);
-            ReactGA.pageview(window.location.pathname + window.location.search);
+        if (isGaEnabled) {
+            Router.onRouteChangeComplete = () => {
+                if (window.gtag) {
+                    console.log("Makerlog/GA: Pageview registered.");
+                    window.gtag("config", config.GA_UA, {
+                        page_location: window.location.href,
+                        page_path: window.location.pathname,
+                        page_title: window.document.title
+                    });
+                }
+            };
+        }
 
-            // Now set tracking code for sessions.
-            //!
-            if (currentAuthState.loggedIn && !isEmpty(currentUserState)) {
-                gaSetUserId(currentUserState);
-            }
+        if (
+            isGaEnabled &&
+            currentAuthState.loggedIn &&
+            !isEmpty(currentUserState)
+        ) {
+            gaSetUserId(currentUserState);
         }
     }
 
