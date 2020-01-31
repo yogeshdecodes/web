@@ -13,6 +13,7 @@ import { isServer } from "~/config";
 
 import "./index.scss";
 import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
+import BlogCard from "../components/BlogCard";
 
 const quotes = [
     { text: "It's mango time.", from: "Fajar Siddiq" },
@@ -250,6 +251,7 @@ const ExploreSidebar = ({ isLoggedIn, me, data }) => {
             <TopStreaksCard topUsers={data.topUsers} />
             <UpcomingEventsCard upcomingEvents={data.upcomingEvents} />
             <AdCard />
+            <BlogCard />
             <SocialCard />
             <SmallFooter />
         </div>

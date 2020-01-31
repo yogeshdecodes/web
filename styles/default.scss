@@ -1919,3 +1919,35 @@ a {
         color: #833ab4;
     }
 }
+
+.SidebarBlogCard {
+    .card {
+        flex-direction: column;
+        .thumbnail {
+            min-height: 130px;
+            @extend %corners;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+    }
+}
+
+.blog-media {
+    p {
+        //color: white;
+    }
+    h4,
+    h5 {
+        margin-bottom: 10px;
+        //color: white;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .outbound {
+        display: block;
+        margin-top: 10px !important;
+    }
+}

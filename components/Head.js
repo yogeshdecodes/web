@@ -82,19 +82,19 @@ const Head = props => (
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="/icons/favicon-32x32.png"
+            href="/icons/favicon-32x32.png?v=csef4nwnl"
         />
         <link
             rel="icon"
             type="image/png"
             sizes="96x96"
-            href="/icons/favicon-96x96.png"
+            href="/icons/favicon-96x96.png?v=csef4nwnl"
         />
         <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="/icons/favicon-16x16.png"
+            href="/icons/favicon-16x16.png?v=csef4nwnl"
         />
         <link rel="manifest" href="/icons/manifest.json" />
         <meta name="msapplication-TileColor" content="#00B77A" />
