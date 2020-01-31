@@ -19,12 +19,12 @@ export function getThreadInfoBar(thread) {
                 </div>
             )}
             <div>
-                <ReplyFaces threadSlug={thread.slug} withOwner={false} />
-            </div>
-            <div>
                 <Link route={"discussion-page"} params={{ slug: thread.slug }}>
                     <a>{thread.reply_count} comments</a>
                 </Link>
+            </div>
+            <div>
+                <ReplyFaces threadSlug={thread.slug} withOwner={false} />
             </div>
 
             <div>
