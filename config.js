@@ -22,6 +22,11 @@ const STREAM_TYPES = (following = true) => ({
 
 const GA_UA = process.env.GA_UA ? process.env.GA_UA : "UA-121772728-1";
 const GO_TAG = process.env.GO_TAG ? process.env.GO_TAG : "GTM-TPWQXJ4";
+// prevent ssr mismatches by rendering everything in one timezone unless logged in
+// est time
+const DEFAULT_TZ = process.env.DEFAULT_TZ
+    ? process.env.DEFAULT_TZ
+    : "America/New_York";
 
 const config = {
     API_URL,
@@ -30,6 +35,7 @@ const config = {
     STREAM_TYPES,
     GA_UA,
     GO_TAG,
-    isDev
+    isDev,
+    DEFAULT_TZ
 };
 export default config;

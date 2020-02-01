@@ -17,6 +17,7 @@ const RehydrateToken = props => {
 const mapStateToProps = state => {
     return {
         token: state.auth.token,
+        timezone: state.user.timezone,
         statsAlreadyLoaded: state.stats.ready,
         tasksAlreadyLoaded: state.tasks.ready
     };

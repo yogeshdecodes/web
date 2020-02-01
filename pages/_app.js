@@ -24,15 +24,25 @@ import NotificationsView from "~/features/notifications/components/Notifications
 import isEmpty from "lodash/isEmpty";
 import { gaSetUserId, isGaEnabled } from "../vendor/ga";
 import Router from "next/router"; // yes this is correct
+import nookies from "nookies";
 
 async function onStoreInit(ctx) {
     // only the sagas here are run on the server side; no async dependencies.
-    const { token } = parseCookies(ctx);
+    const { token, timezone } = parseCookies(ctx);
     ctx.store.dispatch(appActions.requestApiHealth());
+
+    if (timezone && timezone !== "" && timezone !== "null") {
+        console.log("Makerlog: processing with tz " + timezone);
+        axios.defaults.headers.common["X-App-Timezone"] = timezone;
+    } else {
+        axios.defaults.headers.common["X-App-Timezone"] = config.DEFAULT_TZ;
+    }
+
     if (token && token !== "" && token !== "null") {
         axios.defaults.headers.common["Authorization"] = `Token ${token}`;
         ctx.store.dispatch(authActions.login(null, null, token));
     } else {
+        // todo: implement cookie based tz system
         delete axios.defaults.headers.common["Authorization"];
     }
 }
@@ -95,6 +105,12 @@ class Artemis extends App {
             !isEmpty(currentUserState)
         ) {
             gaSetUserId(currentUserState);
+        }
+
+        const { timezone } = nookies.get();
+
+        if (timezone && timezone !== "" && timezone !== "null") {
+            axios.defaults.headers.common["X-App-Timezone"] = timezone;
         }
     }
 
