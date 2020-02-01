@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ProfileModal from "..//ProfileModal";
 import "./LargeAvatar.scss";
+import { imageUrl } from "../../../../lib/utils/img";
 
 class LargeAvatar extends React.Component {
     state = {
@@ -23,7 +24,7 @@ class LargeAvatar extends React.Component {
                 >
                     <img
                         alt={"User"}
-                        src={this.props.user.avatar}
+                        src={imageUrl(this.props.user.avatar, 128)}
                         className={"img-128"}
                         title={this.props.user.username}
                     />

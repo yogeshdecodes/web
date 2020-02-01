@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { imageUrl } from "../../../../../../../../lib/utils/img";
 
 const Avatar = ({ url }) => (
     <div>
-        <img className="img-round img-48" src={url} alt="User" />
+        <img className="img-round img-48" src={imageUrl(url, 48)} alt="User" />
     </div>
 );
 

@@ -22,6 +22,7 @@ import { hasEnded } from "../../../../lib/utils/events";
 import isFunction from "lodash/isFunction";
 import { mapStateToProps } from "~/ducks/user";
 import { connect } from "react-redux";
+import { imageUrl } from "../../../../lib/utils/img";
 
 class EventsTab extends React.Component {
     state = {
@@ -131,7 +132,7 @@ class EventsTab extends React.Component {
             <div className="media">
                 <div className="media-left">
                     <figure className="image is-square is-32x32">
-                        <img src={event.icon} />
+                        <img src={imageUrl(event.icon, 32)} />
                     </figure>
                 </div>
                 <div className="media-content">

@@ -7,6 +7,7 @@ import {
 } from "../../../../../../lib/utils/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { truncate } from "~/lib/utils/random";
+import { imageUrl } from "../../../../../../lib/utils/img";
 
 class ProductMedia extends React.Component {
     renderMedium() {
@@ -16,7 +17,10 @@ class ProductMedia extends React.Component {
                     {this.props.product.icon && (
                         <div>
                             <figure className="img-48">
-                                <img src={this.props.product.icon} alt="User" />
+                                <img
+                                    src={imageUrl(this.props.product.icon, 48)}
+                                    alt="User"
+                                />
                             </figure>
                         </div>
                     )}
@@ -115,11 +119,12 @@ class ProductMedia extends React.Component {
                         <div>
                             <figure className="img-48">
                                 <img
-                                    src={
+                                    src={imageUrl(
                                         this.props.product.icon
                                             ? this.props.product.icon
-                                            : "https://via.placeholder.com/200?text=No+icon"
-                                    }
+                                            : "https://via.placeholder.com/200?text=No+icon",
+                                        48
+                                    )}
                                     alt="Product"
                                 />
                             </figure>
