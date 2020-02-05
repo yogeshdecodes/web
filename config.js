@@ -25,6 +25,11 @@ const IMGOPT_ENABLED = process.env.IMGOPT_ENABLED
     : true;
 const GA_UA = process.env.GA_UA ? process.env.GA_UA : "UA-121772728-1";
 const GO_TAG = process.env.GO_TAG ? process.env.GO_TAG : "GTM-TPWQXJ4";
+// prevent ssr mismatches by rendering everything in one timezone unless logged in
+// est time
+const DEFAULT_TZ = process.env.DEFAULT_TZ
+    ? process.env.DEFAULT_TZ
+    : "America/New_York";
 
 const config = {
     API_URL,
@@ -34,6 +39,7 @@ const config = {
     GA_UA,
     GO_TAG,
     IMGOPT_ENABLED,
-    isDev
+    isDev,
+    DEFAULT_TZ
 };
 export default config;

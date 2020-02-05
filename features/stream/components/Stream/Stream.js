@@ -10,6 +10,7 @@ import { sortStreamByActivity } from "~/lib/utils/tasks";
 import StreamFinished from "./components/StreamFinished/index";
 import Spinner from "~/components/Spinner";
 import { assignModelType } from "../../../../lib/utils/tasks";
+import { isServer } from "../../../../config";
 
 /**
  * Stream Component
@@ -41,20 +42,19 @@ class Stream extends React.Component {
             return this.props.noActivityComponent;
         }
 
-        let lastDate = null;
-
         return (
             <InfiniteScroll
                 next={this.props.loadMore}
                 hasMore={this.props.hasMore}
                 style={{ overflow: "none" }}
+                key={isServer}
             >
                 <div className="card">
                     <div className="card-content">
                         {Object.keys(data).map(date => {
                             return (
                                 <StreamSection
-                                    key={Object.keys(data).indexOf(date)}
+                                    key={date.toString()}
                                     position={Object.keys(data).indexOf(date)}
                                     canSwitchType={this.props.canSwitchType}
                                     isFollowingFeed={this.props.isFollowingFeed}
