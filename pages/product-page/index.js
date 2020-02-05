@@ -1,18 +1,21 @@
 import React from "react";
-import { getProductBySlug } from "~/lib/products";
+import { getProductBySlug, getProductPeople } from "~/lib/products";
 import { Product } from "~/features/products";
 import { ProductStream } from "~/features/stream";
 import "./index.scss";
 import Head from "next/head";
+import ProductPageLayout from "~/layouts/ProductPage";
 
 class ProductPage extends React.Component {
     static async getInitialProps({ query: { slug } }) {
         let layout = { className: "ProductPage" };
         try {
             const product = await getProductBySlug(slug);
+            const people = await getProductPeople(slug);
             return {
                 product,
-                ...layout
+                people,
+                layout: { ...layout }
             };
         } catch (e) {
             if (e.status_code && e.status_code === 404) {
@@ -30,21 +33,12 @@ class ProductPage extends React.Component {
     }
 
     render() {
-        const { product } = this.props;
+        const { product, people } = this.props;
 
         return (
-            <div>
-                <Head
-                    title={`${product.name} | Makerlog`}
-                    description={`${product.name} is built on Makerlog, the world's most supportive community of makers shipping together.`}
-                    ogImage={product.icon || null}
-                />
-
-                <Product hero product={product} />
-                <div className={"container"}>
-                    <ProductStream productSlug={product.slug} />
-                </div>
-            </div>
+            <ProductPageLayout product={product} people={people}>
+                <ProductStream productSlug={product.slug} />
+            </ProductPageLayout>
         );
     }
 }

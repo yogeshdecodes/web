@@ -1,6 +1,7 @@
 @import "../../styles/_variables";
 
-.UserPage {
+.UserPage,
+.ProductPage {
     --back-cover-color: #{$c-bg-darkest};
 
     .header-section {
@@ -67,9 +68,14 @@
             }
         }
 
-        .img-avatar {
+        .img-avatar,
+        .ProductIcon {
             position: absolute;
             top: -64px;
+        }
+
+        .ProductIcon {
+            top: -60px;
         }
 
         .full-name-container {
@@ -77,8 +83,23 @@
     }
 }
 
+.ProductPage {
+    --back-cover-color: #{$c-bg-darkest};
+
+    .header-section {
+        &::before {
+            -webkit-backdrop-filter: none; /* Use for Safari 9+, Edge 17+ (not a mistake) and iOS Safari 9.2+ */
+            backdrop-filter: none; /* Supported in Chrome 76 */
+
+            content: "";
+            display: none;
+        }
+    }
+}
+
 @media (max-width: $breakpoint-mobile) {
-    .UserPage .header-section .container {
+    .UserPage .header-section .container,
+    .ProductPage .header-section .container {
         width: 100% !important;
     }
 }

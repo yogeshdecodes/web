@@ -1,0 +1,18 @@
+@import "../../../../styles/_variables";
+
+.ProductIcon {
+    @extend %corners;
+    background-color: white;
+
+    &.is-128 {
+        max-height: 128px;
+        max-width: 128px;
+
+        img {
+            @extend %corners;
+            height: 75%;
+            width: 75%;
+            margin: 12.5%;
+        }
+    }
+}
