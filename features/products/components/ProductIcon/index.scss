@@ -3,16 +3,55 @@
 .ProductIcon {
     @extend %corners;
     background-color: white;
+    border: 1px solid $c-border;
+    text-transform: uppercase;
+
+    img,
+    div {
+        @extend %corners;
+        height: 75%;
+        width: 75%;
+        margin: 12.5%;
+    }
 
     &.is-128 {
+        min-height: 128px;
+        min-width: 128px;
         max-height: 128px;
         max-width: 128px;
+        height: 128px;
 
-        img {
-            @extend %corners;
-            height: 75%;
-            width: 75%;
-            margin: 12.5%;
+        font-size: 2rem;
+    }
+
+    &.is-48 {
+        min-height: 48px;
+        min-width: 48px;
+        max-height: 48px;
+        max-width: 48px;
+        width: 48px;
+        height: 48px;
+    }
+
+    &.is-32 {
+        min-height: 32px;
+        min-width: 32px;
+        max-height: 32px;
+        max-width: 32px;
+        width: 32px;
+        height: 48px;
+        img,
+        div {
+            margin: 14%;
         }
+    }
+
+    &.text div {
+        //background: $gradient-green;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
     }
 }

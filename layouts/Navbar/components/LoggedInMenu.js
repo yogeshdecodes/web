@@ -23,17 +23,17 @@ const LoggedInMenu = props => (
                 </a>
             </NavLink>
 
-            <NavLink route="discussions-top" activeClassName="is-active">
+            <NavLink route="discussions-top" iexact activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Discuss</span>
                 </a>
             </NavLink>
-            <NavLink route="products" activeClassName="is-active">
+            <NavLink route="products" iexact activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Products</span>
                 </a>
             </NavLink>
-            <NavLink route="tasks" activeClassName="is-active">
+            <NavLink route="tasks" iexact activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Tasks</span>
                 </a>

@@ -67,16 +67,20 @@ class Stream extends React.Component {
 
                         {this.props.hasMore && (
                             <div className={"center"}>
-                                <Button
-                                    loading={this.props.isSyncing}
-                                    className={"btn-loading"}
+                                <button
+                                    className={
+                                        "btn btn-light" +
+                                        (this.props.isSyncing
+                                            ? " is-loading"
+                                            : "")
+                                    }
                                     onClick={this.props.loadMore}
                                 >
                                     <FontAwesomeIcon
                                         icon={"arrow-circle-down"}
                                     />{" "}
                                     Load more tasks...
-                                </Button>
+                                </button>
                             </div>
                         )}
                         {!this.props.hasMore && this.props.isSyncing && (

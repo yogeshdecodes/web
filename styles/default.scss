@@ -46,6 +46,10 @@
     .markdown-body  {
         color: var(--c-text);
     }
+
+    #main-navbar {
+        border-bottom: 0.2px solid var(--c-bg-light);
+    }
 }
 
 html {
@@ -1741,6 +1745,22 @@ figure.img-circle {
         padding: 10px;
         display: flex;
         align-items: center;
+    }
+
+    &.is-gold {
+        background-color: rgba(230, 195, 0, 0.1);
+        border-left: 4px solid rgba(230, 195, 0, 1);
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        color: $c-text;
+
+        .alert-icon {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .alert-title .time {
+            color: rgba(230, 195, 0, 1) !important;
+        }
     }
 
     &.is-info {

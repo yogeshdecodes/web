@@ -184,7 +184,7 @@ const TopStreaksCard = ({ topUsers }) => {
         <div className="TopStreaksCard sidebar-item">
             <h3>Top Streaks</h3>
             <h4 className="subtitle has-text-grey">
-                Every week we rank the best makers.
+                Every week we rank the most productive makers.
             </h4>
             <div className="card">
                 <div className="card-content">

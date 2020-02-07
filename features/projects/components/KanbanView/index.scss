@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: $gap;
+    margin-top: 20px;
 
     .KanbanProject {
         .title-card {
