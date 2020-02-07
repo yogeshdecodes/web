@@ -5,7 +5,7 @@
     @extend %shadow;
     margin-bottom: 10px;
     min-height: 70px;
-    background: $c-bg-light;
+    background: var(--c-bg-light);
     border: 0;
 
     .editor-flex {

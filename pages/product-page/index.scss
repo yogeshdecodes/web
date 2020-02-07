@@ -29,7 +29,7 @@
             span {
                 @extend %corners;
                 display: inline-block;
-                background: $c-bg-light;
+                background: var(--c-bg-light);
                 font-size: 0.75rem;
                 line-height: 1;
                 font-weight: normal;

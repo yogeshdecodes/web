@@ -13,7 +13,7 @@
 
 	.SidebarMenu {
 		display: flex;
-		background: $c-bg-light;
+		background: var(--c-bg-light);
 		flex-flow: column nowrap;
 		justify-content: space-between;
 		padding: 1rem 0.5rem;

@@ -87,7 +87,7 @@ pre {
 }
 
 code {
-    background-color: $c-bg-light;
+    background-color: var(--c-bg-light);
     color: #ff3860;
     font-size: 0.875em;
     padding: 0.25em 0.5em;
@@ -294,14 +294,14 @@ a[class^="btn"] {
 
         &.transparent {
             background: transparent;
-            color: $c-lightest !important;
+            color: var(--c-lightest) !important;
         }
     }
 
     &.btn-primary,
     &.is-primary {
         background: $c-main;
-        color: $c-lightest !important;
+        color: var(--c-lightest) !important;
     }
 
     &.btn-secondary,
@@ -471,7 +471,7 @@ a:not(.btn):hover {
     height: 2.25em;
 
     &:hover {
-        background: $c-bg-light;
+        background: var(--c-bg-light);
         text-decoration: underline;
     }
 
