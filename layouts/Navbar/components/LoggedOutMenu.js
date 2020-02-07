@@ -18,11 +18,11 @@ const LoggedOutMenu = props => (
                 <a className="navbar-item">Explore</a>
             </NavLink>
 
-            <NavLink activeClassName="is-active" route="discussions-top">
+            <NavLink iexact activeClassName="is-active" route="discussions-top">
                 <a className="navbar-item">Discuss</a>
             </NavLink>
 
-            <NavLink activeClassName="is-active" route="products">
+            <NavLink iexact activeClassName="is-active" route="products">
                 <a className="navbar-item">Products</a>
             </NavLink>
 

@@ -13,9 +13,9 @@ import "../ProfilePage/index.scss";
 import ProductIcon from "../../features/products/components/ProductIcon";
 
 function getCoverStyle(product, isBackdrop = false) {
-    if (product.cover)
+    if (product.accent)
         return {
-            backgroundImage: `url(${product.cover})`,
+            background: product.accent,
             backgroundPosition: "center",
             backgroundSize: isBackdrop ? "cover" : "contain",
             backgroundRepeat: "no-repeat"

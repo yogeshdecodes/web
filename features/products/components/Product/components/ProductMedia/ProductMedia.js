@@ -8,27 +8,19 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { truncate } from "~/lib/utils/random";
 import { imageUrl } from "../../../../../../lib/utils/img";
+import ProductIcon from "~/features/products/components/ProductIcon";
 
 class ProductMedia extends React.Component {
     renderMedium() {
         return (
-            <div className={"ProductMedia"}>
-                <div className={"flex"}>
-                    {this.props.product.icon && (
+            <Link
+                route="product-page"
+                params={{ slug: this.props.product.slug }}
+            >
+                <div className={"ProductMedia"}>
+                    <div className={"flex"}>
+                        <ProductIcon is={48} product={this.props.product} />
                         <div>
-                            <figure className="img-48">
-                                <img
-                                    src={imageUrl(this.props.product.icon, 48)}
-                                    alt="User"
-                                />
-                            </figure>
-                        </div>
-                    )}
-                    <div>
-                        <Link
-                            route="product-page"
-                            params={{ slug: this.props.product.slug }}
-                        >
                             <strong>
                                 {this.props.product.name}{" "}
                                 {this.props.product.launched && (
@@ -37,27 +29,18 @@ class ProductMedia extends React.Component {
                                     </div>
                                 )}
                             </strong>
-                        </Link>
-                        <br />
-                        <p>{this.props.product.description}</p>
-                        <div>
-                            {this.props.product.website && (
-                                <a
-                                    target="_blank"
-                                    className={"btn-link"}
-                                    rel="noopener noreferrer"
-                                    href={normalizeUrl(
-                                        this.props.product.website
-                                    )}
-                                >
-                                    <FontAwesomeIcon icon={"globe"} />
-                                    {getHostname(this.props.product.website)}
-                                </a>
-                            )}
+                            <br />
+                            <p>
+                                {truncate(
+                                    this.props.product.description,
+                                    14,
+                                    "..."
+                                )}
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         );
     }
 

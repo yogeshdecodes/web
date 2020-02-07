@@ -20,6 +20,7 @@ import { connect } from "react-redux";
 import { actions as editorActions } from "../../../../ducks/editor";
 import { getMyProducts } from "../../../../lib/products";
 import { actions as tasksActions } from "~/ducks/tasks";
+import ProductIcon from "~/features/products/components/ProductIcon";
 
 const mapStateToProps = state => {
     return {
@@ -63,15 +64,9 @@ const ProductLink = ({ product, active, onSelect, tasks }) => (
             "flex v-center flex-gap ProductLink" + (active ? " active" : "")
         }
     >
-        {product.icon && (
-            <div>
-                <img
-                    className={"img-32"}
-                    src={product.icon}
-                    alt={"product icon"}
-                />
-            </div>
-        )}
+        <div>
+            <ProductIcon is={32} product={product} />
+        </div>
         <div>
             <strong>{product.name}</strong>
 
@@ -166,14 +161,14 @@ class CheckableTask extends React.Component {
                 </div>
                 <div className={"controls buttons"}>
                     {!task.done && !task.in_progress && (
-                        <Button
+                        <button
                             onClick={e => markInProgress(task.id)}
                             warning
-                            className={"btn rounded"}
+                            className={"btn btn-small btn-light"}
                             small
                         >
                             Mark in progress
-                        </Button>
+                        </button>
                     )}
                     <button
                         onClick={this.toggleEditingState}

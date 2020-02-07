@@ -1,0 +1,17 @@
+stages:
+  - deploy
+
+variables:
+  APP_NAME: makerlog-ui
+
+deploy:
+  image: ilyasemenov/gitlab-ci-git-push
+  stage: deploy
+  environment:
+    name: production
+    url: https://next.getmakerlog.com/
+  only:
+    - master
+  script:
+    - SSH_PRIVATE_KEY="$(echo "$SSH_PRIVATE_KEY" | base64 -d)"
+    - git-push ssh://dokku@mattei.dev:22/$APP_NAME
