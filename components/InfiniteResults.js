@@ -19,7 +19,7 @@ class InfiniteResults extends React.Component {
                   loading: false,
                   hasMore: this.props.prefetchedData.next !== null,
                   next: this.props.prefetchedData.next,
-                  items: this.props.prefetchedData.results,
+                  items: this.getOrderedData(this.props.prefetchedData.results),
                   failed: false
               }
             : {
@@ -31,6 +31,13 @@ class InfiniteResults extends React.Component {
                   failed: false
               };
     }
+
+    getOrderedData = data => {
+        if (this.props.orderBy) {
+            return this.props.orderBy(data);
+        }
+        return data;
+    };
 
     componentDidMount() {
         if (!this.state.ready) {
