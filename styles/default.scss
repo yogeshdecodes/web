@@ -22,11 +22,12 @@
 
 [data-theme = "dark"]   {
     background: var(--c-bg);
+    color: var(--c-text);
 
     // Colors -- texts
     --c-title: hsl(0, 0%, 82%);
-    --c-text: hsl(0, 0%, 54%);
-    --c-lightest: hsl(0, 0%, 11%);
+    --c-text: hsl(0, 0%, 47%);
+    --c-lightest: hsl(0, 0%, 9%);
 
     // Colors -- backgrounds
     --c-bg: hsl(0, 0%, 7%);
@@ -42,7 +43,15 @@
     --c-bg-input: hsl(0, 0%, 7%);
 
     .has-text-grey-light {
+        color: hsla(0, 0%, 100%, 0.3) !important;
+    }
+
+    .has-text-grey {
         color: hsla(0, 0%, 100%, 0.2) !important;
+    }
+
+    .sidebar-item .has-text-grey {
+        color: hsl(0, 0%, 47%) !important;
     }
 
     .markdown-body  {
