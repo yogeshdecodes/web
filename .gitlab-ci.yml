@@ -13,5 +13,5 @@ deploy:
   only:
     - master
   script:
-    - SSH_PRIVATE_KEY="$(base64 --decode "$SSH_PRIVATE_KEY")"
+    - SSH_PRIVATE_KEY="$(echo "$SSH_PRIVATE_KEY" | base64 --decode)"
     - git-push ssh://dokku@mattei.dev:22/$APP_NAME
