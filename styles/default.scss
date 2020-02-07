@@ -46,6 +46,10 @@
     .markdown-body  {
         color: var(--c-text);
     }
+
+    #main-navbar {
+        border-bottom: 0.2px solid var(--c-bg-light);
+    }
 }
 
 html {
