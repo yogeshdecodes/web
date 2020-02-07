@@ -9,6 +9,8 @@ import mapDispatchToProps from "../../containers/mapDispatchToProps";
 import KanbanTask from "./components/KanbanTask";
 import isEqual from "lodash/isEqual";
 import "./index.scss";
+import GoldCtaButton from "~/components/GoldCtaButton";
+import GoldAlert from "../../../../components/GoldAlert";
 
 /*<div style={{ borderColor: colorFromProject(project) }} className={"color-circle"}></div>*/
 
@@ -127,9 +129,15 @@ class KanbanView extends React.Component {
         }
     };
 
+    renderGoldWarning = () => {
+        return <GoldAlert />;
+    };
+
     // Normally you would want to split things out into separate components.
     // But in this example everything is just done in one place for simplicity
     render() {
+        if (this.props.me && !this.props.me.gold)
+            return this.renderGoldWarning();
         if (!this.props.tasks) return <Spinner />;
 
         return (
@@ -156,7 +164,12 @@ class KanbanView extends React.Component {
     }
 }
 
-KanbanView = connect(null, mapDispatchToProps)(KanbanView);
+KanbanView = connect(state => {
+    return {
+        me: state.user.me,
+        tasks: state.tasks.tasks
+    };
+}, mapDispatchToProps)(KanbanView);
 
 KanbanView.propTypes = {
     projects: PropTypes.array.isRequired,

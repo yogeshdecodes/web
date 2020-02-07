@@ -5,6 +5,8 @@ import { actions as tasksActions } from "~/ducks/tasks";
 import { applySearchTerms } from "~/lib/utils/tasks";
 import { ListView, KanbanView, TodayView } from "~/features/projects";
 import Spinner from "~/components/Spinner";
+import TasksPageLayout from "~/layouts/TasksPage";
+import GoldAlert from "../../components/GoldAlert";
 
 class TasksPage extends React.Component {
     static async getInitialProps({ query }) {
@@ -17,15 +19,15 @@ class TasksPage extends React.Component {
         };
     }
 
-    componentDidMount() {
-        this.props.connect();
-    }
-
-    componentWillUnmount() {
-        this.props.disconnect();
-    }
-
     renderCurrentRoute = () => {
+        if (!this.props.ready && !this.props.failed) {
+            return (
+                <div className="container">
+                    <Spinner text="Loading your tasks..." />
+                </div>
+            );
+        }
+
         switch (this.props.view) {
             case "list":
                 return <ListView />;
@@ -43,23 +45,12 @@ class TasksPage extends React.Component {
     };
 
     render() {
-        if (!this.props.ready && !this.props.failed) {
-            return <Spinner text="Loading your tasks..." />;
-        }
-
-        return (
-            <>
-                <Navigation />
-                {this.renderCurrentRoute()}
-            </>
-        );
+        return <TasksPageLayout>{this.renderCurrentRoute()}</TasksPageLayout>;
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        connect: () => dispatch(tasksActions.connect()),
-        disconnect: () => dispatch(tasksActions.disconnect()),
         loadTasks: () => dispatch(tasksActions.loadTasks())
     };
 };
@@ -75,7 +66,4 @@ const mapStateToProps = state => ({
     searchTerms: state.tasks.searchTerms
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TasksPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TasksPage);

@@ -1694,6 +1694,22 @@ figure.img-circle {
         align-items: center;
     }
 
+    &.is-gold {
+        background-color: rgba(230, 195, 0, 0.1);
+        border-left: 4px solid rgba(230, 195, 0, 1);
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        color: $c-text;
+
+        .alert-icon {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .alert-title .time {
+            color: rgba(230, 195, 0, 1) !important;
+        }
+    }
+
     &.is-info {
         background-color: rgba(52, 152, 219, 0.1);
         border-left: 4px solid rgba(52, 152, 219, 1);
