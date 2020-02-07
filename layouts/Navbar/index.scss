@@ -127,7 +127,7 @@
         .navbar-item {
             padding: 0.375rem 3rem 0.375rem 1rem;
             line-height: 1.5;
-            color: var(--c-lightest);
+            color: var(--c-text);
         }
 
         .navbar-item:not(div):hover {
@@ -461,12 +461,12 @@
         .navbar-item.is-hoverable:hover .navbar-dropdown {
             // Dropdown CSS
             display: block;
-            background: var(--c-bg-dark);
+            background: var(--c-bg);
             padding: 0.5rem 0;
             min-width: 100%;
 
             a.navbar-item {
-                color: var(--c-lightest);
+                color: var(--c-text);
                 padding: 0.375rem 3rem 0.375rem 1rem;
                 display: flex;
 
@@ -580,6 +580,7 @@
 
 .navbar-dropdown .navbar-item {
     font-weight: normal !important;
+    color: var(--c-lightest);
 }
 
 .navbar-burger {
