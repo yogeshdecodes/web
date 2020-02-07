@@ -21,6 +21,8 @@
 }
 
 [data-theme = "dark"]   {
+    background: var(--c-bg);
+
     // Colors -- texts
     --c-title: hsl(0, 0%, 82%);
     --c-text: hsl(0, 0%, 54%);
@@ -154,6 +156,7 @@ textarea {
     margin-bottom: 0.5rem;
     font-size: 1rem;
     background: var(--c-bg-input);
+    color: var(--c-text);
 
     &:hover {
         border-color: var(--c-border-light);
