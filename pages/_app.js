@@ -25,6 +25,7 @@ import isEmpty from "lodash/isEmpty";
 import { gaSetUserId, isGaEnabled } from "../vendor/ga";
 import Router from "next/router"; // yes this is correct
 import nookies from "nookies";
+import ThemedContainer from "~/layouts/ThemedContainer";
 
 async function onStoreInit(ctx) {
     // only the sagas here are run on the server side; no async dependencies.
@@ -48,10 +49,6 @@ async function onStoreInit(ctx) {
 }
 
 class Artemis extends App {
-    state = {
-        darkModeDemo: false
-    };
-
     static async getInitialProps({ Component, ctx }) {
         let pageProps = {};
 
@@ -116,33 +113,7 @@ class Artemis extends App {
         if (timezone && timezone !== "" && timezone !== "null") {
             axios.defaults.headers.common["X-App-Timezone"] = timezone;
         }
-
-        this.checkDemoMode();
     }
-
-    checkDemoMode = () => {
-        if (window.location.search.includes("dark-mode-demo")) {
-            this.setState({ darkModeDemo: true });
-            this.timer = setTimeout(() => {
-                this.setState({ darkModeDemo: false });
-            }, 10000);
-        }
-    };
-
-    getTheme = () => {
-        if (this.state.darkModeDemo) return "dark";
-        const userState = this.props.store.getState().user;
-        if (
-            userState &&
-            userState.me &&
-            userState.me.gold &&
-            userState.me.dark_mode
-        ) {
-            return "dark";
-        }
-
-        return "light";
-    };
 
     render() {
         const { Component, pageProps, store } = this.props;
@@ -158,14 +129,14 @@ class Artemis extends App {
             <Provider store={store}>
                 <Head />
                 <NProgressContainer spinner={false} />
-                <div data-theme={this.getTheme()}>
+                <ThemedContainer>
                     <Page {...pageProps.layout}>
                         <Component {...pageProps} />
                     </Page>
 
                     <Reactor />
                     <NotificationsView />
-                </div>
+                </ThemedContainer>
             </Provider>
         );
     }
