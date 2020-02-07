@@ -132,7 +132,12 @@ class Artemis extends App {
     getTheme = () => {
         if (this.state.darkModeDemo) return "dark";
         const userState = this.props.store.getState().user;
-        if (userState && userState.me && userState.me.gold) {
+        if (
+            userState &&
+            userState.me &&
+            userState.me.gold &&
+            userState.me.dark_mode
+        ) {
             return "dark";
         }
 
