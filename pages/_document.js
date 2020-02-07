@@ -81,7 +81,7 @@ export default class Document extends NextDocument {
         return (
             <Html>
                 <Head>{this.renderAnalytics()}</Head>
-                <body>
+                <body data-theme={"dark"}>
                     <Main />
                     <NextScript />
                 </body>

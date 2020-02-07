@@ -16,7 +16,7 @@ const InstallButton = ({ app, installed }) => (
     <Link
         route={"apps"}
         params={{ app }}
-        className={"btn-light" + (installed ? " btn-light transparent" : "")}
+        className={"btn btn-gray" + (installed ? " btn btn-gray" : "")}
     >
         {installed ? "Settings" : "Install"}
     </Link>

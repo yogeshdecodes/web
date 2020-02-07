@@ -3,7 +3,7 @@
 .ProductEditModal {
 	> .Modal-Content {
 		@extend %corners;
-		background: $c-lightest;
+		background: var(--c-lightest);
 		padding: 1px;
 	}
 

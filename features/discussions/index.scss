@@ -69,7 +69,7 @@
 
         &.is-selected {
             background: $c-main;
-            color: $c-lightest;
+            color: var(--c-lightest);
             border-color: $c-main;
         }
     }
@@ -83,7 +83,7 @@
         }
 
         a {
-            color: $c-title;
+            color: var(--c-title);
         }
     }
 
@@ -131,7 +131,7 @@
 .ThreadStreamItem {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    //border-bottom: 1px solid $c-border;
+    //border-bottom: 1px solid var(--c-border);
     //cursor: pointer;
 
     h4 {
@@ -156,7 +156,7 @@
     flex-direction: column;
     font-size: 1rem;
     margin-right: 25px !important;
-    color: $c-border-light;
+    color: var(--c-border-light);
 
     .up,
     .down {
@@ -213,9 +213,9 @@
     }
 
     .ReplyForm {
-        border: 1px solid $c-border;
-        background-color: $c-bg;
-        //border-top: 1px solid $c-border;
+        border: 1px solid var(--c-border);
+        background-color: var(--c-bg);
+        //border-top: 1px solid var(--c-border);
         //padding-top: $gap;
         margin-top: 1rem;
         padding: 1rem;
@@ -224,7 +224,7 @@
     .reply-children {
         margin-top: calc(#{$gap} / 2);
         padding-left: 1rem;
-        border-left: 1px solid $c-border;
+        border-left: 1px solid var(--c-border);
 
         &:empty {
             margin-top: 0px;

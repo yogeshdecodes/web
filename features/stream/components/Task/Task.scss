@@ -97,7 +97,7 @@
                 width: 100%;
 
                 &:hover {
-                    color: $c-lightest;
+                    color: var(--c-lightest);
                     background-color: $c-bg-overlay;
                 }
             }
@@ -106,12 +106,12 @@
 
     .task-details {
         //margin-left: 8px;
-        //border-left: 1px solid $c-border;
+        //border-left: 1px solid var(--c-border);
 
         margin-left: 7px;
         border-left: 2px solid $c-secondary;
         //padding: 5px;
-        //background-color: $c-bg;
+        //background-color: var(--c-bg);
 
         .comments-box {
             border-left: none;
@@ -119,16 +119,16 @@
     }
 
     .action-bar {
-        //border-top: 1px solid $c-border-lightest;
+        //border-top: 1px solid var(--c-border-lightest);
         padding: 0.5rem;
         margin-top: 0.5rem;
-        //border-right: 1px solid $c-border-lightest;
-        //border-left: 1px solid $c-border-lightest;
+        //border-right: 1px solid var(--c-border-lightest);
+        //border-left: 1px solid var(--c-border-lightest);
         margin-bottom: -0.5rem; //compensate for commentsbar margin
 
         /*.action-bar-with-taskcontrols {
             .ShareBar {
-                border-top: 1px solid $c-border-lightest;
+                border-top: 1px solid var(--c-border-lightest);
                 padding-top: 0.5rem;
             }
 
@@ -173,7 +173,7 @@
     input.editing {
         width: 90%;
         outline: none;
-        border: 1px solid $c-border;
+        border: 1px solid var(--c-border);
         box-shadow: none;
     }
 }

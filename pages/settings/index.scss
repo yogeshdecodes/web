@@ -20,7 +20,7 @@
 
     button[disabled] {
         border-radius: $rounded-corner 0 0 $rounded-corner;
-        border-color: $c-border;
+        border-color: var(--c-border);
         height: 90%;
 
         svg {
@@ -61,7 +61,7 @@
         }
 
         &:hover {
-            color: $c-lightest;
+            color: var(--c-lightest);
         }
 
         > .menu-icon {

@@ -6,7 +6,7 @@
     //align-items: center;
     padding-top: 2rem;
     padding-bottom: 2rem; // replaces missing .card margin bottom.
-    border-bottom: 1px solid $c-bg-light;
+    border-bottom: 1px solid var(--c-bg-light);
 
     &:first-of-type {
         padding-top: 0px;
@@ -39,7 +39,7 @@
 
         .name {
             font-weight: bold;
-            color: $c-text;
+            color: var(--c-title);
         }
     }
 

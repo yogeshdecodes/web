@@ -75,8 +75,8 @@
         a {
             @extend %rounded;
             padding: 0.5rem 1rem;
-            background: $c-lightest;
-            color: $c-title;
+            background: var(--c-lightest);
+            color: var(--c-title);
         }
     }
 }

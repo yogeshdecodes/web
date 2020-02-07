@@ -2,6 +2,6 @@
 
 .AnnouncementCard	{
 	@extend %transition-bg;
-	color: $c-lightest;
+	color: var(--c-text);
 	background: $gradient-green;
 }

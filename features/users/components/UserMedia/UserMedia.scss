@@ -13,7 +13,7 @@
 
     .name {
         font-weight: bold;
-        color: $c-text;
+        color: var(--c-text);
     }
 
     &.grid-streamcard {

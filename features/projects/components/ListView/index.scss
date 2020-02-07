@@ -13,7 +13,7 @@
         }
 
         strong {
-            color: $c-title;
+            color: var(--c-title);
         }
     }
 
@@ -49,7 +49,7 @@
 
             &.active {
                 background-color: $c-secondary;
-                color: $c-lightest;
+                color: var(--c-lightest);
             }
         }
 

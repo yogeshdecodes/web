@@ -2,17 +2,17 @@
 
 #main-navbar {
     font-size: 0.875rem;
-    background: #ffffff;
+    background: var(--c-lightest);
     height: $navbar-height;
     position: relative;
     z-index: 999;
-    border-bottom: 0.2px solid #ececec;
+    border-bottom: 0.2px solid var(--c-border-lightest);
 
     .navbar-end {
         svg {
             width: 18px;
             height: 18px;
-            color: $c-text;
+            color: var(--c-text);
 
             path {
                 shape-rendering: auto;
@@ -27,7 +27,7 @@
     .tag:not(body) {
         align-items: center;
         background-color: $c-main;
-        color: $c-lightest;
+        color: var(--c-lightest);
         display: inline-flex;
         font-size: 0.75rem;
         height: 2em;
@@ -78,7 +78,7 @@
     }
 
     .navbar-item {
-        color: $c-text;
+        color: var(--c-text);
         font-size: 16px;
         line-height: 1.5;
         padding: 0.5rem 1rem;
@@ -87,7 +87,7 @@
     }
 
     .navbar-link {
-        color: $c-text;
+        color: var(--c-text);
     }
 
     .navbar-item.has-dropdown {
@@ -110,7 +110,7 @@
     svg {
         width: auto;
         margin: 0 0.5rem 0 0;
-        fill: $c-lightest;
+        fill: var(--c-lightest);
     }
 
     .fa-bell {
@@ -119,7 +119,7 @@
     }
 
     .navbar-dropdown {
-        background: $c-bg-dark;
+        background: var(--c-bg-dark);
         box-shadow: 0 8px 8px hsla(0, 0%, 4%, 0.1);
         font-size: 0.9rem;
         min-width: 100%;
@@ -127,7 +127,7 @@
         .navbar-item {
             padding: 0.375rem 3rem 0.375rem 1rem;
             line-height: 1.5;
-            color: $c-lightest;
+            color: var(--c-lightest);
         }
 
         .navbar-item:not(div):hover {
@@ -154,7 +154,7 @@
         }
 
         .navbar-link {
-            color: $c-text;
+            color: var(--c-text);
             // font-weight: regular;
             font-size: 16px;
             line-height: 1.5;
@@ -215,7 +215,7 @@
         > a {
             svg {
                 margin: 0 !important;
-                //color: $c-lightest;
+                //color: var(--c-lightest);
             }
         }
 
@@ -229,7 +229,7 @@
         background: hsla(0, 0%, 0%, 0.1);
         border: 0;
         box-shadow: none;
-        color: $c-lightest;
+        color: var(--c-lightest);
         height: 2.25em;
         line-height: 1;
         padding-left: 1em;
@@ -237,7 +237,7 @@
     }
 
     #navChip {
-        color: $c-text;
+        color: var(--c-text);
         height: 28px;
         cursor: default;
         border: 0;
@@ -291,8 +291,8 @@
 .navbar-secondary {
     font-size: 1rem;
     height: $navbar-height;
-    background: $c-secondary-navbar;
-    border-bottom: 0.2px solid #ececec;
+    background: var(--c-secondary-navbar);
+    border-bottom: 0.2px solid var(--c-border-light);
 
     svg {
         margin-right: 0.5rem;
@@ -342,7 +342,7 @@
 
     .navbar-item,
     .navbar-link {
-        color: $c-title !important;
+        color: var(--c-title) !important;
         line-height: 1.5;
         padding: 0.5rem 1.3rem;
         position: relative;
@@ -355,13 +355,13 @@
 
     .navbar-start {
         > .navbar-item:first-of-type {
-            // margin-left: -1rem; why?
+            // margin-left: -1rem; why? bulma relic
         }
 
         .navbar-item {
             border: solid transparent;
             border-width: 2px 0;
-            color: $c-text;
+            color: var(--c-text);
 
             // &:not(div):hover,
             //&:active,
@@ -461,12 +461,12 @@
         .navbar-item.is-hoverable:hover .navbar-dropdown {
             // Dropdown CSS
             display: block;
-            background: $c-lightest;
+            background: var(--c-bg-dark);
             padding: 0.5rem 0;
             min-width: 100%;
 
             a.navbar-item {
-                color: $c-text !important;
+                color: var(--c-lightest);
                 padding: 0.375rem 3rem 0.375rem 1rem;
                 display: flex;
 
@@ -477,7 +477,7 @@
                 &:hover,
                 &:active {
                     background: rgba(0, 173, 113, 0.5);
-                    color: $c-lightest;
+                    color: var(--c-lightest);
                 }
             }
         }
@@ -513,7 +513,7 @@
             width: 60px;
             height: 60px;
             border: 0;
-            background: $c-bg-dark;
+            background: var(--c-bg-dark);
             z-index: 100;
             display: block;
 
@@ -524,7 +524,7 @@
 
         .navbar-menu {
             margin: 1rem 0 0 0 !important;
-            background: $c-bg-dark;
+            background: var(--c-bg-dark);
             display: none;
         }
 
@@ -677,7 +677,7 @@
 }
 
 #navbarUserChip {
-    color: $c-text;
+    color: var(--c-text);
     height: 28px;
     display: inline-flex;
     outline: none;
@@ -690,7 +690,8 @@
     border-radius: 16px;
     vertical-align: middle;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.08);
+    //background-color: rgba(0, 0, 0, 0.08);
+    background-color: var(--c-bg-light);
 
     img {
         border-radius: 50%;

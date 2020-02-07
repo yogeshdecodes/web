@@ -9,7 +9,7 @@
         .title-card {
             @extend %corners;
             @extend %bold;
-            background: $c-lightest;
+            background: var(--c-lightest);
             padding: $gap/2;
             width: 100%;
             margin-bottom: $gap;
@@ -17,11 +17,11 @@
             line-height: 1;
 
             span {
-                color: $c-border;
+                color: var(--c-border);
             }
 
             .color-circle {
-                background: $c-lightest;
+                background: var(--c-lightest);
                 border: 4px solid red;
                 height: 15px;
                 width: 15px;
@@ -37,7 +37,7 @@
 
     .KanbanTask {
         @extend %corners;
-        background: $c-lightest;
+        background: var(--c-lightest);
         padding: 0.8em;
         font-size: 1.1rem;
         position: relative;
@@ -46,7 +46,7 @@
         .task-actions button {
             @extend %corners;
             background: $c-main;
-            color: $c-lightest;
+            color: var(--c-lightest);
             padding: 5px;
         }
 
@@ -64,7 +64,7 @@
 
             a {
                 text-decoration: none;
-                color: $c-lightest;
+                color: var(--c-lightest);
                 width: 100%;
                 height: 100%;
                 display: flex;

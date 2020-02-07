@@ -7,7 +7,7 @@
 
     small,
     h1 {
-        color: $c-lightest;
+        color: var(--c-lightest);
     }
 
     .toggleModes {
@@ -15,7 +15,7 @@
         text-decoration: none;
         border: 0;
         font-size: 0.813rem;
-        background: $c-bg-darkest;
+        background: var(--c-bg-darkest);
         margin-right: 2px;
     }
 

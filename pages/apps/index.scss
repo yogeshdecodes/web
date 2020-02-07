@@ -62,7 +62,7 @@
 		}
 
 		h2, h3, a {
-			color: $c-lightest;
+			color: var(--c-lightest);
 		}
 
 		h2	{
@@ -134,18 +134,18 @@
 	.MenubarCard {
 		background-image: url(/assets/img/mojave-night.jpg);
 		background-size: cover;
-		color: $c-lightest;
+		color: var(--c-lightest);
 		height: 100%;
 		display: flex;
 		align-items: center;
 
 		h2, h3 {
-			color: $c-lightest;
+			color: var(--c-lightest);
 		}
 	}
 
 	.GoogleAssistantCard {
-		background: $c-lightest;
+		background: var(--c-lightest);
 
 		h2, h3 {
 			color: #4885ed;
@@ -153,11 +153,11 @@
 	}
 
 	.MakerlogSearchCard {
-		background: $c-lightest;
+		background: var(--c-lightest);
 	}
 
 	.TodayForMakerlogCard {
-		background: $c-lightest;
+		background: var(--c-lightest);
 
 		img {
 			@extend %round;

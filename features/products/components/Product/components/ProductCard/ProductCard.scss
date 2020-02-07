@@ -52,9 +52,9 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        background: $c-lightest;
-        border: 1px solid $c-border;
-        color: $c-text;
+        background: var(--c-lightest);
+        border: 1px solid var(--c-border);
+        color: var(--c-text);
         cursor: pointer;
         justify-content: center;
         padding: calc(0.375em - 1px) 1em;
@@ -65,7 +65,7 @@
     footer {
         display: flex;
         align-items: stretch;
-        border-top: 1px solid $c-border;
+        border-top: 1px solid var(--c-border);
         padding: 0;
 
         > div {
@@ -73,7 +73,7 @@
         }
 
         > div:first-of-type {
-            border-right: 1px solid $c-border;
+            border-right: 1px solid var(--c-border);
             display: inline-flex;
             align-items: center;
             flex-grow: 1;

@@ -31,7 +31,7 @@
     textarea {
         @extend %corners;
         width: 100%;
-        background: $c-bg-input;
+        background: var(--c-bg-input);
         border: 0;
         outline: none;
         font-size: 1.5em;
