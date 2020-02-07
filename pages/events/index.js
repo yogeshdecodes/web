@@ -6,64 +6,59 @@ import InfiniteResults from "~/components/InfiniteResults";
 import LiveEventsList from "~/features/events/components/LiveEventsList";
 import React from "react";
 import Sidebar from "~/components/sidebar/components/HomeSidebar";
-import { isOcurring } from "~/lib/utils/events";
+import { isOcurring, hasClosed } from "~/lib/utils/events";
 import orderBy from "lodash/orderBy";
 import { Link } from "~/routes";
+import StdPageLayout from "~/layouts/StdPage";
+import NavLink from "~/components/ActiveLink";
 
 const EventsPage = () => {
     return (
-        <div className="EventsPage">
-            <div className="main-hero">
-                <div className="container">
-                    <h1 className="title is-2">
-                        <FontAwesomeIcon color="#3FDB96" icon="check-circle" />{" "}
-                        Events
-                    </h1>
-                    <h2>Find maker events and grow your network.</h2>
-                    <div>
-                        <Link route="events-host">
-                            <button className="button is-medium is-primary is-rounded">
-                                <span className="icon">
-                                    <FontAwesomeIcon icon="users" />
-                                </span>{" "}
-                                &nbsp;
-                                <span>Host an event</span>
-                            </button>
-                        </Link>
-                    </div>
+        <StdPageLayout
+            title="Events"
+            nav={
+                <>
+                    <NavLink route="events" activeClassName="is-active">
+                        <a className="navbar-item">Soon</a>
+                    </NavLink>
+
+                    <NavLink route="products-yours" activeClassName="is-active">
+                        <a className="navbar-item">Past</a>
+                    </NavLink>
+
+                    <NavLink route="products-yours" activeClassName="is-active">
+                        <a className="navbar-item">Host event</a>
+                    </NavLink>
+                </>
+            }
+        >
+            <div className={"flex col-right v-center mbGap"}>
+                <div>
+                    <h2>Events coming up</h2>
                 </div>
+                <Link route="events-host">
+                    <button className="btn is-secondary">
+                        <span>Host an event</span>
+                    </button>
+                </Link>
             </div>
 
-            <div className="container">
-                <div className="grid-c-s">
-                    <div>
-                        <LiveEventsList />
-
-                        <h1>Events</h1>
-
-                        <InfiniteResults
-                            url={"/events/"}
-                            orderBy={data =>
-                                orderBy(data, "closes_at", "asc").filter(
-                                    e => !isOcurring(e)
-                                )
-                            }
-                            component={({ items }) =>
-                                items.map(event => (
-                                    <EventMedia
-                                        large={event.type === "HACKATHON"}
-                                        event={event}
-                                    />
-                                ))
-                            }
-                        />
-                    </div>
-                    <div>
-                        <Sidebar />
-                    </div>
-                </div>
+            <div className="card">
+                <card className="content">
+                    <InfiniteResults
+                        url={"/events/"}
+                        orderBy={data =>
+                            orderBy(data, "closes_at", "asc").filter(
+                                e => !hasClosed(e) && !isOcurring(e)
+                            )
+                        }
+                        component={({ items }) =>
+                            items.map(event => <EventMedia event={event} />)
+                        }
+                    />
+                </card>
             </div>
-        </div>
+        </StdPageLayout>
     );
 };
 

@@ -19,4 +19,10 @@
     h5 {
         font-size: 0.938rem !important;
     }
+
+    .EventToolbar {
+        display: flex;
+        align-items: left;
+        flex-direction: row;
+    }
 }

@@ -132,7 +132,7 @@ class EventMedia extends Component {
                                 </div>
                             )}
                             <div>
-                                <h1>{event.title}</h1>
+                                <h4>{event.title}</h4>
                                 <p>{event.description}</p>
 
                                 <div className="join-bar">
@@ -142,15 +142,7 @@ class EventMedia extends Component {
                                                 !hasClosed(event) && (
                                                     <>
                                                         <div className="level-item">
-                                                            <button className="button is-primary is-rounded">
-                                                                <span className="icon">
-                                                                    {event.user_joined ? (
-                                                                        <FontAwesomeIcon icon="calendar-check" />
-                                                                    ) : (
-                                                                        <FontAwesomeIcon icon="users" />
-                                                                    )}
-                                                                </span>{" "}
-                                                                &nbsp;
+                                                            <button className="btn btn-light">
                                                                 {event.user_joined ? (
                                                                     <span>
                                                                         Attendee
