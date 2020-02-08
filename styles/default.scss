@@ -1,6 +1,6 @@
 @import "variables";
 
-:root {
+:root   {
     // Colors -- texts
     --c-title: #{$c-title};
     --c-text: #{$c-text};
@@ -20,7 +20,7 @@
     --c-bg-input: #{$c-bg-input};
 }
 
-[data-theme="dark"] {
+[data-theme = "dark"]   {
     background: var(--c-bg);
     color: var(--c-text);
 
@@ -60,6 +60,16 @@
 
     #main-navbar {
         border-bottom: 0.2px solid var(--c-bg-light);
+    }
+
+    .notifications-header .delete::after,
+    .notifications-header .delete::before   {
+        background: var(--c-text);
+    }
+
+    .notifications-header .delete   {
+        background: var(--c-bg);
+        border: 1px solid var(--c-border-light);
     }
 }
 
@@ -1134,7 +1144,7 @@ h2 {
         margin-right: -1px;
     }
 
-    .control:first-child .button,
+    .control:first-child button,
     .control:first-child .input,
     .control:first-child .select select {
         border-top-right-radius: 0;
@@ -1522,7 +1532,7 @@ figure.img-circle {
     }
 
     .color-scale-0 {
-        fill: var(--c-bg-light);
+        fill: #eee;
     }
 
     .color-scale-1 {
