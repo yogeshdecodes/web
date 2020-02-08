@@ -1,6 +1,6 @@
 @import "variables";
 
-:root {
+:root   {
     // Colors -- texts
     --c-title: #{$c-title};
     --c-text: #{$c-text};
@@ -20,7 +20,7 @@
     --c-bg-input: #{$c-bg-input};
 }
 
-[data-theme="dark"] {
+[data-theme = "dark"]   {
     background: var(--c-bg);
     color: var(--c-text);
 
@@ -1532,7 +1532,7 @@ figure.img-circle {
     }
 
     .color-scale-0 {
-        fill: var(--c-bg-light);
+        fill: #eee;
     }
 
     .color-scale-1 {
