@@ -83,7 +83,7 @@
         user-select: none;
         -moz-appearance: none;
         -webkit-appearance: none;
-        background: hsla(0, 0%, 4%, 0.2);
+        background: var(--c-border);
         border: 0;
         cursor: pointer;
         display: inline-block;
