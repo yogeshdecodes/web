@@ -54,7 +54,7 @@
 
 .StreamCard .MilestoneMedia {
     //border-left: 3px solid #00b77a;
-    border: 1px solid $c-border;
+    border: 1px solid var(--c-border);
     transition: all 0.3s ease;
     margin-bottom: 10px;
 

@@ -22,7 +22,7 @@
         @extend %round;
         max-width: 20vh;
         max-height: 20vh;
-        border: 5px solid $c-lightest;
+        border: 5px solid var(--c-lightest);
     }
 
     .sidebar {

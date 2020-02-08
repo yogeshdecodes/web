@@ -1,5 +1,68 @@
 @import "variables";
 
+:root   {
+    // Colors -- texts
+    --c-title: #{$c-title};
+    --c-text: #{$c-text};
+    --c-lightest: #{$c-lightest};
+
+    // Colors -- backgrounds
+    --c-bg: #{$c-bg};
+    --c-bg-dark: #{$c-bg-dark};
+    --c-bg-darkest: #{$c-bg-darkest};
+    --c-bg-light: #{$c-bg-light};
+    --c-secondary-navbar: #{$c-secondary-navbar};
+
+    // Forms
+    --c-border: #{$c-border};
+    --c-border-light: #{$c-border-light};
+    --c-border-lightest: #{$c-border-lightest};
+    --c-bg-input: #{$c-bg-input};
+}
+
+[data-theme = "dark"]   {
+    background: var(--c-bg);
+    color: var(--c-text);
+
+    // Colors -- texts
+    --c-title: hsl(0, 0%, 82%);
+    --c-text: hsl(0, 0%, 47%);
+    --c-lightest: hsl(0, 0%, 9%);
+
+    // Colors -- backgrounds
+    --c-bg: hsl(0, 0%, 7%);
+    --c-bg-dark: hsl(0, 0%, 10%);
+    --c-bg-darkest: hsl(0, 0%, 12%);
+    --c-bg-light: hsl(0, 0%, 14%);
+    --c-secondary-navbar: hsl(0, 0%, 13%);
+
+    // Forms
+    --c-border: hsla(0, 0%, 82%, 0.1);
+    --c-border-light: hsla(0, 0%, 82%, 0.2);
+    --c-border-lightest: hsla(0, 0%, 82%, 0.3);
+    --c-bg-input: hsl(0, 0%, 7%);
+
+    .has-text-grey-light {
+        color: hsla(0, 0%, 100%, 0.3) !important;
+    }
+
+    .has-text-grey {
+        color: hsla(0, 0%, 100%, 0.2) !important;
+    }
+
+    .sidebar-item .has-text-grey {
+        color: hsl(0, 0%, 47%) !important;
+    }
+
+    .markdown-body  {
+        color: var(--c-text);
+    }
+
+    #main-navbar {
+        border-bottom: 0.2px solid var(--c-bg-light);
+    }
+}
+
 html {
     font-size: $font-size;
     font-family: "Inter", sans-serif;
@@ -20,8 +83,8 @@ body {
     @extend %transition-bg;
     font-size: 1rem;
     line-height: 1.5;
-    color: $c-text;
-    background: $c-bg;
+    color: var(--c-text);
+    background: var(--c-bg);
     margin: 0;
 
     overscroll-behavior-y: none;
@@ -39,7 +102,7 @@ pre {
 }
 
 code {
-    background-color: $c-bg-light;
+    background-color: var(--c-bg-light);
     color: #ff3860;
     font-size: 0.875em;
     padding: 0.25em 0.5em;
@@ -93,17 +156,19 @@ input[type="url"],
 input[type="search"],
 textarea {
     //@extend %corners;
-    // @extend %shadow-inset;
+    //@extend %shadow-inset;
     border: none;
-    border-bottom: 1px solid $c-border;
+    border-bottom: 1px solid var(--c-border);
     max-width: 100%;
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
     font-size: 1rem;
+    background: var(--c-bg-input);
+    color: var(--c-text);
 
     &:hover {
-        border-color: $c-border-light;
+        border-color: var(--c-border-light);
     }
 
     &:focus {
@@ -118,7 +183,7 @@ input[type="search"] {
 }
 
 .label {
-    color: $c-text;
+    color: var(--c-text);
     display: block;
     font-size: 1rem;
     font-weight: 700;
@@ -220,7 +285,7 @@ a[class^="btn"] {
     padding: 0 1em;
     background: $c-secondary;
     text-decoration: none;
-    color: $c-lightest;
+    color: var(--c-lightest);
     cursor: pointer;
     font-size: 1rem;
     line-height: 1.4;
@@ -238,21 +303,21 @@ a[class^="btn"] {
     text-align: center;
     transition: transform 0.1s ease;
     &.btn-light {
-        background: $c-lightest;
+        background: var(--c-lightest);
         color: $c-text !important;
-        border: 1px solid $c-border;
+        border: 1px solid var(--c-border);
         // margin-top: 1rem; why?
 
         &.transparent {
             background: transparent;
-            color: $c-lightest !important;
+            color: var(--c-lightest) !important;
         }
     }
 
     &.btn-primary,
     &.is-primary {
         background: $c-main;
-        color: $c-lightest !important;
+        color: var(--c-lightest) !important;
     }
 
     &.btn-secondary,
@@ -261,7 +326,7 @@ a[class^="btn"] {
         color: $c-text !important;
 
         &.is-loading::after {
-            border-color: $c-text;
+            border-color: var(--c-text);
             border-right-color: transparent;
             border-top-color: transparent;
         }
@@ -302,13 +367,13 @@ a[class^="btn"] {
 
     &.btn-twitter {
         background: #1b95e0 !important;
-        color: $c-lightest;
+        color: var(--c-lightest);
         height: 2.25em;
         border: 0;
     }
 
     &.btn-delete {
-        background: $c-lightest;
+        background: var(--c-lightest);
         color: $c-danger;
         border: 1px solid $c-danger;
         font-size: 0.875rem;
@@ -317,7 +382,7 @@ a[class^="btn"] {
     &.btn-danger {
         background: $c-danger;
         border-color: transparent;
-        color: $c-lightest;
+        color: var(--c-lightest);
     }
 
     &.btn-link {
@@ -333,17 +398,17 @@ a[class^="btn"] {
     &.btn-gray {
         background: transparent;
         border: 1px solid $c-gray;
-        color: $c-text;
+        color: var(--c-text);
     }
 
     &.btn-praise {
         background: transparent !important;
-        border: 1px solid $c-border-lightest;
-        color: $c-text;
+        border: 1px solid var(--c-border-lightest);
+        color: var(--c-text);
         font-size: 0.75rem;
 
         &:hover {
-            border-color: $c-border-light;
+            border-color: var(--c-border-light);
         }
 
         &.praising {
@@ -382,7 +447,7 @@ a[class^="btn"] {
 }
 
 hr {
-    background: $c-border;
+    background: var(--c-border);
     border: 0;
     display: block;
     height: 1px;
@@ -416,13 +481,13 @@ a:not(.btn):hover {
     cursor: pointer;
     text-align: center;
     white-space: nowrap;
-    background: $c-lightest;
+    background: var(--c-lightest);
     border: 0;
     padding: 4px 1em;
     height: 2.25em;
 
     &:hover {
-        background: $c-bg-light;
+        background: var(--c-bg-light);
         text-decoration: underline;
     }
 
@@ -443,7 +508,7 @@ h6 {
 
 h1.page-title,
 .page-title {
-    color: $c-text;
+    color: var(--c-text);
     font-size: 1.5rem;
     margin: 0;
 }
@@ -538,12 +603,12 @@ h2 {
 }
 
 .table-bordered {
-    border: 1px solid $c-border;
+    border: 1px solid var(--c-border);
     border-collapse: collapse;
 
     th,
     td {
-        border: 1px solid $c-border;
+        border: 1px solid var(--c-border);
     }
 }
 
@@ -556,7 +621,7 @@ h2 {
     z-index: 0;
     top: 0;
     left: 0;
-    background: $c-bg-dark;
+    background: var(--c-bg-dark);
 }
 
 #page {
@@ -699,8 +764,8 @@ h2 {
 
 .streak {
     @extend %rounded;
-    background: $c-lightest;
-    color: $c-text;
+    background: var(--c-lightest);
+    color: var(--c-text);
     padding: 0.2rem 0.4rem;
     font-size: 0.75rem;
     font-weight: bold;
@@ -721,7 +786,7 @@ h2 {
     font-weight: 600;
 
     * {
-        color: $c-lightest;
+        color: var(--c-lightest);
     }
 
     .container {
@@ -780,12 +845,12 @@ h2 {
     }
 
     .heading {
-        color: $c-lightest;
+        color: var(--c-lightest);
     }
 }
 
 .hero-item {
-    color: $c-lightest;
+    color: var(--c-lightest);
     font-size: 1.5rem;
     text-align: center;
     padding: 0 0 0 1.5rem;
@@ -812,7 +877,7 @@ h2 {
     @extend %corners;
     margin-bottom: 2rem;
     box-shadow: none;
-    background: #fff;
+    background: var(--c-lightest) !important;
 
     header {
         //background: hsla(192, 15%, 64%, 0.1);
@@ -858,7 +923,7 @@ h2 {
         }
 
         * {
-            color: $c-lightest;
+            color: var(--c-lightest);
         }
     }
 
@@ -901,7 +966,7 @@ h2 {
     padding: 0;
     font-size: 0.688rem;
     font-weight: normal !important;
-    color: $c-title;
+    color: var(--c-title);
 
     .emoji {
         margin: 0;
@@ -966,7 +1031,7 @@ h2 {
             }
 
             .note {
-                color: $c-text;
+                color: var(--c-text);
                 font-size: 0.813rem !important;
                 display: block;
             }
@@ -998,7 +1063,7 @@ h2 {
     z-index: 0;
     top: 0;
     left: 0;
-    background: $c-bg-dark;
+    background: var(--c-bg-dark);
 }
 
 .panel-message {
@@ -1086,7 +1151,7 @@ h2 {
 }
 
 button[disabled] {
-    background: $c-lightest;
+    background: var(--c-lightest);
     border: 1px solid $c-gray;
     opacity: 0.5;
     cursor: not-allowed;
@@ -1127,7 +1192,7 @@ button[disabled] {
 
 .announcement {
     @extend %transition;
-    color: $c-lightest;
+    color: var(--c-lightest);
     background: linear-gradient(to right, #4ca2cd, #67b26f);
 }
 
@@ -1223,7 +1288,7 @@ button[disabled] {
     line-height: 1;
     padding: 0 0.75em;
     margin: 0 2px 0 0;
-    color: $c-lightest;
+    color: var(--c-lightest);
 
     &.gold {
         background: $c-gold;
@@ -1267,7 +1332,7 @@ button[disabled] {
         background: $c-hundred;
 
         .emoji {
-            text-shadow: 0 0 3px $c-lightest;
+            text-shadow: 0 0 3px var(--c-lightest);
         }
     }
 
@@ -1275,7 +1340,7 @@ button[disabled] {
         background: $c-fifty;
 
         .emoji {
-            text-shadow: 0 0 3px $c-lightest;
+            text-shadow: 0 0 3px var(--c-lightest);
         }
     }
 
@@ -1299,7 +1364,7 @@ button[disabled] {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    color: $c-lightest;
+    color: var(--c-lightest);
     text-align: center;
     display: flex;
     width: 50px;

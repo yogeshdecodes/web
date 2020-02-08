@@ -10,7 +10,7 @@
 		grid-template-columns: 60px 6fr 3fr 2fr 2fr;
 		grid-template-rows: repeat(10, 100%);
 		grid-column-gap: 1rem;
-		border-bottom: 1px solid $c-border;
+		border-bottom: 1px solid var(--c-border);
 		padding: 1rem;
 
 		.Leaderboards-Content {

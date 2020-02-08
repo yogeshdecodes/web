@@ -2,11 +2,11 @@
 
 .InProgressCard {
     @extend %transition-bg;
-    color: $c-lightest;
+    color: var(--c-lightest);
     background: $c-in-progress;
 
     * {
-        color: $c-lightest;
+        color: var(--c-lightest);
     }
 
     &.empty {
@@ -18,7 +18,7 @@
         cursor: pointer;
 
         svg {
-            color: $c-lightest;
+            color: var(--c-lightest);
             height: 1.4rem;
         }
 
@@ -30,7 +30,7 @@
 
 .color-circle {
     @extend %round;
-    background: $c-lightest;
+    background: var(--c-lightest);
     border: 4px solid red;
     height: 15px;
     width: 15px;

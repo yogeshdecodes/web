@@ -9,6 +9,6 @@
 
     span.img-avatar img {
         @extend %round;
-        border: 2px solid $c-lightest;
+        border: 2px solid var(--c-lightest);
     }
 }

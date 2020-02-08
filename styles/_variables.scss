@@ -1,3 +1,23 @@
+// ---- Theme-dependent variables
+// Colors -- texts
+$c-title: #292929;
+$c-text: #565656;
+$c-lightest: #fff;
+
+// Colors -- backgrounds
+$c-bg: #f6f6f6;
+$c-bg-dark: #263238;
+$c-bg-darkest: #1b2327;
+$c-bg-light: #f5f5f5;
+$c-secondary-navbar: #f4f4f4;
+
+// Forms
+$c-border: #dbdbdb;
+$c-border-light: #b5b5b5;
+$c-border-lightest: #ececec;
+$c-bg-input: #eff1f5;
+// ---- end theme-dependent variables
+
 // Typography
 $font: "Inter", -apple-system, system-ui, sans-serif;
 $font-title: "Inter", -apple-system, system-ui, sans-serif;
@@ -5,9 +25,6 @@ $font-size: 16px;
 //$title-margin:
 
 // Colors -- texts
-$c-title: #292929;
-$c-text: #565656;
-$c-lightest: #fff;
 $c-gray: #808080;
 
 // Colors -- accent colors
@@ -17,15 +34,10 @@ $c-secondary: #a2e1cb;
 $c-link: #0b6e4f;
 
 // Colors -- backgrounds
-$c-bg: #f6f6f6;
-$c-bg-dark: #263238; //hsl(0, 0%, 21%)
-$c-bg-darkest: #1b2327; //hsl(0, 0%, 16%)
-$c-bg-light: #f5f5f5; //hsl(0, 0%, 96%)
 $c-bg-overlay: hsla(0, 0%, 0%, 0.65);
 $c-in-progress: #f39c12;
 $c-done: #00ad71;
 $c-card-header: hsla(0, 0%, 0%, 0.06);
-$c-secondary-navbar: #f4f4f4;
 
 // Colors -- gradients
 $gradient-green: linear-gradient(63deg, #66b26e, #11978c);
@@ -84,7 +96,7 @@ $navbar-height: 68px;
 }
 
 %transition {
-    // `all` causes performance issues and artifacts.
+    // `all` causes performance issues and artifacts -> but there was already another transition for background only (see below)
     transition: background-color 0.3s ease-in-out;
 }
 
@@ -141,7 +153,7 @@ $navbar-height: 68px;
 
 %title {
     font-weight: 700;
-    color: $c-title;
+    color: var(--c-title);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

@@ -6,8 +6,8 @@
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     //margin-left: 1.2rem;
-    background-color: $c-bg;
-    border: 1px solid $c-border;
+    background-color: var(--c-bg);
+    border: 1px solid var(--c-border);
 
     .img-avatar {
         margin-right: 10px;
@@ -23,7 +23,7 @@
 
         .comment-body {
             @extend %corners;
-            background-color: $c-lightest;
+            background-color: var(--c-lightest);
             padding: 0.5rem;
 
             a:first-of-type {
@@ -46,9 +46,9 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        background-color: $c-lightest;
+        background-color: var(--c-lightest);
         padding: 0.5rem;
-        border-top: 1px solid $c-border;
+        border-top: 1px solid var(--c-border);
 
         .spinner-container {
             margin-left: 10px;

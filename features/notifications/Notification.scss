@@ -16,7 +16,7 @@
 }
 
 .quickview-body {
-    background: $c-bg;
+    background: var(--c-bg);
     padding: 10px;
     overflow-y: auto;
 }
@@ -27,7 +27,7 @@
 
 .Notification {
     @extend %corners;
-    //background: $c-lightest;
+    //background: var(--c-lightest);
     display: flex;
     padding: 1.25rem;
     margin-bottom: 1.5rem;
@@ -58,17 +58,17 @@
 }
 
 .notifications-header {
-    background: $c-lightest;
+    background: var(--c-lightest);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
     height: $navbar-height;
-    border-bottom: 1px solid $c-border;
+    border-bottom: 1px solid var(--c-border);
 
     h1 {
         @extend %uppercase;
-        color: $c-title;
+        color: var(--c-title);
         margin: 0;
         font-size: 1rem;
         line-height: 1;
@@ -113,7 +113,7 @@
         &::after,
         &::before {
             content: "";
-            background: $c-lightest;
+            background: var(--c-lightest);
             display: block;
             left: 50%;
             position: absolute;
@@ -182,7 +182,7 @@
         padding: 0.3em;
         border-radius: 999px;
         line-height: 0.75em;
-        color: $c-text;
+        color: var(--c-text);
         background: $c-secondary;
         text-align: center;
         min-width: 1.2em;
@@ -192,7 +192,7 @@
 
 .Notification-new {
     padding: 1rem;
-    border-bottom: 1px solid $c-border;
+    border-bottom: 1px solid var(--c-border);
 
     &.new {
         background: $c-secondary;

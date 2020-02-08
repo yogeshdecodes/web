@@ -29,13 +29,13 @@
             span {
                 @extend %corners;
                 display: inline-block;
-                background: $c-bg-light;
+                background: var(--c-bg-light);
                 font-size: 0.75rem;
                 line-height: 1;
                 font-weight: normal;
                 margin-left: 4px;
                 padding: 2px 4px 2px 0;
-                color: $c-title;
+                color: var(--c-title);
 
                 .emoji {
                     padding-right: 1px;
@@ -59,9 +59,9 @@
     }
 
     button {
-        border: 1px solid $c-lightest;
+        border: 1px solid var(--c-lightest);
         background: transparent;
-        color: $c-lightest;
+        color: var(--c-lightest);
         font-size: 1rem;
         line-height: 1.5;
         height: 2.25em;

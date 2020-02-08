@@ -4,12 +4,12 @@
     @extend %corners;
 
     a {
-        //color: $c-text;
+        //color: var(--c-text);
     }
 
     h2 {
         @extend %bold;
-        color: $c-title;
+        color: var(--c-title);
         font-size: 1.25rem;
         margin: 0;
     }
@@ -23,7 +23,7 @@
         @extend %bold;
         @extend %uppercase;
         background: $c-main;
-        color: $c-lightest;
+        color: var(--c-lightest);
         border: 0;
         -webkit-appearance: none;
         padding: 0.5rem 1rem;
@@ -67,7 +67,7 @@
     }
 
     .card.CreateIconCard {
-        background: $c-border;
+        background: var(--c-border);
         cursor: pointer;
         font-size: 1.2rem;
 
