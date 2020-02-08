@@ -61,6 +61,16 @@
     #main-navbar {
         border-bottom: 0.2px solid var(--c-bg-light);
     }
+
+    .notifications-header .delete::after,
+    .notifications-header .delete::before   {
+        background: var(--c-text);
+    }
+
+    .notifications-header .delete   {
+        background: var(--c-bg);
+        border: 1px solid var(--c-border-light);
+    }
 }
 
 html {
