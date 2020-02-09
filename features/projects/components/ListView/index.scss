@@ -112,7 +112,7 @@
         position: relative;
         padding-left: 1.95em;
         cursor: pointer;
-        color: black;
+        color: var(--c-text);
     }
 
     .checkbox-custom:checked + label {
