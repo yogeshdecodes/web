@@ -10,7 +10,7 @@ import { Link } from "~/routes";
 
 export function getThreadInfoBar(thread) {
     return (
-        <small className={"flex center spaced v-center"}>
+        <small className={"h-list flex center spaced v-center"}>
             {thread.pinned && (
                 <div className={"is-brand-green"}>
                     <strong>

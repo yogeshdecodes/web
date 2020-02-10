@@ -19,18 +19,7 @@ import { Link } from "~/routes";
 import { Router } from "~/routes";
 import { mapStateToProps } from "~/ducks/user";
 import { connect } from "react-redux";
-
-function getCss(event) {
-    if (event.header) {
-        return {
-            background: `url('${event.header}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center"
-        };
-    } else {
-        return {};
-    }
-}
+import EventsPageLayout from "../../layouts/EventsPage";
 
 const EventStream = ({ slug }) => (
     <WeeklyStream
@@ -39,149 +28,26 @@ const EventStream = ({ slug }) => (
     />
 );
 
-const AlreadyJoinedBar = ({ item }) => {
-    return (
-        <div class="already-joined">
-            {item.participant_count > 0 && (
-                <div>
-                    <EventFaces size={32} slug={item.slug} />
-                </div>
-            )}
-            {!isOcurring(item) ? (
-                <div className="joined-text">
-                    {item.user_joined ? (
-                        <strong>You're registered</strong>
-                    ) : (
-                        <strong>
-                            {item.participant_count} makers joined this event
-                        </strong>
-                    )}
-                    <br />
-                    {hasEnded(item) ? (
-                        <>Event has ended</>
-                    ) : (
-                        <>
-                            Registration closes{" "}
-                            <DueCountdown date={item.closes_at} />
-                        </>
-                    )}
-                </div>
-            ) : (
-                <div className="joined-text">
-                    {item.user_joined ? (
-                        <strong>You're registered</strong>
-                    ) : (
-                        <strong>{item.participant_count} shipping now</strong>
-                    )}
-                    <br />
-                    {item.task_count} tasks done
-                </div>
-            )}
-        </div>
-    );
-};
-
 const JoinOrWatchButton = ({ item, onClick }) => {
     if (hasEnded(item)) return null;
 
     if (item.user_joined)
         return (
             <Link route={"event-attendee-panel"} params={{ slug: item.slug }}>
-                <a className="button is-medium is-primary is-rounded has-text-weight-bold">
-                    <span className="icon">
-                        <FontAwesomeIcon icon="calendar-check" />
-                    </span>
-                    Attendee panel
-                </a>
+                <a className="btn is-secondary">Attendee panel</a>
             </Link>
         );
 
     return isOcurring(item) ? (
         <Link route={"event-stream-live"} params={{ slug: item.slug }}>
-            <a className="button is-medium is-primary is-rounded has-text-weight-bold">
-                <span className="icon">
-                    <FontAwesomeIcon icon="check-circle" />
-                </span>
-                Watch LIVE
-            </a>
+            <a className="btn is-secondary">Watch LIVE</a>
         </Link>
     ) : !hasClosed(item) && !item.user_joined ? (
-        <button
-            class="button is-medium is-primary is-rounded has-text-weight-bold"
-            onClick={onClick}
-        >
-            <span className="icon">
-                <FontAwesomeIcon icon="check-circle" />
-            </span>
+        <button class="btn is-secondary" onClick={onClick}>
             Join this event
         </button>
     ) : null;
 };
-
-const HackathonPage = ({ item, toggleJoin }) => (
-    <>
-        <section class="grid-event">
-            <div style={getCss(item)} className="event-hero">
-                <div className="event-side">
-                    <h1>{item.title}</h1>
-                    <p>{item.description}</p>
-                    <JoinOrWatchButton onClick={toggleJoin} item={item} />
-                    <AlreadyJoinedBar item={item} />
-                    <div class="event-overlay" />
-                </div>
-            </div>
-            <div className="event-panel">
-                {isOcurring(item) || hasEnded(item) ? (
-                    <EventStream slug={item.slug} />
-                ) : (
-                    <div className="markdown content">
-                        <Markdown body={item.details} />
-                    </div>
-                )}
-            </div>
-        </section>
-    </>
-);
-
-const MeetupPage = ({ item, toggleJoin }) => (
-    <>
-        <header style={getCss(item)} className="event-header event-hero">
-            <div class="container-event-header">
-                <h1>{item.title}</h1>
-                <p>{item.description}</p>
-                <div class="already-joined">
-                    <JoinOrWatchButton onClick={toggleJoin} item={item} />
-                    <AlreadyJoinedBar item={item} />
-                </div>
-                <div class="event-overlay" />
-            </div>
-        </header>
-        <br />
-        <div className="container">
-            {isOcurring(item) || hasEnded(item) ? (
-                <div className="columns">
-                    <div className="column">
-                        <EventStream slug={item.slug} />
-                    </div>
-
-                    <div className="column is-one-third">
-                        <Sidebar event={item} />
-                    </div>
-                </div>
-            ) : (
-                <div className="columns">
-                    <div className="column">
-                        <Markdown body={item.details} />
-                    </div>
-
-                    <div className="column is-one-third">
-                        <Sidebar />
-                    </div>
-                </div>
-            )}
-        </div>
-    </>
-);
 
 class JoinModal extends React.Component {
     state = {
@@ -315,36 +181,29 @@ class JoinModal extends React.Component {
 
 JoinModal = connect(mapStateToProps)(JoinModal);
 
-class EventPage extends React.Component {
-    state = {
-        joinActive: false
-    };
+const EventPage = ({ item, toggleJoin }) => (
+    <EventsPageLayout event={item}>
+        <div className={"flex col-right v-center mbGap"}>
+            <div>
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+            </div>
+            <Link route="events-host">
+                <JoinOrWatchButton onClick={toggleJoin} item={item} />
+            </Link>
+        </div>
 
-    toggleJoin = () => {
-        this.setState({
-            joinActive: !this.state.joinActive
-        });
-    };
-
-    render() {
-        const { item } = this.props;
-
-        return (
-            <div className={"EventPage " + item.type.toLowerCase()}>
-                <JoinModal
-                    event={item}
-                    open={this.state.joinActive}
-                    toggle={this.toggleJoin}
-                />
-                {item.type === "HACKATHON" && false ? (
-                    <HackathonPage toggleJoin={this.toggleJoin} item={item} />
+        <div className="card">
+            <div className="card-content">
+                {isOcurring(item) || hasEnded(item) ? (
+                    <EventStream slug={item.slug} />
                 ) : (
-                    <MeetupPage toggleJoin={this.toggleJoin} item={item} />
+                    <Markdown body={item.details} />
                 )}
             </div>
-        );
-    }
-}
+        </div>
+    </EventsPageLayout>
+);
 
 const EventPageContainer = props => (
     <SingleItem url={`/events/${props.slug}/`} component={EventPage} />

@@ -11,27 +11,11 @@ import orderBy from "lodash/orderBy";
 import { Link } from "~/routes";
 import StdPageLayout from "~/layouts/StdPage";
 import NavLink from "~/components/ActiveLink";
+import EventsPageLayout from "../../layouts/EventsPage";
 
 const EventsPage = () => {
     return (
-        <StdPageLayout
-            title="Events"
-            nav={
-                <>
-                    <NavLink route="events" activeClassName="is-active">
-                        <a className="navbar-item">Soon</a>
-                    </NavLink>
-
-                    <NavLink route="products-yours" activeClassName="is-active">
-                        <a className="navbar-item">Past</a>
-                    </NavLink>
-
-                    <NavLink route="products-yours" activeClassName="is-active">
-                        <a className="navbar-item">Host event</a>
-                    </NavLink>
-                </>
-            }
-        >
+        <EventsPageLayout>
             <div className={"flex col-right v-center mbGap"}>
                 <div>
                     <h2>Events coming up</h2>
@@ -44,7 +28,7 @@ const EventsPage = () => {
             </div>
 
             <div className="card">
-                <card className="content">
+                <div className="card-content">
                     <InfiniteResults
                         url={"/events/"}
                         orderBy={data =>
@@ -56,9 +40,9 @@ const EventsPage = () => {
                             items.map(event => <EventMedia event={event} />)
                         }
                     />
-                </card>
+                </div>
             </div>
-        </StdPageLayout>
+        </EventsPageLayout>
     );
 };
 

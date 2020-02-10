@@ -1,6 +1,6 @@
 @import "variables";
 
-:root   {
+:root {
     // Colors -- texts
     --c-title: #{$c-title};
     --c-text: #{$c-text};
@@ -20,7 +20,7 @@
     --c-bg-input: #{$c-bg-input};
 }
 
-[data-theme = "dark"]   {
+[data-theme="dark"] {
     background: var(--c-bg);
     color: var(--c-text);
 
@@ -54,7 +54,7 @@
         color: hsl(0, 0%, 47%) !important;
     }
 
-    .markdown-body  {
+    .markdown-body {
         color: var(--c-text);
     }
 
@@ -63,11 +63,11 @@
     }
 
     .notifications-header .delete::after,
-    .notifications-header .delete::before   {
+    .notifications-header .delete::before {
         background: var(--c-text);
     }
 
-    .notifications-header .delete   {
+    .notifications-header .delete {
         background: var(--c-bg);
         border: 1px solid var(--c-border-light);
     }
@@ -2041,4 +2041,29 @@ a {
         display: block;
         margin-top: 10px !important;
     }
+}
+
+.h-list.flex {
+    &.spaced {
+        justify-content: flex-start;
+
+        div {
+            flex-grow: 0;
+            padding-top: 4px;
+        }
+
+        div:not(:first-of-type) {
+            margin-left: 1rem;
+        }
+    }
+
+    &.v-center {
+        .FaceStack .img-avatar {
+            margin-right: 0;
+        }
+    }
+}
+
+.w-full {
+    width: 100%;
 }

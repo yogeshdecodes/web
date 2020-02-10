@@ -26,70 +26,38 @@ function getCss(event) {
 
 const EventToolbar = ({ event }) => {
     return (
-        <nav className="EventToolbar level">
-            <div className="level-left">
-                {event.user_joined && (
-                    <div className="level-item">
-                        <p>
-                            <FontAwesomeIcon color="gray" icon="check-circle" />{" "}
-                            <strong>You're registered</strong>
-                        </p>
-                    </div>
-                )}
-                {!isOcurring(event) ? (
-                    hasEnded(event) ? (
-                        <div className="level-item">
-                            <p>
-                                <FontAwesomeIcon
-                                    color="gray"
-                                    icon="calendar-check"
-                                />{" "}
-                                <strong>Ended</strong>
-                            </p>
-                        </div>
-                    ) : (
-                        <div className="level-item">
-                            <p>
-                                <FontAwesomeIcon
-                                    color="gray"
-                                    icon="calendar-check"
-                                />{" "}
-                                Closes{" "}
-                                <DueCountdown date={toDate(event.closes_at)} />
-                            </p>
-                        </div>
-                    )
-                ) : (
-                    <div className="level-item">
-                        <p>
-                            <Emoji emoji="🔴" /> LIVE NOW
-                        </p>
-                    </div>
-                )}
-                <div className="level-item">
-                    <p>
-                        <FontAwesomeIcon color="gray" icon="users" />{" "}
-                        {event.participant_count} people
-                    </p>
+        <small className="h-list flex center spaced v-center has-text-grey-light">
+            {event.user_joined && (
+                <div className="has-text-grey">
+                    <FontAwesomeIcon color="gray" icon="check-circle" />{" "}
+                    <strong>You're registered</strong>
                 </div>
-
-                {event.starts_at && (
-                    <div className="level-item">
-                        <span>
-                            <p>
-                                <FontAwesomeIcon color="gray" icon="clock" />{" "}
-                                {format(
-                                    toDate(event.starts_at),
-                                    "MMMM d, yyyy h:m",
-                                    { awareOfUnicodeTokens: true }
-                                ).toString()}{" "}
-                                UTC
-                            </p>
-                        </span>
+            )}
+            {event.starts_at && (
+                <div>
+                    {format(toDate(event.starts_at), "MMMM d, yyyy h:m", {
+                        awareOfUnicodeTokens: true
+                    }).toString()}{" "}
+                    UTC
+                </div>
+            )}
+            {!isOcurring(event) ? (
+                hasEnded(event) ? (
+                    <div>
+                        <strong>Ended</strong>
                     </div>
-                )}
-            </div>
-        </nav>
+                ) : (
+                    <div>
+                        Registrations close{" "}
+                        <DueCountdown date={toDate(event.closes_at)} />
+                    </div>
+                )
+            ) : (
+                <p>
+                    <Emoji emoji="🔴" /> LIVE NOW
+                </p>
+            )}
+        </small>
     );
 };
 
@@ -118,65 +86,44 @@ class EventMedia extends Component {
 
         return (
             <Link route={"event-page"} params={{ slug: event.slug }}>
-                <a
-                    style={getCss(event)}
-                    className={"EventMedia card" + (large ? " large" : "")}
-                >
-                    <div className="card-content">
-                        <div className="flex flex-gap">
-                            {event.icon && (
-                                <div>
-                                    <figure class={"img-48"}>
-                                        <img src={imageUrl(event.icon, 48)} />
-                                    </figure>
-                                </div>
-                            )}
-                            <div>
-                                <h4>{event.title}</h4>
-                                <p>{event.description}</p>
-
-                                <div className="join-bar">
-                                    <nav className="EventToolbar level">
-                                        <div className="level-left">
-                                            {!isOcurring(event) &&
-                                                !hasClosed(event) && (
-                                                    <>
-                                                        <div className="level-item">
-                                                            <button className="btn btn-light">
-                                                                {event.user_joined ? (
-                                                                    <span>
-                                                                        Attendee
-                                                                        panel
-                                                                    </span>
-                                                                ) : (
-                                                                    <span>
-                                                                        Join
-                                                                        this
-                                                                        event
-                                                                    </span>
-                                                                )}
-                                                            </button>
-                                                        </div>
-
-                                                        <div className="level-item">
-                                                            <EventFaces
-                                                                size={32}
-                                                                slug={
-                                                                    event.slug
-                                                                }
-                                                            />
-                                                        </div>
-                                                    </>
-                                                )}
-                                        </div>
-                                    </nav>
-                                </div>
-
-                                <EventToolbar event={event} />
-                            </div>
+                <div className="EventMedia flex flex-gap">
+                    {event.icon && (
+                        <div>
+                            <figure class={"img-48"}>
+                                <img src={imageUrl(event.icon, 48)} />
+                            </figure>
                         </div>
+                    )}
+                    <div className="flex flex-column">
+                        <h4>{event.title}</h4>
+                        <p>{event.description}</p>
+
+                        <div className="join-bar flex">
+                            {!isOcurring(event) && !hasClosed(event) && (
+                                <>
+                                    <div>
+                                        <button className="btn btn-light">
+                                            {event.user_joined ? (
+                                                <span>Attendee panel</span>
+                                            ) : (
+                                                <span>Join this event</span>
+                                            )}
+                                        </button>
+                                    </div>
+
+                                    <div className="level-item">
+                                        <EventFaces
+                                            size={32}
+                                            slug={event.slug}
+                                        />
+                                    </div>
+                                </>
+                            )}
+                        </div>
+
+                        <EventToolbar event={event} />
                     </div>
-                </a>
+                </div>
             </Link>
         );
     }

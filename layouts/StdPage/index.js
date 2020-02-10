@@ -18,7 +18,11 @@ export default class StdPageLayout extends Component {
                 <div className="StdPage container grid-c-s">
                     <div>{props.children}</div>
                     <div>
-                        <StdPageSidebar />
+                        {this.props.sidebar ? (
+                            this.props.sidebar
+                        ) : (
+                            <StdPageSidebar />
+                        )}
                     </div>
                 </div>
             </>
