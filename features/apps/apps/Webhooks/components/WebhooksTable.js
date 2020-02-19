@@ -68,7 +68,7 @@ class WebhookTable extends React.Component {
         const webhooks = this.state.webhooks;
 
         return (
-            <table className="is-fullwidth">
+            <table>
                 <thead>
                     <th>
                         <th>

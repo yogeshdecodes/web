@@ -96,12 +96,8 @@ class AppWebhookCreator extends React.Component {
             );
         } else if (this.state.ready && !this.state.linked) {
             return (
-                <div className={"has-text-centered"}>
-                    <div className="field">
-                        <label class="label">
-                            Select a project to create a linked webhook:
-                        </label>
-                    </div>
+                <div className={"flex flex-column flex-v-gap"}>
+                    <br />
                     <div className="field">
                         <div className="select is-medium">
                             <select
@@ -112,7 +108,7 @@ class AppWebhookCreator extends React.Component {
                                     })
                                 }
                             >
-                                <option>Choose a project...</option>
+                                <option>Choose a hashtag to post to...</option>
                                 {this.state.projects.map(project => (
                                     <option value={project.id}>
                                         #{project.name}
@@ -123,16 +119,19 @@ class AppWebhookCreator extends React.Component {
                     </div>
 
                     <div className="field">
-                        <Button
+                        <button
                             disabled={!this.state.selectedProject}
-                            link
+                            className="btn btn-secondary"
                             onClick={this.onSubmit}
                         >
                             Create linked webhook
-                        </Button>
+                        </button>
                     </div>
                     <div className="field">
-                        <button className={"btn-small"} onClick={this.onSubmit}>
+                        <button
+                            className={"btn btn-link btn-small"}
+                            onClick={this.onSubmit}
+                        >
                             ...or make a non-linked webhook
                         </button>
                     </div>
