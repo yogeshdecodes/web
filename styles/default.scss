@@ -612,6 +612,17 @@ h2 {
     padding: 0;
 }
 
+table {
+    th,
+    td {
+        padding: 5px;
+    }
+}
+
+table.is-full {
+    width: 100%;
+}
+
 .table-bordered {
     border: 1px solid var(--c-border);
     border-collapse: collapse;

@@ -1,8 +1,8 @@
 import React from "react";
 
 const InstallCard = props => (
-    <div className={"hero has-text-centered"}>
-        <div className={"container"}>
+    <div className={"flex flex-column flex-v-gap has-text-centered"}>
+        <div>
             <h3 className="has-text-grey">
                 {props.header ? (
                     props.header
@@ -13,8 +13,8 @@ const InstallCard = props => (
             <h3 className="has-text-grey-light">
                 Click the button below to begin.
             </h3>
-            <div>{props.children}</div>
         </div>
+        <div>{props.children}</div>
     </div>
 );
 

@@ -20,6 +20,7 @@ import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Link } from "~/routes";
+import { loadingClass } from "~/lib/utils/random";
 
 class TodoistProjectLinker extends React.Component {
     state = {
@@ -89,15 +90,7 @@ class TodoistProjectLinker extends React.Component {
     renderFirstStep = () => {
         return (
             <div>
-                <h3 className="has-text-grey">
-                    <strong>
-                        Begin by picking a Makerlog hashtag to link:
-                    </strong>
-                    <br />
-                    <small>
-                        Create one by typing a task with a #hashtag in it!
-                    </small>
-                </h3>
+                <strong>Begin by picking a Makerlog #hashtag to link:</strong>
                 <div className={"select"}>
                     <select
                         className={"select"}
@@ -119,10 +112,7 @@ class TodoistProjectLinker extends React.Component {
     renderSecondStep = () => {
         return (
             <div>
-                <br />
-                <h3 className="has-text-grey">
-                    <strong>Now, pick a Todoist project:</strong>
-                </h3>
+                <strong>Now, pick a Todoist project:</strong>
                 <div className={"select"}>
                     <select
                         className={"select"}
@@ -144,15 +134,16 @@ class TodoistProjectLinker extends React.Component {
     renderThirdStep = () => {
         return (
             <div>
-                <hr />
-                <Button
+                <button
                     onClick={this.linkToProject}
-                    className={"btn"}
-                    loading={this.state.linking}
+                    className={loadingClass(
+                        "btn btn-secondary",
+                        this.state.linking
+                    )}
                 >
                     <FontAwesomeIcon icon={"plug"} />
                     <span>Link</span>
-                </Button>
+                </button>
             </div>
         );
     };
@@ -363,9 +354,7 @@ class Todoist extends React.Component {
             <div>
                 <div className={"flex col-right v-center mbGap"}>
                     <div>
-                        <h2>
-                            <Link route="apps">Apps →</Link> Todoist
-                        </h2>
+                        <h2>Todoist</h2>
                         <p>
                             Link projects from Todoist and all done tasks will
                             be logged automatically.
@@ -394,12 +383,8 @@ class Todoist extends React.Component {
                         {this.state.installed && (
                             <div>
                                 <TodoistProjectLinker />
-                                <h2>Links</h2>
-                                <h3>All available links.</h3>
                                 <hr />
                                 <TodoistLinks />
-                                <h2>Danger zone</h2>
-                                <h3>Here you can do dangerous stuff...</h3>
                                 <hr />
                                 <button
                                     className={"btn-delete"}

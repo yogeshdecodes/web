@@ -15,7 +15,9 @@ import { getProjects } from "~/lib/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { resetTrello } from "~/lib/integrations/trello";
 import paramParser from "url-param-parser"; // for hash url
+import PageTitle from "~/components/ui/PageTitle";
 import "./index.scss";
+import { loadingClass } from "~/lib/utils/random";
 
 class TrelloLinkWizard extends React.Component {
     state = {
@@ -64,10 +66,8 @@ class TrelloLinkWizard extends React.Component {
         }
 
         return (
-            <div className={"center"}>
-                <h3 className="has-text-grey">
-                    <strong>Hi! Begin by picking a Trello board:</strong>
-                </h3>
+            <div className={"flex flex-v-gap flex-column"}>
+                <strong>Begin by picking a Trello board:</strong>
                 <div className={"select"}>
                     <select
                         className={"select"}
@@ -82,10 +82,7 @@ class TrelloLinkWizard extends React.Component {
                 </div>
                 {this.state.board !== null && selectedBoardData && (
                     <div>
-                        <br />
-                        <h3 className="has-text-grey">
-                            <strong>Now, pick a list from that board:</strong>
-                        </h3>
+                        <strong>Now, pick a list from that board:</strong>
 
                         <div className={"select"}>
                             <select
@@ -105,12 +102,7 @@ class TrelloLinkWizard extends React.Component {
                 )}
                 {this.state.list && this.state.board && (
                     <div>
-                        <br />
-                        <h4 className="has-text-grey">
-                            <strong>
-                                Finally, which tag do we link it to?
-                            </strong>
-                        </h4>
+                        <strong>Finally, which tag do we link it to?</strong>
 
                         <div className={"select"}>
                             <select
@@ -147,14 +139,16 @@ class TrelloLinkWizard extends React.Component {
                 {this.state.list && this.state.board && this.state.project && (
                     <div>
                         <hr />
-                        <Button
+                        <button
                             onClick={this.linkToProject}
-                            primary
-                            loading={this.state.linking}
+                            className={loadingClass(
+                                "btn btn-secondary",
+                                this.state.linking
+                            )}
                         >
                             <FontAwesomeIcon icon={"plug"} />
                             <span>Link</span>
-                        </Button>
+                        </button>
                     </div>
                 )}
             </div>
@@ -218,23 +212,13 @@ class TrelloSettings extends React.Component {
         if (this.state.ready) {
             return (
                 <div>
-                    <h2>Link boards to Makerlog</h2>
-                    <h3>
-                        Link board lists to your projects to automatically add
-                        cards to your log.
-                    </h3>
-                    <hr />
                     <TrelloLinkWizard
                         boards={this.state.boards}
                         webhooks={this.state.webhooks}
                         projects={this.state.projects}
                     />
-
-                    <br />
-                    <h2>Reset integration</h2>
-                    <h3>Having problems? Just reset the integration.</h3>
                     <hr />
-                    <button onClick={this.resetTrello}>
+                    <button className="btn-delete" onClick={this.resetTrello}>
                         Reset Trello (you also have to delete Makerlog from
                         Trello account settings)
                     </button>
@@ -294,24 +278,17 @@ class Trello extends React.Component {
         }
 
         return (
-            <div className="Trello">
-                <section className={"hero dark"} style={style}>
-                    <div className={"container"}>
-                        <h2 className={"has-text-white"}>Trello</h2>
-                        <h3>
-                            Integrate Trello with Makerlog, and add logs
-                            directly from your boards
-                        </h3>
+            <div>
+                <PageTitle title="Trello" />
+                <div className="card">
+                    <div className="card-content">
+                        {!this.state.installed && (
+                            <TrelloInstallCard
+                                afterInstall={this.props.fetchApps}
+                            />
+                        )}
+                        {this.state.installed && <TrelloSettings />}
                     </div>
-                </section>
-                <div className={"container"}>
-                    <br />
-                    {!this.state.installed && (
-                        <TrelloInstallCard
-                            afterInstall={this.props.fetchApps}
-                        />
-                    )}
-                    {this.state.installed && <TrelloSettings />}
                 </div>
             </div>
         );

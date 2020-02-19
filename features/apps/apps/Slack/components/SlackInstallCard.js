@@ -48,8 +48,10 @@ class SlackInstallCard extends React.Component {
         return (
             <div>
                 {this.state.success && (
-                    <div className={"panel-message success"}>
-                        Congrats! We've added Slack to your account.
+                    <div className={"alert is-primary"}>
+                        <div className="alert-body">
+                            Congrats! We've added Slack to your account.
+                        </div>
                     </div>
                 )}
 
@@ -59,10 +61,12 @@ class SlackInstallCard extends React.Component {
                     />
                 )}
 
-                <div className={"panel-message"}>
-                    Note: If Makerlog is already installed to your channel, just
-                    run <kbd>/mlink {this.props.linkKey}</kbd> to link it to
-                    your account.
+                <div className={"alert is-info"}>
+                    <div className="alert-body">
+                        Note: If Makerlog is already installed to your channel,
+                        just run <kbd>/mlink {this.props.linkKey}</kbd> to link
+                        it to your account.
+                    </div>
                 </div>
 
                 <InstallCard header={"Add to workspace"} app="Slack">

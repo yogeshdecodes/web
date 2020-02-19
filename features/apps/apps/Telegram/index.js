@@ -59,9 +59,7 @@ class Telegram extends React.Component {
             <div>
                 <div className={"flex col-right v-center mbGap"}>
                     <div>
-                        <h2>
-                            <Link route="apps">Apps →</Link> Telegram
-                        </h2>
+                        <h2>Telegram</h2>
                     </div>
                 </div>
                 {this.state.success && (

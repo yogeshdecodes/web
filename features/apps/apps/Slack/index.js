@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import SlackInstallCard from "./components/SlackInstallCard";
 import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
 import Spinner from "~/components/Spinner";
+import PageTitle from "~/components/ui/PageTitle";
 
 class Slack extends React.Component {
     static getInitialProps({ query }) {
@@ -20,26 +21,21 @@ class Slack extends React.Component {
         }
 
         return (
-            <div>
-                <div className={"hero dark"} style={style}>
-                    <div className={"container"}>
-                        <h2 className={"has-text-white"}>Slack</h2>
-                        <h3>
-                            Seamlessly add logs from Slack, and stay updated
-                            right from your chat client.
-                        </h3>
+            <>
+                <PageTitle title="Slack" />
+                <div className="card">
+                    <div className="card-content">
+                        <SlackInstallCard
+                            code={
+                                this.props.query.code
+                                    ? this.props.query.code
+                                    : null
+                            }
+                            linkKey={this.props.linkKey}
+                        />
                     </div>
                 </div>
-                <div className={"container"}>
-                    <br />
-                    <SlackInstallCard
-                        code={
-                            this.props.query.code ? this.props.query.code : null
-                        }
-                        linkKey={this.props.linkKey}
-                    />
-                </div>
-            </div>
+            </>
         );
     }
 }
