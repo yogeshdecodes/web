@@ -479,6 +479,11 @@
                     background: rgba(0, 173, 113, 0.5);
                     color: var(--c-lightest);
                 }
+
+                &.is-active {
+                    color: var(--c-text) !important;
+                    font-weight: bold !important;
+                }
             }
         }
     }

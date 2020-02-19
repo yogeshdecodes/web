@@ -20,6 +20,7 @@ import { Router } from "~/routes";
 import { mapStateToProps } from "~/ducks/user";
 import { connect } from "react-redux";
 import EventsPageLayout from "../../layouts/EventsPage";
+import { requireAuthed } from "~/lib/auth";
 
 const EventStream = ({ slug }) => (
     <WeeklyStream
@@ -95,7 +96,7 @@ class JoinModal extends React.Component {
                 href={`https://twitter.com/share?text=${encodeURIComponent(
                     text
                 )}&url=${url}`}
-                className="button is-info is-medium is-rounded"
+                className="btn btn-twitter btn-medium"
                 target="_blank"
             >
                 <span className="icon">
@@ -126,31 +127,26 @@ class JoinModal extends React.Component {
 
         return (
             <div>
-                <h3 className="title is-3">
+                <h1>
                     <Emoji emoji="🎉" /> Yay! You're all set!
-                </h3>
-                <h3 className="subtitle is-5">
+                </h1>
+                <p className="mb-5">
                     You've just joined {event.title}. Tweet it to meet other
                     attendees!
-                </h3>
-                {this.renderTweetButton()}
-                <hr />
-                <h3 className="subtitle is-5">
-                    Now it's time to grab the calendar events, set up things
-                    like livestreaming, and get ready.
-                </h3>
-                <Link
-                    route={"event-attendee-panel"}
-                    params={{ slug: item.slug }}
-                    to={`/events/${event.slug}/attendance/`}
-                >
-                    <a className="button is-primary is-medium is-rounded">
-                        <span className="icon">
-                            <FontAwesomeIcon icon={"check-circle"} />
-                        </span>{" "}
-                        Set up your attendance
-                    </a>
-                </Link>
+                </p>
+                <br />
+                <div>{this.renderTweetButton()}</div>
+                <div className="mt-5">
+                    <Link
+                        route={"event-attendee-panel"}
+                        params={{ slug: event.slug }}
+                        to={`/events/${event.slug}/attendance/`}
+                    >
+                        <a className="btn btn-light btn-medium">
+                            Set up your attendance
+                        </a>
+                    </Link>
+                </div>
             </div>
         );
     };
@@ -181,29 +177,53 @@ class JoinModal extends React.Component {
 
 JoinModal = connect(mapStateToProps)(JoinModal);
 
-const EventPage = ({ item, toggleJoin }) => (
-    <EventsPageLayout event={item}>
-        <div className={"flex col-right v-center mbGap"}>
-            <div>
-                <h2>{item.title}</h2>
-                <p>{item.description}</p>
-            </div>
-            <Link route="events-host">
-                <JoinOrWatchButton onClick={toggleJoin} item={item} />
-            </Link>
-        </div>
+class EventPage extends React.Component {
+    state = {
+        joinActive: false
+    };
 
-        <div className="card">
-            <div className="card-content">
+    toggleJoin = () => {
+        this.setState({
+            joinActive: !this.state.joinActive
+        });
+    };
+
+    render() {
+        const { item } = this.props;
+
+        return (
+            <EventsPageLayout event={item}>
+                <JoinModal
+                    event={item}
+                    open={this.state.joinActive}
+                    toggle={this.toggleJoin}
+                />
+                <div className={"flex col-right v-center mbGap"}>
+                    <div>
+                        <h2>{item.title}</h2>
+                        <p>{item.description}</p>
+                    </div>
+                    <div>
+                        <JoinOrWatchButton
+                            onClick={this.toggleJoin}
+                            item={item}
+                        />
+                    </div>
+                </div>
+
                 {isOcurring(item) || hasEnded(item) ? (
                     <EventStream slug={item.slug} />
                 ) : (
-                    <Markdown body={item.details} />
+                    <div className="card">
+                        <div className="card-content">
+                            <Markdown body={item.details} />
+                        </div>
+                    </div>
                 )}
-            </div>
-        </div>
-    </EventsPageLayout>
-);
+            </EventsPageLayout>
+        );
+    }
+}
 
 const EventPageContainer = props => (
     <SingleItem url={`/events/${props.slug}/`} component={EventPage} />
@@ -215,4 +235,4 @@ EventPageContainer.getInitialProps = async ({ query }) => {
     };
 };
 
-export default EventPageContainer;
+export default requireAuthed(EventPageContainer);

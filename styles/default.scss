@@ -286,7 +286,7 @@ input[type="search"] {
     }
 }
 
-button:not(.edit-button):not(.delete-button):not(.gray-link-with-icon),
+button:not(.edit-button):not(.delete-button):not(.gray-link-with-icon):not(.react-datepicker__navigation),
 div[class^="btn"],
 a[class^="btn"] {
     @extend %rounded;
@@ -2070,4 +2070,50 @@ a {
 
 .mt-5 {
     margin-top: 5px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.std-media {
+    margin-bottom: 20px;
+    color: var(--c-text);
+
+    &.clickable {
+        cursor: pointer;
+    }
+
+    .icon {
+        margin-right: 10px;
+
+        figure,
+        img {
+            @extend %corners;
+        }
+    }
+
+    .actions {
+        margin-top: 5px;
+    }
+
+    &:last-of-type {
+        margin-bottom: 0px;
+    }
+}
+
+.has-text-normal {
+    font-weight: normal;
+}
+
+.no-margin-last {
+    .std-media {
+        margin-bottom: 20px !important;
+    }
+
+    &:last-of-type {
+        .std-media {
+            margin-bottom: 0px !important;
+        }
+    }
 }

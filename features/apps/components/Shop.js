@@ -3,20 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Emoji from "~/components/Emoji";
 import AppList from "./AppList";
 import { Link } from "~/routes";
+import IntegrationMedia from "./IntegrationMedia";
 
-const Shop = props => {
-    return (
-        <div className={"AppsPage"}>
-            <div className={"hero dark PageHero"}>
-                <div className={"container"}>
-                    <div>
-                        <h2>Apps for Makerlog</h2>
-                        <h3>
-                            Integrations, apps, community creations, and more!
-                        </h3>
-                    </div>
-                </div>
-            </div>
+/*
 
             <section className={"container grid-apps"}>
                 <div className={"AppHero"}>
@@ -78,7 +67,7 @@ const Shop = props => {
                     <div className={"card-content flex"}>
                         <div>
                             <h2>Makerlog for Google Assistant</h2>
-                            <h3>Productivity right from your assistant.</h3>
+                            <h3></h3>
                             <a
                                 href="https://assistant.getmakerlog.com/"
                                 className="btn-light"
@@ -142,9 +131,63 @@ const Shop = props => {
                     // Begin official integrations
                 }
 
-                <AppList />
-            </section>
-        </div>
+*/
+
+const Shop = props => {
+    return (
+        <>
+            <div className={"flex col-right v-center mbGap"}>
+                <div>
+                    <h2>Featured community integrations</h2>
+                    <p>Makerlog has an awesome bunch of devs!</p>
+                </div>
+            </div>
+            <div className="card">
+                <div className="card-content">
+                    <IntegrationMedia
+                        name="Makerlog Menubar"
+                        description="A super fast menubar app for macOS."
+                        outboundUrl="https://menubar.getmakerlog.com/"
+                        icon="https://makerlog.imgix.net/media/uploads/2019/09/18/twitter.png"
+                    />
+                    <IntegrationMedia
+                        name="Today for Makerlog"
+                        description="A simple task manager for Makerlog."
+                        icon="https://today.jipfr.nl/apple-touch-icon.png"
+                        outboundUrl="https://today.jipfr.nl/"
+                    />
+                    <IntegrationMedia
+                        name="Makerlog CLI"
+                        description="Log straight from Terminal. It's seamless."
+                        icon="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/terminal-icon.png"
+                        outboundUrl="https://github.com/MihaiVoinea/makerlog-cli/"
+                    />
+                    <IntegrationMedia
+                        name="Makerlog for Google Assistant"
+                        description="Productivity right from your assistant."
+                        icon="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Google_Assistant_logo.svg/1200px-Google_Assistant_logo.svg.png"
+                        outboundUrl="https://assistant.getmakerlog.com/"
+                    />
+                    <IntegrationMedia
+                        name="Logger for Makerlog"
+                        description="An unofficial mobile app for Makerlog"
+                        icon="https://lh3.googleusercontent.com/252TmJBOGuK9gNiubt1D0Q0VgqczU36LaEq-1JFBIL-d_D0wwBYdUOaYZfNUOW9w6Mg=s180-rw"
+                        outboundUrl="https://play.google.com/store/apps/details?id=com.brownfingers.getmakerlog"
+                    />
+                </div>
+            </div>
+            <div className={"flex col-right v-center mbGap"}>
+                <div>
+                    <h2>Official integrations</h2>
+                    <p>We also make some awesome first-party ones too!</p>
+                </div>
+            </div>
+            <div className="card">
+                <div className="card-content">
+                    <AppList />
+                </div>
+            </div>
+        </>
     );
 };
 

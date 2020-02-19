@@ -192,7 +192,9 @@ class WeeklyStream extends React.Component {
             }
         } catch (e) {
             this.setState({
-                failed: true
+                failed: true,
+                isSyncing: false,
+                hasMore: false
             });
         }
     };

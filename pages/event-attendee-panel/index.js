@@ -7,6 +7,63 @@ import Markdown from "~/components/Markdown";
 import OutboundLink from "~/components/OutboundLink";
 import SingleItem from "~/containers/SingleItem";
 import EventsPageLayout from "../../layouts/EventsPage";
+import { Link } from "~/routes";
+import { requireAuthed } from "~/lib/auth";
+import { Router } from "~/routes";
+import { loadingClass } from "~/lib/utils/random";
+import { leaveEvent } from "~/lib/events";
+
+class LeaveEventButton extends Component {
+    state = {
+        deleted: false,
+        deleting: false,
+        failed: false
+    };
+
+    onClick = async () => {
+        this.setState({
+            deleting: true,
+            failed: false
+        });
+
+        try {
+            await leaveEvent(this.props.event.slug);
+            this.setState({
+                deleted: true,
+                deleting: false,
+                failed: false
+            });
+            // redirect?
+            Router.pushRoute("events");
+        } catch (e) {
+            this.setState({
+                deleting: false,
+                failed: true
+            });
+        }
+    };
+
+    render() {
+        return (
+            <>
+                <button
+                    onClick={this.onClick}
+                    className={loadingClass(
+                        "btn btn-danger btn-small",
+                        this.state.deleting
+                    )}
+                >
+                    Leave "{this.props.event.title}"
+                </button>
+                {this.state.failed && (
+                    <p className="help has-text-danger mt-5">
+                        This didn't work. Try again later.
+                    </p>
+                )}
+            </>
+        );
+    }
+}
 
 class EventAttendeePanel extends Component {
     state = {
@@ -65,12 +122,14 @@ class EventAttendeePanel extends Component {
                         <h2>Your attendance to {item.title}</h2>
                         <p>Steps for a successful event experience</p>
                     </div>
+
+                    <Link route={"event-page"} params={{ slug: item.slug }}>
+                        <a className="btn is-secondary">Go back</a>
+                    </Link>
                 </div>
                 <div className="card">
                     <div className="card-content">
-                        <h4>
-                            <Emoji emoji="✅" /> Logging setup
-                        </h4>
+                        <h4>Logging setup</h4>
                         <p>
                             Makerlog lets you log tasks and track your progress
                             on your hackathon projects.
@@ -129,9 +188,7 @@ class EventAttendeePanel extends Component {
                             </div>
                         </div>
                         <hr />
-                        <h4>
-                            <Emoji emoji="🚨" /> Team & product setup
-                        </h4>
+                        <h4>Team & product setup</h4>
                         <p>
                             You can add your product to Makerlog to allow judges
                             to see it and track your progress more effectively.
@@ -204,6 +261,19 @@ class EventAttendeePanel extends Component {
                         <div className="h-list flex center spaced v-center mt-5">
                             <div>{this.renderTweetButton()}</div>
                         </div>
+                        <hr />
+                        <h4>Leave event</h4>
+                        <p>
+                            If you no longer wish to attend the following event,
+                            click the button below. Your registration will be
+                            removed and the organizer will no longer have access
+                            to your details.
+                        </p>
+                        <div className="h-list flex center spaced v-center mt-5">
+                            <div>
+                                <LeaveEventButton event={item} />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </EventsPageLayout>
@@ -221,4 +291,4 @@ EventAttendeePanelContainer.getInitialProps = async ({ query }) => {
     };
 };
 
-export default EventAttendeePanelContainer;
+export default requireAuthed(EventAttendeePanelContainer);

@@ -81,9 +81,8 @@ class CommentInput extends React.Component {
             return (
                 <div className="input-container">
                     <Link route={"begin"}>
-                        <a>Sign in or join</a>
-                    </Link>{" "}
-                    &nbsp; to post a comment.
+                        <a>Join to post a comment.</a>
+                    </Link>
                 </div>
             );
         }

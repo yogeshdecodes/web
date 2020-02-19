@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import StdPageLayout from "~/layouts/StdPage";
 import NavLink from "~/components/ActiveLink";
 import EventPageSidebar from "~/components/sidebar/event-page";
+import "./index.scss";
 
 export default class EventsPageLayout extends Component {
     render() {
@@ -15,14 +16,14 @@ export default class EventsPageLayout extends Component {
                         </NavLink>
 
                         <NavLink
-                            route="products-yours"
+                            route="events-past"
                             activeClassName="is-active"
                         >
                             <a className="navbar-item">Past</a>
                         </NavLink>
 
                         <NavLink
-                            route="products-yours"
+                            route="events-host"
                             activeClassName="is-active"
                         >
                             <a className="navbar-item">Host event</a>

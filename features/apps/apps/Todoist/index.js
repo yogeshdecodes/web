@@ -19,6 +19,8 @@ import ErrorMessageList from "~/components/forms/ErrorMessageList";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { Link } from "~/routes";
+
 class TodoistProjectLinker extends React.Component {
     state = {
         ready: false,
@@ -359,54 +361,55 @@ class Todoist extends React.Component {
 
         return (
             <div>
-                <div className={"hero dark"} style={style}>
-                    <div className={"container"}>
-                        <h2 className={"has-text-white"}>Todoist</h2>
-                        <h3>Log straight from Todoist. It's seamless.</h3>
+                <div className={"flex col-right v-center mbGap"}>
+                    <div>
+                        <h2>
+                            <Link route="apps">Apps →</Link> Todoist
+                        </h2>
+                        <p>
+                            Link projects from Todoist and all done tasks will
+                            be logged automatically.
+                        </p>
                     </div>
                 </div>
-                <div className={"container"}>
-                    {this.state.errorMessages && (
-                        <ErrorMessageList
-                            errorMessages={this.state.errorMessages}
-                        />
-                    )}
+                <div className="card">
+                    <div className="card-content">
+                        {this.state.errorMessages && (
+                            <ErrorMessageList
+                                errorMessages={this.state.errorMessages}
+                            />
+                        )}
 
-                    {!this.state.installed && (
-                        <InstallCard app={"Todoist"}>
-                            <a
-                                className={"button is-danger is-large"}
-                                href={this.state.installUrl}
-                            >
-                                Install
-                            </a>
-                        </InstallCard>
-                    )}
+                        {!this.state.installed && (
+                            <InstallCard app={"Todoist"}>
+                                <a
+                                    className={"button is-danger is-large"}
+                                    href={this.state.installUrl}
+                                >
+                                    Install
+                                </a>
+                            </InstallCard>
+                        )}
 
-                    {this.state.installed && (
-                        <div>
-                            <h2>Link Todoist projects to Makerlog</h2>
-                            <h3>
-                                Link projects from Todoist and all done tasks
-                                will be logged automagically.
-                            </h3>
-                            <hr />
-                            <TodoistProjectLinker />
-                            <h2>Links</h2>
-                            <h3>All available links.</h3>
-                            <hr />
-                            <TodoistLinks />
-                            <h2>Danger zone</h2>
-                            <h3>Here you can do dangerous stuff...</h3>
-                            <hr />
-                            <button
-                                className={"btn-delete"}
-                                onClick={this.uninstall}
-                            >
-                                Uninstall app
-                            </button>
-                        </div>
-                    )}
+                        {this.state.installed && (
+                            <div>
+                                <TodoistProjectLinker />
+                                <h2>Links</h2>
+                                <h3>All available links.</h3>
+                                <hr />
+                                <TodoistLinks />
+                                <h2>Danger zone</h2>
+                                <h3>Here you can do dangerous stuff...</h3>
+                                <hr />
+                                <button
+                                    className={"btn-delete"}
+                                    onClick={this.uninstall}
+                                >
+                                    Uninstall app
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         );

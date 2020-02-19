@@ -97,29 +97,23 @@ class EventMedia extends Component {
                     <div className="flex flex-column">
                         <h4>{event.title}</h4>
                         <p>{event.description}</p>
+                        {!isOcurring(event) && !hasClosed(event) && (
+                            <div className="join-bar flex">
+                                <div>
+                                    <button className="btn btn-light">
+                                        {event.user_joined ? (
+                                            <span>Attendee panel</span>
+                                        ) : (
+                                            <span>Join this event</span>
+                                        )}
+                                    </button>
+                                </div>
 
-                        <div className="join-bar flex">
-                            {!isOcurring(event) && !hasClosed(event) && (
-                                <>
-                                    <div>
-                                        <button className="btn btn-light">
-                                            {event.user_joined ? (
-                                                <span>Attendee panel</span>
-                                            ) : (
-                                                <span>Join this event</span>
-                                            )}
-                                        </button>
-                                    </div>
-
-                                    <div className="level-item">
-                                        <EventFaces
-                                            size={32}
-                                            slug={event.slug}
-                                        />
-                                    </div>
-                                </>
-                            )}
-                        </div>
+                                <div className="level-item">
+                                    <EventFaces size={32} slug={event.slug} />
+                                </div>
+                            </div>
+                        )}
 
                         <EventToolbar event={event} />
                     </div>

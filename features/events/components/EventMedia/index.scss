@@ -2,6 +2,11 @@
 
 .EventMedia {
     cursor: pointer;
+    margin-top: 20px;
+
+    &:first-of-type {
+        margin-top: 0px;
+    }
 
     h5,
     p {

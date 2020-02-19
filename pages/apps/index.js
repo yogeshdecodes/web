@@ -14,6 +14,8 @@ import Telegram from "~/features/apps/apps/Telegram";
 import "./index.scss";
 import Shop from "~/features/apps/components/Shop";
 import { requireAuthed } from "~/lib/auth";
+import AppsPageLayout from "~/layouts/AppsPage";
+import NavLink from "~/components/ActiveLink";
 
 class AppsPage extends React.Component {
     static async getInitialProps({ query, ...ctx }) {
@@ -25,7 +27,7 @@ class AppsPage extends React.Component {
         };
     }
 
-    render() {
+    getCurrentRoute = () => {
         const { app, query } = this.props;
 
         switch (app) {
@@ -59,6 +61,10 @@ class AppsPage extends React.Component {
             default:
                 return <Shop />;
         }
+    };
+
+    render() {
+        return <AppsPageLayout>{this.getCurrentRoute()}</AppsPageLayout>;
     }
 }
 
@@ -66,4 +72,4 @@ class AppsPage extends React.Component {
 const passCombinedState = state => {
     return { ...mapStateToProps(state), ...mapUserToProps(state) };
 };
-export default connect(passCombinedState)(requireAuthed(AppsPage));
+export default connect(passCombinedState)(AppsPage);
