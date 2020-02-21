@@ -28,7 +28,7 @@ export default requireAuthed(
         renderProducts = () => {
             if (!this.props.products) return <div>No products found.</div>;
 
-            return <ProductList media products={this.props.products} />;
+            return <ProductList media medium products={this.props.products} />;
         };
 
         render() {

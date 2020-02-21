@@ -176,7 +176,7 @@ class ProfileTab extends React.Component {
                     <div>
                         <section className={"settings-header"}>
                             <h2 className={"mt0"}>You</h2>
-                            <p className={"note"}>The essentials.</p>
+                            <br />
                         </section>
                         <div className={"form-row"}>
                             <label className="label">First name</label>
@@ -277,7 +277,7 @@ class ProfileTab extends React.Component {
                             <label className="label">Profile picture</label>
                             <Dropzone
                                 maxSize={2 * 1024 * 1024}
-                                className={"icon-dropzone"}
+                                className={"ProductIconPicker"}
                                 accept="image/*"
                                 multiple={false}
                                 onDrop={this.onAvatarUpload}
@@ -323,21 +323,11 @@ class ProfileTab extends React.Component {
                     <div>
                         <section className={"settings-header"}>
                             <h2>Social</h2>
-                            <p className={"note"}>
-                                Show off some social flair in your profile!
-                            </p>
+                            <br />
                         </section>
 
                         <label className="label">Twitter handle</label>
                         <div className={"form-row has-addons"}>
-                            <div className={"control"}>
-                                <button disabled>
-                                    <FontAwesomeIcon
-                                        icon={["fab", "twitter"]}
-                                        color={"black"}
-                                    />
-                                </button>
-                            </div>
                             <div className={"control"}>
                                 <input
                                     type={"text"}
@@ -355,14 +345,6 @@ class ProfileTab extends React.Component {
                         <label className="label">Telegram handle</label>
                         <div className={"form-row has-addons"}>
                             <div className={"control"}>
-                                <Button disabled>
-                                    <FontAwesomeIcon
-                                        icon={["fab", "telegram"]}
-                                        color={"black"}
-                                    />
-                                </Button>
-                            </div>
-                            <div className={"control"}>
                                 <input
                                     type={"text"}
                                     value={this.state.telegram_handle}
@@ -378,14 +360,6 @@ class ProfileTab extends React.Component {
 
                         <label className="label">Instagram handle</label>
                         <div className={"form-row has-addons"}>
-                            <div className={"control"}>
-                                <Button disabled>
-                                    <FontAwesomeIcon
-                                        icon={["fab", "instagram"]}
-                                        color={"black"}
-                                    />
-                                </Button>
-                            </div>
                             <div className={"control"}>
                                 <input
                                     type={"text"}
@@ -403,14 +377,6 @@ class ProfileTab extends React.Component {
                         <label className="label">Product Hunt handle</label>
                         <div className={"form-row has-addons"}>
                             <div className={"control"}>
-                                <button disabled>
-                                    <FontAwesomeIcon
-                                        icon={["fab", "product-hunt"]}
-                                        color={"black"}
-                                    />
-                                </button>
-                            </div>
-                            <div className={"control"}>
                                 <input
                                     type={"text"}
                                     value={this.state.product_hunt_handle}
@@ -426,14 +392,6 @@ class ProfileTab extends React.Component {
 
                         <label className="label">GitHub handle</label>
                         <div className={"form-row has-addons"}>
-                            <div className={"control"}>
-                                <button disabled>
-                                    <FontAwesomeIcon
-                                        icon={["fab", "github"]}
-                                        color={"black"}
-                                    />
-                                </button>
-                            </div>
                             <div className={"control"}>
                                 <input
                                     type={"text"}
@@ -451,14 +409,6 @@ class ProfileTab extends React.Component {
                         <label className="label">Twitch handle</label>
                         <div className={"form-row"}>
                             <div className={"has-addons"}>
-                                <div className={"control"}>
-                                    <button disabled>
-                                        <FontAwesomeIcon
-                                            icon={["fab", "twitch"]}
-                                            color={"black"}
-                                        />
-                                    </button>
-                                </div>
                                 <div className={"control"}>
                                     <input
                                         type={"text"}
@@ -488,14 +438,6 @@ class ProfileTab extends React.Component {
                         <div className={"form-row"}>
                             <div className={"has-addons"}>
                                 <div className={"control"}>
-                                    <button disabled>
-                                        <FontAwesomeIcon
-                                            icon={"location-arrow"}
-                                            color={"black"}
-                                        />
-                                    </button>
-                                </div>
-                                <div className={"control"}>
                                     <input
                                         type={"text"}
                                         value={this.state.nomadlist_handle}
@@ -517,14 +459,6 @@ class ProfileTab extends React.Component {
                         <label className="label">Buy Me A Coffee handle</label>
                         <div className={"form-row"}>
                             <div className={"has-addons"}>
-                                <div className={"control"}>
-                                    <button disabled>
-                                        <FontAwesomeIcon
-                                            icon={"mug-hot"}
-                                            color={"black"}
-                                        />
-                                    </button>
-                                </div>
                                 <div className={"control"}>
                                     <input
                                         type={"text"}
