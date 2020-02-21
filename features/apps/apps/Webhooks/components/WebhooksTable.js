@@ -3,6 +3,7 @@ import { Button } from "~/vendor/bulma";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getAppIcon } from "~/lib/apps";
 import { deleteHook } from "~/lib/integrations/webhook";
+import { loadingClass } from "~/lib/utils/random";
 
 class DeleteButton extends React.Component {
     state = {
@@ -25,9 +26,12 @@ class DeleteButton extends React.Component {
 
     render() {
         return (
-            <Button danger onClick={this.onClick} loading={this.state.deleting}>
+            <button
+                className={loadingClass("btn-delete", this.state.deleting)}
+                onClick={this.onClick}
+            >
                 {this.state.failed ? "Failed to delete." : "Delete hook"}
-            </Button>
+            </button>
         );
     }
 }
@@ -68,18 +72,16 @@ class WebhookTable extends React.Component {
         const webhooks = this.state.webhooks;
 
         return (
-            <table>
+            <table className="is-full">
                 <thead>
                     <th>
-                        <th>
-                            <abbr title="Application">App</abbr>
-                        </th>
-                        <th>Token (secret)</th>
-                        <th>Linked project</th>
-                        <th>Description</th>
-                        <th>App data</th>
-                        <th>Actions</th>
+                        <abbr title="Application">App</abbr>
                     </th>
+                    <th>Token (secret)</th>
+                    <th>Linked project</th>
+                    <th>Description</th>
+                    <th>App data</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     {webhooks &&

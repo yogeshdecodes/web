@@ -4,6 +4,8 @@ import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
 import Spinner from "~/components/Spinner";
 import { me, patchSettings } from "~/lib/user";
 import { Button } from "~/vendor/bulma";
+import PageTitle from "../../../../components/ui/PageTitle";
+import { loadingClass } from "~/lib/utils/random";
 
 class ShipstreamsSettings extends React.Component {
     state = {
@@ -81,49 +83,52 @@ class ShipstreamsSettings extends React.Component {
         return (
             <div className={"card"}>
                 <div className={"card-content"}>
+                    <h4>Link your Shipstreams account</h4>
+                    <br />
                     <form onSubmit={this.onSubmit}>
                         <div className={"form-row"}>
-                            <label className="label">
-                                Shipstreams username
-                            </label>
                             <input
                                 type={"text"}
+                                placeholder="Shipstreams username"
                                 value={this.state.shipstreamsHandle}
                                 onChange={e =>
                                     this.setState({
                                         shipstreamsHandle: e.target.value
                                     })
                                 }
-                                placeholder="sergiomattei"
                             />
                         </div>
                         <div className={"form-row"}>
                             {!this.state.deleting && (
-                                <Button
+                                <button
                                     disabled={this.state.done}
                                     type={"submit"}
-                                    medium
-                                    className={"is-fullwidth"}
-                                    primary
-                                    loading={this.state.submitting}
+                                    className={loadingClass(
+                                        "btn btn-secondary",
+                                        this.state.submitting
+                                    )}
+                                    onClick={this.onSubmit}
                                 >
                                     {this.state.done ? "Linked!" : "Link"}
-                                </Button>
+                                </button>
                             )}
                         </div>
                         <div className={"form-row"}>
                             {((this.state.me.shipstreams_handle &&
                                 this.state.me.shipstreams_handle.length > 0) ||
                                 this.state.deleting) && (
-                                <Button
-                                    onClick={this.onDelete}
-                                    medium
-                                    className={"is-fullwidth"}
-                                    danger
-                                    loading={this.state.submitting}
-                                >
-                                    Unlink
-                                </Button>
+                                <>
+                                    <hr />
+                                    <button
+                                        onClick={this.onDelete}
+                                        medium
+                                        className={"btn-delete"}
+                                        danger
+                                        loading={this.state.submitting}
+                                    >
+                                        Unlink
+                                    </button>
+                                </>
                             )}
                         </div>
                     </form>
@@ -140,26 +145,10 @@ class Shipstreams extends React.Component {
         }
 
         return (
-            <div className="Trello">
-                <div className={"hero info"}>
-                    <div className={"container"}>
-                        <h2 className={"has-text-white"}>Shipstreams</h2>
-                        <h3>Log when you go live and showcase your streams!</h3>
-                    </div>
-                </div>
-                <br />
-                <div className={"container"}>
-                    <div className={"columns"}>
-                        <div
-                            className={
-                                "column is-one-third is-offset-one-third"
-                            }
-                        >
-                            <h2 is={"5"}>Link your Shipstreams.com account</h2>
-                            <ShipstreamsSettings />
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <PageTitle title="Shipstreams" />
+
+                <ShipstreamsSettings />
             </div>
         );
     }

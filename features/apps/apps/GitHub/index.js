@@ -33,6 +33,8 @@ class GitHub extends React.Component {
                                 Learn how to use this webhook.
                             </a>
                         </small>
+                        <br />
+                        <br />
                         <AppWebhookCreator
                             appName="GitHub"
                             identifier="github"

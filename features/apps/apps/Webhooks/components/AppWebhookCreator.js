@@ -97,7 +97,6 @@ class AppWebhookCreator extends React.Component {
         } else if (this.state.ready && !this.state.linked) {
             return (
                 <div className={"flex flex-column flex-v-gap"}>
-                    <br />
                     <div className="field">
                         <div className="select is-medium">
                             <select
