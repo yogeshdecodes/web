@@ -2,8 +2,8 @@
 
 .ProductIcon {
     @extend %corners;
-    background-color: white;
-    border: 1px solid $c-border;
+    background-color: var(--c-lightest);
+    border: 1px solid var(--c-border);
     text-transform: uppercase;
 
     img,

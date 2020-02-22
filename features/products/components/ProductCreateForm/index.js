@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import LaunchedToggle from "~/features/products/components/LaunchedToggle";
 import Dropzone from "react-dropzone";
 import ProductIcon from "~/features/products/components/ProductIcon";
+import { handleChange } from "~/lib/utils/random";
+import ErrorMessageList from "~/components/forms/ErrorMessageList";
+import HashtagPicker from "~/features/projects/components/HashtagPicker";
 
 export default class ProductCreateForm extends Component {
     state = {
@@ -26,8 +29,19 @@ export default class ProductCreateForm extends Component {
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             newUrl = `https://${url}`;
         }
+
         this.setState({
             [key]: newUrl
+        });
+    };
+
+    setHandle = (key, handle) => {
+        let newHandle = handle;
+        if (handle.includes("@")) {
+            newHandle = newHandle.replace("@", "");
+        }
+        this.setState({
+            [key]: newHandle
         });
     };
 
@@ -80,28 +94,57 @@ export default class ProductCreateForm extends Component {
         });
     };
 
+    handleChange = e => handleChange(e, this);
+
     render() {
         return (
             <div>
+                <ErrorMessageList errorMessages={this.state.errorMessages} />
                 <form>
                     <div className="control">
                         <label>Name</label>
-                        <input type="text" placeholder="Makerlog" />
+                        <input
+                            name="name"
+                            onChange={this.handleChange}
+                            value={this.state.name}
+                            type="text"
+                            placeholder="Makerlog"
+                        />
                     </div>
                     <div className="control">
                         <label>Description</label>
-                        <input type="text" placeholder="The maker community." />
+                        <input
+                            name="description"
+                            onChange={this.handleChange}
+                            value={this.state.description}
+                            type="text"
+                            placeholder="The maker community."
+                        />
                         <p className="help">
                             Make it short and sweet, like a pitch!
                         </p>
                     </div>
                     <div className="control">
                         <label>Website (optional)</label>
-                        <input type="text" placeholder="getmakerlog.com" />
+                        <input
+                            name="url"
+                            value={this.state.url}
+                            onChange={e => this.setUrl("url", e.target.value)}
+                            type="text"
+                            placeholder="getmakerlog.com"
+                        />
                     </div>
                     <div className="control">
                         <label>Twitter (optional)</label>
-                        <input type="text" placeholder="getmakerlog" />
+                        <input
+                            name="twitter"
+                            value={this.state.twitter}
+                            onChange={e =>
+                                this.setHandle("twitter", e.target.value)
+                            }
+                            type="text"
+                            placeholder="getmakerlog"
+                        />
                     </div>
                     <div className="control">
                         <label>Launched yet?</label>
@@ -153,17 +196,10 @@ export default class ProductCreateForm extends Component {
                                 and adding the tasks to your product log.
                             </p>
                         </label>
-                        <div className="input-control flex flex-gap">
-                            <div>
-                                <input type="text" placeholder="#makerlog" />
-                            </div>
-                            <div>
-                                <button className="btn-light">Add</button>
-                            </div>
-                        </div>
-                        <div className="hashtag-list flex flex-gap">
-                            <div className="tag">#test</div>
-                        </div>
+                        <HashtagPicker
+                            projects={this.state.hashtags}
+                            onChange={this.onHashtagChange}
+                        />
                     </div>
                     <div className="control">
                         <label>
