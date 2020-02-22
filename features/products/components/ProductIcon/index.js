@@ -21,9 +21,9 @@ function darken(color, amount) {
 }
 
 function getBackgroundStyle(product) {
-    const { accent } = product;
+    let { accent } = product;
 
-    if (!accent) return;
+    if (!accent) accent = "#00a676";
 
     return {
         background: `linear-gradient(120deg, ${darken(
@@ -43,7 +43,7 @@ class ProductIcon extends Component {
                 className={`ProductIcon text gradient-${gradientId} is-${this.props.is}`}
             >
                 <div style={getBackgroundStyle(product)}>
-                    {product.name.charAt(0)}
+                    {product.name.length ? product.name.charAt(0) : "P"}
                 </div>
             </figure>
         );

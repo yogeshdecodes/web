@@ -3,6 +3,7 @@ import InfiniteResults from "~/components/InfiniteResults";
 import ProductList from "~/features/products/components/ProductList";
 import "./index.scss";
 import ProductsPageLayout from "../../layouts/ProductsPage";
+import { Link } from "~/routes";
 
 export default class ProductsPage extends Component {
     static async getInitialProps() {
@@ -19,7 +20,9 @@ export default class ProductsPage extends Component {
                     <div>
                         <h2>Recent launches</h2>
                     </div>
-                    <button className="btn btn-secondary">Add yours</button>
+                    <Link route="products-add">
+                        <a className="btn btn-secondary">Add product</a>
+                    </Link>
                 </div>
                 <div className="LaunchStream card">
                     <div className="card-content">

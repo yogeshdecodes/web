@@ -5,6 +5,7 @@ import ProductsPageLayout from "../../layouts/ProductsPage";
 import Spinner from "~/components/Spinner";
 import { requireAuthed } from "~/lib/auth";
 import { getMyProducts } from "~/lib/products";
+import { Link } from "~/routes";
 
 export default requireAuthed(
     class ProductsYoursPage extends Component {
@@ -38,9 +39,9 @@ export default requireAuthed(
                         <div>
                             <h2>Your products</h2>
                         </div>
-                        <button className="btn btn-secondary">
-                            Add product
-                        </button>
+                        <Link route="products-add">
+                            <a className="btn btn-secondary">Add product</a>
+                        </Link>
                     </div>
                     <div className="LaunchStream card">
                         <div className="card-content">
