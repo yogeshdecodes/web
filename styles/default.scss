@@ -2185,3 +2185,64 @@ form {
         font-size: 14px;
     }
 }
+
+.delete {
+    @extend %round;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: var(--c-border);
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-size: 0;
+    height: 20px;
+    max-height: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    min-width: 20px;
+    outline: none;
+    position: relative;
+    vertical-align: top;
+    width: 20px;
+
+    &.ml {
+        margin-left: 5px;
+    }
+
+    &::before {
+        height: 2px;
+        width: 50%;
+    }
+
+    &::after {
+        height: 50%;
+        width: 2px;
+    }
+
+    &::after,
+    &::before {
+        content: "";
+        background: var(--c-lightest);
+        display: block;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+        transform: translateX(-50%) translateY(-50%) rotate(45deg);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+    }
+}
+
+ul.unstyled {
+    li {
+        list-style-type: none;
+    }
+}

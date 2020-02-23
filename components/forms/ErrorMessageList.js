@@ -1,10 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./ErrorMessageList.scss";
+import React from "react";
 
 const renderFieldErrors = fieldErrors => {
-    console.log(fieldErrors);
     if (fieldErrors !== null && fieldErrors.constructor === Array) {
         let list = [];
         fieldErrors.map(o => {
@@ -29,7 +26,7 @@ const renderFieldErrors = fieldErrors => {
         Object.keys(fieldErrors).map(k => {
             list.push(
                 <li>
-                    <b>{k}</b>: {JSON.stringify(fieldErrors[k])}
+                    <b>{k}</b>: {fieldErrors[k].join(", ")}
                 </li>
             );
 
@@ -39,38 +36,39 @@ const renderFieldErrors = fieldErrors => {
         return <ul>{list}</ul>;
     }
 
+    if (typeof fieldErrors === "string") return fieldErrors;
+
     return null;
 };
 
-/*
+const ErrorMessageList = ({
+    errorMessages,
+    fieldErrors,
+    errors = null,
+    nonFieldOnly = false
+}) => {
+    if (errors !== null && typeof errors === "object" && nonFieldOnly)
+        return null;
 
-            <div className="alert-icon">
-                <FontAwesomeIcon icon="exclamation-triangle" />
-            </div>
-*/
-
-const ErrorMessageList = ({ errorMessages, fieldErrors }) =>
-    (errorMessages && errorMessages.length > 0) ||
-    (fieldErrors && fieldErrors.length > 0) ? (
-        <div className="alert is-danger">
+    return errorMessages || fieldErrors || errors ? (
+        <div className="alert is-danger" danger>
             <div className="alert-body">
-                <ul>
+                <ul className="unstyled">
                     <b>
                         {errorMessages &&
-                            errorMessages.length > 1 &&
                             errorMessages.map(message => (
                                 <li key={message}>{message}</li>
                             ))}
-                        {errorMessages && errorMessages.length == 1 && (
-                            <span>{errorMessages[0]}</span>
-                        )}
                     </b>
                     {errorMessages && fieldErrors && <hr />}
-                    {fieldErrors && <div>{renderFieldErrors(fieldErrors)}</div>}
+                    {(errors || fieldErrors) && (
+                        <div>{renderFieldErrors(errors || fieldErrors)}</div>
+                    )}
                 </ul>
             </div>
         </div>
     ) : null;
+};
 
 ErrorMessageList.propTypes = {
     errorMessages: PropTypes.array.isRequired

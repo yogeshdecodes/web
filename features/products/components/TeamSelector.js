@@ -2,10 +2,11 @@ import React from "react";
 import { getProductPeople } from "~/lib/products";
 import { getByUsername } from "~/lib/user";
 import uniqBy from "lodash/uniqBy";
-import UserMediaList from "~/features/users/components/UserMediaList";
+import UserMedia from "~/features/users/components/UserMedia";
 import Spinner from "~/components/Spinner";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
+import { loadingClass } from "../../../lib/utils/random";
 
 class UserGroupSelector extends React.Component {
     state = {
@@ -97,6 +98,45 @@ class UserGroupSelector extends React.Component {
         if (this.state.loading) return <Spinner small />;
 
         return (
+            <div>
+                <div className="input-control flex flex-gap">
+                    <div>
+                        <input
+                            onChange={e =>
+                                this.setState({ value: e.target.value })
+                            }
+                            disabled={this.state.adding}
+                            value={this.state.value}
+                            placeholder="username"
+                            type="text"
+                        />
+                    </div>
+                    <div>
+                        <button
+                            onClick={this.addUser}
+                            className={loadingClass(
+                                "btn-light",
+                                this.state.adding
+                            )}
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+                <div className="flex flex-column flex-v-gap">
+                    {this.state.team.map(u => (
+                        <div className="flex flex-gap">
+                            <UserMedia user={u} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+}
+
+/**
+ * 
             <>
                 {this.state.team.length === 0 && (
                     <>
@@ -147,8 +187,6 @@ class UserGroupSelector extends React.Component {
                     <UserMediaList users={this.state.team} />
                 )}
             </>
-        );
-    }
-}
+ */
 
 export default connect(mapStateToProps)(UserGroupSelector);

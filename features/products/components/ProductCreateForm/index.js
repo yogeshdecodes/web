@@ -5,6 +5,10 @@ import ProductIcon from "~/features/products/components/ProductIcon";
 import { handleChange } from "~/lib/utils/random";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import HashtagPicker from "~/features/projects/components/HashtagPicker";
+import TeamSelector from "../TeamSelector";
+import { loadingClass } from "../../../../lib/utils/random";
+import { createProduct } from "~/lib/products";
+import isFunction from "lodash/isFunction";
 
 export default class ProductCreateForm extends Component {
     state = {
@@ -68,7 +72,7 @@ export default class ProductCreateForm extends Component {
             await createProduct(
                 this.state.name,
                 this.state.description,
-                this.state.selectedProjects,
+                this.state.selectedProjects.map(p => p.id),
                 this.state.productHunt,
                 this.state.twitter,
                 this.state.url,
@@ -81,6 +85,7 @@ export default class ProductCreateForm extends Component {
                 this.props.onFinish();
             }
         } catch (e) {
+            console.log((e.field_errors || e.message).length);
             this.setState({
                 isCreating: false,
                 errorMessages: e.field_errors || e.message
@@ -94,12 +99,19 @@ export default class ProductCreateForm extends Component {
         });
     };
 
+    onHashtagChange = newState => {
+        console.log(newState);
+        this.setState({
+            selectedProjects: newState
+        });
+    };
+
     handleChange = e => handleChange(e, this);
 
     render() {
         return (
             <div>
-                <ErrorMessageList errorMessages={this.state.errorMessages} />
+                <ErrorMessageList fieldErrors={this.state.errorMessages} />
                 <form>
                     <div className="control">
                         <label>Name</label>
@@ -197,7 +209,7 @@ export default class ProductCreateForm extends Component {
                             </p>
                         </label>
                         <HashtagPicker
-                            projects={this.state.hashtags}
+                            projects={this.state.selectedProjects}
                             onChange={this.onHashtagChange}
                         />
                     </div>
@@ -208,23 +220,21 @@ export default class ProductCreateForm extends Component {
                                 Add your team usernames and combine your logs!
                             </p>
                         </label>
-                        <div className="input-control flex flex-gap">
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder="makerlog_username"
-                                />
-                            </div>
-                            <div>
-                                <button className="btn-light">Add</button>
-                            </div>
-                        </div>
-                        <div className="hashtag-list flex flex-gap">
-                            <div className="tag">@sergio</div>
-                        </div>
+                        <TeamSelector onChange={this.onAddTeamMember} />
                     </div>
                     <hr />
-                    <button className="btn btn-secondary">Submit</button>
+                    <button
+                        onClick={e => {
+                            e.preventDefault();
+                            this.onSubmit();
+                        }}
+                        className={loadingClass(
+                            "btn btn-secondary",
+                            this.state.isCreating
+                        )}
+                    >
+                        Submit
+                    </button>
                 </form>
             </div>
         );

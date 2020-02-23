@@ -1,14 +1,14 @@
-import {Step, Steps, Wizard} from "react-albus";
+import { Step, Steps, Wizard } from "react-albus";
 
 import Dropzone from "react-dropzone";
 import Emoji from "../../../../components/Emoji";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LaunchedToggle from "../LaunchedToggle";
-import {Product} from "~/features/products";
-import {ProjectPicker} from "~/features/projects";
+import { Product } from "~/features/products";
+import { ProjectPicker } from "~/features/projects";
 import React from "react";
 import TeamSelector from "../TeamSelector";
-import {createProduct} from "~/lib/products";
+import { createProduct } from "~/lib/products";
 import isFunction from "lodash/isFunction";
 
 const CreateProductStep1 = props => (
