@@ -3,8 +3,9 @@ import ProductsPageLayout from "~/layouts/ProductsPage";
 import PageTitle from "~/components/ui/PageTitle";
 import "./index.scss";
 import ProductCreateForm from "../../features/products/components/ProductCreateForm";
+import { requireAuthed } from "~/lib/auth";
 
-export default class AddProductPage extends Component {
+class AddProductPage extends Component {
     render() {
         return (
             <ProductsPageLayout>
@@ -18,3 +19,5 @@ export default class AddProductPage extends Component {
         );
     }
 }
+
+export default requireAuthed(AddProductPage);
