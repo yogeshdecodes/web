@@ -9,6 +9,7 @@ import TeamSelector from "../TeamSelector";
 import { loadingClass } from "../../../../lib/utils/random";
 import { createProduct } from "~/lib/products";
 import isFunction from "lodash/isFunction";
+import { Router } from "~/routes";
 
 export default class ProductCreateForm extends Component {
     state = {
@@ -24,6 +25,7 @@ export default class ProductCreateForm extends Component {
         team: [],
         productHunt: "",
         twitter: "",
+        accent: "#00a676",
         errorMessages: null
     };
 
@@ -69,7 +71,7 @@ export default class ProductCreateForm extends Component {
         try {
             this.setState({ isCreating: true });
             // returns product instance
-            await createProduct(
+            const product = await createProduct(
                 this.state.name,
                 this.state.description,
                 this.state.selectedProjects.map(p => p.id),
@@ -78,8 +80,13 @@ export default class ProductCreateForm extends Component {
                 this.state.url,
                 this.state.launched,
                 this.state.logo,
-                this.state.team
+                this.state.team,
+                this.state.accent
             );
+
+            this.setState({ finished: true });
+
+            Router.pushRoute(`/products/${product.slug}`);
 
             if (isFunction(this.props.onFinish)) {
                 this.props.onFinish();
@@ -221,6 +228,18 @@ export default class ProductCreateForm extends Component {
                             </p>
                         </label>
                         <TeamSelector onChange={this.onAddTeamMember} />
+                    </div>
+                    <div className="control">
+                        <label>Accent color (optional)</label>
+                        <p className="help mb-5">
+                            Add a little flair to your product!
+                        </p>
+                        <input
+                            onChange={this.handleChange}
+                            type="color"
+                            name="accent"
+                            value={this.state.accent}
+                        ></input>
                     </div>
                     <hr />
                     <button

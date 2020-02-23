@@ -1,27 +1,21 @@
 import React from "react";
-import {getBroadcasts} from "../lib/broadcasts";
+import { getBroadcasts } from "../lib/broadcasts";
 import OutboundLink from "./OutboundLink";
+import { imageUrl } from "../lib/utils/img";
 
 export const Broadcast = ({ broadcast }) => (
-    <div className={"Broadcast flex"}>
+    <div className={"Broadcast std-media flex flex-gap"}>
         <div>
-            <h2>{broadcast.title}</h2>
-            <p>{broadcast.message}</p>
-            {broadcast.url && (
-                <OutboundLink className={"btn-small green"} to={broadcast.url}>
-                    Take a look &raquo;
-                </OutboundLink>
-            )}
+            <h4>{broadcast.title}</h4>
+            <small>
+                <p>{broadcast.message}</p>
+                {broadcast.url && (
+                    <OutboundLink to={broadcast.url}>
+                        Learn more &raquo;
+                    </OutboundLink>
+                )}
+            </small>
         </div>
-        {broadcast.attachment && (
-            <div>
-                <img
-                    alt={broadcast.title}
-                    src={broadcast.attachment}
-                    width="75"
-                />
-            </div>
-        )}
     </div>
 );
 
@@ -48,20 +42,21 @@ class BroadcastList extends React.Component {
     render() {
         if (this.state.broadcasts.length && !this.state.failed) {
             return (
-                <>
-                    <div
-                        className={"card"}
-                        style={{ borderTop: "3px solid #00b77a" }}
-                    >
+                <div className="sidebar-item">
+                    <h3>New on Makerlog</h3>
+                    <div className={"card"}>
                         <div className={"card-content"}>
-                            <div className={"BroadcastList"}>
+                            <div
+                                className={"BroadcastList"}
+                                style={{ width: "100%" }}
+                            >
                                 {this.state.broadcasts.map(broadcast => (
                                     <Broadcast broadcast={broadcast} />
                                 ))}
                             </div>
                         </div>
                     </div>
-                </>
+                </div>
             );
         } else {
             return null;

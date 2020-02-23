@@ -14,6 +14,7 @@ import { isServer } from "~/config";
 import "./index.scss";
 import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
 import BlogCard from "../components/BlogCard";
+import BroadcastList from "../../BroadcastList";
 
 const quotes = [
     { text: "It's mango time.", from: "Fajar Siddiq" },

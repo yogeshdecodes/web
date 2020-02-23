@@ -10,6 +10,7 @@ import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import GlobalStream, {
     prefetch as prefetchStream
 } from "~/features/stream/containers/GlobalStream";
+import BroadcastList from "~/components/BroadcastList";
 
 class StreamPage extends React.Component {
     static async getInitialProps() {
@@ -31,6 +32,7 @@ class StreamPage extends React.Component {
                 <section className={"container"}>
                     <div className={"grid-c-s"}>
                         <div>
+                            <h3 className="mb-em">Today's log</h3>
                             {this.isNewUser() ? (
                                 <NoActivityCard />
                             ) : (

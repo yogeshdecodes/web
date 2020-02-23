@@ -54,7 +54,10 @@ export default connect(mapStateToProps)(
                         end={
                             me.id === product.user ? (
                                 <div className="navbar-item">
-                                    <Link route="products">
+                                    <Link
+                                        route="product-edit"
+                                        params={{ slug: product.slug }}
+                                    >
                                         <a className="btn btn-light">Edit</a>
                                     </Link>
                                 </div>
