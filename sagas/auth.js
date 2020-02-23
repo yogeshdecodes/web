@@ -41,7 +41,9 @@ function* fetchToken(action) {
             yield put(authActions.loginSuccess(token));
 
             if (!isServer) {
-                setCookie({}, "token", token);
+                setCookie({}, "token", token, {
+                    maxAge: 30 * 24 * 60 * 60
+                });
                 //sync auth across windows
                 window.localStorage.setItem("authSync_login", Date.now());
             }
