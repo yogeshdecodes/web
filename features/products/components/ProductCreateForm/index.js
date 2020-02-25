@@ -6,7 +6,11 @@ import { handleChange } from "~/lib/utils/random";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import HashtagPicker from "~/features/projects/components/HashtagPicker";
 import TeamSelector from "../TeamSelector";
-import { loadingClass } from "../../../../lib/utils/random";
+import {
+    loadingClass,
+    formatUrl,
+    formatHandle
+} from "../../../../lib/utils/random";
 import { createProduct } from "~/lib/products";
 import isFunction from "lodash/isFunction";
 import { Router } from "~/routes";
@@ -30,24 +34,14 @@ export default class ProductCreateForm extends Component {
     };
 
     setUrl = (key, url) => {
-        let newUrl = url;
-
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            newUrl = `https://${url}`;
-        }
-
         this.setState({
-            [key]: newUrl
+            [key]: formatUrl(url)
         });
     };
 
     setHandle = (key, handle) => {
-        let newHandle = handle;
-        if (handle.includes("@")) {
-            newHandle = newHandle.replace("@", "");
-        }
         this.setState({
-            [key]: newHandle
+            [key]: formatHandle(handle)
         });
     };
 
