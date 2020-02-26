@@ -1,5 +1,5 @@
 @import "../../../../styles/_variables";
-
+/*
 .Editor {
     @extend %corners;
     @extend %shadow;
@@ -290,10 +290,11 @@
 .icon-dropzone {
     height: 48px;
     width: 48px;
-    background-color: whitesmoke;
+    background-color: var(--c-bg-light);
     color: gray;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
 }
+*/

@@ -73,7 +73,10 @@ const LoggedInMenu = props => (
         </div>
         <div className="navbar-end">
             <div className="navbar-item">
-                <button className="has-text-bold is-small is-rounded is-primary">
+                <button
+                    onClick={props.onToggleEditor}
+                    className="has-text-bold is-small is-rounded is-primary"
+                >
                     New
                 </button>
             </div>

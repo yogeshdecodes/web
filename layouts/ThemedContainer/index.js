@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-function checkDarkMode(me) {
-    if (!me || !me.gold) return false;
-    return me.gold && me.dark_mode;
-}
+import { checkDarkMode } from "../../lib/utils/random";
 
 export default connect(state => ({
     darkMode: checkDarkMode(state.user.me)

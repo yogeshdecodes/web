@@ -38,6 +38,16 @@ export default class TeamTab extends Component {
     };
 
     render() {
+        if (!this.props.isOwner) {
+            return (
+                <div className="alert is-warning">
+                    <div className="alert-body">
+                        Only owners can change team settings.
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div>
                 <ErrorMessageList fieldErrors={this.state.errorMessages} />

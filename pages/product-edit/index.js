@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import GeneralTab from "~/features/products/components/settings/GeneralTab";
 import TeamTab from "~/features/products/components/settings/TeamTab";
 import { requireAuthed } from "~/lib/auth";
+import EventsTab from "../../features/products/components/settings/EventsTab";
 
 class ProductEditPage extends Component {
     state = {
@@ -63,9 +64,7 @@ class ProductEditPage extends Component {
             return (
                 <div className="container">
                     <div className="alert is-danger">
-                        <div className="alert-body">
-                            You don't have permission to be here.
-                        </div>
+                        <div className="alert-body">Go away, stranger!</div>
                     </div>
                 </div>
             );
@@ -85,6 +84,9 @@ class ProductEditPage extends Component {
                         )}
                         {this.state.tab === 1 && (
                             <TeamTab {...this.getTabProps()} />
+                        )}
+                        {this.state.tab === 2 && (
+                            <EventsTab {...this.getTabProps()} />
                         )}
                     </div>
                 </div>

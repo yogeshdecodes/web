@@ -1,5 +1,3 @@
-import "./index.scss";
-
 import {
     addProductToEvent,
     getEventsForProduct,
@@ -176,13 +174,15 @@ class EventsTab extends React.Component {
 
         if (!isOwner)
             return (
-                <div>
-                    <strong>
-                        Only the owner of this product can enroll it in an
-                        event.
-                    </strong>{" "}
-                    <br /> Your entry will count as one entry for the whole
-                    team.
+                <div className="alert is-warning">
+                    <div className="alert-body">
+                        <strong>
+                            Only the owner of this product can enroll it in an
+                            event.
+                        </strong>{" "}
+                        <br /> Your entry will count as one entry for the whole
+                        team.
+                    </div>
                 </div>
             );
 

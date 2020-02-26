@@ -69,7 +69,9 @@ export default connect(mapStateToProps)(({ user, me = {}, ...props }) => {
                         route="profile-page-updates"
                         params={{ username: user.username }}
                     >
-                        <a className={"navbar-item"}>Updates</a>
+                        <a className={"navbar-item disabled"}>
+                            Updates <span className="tag">soon</span>
+                        </a>
                     </NavLink>
                     <NavLink
                         activeClassName="is-active"

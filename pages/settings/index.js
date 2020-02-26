@@ -1,5 +1,6 @@
 import React from "react";
 import { actions as userActions } from "~/ducks/user";
+import { actions as authActions } from "~/ducks/auth";
 import { connect } from "react-redux";
 import { Button } from "~/vendor/bulma";
 import axios from "~/lib/axios";
@@ -16,6 +17,7 @@ import { requireAuthed } from "~/lib/auth";
 import "./index.scss";
 import { isServer } from "~/config";
 import PageNavigation from "~/components/ui/PageNavigation";
+import { loadingClass } from "~/lib/utils/random";
 
 class SecuritySettings extends React.Component {
     state = {
@@ -41,6 +43,7 @@ class SecuritySettings extends React.Component {
             if (success) {
                 this.setState({
                     success: true,
+                    isChanging: false,
                     oldPassword: "",
                     newPassword: ""
                 });
@@ -49,6 +52,9 @@ class SecuritySettings extends React.Component {
                     "Password change failed, and server didn't return why."
                 );
             }
+
+            // refresh tokens
+            authActions.login(this.props.user, this.state.newPassword);
         } catch (e) {
             this.setState({
                 failed: true
@@ -81,8 +87,12 @@ class SecuritySettings extends React.Component {
     render() {
         return (
             <div>
-                <section className={"settings-header"}>
+                <section className={"settings-header mb-5"}>
                     <h2>Change your password</h2>
+                    <p>
+                        Note: a password change will revoke all previously
+                        issued auth tokens.
+                    </p>
                 </section>
                 {this.renderSuccess()}
                 {this.renderErrors()}
@@ -108,7 +118,13 @@ class SecuritySettings extends React.Component {
                         />
                     </div>
                 </div>
-                <button className={"btn"} onClick={this.onSubmit}>
+                <button
+                    className={loadingClass(
+                        "btn btn-secondary",
+                        this.state.isChanging
+                    )}
+                    onClick={this.onSubmit}
+                >
                     Change password
                 </button>
             </div>
@@ -437,7 +453,9 @@ class SettingsPage extends React.Component {
                                     updateUser={this.props.updateUser}
                                 />
                             )}
-                            {this.state.activeTab === 2 && <SecuritySettings />}
+                            {this.state.activeTab === 2 && (
+                                <SecuritySettings user={this.props.user} />
+                            )}
                             {this.state.activeTab === 3 && <DataSettings />}
                             {this.state.activeTab === 4 && <ManagementPanel />}
                             {this.state.activeTab === 5 && (

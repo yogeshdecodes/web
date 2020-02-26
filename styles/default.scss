@@ -1857,12 +1857,13 @@ figure.img-circle {
         background-color: rgba(54, 54, 54, 0.951);
     }
 
-    &.warning {
+    &.warning,
+    &.is-warning {
         background-color: rgba(255, 221, 87, 0.1);
         border-left: 4px solid rgba(255, 221, 87, 1);
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
-        color: rgba(255, 221, 87, 1);
+        color: rgb(209, 181, 69);
 
         .alert-icon {
             background-color: rgba(255, 221, 87, 0.1);

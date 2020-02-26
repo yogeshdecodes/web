@@ -7,12 +7,16 @@ import Sticky from "react-stickynode";
 import { isServer } from "~/config";
 import Head from "~/components/Head";
 import "./index.scss";
+import ProfilePage from "~/layouts/ProfilePage";
+import Task from "~/features/stream/components/Task";
 
 class EntryPage extends React.Component {
     static async getInitialProps({ query }) {
         try {
+            const layout = { className: "UserPage" };
             return {
-                task: await getTask(query.id)
+                task: await getTask(query.id),
+                layout
             };
         } catch (e) {
             if (e.status_code && e.status_code === 404) {
@@ -31,7 +35,7 @@ class EntryPage extends React.Component {
         const { task } = this.props;
 
         return (
-            <div className="EntryPage container">
+            <ProfilePage user={task.user}>
                 <Head
                     title={`Done by @${task.user.username} |
                     Makerlog`}
@@ -39,24 +43,12 @@ class EntryPage extends React.Component {
                     ogImage={task.user.avatar}
                 />
 
-                <div className={"columns"}>
-                    <div className={"column is-one-quarter"}>
-                        <Sticky
-                            enabled={
-                                !isServer ? window.innerWidth >= 728 : true
-                            }
-                            top={30}
-                        >
-                            <UserCard user={task.user} />
-                        </Sticky>
-                    </div>
-                    <div className={"column"}>
-                        <EntryDetail task={task} />
-                        <br />
-                        <CommentsBox indexUrl={`/tasks/${task.id}/`} />
+                <div className="card">
+                    <div className="card-content">
+                        <Task task={task} defaultOpen />
                     </div>
                 </div>
-            </div>
+            </ProfilePage>
         );
     }
 }

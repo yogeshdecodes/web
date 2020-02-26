@@ -1,3 +1,7 @@
+@import "../../styles/variables";
+$min-modal-height: $navbar-height;
+$modal-padding: 1rem;
+
 .Modal {
     position: absolute;
     min-width: 50%;
@@ -6,7 +10,7 @@
     transform: translate(-50%, -50%);
     outline: none;
     animation: fadein 0.5s;
-    background-color: white;
+    background-color: var(--c-lightest);
     border-radius: 8px;
     max-height: 100%;
     overflow-y: auto;
@@ -18,7 +22,7 @@
 
 .Modal-Container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .Modal-Column {
@@ -35,27 +39,16 @@
 }
 
 .Modal-Header {
-    min-height: 500px;
-    padding: 20px;
-    background: #56ccf2; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-        to top,
-        #2f80ed,
-        #56ccf2
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-        to top,
-        #2f80ed,
-        #56ccf2
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    min-height: calc(#{$min-modal-height} / 3);
+    padding: $modal-padding;
+    padding-top: $modal-padding / 2;
+    padding-bottom: $modal-padding / 2;
+    background: var(--c-bg);
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.Modal-Header > div {
-    text-align: center;
-    color: white;
+    > div.flex {
+        width: 100%;
+    }
 }
 
 .Modal-Header > div > div > .tag {
@@ -64,7 +57,6 @@
 
 .Modal-Header > div > h1 {
     text-align: center;
-    color: white;
 }
 
 .Modal-Header > div > .upload-button {
@@ -72,7 +64,6 @@
 }
 
 .Modal-Header > div > .subtitle {
-    color: white;
 }
 
 strong {
@@ -80,7 +71,6 @@ strong {
 }
 
 .Modal-Header > div > p > strong {
-    color: white;
 }
 
 .Modal-Header > div > p {
@@ -89,21 +79,20 @@ strong {
 }
 
 .Modal-Header > div > h5 {
-    color: white;
-}
-
-.Modal-Avatar {
-    height: 100px;
-    width: 100px;
-    border: 4px solid white;
-    border-radius: 50%;
-    margin-bottom: 10px;
 }
 
 .Modal-Content {
-    padding: 30px;
+    min-height: $min-modal-height;
+    padding: $modal-padding;
     flex: 1;
     overflow-y: auto;
+
+    align-items: center;
+    display: flex;
+
+    > div {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -116,7 +105,7 @@ strong {
     }
 
     .Modal-Container {
-        flex-direction: row;
+        //flex-direction: row;
     }
 
     .Modal-Content {
@@ -147,9 +136,9 @@ strong {
     }
 }
 
-.ReactModal__Body--open > #root {
+.ReactModal__Body--open #__next {
     /* Performance broski */
-    /* filter: blur(1.5px); */
+    //filter: blur(1.5px);
 }
 
 .ModalOverlay {
@@ -158,6 +147,6 @@ strong {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.65);
-    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
 }

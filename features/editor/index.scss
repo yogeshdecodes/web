@@ -1,0 +1,19 @@
+@import "../../styles/_variables";
+
+.Editor {
+    .editor-select {
+        color: var(--c-text);
+        margin-right: 10px;
+        display: inline-block;
+
+        &.is-active {
+            font-weight: bold;
+            color: var(--c-title);
+            border-bottom: 2px solid $c-main;
+        }
+
+        &:hover:not(.is-active) {
+            color: var(--c-text);
+        }
+    }
+}

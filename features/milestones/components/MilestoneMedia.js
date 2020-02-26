@@ -191,7 +191,7 @@ class MilestoneMediaComponent extends React.Component {
                             {this.props.me &&
                                 this.props.me.id === milestone.user.id &&
                                 !(this.props.xs || this.props.stream) && (
-                                    <Button
+                                    <button
                                         onClick={e =>
                                             this.setState({
                                                 editing: !this.state.editing
@@ -199,24 +199,23 @@ class MilestoneMediaComponent extends React.Component {
                                         }
                                         small
                                         className={
-                                            "is-rounded" +
+                                            "btn btn-link is-rounded btn-small" +
                                             (this.props.xs || this.props.stream
                                                 ? " hidden-button"
                                                 : "")
                                         }
                                     >
                                         <FontAwesomeIcon icon={"edit"} />
-                                    </Button>
+                                    </button>
                                 )}
                             {this.props.me &&
                                 this.props.me.id === milestone.user.id && (
-                                    <Button
+                                    <button
                                         loading={this.state.deleting}
                                         onClick={this.delete}
-                                        small
                                         danger={this.state.confirmDelete}
                                         className={
-                                            "is-rounded" +
+                                            "btn btn-link btn-small is-rounded" +
                                             (this.props.xs || this.props.stream
                                                 ? " hidden-button"
                                                 : "")
@@ -226,7 +225,7 @@ class MilestoneMediaComponent extends React.Component {
                                         {this.state.confirmDelete
                                             ? "Are you sure?"
                                             : ""}
-                                    </Button>
+                                    </button>
                                 )}
                         </div>
                     )}

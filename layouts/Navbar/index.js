@@ -13,6 +13,7 @@ import { actions as authActions } from "~/ducks/auth";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withRouter } from "next/router";
+import { actions as editorActions } from "~/ducks/editor";
 import { imageUrl } from "../../lib/utils/img";
 
 class Navbar extends React.Component {
@@ -127,6 +128,7 @@ class Navbar extends React.Component {
 
                     {this.props.isLoggedIn && (
                         <LoggedInMenu
+                            onToggleEditor={this.props.toggleEditor}
                             expanded={this.state.expanded}
                             onToggleExpand={this.onToggleExpand}
                             user={this.props.user}
@@ -152,6 +154,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        toggleEditor: () => {
+            dispatch(editorActions.toggleEditor());
+        },
         onClickLogout: () => {
             dispatch(authActions.logout());
         },

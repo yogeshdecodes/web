@@ -26,6 +26,7 @@ import { gaSetUserId, isGaEnabled } from "../vendor/ga";
 import Router from "next/router"; // yes this is correct
 import nookies from "nookies";
 import ThemedContainer from "~/layouts/ThemedContainer";
+import Editor from "~/features/editor";
 
 async function onStoreInit(ctx) {
     // only the sagas here are run on the server side; no async dependencies.
@@ -135,6 +136,7 @@ class Artemis extends App {
                     </Page>
 
                     <Reactor />
+                    <Editor />
                     <NotificationsView />
                 </ThemedContainer>
             </Provider>

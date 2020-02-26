@@ -11,6 +11,7 @@ import { Link } from "~/routes";
 import { imageUrl } from "~/lib/utils/img";
 import "../ProfilePage/index.scss";
 import ProductIcon from "../../features/products/components/ProductIcon";
+import { isTeamMember } from "~/lib/utils/products";
 
 function getCoverStyle(product, isBackdrop = false) {
     if (product.accent)
@@ -52,7 +53,8 @@ export default connect(mapStateToProps)(
                             </div>
                         }
                         end={
-                            me.id === product.user ? (
+                            me.id === product.user ||
+                            isTeamMember(product, me) ? (
                                 <div className="navbar-item">
                                     <Link
                                         route="product-edit"

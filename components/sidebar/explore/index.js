@@ -205,14 +205,20 @@ const UpcomingEventsCard = ({ upcomingEvents }) => {
             </h4>
             <div className="card">
                 <div className="card-content">
-                    {upcomingEvents.map(event => (
-                        <span style={{ marginBottom: 5, width: "100%" }}>
-                            <EventMedia small event={event} />
-                        </span>
-                    ))}
-                    {upcomingEvents.length === 0 && (
-                        <button className="btn-light">Host an event</button>
-                    )}
+                    <div className="flex flex-column flex-v-gap">
+                        {upcomingEvents.map(event => (
+                            <div>
+                                <EventMedia small event={event} />
+                            </div>
+                        ))}
+                        {upcomingEvents.length === 0 && (
+                            <div>
+                                <button className="btn-light">
+                                    Host an event
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

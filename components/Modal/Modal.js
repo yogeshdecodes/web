@@ -1,5 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
+import { connect } from "react-redux";
+import { checkDarkMode } from "../../lib/utils/random";
 
 export const ModalContent = props => {
     let styles = {
@@ -41,12 +43,18 @@ class Modal extends React.Component {
         ReactModal.setAppElement("body");
     }
 
+    getThemeData = () => {
+        return {
+            theme: this.props.darkMode ? "dark" : "light"
+        };
+    };
+
     // flexdirection: row or column
     render() {
         let styles = {
             flexDirection: this.props.flexDirection
                 ? this.props.flexDirection
-                : "row"
+                : "column"
         };
 
         if (this.props.style) {
@@ -63,11 +71,12 @@ class Modal extends React.Component {
                 className="Modal"
                 shouldCloseOnOverlayClick={true}
                 overlayClassName="ModalOverlay"
+                data={this.getThemeData()}
                 style={{
                     content: {
                         background: this.props.background
                             ? this.props.background
-                            : "white",
+                            : "var(--c-lightest)",
                         width: this.props.percentWidth
                             ? `${this.props.percentWidth}%`
                             : "50%",
@@ -96,4 +105,6 @@ class Modal extends React.Component {
 
 Modal.propTypes = {};
 
-export default Modal;
+export default connect(state => ({
+    darkMode: checkDarkMode(state.user.me)
+}))(Modal);

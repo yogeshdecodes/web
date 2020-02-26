@@ -174,10 +174,6 @@ class ProfileTab extends React.Component {
             <form onSubmit={this.onSubmit}>
                 <div className={"grid-2c grid-gap"}>
                     <div>
-                        <section className={"settings-header"}>
-                            <h2 className={"mt0"}>You</h2>
-                            <br />
-                        </section>
                         <div className={"form-row"}>
                             <label className="label">First name</label>
                             <div className={"control"}>
@@ -321,11 +317,6 @@ class ProfileTab extends React.Component {
                         </div>
                     </div>
                     <div>
-                        <section className={"settings-header"}>
-                            <h2>Social</h2>
-                            <br />
-                        </section>
-
                         <label className="label">Twitter handle</label>
                         <div className={"form-row has-addons"}>
                             <div className={"control"}>

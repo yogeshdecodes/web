@@ -47,11 +47,17 @@ function isRecentTask(task) {
 */
 
 class Task extends React.Component {
-    state = {
-        attachmentOpen: false,
-        detailsOpen: false,
-        hover: false
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            attachmentOpen: false,
+            detailsOpen: this.props.defaultOpen
+                ? this.props.defaultOpen
+                : false,
+            hover: false
+        };
+    }
 
     onMouseEnter = e => {
         this.setState({

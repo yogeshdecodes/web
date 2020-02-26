@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import Emoji from "~/components/Emoji";
-import { mapStateToProps as mapUserToProps } from "~/ducks/user";
-import { connect } from "react-redux";
 import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import findHashtags from "find-hashtags";
 import debounce from "lodash/debounce";
-import uniqueId from "lodash/uniqueId";
 
-const PostTypes = {
-    TASK: 1,
-    QUESTION: 2,
-    MILESTONE: 3,
-    RFF: 4
-};
+/*
+PropTypes:
+onChange => control onTaskAdd, remove -> returns newState
+onAdd(t) => queue control
+onRemove(t) => queue control
+queue => controlled component state
+*/
 
 const Hashtag = (tag, inText = false) => {
     return {
@@ -22,12 +19,11 @@ const Hashtag = (tag, inText = false) => {
     };
 };
 
-class QuickPost extends Component {
+class TaskQueue extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            type: PostTypes.TASK,
             tasks: [this.createTaskObject("", true)],
             currentTask: null,
             hashtags: []
@@ -83,20 +79,16 @@ class QuickPost extends Component {
     };
 
     handleChange = e => {
-        if (this.state.type === PostTypes.TASK) {
-            this.onTaskInput(e.target.value);
+        this.onTaskInput(e.target.value);
 
-            this.setActiveTask(e.target.name);
+        this.setActiveTask(e.target.name);
 
-            let task = this.state.tasks.find(t => t.id === e.target.name);
-            task.content = e.target.value;
+        let task = this.state.tasks.find(t => t.id === e.target.name);
+        task.content = e.target.value;
 
-            this.setState({
-                tasks: this.state.tasks.map(x => (x.id === task.id ? task : x))
-            });
-        } else {
-            this.setState({ [e.target.name]: e.target.value });
-        }
+        this.setState({
+            tasks: this.state.tasks.map(x => (x.id === task.id ? task : x))
+        });
     };
 
     setActiveTask = currentTask => {
@@ -126,7 +118,7 @@ class QuickPost extends Component {
         const open = this.state.currentTask !== null;
 
         return (
-            <div className={"QuickPost " + (open ? "is-active" : "")}>
+            <div className={"TaskQueue " + (open ? "is-active" : "")}>
                 <div className="controls">
                     <div className="input-container"></div>
 
@@ -156,6 +148,7 @@ class QuickPost extends Component {
                                 </div>
                                 <div className="input">
                                     <input
+                                        autocomplete="off"
                                         onKeyDown={this.onTaskKeyDown}
                                         name={task.id}
                                         onChange={this.handleChange}
@@ -168,69 +161,9 @@ class QuickPost extends Component {
                         ))}
                     </div>
                 </div>
-
-                <footer className="flex flex-gap">
-                    <div>
-                        <button className="btn-small btn-light">
-                            <FontAwesomeIcon icon="check-circle" /> Completed
-                        </button>
-                    </div>
-                    {this.state.hashtags.length > 0 ? (
-                        this.state.hashtags.map(t => (
-                            <div>
-                                <button className="btn-small btn-gray">
-                                    #{t.tag}
-                                </button>
-                            </div>
-                        ))
-                    ) : (
-                        <div>
-                            <button className="btn-small btn-gray">
-                                + Add tags
-                            </button>
-                        </div>
-                    )}
-                    <div className="flex-grow"></div>
-                    <div>
-                        <button className="btn-small">Post</button>
-                    </div>
-                </footer>
             </div>
         );
     }
 }
 
-const mapStateToProps = state => ({
-    hasGold: state.user.me ? state.user.me.gold : false,
-    open: state.editor.open,
-    queue: state.editor.queue,
-    creatingMilestone: state.editor.creatingMilestone,
-    creatingDiscussion: state.editor.creatingDiscussion,
-    editorDueAt: state.editor.editorDueAt,
-    editorAttachment: state.editor.editorAttachment,
-    isCreating: state.editor.isCreating,
-    editorValue: state.editor.editorValue,
-    editorDone: state.editor.editorDone,
-    editorInProgress: state.editor.editorInProgress,
-    createFailed: state.editor.createFailed,
-    errorMessages: state.editor.errorMessages,
-    fieldErrors: state.editor.fieldErrors
-});
-
-const mapDispatchToProps = dispatch => ({
-    onClose: () => dispatch(editorActions.toggleEditor()),
-    addToQueue: () => dispatch(editorActions.addToQueue()),
-    removeFromQueue: t => dispatch(editorActions.removeFromQueue(t)),
-    createTasks: () => dispatch(editorActions.createTasks()),
-    setEditorValue: v => dispatch(editorActions.setEditorValue(v)),
-    setEditorDueAt: v => dispatch(editorActions.setEditorDueAt(v)),
-    toggleEditorDone: () => dispatch(editorActions.toggleEditorDone()),
-    setEditorAttachment: a => dispatch(editorActions.setEditorAttachment(a)),
-    markDone: () => dispatch(editorActions.markDone()),
-    markInProgress: () => dispatch(editorActions.markInProgress()),
-    markRemaining: () => dispatch(editorActions.markRemaining()),
-    openMilestoneEditor: () => dispatch(editorActions.openMilestoneEditor()),
-    openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(QuickPost);
+export default TaskQueue;

@@ -1,10 +1,11 @@
 @import "../../../../styles/_variables";
 
-.QuickPost {
-    @extend %long-shadow;
+.TaskQueue {
+    .help {
+        margin-top: 10px;
+    }
 
     header {
-        background: white;
         padding-top: 1rem;
 
         button {
@@ -64,9 +65,10 @@
     .input-container input {
         padding: 0 1.5rem 1.5rem;
         font-size: 20px;
-        background: white;
+        background: var(--c-lightest);
         border: none;
         width: 100%;
+        color: var(--c-text);
         @extend %corners;
     }
 
@@ -80,7 +82,7 @@
         flex-direction: row;
         align-items: center;
         // padding: 1rem;
-        padding-top: 0px;
+        padding-top: 1rem;
         position: relative;
         opacity: 0.5;
 
@@ -123,12 +125,13 @@
         & > div.input {
             width: 100%;
             > input {
+                color: var(--c-title);
                 //padding: 1.5rem;
                 padding-left: 0.6rem;
                 padding-top: 0px;
                 font-size: 20px;
                 // @extend %worksans;
-                background: white;
+                background: var(--c-lightest);
                 border: none;
                 width: 100%;
                 @extend %corners;
