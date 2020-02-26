@@ -3,6 +3,7 @@ import ProductSettingsPage from "../../layouts/ProductSettingsPage";
 import { getProductBySlug } from "../../lib/products";
 import { connect } from "react-redux";
 import GeneralTab from "~/features/products/components/settings/GeneralTab";
+import TeamTab from "~/features/products/components/settings/TeamTab";
 import { requireAuthed } from "~/lib/auth";
 
 class ProductEditPage extends Component {
@@ -71,8 +72,22 @@ class ProductEditPage extends Component {
         }
 
         return (
-            <ProductSettingsPage product={product} switchTab={this.switchTab}>
-                {this.state.tab === 0 && <GeneralTab {...this.getTabProps()} />}
+            <ProductSettingsPage
+                product={product}
+                tab={this.state.tab}
+                switchTab={this.switchTab}
+                {...this.getTabProps()}
+            >
+                <div className="card">
+                    <div className="card-content">
+                        {this.state.tab === 0 && (
+                            <GeneralTab {...this.getTabProps()} />
+                        )}
+                        {this.state.tab === 1 && (
+                            <TeamTab {...this.getTabProps()} />
+                        )}
+                    </div>
+                </div>
             </ProductSettingsPage>
         );
     }

@@ -12,27 +12,33 @@ export default class ProductSettingsPage extends Component {
                 title={product.name}
                 nav={
                     <>
-                        <NavLink
-                            route="product-edit"
-                            params={{ slug: product.slug }}
-                            activeClassName="is-active"
+                        <a
+                            className={
+                                "navbar-item " +
+                                (this.props.tab === 0 && "is-active")
+                            }
+                            onClick={e => this.props.switchTab(0)}
                         >
-                            <a className="navbar-item">General</a>
-                        </NavLink>
-
-                        <NavLink
-                            route="events-past"
-                            activeClassName="is-active"
+                            General
+                        </a>
+                        <a
+                            className={
+                                "navbar-item " +
+                                (this.props.tab === 1 && "is-active")
+                            }
+                            onClick={e => this.props.switchTab(1)}
                         >
-                            <a className="navbar-item">Team</a>
-                        </NavLink>
-
-                        <NavLink
-                            route="events-host"
-                            activeClassName="is-active"
+                            Team
+                        </a>
+                        <a
+                            className={
+                                "navbar-item " +
+                                (this.props.tab === 2 && "is-active")
+                            }
+                            onClick={e => this.props.switchTab(2)}
                         >
-                            <a className="navbar-item">Events</a>
-                        </NavLink>
+                            Events
+                        </a>
                     </>
                 }
                 sidebar={<ProductsPageSidebar />}

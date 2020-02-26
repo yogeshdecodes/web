@@ -21,15 +21,18 @@ class UserGroupSelector extends React.Component {
     async componentDidMount() {
         if (this.props.product && this.props.onChange) {
             try {
-                const people = await getProductPeople(this.props.product.slug);
+                const people = await getProductPeople(
+                    this.props.product.slug,
+                    true
+                );
                 this.setState({
                     loading: false,
-                    team: [
-                        ...people.filter(u => this.props.product.user !== u.id)
-                    ]
+                    team: people.filter(u => this.props.product.user !== u.id)
                 });
                 // Remove owner from list
-            } catch (e) {}
+            } catch (e) {
+                console.log(e);
+            }
         } else {
             this.setState({ loading: false });
         }
