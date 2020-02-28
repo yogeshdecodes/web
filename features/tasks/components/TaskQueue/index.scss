@@ -106,19 +106,36 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+            cursor: pointer;
 
             div {
-                border-radius: 2px;
-                height: 18px;
-                width: 18px;
-                background: $c-main;
+                border-radius: 50%;
+                height: 19px;
+                width: 19px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                &.done {
+                    background: $c-main;
+                }
+
+                &.remaining,
+                &.in-progress {
+                    background-color: $c-in-progress;
+                }
             }
 
             svg {
-                width: 0.8em;
+                height: 1.3rem;
+                width: 1.3rem;
+            }
+
+            &.in-progress svg {
+                @extend %round;
+                animation: pulse 2s infinite;
+                box-shadow: 0 0 5px #f4a324;
+                z-index: 100;
             }
         }
 

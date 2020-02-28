@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Sticky from "react-stickynode";
 import ProfileTab from "../../features/users/views/ProfileTab";
 import GoldTab from "../../features/users/views/GoldTab";
+import StreakTab from "../../features/users/views/StreakTab";
 import SidebarLink from "~/components/SidebarLink";
 import { requireAuthed } from "~/lib/auth";
 import "./index.scss";
@@ -468,6 +469,8 @@ class SettingsPage extends React.Component {
                                     updateUser={this.props.updateUser}
                                 />
                             )}
+
+                            {this.state.activeTab === 8 && <StreakTab />}
                         </div>
                     </div>
                 </section>

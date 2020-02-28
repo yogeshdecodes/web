@@ -10,6 +10,8 @@ import config from "~/config";
 import ReplyForm from "./ReplyForm";
 import ReplyList from "./ReplyList";
 import { deleteThread } from "~/lib/discussions";
+import Spinner from "~/components/Spinner";
+import { Router } from "~/routes";
 
 export default connect(mapUserToProps)(
     class Thread extends React.Component {
@@ -150,7 +152,7 @@ export default connect(mapUserToProps)(
                                                     <div>
                                                         <button
                                                             className={
-                                                                "btn-link"
+                                                                "gray-link-with-icon"
                                                             }
                                                             onClick={
                                                                 this
@@ -167,7 +169,7 @@ export default connect(mapUserToProps)(
                                                     <div>
                                                         <button
                                                             className={
-                                                                "btn-small btn-delete"
+                                                                "gray-link-with-icon btn-delete"
                                                             }
                                                             onClick={
                                                                 this

@@ -1925,6 +1925,10 @@ figure.img-circle {
 .help {
     margin-top: 0;
     font-size: 12px;
+
+    &.help-link {
+        cursor: help;
+    }
 }
 
 .clickable {
@@ -2143,7 +2147,8 @@ a {
     }
 }
 
-form {
+form,
+.form {
     .control {
         margin-bottom: 20px;
 
@@ -2249,5 +2254,42 @@ form {
 ul.unstyled {
     li {
         list-style-type: none;
+    }
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+        box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+}
+
+.ThreadTypeSelect {
+    border: 1px solid var(--c-border);
+    padding: 10px;
+    cursor: pointer;
+
+    &.is-selected {
+        font-weight: bold;
     }
 }

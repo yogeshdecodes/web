@@ -35,9 +35,24 @@ export const ModalHeader = props => {
     );
 };
 
+export const ModalFooter = props => {
+    // Allow width screen ratio
+    // let ratio = 1;
+    //let styles = {
+    //   flex:
+    //}
+
+    return (
+        <div className="Modal-Column Modal-Footer" style={props.style}>
+            {props.children}
+        </div>
+    );
+};
+
 class Modal extends React.Component {
     static Header = ModalHeader;
     static Content = ModalContent;
+    static Footer = ModalFooter;
 
     componentWillMount() {
         ReactModal.setAppElement("body");
@@ -68,9 +83,17 @@ class Modal extends React.Component {
             <ReactModal
                 isOpen={this.props.open}
                 onRequestClose={this.props.onClose}
-                className="Modal"
+                className={
+                    this.props.modalClassName
+                        ? this.props.modalClassName
+                        : "Modal"
+                }
                 shouldCloseOnOverlayClick={true}
-                overlayClassName="ModalOverlay"
+                overlayClassName={
+                    this.props.overlayClassName
+                        ? this.props.overlayClassName
+                        : "ModalOverlay"
+                }
                 data={this.getThemeData()}
                 style={{
                     content: {

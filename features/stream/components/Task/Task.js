@@ -115,8 +115,10 @@ class Task extends React.Component {
 
         return this.props.task.done ? (
             <FontAwesomeIcon icon={doneIcon} color={doneColor} />
+        ) : this.props.task.in_progress ? (
+            <FontAwesomeIcon icon={"dot-circle"} color="#f39c12" />
         ) : (
-            <FontAwesomeIcon icon={remainingIcon} color={remainingColor} />
+            <FontAwesomeIcon icon={["far", "circle"]} color="#f39c12" />
         );
     };
 

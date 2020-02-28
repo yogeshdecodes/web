@@ -1,4 +1,5 @@
-import {errorArray} from "~/lib/utils/error";
+import { errorArray } from "~/lib/utils/error";
+import uniqBy from "lodash/uniqBy";
 
 const initialState = {
     open: false,
@@ -65,15 +66,6 @@ export const editorReducer = (state = initialState, action) => {
             };
 
         case types.ADD_TO_QUEUE:
-            let task = {
-                content: state.editorValue,
-                done: state.editorDone,
-                in_progress: state.editorInProgress,
-                due_at: state.editorDueAt
-            };
-            if (state.editorAttachment) {
-                task["attachment"] = state.editorAttachment;
-            }
             return {
                 ...state,
                 editorValue: "",
@@ -81,15 +73,13 @@ export const editorReducer = (state = initialState, action) => {
                 editorDone: true,
                 editorInProgress: false,
                 editorAttachment: null,
-                queue: [...state.queue, task]
+                queue: uniqBy([...state.queue, action.task], "id")
             };
 
         case types.REMOVE_FROM_QUEUE:
             return {
                 ...state,
-                queue: [...state.queue].filter(
-                    t => t.content !== action.task.content
-                )
+                queue: [...state.queue].filter(t => t.id !== action.task.id)
             };
 
         case types.SET_EDITOR_ATTACHMENT:
@@ -175,7 +165,7 @@ export const editorReducer = (state = initialState, action) => {
 export const actions = {
     toggleEditor: () => ({ type: types.TOGGLE_EDITOR }),
 
-    addToQueue: () => ({ type: types.ADD_TO_QUEUE }),
+    addToQueue: task => ({ type: types.ADD_TO_QUEUE, task }),
     removeFromQueue: task => ({ type: types.REMOVE_FROM_QUEUE, task: task }),
     setEditorDueAt: value => ({
         type: types.EDITOR_SET_DUE_AT,
