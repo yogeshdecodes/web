@@ -279,10 +279,13 @@ class ProfileTab extends React.Component {
                                 onDrop={this.onAvatarUpload}
                             >
                                 {this.state.avatarPreviewUrl ? (
-                                    <img
-                                        className={"image is-square is-48x48"}
-                                        src={this.state.avatarPreviewUrl}
-                                    />
+                                    <figure className="is-square is-64x64">
+                                        <img
+                                            style={{ height: 64, width: 64 }}
+                                            className={"image"}
+                                            src={this.state.avatarPreviewUrl}
+                                        />
+                                    </figure>
                                 ) : this.state.avatarUploading ? (
                                     <Spinner small />
                                 ) : (
@@ -303,11 +306,12 @@ class ProfileTab extends React.Component {
                                 onDrop={this.onHeaderUpload}
                             >
                                 {this.state.headerPreviewUrl ? (
-                                    <img
-                                        className={"image is-4by3"}
-                                        style={{ height: 100 }}
-                                        src={this.state.headerPreviewUrl}
-                                    />
+                                    <figure className="image is4by3">
+                                        <img
+                                            style={{ height: 100 }}
+                                            src={this.state.headerPreviewUrl}
+                                        />
+                                    </figure>
                                 ) : this.state.headerUploading ? (
                                     <Spinner small />
                                 ) : (

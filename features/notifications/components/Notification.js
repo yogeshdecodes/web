@@ -285,18 +285,16 @@ function renderNotificationVerb(key, notification, grouped = false) {
 const Notification = ({ notification, grouped = false }) => {
     let notificationImage = null;
     let notificationHtml = "Error parsing notification.";
-
-    let key = "";
-
-    if (grouped && notification.length > 0) {
-        key = notification[0].key;
-    } else {
-        key = notification.key;
-    }
-
-    const verb = renderNotificationVerb(key, notification, grouped);
-
     try {
+        let key = "";
+
+        if (grouped && notification.length > 0) {
+            key = notification[0].key;
+        } else {
+            key = notification.key;
+        }
+        const verb = renderNotificationVerb(key, notification, grouped);
+
         switch (key) {
             case "received_praise":
                 if (grouped) {
@@ -367,32 +365,27 @@ const Notification = ({ notification, grouped = false }) => {
                 break;
 
             case "user_joined":
-                notificationImage = "/assets/img/icon.jpg";
+                notificationImage = "/icons/android-chrome-192x192.png";
                 notificationHtml = (
                     <div>
-                        <h3>
-                            <Emoji emoji={"🎉"} /> Welcome to Makerlog,{" "}
-                            {notification.recipient.username}!
-                        </h3>
-                        <div className={"buttons"}>
-                            <Link route={"explore"}>
-                                <a className={"btn is-primary is-rounded"}>
-                                    Explore Makerlog
+                        {renderNotificationVerb(key, notification)}
+
+                        <div className="content-case">
+                            <div className={"flex flex-gap"}>
+                                <a
+                                    className={"btn btn-light btn-small"}
+                                    target={"_blank"}
+                                    rel="noopener noreferrer"
+                                    href={"https://t.me/makerlog"}
+                                >
+                                    Join Telegram
                                 </a>
-                            </Link>
-                            <a
-                                className={"btn btn-light"}
-                                target={"_blank"}
-                                rel="noopener noreferrer"
-                                href={"https://t.me/makerlog"}
-                            >
-                                Join Telegram
-                            </a>
-                            <Link route={"settings"}>
-                                <a className={"btn btn-light"}>
-                                    Edit your profile
-                                </a>
-                            </Link>
+                                <Link route={"settings"}>
+                                    <a className={"btn btn-light btn-small"}>
+                                        Edit your profile
+                                    </a>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 );
@@ -587,19 +580,6 @@ const Notification = ({ notification, grouped = false }) => {
                 </figure>
             </div>
             <div className="flex-grow">{notificationHtml}</div>
-        </div>
-    );
-
-    return (
-        <div
-            className={notification.read ? "Notification read" : "Notification"}
-        >
-            {notificationImage && (
-                <div>
-                    <img className="img-circle" src={notificationImage} />
-                </div>
-            )}
-            {notificationHtml}
         </div>
     );
 };

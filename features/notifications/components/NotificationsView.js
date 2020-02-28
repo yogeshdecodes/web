@@ -35,6 +35,11 @@ class NotificationsView extends React.Component {
         }
     };
 
+    isMalformedNotification(n) {
+        if (!n.actor) return true;
+        return false;
+    }
+
     renderNotifications = () => {
         let notifications = this.state.notifications;
         notifications = notifications.filter(n => n.target !== null);
