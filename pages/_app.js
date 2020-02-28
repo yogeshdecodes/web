@@ -26,6 +26,7 @@ import { gaSetUserId, isGaEnabled } from "../vendor/ga";
 import Router from "next/router"; // yes this is correct
 import nookies from "nookies";
 import ThemedContainer from "~/layouts/ThemedContainer";
+import MobileNav from "~/layouts/MobileNav";
 import Editor from "~/features/editor";
 
 async function onStoreInit(ctx) {
@@ -138,6 +139,7 @@ class Artemis extends App {
                     <Reactor />
                     <Editor />
                     <NotificationsView />
+                    <MobileNav />
                 </ThemedContainer>
             </Provider>
         );

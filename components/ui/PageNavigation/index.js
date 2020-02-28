@@ -28,7 +28,7 @@ class PageNavigation extends React.Component {
             >
                 <div className={"container"}>
                     <div className={"flex v-center flex-gap-big"}>
-                        <div className={"flex v-center"}>
+                        <div className={"flex v-center is-hidden-mobile"}>
                             <strong>{this.props.title}</strong>
 
                             <div

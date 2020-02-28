@@ -285,6 +285,9 @@ function renderNotificationVerb(key, notification, grouped = false) {
 const Notification = ({ notification, grouped = false }) => {
     let notificationImage = null;
     let notificationHtml = "Error parsing notification.";
+    // DO NOT MESS WITH THE TRY CATCH
+    // YOU WILL BREAK THE SITE
+    // EVERYTHING MUST BE UNDER IT
     try {
         let key = "";
 

@@ -290,7 +290,7 @@ input[type="search"] {
     }
 }
 
-button:not(.edit-button):not(.delete-button):not(.gray-link-with-icon):not(.react-datepicker__navigation),
+button:not(.unstyled-btn):not(.edit-button):not(.delete-button):not(.gray-link-with-icon):not(.react-datepicker__navigation),
 div[class^="btn"],
 a[class^="btn"] {
     @extend %rounded;
@@ -903,6 +903,10 @@ table.is-full {
     margin-bottom: 2rem;
     box-shadow: none;
     background: var(--c-lightest) !important;
+
+    > .flex {
+        width: 100%;
+    }
 
     header {
         //background: hsla(192, 15%, 64%, 0.1);
@@ -1676,6 +1680,13 @@ figure.img-circle {
 @media (max-width: $breakpoint-mobile) {
     .is-hidden-mobile {
         display: none;
+    }
+    .flex {
+        width: 100%;
+
+        > div:only-child {
+            width: 100%;
+        }
     }
 
     #page-content {

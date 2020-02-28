@@ -27,10 +27,10 @@ export function getThreadInfoBar(thread) {
                 <ReplyFaces threadSlug={thread.slug} withOwner={false} />
             </div>
 
-            <div>
+            <div className="is-hidden-mobile">
                 <TimeAgo date={thread.created_at} />
             </div>
-            <div>by @{thread.owner.username}</div>
+            <div className="is-hidden-mobile">by @{thread.owner.username}</div>
         </small>
     );
 }

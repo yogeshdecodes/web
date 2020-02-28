@@ -67,39 +67,17 @@ class Navbar extends React.Component {
                                 <FontAwesomeIcon icon="check-circle" />
                             </a>
                         </NavLink>
-                        <button
-                            className="button navbar-burger is-hidden-mobile"
-                            onClick={e =>
-                                this.setState({
-                                    expanded: !this.state.expanded
-                                })
-                            }
-                        >
-                            <span />
-                            <span />
-                            <span />
-                        </button>
-
-                        {this.props.isLoggedIn && (
-                            <div
-                                className={
-                                    "user-chip navbar-item is-hidden-desktop"
-                                }
-                            >
-                                <Link
-                                    route={"profile-page"}
-                                    params={{
-                                        username: this.props.user.username
-                                    }}
-                                >
+                    </div>
+                    {this.props.isLoggedIn ? (
+                        <div className="navbar-menu is-hidden-desktop">
+                            <div className="navbar-start"></div>
+                            <div className="navbar-end">
+                                <div className="navbar-item">
                                     <a className="navbar-link">
-                                        <Chip>
+                                        <Chip id={"navbarUserChip"}>
                                             <img
                                                 alt={this.props.user.username}
-                                                src={imageUrl(
-                                                    this.props.user.avatar,
-                                                    28
-                                                )}
+                                                src={this.props.user.avatar}
                                             />
                                             <div>
                                                 <Streak
@@ -110,10 +88,23 @@ class Navbar extends React.Component {
                                             </div>
                                         </Chip>
                                     </a>
-                                </Link>
+                                </div>
                             </div>
-                        )}
-                    </div>
+                        </div>
+                    ) : (
+                        <div className="navbar-menu is-hidden-desktop">
+                            <div className="navbar-start"></div>
+                            <div className="navbar-end">
+                                <div className="navbar-item">
+                                    <Link route="begin">
+                                        <button className="has-text-bold is-rounded is-primary">
+                                            Get started
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {!this.props.isLoggedIn && (
                         <LoggedOutMenu

@@ -12,10 +12,7 @@ import Streak from "~/components/Streak";
 import OutboundLink from "../../../components/OutboundLink";
 
 const LoggedInMenu = props => (
-    <div
-        className={props.expanded ? "navbar-menu is-active" : "navbar-menu"}
-        onClick={props.onToggleExpand}
-    >
+    <div className={"navbar-menu"} onClick={props.onToggleExpand}>
         <div className="navbar-start">
             <NavLink route="log" activeClassName="is-active">
                 <a className="navbar-item">

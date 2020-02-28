@@ -23,7 +23,7 @@ export default class extends React.Component {
                 route={"discussion-page"}
                 params={{ slug: this.props.thread.slug }}
             >
-                <a className={"card-footer-item has-text-grey"}>
+                <a className={"has-text-grey"}>
                     <FontAwesomeIcon icon={"reply"} />
                     <strong>Discuss</strong>
                     <span className={"has-text-grey-light"}>
@@ -32,7 +32,7 @@ export default class extends React.Component {
                 </a>
             </Link>
             {this.props.thread.reply_count > 0 && (
-                <div className={"has-text-grey card-footer-item"}>
+                <div className={"has-text-grey "}>
                     <ReplyFaces size={32} threadSlug={this.props.thread.slug} />
                 </div>
             )}
@@ -43,7 +43,7 @@ export default class extends React.Component {
         let thread = this.props.thread;
         return (
             <div className={"flex v-center flex-gap"}>
-                <div className={"topicMid"}>
+                <div>
                     {thread.type === "LINK" ? (
                         <OutboundLink to={thread.body}>
                             <h3>{thread.title}</h3>

@@ -1,0 +1,71 @@
+@import "../../styles/_variables";
+
+.MobileNav {
+    display: none;
+    flex-direction: row;
+    position: fixed;
+    height: $navbar-height;
+    width: 100vw;
+    background-color: var(--c-lightest);
+    border-top: 1px solid var(--c-border);
+    bottom: 0;
+    z-index: 98;
+
+    .item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+        color: var(--c-text);
+
+        button {
+            background-color: $c-main;
+            border: 1px solid $c-main;
+            font-size: 2rem;
+            height: 100%;
+            width: 70px;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            &:active {
+                transform: scale(1.2);
+                outline: none;
+            }
+        }
+
+        &.is-active {
+            color: #49a57c;
+            border-top: 2px solid $c-main;
+            padding-bottom: 2px;
+        }
+
+        .icon {
+            font-size: 1.3rem;
+        }
+
+        span {
+            margin-top: 3px;
+            font-size: 0.8rem;
+        }
+
+        &:hover {
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .MobileNav {
+        display: flex;
+    }
+
+    body {
+        margin-bottom: 80px;
+    }
+}

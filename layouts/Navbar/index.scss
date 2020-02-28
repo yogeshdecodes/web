@@ -8,6 +8,72 @@
     z-index: 999;
     border-bottom: 0.2px solid var(--c-border-lightest);
 
+    .navbar-start {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .navbar-end {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: end;
+
+        > .navbar-item {
+            justify-content: center;
+            margin-left: 2rem;
+        }
+    }
+    .navbar-item,
+    .navbar-link {
+        align-items: center;
+        display: flex;
+    }
+
+    .navbar-dropdown {
+        border-radius: 5px 5px 5px 5px;
+        box-shadow: 6px 2px 64px -16px hsla(0, 0%, 0%, 0.75);
+        display: none;
+        left: 0;
+        min-width: 100%;
+        position: absolute;
+        top: 70px;
+        z-index: 20;
+
+        .navbar-item {
+            white-space: nowrap;
+        }
+    }
+
+    .navbar-item.is-active .navbar-dropdown,
+    .navbar-item.is-hoverable:hover .navbar-dropdown {
+        // Dropdown CSS
+        display: block;
+        background: var(--c-bg);
+        padding: 0.5rem 0;
+        min-width: 100%;
+
+        a.navbar-item {
+            color: var(--c-text);
+            padding: 0.375rem 3rem 0.375rem 1rem;
+            display: flex;
+
+            svg {
+                margin: 0.5rem;
+            }
+
+            &:hover,
+            &:active {
+                background: rgba(0, 173, 113, 0.5);
+                //color: var(--c-lightest);
+            }
+
+            &.is-active {
+                color: var(--c-text) !important;
+                font-weight: bold !important;
+            }
+        }
+    }
+
     .navbar-end {
         svg {
             width: 18px;
@@ -392,30 +458,8 @@
     display: none;
 }
 
-@media screen and (min-width: $breakpoint-desktop) {
+@media screen and (min-width: $breakpoint-tablet) {
     #main-navbar {
-        .navbar-start {
-            display: flex;
-            align-items: stretch;
-        }
-
-        .navbar-end {
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: end;
-
-            > .navbar-item {
-                justify-content: center;
-                margin-left: 2rem;
-            }
-        }
-
-        .navbar-item,
-        .navbar-link {
-            align-items: center;
-            display: flex;
-        }
-
         .navbar-item.is-icon {
             margin-left: 1.5rem;
         }
@@ -441,55 +485,10 @@
             left: auto;
             right: 0;
         }
-
-        .navbar-dropdown {
-            border-radius: 5px 5px 5px 5px;
-            box-shadow: 6px 2px 64px -16px hsla(0, 0%, 0%, 0.75);
-            display: none;
-            left: 0;
-            min-width: 100%;
-            position: absolute;
-            top: 70px;
-            z-index: 20;
-
-            .navbar-item {
-                white-space: nowrap;
-            }
-        }
-
-        .navbar-item.is-active .navbar-dropdown,
-        .navbar-item.is-hoverable:hover .navbar-dropdown {
-            // Dropdown CSS
-            display: block;
-            background: var(--c-bg);
-            padding: 0.5rem 0;
-            min-width: 100%;
-
-            a.navbar-item {
-                color: var(--c-text);
-                padding: 0.375rem 3rem 0.375rem 1rem;
-                display: flex;
-
-                svg {
-                    margin: 0.5rem;
-                }
-
-                &:hover,
-                &:active {
-                    background: rgba(0, 173, 113, 0.5);
-                    //color: var(--c-lightest);
-                }
-
-                &.is-active {
-                    color: var(--c-text) !important;
-                    font-weight: bold !important;
-                }
-            }
-        }
     }
 }
 
-@media screen and (max-width: $breakpoint-tablet) {
+@media screen and (max-width: $breakpoint-mobile) {
     .navbar-secondary {
         .flex.flex-gap-big > div:not(:last-child) {
             margin-right: 0.5rem !important;
@@ -510,27 +509,14 @@
             padding: 0.8rem 0 0 1.5rem;
         }
 
-        .navbar-burger {
-            position: fixed;
-            top: 0;
-            right: 0;
-            border-radius: 0;
-            width: 60px;
-            height: 60px;
-            border: 0;
-            background: var(--c-bg-dark);
-            z-index: 100;
-            display: block;
-
-            span {
-                background: $c-brand;
-            }
+        .navbar-menu {
+            //margin: 1rem 0 0 0 !important;
+            display: none;
         }
 
-        .navbar-menu {
-            margin: 1rem 0 0 0 !important;
-            background: var(--c-bg-dark);
-            display: none;
+        .navbar-menu.is-hidden-desktop {
+            display: flex;
+            margin: none !important;
         }
 
         .navbar-menu.is-active {
@@ -541,18 +527,6 @@
                 display: flex;
                 flex-flow: column nowrap;
                 margin-left: 0;
-
-                .navbar-dropdown {
-                    display: flex;
-                    flex-flow: column nowrap;
-                    align-items: flex-start;
-                    position: relative;
-                    top: auto;
-                    left: auto;
-                    right: auto;
-                    font-family: $font;
-                    font-weight: normal;
-                }
             }
 
             .navbar-end {
@@ -570,10 +544,6 @@
                 display: block;
             }
         }
-    }
-
-    .navbar .container {
-        width: 100vw !important;
     }
 }
 
@@ -600,45 +570,6 @@
 
 .navbar-dropdown {
     box-shadow: 6px 2px 64px -16px rgba(0, 0, 0, 0.75) !important;
-}
-
-@media screen and (max-width: 1023px) {
-    .navbar-dark .navbar-menu {
-        /* background-color: white; */
-        background-color: black;
-        z-index: 10000;
-    }
-
-    .navbar-dark .container {
-        z-index: 10000;
-        height: 60px;
-        padding-top: 5px;
-    }
-
-    .navbar-brand {
-    }
-
-    .navbar-dark .navbar-end {
-        margin-top: 20px;
-    }
-
-    .navbar-dark .navbar-menu .navbar-item.is-active {
-        color: black !important;
-    }
-
-    .navbar-dark .navbar-menu .navbar-item:hover {
-        color: black !important;
-    }
-
-    .navbar-dark .container .navbar-burger {
-        background-color: transparent;
-        color: white;
-        border: 0;
-    }
-
-    .navbar-dark .navbar-dropdown .navbar-item {
-        color: white !important;
-    }
 }
 
 .brand-underline {
