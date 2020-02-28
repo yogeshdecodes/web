@@ -481,9 +481,9 @@
             display: none;
         }
 
-        .navbar-dropdown.is-right {
-            left: auto;
-            right: 0;
+        .navbar-item .navbar-dropdown.is-right {
+            left: auto !important;
+            right: 0px !important;
         }
     }
 }
@@ -505,6 +505,10 @@
     }
 
     #main-navbar {
+        .navbar-item .navbar-dropdown.is-right {
+            left: auto !important;
+            right: 0px !important;
+        }
         #logo {
             padding: 0.8rem 0 0 1.5rem;
         }

@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withRouter } from "next/router";
 import { actions as editorActions } from "~/ducks/editor";
 import { imageUrl } from "../../lib/utils/img";
+import UserChip from "./components/UserChip";
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -72,23 +73,7 @@ class Navbar extends React.Component {
                         <div className="navbar-menu is-hidden-desktop">
                             <div className="navbar-start"></div>
                             <div className="navbar-end">
-                                <div className="navbar-item">
-                                    <a className="navbar-link">
-                                        <Chip id={"navbarUserChip"}>
-                                            <img
-                                                alt={this.props.user.username}
-                                                src={this.props.user.avatar}
-                                            />
-                                            <div>
-                                                <Streak
-                                                    days={
-                                                        this.props.user.streak
-                                                    }
-                                                />
-                                            </div>
-                                        </Chip>
-                                    </a>
-                                </div>
+                                <UserChip {...this.props} />
                             </div>
                         </div>
                     ) : (
