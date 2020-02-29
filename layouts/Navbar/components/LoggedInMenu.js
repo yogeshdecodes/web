@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import OutboundLink from "../../../components/OutboundLink";
 import UserChip from "./UserChip";
+import Spinner from "~/components/Spinner";
 
 const LoggedInMenu = props => (
     <div className={"navbar-menu"} onClick={props.onToggleExpand}>
@@ -67,6 +68,11 @@ const LoggedInMenu = props => (
             </NavbarDropdown>
         </div>
         <div className="navbar-end">
+            {props.isSyncing && (
+                <div className="navbar-item">
+                    <Spinner small text="Syncing tasks..." />
+                </div>
+            )}
             <div className="navbar-item">
                 <button
                     onClick={props.onToggleEditor}

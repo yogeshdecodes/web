@@ -49,7 +49,6 @@ const mapDispatchToProps = dispatch => {
                 }
             } else {
                 dispatch(appActions.toggleNewUser());
-                Router.pushRoute("welcome");
             }
         }
     };

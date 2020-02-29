@@ -4,7 +4,7 @@ import { errorArray } from "~/lib/utils/error";
 
 const initialState = {
     ready: false,
-    isSyncing: false,
+    isSyncing: true,
     isCreating: false,
     tasks: [],
     lastSynced: null,

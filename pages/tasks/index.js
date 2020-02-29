@@ -5,6 +5,7 @@ import { applySearchTerms } from "~/lib/utils/tasks";
 import { KanbanView, ListView, TodayView } from "~/features/projects";
 import Spinner from "~/components/Spinner";
 import TasksPageLayout from "~/layouts/TasksPage";
+import { requireAuthed } from "~/lib/auth";
 
 class TasksPage extends React.Component {
     static async getInitialProps({ query }) {
@@ -64,4 +65,7 @@ const mapStateToProps = state => ({
     searchTerms: state.tasks.searchTerms
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TasksPage);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(requireAuthed(TasksPage));

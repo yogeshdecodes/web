@@ -12,6 +12,8 @@ import { appsReducer } from "./apps";
 import { appReducer } from "./app";
 import { projectsReducer } from "./projects";
 import { isServer } from "~/config";
+import localForage from "localforage";
+import { Router } from "~/routes";
 
 /*
 
@@ -72,18 +74,18 @@ export default (state, action) => {
         if (action.type === authTypes.LOGOUT) {
             state = undefined;
             if (!isServer) {
-                Router.pushRoute("/");
-
                 // total hack
                 // 1. sync across windows
                 window.localStorage.setItem("authSync_logout", Date.now());
                 // 2. flush storage
                 if (storage) {
                     storage.clear();
+                    localForage.clear().then(e => {
+                        // 3. reload
+                        Router.pushRoute("home");
+                        window.location.reload();
+                    });
                 }
-
-                // 3. reload
-                window.location.reload();
             }
         }
     } catch (e) {

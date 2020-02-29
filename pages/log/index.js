@@ -9,6 +9,7 @@ import GlobalStream, {
 import DiscussionSection, {
     prefetchData as prefetchThreads
 } from "~/features/discussions/DiscussionSection";
+import { Router } from "~/routes";
 
 class StreamPage extends React.Component {
     static async getInitialProps() {
@@ -19,11 +20,13 @@ class StreamPage extends React.Component {
         };
     }
 
-    isNewUser = () =>
-        (this.props.tasks.length === 0 &&
-            this.props.initialLoaded &&
-            !this.props.isSyncing) ||
-        this.props.isNewUser;
+    componentDidMount() {
+        if (this.props.isNewUser) {
+            Router.pushRoute("welcome");
+        }
+    }
+
+    hasNoTasks = () => this.props.tasks.length === 0 && !this.props.isSyncing;
 
     render() {
         return (
@@ -31,7 +34,7 @@ class StreamPage extends React.Component {
                 <section className={"container"}>
                     <div className={"grid-c-s"}>
                         <div>
-                            {this.isNewUser() ? <NoActivityCard /> : null}
+                            {this.hasNoTasks() ? <NoActivityCard /> : null}
                             <h3 className="mb-em">Latest threads</h3>
                             <div className="card">
                                 <div className="card-content">
@@ -58,9 +61,8 @@ class StreamPage extends React.Component {
 const mapStateToProps = state => {
     return {
         isNewUser: state.app.isNewUser,
-        isSyncing: state.stream.isSyncing,
-        tasks: state.stream.tasks,
-        initialLoaded: state.stream.initialLoaded
+        isSyncing: state.tasks.isSyncing,
+        tasks: state.tasks.tasks
     };
 };
 
