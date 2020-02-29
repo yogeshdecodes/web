@@ -3,7 +3,7 @@
 .Onboarding {
     position: fixed;
     z-index: 1;
-    background: #fff !important;
+    background: var(--c-lightest) !important;
     width: 100vw;
     height: 100vh;
 
@@ -25,6 +25,10 @@
             "Fira Sans", "Segoe UI", sans-serif;
     }
 
+    img {
+        border-radius: 50%;
+    }
+
     h1 {
         color: $c-brand;
         text-align: center;
@@ -38,7 +42,7 @@
         font-weight: 800;
         font-size: 64px;
         line-height: 77px;
-        color: #000;
+        color: var(--c-title);
         padding: 0;
         margin: 0 0 20px;
     }

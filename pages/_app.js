@@ -121,10 +121,6 @@ class Artemis extends App {
 
         if (!store.getState().app.healthy) return <DownPage />;
 
-        if (statusCode && statusCode >= 400) {
-            return <ErrorPage statusCode={statusCode} />;
-        }
-
         return (
             <Provider store={store}>
                 <Head />

@@ -2323,3 +2323,45 @@ ul.unstyled {
         }
     }
 }
+
+@keyframes animatedBackground {
+    from {
+        background-position: 0 0;
+    }
+    /*use negative width if you want it to flow right to left else and positive for left to right*/
+    to {
+        background-position: -10000px 0;
+    }
+}
+
+.ErrorPage {
+    background: url(/img/fun/nyan-bg.png), #014479;
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
+    /*adjust s value for speed*/
+    animation: animatedBackground 50s linear infinite;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    padding-bottom: $navbar-height;
+
+    h1 {
+        font-weight: 800;
+        font-size: 48px;
+        line-height: 77px;
+        color: var(--c-lightest);
+    }
+
+    .subtitle {
+        color: var(--c-lightest);
+    }
+
+    .nyan {
+        position: fixed;
+        left: 0;
+        bottom: 20%;
+        height: 40px;
+    }
+}
