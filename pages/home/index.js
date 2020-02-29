@@ -5,7 +5,10 @@ import GlobalStream, {
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
-import DiscussionSection from "~/features/discussions/DiscussionSection";
+import DiscussionSection, {
+    prefetchData as prefetchThreads
+} from "~/features/discussions/DiscussionSection";
+import HomeHero from "../../components/marketing/HomeHero";
 
 function Home(props) {
     return (
@@ -13,6 +16,9 @@ function Home(props) {
             <section className={"container"}>
                 <div className="grid-c-s">
                     <div>
+                        <div className="mbGap">
+                            <HomeHero />
+                        </div>
                         <h3>Top threads this week</h3>
                         <h4 className="subtitle has-text-grey mb-em">
                             Discuss indie hacking and help other makers in their
@@ -21,11 +27,15 @@ function Home(props) {
                         <div className="card">
                             <div className="card-content">
                                 <DiscussionSection
+                                    top
                                     {...props.discussionPrefetch}
                                 />
                             </div>
                         </div>
-                        <h3 className="mb-em">Today's log</h3>
+                        <h3>Today's log</h3>
+                        <h4 className="subtitle has-text-grey mb-em">
+                            Here's what the community is building...
+                        </h4>
                         <GlobalStream {...props.streamPrefetch} />
                     </div>
                     <div className={"sidebar"}>
@@ -41,7 +51,7 @@ Home.getInitialProps = async () => {
     return {
         ...(await prefetchData()),
         streamPrefetch: await prefetchStream(),
-        discussionPrefetch: await (async () => {})
+        discussionPrefetch: await prefetchThreads(true)
     };
 };
 

@@ -710,6 +710,11 @@ table.is-full {
     &.columns {
         flex-flow: column nowrap;
     }
+    &.flex-v-gap-half {
+        > div:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+    }
 
     &.flex-v-gap {
         > div:not(:last-child) {
@@ -2302,5 +2307,15 @@ ul.unstyled {
 
     &.is-selected {
         font-weight: bold;
+    }
+}
+
+.ThreadMediaLine {
+    h4 {
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }

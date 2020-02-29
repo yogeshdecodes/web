@@ -7,7 +7,7 @@ import Repeatable from "react-repeatable";
 import Emoji from "../../../../../../components/Emoji";
 import { incrementPraise } from "../../../../../../lib/praise";
 import styled from "styled-components";
-import { Redirect } from "~/routes";
+import { Router } from "~/routes";
 import { connect } from "react-redux";
 import { isServer } from "~/config";
 
@@ -59,7 +59,9 @@ class Praisable extends React.Component {
     checkPraiseStatus = () => {
         if (!this.props.isLoggedIn) {
             this.setState({ loggedOutError: true });
-            setTimeout(() => this.setState({ redirecting: true }), 1000);
+            setTimeout(() => {
+                Router.pushRoute("begin");
+            }, 1000);
             this.fadeErr();
             return false;
         }
@@ -215,7 +217,6 @@ class Praisable extends React.Component {
                 "Too much praise!"}
             {this.state.loggedOutError &&
                 "You must login to praise. Taking you there..."}
-            {this.state.redirecting && <Redirect to={"/begin"} />}
         </Repeatable>
     );
 
