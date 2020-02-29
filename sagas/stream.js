@@ -1,17 +1,6 @@
-import {
-    all,
-    call,
-    put,
-    race,
-    select,
-    take,
-    takeLatest
-} from "redux-saga/effects";
+import { all, call, put, race, select, take, takeLatest } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
-import {
-    actions as streamActions,
-    types as streamTypes
-} from "../ducks/stream";
+import { actions as streamActions, types as streamTypes } from "../ducks/stream";
 import { types as editorTypes } from "~/ducks/editor";
 import { actions as tasksActions } from "~/ducks/tasks";
 import { getStreamMetadata } from "~/lib/tasks";

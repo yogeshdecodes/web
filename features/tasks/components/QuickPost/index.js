@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import Emoji from "~/components/Emoji";
-import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import { connect } from "react-redux";
 import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import findHashtags from "find-hashtags";
 import debounce from "lodash/debounce";
-import uniqueId from "lodash/uniqueId";
 
 const PostTypes = {
     TASK: 1,

@@ -1,12 +1,10 @@
 import React from "react";
-import Navigation from "../../features/tasks/components/Navigation";
 import { connect } from "react-redux";
 import { actions as tasksActions } from "~/ducks/tasks";
 import { applySearchTerms } from "~/lib/utils/tasks";
-import { ListView, KanbanView, TodayView } from "~/features/projects";
+import { KanbanView, ListView, TodayView } from "~/features/projects";
 import Spinner from "~/components/Spinner";
 import TasksPageLayout from "~/layouts/TasksPage";
-import GoldAlert from "../../components/GoldAlert";
 
 class TasksPage extends React.Component {
     static async getInitialProps({ query }) {

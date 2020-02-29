@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
 import Spinner from "~/components/Spinner";
 import { me, patchSettings } from "~/lib/user";
-import { Button } from "~/vendor/bulma";
 import PageTitle from "../../../../components/ui/PageTitle";
 import { loadingClass } from "~/lib/utils/random";
 

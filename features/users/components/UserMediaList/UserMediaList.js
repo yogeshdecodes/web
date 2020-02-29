@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {UserMedia} from "~/features/users";
+import { UserMedia } from "~/features/users";
 
 const UserMediaList = ({ users, large = false }) => (
     <ul className={"UserMediaList"}>

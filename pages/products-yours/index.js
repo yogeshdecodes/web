@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ProductList from "~/features/products/components/ProductList";
 import "./index.scss";
 import ProductsPageLayout from "../../layouts/ProductsPage";
-import Spinner from "~/components/Spinner";
 import { requireAuthed } from "~/lib/auth";
 import { getMyProducts } from "~/lib/products";
 import { Link } from "~/routes";

@@ -1,4 +1,4 @@
-import {convertToDate, dateNDaysAgo, getBeginningTimeForDate, getRange, shiftDate} from "../src/helpers";
+import { convertToDate, dateNDaysAgo, getBeginningTimeForDate, getRange, shiftDate } from "../src/helpers";
 
 describe("shiftDate", () => {
     it("adds a day to the first day of a month", () => {

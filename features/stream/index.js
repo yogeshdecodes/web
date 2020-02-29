@@ -1,4 +1,3 @@
-import Editor from "./components/Editor";
 import Entry from "./components/Task";
 import EntryList from "./components/EntryList";
 import Stream from "./components/Stream";
@@ -13,7 +12,6 @@ import StreamDateHeader from "./components/Stream/components/StreamSection/Strea
 import EmbedTask from "./components/EmbedTask";
 
 export {
-    Editor,
     Entry,
     EntryDetail,
     TaskDetailModal,

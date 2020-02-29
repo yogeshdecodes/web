@@ -1,8 +1,8 @@
 import React from "react";
-import {connect} from "react-redux";
-import {actions as statsActions} from "~/ducks/stats";
+import { connect } from "react-redux";
+import { actions as statsActions } from "~/ducks/stats";
 import Streak from "~/components/Streak";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tda from "~/components/Tda";
 import Emoji from "../../../../components/Emoji";
 

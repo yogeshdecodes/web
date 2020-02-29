@@ -1,7 +1,6 @@
 import React from "react";
 import ClimbingBoxLoader from "~/vendor/ClimbingBoxLoader";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { ClassicSpinner } from "react-spinners-kit";
 import "./index.scss";
 

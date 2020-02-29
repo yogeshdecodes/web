@@ -1,8 +1,4 @@
 import React from "react";
-import { Link } from "~/routes";
-import FullName from "~/features/users/components/FullName";
-import TimeAgo from "react-timeago";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Markdown from "~/components/Markdown";
 import { deleteComment, editComment } from "~/lib/comments";
 import { connect } from "react-redux";

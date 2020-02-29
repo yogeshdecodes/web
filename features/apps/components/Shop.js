@@ -1,8 +1,5 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Emoji from "~/components/Emoji";
 import AppList from "./AppList";
-import { Link } from "~/routes";
 import IntegrationMedia from "./IntegrationMedia";
 
 /*

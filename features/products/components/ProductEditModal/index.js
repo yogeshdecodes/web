@@ -1,16 +1,8 @@
 import "./index.scss";
-
-import {
-    addProductToEvent,
-    getEventsForProduct,
-    getEventsForUser,
-    removeProductFromEvent
-} from "../../../../lib/events";
 import { deleteProduct, editProduct, leaveProduct } from "~/lib/products";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GeneralTab from "./components/GeneralTab";
-import { Link } from "~/routes";
 import Modal from "~/components/Modal";
 import React from "react";
 import SidebarLink from "~/components/SidebarLink";
@@ -18,11 +10,9 @@ import Spinner from "~/components/Spinner";
 import TeamSelector from "../TeamSelector";
 import { createProject } from "../../../../lib/projects";
 import { getProjects } from "~/lib/projects";
-import { hasEnded } from "../../../../lib/utils/events";
 import isFunction from "lodash/isFunction";
 import { mapStateToProps } from "~/ducks/user";
 import { connect } from "react-redux";
-import { imageUrl } from "../../../../lib/utils/img";
 
 // Three required props:
 // productSlug={props.productSlug} onDelete={props.onDelete} onFinish={props.onFinish}

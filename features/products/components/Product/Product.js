@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import ProductThumbnail from "./components/ProductThumbnail/index";
 import ProductMedia from "./components/ProductMedia/index";
 import ProductCard from "./components/ProductCard";
-import ProductHero from "./components/ProductHero";
 
 const Product = ({
     product,
@@ -29,7 +28,7 @@ const Product = ({
     }
 
     if (hero) {
-        Component = ProductHero;
+        Component = null;
     }
 
     return <Component linked={linked} product={product} {...props} />;

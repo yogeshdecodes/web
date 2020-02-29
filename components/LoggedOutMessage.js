@@ -1,6 +1,6 @@
 import React from "react";
-import {Link} from "~/routes";
-import {LoggedOutOnly} from "~/features/users";
+import { Link } from "~/routes";
+import { LoggedOutOnly } from "~/features/users";
 import Emoji from "~/components/Emoji";
 
 const LoggedOutMessage = props => (

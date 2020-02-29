@@ -1,5 +1,5 @@
 import React from "react";
-import NextDocument, { Html, Head, Main, NextScript } from "next/document";
+import NextDocument, { Head, Html, Main, NextScript } from "next/document";
 
 import { ServerStyleSheet } from "styled-components";
 import config from "../config";

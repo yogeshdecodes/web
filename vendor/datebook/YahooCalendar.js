@@ -1,8 +1,8 @@
-import {RECURRENCE, URL} from "./constants";
-import {formatTime, getHoursDuration} from "./utils/time";
+import { RECURRENCE, URL } from "./constants";
+import { formatTime, getHoursDuration } from "./utils/time";
 
 import CalendarBase from "./CalendarBase";
-import {toQueryString} from "./utils/data";
+import { toQueryString } from "./utils/data";
 
 /**
  * Generates a Yahoo! Calendar url.

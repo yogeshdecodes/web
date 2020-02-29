@@ -1,24 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-    groupTasksByDone,
-    orderByDate,
-    groupIntegrationTasksByEvent,
-    integrationsToCollapse
-} from "~/lib/utils/tasks";
+import { groupIntegrationTasksByEvent, groupTasksByDone, integrationsToCollapse, orderByDate } from "~/lib/utils/tasks";
 import EntryList from "../../../EntryList";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Tooltip } from "react-tippy";
 // import { StreamCard as Card } from "./styled";
 import { UserMedia } from "~/features/users";
-import { UserBadges } from "~/components/badges";
-import OutboundLink from "~/components/OutboundLink";
 import { MilestoneMedia } from "~/features/milestones";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
-import Avatar from "~/features/users/components/Avatar";
-import Streak from "~/components/Streak";
-import FullName from "~/components/FullName";
 import InlineCollapse from "../../../../../../components/InlineCollapse";
 
 function containsWords(input, words) {

@@ -1,11 +1,6 @@
 import "./index.scss";
 import { Link } from "~/routes";
-import {
-    searchDiscussions,
-    searchProducts,
-    searchTasks,
-    searchUsers
-} from "../../../../lib/search";
+import { searchDiscussions, searchProducts, searchTasks, searchUsers } from "../../../../lib/search";
 
 import Avatar from "../../../users/components/Avatar/Avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +11,6 @@ import ThreadList from "../../../discussions/ThreadList";
 import UserMediaList from "../../../users/components/UserMediaList/UserMediaList";
 import debounce from "lodash/debounce";
 import orderBy from "lodash/orderBy";
-import Spinner from "~/components/Spinner";
 
 class GlobalSearchBar extends React.Component {
     state = {

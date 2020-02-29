@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import config from "../../../../config";
 import { imageUrl } from "../../../../lib/utils/img";
 
 class Avatar extends React.Component {

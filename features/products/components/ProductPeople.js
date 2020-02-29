@@ -1,6 +1,6 @@
 import React from "react";
-import {FaceStack} from "~/features/users";
-import {getProductPeople} from "~/lib/products";
+import { FaceStack } from "~/features/users";
+import { getProductPeople } from "~/lib/products";
 
 class ProductPeople extends React.Component {
     state = {

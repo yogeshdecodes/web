@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
 

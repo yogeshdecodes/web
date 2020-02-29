@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { persistReducer, getPersistor } from "redux-persist";
+import { persistReducer } from "redux-persist";
 import { routerReducer } from "react-router-redux";
 import { default as storage } from "localforage";
 import { authReducer, types as authTypes } from "./auth";
@@ -12,7 +12,6 @@ import { appsReducer } from "./apps";
 import { appReducer } from "./app";
 import { projectsReducer } from "./projects";
 import { isServer } from "~/config";
-import { gaSetUserId } from "../vendor/ga";
 
 /*
 

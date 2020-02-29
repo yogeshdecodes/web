@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "~/routes";
 import Markdown from "~/components/Markdown";
-import Emoji from "~/components/Emoji";
-import { Button, Input } from "~/vendor/bulma";
 import { truncate } from "~/lib/utils/random";
 import { Praisable } from "~/features/stream/components/Task/components/Praise";
 import { mapStateToProps } from "~/ducks/user";
@@ -12,6 +10,7 @@ import { connect } from "react-redux";
 
 import "./MilestoneMedia.scss";
 import CommentsBox from "../../comments/components/CommentsBox";
+import { loadingClass } from "~/lib/utils/random";
 
 class MilestoneMediaComponent extends React.Component {
     constructor(props) {
@@ -143,7 +142,7 @@ class MilestoneMediaComponent extends React.Component {
                         <>
                             <div className={"from-row"}>
                                 <div className={"control"}>
-                                    <Input
+                                    <input
                                         onChange={e =>
                                             this.setState({
                                                 title: e.target.value
@@ -165,13 +164,15 @@ class MilestoneMediaComponent extends React.Component {
                                     />
                                 </div>
                             </div>
-                            <Button
-                                loading={this.state.loadingEdit}
+                            <button
                                 onClick={this.edit}
-                                primary
+                                className={loadingClass(
+                                    "btn btn-light",
+                                    this.state.loadingEdit
+                                )}
                             >
                                 Submit
-                            </Button>
+                            </button>
                         </>
                     )}
                     {this.state.deleted && <em>This milestone was deleted.</em>}

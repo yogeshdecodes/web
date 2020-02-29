@@ -1,8 +1,5 @@
 import React from "react";
-import {
-    getHostname,
-    normalizeUrl
-} from "../../../../../../lib/utils/products";
+import { getHostname, normalizeUrl } from "../../../../../../lib/utils/products";
 import isFunction from "lodash/isFunction";
 import ProductEditModal from "../../../ProductEditModal";
 import { Link } from "~/routes";

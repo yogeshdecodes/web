@@ -1,6 +1,5 @@
 import React from "react";
 import "./CarbonAd.scss";
-import Emoji from "../components/Emoji";
 
 class CarbonAd extends React.Component {
     componentDidMount() {

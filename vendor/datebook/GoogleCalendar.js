@@ -1,9 +1,9 @@
-import {FORMAT, URL} from "./constants";
+import { FORMAT, URL } from "./constants";
 
 import CalendarBase from "./CalendarBase";
-import {formatTime} from "./utils/time";
-import {getRrule} from "./utils/ics";
-import {toQueryString} from "./utils/data";
+import { formatTime } from "./utils/time";
+import { getRrule } from "./utils/ics";
+import { toQueryString } from "./utils/data";
 
 /**
  * Generates a Google Calendar url.

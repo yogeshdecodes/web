@@ -1,16 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "~/vendor/bulma";
-import Task from "../../Task";
-import { RIEInput } from "riek";
 import { actions as tasksActions } from "~/ducks/tasks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { actions as streamActions } from "~/ducks/stream";
 import Embed from "~/components/Embed";
 import config from "~/config";
 import ShareBar from "~/components/ShareBar";
-import { Dropdown } from "~/components/Dropdown";
-import { UserMedia } from "~/features/users";
 
 class TaskDetail extends React.Component {
     constructor(props) {

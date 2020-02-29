@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import { getWorldStats } from "~/lib/stats";
 import UserRow from "~/features/users/components/UserRow";
-import { getLiveEvents, getUpcomingEvents } from "~/lib/events";
+import { getUpcomingEvents } from "~/lib/events";
 import EventMedia from "~/features/events/components/EventMedia";
 import SmallFooter from "~/components/sidebar/components/SmallFooter";
 import AdCard from "~/components/sidebar/components/AdCard";
@@ -14,7 +14,6 @@ import { isServer } from "~/config";
 import "./index.scss";
 import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
 import BlogCard from "../components/BlogCard";
-import BroadcastList from "../../BroadcastList";
 
 const quotes = [
     { text: "It's mango time.", from: "Fajar Siddiq" },

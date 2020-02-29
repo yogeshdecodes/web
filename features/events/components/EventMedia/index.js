@@ -9,7 +9,6 @@ import Emoji from "~/components/Emoji";
 import EventFaces from "../EventFaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
-import config from "../../../../config";
 import { imageUrl } from "../../../../lib/utils/img";
 
 function getCss(event) {

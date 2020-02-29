@@ -1,7 +1,5 @@
 import React from "react";
-import GlobalStream, {
-    prefetch as prefetchStream
-} from "~/features/stream/containers/GlobalStream";
+import GlobalStream, { prefetch as prefetchStream } from "~/features/stream/containers/GlobalStream";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";

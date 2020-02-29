@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Emoji from "../../components/Emoji";
 
 const MANGO_CLUB = ["fajarsiddiq"];

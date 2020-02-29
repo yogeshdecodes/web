@@ -2,12 +2,11 @@ import React from "react";
 import "./index.scss";
 import LoginForm from "../LoginForm";
 import { connect } from "react-redux";
-import { requireUnauthed } from "~/lib/auth";
 import Spinner from "~/components/Spinner";
 import { Link } from "~/routes";
 import RegisterForm from "../RegisterForm";
 import Modal from "~/components/Modal";
-import { TwitterTweetEmbed, TwitterTimelineEmbed } from "react-twitter-embed";
+import { TwitterTweetEmbed } from "react-twitter-embed";
 
 function getLoveTweetId() {
     const strs = [

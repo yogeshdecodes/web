@@ -1,10 +1,7 @@
 import React from "react";
 import "./index.scss";
-import { AuthModalCard } from "../../features/users/components/AuthModal";
 import { requireUnauthed } from "~/lib/auth";
 import RegisterForm from "~/features/users/components/RegisterForm";
-import { TwitterTweetEmbed, TwitterTimelineEmbed } from "react-twitter-embed";
-import Spinner from "~/components/Spinner";
 import WallOfLove from "../../components/WallOfLove";
 import axios from "~/lib/axios";
 

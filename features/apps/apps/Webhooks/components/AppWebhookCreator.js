@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "~/vendor/bulma";
 import Spinner from "~/components/Spinner";
 import { getProjects } from "~/lib/user";
 import { createWebhook } from "~/lib/apps";

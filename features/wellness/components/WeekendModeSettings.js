@@ -1,7 +1,7 @@
 import React from "react";
 import WeekendModeToggle from "./WeekendModeToggle";
 import Spinner from "../../../components/Spinner";
-import {me, patchSettings} from "../../../lib/user";
+import { me, patchSettings } from "../../../lib/user";
 
 class WeekendModeSettings extends React.Component {
     state = {

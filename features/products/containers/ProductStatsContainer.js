@@ -1,6 +1,6 @@
 import React from "react";
 import Spinner from "~/components/Spinner";
-import {getProductStats} from "../../../lib/products";
+import { getProductStats } from "../../../lib/products";
 
 class ProductStatsContainer extends React.Component {
     state = {

@@ -1,7 +1,5 @@
 import { errorArray } from "~/lib/utils/error";
-import { isServer } from "~/config";
-import { setCookie, destroyCookie } from "nookies";
-import Router from "next/router";
+import { destroyCookie } from "nookies";
 
 const initialState = {
     authModalOpen: false,

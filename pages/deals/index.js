@@ -1,7 +1,6 @@
 import "./index.scss";
 import React, { Component } from "react";
 import OutboundLink from "../../components/OutboundLink";
-import { requireAuthed } from "~/lib/auth";
 import LoggedInOnly from "~/features/users/containers/LoggedInOnly";
 import LoggedOutOnly from "~/features/users/containers/LoggedOutOnly";
 import { Link } from "~/routes";

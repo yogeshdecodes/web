@@ -1,6 +1,5 @@
 import React from "react";
-import { FullName } from "~/features/users";
-import { Avatar } from "~/features/users";
+import { Avatar, FullName } from "~/features/users";
 import Head from "~/components/Head";
 import PageNavigation from "~/components/ui/PageNavigation";
 import ProfileSidebar from "~/components/sidebar/profile-page";

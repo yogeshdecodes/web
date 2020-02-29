@@ -1,9 +1,7 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
 import LoggedOutOnly from "~/features/users/containers/LoggedOutOnly";
 import { connect } from "react-redux";
-import { mapStateToProps, mapDispatchToProps } from "~/ducks/apps";
+import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
 import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import { Link } from "~/routes";
 import "./AppsList.scss";

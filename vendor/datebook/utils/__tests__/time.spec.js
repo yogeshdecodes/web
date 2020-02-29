@@ -1,6 +1,6 @@
 import moment from "moment";
-import {FORMAT} from "../../constants";
-import {formatTime, getHoursDuration, getTimeCreated} from "../time";
+import { FORMAT } from "../../constants";
+import { formatTime, getHoursDuration, getTimeCreated } from "../time";
 
 describe("time util", () => {
     describe("formatTime()", () => {

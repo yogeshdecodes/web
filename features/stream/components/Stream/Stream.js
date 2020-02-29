@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "~/vendor/bulma";
 //import { CSSTransitionGroup } from "react-transition-group";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StreamSection from "./components/StreamSection/index";

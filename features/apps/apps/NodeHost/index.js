@@ -4,7 +4,6 @@ import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
 import Spinner from "~/components/Spinner";
 import { WebhookTable } from "../Webhooks/components/WebhooksTable";
 import AppWebhookCreator from "../Webhooks/components/AppWebhookCreator";
-import { isServer } from "~/config";
 import PageTitle from "../../../../components/ui/PageTitle";
 
 class NodeHost extends React.Component {

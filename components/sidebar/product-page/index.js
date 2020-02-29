@@ -1,18 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import SmallFooter from "~/components/sidebar/components/SmallFooter";
 import AdCard from "~/components/sidebar/components/AdCard";
 import "./index.scss";
 import OutboundLink from "~/components/OutboundLink";
 import { normalizeUrl } from "~/lib/utils/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import StreakTrophy from "../../../features/trophies/StreakTrophy";
-import ClubTrophy from "../../../features/trophies/ClubTrophy";
-import StaffTrophy from "../../../features/trophies/StaffTrophy";
-import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
-import Spinner from "~/components/Spinner";
-import { getNomadLocation } from "../../../lib/integrations/nomadlist";
-import ProductsContainer from "~/features/products/containers/ProductsContainer";
-import { ProductList } from "~/features/products";
 import UserRow from "~/features/users/components/UserRow";
 import orderBy from "lodash/orderBy";
 

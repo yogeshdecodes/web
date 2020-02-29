@@ -1,6 +1,5 @@
 import React from "react";
 import "./index.scss";
-import { AuthModalCard } from "../../features/users/components/AuthModal";
 import { requireUnauthed } from "~/lib/auth";
 import LoginForm from "~/features/users/components/LoginForm";
 import { connect } from "react-redux";

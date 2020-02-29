@@ -2,7 +2,7 @@ import "./index.scss";
 import TimeAgo from "react-timeago";
 
 import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Toast = ({ toast, onClose }) => {
     return (

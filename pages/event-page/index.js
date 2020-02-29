@@ -1,22 +1,17 @@
 import "./index.scss";
 
 import { hasClosed, hasEnded, isOcurring } from "~/lib/utils/events";
-
-import DueCountdown from "~/components/DueCountdown";
 import Emoji from "~/components/Emoji";
-import EventFaces from "~/features/events/components/EventFaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Markdown from "~/components/Markdown";
 import Modal from "~/components/Modal";
 import OutboundLink from "~/components/OutboundLink";
 import React from "react";
-import Sidebar from "~/components/sidebar/components/HomeSidebar";
 import SingleItem from "~/containers/SingleItem";
 import Spinner from "~/components/Spinner";
 import { WeeklyStream } from "~/features/stream";
 import { joinEvent } from "~/lib/events";
-import { Link } from "~/routes";
-import { Router } from "~/routes";
+import { Link, Router } from "~/routes";
 import { mapStateToProps } from "~/ducks/user";
 import { connect } from "react-redux";
 import EventsPageLayout from "../../layouts/EventsPage";

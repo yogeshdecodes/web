@@ -4,7 +4,6 @@ import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
 import Spinner from "~/components/Spinner";
 import OutboundLink from "~/components/OutboundLink";
 import { link } from "~/lib/integrations/telegram";
-import { Link } from "~/routes";
 
 class Telegram extends React.Component {
     state = {

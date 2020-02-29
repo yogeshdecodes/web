@@ -1,15 +1,11 @@
 import { GoogleCalendar, ICalendar } from "~/vendor/datebook";
 import React, { Component } from "react";
-
-import Emoji from "~/components/Emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Markdown from "~/components/Markdown";
 import OutboundLink from "~/components/OutboundLink";
 import SingleItem from "~/containers/SingleItem";
 import EventsPageLayout from "../../layouts/EventsPage";
-import { Link } from "~/routes";
+import { Link, Router } from "~/routes";
 import { requireAuthed } from "~/lib/auth";
-import { Router } from "~/routes";
 import { loadingClass } from "~/lib/utils/random";
 import { leaveEvent } from "~/lib/events";
 

@@ -2,12 +2,10 @@ import { call, put, select, take, takeEvery } from "redux-saga/effects";
 import { actions as appActions, types as appTypes } from "../ducks/app";
 import { actions as statsActions } from "../ducks/stats";
 import { actions as tasksActions } from "../ducks/tasks";
-import { actions as userActions } from "../ducks/user";
 import { actions as projectsActions } from "../ducks/projects";
 import { checkApiHealth } from "~/lib/app";
 import { syncTimezone } from "~/lib/user";
 import axios from "~/lib/axios";
-import { isServer } from "~/config";
 
 // const getAuth = state => state.auth;
 const getStats = state => state.stats;

@@ -1,6 +1,5 @@
-import { call, put, race, take, takeLatest, select } from "redux-saga/effects";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 import { actions as authActions, types as authTypes } from "../ducks/auth";
-import { actions as userActions, types as userTypes } from "~/ducks/user";
 import axios from "~/lib/axios";
 import { getToken } from "~/lib/auth";
 import { setCookie } from "nookies";

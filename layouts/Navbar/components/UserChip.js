@@ -3,10 +3,6 @@ import NavLink from "~/components/ActiveLink";
 
 import Chip from "~/components/Chip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import GlobalSearchBar from "~/features/search/components/GlobalSearchBar";
-import { NavbarDropdown } from "~/components/Dropdown";
-import { NotificationsLink } from "~/features/notifications";
-import PropTypes from "prop-types";
 import React from "react";
 import Streak from "~/components/Streak";
 import OutboundLink from "../../../components/OutboundLink";

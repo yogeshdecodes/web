@@ -1,20 +1,14 @@
 import "./index.scss";
 
 import { Link as NavLink, Link } from "~/routes";
-
-import Chip from "~/components/Chip";
-import LocalOnly from "~/containers/LocalOnly";
 import LoggedInMenu from "./components/LoggedInMenu";
 import LoggedOutMenu from "./components/LoggedOutMenu";
 import React from "react";
-import Spinner from "~/components/Spinner";
-import Streak from "~/components/Streak";
 import { actions as authActions } from "~/ducks/auth";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withRouter } from "next/router";
 import { actions as editorActions } from "~/ducks/editor";
-import { imageUrl } from "../../lib/utils/img";
 import UserChip from "./components/UserChip";
 
 class Navbar extends React.Component {

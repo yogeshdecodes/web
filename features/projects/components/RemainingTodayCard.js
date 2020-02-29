@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {groupTasksByDone} from "~/lib/utils/tasks";
-import {Entry} from "~/features/stream";
-import {Tooltip} from "react-tippy";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {connect} from "react-redux";
+import { groupTasksByDone } from "~/lib/utils/tasks";
+import { Entry } from "~/features/stream";
+import { Tooltip } from "react-tippy";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 import mapDispatchToProps from "../containers/mapDispatchToProps";
-import {FullName} from "~/features/users";
+import { FullName } from "~/features/users";
 import Greeting from "~/components/Greeting";
-import {isDueSoon, wasAddedToday} from "../../../lib/utils/tasks";
+import { isDueSoon, wasAddedToday } from "../../../lib/utils/tasks";
 
 const HelpTooltip = props => (
     <Tooltip

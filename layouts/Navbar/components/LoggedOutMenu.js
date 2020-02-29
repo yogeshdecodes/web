@@ -1,10 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import GlobalSearchBar from "~/features/search/components/GlobalSearchBar/index";
 import NavLink from "~/components/ActiveLink";
 import { NavbarDropdown } from "~/components/Dropdown";
 import React from "react";
 import { Link } from "~/routes";
-import AuthModal from "~/features/users/components/AuthModal";
 import OutboundLink from "~/components/OutboundLink";
 
 const LoggedOutMenu = props => (

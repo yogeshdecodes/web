@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import ProfilePageLayout from "~/layouts/ProfilePage";
 import { getProfileProps } from "../index";
-import { getProducts } from "~/lib/products";
-import { ProductList } from "~/features/products";
 import { prefetchDiscussionsForUser } from "../../../lib/discussions";
 import ThreadStreamItem from "../../../features/discussions/ThreadStream/Item";
 import InfiniteResults from "~/components/InfiniteResults";

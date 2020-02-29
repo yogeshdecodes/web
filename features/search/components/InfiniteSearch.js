@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Button } from "../../../vendor/bulma";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Spinner from "../../../components/Spinner";
 import orderBy from "lodash/orderBy";
 import debounce from "lodash/debounce";
 import axios from "~/lib/axios";
+import { loadingClass } from "~/lib/utils/random";
 
 class InfiniteSearch extends React.Component {
     _isMounted = false;
@@ -110,14 +110,16 @@ class InfiniteSearch extends React.Component {
 
                 {this.state.hasMore && (
                     <div className={"center"}>
-                        <Button
-                            loading={this.state.loading}
-                            className={"btn rounded"}
+                        <button
+                            className={loadingClass(
+                                "btn rounded",
+                                this.state.loading
+                            )}
                             onClick={this.loadMore}
                         >
                             <FontAwesomeIcon icon={"arrow-circle-down"} />{" "}
                             &nbsp; Load more results...
-                        </Button>
+                        </button>
                     </div>
                 )}
                 {!this.state.hasMore && this.state.loading && <Spinner />}

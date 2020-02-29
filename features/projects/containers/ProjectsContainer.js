@@ -1,5 +1,5 @@
 import React from "react";
-import {getProjects} from "~/lib/projects";
+import { getProjects } from "~/lib/projects";
 import Spinner from "~/components/Spinner";
 
 class ProjectsContainer extends React.Component {

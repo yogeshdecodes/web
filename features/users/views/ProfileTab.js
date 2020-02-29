@@ -1,4 +1,3 @@
-import { Button, File, Input } from "~/vendor/bulma";
 import { me, updateSettings } from "~/lib/user";
 import { Link } from "~/routes";
 
@@ -7,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Spinner from "~/components/Spinner";
 import omit from "lodash/omit";
+import { loadingClass } from "../../../lib/utils/random";
 
 class ProfileTab extends React.Component {
     state = {
@@ -479,15 +479,16 @@ class ProfileTab extends React.Component {
                         {this.renderErrorMessages()}
                     </div>
                 )}
-                <Button
-                    className={"is-rounded"}
-                    loading={this.state.isPosting}
+                <button
+                    className={loadingClass(
+                        "btn btn-primary",
+                        this.state.isPosting
+                    )}
                     onClick={this.onSubmit}
-                    primary
                     type="submit"
                 >
                     Save
-                </Button>
+                </button>
             </form>
         );
     }

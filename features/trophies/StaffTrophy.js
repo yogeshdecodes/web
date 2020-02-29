@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import Streak from "~/components/Streak";
+import React from "react";
 import Emoji from "../../components/Emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

@@ -1,6 +1,6 @@
-import {call, put, takeLatest} from "redux-saga/effects";
-import {actions as statsActions, types as statsTypes} from "../ducks/stats";
-import {getMyStats, getWorldStats} from "../lib/stats";
+import { call, put, takeLatest } from "redux-saga/effects";
+import { actions as statsActions, types as statsTypes } from "../ducks/stats";
+import { getMyStats, getWorldStats } from "../lib/stats";
 
 function* fetchStats(action) {
     try {

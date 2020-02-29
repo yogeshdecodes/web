@@ -3,10 +3,6 @@ import { getMilestoneBySlug } from "~/lib/milestones";
 
 import "./index.scss";
 import MilestoneMedia from "~/features/milestones/components/MilestoneMedia";
-import { CommentsBox } from "~/features/comments";
-import Sticky from "react-stickynode";
-import UserCard from "~/features/users/UserCard";
-import { isServer } from "~/config";
 import Head from "~/components/Head";
 import ProfilePage from "~/layouts/ProfilePage";
 

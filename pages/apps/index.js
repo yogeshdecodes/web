@@ -13,9 +13,7 @@ import Shipstreams from "~/features/apps/apps/Shipstreams";
 import Telegram from "~/features/apps/apps/Telegram";
 import "./index.scss";
 import Shop from "~/features/apps/components/Shop";
-import { requireAuthed } from "~/lib/auth";
 import AppsPageLayout from "~/layouts/AppsPage";
-import NavLink from "~/components/ActiveLink";
 
 class AppsPage extends React.Component {
     static async getInitialProps({ query, ...ctx }) {

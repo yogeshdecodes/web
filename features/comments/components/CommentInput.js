@@ -3,12 +3,11 @@ import { Link } from "~/routes";
 import { postComment } from "~/lib/comments";
 import Avatar from "~/features/users/components/Avatar";
 import Spinner from "~/components/Spinner";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CommentInput.scss";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import dynamic from "next/dynamic";
+
 const GiphyPane = dynamic(
     () => {
         return import("react-giphy-selector").then(mod => mod.Selector);

@@ -1,10 +1,10 @@
-import React, {Component} from "react";
-import {getLiveParticipants, getTopParticipants} from "../../../lib/events";
+import React, { Component } from "react";
+import { getLiveParticipants, getTopParticipants } from "../../../lib/events";
 
 import Emoji from "~/components/Emoji";
 import Spinner from "../../../components/Spinner";
-import {UserRow} from "../../users";
-import {isOcurring} from "../../../lib/utils/events";
+import { UserRow } from "../../users";
+import { isOcurring } from "../../../lib/utils/events";
 
 class AttendeesCard extends Component {
     state = {

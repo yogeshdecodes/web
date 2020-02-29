@@ -1,7 +1,7 @@
 import "~/styles/index.scss";
 import "~/vendor/fa";
 
-import App, { Container } from "next/app";
+import App from "next/app";
 
 import ErrorPage from "next/error";
 import Head from "~/components/Head";
@@ -14,9 +14,8 @@ import Reactor from "~/components/Reactor";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
 import config, { isServer } from "~/config";
-import { parseCookies } from "nookies";
+import nookies, { parseCookies } from "nookies";
 import { actions as authActions } from "~/ducks/auth";
-import { actions as userActions } from "~/ducks/user";
 import { actions as appActions } from "~/ducks/app";
 import axios from "~/lib/axios";
 import DownPage from "~/layouts/DownPage";
@@ -24,7 +23,6 @@ import NotificationsView from "~/features/notifications/components/Notifications
 import isEmpty from "lodash/isEmpty";
 import { gaSetUserId, isGaEnabled } from "../vendor/ga";
 import Router from "next/router"; // yes this is correct
-import nookies from "nookies";
 import ThemedContainer from "~/layouts/ThemedContainer";
 import MobileNav from "~/layouts/MobileNav";
 import Editor from "~/features/editor";

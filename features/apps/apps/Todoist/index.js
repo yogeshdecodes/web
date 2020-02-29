@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "~/vendor/bulma";
 import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
 import Spinner from "~/components/Spinner";
 import { getProjects } from "~/lib/user";
@@ -18,8 +17,6 @@ import { errorArray } from "~/lib/utils/error";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { Link } from "~/routes";
 import { loadingClass } from "~/lib/utils/random";
 
 class TodoistProjectLinker extends React.Component {
@@ -237,13 +234,15 @@ class TodoistLinks extends React.Component {
                         <tr>
                             <td>#{l.linked_project.name}</td>
                             <td>
-                                <Button
+                                <button
                                     onClick={() => this.deleteProject(l.id)}
-                                    loading={this.state.deleting}
-                                    className={"btn-delete"}
+                                    className={loadingClass(
+                                        "btn-delete",
+                                        this.state.deleting
+                                    )}
                                 >
                                     Unlink
-                                </Button>
+                                </button>
                             </td>
                         </tr>
                     ))}

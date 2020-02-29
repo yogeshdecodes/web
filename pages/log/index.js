@@ -1,16 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import NoActivityCard from "~/features/stream/components/NoActivityCard";
-import { FollowingStream } from "~/features/stream";
-import StreamHeader from "../../features/stream/components/StreamHeader";
-import Sidebar from "../../features/stream/components/Sidebar";
 import { requireAuthed } from "../../lib/auth";
-import QuickPost from "~/features/tasks/components/QuickPost";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
-import GlobalStream, {
-    prefetch as prefetchStream
-} from "~/features/stream/containers/GlobalStream";
-import BroadcastList from "~/components/BroadcastList";
+import GlobalStream, { prefetch as prefetchStream } from "~/features/stream/containers/GlobalStream";
 
 class StreamPage extends React.Component {
     static async getInitialProps() {

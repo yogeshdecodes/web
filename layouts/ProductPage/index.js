@@ -1,6 +1,4 @@
 import React from "react";
-import { FullName } from "~/features/users";
-import { Avatar } from "~/features/users";
 import Head from "~/components/Head";
 import PageNavigation from "~/components/ui/PageNavigation";
 import ProductSidebar from "~/components/sidebar/product-page";
@@ -8,7 +6,6 @@ import "./index.scss";
 import { connect } from "react-redux";
 import NavLink from "~/components/ActiveLink";
 import { Link } from "~/routes";
-import { imageUrl } from "~/lib/utils/img";
 import "../ProfilePage/index.scss";
 import ProductIcon from "../../features/products/components/ProductIcon";
 import { isTeamMember } from "~/lib/utils/products";

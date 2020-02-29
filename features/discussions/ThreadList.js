@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "~/routes";
+import { Link } from "~/routes";
 import ReplyFaces from "./ReplyFaces";
 
 export default props => {

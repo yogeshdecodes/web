@@ -2,21 +2,15 @@ import React from "react";
 import { actions as userActions } from "~/ducks/user";
 import { actions as authActions } from "~/ducks/auth";
 import { connect } from "react-redux";
-import { Button } from "~/vendor/bulma";
 import axios from "~/lib/axios";
 import { changePassword, downloadExportedData } from "~/lib/user";
-import { requestReport } from "~/lib/management";
 import { Experiment } from "~/lib/utils/experiment";
 import Embed from "~/components/Embed";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Sticky from "react-stickynode";
 import ProfileTab from "../../features/users/views/ProfileTab";
 import GoldTab from "../../features/users/views/GoldTab";
 import StreakTab from "../../features/users/views/StreakTab";
-import SidebarLink from "~/components/SidebarLink";
 import { requireAuthed } from "~/lib/auth";
 import "./index.scss";
-import { isServer } from "~/config";
 import PageNavigation from "~/components/ui/PageNavigation";
 import { loadingClass } from "~/lib/utils/random";
 
@@ -221,111 +215,6 @@ class DataSettings extends React.Component {
     }
 }
 
-class Broadcaster extends React.Component {
-    state = {
-        isLoading: false,
-        message: "",
-        link: "",
-        failed: false
-    };
-
-    broadcast = async () => {
-        try {
-            this.setState({ isLoading: true });
-            let result = await axios.post(
-                "/notifications/management/broadcast/",
-                { content: this.state.message, broadcast_link: this.state.link }
-            );
-            this.setState({
-                isLoading: false,
-                failed: !result.data.success
-            });
-        } catch (e) {}
-    };
-
-    render() {
-        return (
-            <div>
-                {this.state.failed && (
-                    <div className={"panel-message danger"}>
-                        Failed to broadcast.
-                    </div>
-                )}
-                <input
-                    type={"text"}
-                    placeholder="Message"
-                    value={this.state.message}
-                    onChange={e => this.setState({ message: e.target.value })}
-                />
-                <input
-                    type={"text"}
-                    placeholder="Link"
-                    value={this.state.link}
-                    onChange={e => this.setState({ link: e.target.value })}
-                />
-                <button
-                    className={"btn"}
-                    onClick={this.broadcast}
-                    loading={this.state.isLoading}
-                >
-                    Broadcast
-                </button>
-            </div>
-        );
-    }
-}
-
-class ManagementPanel extends React.Component {
-    state = {
-        requestingReport: false,
-        failed: false
-    };
-
-    requestReport = async () => {
-        try {
-            this.setState({ requestingReport: true });
-            await requestReport();
-            this.setState({ requestingReport: false });
-        } catch (e) {
-            this.setState({
-                requestingReport: false,
-                failed: true
-            });
-        }
-    };
-
-    render() {
-        return (
-            <div>
-                <div className={"panel-message info"}>
-                    <strong>
-                        Welcome to the Makerlog staff management panel.
-                    </strong>{" "}
-                    If you aren't staff, you shouldn't be here. Either way,
-                    nothing will work (API controls mwahaha). Go away.
-                </div>
-                {this.state.failed && (
-                    <div className={"panel-message danger"}>
-                        Something went wrong, or you don't have permission to do
-                        this.
-                    </div>
-                )}
-                <hr />
-                <h3>Discord</h3>
-                <Button
-                    onClick={this.requestReport}
-                    loading={this.state.requestingReport}
-                >
-                    Send daily report
-                </Button>
-                <hr />
-                <h3>Broadcaster</h3>
-                <Broadcaster />
-            </div>
-        );
-    }
-}
-
 class ExperimentalSettings extends React.Component {
     constructor(props) {
         super(props);
@@ -458,7 +347,6 @@ class SettingsPage extends React.Component {
                                 <SecuritySettings user={this.props.user} />
                             )}
                             {this.state.activeTab === 3 && <DataSettings />}
-                            {this.state.activeTab === 4 && <ManagementPanel />}
                             {this.state.activeTab === 5 && (
                                 <ExperimentalSettings />
                             )}

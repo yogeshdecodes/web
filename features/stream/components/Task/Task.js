@@ -1,4 +1,3 @@
-import CommentFaces from "../../../comments/components/CommentFaces";
 import DueCountdown from "../../../../components/DueCountdown";
 import Emoji from "~/components/Emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,15 +7,11 @@ import Linkify from "react-linkify";
 import { Praisable } from "./components/Praise";
 import PropTypes from "prop-types";
 import React from "react";
-import TaskDetailModal from "./components/TaskDetailModal";
 import { getAppIcon } from "~/lib/apps";
 import { processTaskString } from "~/lib/utils/parsers";
 import startsWith from "lodash/startsWith";
-import Avatar from "../../../users/components/Avatar";
-import FullName from "../../../users/components/FullName";
 import CommentsBox from "~/features/comments/components/CommentsBox";
 import TaskDetail from "./components/TaskDetailModal/TaskDetail";
-import config from "../../../../config";
 import { imageUrl } from "../../../../lib/utils/img";
 
 function findWord(word, str) {

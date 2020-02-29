@@ -1,5 +1,5 @@
-import {actions as tasksActions} from "../../../ducks/tasks";
-import {actions as editorActions} from "../../../ducks/editor";
+import { actions as tasksActions } from "../../../ducks/tasks";
+import { actions as editorActions } from "../../../ducks/editor";
 
 export default dispatch => {
     return {

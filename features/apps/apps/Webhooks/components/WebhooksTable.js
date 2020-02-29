@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "~/vendor/bulma";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getAppIcon } from "~/lib/apps";
 import { deleteHook } from "~/lib/integrations/webhook";

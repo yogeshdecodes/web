@@ -1,7 +1,5 @@
 import "react-phone-number-input/style.css";
 
-import { Button, Input } from "~/vendor/bulma";
-
 import Emoji from "~/components/Emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OutboundLink from "~/components/OutboundLink";
@@ -9,7 +7,6 @@ import PhoneInput from "react-phone-number-input";
 import ReCaptcha from "react-google-recaptcha";
 import React from "react";
 import Spinner from "~/components/Spinner";
-import { StreamCard } from "~/features/stream/components/Stream/components/StreamCard/styled";
 import { actions as appActions } from "~/ducks/app";
 import { actions as authActions } from "~/ducks/auth";
 import axios from "~/lib/axios";
@@ -18,7 +15,6 @@ import { connect } from "react-redux";
 import { validateEmail } from "~/lib/utils/random";
 import "./index.scss";
 import { Router } from "~/routes";
-import { requireUnauthed } from "~/lib/auth";
 import styled from "styled-components";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
 
@@ -342,7 +338,7 @@ class RegisterForm extends React.Component {
                 <div className={"form-row"}>
                     <label className="label">Email</label>
                     <div className={"control"}>
-                        <Input
+                        <input
                             danger={
                                 this.state.errorMessages &&
                                 this.state.errorMessages.email
@@ -363,7 +359,7 @@ class RegisterForm extends React.Component {
             <div className={"form-row"}>
                 <label className="label">Password</label>
                 <div className={"control"}>
-                    <Input
+                    <input
                         value={this.state.password}
                         onChange={e =>
                             this.setState({

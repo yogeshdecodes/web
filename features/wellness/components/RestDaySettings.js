@@ -1,6 +1,6 @@
 import React from "react";
 import Spinner from "../../../components/Spinner";
-import {me, patchSettings} from "../../../lib/user";
+import { me, patchSettings } from "../../../lib/user";
 import HardcoreModeToggle from "./HardcoreModeToggle";
 
 class RestDaySettings extends React.Component {

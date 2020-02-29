@@ -1,9 +1,7 @@
 import React from "react";
 import { getProductBySlug, getProductPeople } from "~/lib/products";
-import { Product } from "~/features/products";
 import { ProductStream } from "~/features/stream";
 import "./index.scss";
-import Head from "next/head";
 import ProductPageLayout from "~/layouts/ProductPage";
 
 class ProductPage extends React.Component {

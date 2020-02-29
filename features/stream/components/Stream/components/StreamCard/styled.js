@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import {Card} from "~/vendor/bulma";
 
 const StreamCard = styled.div`
     padding: 0px;

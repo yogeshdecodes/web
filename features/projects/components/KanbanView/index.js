@@ -9,7 +9,6 @@ import mapDispatchToProps from "../../containers/mapDispatchToProps";
 import KanbanTask from "./components/KanbanTask";
 import isEqual from "lodash/isEqual";
 import "./index.scss";
-import GoldCtaButton from "~/components/GoldCtaButton";
 import GoldAlert from "../../../../components/GoldAlert";
 
 /*<div style={{ borderColor: colorFromProject(project) }} className={"color-circle"}></div>*/

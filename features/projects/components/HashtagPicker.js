@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Spinner from "../../../components/Spinner";
 import { createProject } from "../../../lib/projects";
 import uniqBy from "lodash/uniqBy";
-import { loadingClass, handleChange } from "../../../lib/utils/random";
+import { handleChange, loadingClass } from "../../../lib/utils/random";
 import { actions as projectsActions } from "~/ducks/projects";
 
 class HashtagPicker extends Component {

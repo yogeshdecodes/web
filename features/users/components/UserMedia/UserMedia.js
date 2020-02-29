@@ -7,7 +7,6 @@ import "./UserMedia.scss";
 import Emoji from "~/components/Emoji";
 import Avatar from "../Avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ProfileModalAction from "../../containers/ProfileModalAction";
 import MakerScore from "../../../../components/MakerScore";
 import { Link } from "~/routes";
 import { imageUrl } from "../../../../lib/utils/img";

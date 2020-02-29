@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import Emoji from "~/components/Emoji";
-import WeekendModeSettings from "~/features/wellness/components/WeekendModeSettings";
 import RestDaySettings from "~/features/wellness/components/RestDaySettings";
-import Spinner from "~/components/Spinner";
 import RestDayList from "~/features/wellness/components/RestDayList";
 import { connect } from "react-redux";
-import { requireAuthed } from "~/lib/auth";
 import { mapStateToProps } from "~/ducks/user";
 
 export default connect(mapStateToProps)(

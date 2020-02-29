@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Streak from "~/components/Streak";
 import Emoji from "../../components/Emoji";
 

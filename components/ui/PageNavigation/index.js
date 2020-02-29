@@ -1,8 +1,4 @@
 import "./index.scss";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ActiveLink from "~/components/ActiveLink";
-import OutboundLink from "~/components/OutboundLink";
 import React from "react";
 
 class PageNavigation extends React.Component {

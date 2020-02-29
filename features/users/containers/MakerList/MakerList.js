@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "~/lib/axios";
 import Spinner from "~/components/Spinner";
-import {UserMedia} from "~/features/users";
-import Tiles, {Tile} from "../../../../components/Tiles";
+import { UserMedia } from "~/features/users";
+import Tiles, { Tile } from "../../../../components/Tiles";
 
 class MakerList extends React.Component {
     state = {

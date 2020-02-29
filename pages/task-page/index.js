@@ -1,10 +1,5 @@
 import React from "react";
 import { getTask } from "~/lib/tasks";
-import { CommentsBox } from "~/features/comments";
-import { EntryDetail } from "~/features/stream";
-import UserCard from "~/features/users/UserCard";
-import Sticky from "react-stickynode";
-import { isServer } from "~/config";
 import Head from "~/components/Head";
 import "./index.scss";
 import ProfilePage from "~/layouts/ProfilePage";

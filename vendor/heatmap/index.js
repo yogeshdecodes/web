@@ -1,19 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import memoizeOne from "memoize-one";
-import {
-    DAYS_IN_WEEK,
-    MILLISECONDS_IN_ONE_DAY,
-    DAY_LABELS,
-    MONTH_LABELS
-} from "./constants";
-import {
-    dateNDaysAgo,
-    shiftDate,
-    getBeginningTimeForDate,
-    convertToDate,
-    getRange
-} from "./helpers";
+import { DAY_LABELS, DAYS_IN_WEEK, MILLISECONDS_IN_ONE_DAY, MONTH_LABELS } from "./constants";
+import { convertToDate, dateNDaysAgo, getBeginningTimeForDate, getRange, shiftDate } from "./helpers";
 
 const SQUARE_SIZE = 10;
 const MONTH_LABEL_GUTTER_SIZE = 4;

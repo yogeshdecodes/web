@@ -1,6 +1,6 @@
 import React from "react";
-import {getRecentQuestions} from "../../lib/discussions";
-import {Link} from "~/routes";
+import { getRecentQuestions } from "../../lib/discussions";
+import { Link } from "~/routes";
 import Avatar from "../users/components/Avatar/Avatar";
 import Spinner from "../../components/Spinner";
 

@@ -5,10 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TaskQueue from "~/features/tasks/components/TaskQueue";
 import "./index.scss";
 
-import { Link, Redirect } from "~/routes";
-
-import { Button } from "~/vendor/bulma";
-import Dropzone from "react-dropzone";
+import { Router } from "~/routes";
 import Emoji from "~/components/Emoji";
 import GoldCtaButton from "~/components/GoldCtaButton";
 import Spinner from "~/components/Spinner";
@@ -20,7 +17,6 @@ import { getMyProducts } from "~/lib/products";
 import { loadingClass } from "~/lib/utils/random";
 import { Tooltip } from "react-tippy";
 import MarkdownHelpText from "~/components/MarkdownHelpText";
-import { Router } from "~/routes";
 
 class ProductSelectorDropdown extends React.Component {
     state = {

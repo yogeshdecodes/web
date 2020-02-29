@@ -2,7 +2,7 @@ import React from "react";
 import Tda from "~/components/Tda";
 import Streak from "~/components/Streak";
 import Emoji from "~/components/Emoji";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 export const Badge = props => (

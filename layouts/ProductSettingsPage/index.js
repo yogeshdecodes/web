@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ProductsPageSidebar from "~/components/sidebar/products-page";
 import StdPageLayout from "~/layouts/StdPage";
-import NavLink from "~/components/ActiveLink";
 import "./index.scss";
 
 export default class ProductSettingsPage extends Component {

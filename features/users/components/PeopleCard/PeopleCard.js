@@ -8,7 +8,6 @@ import FullName from "../FullName";
 import { Link } from "~/routes";
 import OutboundLink from "~/components/OutboundLink";
 import ProductList from "../../../products/components/ProductList/ProductList";
-import PropTypes from "prop-types";
 import React from "react";
 import RecentDiscussionList from "../../../discussions/RecentDiscussionList";
 import Spinner from "../../../../components/Spinner";
