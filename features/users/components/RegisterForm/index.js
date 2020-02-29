@@ -339,6 +339,7 @@ class RegisterForm extends React.Component {
                     <label className="label">Email</label>
                     <div className={"control"}>
                         <input
+                            type="email"
                             danger={
                                 this.state.errorMessages &&
                                 this.state.errorMessages.email

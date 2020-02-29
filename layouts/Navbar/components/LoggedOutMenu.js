@@ -43,12 +43,6 @@ const LoggedOutMenu = props => (
                         <span>Integrations</span>
                     </a>
                 </NavLink>
-                <NavLink activeClassName="is-active" route="live">
-                    <a className="navbar-item">
-                        <span>Live</span>
-                    </a>
-                </NavLink>
-
                 <OutboundLink
                     to="https://open.getmakerlog.com"
                     className="navbar-item"
