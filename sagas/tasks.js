@@ -109,7 +109,6 @@ function listen(socket) {
             switch (data.type) {
                 case "task.created":
                 case "task.updated":
-                    console.log("Test", action);
                     emit(
                         tasksActions.loadTasksSuccess(
                             [data.payload],
