@@ -17,6 +17,7 @@ import { getMyProducts } from "~/lib/products";
 import { loadingClass } from "~/lib/utils/random";
 import { Tooltip } from "react-tippy";
 import MarkdownHelpText from "~/components/MarkdownHelpText";
+import { Track } from "../../vendor/ga";
 
 class ProductSelectorDropdown extends React.Component {
     state = {
@@ -98,6 +99,8 @@ class MilestoneEditor extends React.Component {
                 iconPreview: null,
                 loading: false
             });
+
+            new Track().event("milestone-posted");
             if (this.props.onClose) this.props.onClose();
             if (this.props.onBack) this.props.onBack();
         } catch (e) {
@@ -378,6 +381,8 @@ class DiscussionEditor extends React.Component {
                 loading: false,
                 thread
             });
+
+            new Track().event("discussion-posted");
             if (this.props.onClose) this.props.onClose();
             if (this.props.onBack) this.props.onBack();
             Router.pushRoute(`/discussions/${thread.slug}/`);

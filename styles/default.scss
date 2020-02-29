@@ -2365,3 +2365,13 @@ ul.unstyled {
         height: 40px;
     }
 }
+.TodayPage {
+    .card {
+        border: 1px solid var(--c-border);
+    }
+    .today-input {
+        padding: 1rem;
+        //background: var(--c-bg);
+        border-bottom: 1px solid var(--c-border);
+    }
+}

@@ -1,5 +1,6 @@
 import { errorArray } from "~/lib/utils/error";
 import uniqBy from "lodash/uniqBy";
+import { Track } from "../vendor/ga";
 
 const initialState = {
     open: false,
@@ -39,9 +40,11 @@ export const types = {
 export const editorReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.TOGGLE_EDITOR:
+            let nextOpen = !state.open;
+            new Track().event(`editor-toggled-${nextOpen ? "open" : "close"}`);
             return {
                 ...state,
-                open: !state.open,
+                open: nextOpen,
                 creatingMilestone: false,
                 creatingDiscussion: false
             };
@@ -163,7 +166,9 @@ export const editorReducer = (state = initialState, action) => {
 };
 
 export const actions = {
-    toggleEditor: () => ({ type: types.TOGGLE_EDITOR }),
+    toggleEditor: () => {
+        return { type: types.TOGGLE_EDITOR };
+    },
 
     addToQueue: task => ({ type: types.ADD_TO_QUEUE, task }),
     removeFromQueue: task => ({ type: types.REMOVE_FROM_QUEUE, task: task }),
@@ -188,6 +193,7 @@ export const actions = {
     }),
 
     createTasks: () => {
+        new Track().event("task-posted");
         return {
             type: types.TASK_CREATE_REQUEST
         };

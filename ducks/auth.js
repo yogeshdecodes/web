@@ -1,5 +1,6 @@
 import { errorArray } from "~/lib/utils/error";
 import { destroyCookie } from "nookies";
+import { Track } from "~/vendor/ga";
 
 const initialState = {
     authModalOpen: false,
@@ -85,6 +86,7 @@ export const actions = {
     },
 
     loginSuccess: (token, user) => {
+        new Track().event("login");
         return {
             type: types.LOGIN_SUCCEEDED,
             token: token
@@ -92,6 +94,7 @@ export const actions = {
     },
 
     loginFailed: (errorMessages = ["Login failed."]) => {
+        new Track().event("login-failed");
         return {
             type: types.LOGIN_FAILED,
             errorMessages: errorArray(errorMessages)
@@ -100,6 +103,7 @@ export const actions = {
 
     logout: (ctx = null) => {
         // persistor.purge();
+        new Track().event("logout");
         destroyCookie(ctx ? ctx : {}, "token");
         return {
             type: types.LOGOUT

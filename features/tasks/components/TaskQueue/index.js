@@ -117,6 +117,10 @@ class TaskQueue extends Component {
     onTaskKeyDown = e => {
         if (e.key === "Enter" && !e.shiftKey) {
             this.props.createTasks();
+            setTimeout(
+                () => this.props.addToQueue(this.createTaskObject("", true)),
+                1000
+            );
         }
 
         if (e.key === "Enter" && e.shiftKey) {

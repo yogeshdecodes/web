@@ -6,7 +6,7 @@ import OutboundLink from "../OutboundLink";
 
 const MarkdownHelpText = ({ className = "" }) => {
     return (
-        <p className={"MarkdownHelpText help " + className}>
+        <p className={"MarkdownHelpText help has-text-grey " + className}>
             <FontAwesomeIcon icon={["fab", "markdown"]} /> Markdown is
             supported.{" "}
             <OutboundLink to="https://www.markdownguide.org/cheat-sheet/">

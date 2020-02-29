@@ -71,7 +71,7 @@ export default connect(mapUserToProps)(
                             </a>
                         </Link>
                     </div>
-                    <div>
+                    <div style={{ width: "100%" }}>
                         <div className={"reply-user flex flex-gap"}>
                             <UserLine user={reply.owner} />
                         </div>

@@ -173,28 +173,6 @@ class TodayView extends React.Component {
                                 ))}
                             </div>
                         </div>
-                        <div className={"flex actions"}>
-                            <div>
-                                <button
-                                    className={"toggleModes btn-gray btn-small"}
-                                    onClick={this.toggleFocusMode}
-                                >
-                                    <FontAwesomeIcon icon={"eye"} />
-                                    {this.state.focusMode
-                                        ? "Exit focus mode"
-                                        : "Focus mode"}
-                                </button>
-                            </div>
-                            <div>
-                                <button
-                                    className={"toggleModes btn-gray btn-small"}
-                                    onClick={this.toggleFullScreen}
-                                >
-                                    <FontAwesomeIcon icon={"arrows-alt"} />{" "}
-                                    Toggle full screen
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </TodayPage>
