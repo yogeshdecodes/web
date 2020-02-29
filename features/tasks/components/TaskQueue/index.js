@@ -351,7 +351,7 @@ class TaskQueue extends Component {
                                             autoFocus
                                         ></input>
                                     </div>
-                                    <div className="flex attach-controls flex-gap">
+                                    <div className="flex attach-controls flex-gap end inline">
                                         {task.due_at && (
                                             <div>
                                                 <small

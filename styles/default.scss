@@ -1689,8 +1689,11 @@ figure.img-circle {
     .is-hidden-mobile {
         display: none;
     }
+
     .flex {
-        width: 100%;
+        &:not(.inline) {
+            width: 100%;
+        }
 
         > div:only-child {
             width: 100%;
