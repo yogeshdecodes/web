@@ -200,6 +200,23 @@ class TaskQueue extends Component {
                     <div className="input-container"></div>
 
                     <div className="task-input-list">
+                        {this.props.queue.length === 0 && (
+                            <div className={"task-input posting"}>
+                                <div className={"check-case "}>
+                                    {this.getFaIcon(
+                                        this.createTaskObject("", true)
+                                    )}
+                                </div>
+                                <div className="input">
+                                    <input
+                                        disabled={true}
+                                        autocomplete="off"
+                                        placeholder={"Start typing a task..."}
+                                        autoFocus
+                                    ></input>
+                                </div>
+                            </div>
+                        )}
                         {this.props.queue.map(task => (
                             <div
                                 className={
@@ -227,6 +244,9 @@ class TaskQueue extends Component {
                                 </div>
                                 <div className="input">
                                     <input
+                                        disabled={
+                                            this.state.currentTask === null
+                                        }
                                         autocomplete="off"
                                         onKeyDown={this.onTaskKeyDown}
                                         name={task.id}
