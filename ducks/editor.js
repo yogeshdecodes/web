@@ -82,7 +82,7 @@ export const editorReducer = (state = initialState, action) => {
         case types.REMOVE_FROM_QUEUE:
             return {
                 ...state,
-                queue: [...state.queue].filter(t => t.id !== action.task.id)
+                queue: state.queue.filter(t => t.id !== action.task.id)
             };
 
         case types.SET_EDITOR_ATTACHMENT:

@@ -5,6 +5,22 @@
         margin-top: 10px;
     }
 
+    .attachment-preview {
+        background: var(--c-bg);
+        border: 1px solid var(--c-border);
+        margin-top: 1rem;
+        padding: 10px;
+        background-size: cover;
+        background-position: center;
+        height: 150px;
+        position: relative;
+        .delete {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+    }
+
     header {
         padding-top: 1rem;
 

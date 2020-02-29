@@ -5,6 +5,7 @@ import findHashtags from "find-hashtags";
 import debounce from "lodash/debounce";
 import { connect } from "react-redux";
 import { actions as editorActions } from "~/ducks/editor";
+import Dropzone from "react-dropzone";
 
 /*
 PropTypes:
@@ -35,11 +36,20 @@ class TaskQueue extends Component {
 
         this.state = {
             currentTask: defaultTask.id,
-            hashtags: []
+            hashtags: [],
+            uploadHover: false,
+            tooLarge: false
         };
+        this.dropRef = React.createRef();
 
         this.props.addToQueue(defaultTask);
     }
+
+    onHoverUpload = s => {
+        this.setState({
+            uploadHover: s
+        });
+    };
 
     populateInitialTask = () => {
         const initialTask = this.createTaskObject("", true);
@@ -140,7 +150,7 @@ class TaskQueue extends Component {
                         .filter(t => t.id !== task.id)
                         .slice(-1)[0].id
                 });
-                this.props.removeFromQueue(task.id);
+                this.props.removeFromQueue(task);
             } else {
                 this.setState({ currentTask: null });
             }
@@ -191,74 +201,167 @@ class TaskQueue extends Component {
         );
     };
 
+    onDrop = (acceptedFiles, rejectedFiles) => {
+        this.onHoverUpload(false);
+        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        if (!acceptedFiles.length) {
+            this.setState({ tooLarge: true });
+            return;
+        } else {
+            this.setState({ tooLarge: false });
+        }
+        const file = acceptedFiles[0];
+
+        task.attachment = file;
+
+        this.props.addToQueue(task);
+    };
+
+    removeAttachment = e => {
+        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        delete task.attachment;
+        this.props.addToQueue(task);
+    };
+
     render() {
         const open = this.state.currentTask !== null;
+        let currentTask = this.props.queue.find(
+            t => t.id === this.state.currentTask
+        );
 
+        if (this.state.uploadHover)
+            return (
+                <Dropzone
+                    maxSize={2 * 1024 * 1024}
+                    className={"task-dropzone"}
+                    accept="image/*"
+                    multiple={false}
+                    onDrop={this.onDrop}
+                    disableClick
+                    onDragEnter={e => this.onHoverUpload(true)}
+                    onDragLeave={e => this.onHoverUpload(false)}
+                >
+                    <div className="upload-hover-state">
+                        Drop to attach an image{" "}
+                        {this.state.tooLarge ? "(too large)" : null}
+                    </div>
+                </Dropzone>
+            );
         return (
             <div className={"TaskQueue " + (open ? "is-active" : "")}>
                 <div className="controls">
-                    <div className="input-container"></div>
-
-                    <div className="task-input-list">
-                        {this.props.queue.length === 0 && (
-                            <div className={"task-input posting"}>
-                                <div className={"check-case "}>
-                                    {this.getFaIcon(
-                                        this.createTaskObject("", true)
-                                    )}
+                    <Dropzone
+                        maxSize={2 * 1024 * 1024}
+                        className={"task-dropzone"}
+                        accept="image/*"
+                        multiple={false}
+                        onDrop={e => console.log(e)}
+                        disableClick
+                        onDragEnter={e => this.onHoverUpload(true)}
+                        onDragLeave={e => this.onHoverUpload(false)}
+                        ref={this.dropRef}
+                    >
+                        <div className="task-input-list">
+                            {this.props.queue.length === 0 && (
+                                <div className={"task-input posting"}>
+                                    <div className={"check-case "}>
+                                        {this.getFaIcon(
+                                            this.createTaskObject("", true)
+                                        )}
+                                    </div>
+                                    <div className="input">
+                                        <input
+                                            disabled={true}
+                                            autocomplete="off"
+                                            placeholder={
+                                                "Start typing a task..."
+                                            }
+                                            autoFocus
+                                        ></input>
+                                    </div>
                                 </div>
-                                <div className="input">
-                                    <input
-                                        disabled={true}
-                                        autocomplete="off"
-                                        placeholder={"Start typing a task..."}
-                                        autoFocus
-                                    ></input>
-                                </div>
-                            </div>
-                        )}
-                        {this.props.queue.map(task => (
-                            <div
-                                className={
-                                    "task-input " +
-                                    ((this.state.currentTask === task.id ||
-                                        this.state.currentTask === null) &&
-                                    !this.props.isCreating
-                                        ? "active "
-                                        : " ") +
-                                    (task.posting ? "posting " : " ")
-                                }
-                                onClick={e => {
-                                    this.setActiveTask(task.id);
-                                }}
-                                key={task.id}
-                            >
+                            )}
+                            {this.props.queue.map(task => (
                                 <div
                                     className={
-                                        "check-case " +
-                                        this.getClassNameForDoneState(task)
+                                        "task-input " +
+                                        ((this.state.currentTask === task.id ||
+                                            this.state.currentTask === null) &&
+                                        !this.props.isCreating
+                                            ? "active "
+                                            : " ") +
+                                        (task.posting ? "posting " : " ")
                                     }
-                                    onClick={e => this.cycleDoneStates()}
+                                    onClick={e => {
+                                        this.setActiveTask(task.id);
+                                    }}
+                                    key={task.id}
                                 >
-                                    {this.getFaIcon(task)}
-                                </div>
-                                <div className="input">
-                                    <input
-                                        disabled={
-                                            this.state.currentTask === null
+                                    <div
+                                        className={
+                                            "check-case " +
+                                            this.getClassNameForDoneState(task)
                                         }
-                                        autocomplete="off"
-                                        onKeyDown={this.onTaskKeyDown}
-                                        name={task.id}
-                                        onChange={this.handleChange}
-                                        value={task.content}
-                                        placeholder={"Start typing a task..."}
-                                        autoFocus
-                                    ></input>
+                                        onClick={e => this.cycleDoneStates()}
+                                    >
+                                        {this.getFaIcon(task)}
+                                    </div>
+                                    <div className="input">
+                                        <input
+                                            disabled={
+                                                this.state.currentTask === null
+                                            }
+                                            autocomplete="off"
+                                            onKeyDown={this.onTaskKeyDown}
+                                            name={task.id}
+                                            onChange={this.handleChange}
+                                            value={task.content}
+                                            placeholder={
+                                                "Start typing a task..."
+                                            }
+                                            autoFocus
+                                        ></input>
+                                    </div>
+                                    <div className="flex attach-controls flex-gap">
+                                        <div
+                                            className="cursor-pointer"
+                                            onClick={e => {
+                                                if (this.dropRef.current) {
+                                                    this.dropRef.current.open();
+                                                }
+                                            }}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon="camera"
+                                                color="var(--c-text)"
+                                            />
+                                        </div>
+                                        <div className="cursor-pointer">
+                                            <FontAwesomeIcon
+                                                icon="clock"
+                                                color="var(--c-text)"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
+                            ))}
+                        </div>
+                        {currentTask && currentTask.attachment && (
+                            <div
+                                className="attachment-preview"
+                                style={{
+                                    background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${currentTask.attachment.preview})`,
+                                    backgroundSize: "cover",
+                                    backgroundPosition: "center"
+                                }}
+                            >
+                                <span
+                                    onClick={this.removeAttachment}
+                                    className="delete"
+                                ></span>
                             </div>
-                        ))}
-                    </div>
+                        )}
+                    </Dropzone>
                 </div>
             </div>
         );

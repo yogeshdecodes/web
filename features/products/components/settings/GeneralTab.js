@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { formatUrl, handleChange } from "../../../../lib/utils/random";
 import isFunction from "lodash/isFunction";
-import { deleteProduct, editProduct, leaveProduct } from "../../../../lib/products";
+import {
+    deleteProduct,
+    editProduct,
+    leaveProduct
+} from "../../../../lib/products";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import LaunchedToggle from "~/features/products/components/LaunchedToggle";
 import Dropzone from "react-dropzone";
