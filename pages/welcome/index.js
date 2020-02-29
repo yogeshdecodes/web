@@ -14,7 +14,7 @@ const StepOne = ({ next }) => (
     <>
         <div className="image-container">
             <img
-                src={"/assets/img/onboarding/01-Onboarding-Logo.png"}
+                src={"/img/onboarding/01-Onboarding-Logo.png"}
                 alt={"Makerlog Check Mark"}
             />
         </div>
@@ -40,7 +40,7 @@ const StepTwo = ({ next, previous }) => (
     <>
         <div className="image-container">
             <img
-                src={"/assets/img/onboarding/02-Onboarding-Log.png"}
+                src={"/img/onboarding/02-Onboarding-Log.png"}
                 alt={"Task Log"}
             />
         </div>
@@ -51,12 +51,20 @@ const StepTwo = ({ next, previous }) => (
                 doing, and here’s where you’ll interact most of the time.
             </p>
             <p>You’ll be posting tasks to the log in the next step.</p>
-            <button onClick={next} className={"btn-onboard"}>
-                Next
-            </button>
-            <button onClick={previous} className={"btn-onboard prev"}>
-                Back
-            </button>
+
+            <div className="flex flex-gap">
+                <div>
+                    {" "}
+                    <button onClick={previous} className={"btn btn-light"}>
+                        Back
+                    </button>
+                </div>
+                <div>
+                    <button onClick={next} className={"btn-onboard"}>
+                        Next
+                    </button>
+                </div>
+            </div>
         </div>
     </>
 );
@@ -95,9 +103,7 @@ class StepThree extends React.Component {
             <>
                 <div className="image-container">
                     <img
-                        src={
-                            "/assets/img/onboarding/03-Onboarding-First-Task.png"
-                        }
+                        src={"/img/onboarding/03-Onboarding-First-Task.png"}
                         alt={"Makerlog Check Mark"}
                     />
                 </div>
@@ -109,12 +115,24 @@ class StepThree extends React.Component {
                         today or plan to do. You can add a #hashtag to
                         categorize it later.
                     </p>
-                    <button onClick={this.onNext} className={"btn-onboard"}>
-                        {this.state.addedTask ? "Next" : "Add your first task"}
-                    </button>
-                    <button onClick={previous} className={"btn-onboard prev"}>
-                        Back
-                    </button>
+                    <div className="flex flex-gap">
+                        <div>
+                            {" "}
+                            <button
+                                onClick={previous}
+                                className={"btn btn-light"}
+                            >
+                                Back
+                            </button>
+                        </div>
+                        <div>
+                            <button onClick={this.onNext} className={"btn"}>
+                                {this.state.addedTask
+                                    ? "Next"
+                                    : "Add your first task"}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </>
         );
@@ -135,7 +153,7 @@ const StepFour = ({ next, previous }) => (
     <>
         <div className="image-container">
             <img
-                src={"/assets/img/onboarding/04-Onboarding-Streak.png"}
+                src={"/img/onboarding/04-Onboarding-Streak.png"}
                 alt={"Makerlog Check Mark"}
             />
         </div>
@@ -150,12 +168,19 @@ const StepFour = ({ next, previous }) => (
                 Keep a streak up to rise up in the leaderboards and ship
                 products hard!
             </p>
-            <button onClick={next} className={"btn-onboard"}>
-                Next
-            </button>
-            <button onClick={previous} className={"btn-onboard prev"}>
-                Back
-            </button>
+            <div className="flex flex-gap">
+                <div>
+                    {" "}
+                    <button onClick={previous} className={"btn btn-light"}>
+                        Back
+                    </button>
+                </div>
+                <div>
+                    <button onClick={next} className={"btn-onboard"}>
+                        Next
+                    </button>
+                </div>
+            </div>
         </div>
     </>
 );
@@ -164,7 +189,7 @@ const StepFive = ({ next, previous }) => (
     <>
         <div className="image-container">
             <img
-                src={"/assets/img/onboarding/05-Onboarding-Integrations.png"}
+                src={"/img/onboarding/05-Onboarding-Integrations.png"}
                 alt={"Makerlog Check Mark"}
             />
         </div>
@@ -181,12 +206,19 @@ const StepFive = ({ next, previous }) => (
                     <a>Check them all out here! →</a>
                 </Link>
             </p>
-            <button onClick={next} className={"btn-onboard"}>
-                Next
-            </button>
-            <button onClick={previous} className={"btn-onboard prev"}>
-                Back
-            </button>
+            <div className="flex flex-gap">
+                <div>
+                    {" "}
+                    <button onClick={previous} className={"btn btn-light"}>
+                        Back
+                    </button>
+                </div>
+                <div>
+                    <button onClick={next} className={"btn-onboard"}>
+                        Next
+                    </button>
+                </div>
+            </div>
         </div>
     </>
 );
@@ -215,9 +247,7 @@ class StepSix extends React.Component {
             <>
                 <div className="image-container">
                     <img
-                        src={
-                            "/assets/img/onboarding/06-Onboarding-People-Logo.png"
-                        }
+                        src={"/img/onboarding/06-Onboarding-People-Logo.png"}
                         alt={"Makerlog Check Mark"}
                     />
                 </div>
@@ -228,12 +258,24 @@ class StepSix extends React.Component {
                         your time with us! <Emoji emoji={"✌️"} />
                     </p>
                     <p>Now go meet makers & get productive!</p>
-                    <button onClick={this.onDone} className={"btn-onboard"}>
-                        Done
-                    </button>
-                    <button onClick={previous} className={"btn-onboard prev"}>
-                        Back
-                    </button>
+                    <div className="flex flex-gap">
+                        <div>
+                            <button
+                                onClick={previous}
+                                className={"btn btn-light prev"}
+                            >
+                                Back
+                            </button>
+                        </div>
+                        <div>
+                            <button
+                                onClick={this.onDone}
+                                className={"btn-onboard"}
+                            >
+                                Done
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </>
         );
@@ -269,7 +311,6 @@ class Onboarding extends Component {
     render() {
         return (
             <div className="Onboarding">
-                <h1>Makerlog</h1>
                 <section className={"grid-onboarding"}>
                     {this.state.step === 1 && <StepOne next={this.nextStep} />}
                     {this.state.step === 2 && (

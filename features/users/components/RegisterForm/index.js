@@ -49,6 +49,7 @@ const mapDispatchToProps = dispatch => {
                 }
             } else {
                 dispatch(appActions.toggleNewUser());
+                Router.pushRoute("welcome");
             }
         }
     };
@@ -312,7 +313,7 @@ class RegisterForm extends React.Component {
 
     renderForm = () => (
         <div>
-            <ErrorMessageList errorMessages={this.state.errorMessages} />
+            <ErrorMessageList fieldErrors={this.state.errorMessages} />
             <div className={"form-row"}>
                 <label className="label">Username</label>
                 <div className="control has-icons-left">
@@ -327,7 +328,7 @@ class RegisterForm extends React.Component {
                         placeholder="@username"
                     />
                 </div>
-                <p className="help">
+                <p className="help  has-text-danger">
                     {this.state.errorMessages &&
                     this.state.errorMessages.username
                         ? this.state.errorMessages.username
@@ -353,7 +354,9 @@ class RegisterForm extends React.Component {
                     </div>
                     {this.state.errorMessages &&
                     this.state.errorMessages.email ? (
-                        <p className="help">{this.state.errorMessages.email}</p>
+                        <p className="help has-text-danger">
+                            {this.state.errorMessages.email}
+                        </p>
                     ) : null}
                 </div>
             )}
@@ -388,7 +391,9 @@ class RegisterForm extends React.Component {
                 </div>
                 {this.state.errorMessages &&
                 this.state.errorMessages.password ? (
-                    <p className="help">{this.state.errorMessages.password}</p>
+                    <p className="help has-text-danger">
+                        {this.state.errorMessages.password}
+                    </p>
                 ) : null}
             </div>
 
@@ -428,7 +433,7 @@ class RegisterForm extends React.Component {
                     text
                 )}&url=${url}`}
                 className="btn btn-twitter"
-                style={{ backgroundColor: "#1b95e0" }}
+                style={{ backgroundColor: "#1b95e0", color: "white" }}
                 target="_blank"
             >
                 <FontAwesomeIcon icon={["fab", "twitter"]} /> Tweet
@@ -483,7 +488,7 @@ class RegisterForm extends React.Component {
 
         return (
             <>
-                <h1>Let's get started.</h1>
+                {!this.state.registered && <h1>Let's get started.</h1>}
                 {this.state.failedPreflight && (
                     <div className="has-text-centered">
                         Oops, I didn't work.{" "}

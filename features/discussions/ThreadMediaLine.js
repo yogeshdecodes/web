@@ -13,7 +13,11 @@ function ThreadMediaLine({ thread }) {
             <div>
                 <Link route={"discussion-page"} params={{ slug: thread.slug }}>
                     <a className="has-text-grey-light">
-                        {thread.reply_count} replies
+                        {thread.reply_count ? (
+                            <>{thread.reply_count} replies</>
+                        ) : (
+                            <strong>Be the first to reply!</strong>
+                        )}
                     </a>
                 </Link>
             </div>{" "}

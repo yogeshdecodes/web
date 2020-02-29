@@ -297,7 +297,7 @@ a[class^="btn"] {
     -webkit-appearance: none;
     border: 0;
     padding: 0 1em;
-    background: $c-secondary;
+    background: $c-main;
     text-decoration: none;
     color: var(--c-lightest);
     cursor: pointer;
@@ -705,6 +705,10 @@ table.is-full {
 
     &.v-center {
         align-items: center;
+    }
+
+    &.center {
+        justify-content: center;
     }
 
     &.columns {

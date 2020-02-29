@@ -3,13 +3,19 @@ import { connect } from "react-redux";
 import NoActivityCard from "~/features/stream/components/NoActivityCard";
 import { requireAuthed } from "../../lib/auth";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
-import GlobalStream, { prefetch as prefetchStream } from "~/features/stream/containers/GlobalStream";
+import GlobalStream, {
+    prefetch as prefetchStream
+} from "~/features/stream/containers/GlobalStream";
+import DiscussionSection, {
+    prefetchData as prefetchThreads
+} from "~/features/discussions/DiscussionSection";
 
 class StreamPage extends React.Component {
     static async getInitialProps() {
         return {
             ...(await prefetchData()),
-            streamPrefetch: await prefetchStream()
+            streamPrefetch: await prefetchStream(),
+            discussionPrefetch: await prefetchThreads()
         };
     }
 
@@ -25,12 +31,17 @@ class StreamPage extends React.Component {
                 <section className={"container"}>
                     <div className={"grid-c-s"}>
                         <div>
+                            {this.isNewUser() ? <NoActivityCard /> : null}
+                            <h3 className="mb-em">Latest threads</h3>
+                            <div className="card">
+                                <div className="card-content">
+                                    <DiscussionSection
+                                        {...this.props.discussionPrefetch}
+                                    />
+                                </div>
+                            </div>
                             <h3 className="mb-em">Today's log</h3>
-                            {this.isNewUser() ? (
-                                <NoActivityCard />
-                            ) : (
-                                <GlobalStream {...this.props.streamPrefetch} />
-                            )}
+                            <GlobalStream {...this.props.streamPrefetch} />
                         </div>
 
                         <div className={"sidebar is-hidden-mobile"}>
