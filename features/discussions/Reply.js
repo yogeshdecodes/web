@@ -146,7 +146,7 @@ export default connect(mapUserToProps)(
                                     </div>
                                     <div>
                                         <button
-                                            className={"btn-small btn-danger"}
+                                            className={"btn-small btn-delete"}
                                             onClick={this.deleteReply}
                                         >
                                             <FontAwesomeIcon

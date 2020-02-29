@@ -5,7 +5,7 @@
         margin-top: 10px;
     }
 
-    .attachment-preview {
+    .attachment-panel {
         background: var(--c-bg);
         border: 1px solid var(--c-border);
         margin-top: 1rem;
@@ -18,6 +18,10 @@
             position: absolute;
             right: 10px;
             top: 10px;
+        }
+
+        &.dyn-height {
+            height: auto !important;
         }
     }
 

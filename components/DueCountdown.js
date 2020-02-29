@@ -12,8 +12,8 @@ const formatter = function(time, unit, suffix) {
     }
 };
 
-export default ({ date }) => (
-    <span className={"due-at has-text-grey-light"}>
+export default ({ date, className = "has-text-grey-light " }) => (
+    <span className={"due-at " + className}>
         <TimeAgo formatter={formatter} live={true} date={date} />
     </span>
 );

@@ -7,6 +7,10 @@ import { connect } from "react-redux";
 import { actions as editorActions } from "~/ducks/editor";
 import Dropzone from "react-dropzone";
 
+import chrono from "chrono-node";
+import { format } from "date-fns";
+import DueCountdown from "../../../../components/DueCountdown";
+
 /*
 PropTypes:
 onChange => control onTaskAdd, remove -> returns newState
@@ -38,6 +42,7 @@ class TaskQueue extends Component {
             currentTask: defaultTask.id,
             hashtags: [],
             uploadHover: false,
+            editorNaturalDate: "",
             tooLarge: false
         };
         this.dropRef = React.createRef();
@@ -70,6 +75,26 @@ class TaskQueue extends Component {
                 ? "INIT"
                 : JSON.stringify(new Date().getUTCMilliseconds())
         };
+    };
+
+    setEditorDueAt = e => {
+        this.setState({
+            editorNaturalDate: e.target.value
+        });
+        let parsed = chrono.parseDate(e.target.value);
+        if (parsed) {
+            let task = this.props.queue.find(
+                t => t.id === this.state.currentTask
+            );
+            task.due_at = parsed;
+            this.props.addToQueue(task);
+        }
+    };
+
+    onDueKeypress = e => {
+        if (e.key === "Enter") {
+            this.toggleDueEditor();
+        }
     };
 
     cycleDoneStates = () => {
@@ -217,6 +242,10 @@ class TaskQueue extends Component {
         this.props.addToQueue(task);
     };
 
+    toggleDueEditor = () => {
+        this.setState({ showDueEditor: !this.state.showDueEditor });
+    };
+
     removeAttachment = e => {
         let task = this.props.queue.find(t => t.id === this.state.currentTask);
         delete task.attachment;
@@ -323,6 +352,19 @@ class TaskQueue extends Component {
                                         ></input>
                                     </div>
                                     <div className="flex attach-controls flex-gap">
+                                        {task.due_at && (
+                                            <div>
+                                                <small
+                                                    className="has-text-grey"
+                                                    style={{ display: "block" }}
+                                                >
+                                                    {format(
+                                                        task.due_at,
+                                                        "MMMM d, yyyy (h:mm aa)"
+                                                    )}
+                                                </small>
+                                            </div>
+                                        )}
                                         <div
                                             className="cursor-pointer"
                                             onClick={e => {
@@ -336,7 +378,10 @@ class TaskQueue extends Component {
                                                 color="var(--c-text)"
                                             />
                                         </div>
-                                        <div className="cursor-pointer">
+                                        <div
+                                            className="cursor-pointer"
+                                            onClick={this.toggleDueEditor}
+                                        >
                                             <FontAwesomeIcon
                                                 icon="clock"
                                                 color="var(--c-text)"
@@ -348,7 +393,7 @@ class TaskQueue extends Component {
                         </div>
                         {currentTask && currentTask.attachment && (
                             <div
-                                className="attachment-preview"
+                                className="attachment-panel"
                                 style={{
                                     background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${currentTask.attachment.preview})`,
                                     backgroundSize: "cover",
@@ -359,6 +404,28 @@ class TaskQueue extends Component {
                                     onClick={this.removeAttachment}
                                     className="delete"
                                 ></span>
+                            </div>
+                        )}
+                        {currentTask && this.state.showDueEditor && (
+                            <div className="flex flex-column flex-v-gap attachment-panel dyn-height">
+                                <div>
+                                    <div className="control">
+                                        <input
+                                            type="Text"
+                                            autoFocus
+                                            value={this.state.editorNaturalDate}
+                                            onChange={this.setEditorDueAt}
+                                            autoComplete={"off"}
+                                            placeholder={
+                                                "When is this task due? Type things like in 6 hours, in 2 days, at 6:30..."
+                                            }
+                                            onKeyPress={this.onDueKeypress}
+                                        />
+                                        <p className="help">
+                                            Hit Enter to set the date.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </Dropzone>
