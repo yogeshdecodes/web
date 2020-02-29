@@ -12,6 +12,8 @@ import { Tooltip } from "react-tippy";
 import { actions as editorActions } from "../../../ducks/editor";
 import config from "../../../config";
 
+import TaskQueue from "~/features/tasks/components/TaskQueue";
+
 const TodayPage = styled.div`
     min-height: ${props => (props.focusMode ? "100vh" : "calc(100vh - 120px)")};
 
@@ -86,122 +88,70 @@ class TodayView extends React.Component {
             <TodayPage
                 user={this.props.me}
                 focusMode={this.state.focusMode}
-                className={"container narrow"}
+                className={"TodayPage container narrow"}
             >
-                <div className={"overlay"} />
-                <div className="card" style={{marginTop: 40}}>
+                <div className="card" style={{ marginTop: 40 }}>
+                    <div className="today-input">
+                        <TaskQueue />
+                    </div>
                     <div className={"card-content"}>
-                        <div className={"flex col-right mbGap"}>
-                            <div>
-                                <h2 className={"has-text-white mt0 mb0"}>
-                                    Remaining today
-                                </h2>
-                            </div>
-                            <div>
-                                <FontAwesomeIcon
-                                    icon={"plus"}
-                                    color={"white"}
-                                    onClick={this.props.toggleEditor}
-                                />
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className={"card-content"}>
-                                {this.props.doneToday === 0 &&
-                                    tasks.length === 0 && (
-                                        <div
-                                            className={
-                                                "message-container flex center"
-                                            }
-                                        >
-                                            <h3 className={"mt0 mb0"}>
-                                                You haven't done anything today.
-                                            </h3>
-                                            <div>
-                                                <button
-                                                    className={"btn-small"}
-                                                    onClick={
-                                                        this.props.toggleEditor
-                                                    }
-                                                >
-                                                    <FontAwesomeIcon
-                                                        icon={"plus"}
-                                                        color={"white"}
-                                                    />{" "}
-                                                    Add tasks
-                                                </button>
-                                            </div>
-                                        </div>
-                                    )}
-                                {tasks.length === 0 &&
-                                    this.props.doneToday > 0 && (
-                                        <div
-                                            className={
-                                                "message-container flex columns center v-center"
-                                            }
-                                        >
-                                            <h3 className={"mt0"}>
-                                                <Emoji emoji={"🎉"} />
-                                                All done for today!
-                                            </h3>
-                                            {this.renderTweetButton()}
-                                        </div>
-                                    )}
-                                {tasks.map(task => (
-                                    <div
-                                        onClick={e =>
-                                            this.props.markDone(task.id)
-                                        }
+                        {this.props.doneToday === 0 && tasks.length === 0 && (
+                            <div className={"message-container flex center"}>
+                                <h3 className={"mt0 mb0"}>
+                                    You haven't done anything today.
+                                </h3>
+                                <div>
+                                    <button
+                                        className={"btn-small"}
+                                        onClick={this.props.toggleEditor}
                                     >
-                                        <Tooltip
-                                            html={
-                                                <span>
-                                                    <FontAwesomeIcon
-                                                        icon={"check"}
-                                                    />{" "}
-                                                    <b>Click</b> to mark as done
-                                                </span>
-                                            }
-                                            delay={1000}
-                                            position={"right"}
-                                            size={"small"}
-                                            hideOnClick
-                                            followCursor
-                                        >
-                                            <Task
-                                                withTooltip={false}
-                                                withPraise={false}
-                                                withDetailModal={false}
-                                                withCounts={false}
-                                                task={task}
-                                            />
-                                        </Tooltip>
-                                    </div>
-                                ))}
+                                        <FontAwesomeIcon
+                                            icon={"plus"}
+                                            color={"white"}
+                                        />{" "}
+                                        Add tasks
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div className={"flex flex-gap is-hidden-mobile"}>
-                            <div>
-                                <button
-                                    className={"toggleModes btn-gray btn-small"}
-                                    onClick={this.toggleFocusMode}
+                        )}
+                        {tasks.length === 0 && this.props.doneToday > 0 && (
+                            <div
+                                className={
+                                    "message-container flex columns center v-center"
+                                }
+                            >
+                                <h3 className={"mt0"}>
+                                    <Emoji emoji={"🎉"} />
+                                    All done for today!
+                                </h3>
+                                {this.renderTweetButton()}
+                            </div>
+                        )}
+                        {tasks.map(task => (
+                            <div onClick={e => this.props.markDone(task.id)}>
+                                <Tooltip
+                                    html={
+                                        <span>
+                                            <FontAwesomeIcon icon={"check"} />{" "}
+                                            <b>Click</b> to mark as done
+                                        </span>
+                                    }
+                                    delay={1000}
+                                    position={"right"}
+                                    size={"small"}
+                                    hideOnClick
+                                    followCursor
                                 >
-                                    <FontAwesomeIcon icon={"eye"} />
-                                    {this.state.focusMode
-                                        ? "Exit focus mode"
-                                        : "Focus mode"}
-                                </button>
+                                    <Task
+                                        withTooltip={false}
+                                        withPraise={false}
+                                        withDetailModal={false}
+                                        withCounts={false}
+                                        task={task}
+                                    />
+                                </Tooltip>
                             </div>
-                            <div>
-                                <button
-                                    className={"toggleModes btn-gray btn-small"}
-                                    onClick={this.toggleFullScreen}
-                                >
-                                    <FontAwesomeIcon icon={"arrows-alt"} />
-                                    Toggle full screen
-                                </button>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </TodayPage>

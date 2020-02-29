@@ -17,6 +17,7 @@ import "./index.scss";
 import { Router } from "~/routes";
 import styled from "styled-components";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
+import { Track } from "../../../../vendor/ga";
 
 const RegisterPageLayout = styled.div`
     .columns {
@@ -92,6 +93,8 @@ class AccountActivator extends React.Component {
             }
             console.log("Activated", response.data);
             console.log(this.props.next);
+
+            new Track().event("account-activated");
             this.props.onConfirm(response.data.token, this.props.next);
         } catch (e) {
             this.setState({ failed: true, activating: false });
@@ -193,6 +196,8 @@ class RegisterForm extends React.Component {
     }
 
     getPreflight = async () => {
+        new Track().event("sign-up-view");
+
         if (!this.props.preflight) {
             this.setState({
                 loading: true,
@@ -285,6 +290,8 @@ class RegisterForm extends React.Component {
             if (this.state.smsMode && this.props.onSmsActivation) {
                 this.props.onSmsActivation();
             }
+
+            new Track().event("sign_up");
         } catch (e) {
             if (e.response && e.response.data && e.response.status === 400) {
                 this.setState({

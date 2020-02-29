@@ -1,4 +1,12 @@
-import { call, put, race, select, take, takeLatest } from "redux-saga/effects";
+import {
+    call,
+    put,
+    race,
+    select,
+    take,
+    takeLatest,
+    all
+} from "redux-saga/effects";
 import { actions as tasksActions, types as tasksTypes } from "../ducks/tasks";
 import {
     createTask as createTaskModel,
@@ -25,6 +33,7 @@ function* syncTasks(action) {
         const lastSynced = tasksState.lastSynced;
         const data = yield call(syncTasksModel, lastSynced);
         yield put(tasksActions.loadTasksSuccess(data.data, data.sync_date));
+        yield put(tasksActions.connect());
     } catch (e) {
         console.log(e);
         yield put(tasksActions.loadTasksFailed(e.message));
@@ -100,6 +109,7 @@ function listen(socket) {
             switch (data.type) {
                 case "task.created":
                 case "task.updated":
+                    console.log("Test", action);
                     emit(
                         tasksActions.loadTasksSuccess(
                             [data.payload],
@@ -135,10 +145,10 @@ function* tasksSocketWatcher(action) {
         const socket = new RWS(getTasksSocketUrl(user.me.id));
         const socketChannel = yield call(listen, socket);
         const { cancel } = yield race({
-            task: [
+            task: all([
                 call(receiveListener, socketChannel), // listen to receive msg
                 call(sendListener, socket) // listen to send new msg
-            ],
+            ]),
             cancel: take("TASKS_SOCKET_CLOSE")
         });
         if (cancel) {
