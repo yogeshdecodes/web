@@ -8,7 +8,7 @@ const NewTopicButton = connect(
         isLoggedIn: state.auth.loggedIn
     }),
     dispatch => ({
-        openEditor: () => dispatch(editorActions.openDiscussionEditor(false))
+        openEditor: () => dispatch(editorActions.toggleEditor())
     })
 )(props => {
     if (!props.isLoggedIn) {
