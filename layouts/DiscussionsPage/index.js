@@ -17,10 +17,14 @@ export default class DiscussionsPage extends Component {
                         <a className="navbar-item">Top</a>
                     </NavLink>
                     <NavLink route="discussions" activeClassName="is-active">
-                        <a className="navbar-item">New</a>
+                        <a className="navbar-item disabled">
+                            New <span className="tag">Soon</span>
+                        </a>
                     </NavLink>
                     <NavLink route="discussions" activeClassName="is-active">
-                        <a className="navbar-item">Rising</a>
+                        <a className="navbar-item disabled">
+                            Rising <span className="tag">Soon</span>
+                        </a>
                     </NavLink>
                 </PageNavigation>
                 <div className={"container grid-c-s"}>
