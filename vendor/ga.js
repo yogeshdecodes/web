@@ -30,6 +30,18 @@ export class Track {
         });
     };
 
+    outbound = to => {
+        this.send("click", {
+            event_category: "outbound",
+            event_label: to,
+            transport_type: "beacon",
+            event_callback: function() {
+                if (!document || !document.location) return "";
+                document.location = url;
+            }
+        });
+    };
+
     buttonClick = (label, data = null) => {
         let extra = data ? { data } : {};
         this.send("button-click", {
@@ -48,13 +60,17 @@ export class Track {
         });
     };
 
-    mock = type => {
-        console.log(`Track/Mock: ${type} sent.`);
+    mock = (type, data) => {
+        console.log(
+            `Track/Mock: ${type} sent. (${
+                data.event_category ? data.event_category : "action"
+            })`
+        );
     };
 
     send = (type, data) => {
         if (!this.canSend()) {
-            this.mock(type);
+            this.mock(type, data);
             return;
         }
         try {

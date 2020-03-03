@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Track } from "../vendor/ga";
 
 const OutboundLink = ({
     to,
@@ -14,6 +15,9 @@ const OutboundLink = ({
         rel="noopener noreferrer"
         className={className}
         style={style}
+        onClick={() => {
+            new Track().outbound(to || href);
+        }}
     >
         {children}
     </a>
