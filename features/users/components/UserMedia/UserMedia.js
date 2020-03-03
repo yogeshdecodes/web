@@ -10,6 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MakerScore from "../../../../components/MakerScore";
 import { Link } from "~/routes";
 import { imageUrl } from "../../../../lib/utils/img";
+import GoldIcon from "~/components/icons/GoldIcon";
+import { Tooltip } from "react-tippy";
+import OutboundLink from "~/components/OutboundLink";
+import VerifiedIcon from "../../../../components/icons/VerifiedIcon";
 
 const Badge = props => (
     <span
@@ -31,10 +35,6 @@ const GoldBadge = props => (
         <FontAwesomeIcon icon={"check-circle"} color="white" />
         <strong>Gold</strong>
     </Badge>
-);
-
-const VerifiedIcon = props => (
-    <FontAwesomeIcon icon={"check-circle"} color="#47E0A0" />
 );
 
 const DonorBadge = props => (
@@ -215,8 +215,45 @@ class UserMedia extends React.Component {
                         <span className="name">
                             <FullName user={user} />
                         </span>
-                        &nbsp;
-                        {user.verified && <VerifiedIcon />}
+                        {user.verified ? (
+                            <>
+                                &nbsp;
+                                <Tooltip
+                                    html={"Verified"}
+                                    animateFill={false}
+                                    delay={200}
+                                    position={"top"}
+                                    size={"small"}
+                                >
+                                    <VerifiedIcon />
+                                </Tooltip>
+                            </>
+                        ) : (
+                            user.gold && (
+                                <Tooltip
+                                    interactive
+                                    html={
+                                        <OutboundLink to="https://gold.getmakerlog.com">
+                                            <a
+                                                style={{
+                                                    color: "white",
+                                                    textDecoration: "underline"
+                                                }}
+                                            >
+                                                Makerlog Gold Subscriber
+                                            </a>
+                                        </OutboundLink>
+                                    }
+                                    animateFill={false}
+                                    delay={200}
+                                    position={"top"}
+                                    size={"small"}
+                                >
+                                    &nbsp;
+                                    <GoldIcon />
+                                </Tooltip>
+                            )
+                        )}
                     </div>
                     <div className={"stats-case"}>
                         <span className="username">@{user.username}</span>
