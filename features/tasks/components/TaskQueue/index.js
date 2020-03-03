@@ -284,7 +284,7 @@ class TaskQueue extends Component {
                         className={"task-dropzone"}
                         accept="image/*"
                         multiple={false}
-                        onDrop={e => console.log(e)}
+                        onDrop={this.onDrop}
                         disableClick
                         onDragEnter={e => this.onHoverUpload(true)}
                         onDragLeave={e => this.onHoverUpload(false)}
