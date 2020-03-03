@@ -2391,3 +2391,15 @@ ul.unstyled {
     font-weight: bold;
     font-size: 20px;
 }
+
+.new-dot {
+    height: 8px;
+    width: 8px;
+    background-color: $c-main;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 8px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+}
