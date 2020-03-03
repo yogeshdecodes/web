@@ -34,11 +34,7 @@ const JoinOrWatchButton = ({ item, onClick }) => {
             </Link>
         );
 
-    return isOcurring(item) ? (
-        <Link route={"event-stream-live"} params={{ slug: item.slug }}>
-            <a className="btn is-secondary">Watch LIVE</a>
-        </Link>
-    ) : !hasClosed(item) && !item.user_joined ? (
+    return isOcurring(item) ? null : !hasClosed(item) && !item.user_joined ? (
         <button class="btn is-secondary" onClick={onClick}>
             Join this event
         </button>
@@ -206,15 +202,11 @@ class EventPage extends React.Component {
                     </div>
                 </div>
 
-                {isOcurring(item) || hasEnded(item) ? (
-                    <EventStream slug={item.slug} />
-                ) : (
-                    <div className="card">
-                        <div className="card-content">
-                            <Markdown body={item.details} />
-                        </div>
+                <div className="card">
+                    <div className="card-content">
+                        <Markdown body={item.details} />
                     </div>
-                )}
+                </div>
             </EventsPageLayout>
         );
     }
