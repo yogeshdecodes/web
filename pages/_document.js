@@ -65,7 +65,10 @@ export default class Document extends NextDocument {
                 gtag('js', new Date());
 
                 gtag('config', '${config.GA_UA}'${extra});
-                ${autoHideCode}`
+                ${autoHideCode}
+                
+                window.$crisp=[];window.CRISP_WEBSITE_ID="9d616a72-dd1d-4958-9884-29fe60d526c2";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+                `
                     }}
                 ></script>
                 <style jsx global>{`
