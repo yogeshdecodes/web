@@ -92,7 +92,8 @@ class NomadLocationCard extends Component {
         const { data, loading, failed } = this.state;
 
         if (failed) {
-            return (
+            return null;
+            /*return (
                 <div className="card">
                     <div className="card-content">
                         <span>
@@ -106,7 +107,7 @@ class NomadLocationCard extends Component {
                         </span>
                     </div>
                 </div>
-            );
+            );*/
         }
 
         if (
