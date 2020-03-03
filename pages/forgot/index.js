@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "~/lib/axios";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import { prettyAxiosError } from "~/lib/utils/error";
 import { requireUnauthed } from "~/lib/auth";
