@@ -2,6 +2,7 @@ import NextHead from "next/head";
 import React from "react";
 import { string } from "prop-types";
 import { isDev } from "~/config";
+import config from "../config";
 
 function getPageTitle() {
     if (isDev) return "Makerlog Dev 🐾";
@@ -12,7 +13,7 @@ function getPageTitle() {
 const defaultDescription =
     "Makerlog is the home of the maker community. Share your work, get feedback, and much more.";
 const defaultOGURL = "";
-const defaultOGImage = "/img/og/default.png";
+const defaultOGImage = `${config.BASE_URL}/img/og/default.png`;
 
 const Head = props => (
     <NextHead>
