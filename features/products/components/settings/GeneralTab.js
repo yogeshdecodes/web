@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { formatUrl, handleChange } from "../../../../lib/utils/random";
+import {
+    formatUrl,
+    handleChange,
+    formatHandle
+} from "../../../../lib/utils/random";
 import isFunction from "lodash/isFunction";
 import {
     deleteProduct,
@@ -47,6 +51,12 @@ export default class GeneralTab extends Component {
         this.setState({
             icon: file,
             iconPreview: preview
+        });
+    };
+
+    setHandle = (key, handle) => {
+        this.setState({
+            [key]: formatHandle(handle)
         });
     };
 
