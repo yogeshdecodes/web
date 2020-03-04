@@ -1,5 +1,8 @@
 import React from "react";
-import { getHostname, normalizeUrl } from "../../../../../../lib/utils/products";
+import {
+    getHostname,
+    normalizeUrl
+} from "../../../../../../lib/utils/products";
 import isFunction from "lodash/isFunction";
 import ProductEditModal from "../../../ProductEditModal";
 import { Link } from "~/routes";
@@ -64,14 +67,7 @@ class ProductCard extends React.Component {
                                 params={{ slug: product.slug }}
                             >
                                 <a>
-                                    <h2>
-                                        {product.name}
-                                        {product.launched && (
-                                            <span>
-                                                <Emoji emoji={"🚀"} /> Launched
-                                            </span>
-                                        )}
-                                    </h2>
+                                    <h2>{product.name}</h2>
                                     {product.description}
                                 </a>
                             </Link>

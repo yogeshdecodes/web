@@ -16,14 +16,7 @@ class ProductMedia extends React.Component {
                     <div className={"flex"}>
                         <ProductIcon is={48} product={this.props.product} />
                         <div>
-                            <strong>
-                                {this.props.product.name}{" "}
-                                {this.props.product.launched && (
-                                    <div className={"tag"}>
-                                        <Emoji emoji={"🚀"} /> Launched
-                                    </div>
-                                )}
-                            </strong>
+                            <strong>{this.props.product.name} </strong>
                             <br />
                             <p>
                                 {truncate(
@@ -109,14 +102,7 @@ class ProductMedia extends React.Component {
                         </div>
                         <div>
                             <div>
-                                <strong>
-                                    {this.props.product.name}{" "}
-                                    {this.props.product.launched && (
-                                        <div className={"tag"}>
-                                            <Emoji emoji={"🚀"} /> Launched
-                                        </div>
-                                    )}
-                                </strong>
+                                <strong>{this.props.product.name}</strong>
                                 <br />
                                 <small>
                                     {truncate(
