@@ -107,10 +107,7 @@ const Head = props => (
         <meta name="theme-color" content="#00B77A" />
 
         <meta property="og:url" content={props.url || defaultOGURL} />
-        <meta
-            property="og:title"
-            content={props.title || "The home of the maker community."}
-        />
+        <meta property="og:title" content={props.title || "Makerlog"} />
         <meta
             property="og:description"
             content={props.description || defaultDescription}
