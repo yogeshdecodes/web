@@ -1859,7 +1859,8 @@ figure.img-circle {
         }
     }
 
-    &.success {
+    &.success,
+    &.is-success {
         background-color: rgba(35, 209, 96, 0.1);
         border-left: 4px solid rgba(35, 209, 96, 1);
         border-bottom-left-radius: 0;

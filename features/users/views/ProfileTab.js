@@ -10,6 +10,7 @@ import { loadingClass } from "../../../lib/utils/random";
 
 class ProfileTab extends React.Component {
     state = {
+        saved: false,
         isLoading: true,
         isPosting: false,
         first_name: "",
@@ -63,12 +64,13 @@ class ProfileTab extends React.Component {
             if (this.props.updateUser) {
                 this.props.updateUser(user);
             }
-            this.setState({ isPosting: false });
+            this.setState({ isPosting: false, saved: true });
         } catch (e) {
             if (e.field_errors) {
                 this.setState({
                     isPosting: false,
-                    errorMessages: e.field_errors
+                    errorMessages: e.field_errors,
+                    saved: false
                 });
             }
         }
@@ -474,9 +476,17 @@ class ProfileTab extends React.Component {
                     </div>
                 </div>
                 <br />
+
+                {this.state.saved && (
+                    <div className="alert is-success mbGap">
+                        <div className="alert-body">Saved.</div>
+                    </div>
+                )}
                 {this.state.errorMessages && (
-                    <div className={"panel-message danger"}>
-                        {this.renderErrorMessages()}
+                    <div className={"alert is-danger mbGap"}>
+                        <div className="alert-body">
+                            {this.renderErrorMessages()}
+                        </div>
                     </div>
                 )}
                 <button
