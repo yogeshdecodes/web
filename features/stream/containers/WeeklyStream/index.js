@@ -10,6 +10,7 @@ import { hasMore } from "../../../../lib/utils/stream";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import "./index.scss";
+import { Track } from "../../../../vendor/ga";
 
 class WeeklyStream extends React.Component {
     initialState = {
@@ -143,6 +144,8 @@ class WeeklyStream extends React.Component {
                 if (this.props.milestonesIndexUrl) {
                     nextUrl["milestones"] = this.props.milestonesIndexUrl;
                 }
+            } else {
+                new Track().event("stream-more-loaded", "Infinite scroll load");
             }
 
             // we now have metadata. go ahead, let's ROLL!
