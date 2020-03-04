@@ -116,7 +116,7 @@ const Head = props => (
             content={props.description || defaultDescription}
         />
         <meta name="twitter:site" content={props.url || defaultOGURL} />
-        {props.ogLargeImage ? (
+        {props.ogLargeImage || (!props.ogImage && defaultOGImage) ? (
             <meta name="twitter:card" content="summary_large_image" />
         ) : (
             <meta name="twitter:card" content={"summary"} />
