@@ -12,7 +12,7 @@ function getPageTitle() {
 
 const defaultDescription =
     "Makerlog is the home of the maker community. Share your work, get feedback, and much more.";
-const defaultOGURL = "";
+const defaultOGURL = config.BASE_URL;
 const defaultOGImage = `${config.BASE_URL}/img/og/default.png`;
 
 const Head = props => (
