@@ -1,6 +1,7 @@
 import React from "react";
 import { getRecentDiscussions, getTrendingThreads } from "~/lib/discussions";
 import ThreadMediaLine from "./ThreadMediaLine";
+import orderBy from "lodash/orderBy";
 
 class DiscussionSection extends React.Component {
     constructor(props) {
@@ -35,9 +36,14 @@ class DiscussionSection extends React.Component {
     }
 
     render() {
+        let discussions = this.state.data.filter(t => t.pinned === false);
+        let pinned = this.state.data.filter(t => t.pinned);
         return (
             <div className="flex flex-v-gap-half flex-column">
-                {this.state.data.map(t => (
+                {pinned.map(t => (
+                    <ThreadMediaLine thread={t} />
+                ))}
+                {discussions.map(t => (
                     <ThreadMediaLine thread={t} />
                 ))}
             </div>

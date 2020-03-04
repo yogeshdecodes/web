@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "~/routes";
 import ReplyFaces from "./ReplyFaces";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function ThreadMediaLine({ thread }) {
     return (
         <div className=" ThreadMediaLine flex flex-gap">
+            {thread.pinned && (
+                <div>
+                    <FontAwesomeIcon size="xs" icon={"thumbtack"} />
+                </div>
+            )}
             <div>
                 <Link route={"discussion-page"} params={{ slug: thread.slug }}>
                     <h4>{thread.title}</h4>
