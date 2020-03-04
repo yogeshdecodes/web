@@ -59,21 +59,6 @@ const ProductDescriptionCard = ({ product }) => {
                                     </OutboundLink>
                                 </li>
                             )}
-
-                            {product.product_hunt && (
-                                <li>
-                                    <OutboundLink
-                                        to={`https://producthunt.com/posts/${product.product_hunt}`}
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={["fab", "product-hunt"]}
-                                        />{" "}
-                                        {product.product_hunt
-                                            .replace("http://", "")
-                                            .replace("https://", "")}
-                                    </OutboundLink>
-                                </li>
-                            )}
                         </ul>
                     </small>
                 </div>
