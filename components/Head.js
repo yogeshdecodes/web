@@ -9,9 +9,10 @@ function getPageTitle() {
     return "Makerlog";
 }
 
-const defaultDescription = "";
+const defaultDescription =
+    "Makerlog is the home of the maker community. Share your work, get feedback, and much more.";
 const defaultOGURL = "";
-const defaultOGImage = "";
+const defaultOGImage = "/img/og/default.png";
 
 const Head = props => (
     <NextHead>
