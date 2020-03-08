@@ -23,7 +23,7 @@ export default class GeneralTab extends Component {
         description: "",
         launched: false,
         icon: null,
-        iconPreview: null, // use iconpreview rather than icon!
+        logoPreviewUrl: null, // use iconpreview rather than icon!
         selectedProjects: [],
         productHunt: "",
         twitter: "",
@@ -37,7 +37,7 @@ export default class GeneralTab extends Component {
         this.setState({
             ...this.props.product,
             icon: null,
-            iconPreview: this.props.product.icon
+            logoPreviewUrl: this.props.product.icon
         });
     }
 
@@ -47,11 +47,20 @@ export default class GeneralTab extends Component {
         });
     };
 
-    onIconUpload = (file, preview) => {
-        this.setState({
-            icon: file,
-            iconPreview: preview
-        });
+    onLogoUpload = (acceptedFiles, rejectedFiles) => {
+        const file = acceptedFiles[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onloadend = e => {
+            this.setState({
+                logoPreviewUrl: reader.result
+            });
+
+            this.setState({
+                icon: file
+            });
+        };
     };
 
     setHandle = (key, handle) => {
