@@ -20,7 +20,7 @@ export default class DealsPage extends Component {
                 </section>
                 <section className={"container"}>
                     <div className="card">
-                        <div className="card-content">
+                        <div className="card-content flex flex-column flex-v-gap">
                             <div className="flex flex-gap">
                                 <div className="icon">
                                     <figure className="img-48">
@@ -50,6 +50,42 @@ export default class DealsPage extends Component {
                                     <LoggedInOnly>
                                         <OutboundLink
                                             href="https://divjoy.com?promo=makerlog"
+                                            className="btn btn-light"
+                                        >
+                                            Grab this deal
+                                        </OutboundLink>
+                                    </LoggedInOnly>
+                                </div>
+                            </div>
+                            <div className="flex flex-gap">
+                                <div className="icon">
+                                    <figure className="img-48">
+                                        <img src="/img/deals/polypane.png"></img>
+                                    </figure>
+                                </div>
+                                <div className="flex-grow">
+                                    <h4>Polypane</h4>
+                                    <p>
+                                        Get 20% off Polypane, the world's best
+                                        browser for creating web experiences.
+                                    </p>
+                                    <LoggedOutOnly>
+                                        <div className="alert is-info">
+                                            <div className="alert-body">
+                                                <h4>
+                                                    You must sign in to see
+                                                    these deals.
+                                                </h4>
+
+                                                <Link route="begin">
+                                                    <a>Get started</a>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </LoggedOutOnly>
+                                    <LoggedInOnly>
+                                        <OutboundLink
+                                            href="https://polypane.app/?coupon=MAKERLOG20"
                                             className="btn btn-light"
                                         >
                                             Grab this deal

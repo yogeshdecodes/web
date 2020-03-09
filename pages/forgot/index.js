@@ -36,7 +36,7 @@ class ResetForm extends React.Component {
             this.setState({ success: true, failed: false, loading: false });
 
             // NextJS redirect to login page
-            Router.pushRoute("login");
+            // Router.pushRoute("login");
         } catch (e) {
             try {
                 prettyAxiosError(e);
@@ -61,8 +61,19 @@ class ResetForm extends React.Component {
     };
 
     render() {
+        if (this.state.success) {
+            return (
+                <div className="alert success">
+                    <div className="alert-body">
+                        All done! You can now sign in.
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <form onSubmit={this.onSubmit}>
+                <h1>Reset</h1>
                 {this.state.failed && this.state.errorMessages && (
                     <ErrorMessageList fieldErrors={this.state.errorMessages} />
                 )}
@@ -89,13 +100,13 @@ class ResetForm extends React.Component {
                     />
                 </div>
                 <div className={"flex stretch"}>
-                    <div />
+                    <div className="stretch" />
                     <div>
                         <button
                             className={
                                 this.state.loading
-                                    ? "button is-primary"
-                                    : "button is-primary is-loading"
+                                    ? "btn btn-secondary is-loading"
+                                    : "btn btn-secondary"
                             }
                             onClick={this.onSubmit}
                             type="submit"
@@ -154,6 +165,7 @@ class ForgotForm extends React.Component {
 
         return (
             <form onSubmit={this.onSubmit}>
+                <h1>Forgot?</h1>
                 <div className={"form-row"}>
                     <label className="label">Email</label>
                     <input
@@ -164,13 +176,13 @@ class ForgotForm extends React.Component {
                     />
                 </div>
                 <div className={"flex stretch"}>
-                    <div />
+                    <div className="stretch" />
                     <div>
                         <button
                             className={
                                 this.state.loading
-                                    ? "button is-primary"
-                                    : "button is-primary is-loading"
+                                    ? "btn btn-secondary is-loading"
+                                    : "btn btn-secondary"
                             }
                             onClick={this.onSubmit}
                             type="submit"
@@ -188,7 +200,8 @@ class ForgotPage extends React.Component {
     static async getInitialProps({ query }) {
         return {
             layout: {
-                className: "ForgotPage"
+                className: "ForgotPage",
+                footer: false
             },
             uid: query.uid,
             token: query.token
@@ -197,11 +210,10 @@ class ForgotPage extends React.Component {
 
     render() {
         return (
-            <section>
-                <div className="flex column center">
-                    <h1>Forgot?</h1>
-                    <div className={"card"}>
-                        <div className={"card-content"}>
+            <div className="form-section">
+                <div className="form-card">
+                    <div className="card">
+                        <div className="card-content">
                             {this.props.uid && this.props.token ? (
                                 <ResetForm
                                     uid={this.props.uid}
@@ -213,7 +225,7 @@ class ForgotPage extends React.Component {
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         );
     }
 }

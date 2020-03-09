@@ -1,65 +1,71 @@
 @import "../../styles/_variables";
 
 .ForgotPage {
-    section {
-        display: grid;
-        grid-template-columns: 2fr 3fr;
-        align-items: stretch;
-        justify-content: center;
-        min-height: 100vh;
-        color: var(--c-lightest);
-        background: $gradient-green;
+    #page-content {
+        //margin-top: calc(25vh - 80px);
+    }
 
-        div {
-            display: flex;
+    div.form-section {
+        @extend %people-bg;
+        @extend %transition-bg;
+        min-height: calc(100vh - #{$navbar-height});
+    }
+
+    .form-card {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 200px 0;
+
+        section {
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            padding: 1.5rem 1.2rem;
+        }
+
+        h1 {
+            color: $c-title !important;
+            margin: 0 0 1.5rem;
+        }
+
+        a {
+            color: $c-main;
+        }
+
+        .grid {
+            grid-template-columns: auto auto;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .form-card {
+        max-width: 100vw !important;
+        padding: 0px !important;
+
+        .card {
+            border-radius: 0px;
+            padding: 0px !important;
+            height: calc(100vh - #{$navbar-height});
             align-items: center;
             justify-content: center;
-            flex-flow: column nowrap;
-            padding: 0 3rem 3rem;
+
+            .card-content {
+                height: 100%;
+                justify-content: center;
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+            }
         }
 
-        div:first-of-type {
-            background: #0a0a0a;
-        }
-
-        h1,
-        blockquote {
-            @extend %bold;
-            color: var(--c-lightest);
-            font-size: 2.5rem;
-            margin: 0;
-        }
-
-        h3 {
-            color: var(--c-lightest);
-        }
-
-        cite {
-            font-size: 1.5rem;
-            font-style: normal;
-            display: block;
-        }
-
-        input[type="password"],
-        input[type="email"] {
-            @extend %bold;
-            background: transparent;
-            outline: 0;
-            font-size: 1rem;
-            color: var(--c-lightest);
-            border-radius: 0;
-            border: solid var(--c-lightest);
-            border-width: 0 0 1px;
-            padding: 0.75rem 0;
-        }
-
-        button {
-            @extend %bold;
-            color: $c-brand;
-            background: transparent;
-            border: 0;
-            margin-top: 1rem;
-            font-size: 1rem;
+        .grid {
+            margin-top: 0rem;
+            align-items: none;
         }
     }
 }
