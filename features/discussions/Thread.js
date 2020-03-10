@@ -9,9 +9,62 @@ import ShareBar from "~/components/ShareBar";
 import config from "~/config";
 import ReplyForm from "./ReplyForm";
 import ReplyList from "./ReplyList";
-import { deleteThread } from "~/lib/discussions";
+import { deleteThread, updateThread } from "~/lib/discussions";
 import Spinner from "~/components/Spinner";
 import { Router } from "~/routes";
+import BodyEditor from "./BodyEditor";
+
+class ThreadEditor extends React.Component {
+    state = {
+        updating: false,
+        body: null,
+        failed: false
+    };
+
+    componentDidMount() {
+        if (this.props.thread) {
+            this.setState({
+                body: this.props.thread.body
+            });
+        }
+    }
+
+    updateThread = async () => {
+        try {
+            await this.setState({
+                updating: true,
+                failed: false
+            });
+            await updateThread(this.props.thread.slug, {
+                body: this.state.body
+            });
+            await this.setState({
+                updating: false,
+                failed: false
+            });
+
+            if (this.props.onFinish) {
+                this.props.onFinish(this.state.body);
+            }
+        } catch (e) {
+            this.setState({
+                updating: false,
+                failed: true
+            });
+        }
+    };
+
+    render() {
+        return (
+            <BodyEditor
+                value={this.state.body}
+                onChange={e => this.setState({ body: e.target.value })}
+                loading={this.state.updating}
+                onSubmit={this.updateThread}
+            />
+        );
+    }
+}
 
 export default connect(mapUserToProps)(
     class Thread extends React.Component {

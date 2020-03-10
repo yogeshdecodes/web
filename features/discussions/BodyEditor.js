@@ -7,6 +7,7 @@ export default props => (
             <div className="control">
                 <textarea
                     cols={4}
+                    rows={"8"}
                     value={props.value}
                     onChange={props.onChange}
                     placeholder={"Write something..."}
