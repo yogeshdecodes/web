@@ -5,6 +5,7 @@ import Chip from "~/components/Chip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Streak from "~/components/Streak";
+import RestDays from "~/components/RestDays";
 import OutboundLink from "../../../components/OutboundLink";
 
 const UserChip = props => (
@@ -16,7 +17,12 @@ const UserChip = props => (
             <Chip id={"navbarUserChip"}>
                 <img alt={props.user.username} src={props.user.avatar} />
                 <div>
-                    <Streak days={props.user.streak} />
+                    <div>
+                        <Streak days={props.user.streak} />
+                    </div>
+                    <div>
+                        <RestDays days={props.restDayBalance} />
+                    </div>
                 </div>
             </Chip>
         </a>

@@ -104,6 +104,7 @@ class Navbar extends React.Component {
                             user={this.props.user}
                             isSyncing={this.props.isSyncing}
                             onClickLogout={this.props.onClickLogout}
+                            restDayBalance={this.props.restDayBalance}
                         />
                     )}
                 </div>
@@ -118,7 +119,8 @@ const mapStateToProps = state => {
         user: state.user.me,
         isSyncing: state.tasks.isSyncing || state.projects.isSyncing,
         authModalType: state.auth.authModalType,
-        authModalOpen: state.auth.authModalOpen
+        authModalOpen: state.auth.authModalOpen,
+        restDayBalance: state.stats.user ? state.stats.user.rest_day_balance : 0
     };
 };
 
