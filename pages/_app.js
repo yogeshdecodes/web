@@ -3,7 +3,7 @@ import "~/vendor/fa";
 
 import App from "next/app";
 
-import ErrorPage from "next/error";
+import ErrorPage from "./_error";
 import Head from "~/components/Head";
 import NProgressContainer from "../vendor/nprogress";
 import Page from "~/layouts/Page";
@@ -118,6 +118,7 @@ class Artemis extends App {
     render() {
         const { Component, pageProps, store } = this.props;
         const { statusCode } = pageProps;
+        const errored = statusCode && statusCode >= 400;
 
         if (!store.getState().app.healthy) return <DownPage />;
 
@@ -127,7 +128,11 @@ class Artemis extends App {
                 <NProgressContainer spinner={false} />
                 <ThemedContainer>
                     <Page {...pageProps.layout}>
-                        <Component {...pageProps} />
+                        {errored ? (
+                            <ErrorPage statusCode={statusCode} />
+                        ) : (
+                            <Component {...pageProps} />
+                        )}
                     </Page>
 
                     <Reactor />
