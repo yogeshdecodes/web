@@ -5,6 +5,7 @@ import { Track } from "../vendor/ga";
 const initialState = {
     open: false,
     editorValue: "",
+    tab: 0,
     editorDueAt: null,
     editorDone: true,
     editorInProgress: false,
@@ -34,7 +35,8 @@ export const types = {
     EDITOR_TOGGLE_MILESTONE: "EDITOR_TOGGLE_MILESTONE",
     EDITOR_OPEN_DISCUSSIONS: "EDITOR_OPEN_DISCUSSIONS",
     EDITOR_TOGGLE_DISCUSSIONS: "EDITOR_TOGGLE_DISCUSSIONS",
-    EDITOR_SET_DUE_AT: "EDITOR_SET_DUE_AT"
+    EDITOR_SET_DUE_AT: "EDITOR_SET_DUE_AT",
+    EDITOR_SWITCH_TAB: "EDITOR_SWITCH_TAB"
 };
 
 export const editorReducer = (state = initialState, action) => {
@@ -46,7 +48,14 @@ export const editorReducer = (state = initialState, action) => {
                 ...state,
                 open: nextOpen,
                 creatingMilestone: false,
-                creatingDiscussion: false
+                creatingDiscussion: false,
+                tab: action.tab || 0
+            };
+
+        case types.EDITOR_SWITCH_TAB:
+            return {
+                ...state,
+                tab: action.tab
             };
 
         case types.EDITOR_TOGGLE_MILESTONE:
@@ -166,8 +175,8 @@ export const editorReducer = (state = initialState, action) => {
 };
 
 export const actions = {
-    toggleEditor: () => {
-        return { type: types.TOGGLE_EDITOR };
+    toggleEditor: (tab = 0) => {
+        return { type: types.TOGGLE_EDITOR, tab };
     },
 
     addToQueue: task => ({ type: types.ADD_TO_QUEUE, task }),
@@ -213,6 +222,13 @@ export const actions = {
             type: types.TASK_CREATE_FAILED,
             errorMessages: errorArray(errorMessages),
             fieldErrors: fieldErrors ? fieldErrors : null
+        };
+    },
+
+    switchTab: tab => {
+        return {
+            type: types.EDITOR_SWITCH_TAB,
+            tab
         };
     }
 };
