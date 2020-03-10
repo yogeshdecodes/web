@@ -6,6 +6,56 @@ import { actions as streamActions } from "~/ducks/stream";
 import Embed from "~/components/Embed";
 import config from "~/config";
 import ShareBar from "~/components/ShareBar";
+import { onEnter, handleChange } from "../../../../../../lib/utils/random";
+
+class TaskEdit extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            newContent: this.props.task.content
+        };
+    }
+
+    onSubmit = (e = null) => {
+        if (e) e.preventDefault();
+        this.props.onFinish({
+            content: this.state.newContent
+        });
+    };
+
+    handleChange = e => handleChange(e, this);
+
+    onKeyPress = e =>
+        onEnter(e, () => {
+            this.onSubmit();
+        });
+
+    render() {
+        return (
+            <form onSubmit={this.onSubmit}>
+                <div className="flex flex-gap">
+                    <div className="stretch">
+                        <input
+                            name="newContent"
+                            type="text"
+                            onChange={this.handleChange}
+                            value={this.state.newContent}
+                        />
+                    </div>
+                    <div>
+                        <button
+                            onClick={this.onSubmit}
+                            className="btn btn-secondary"
+                        >
+                            Edit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        );
+    }
+}
 
 class TaskDetail extends React.Component {
     constructor(props) {
@@ -68,6 +118,7 @@ class TaskDetail extends React.Component {
 
     onEdit = payload => {
         this.props.updateTask(this.props.task.id, payload);
+        this.toggleEditing();
     };
 
     onTryDelete = () => {
@@ -324,15 +375,15 @@ class TaskDetail extends React.Component {
     };
 
     render() {
-        const user = this.props.task.user;
-
         return (
             <div>
-                {this.renderActionBar()}
-
+                {this.state.editing ? (
+                    <TaskEdit task={this.props.task} onFinish={this.onEdit} />
+                ) : (
+                    this.renderActionBar()
+                )}
                 {this.state.embedOpen && (
                     <div style={{ width: "50%" }}>
-                        <br />
                         <Embed
                             task
                             url={`/tasks/${this.props.task.id}/embed`}
