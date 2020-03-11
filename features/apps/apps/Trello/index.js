@@ -247,7 +247,7 @@ class Trello extends React.Component {
         };
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         const qs = new paramParser(window.location.hash);
         if (qs.hash.token) {
             this.setState({ installing: true });
