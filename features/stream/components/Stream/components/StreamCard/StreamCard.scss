@@ -50,10 +50,6 @@
     .tasks-container {
     }
 
-    & .lifelogs {
-        margin-top: 10px;
-    }
-
     .card-content,
     header {
         padding: 1rem !important;
@@ -70,5 +66,12 @@
         div {
             padding-left: 0.5rem;
         }
+    }
+
+    .toolbar {
+        padding-top: 10px;
+        font-size: $font-size;
+        font-weight: normal !important;
+        color: vaR(--c-text);
     }
 }

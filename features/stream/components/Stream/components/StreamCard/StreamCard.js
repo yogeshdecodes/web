@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { groupIntegrationTasksByEvent, groupTasksByDone, integrationsToCollapse, orderByDate } from "~/lib/utils/tasks";
+import {
+    groupIntegrationTasksByEvent,
+    groupTasksByDone,
+    integrationsToCollapse,
+    orderByDate
+} from "~/lib/utils/tasks";
 import EntryList from "../../../EntryList";
 // import { StreamCard as Card } from "./styled";
 import { UserMedia } from "~/features/users";
@@ -8,6 +13,8 @@ import { MilestoneMedia } from "~/features/milestones";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import InlineCollapse from "../../../../../../components/InlineCollapse";
+import { Tooltip } from "react-tippy";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function containsWords(input, words) {
     return words.some(word => input.toLowerCase().includes(word.toLowerCase()));
@@ -63,6 +70,10 @@ class StreamCard extends React.Component {
             ...t,
             lifelog: containsWords(t.content, lifeLogTasks)
         }));
+    };
+
+    isCurrentUser = () => {
+        return this.props.me && this.props.me.id === this.getUser().id;
     };
 
     generateTweetText = doneTasks => {
@@ -186,55 +197,82 @@ class StreamCard extends React.Component {
                         </div>
                     )}
 
-                    {collapsedTasks.length > 0 && (
-                        <div className={"lifelogs"}>
-                            <InlineCollapse
-                                text={
-                                    <small>
-                                        <a
-                                            className="has-text-grey-light"
-                                            onClick={this.toggleLifeLogs}
-                                        >
-                                            {collapsedTasks.length}{" "}
-                                            {hasCollapsedIntegrations &&
-                                                "tasks from integrations "}{" "}
-                                            {hasCollapsedIntegrations &&
-                                                hasCollapsedLifelog &&
-                                                "& "}{" "}
-                                            {hasCollapsedLifelog && "lifelogs "}
-                                            collapsed
-                                        </a>
-                                    </small>
-                                }
-                            >
-                                {groupedCollapsedTasks.in_progress && (
-                                    <div>
-                                        <EntryList
-                                            tasks={
-                                                groupedCollapsedTasks.in_progress
-                                            }
-                                        />
-                                    </div>
-                                )}
-                                {groupedCollapsedTasks.done && (
-                                    <div>
-                                        <EntryList
-                                            tasks={groupedCollapsedTasks.done}
-                                        />
-                                    </div>
-                                )}
-                                {groupedCollapsedTasks.remaining && (
-                                    <div>
-                                        <EntryList
-                                            tasks={
-                                                groupedCollapsedTasks.remaining
-                                            }
-                                        />
-                                    </div>
-                                )}
-                            </InlineCollapse>
+                    {this.isCurrentUser() || collapsedTasks.length > 0 ? (
+                        <div className="flex toolbar flex-gap">
+                            {this.isCurrentUser() ? (
+                                <div>
+                                    <a
+                                        className="gray-link-with-icon has-text-grey-light"
+                                        target={"_blank"}
+                                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                                            this.generateTweetText(
+                                                orderByDate(tasks.done)
+                                            )
+                                        )}`}
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={["fab", "twitter"]}
+                                        />{" "}
+                                        Tweet
+                                    </a>
+                                </div>
+                            ) : null}
+                            {collapsedTasks.length > 0 && (
+                                <div className={"lifelogs"}>
+                                    <InlineCollapse
+                                        text={
+                                            <small>
+                                                <a
+                                                    className="has-text-grey-light"
+                                                    onClick={
+                                                        this.toggleLifeLogs
+                                                    }
+                                                >
+                                                    {collapsedTasks.length}{" "}
+                                                    {hasCollapsedIntegrations &&
+                                                        "tasks from integrations "}{" "}
+                                                    {hasCollapsedIntegrations &&
+                                                        hasCollapsedLifelog &&
+                                                        "& "}{" "}
+                                                    {hasCollapsedLifelog &&
+                                                        "lifelogs "}
+                                                    collapsed
+                                                </a>
+                                            </small>
+                                        }
+                                    >
+                                        {groupedCollapsedTasks.in_progress && (
+                                            <div>
+                                                <EntryList
+                                                    tasks={
+                                                        groupedCollapsedTasks.in_progress
+                                                    }
+                                                />
+                                            </div>
+                                        )}
+                                        {groupedCollapsedTasks.done && (
+                                            <div>
+                                                <EntryList
+                                                    tasks={
+                                                        groupedCollapsedTasks.done
+                                                    }
+                                                />
+                                            </div>
+                                        )}
+                                        {groupedCollapsedTasks.remaining && (
+                                            <div>
+                                                <EntryList
+                                                    tasks={
+                                                        groupedCollapsedTasks.remaining
+                                                    }
+                                                />
+                                            </div>
+                                        )}
+                                    </InlineCollapse>
+                                </div>
+                            )}
                         </div>
-                    )}
+                    ) : null}
                 </div>
             </div>
         );
