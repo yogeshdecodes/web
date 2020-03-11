@@ -162,7 +162,7 @@ function renderNotificationVerb(key, notification, grouped = false) {
                         route={"discussion-page"}
                         params={{ slug: notification.target.slug }}
                     >
-                        <a>a thread you're in</a>
+                        <a>{notification.target.title}</a>
                     </Link>
                     .
                 </Container>
@@ -266,7 +266,14 @@ function renderNotificationVerb(key, notification, grouped = false) {
                     >
                         <a>@{notification.actor.username}</a>
                     </Link>{" "}
-                    mentioned you.
+                    mentioned you in{" "}
+                    <Link
+                        route={"discussion-page"}
+                        params={{ slug: notification.target.slug }}
+                    >
+                        <a>{notification.target.title}</a>
+                    </Link>
+                    .
                 </Container>
             );
 
@@ -282,7 +289,11 @@ function renderNotificationVerb(key, notification, grouped = false) {
     }
 }
 
-const Notification = ({ notification, grouped = false }) => {
+const Notification = ({
+    notification,
+    grouped = false,
+    onClose = () => {}
+}) => {
     let notificationImage = null;
     let notificationHtml = "Error parsing notification.";
     // DO NOT MESS WITH THE TRY CATCH
@@ -421,7 +432,7 @@ const Notification = ({ notification, grouped = false }) => {
             case "thread_created":
                 notificationImage = notification.actor.avatar;
                 notificationHtml = (
-                    <div>
+                    <div onClick={onClose}>
                         {renderNotificationVerb(key, notification)}
                         <div className="actions">
                             <Link
@@ -440,18 +451,8 @@ const Notification = ({ notification, grouped = false }) => {
             case "thread_replied":
                 notificationImage = notification.actor.avatar;
                 notificationHtml = (
-                    <div>
+                    <div onClick={onClose}>
                         {renderNotificationVerb(key, notification)}
-                        <div className="actions">
-                            <Link
-                                route={"discussion-page"}
-                                params={{ slug: notification.target.slug }}
-                            >
-                                <a className={"btn btn-small btn-light"}>
-                                    View thread
-                                </a>
-                            </Link>
-                        </div>
                     </div>
                 );
                 break;
@@ -524,18 +525,8 @@ const Notification = ({ notification, grouped = false }) => {
             case "mention_discussion":
                 notificationImage = notification.actor.avatar;
                 notificationHtml = (
-                    <div>
+                    <div onClick={onClose}>
                         {renderNotificationVerb(key, notification)}
-                        <div className="actions">
-                            <Link
-                                route={"discussion-page"}
-                                params={{ slug: notification.target.slug }}
-                            >
-                                <a className="btn btn-small btn-light">
-                                    View thread
-                                </a>
-                            </Link>
-                        </div>
                     </div>
                 );
                 break;

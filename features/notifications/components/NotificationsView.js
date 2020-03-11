@@ -55,10 +55,17 @@ class NotificationsView extends React.Component {
         return (
             <>
                 {praiseNotifications.length >= 2 && (
-                    <Notification grouped notification={praiseNotifications} />
+                    <Notification
+                        onClose={this.props.closeHandler}
+                        grouped
+                        notification={praiseNotifications}
+                    />
                 )}
                 {notifications.map(n => (
-                    <Notification notification={n} />
+                    <Notification
+                        onClose={this.props.closeHandler}
+                        notification={n}
+                    />
                 ))}
             </>
         );
