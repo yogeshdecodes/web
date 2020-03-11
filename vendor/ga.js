@@ -81,3 +81,41 @@ export class Track {
         }
     };
 }
+
+export class Experiment {
+    constructor(experiment, onRun = () => {}) {
+        this.mock = experiment.mock;
+        this.id = experiment.id;
+        this.onRun = onRun;
+
+        this.run();
+    }
+
+    run = () => {
+        if (isServer) {
+            return;
+        }
+
+        if (!this.canRun() && this.mock) {
+            console.log("GA/Optimize: Mocking experiment " + this.id);
+            this.onRun();
+            return;
+        } else if (!this.canRun()) {
+            console.log("GA/Optimize: Not loading experiment " + this.id);
+            return;
+        } else {
+            console.log(
+                "GA/Optimize: Setting up callback for experiment " + this.id
+            );
+
+            gtag("event", "optimize.callback", {
+                name: this.id,
+                callback: this.onRun
+            });
+        }
+    };
+
+    canRun = () => {
+        return !isServer && isGaEnabled && window.gtag;
+    };
+}
