@@ -69,6 +69,7 @@ export class Track {
     };
 
     send = (type, data) => {
+        if (isServer) return;
         if (!this.canSend() && !isServer) {
             this.mock(type, data);
             return;
