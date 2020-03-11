@@ -502,14 +502,8 @@ class DiscussionEditor extends React.Component {
 }
 
 class Editor extends Component {
-    state = {
-        tab: 0
-    };
-
     switchTab = tab => {
-        this.setState({
-            tab
-        });
+        this.props.switchTab(tab);
     };
 
     render() {
@@ -527,7 +521,7 @@ class Editor extends Component {
                             <a
                                 className={
                                     "editor-select " +
-                                    (this.state.tab === 0 && "is-active")
+                                    (this.props.tab === 0 && "is-active")
                                 }
                                 onClick={e => this.switchTab(0)}
                             >
@@ -536,7 +530,7 @@ class Editor extends Component {
                             <a
                                 className={
                                     "editor-select " +
-                                    (this.state.tab === 1 && "is-active")
+                                    (this.props.tab === 1 && "is-active")
                                 }
                                 onClick={e => this.switchTab(1)}
                             >
@@ -545,7 +539,7 @@ class Editor extends Component {
                             <a
                                 className={
                                     "editor-select " +
-                                    (this.state.tab === 2 && "is-active")
+                                    (this.props.tab === 2 && "is-active")
                                 }
                                 onClick={e => this.switchTab(2)}
                             >
@@ -554,14 +548,14 @@ class Editor extends Component {
                         </div>
                     </div>
                 </Modal.Header>
-                {this.state.tab === 0 && <TaskEditorTab {...this.props} />}
-                {this.state.tab === 1 && (
+                {this.props.tab === 0 && <TaskEditorTab {...this.props} />}
+                {this.props.tab === 1 && (
                     <MilestoneEditor
                         hasGold={this.props.hasGold}
                         onClose={this.props.onClose}
                     />
                 )}
-                {this.state.tab === 2 && (
+                {this.props.tab === 2 && (
                     <DiscussionEditor
                         hasGold={this.props.hasGold}
                         onClose={this.props.onClose}
@@ -587,7 +581,8 @@ const mapStateToProps = state => ({
     editorInProgress: state.editor.editorInProgress,
     createFailed: state.editor.createFailed,
     errorMessages: state.editor.errorMessages,
-    fieldErrors: state.editor.fieldErrors
+    fieldErrors: state.editor.fieldErrors,
+    tab: state.editor.tab
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -603,7 +598,8 @@ const mapDispatchToProps = dispatch => ({
     markInProgress: () => dispatch(editorActions.markInProgress()),
     markRemaining: () => dispatch(editorActions.markRemaining()),
     openMilestoneEditor: () => dispatch(editorActions.openMilestoneEditor()),
-    openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor())
+    openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor()),
+    switchTab: tab => dispatch(editorActions.switchTab(tab))
 });
 
 Editor.propTypes = {};

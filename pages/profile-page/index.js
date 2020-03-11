@@ -25,7 +25,7 @@ class ProfilePage extends React.Component {
 
         return (
             <ProfilePageLayout user={user}>
-                <UserStream userId={user.id} />
+                <UserStream key={user.id} userId={user.id} />
             </ProfilePageLayout>
         );
     }

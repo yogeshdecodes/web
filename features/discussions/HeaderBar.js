@@ -2,13 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
+import { actions as editorActions } from "~/ducks/editor";
 
 const NewTopicButton = connect(
     state => ({
         isLoggedIn: state.auth.loggedIn
     }),
     dispatch => ({
-        openEditor: () => dispatch(editorActions.toggleEditor())
+        openEditor: () => dispatch(editorActions.toggleEditor(2))
     })
 )(props => {
     if (!props.isLoggedIn) {

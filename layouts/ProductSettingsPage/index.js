@@ -38,6 +38,15 @@ export default class ProductSettingsPage extends Component {
                         >
                             Events
                         </a>
+                        <a
+                            className={
+                                "navbar-item " +
+                                (this.props.tab === 3 && "is-active")
+                            }
+                            onClick={e => this.props.switchTab(3)}
+                        >
+                            Danger zone
+                        </a>
                     </>
                 }
                 sidebar={<ProductsPageSidebar />}

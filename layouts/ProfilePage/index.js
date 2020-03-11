@@ -93,7 +93,7 @@ export default connect(mapStateToProps)(({ user, me = {}, ...props }) => {
                 <div className="grid-c-s">
                     <div>{props.children}</div>
                     <div>
-                        <ProfileSidebar user={user} />
+                        <ProfileSidebar key={user.id} user={user} />
                     </div>
                 </div>
             </div>

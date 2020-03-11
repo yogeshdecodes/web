@@ -482,6 +482,7 @@ class ProfileTab extends React.Component {
                         <div className="alert-body">Saved.</div>
                     </div>
                 )}
+
                 {this.state.errorMessages && (
                     <div className={"alert is-danger mbGap"}>
                         <div className="alert-body">
@@ -489,6 +490,7 @@ class ProfileTab extends React.Component {
                         </div>
                     </div>
                 )}
+
                 <button
                     className={loadingClass(
                         "btn btn-primary",
