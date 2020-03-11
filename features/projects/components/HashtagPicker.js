@@ -71,7 +71,7 @@ class HashtagPicker extends Component {
                                 this.state.loading
                             )}
                         >
-                            Add
+                            Add hashtag
                         </button>
                     </div>
                 </div>
