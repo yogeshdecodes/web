@@ -480,7 +480,7 @@ a:not(.btn):hover {
     @extend %rounded;
     font-size: 0.75rem;
     color: $c-text !important;
-    text-decoration: underline;
+    //text-decoration: underline;
     display: inline-flex;
     justify-content: center;
     align-items: center;
