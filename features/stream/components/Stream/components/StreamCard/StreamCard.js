@@ -15,6 +15,7 @@ import { mapStateToProps } from "~/ducks/user";
 import InlineCollapse from "../../../../../../components/InlineCollapse";
 import { Tooltip } from "react-tippy";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Track } from "../../../../../../vendor/ga";
 
 function containsWords(input, words) {
     return words.some(word => input.toLowerCase().includes(word.toLowerCase()));
@@ -150,6 +151,10 @@ class StreamCard extends React.Component {
         }
     };
 
+    onTweetClick = () => {
+        new Track().linkClick("tweeted-streamcard");
+    };
+
     render() {
         let tasks = this.getGroupedTasks();
         let milestones = this.getMilestones();
@@ -209,6 +214,7 @@ class StreamCard extends React.Component {
                                                 orderByDate(tasks.done)
                                             )
                                         )}`}
+                                        onClick={this.onTweetClick}
                                     >
                                         <FontAwesomeIcon
                                             icon={["fab", "twitter"]}
