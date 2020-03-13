@@ -10,6 +10,7 @@ import MilestoneMedia from "../../milestones/components/MilestoneMedia";
 import orderBy from "lodash/orderBy";
 import InlineCollapse from "../../../components/InlineCollapse";
 import { imageUrl } from "../../../lib/utils/img";
+import { Track } from "../../../vendor/ga";
 
 function renderPolymorphicPraise(n, withComments = true) {
     if (n.target_type === "task")
@@ -42,6 +43,25 @@ function intersperse(arr, sep) {
         },
         [arr[0]]
     );
+}
+
+function trackNotificationClick(notification, grouped) {
+    try {
+        let key = "std-notification";
+        if (grouped && notification.length > 0) {
+            key = notification[0].key;
+        } else {
+            key = notification.key;
+        }
+        new Track().linkClick(
+            key
+                .trim()
+                .replace(" ", "-")
+                .replace("_", "-")
+        );
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function renderNotificationVerb(key, notification, grouped = false) {
@@ -299,6 +319,7 @@ const Notification = ({
     // DO NOT MESS WITH THE TRY CATCH
     // YOU WILL BREAK THE SITE
     // EVERYTHING MUST BE UNDER IT
+
     try {
         let key = "";
 
@@ -564,6 +585,7 @@ const Notification = ({
                     ? "Notification-new read flex"
                     : "Notification-new  flex"
             }
+            onClick={() => trackNotificationClick(notification, grouped)}
         >
             <div>
                 <figure className="img-avatar img-48">

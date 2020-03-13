@@ -64,7 +64,7 @@ export class Track {
         console.log(
             `Track/Mock: ${type} sent. (${
                 data.event_category ? data.event_category : "action"
-            })`
+            }${data.event_label ? `:${data.event_label}` : ""})`
         );
     };
 
@@ -77,7 +77,11 @@ export class Track {
         try {
             gtag("event", type, { ...data });
         } catch (e) {
-            console.error(`Track: Failed to send event. (${type})`);
+            console.error(
+                `Track: Failed to send event. (${type}${
+                    data.event_label ? `:${data.event - label}` : ""
+                })`
+            );
         }
     };
 }

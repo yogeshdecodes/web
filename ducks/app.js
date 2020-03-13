@@ -1,4 +1,5 @@
 import { errorArray } from "~/lib/utils/error";
+import { Track } from "../vendor/ga";
 
 const initialState = {
     healthy: true,
@@ -40,9 +41,13 @@ export const appReducer = (state = initialState, action) => {
             };
 
         case types.APP_NOTIFICATIONS_TOGGLE:
+            let nextOpen = !state.notificationsOpen;
+            new Track().event(
+                `notifications-toggled-${nextOpen ? "open" : "close"}`
+            );
             return {
                 ...state,
-                notificationsOpen: !state.notificationsOpen
+                notificationsOpen: nextOpen
             };
 
         case types.APP_TOGGLE_NEW_USER:
