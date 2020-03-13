@@ -207,7 +207,7 @@ class StreamCard extends React.Component {
                             {this.isCurrentUser() ? (
                                 <div>
                                     <a
-                                        className="gray-link-with-icon has-text-grey-light"
+                                        className="gray-link-with-icon has-text-grey-light streamcard-tweet-button"
                                         target={"_blank"}
                                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                                             this.generateTweetText(
