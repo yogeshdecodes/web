@@ -18,6 +18,13 @@
     --c-border-light: #{$c-border-light};
     --c-border-lightest: #{$c-border-lightest};
     --c-bg-input: #{$c-bg-input};
+
+    // Heatmap
+    --c-heatmap-0: #{$c-heatmap-0};
+    --c-heatmap-1: #{$c-heatmap-1};
+    --c-heatmap-2: #{$c-heatmap-2};
+    --c-heatmap-3: #{$c-heatmap-3};
+    --c-heatmap-4: #{$c-heatmap-4};
 }
 
 [data-theme="dark"] {
@@ -41,6 +48,13 @@
     --c-border-light: hsla(0, 0%, 82%, 0.2);
     --c-border-lightest: hsla(0, 0%, 82%, 0.3);
     --c-bg-input: hsl(0, 0%, 7%);
+
+    // Heatmap
+    --c-heatmap-0: #142e25;
+    --c-heatmap-1: #143a2d;
+    --c-heatmap-2: #114130;
+    --c-heatmap-3: #0f513a;
+    --c-heatmap-4: #0d5f42;
 
     .has-text-grey-light {
         color: hsla(0, 0%, 100%, 0.3) !important;
@@ -1564,23 +1578,23 @@ figure.img-circle {
     }
 
     .color-scale-0 {
-        fill: #eee;
+        fill: var(--c-heatmap-0);
     }
 
     .color-scale-1 {
-        fill: #b3e8d8;
+        fill: var(--c-heatmap-1);
     }
 
     .color-scale-2 {
-        fill: #80d9be;
+        fill: var(--c-heatmap-2);
     }
 
     .color-scale-3 {
-        fill: #33c297;
+        fill: var(--c-heatmap-3);
     }
 
     .color-scale-4 {
-        fill: #008f64;
+        fill: var(--c-heatmap-4);
     }
 }
 
