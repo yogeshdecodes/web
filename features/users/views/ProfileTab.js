@@ -33,6 +33,7 @@ class ProfileTab extends React.Component {
         headerUploading: false,
         headerPreviewUrl: null,
         digest: true,
+        email_notifications: true,
         errorMessages: null,
         accent: ""
     };
@@ -132,7 +133,8 @@ class ProfileTab extends React.Component {
                 website: data.website || "",
                 avatarPreviewUrl: data.avatar,
                 headerPreviewUrl: data.header,
-                digest: data.digest
+                digest: data.digest,
+                email_notifications: data.email_notifications || true
             });
         } catch (e) {}
     };
@@ -260,12 +262,38 @@ class ProfileTab extends React.Component {
                                             })
                                         }
                                     />{" "}
-                                    Subscribe to the weekly newsletter
+                                    Send newsletters
                                 </label>
                             </div>
                             <p className="help">
-                                Stay in the loop with a weekly digest chock-full
-                                of launches and achievements.
+                                Stay in the loop with a digests and blog posts
+                                chock-full of launches, achievements and weekly
+                                interviews.
+                            </p>
+                        </div>
+
+                        <br />
+
+                        <label className="label">Email notifications</label>
+                        <div className={"form-row"}>
+                            <div className={"control"}>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={this.state.email_notifications}
+                                        onChange={e =>
+                                            this.setState({
+                                                email_notifications:
+                                                    e.target.checked
+                                            })
+                                        }
+                                    />{" "}
+                                    Send email notifications
+                                </label>
+                            </div>
+                            <p className="help">
+                                We'll send you notifications when important
+                                things happen on-site.
                             </p>
                         </div>
 
