@@ -1,10 +1,12 @@
 import React from "react";
 import InstallCard from "../../../components/InstallCard";
+import { isServer } from "~/config";
 
 // todo: get hash fragment fixing for #?token=whateverthefuck
 
 class TrelloInstallCard extends React.Component {
     render() {
+        if (isServer) return null;
         const protocol = window.location.protocol;
         const slashes = protocol.concat("//");
         const host = slashes.concat(window.location.hostname);
