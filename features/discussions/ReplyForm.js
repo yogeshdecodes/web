@@ -5,6 +5,7 @@ import Avatar from "~/features/users/components/Avatar";
 import MarkdownHelpText from "~/components/MarkdownHelpText";
 import { postReply } from "~/lib/discussions";
 import { Link } from "~/routes";
+import { Track } from "../../vendor/ga";
 
 export default connect(mapUserToProps)(
     class ReplyForm extends React.Component {
@@ -23,6 +24,8 @@ export default connect(mapUserToProps)(
                     isCreating: true,
                     failed: false
                 });
+
+                new Track().event("reply-posted");
 
                 const reply = await postReply(
                     this.props.thread.slug,

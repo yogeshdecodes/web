@@ -25,7 +25,7 @@ export class Track {
         let extra = data ? { data } : {};
         this.send(action, {
             event_category: "Action",
-            event_label: label,
+            event_label: label ? label : action,
             ...extra
         });
     };

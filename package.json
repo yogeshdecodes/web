@@ -62,6 +62,7 @@
         "pluralize": "^8.0.0",
         "prettier": "^1.19.1",
         "query-string": "^6.9.0",
+        "rc-progress": "^2.5.2",
         "react": "^16.12.0",
         "react-albus": "^2.0.0",
         "react-autosize-textarea": "^7.0.0",

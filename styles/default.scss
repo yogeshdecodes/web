@@ -7,6 +7,7 @@
     --c-lightest: #{$c-lightest};
 
     // Colors -- backgrounds
+    --c-main: #{$c-main};
     --c-bg: #{$c-bg};
     --c-bg-dark: #{$c-bg-dark};
     --c-bg-darkest: #{$c-bg-darkest};
@@ -368,7 +369,8 @@ a[class^="btn"] {
         margin-right: 0.5em;
     }
 
-    &[disabled] {
+    &[disabled],
+    &.is-disabled {
         opacity: 0.5;
         cursor: not-allowed;
     }
@@ -571,7 +573,7 @@ h2 {
 }
 
 .mb0 {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 .spinner {
@@ -2055,6 +2057,10 @@ a {
 
 .has-text-danger {
     color: $c-danger;
+}
+
+.has-text-success {
+    color: $c-brand;
 }
 
 .has-text-twitter {
