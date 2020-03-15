@@ -13,6 +13,7 @@ import Spinner from "~/components/Spinner";
 import { getNomadLocation } from "../../../lib/integrations/nomadlist";
 import ProductsContainer from "~/features/products/containers/ProductsContainer";
 import { ProductList } from "~/features/products";
+import SpecialTrophy from "../../../features/trophies/SpecialTrophy";
 
 class MyProductsCard extends Component {
     render() {
@@ -174,6 +175,7 @@ const TrophyCaseCard = ({ user }) => {
                         <StaffTrophy user={user} />
                         <StreakTrophy user={user} />
                         <ClubTrophy user={user} />
+                        <SpecialTrophy user={user} />
                     </ul>
                 </div>
             </div>
