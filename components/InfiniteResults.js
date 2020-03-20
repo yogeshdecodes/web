@@ -165,6 +165,7 @@ class InfiniteResults extends React.Component {
                 next={this.loadMore}
                 hasMore={this.state.hasMore}
                 style={{ overflow: "none" }}
+                className={this.props.className ? this.props.className : ""}
             >
                 <Component items={this.state.items} />
 

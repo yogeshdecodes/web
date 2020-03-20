@@ -10,10 +10,13 @@ import AdCard from "~/components/sidebar/components/AdCard";
 import SocialCard from "~/components/sidebar/components/SocialCard";
 import sample from "lodash/sample";
 import { isServer } from "~/config";
+import DealMedia from "~/features/deals/DealMedia";
+import { Link } from "~/routes";
 
 import "./index.scss";
 import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
 import BlogCard from "../components/BlogCard";
+import { getLatestDeals } from "../../../lib/deals";
 
 const quotes = [
     { text: "It's mango time.", from: "Fajar Siddiq" },
@@ -224,6 +227,37 @@ const UpcomingEventsCard = ({ upcomingEvents }) => {
     );
 };
 
+const LatestDealsCard = ({ latestDeals }) => {
+    if (!latestDeals) return null;
+    if (latestDeals && latestDeals.length === 0) return null;
+    return (
+        <div className="UpcomingEventsCard sidebar-item">
+            <h3>Latest deals</h3>
+            <h4 className="subtitle has-text-grey">
+                Earn fantastic indie deals by being productive!
+            </h4>
+            <div className="card">
+                <div className="card-content">
+                    <div className="flex flex-column flex-v-gap">
+                        {latestDeals.slice(0, 4).map(deal => (
+                            <div>
+                                <Link to="deals">
+                                    <a
+                                        className="a-unstyled"
+                                        style={{ color: "var(--c-text)" }}
+                                    >
+                                        <DealMedia small deal={deal} />
+                                    </a>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const UserCard = ({ me }) => {
     const quote = getQuote();
     return (
@@ -257,6 +291,7 @@ const ExploreSidebar = ({ isLoggedIn, me, data }) => {
             <TopStreaksCard topUsers={data.topUsers} />
             <UpcomingEventsCard upcomingEvents={data.upcomingEvents} />
             <AdCard />
+            <LatestDealsCard latestDeals={data.latestDeals} />
             <BlogCard />
             <SocialCard />
             <SmallFooter />
@@ -268,6 +303,7 @@ export async function prefetchData() {
     try {
         let worldStats = await getWorldStats();
         let upcomingEvents = await getUpcomingEvents();
+        let latestDeals = await getLatestDeals();
         let topUsers = worldStats.top_users;
         let newUsers = worldStats.new_users;
 
@@ -275,7 +311,8 @@ export async function prefetchData() {
             data: {
                 topUsers,
                 newUsers,
-                upcomingEvents
+                upcomingEvents,
+                latestDeals
             }
         };
     } catch (e) {
