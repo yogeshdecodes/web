@@ -2424,3 +2424,17 @@ ul.unstyled {
     top: 35%;
     left: 50%;
 }
+
+ul {
+    padding-inline-start: 0px;
+
+    &.unstyled {
+        list-style-type: none;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+    }
+
+    &.mb li {
+        margin-bottom: 5px;
+    }
+}

@@ -5,6 +5,7 @@ import SmallFooter from "~/components/sidebar/components/SmallFooter";
 import AdCard from "~/components/sidebar/components/AdCard";
 import "./index.scss";
 import DealUnlockProgressCard from "../components/DealUnlockProgressCard";
+import DealLevelsCard from "../components/DealLevelsCard";
 
 // TODO: thread sidebar
 // props passed, just check
@@ -15,6 +16,7 @@ const DealsSidebar = ({ isLoggedIn, me, data }) => {
     return (
         <div className="Sidebar">
             <DealUnlockProgressCard />
+            <DealLevelsCard />
             <AdCard />
             <SmallFooter />
         </div>

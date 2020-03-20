@@ -41,7 +41,7 @@ class DealsPage extends Component {
                         </NavLink>
 
                         <OutboundLink
-                            to="https://t.me/matteing"
+                            to="https://airtable.com/shrT9ECO3hxC591Mq"
                             className="navbar-item"
                         >
                             Submit deal
