@@ -7,6 +7,7 @@
     --c-lightest: #{$c-lightest};
 
     // Colors -- backgrounds
+    --c-main: #{$c-main};
     --c-bg: #{$c-bg};
     --c-bg-dark: #{$c-bg-dark};
     --c-bg-darkest: #{$c-bg-darkest};
@@ -368,7 +369,8 @@ a[class^="btn"] {
         margin-right: 0.5em;
     }
 
-    &[disabled] {
+    &[disabled],
+    &.is-disabled {
         opacity: 0.5;
         cursor: not-allowed;
     }
@@ -571,7 +573,7 @@ h2 {
 }
 
 .mb0 {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 .spinner {
@@ -2057,6 +2059,10 @@ a {
     color: $c-danger;
 }
 
+.has-text-success {
+    color: $c-brand;
+}
+
 .has-text-twitter {
     color: #38a1f3;
 
@@ -2417,4 +2423,18 @@ ul.unstyled {
     position: absolute;
     top: 35%;
     left: 50%;
+}
+
+ul {
+    padding-inline-start: 0px;
+
+    &.unstyled {
+        list-style-type: none;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+    }
+
+    &.mb li {
+        margin-bottom: 5px;
+    }
 }

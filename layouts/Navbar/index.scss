@@ -27,6 +27,13 @@
     .navbar-link {
         align-items: center;
         display: flex;
+
+        .tag-up {
+            text-transform: uppercase;
+            font-size: 10px;
+            padding-bottom: 10px;
+            padding-left: 5px;
+        }
     }
 
     .navbar-dropdown {

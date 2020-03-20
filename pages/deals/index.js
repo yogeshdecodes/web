@@ -4,95 +4,74 @@ import OutboundLink from "../../components/OutboundLink";
 import LoggedInOnly from "~/features/users/containers/LoggedInOnly";
 import LoggedOutOnly from "~/features/users/containers/LoggedOutOnly";
 import { Link } from "~/routes";
+import DealMedia from "../../features/deals/DealMedia";
+import InfiniteResults from "~/components/InfiniteResults";
+import { prefetchDeals } from "../../lib/deals";
+import StdPageLayout from "~/layouts/StdPage";
+import NavLink from "~/components/ActiveLink";
+import PageTitle from "~/components/ui/PageTitle";
+import DealsSidebar from "~/components/sidebar/deals-page";
 
 // disable buttons , dont redirect
 
-export default class DealsPage extends Component {
+class DealsPage extends Component {
+    static async getInitialProps(ctx) {
+        try {
+            const prefetchedData = await prefetchDeals();
+            return {
+                prefetchedData
+            };
+        } catch (e) {
+            console.log(e);
+            return {
+                statusCode: e.status_code ? e.status_code : 500
+            };
+        }
+    }
+
     render() {
         return (
-            <div className="DealsPage">
-                <section className="container">
-                    <h1>Deals</h1>
-                    <h3 className="subtitle">
-                        Exclusive deals from the community, curated only for
-                        Makerlog members.
-                    </h3>
-                </section>
-                <section className={"container"}>
+            <StdPageLayout
+                title="Deals"
+                sidebar={<DealsSidebar />}
+                nav={
+                    <>
+                        <NavLink route="deals" activeClassName="is-active">
+                            <a className="navbar-item">Featured</a>
+                        </NavLink>
+
+                        <OutboundLink
+                            to="https://airtable.com/shrT9ECO3hxC591Mq"
+                            className="navbar-item"
+                        >
+                            Submit deal
+                        </OutboundLink>
+                    </>
+                }
+            >
+                <div className="DealsPage">
+                    <PageTitle
+                        title={<>Latest Deals</>}
+                        left={
+                            <h4 className="subtitle has-text-grey">
+                                Exclusive deals from the community, curated only
+                                for Makerlog members.
+                            </h4>
+                        }
+                    />
                     <div className="card">
-                        <div className="card-content flex flex-column flex-v-gap">
-                            <div className="flex flex-gap">
-                                <div className="icon">
-                                    <figure className="img-48">
-                                        <img src="/img/deals/divjoy.jpg"></img>
-                                    </figure>
-                                </div>
-                                <div className="flex-grow">
-                                    <h4>Divjoy</h4>
-                                    <p>
-                                        Get 50% off Divjoy, the React codebase
-                                        generator.
-                                    </p>
-                                    <LoggedOutOnly>
-                                        <div className="alert is-info">
-                                            <div className="alert-body">
-                                                <h4>
-                                                    You must sign in to see
-                                                    these deals.
-                                                </h4>
-
-                                                <Link route="begin">
-                                                    <a>Get started</a>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </LoggedOutOnly>
-                                    <LoggedInOnly>
-                                        <OutboundLink
-                                            href="https://divjoy.com?promo=makerlog"
-                                            className="btn btn-light"
-                                        >
-                                            Grab this deal
-                                        </OutboundLink>
-                                    </LoggedInOnly>
-                                </div>
-                            </div>
-                            <div className="flex flex-gap">
-                                <div className="icon">
-                                    <figure className="img-48">
-                                        <img src="/img/deals/polypane.png"></img>
-                                    </figure>
-                                </div>
-                                <div className="flex-grow">
-                                    <h4>Polypane</h4>
-                                    <p>
-                                        Get 20% off Polypane, the world's best
-                                        browser for creating web experiences.
-                                    </p>
-                                    <LoggedOutOnly>
-                                        <div className="alert is-info">
-                                            <div className="alert-body">
-                                                <h4>
-                                                    You must sign in to see
-                                                    these deals.
-                                                </h4>
-
-                                                <Link route="begin">
-                                                    <a>Get started</a>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </LoggedOutOnly>
-                                    <LoggedInOnly>
-                                        <OutboundLink
-                                            href="https://polypane.app/?coupon=MAKERLOG20"
-                                            className="btn btn-light"
-                                        >
-                                            Grab this deal
-                                        </OutboundLink>
-                                    </LoggedInOnly>
-                                </div>
-                            </div>
+                        <div className="card-content">
+                            <InfiniteResults
+                                url={"/deals/"}
+                                prefetchedData={this.props.results}
+                                component={({ items }) => (
+                                    <div className="flex flex-column flex-v-gap">
+                                        {items.map(deal => (
+                                            <DealMedia deal={deal} />
+                                        ))}
+                                    </div>
+                                )}
+                            />
                         </div>
                     </div>
 
@@ -100,8 +79,10 @@ export default class DealsPage extends Component {
                         Got an offer for the community?{" "}
                         <a href="https://t.me/matteing">Contact me!</a>
                     </div>
-                </section>
-            </div>
+                </div>
+            </StdPageLayout>
         );
     }
 }
+
+export default DealsPage;
