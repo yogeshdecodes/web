@@ -118,7 +118,7 @@ class UserGroupSelector extends React.Component {
                         <button
                             onClick={this.addUser}
                             className={loadingClass(
-                                "btn-light",
+                                "btn btn-secondary",
                                 this.state.adding
                             )}
                         >
