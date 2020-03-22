@@ -5,7 +5,8 @@
     "scripts": {
         "build": "next build",
         "dev": "DEBUG=axios node server.js",
-        "start": "NODE_ENV=production node server.js"
+        "start": "NODE_ENV=production node server.js",
+        "stage": "git push -f heroku develop:master"
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.5.5",

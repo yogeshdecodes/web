@@ -67,7 +67,7 @@ class HashtagPicker extends Component {
                         <button
                             onClick={this.onAddTag}
                             className={loadingClass(
-                                "btn btn-light",
+                                "btn btn-secondary",
                                 this.state.loading
                             )}
                         >
