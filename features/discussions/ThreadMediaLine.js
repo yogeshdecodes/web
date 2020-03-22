@@ -13,7 +13,9 @@ function ThreadMediaLine({ thread }) {
             )}
             <div>
                 <Link route={"discussion-page"} params={{ slug: thread.slug }}>
-                    <h4>{thread.title}</h4>
+                    <a>
+                        <h4>{thread.title}</h4>
+                    </a>
                 </Link>
             </div>
             <div>

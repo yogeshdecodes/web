@@ -53,7 +53,9 @@ export default class extends React.Component {
                             route={"discussion-page"}
                             params={{ slug: thread.slug }}
                         >
-                            <h4>{thread.title}</h4>
+                            <a>
+                                <h4>{thread.title}</h4>
+                            </a>
                         </Link>
                     )}
 
