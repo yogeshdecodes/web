@@ -106,36 +106,40 @@ class UserMedia extends React.Component {
                         route="profile-page"
                         params={{ username: user.username }}
                     >
-                        <div className={"card"}>
-                            <div className={"card-content"}>
-                                <div className={"flex"}>
-                                    <div>
-                                        <img
-                                            className={"img-48"}
-                                            src={imageUrl(
-                                                this.props.user.avatar,
-                                                48
-                                            )}
-                                            alt="User avatar"
-                                        />
+                        <a>
+                            <div className={"card"}>
+                                <div className={"card-content"}>
+                                    <div className={"flex"}>
+                                        <div>
+                                            <img
+                                                className={"img-48"}
+                                                src={imageUrl(
+                                                    this.props.user.avatar,
+                                                    48
+                                                )}
+                                                alt="User avatar"
+                                            />
+                                        </div>
+                                        <div>
+                                            <h4>
+                                                <FullName
+                                                    user={this.props.user}
+                                                />
+                                            </h4>
+                                            <h3>@{this.props.user.username}</h3>
+                                        </div>
                                     </div>
                                     <div>
-                                        <h4>
-                                            <FullName user={this.props.user} />
-                                        </h4>
-                                        <h3>@{this.props.user.username}</h3>
+                                        {this.props.user.description
+                                            ? this.props.user.description
+                                            : "This user has no bio."}
                                     </div>
                                 </div>
-                                <div>
-                                    {this.props.user.description
-                                        ? this.props.user.description
-                                        : "This user has no bio."}
-                                </div>
+                                <footer className="card-footer">
+                                    <StatBar user={this.props.user} />
+                                </footer>
                             </div>
-                            <footer className="card-footer">
-                                <StatBar user={this.props.user} />
-                            </footer>
-                        </div>
+                        </a>
                     </Link>
                 </div>
             );
@@ -144,9 +148,74 @@ class UserMedia extends React.Component {
         if (this.props.xs) {
             return (
                 <Link route="profile-page" params={{ username: user.username }}>
+                    <a>
+                        <div
+                            className={
+                                "flex flex-gap UserMedia xs" +
+                                (!this.props.user.streak ||
+                                !this.props.user.week_tda
+                                    ? "lazy"
+                                    : "")
+                            }
+                        >
+                            <div>
+                                <Avatar is={32} user={this.props.user} />
+                            </div>
+                            <div>
+                                <strong>
+                                    <FullName user={this.props.user} />
+                                </strong>
+                            </div>
+                        </div>
+                    </a>
+                </Link>
+            );
+        }
+
+        if (this.props.medium) {
+            return (
+                <Link route="profile-page" params={{ username: user.username }}>
+                    <a>
+                        <div
+                            className={
+                                "a-unstyled grid-streamcard UserMedia " +
+                                (!this.props.user.streak ||
+                                !this.props.user.week_tda
+                                    ? "lazy"
+                                    : "")
+                            }
+                        >
+                            <div>
+                                <Avatar is={48} user={this.props.user} />
+                            </div>
+                            <div>
+                                <h5>
+                                    <FullName user={user} />
+                                </h5>
+                                <span className={"note"}>
+                                    {user.description}
+                                </span>
+                            </div>
+                            <div className={"stats-case"}>
+                                {user.streak > 0 && (
+                                    <Streak days={user.streak} />
+                                )}
+                                {user.streak === 100 && <Emoji emoji={"🎉"} />}
+                                <MakerScore score={user.maker_score} />
+                                <Tda tda={user.week_tda} />
+                            </div>
+                        </div>
+                    </a>
+                </Link>
+            );
+        }
+
+        return (
+            <Link route="profile-page" params={{ username: user.username }}>
+                <a>
                     <div
                         className={
-                            "flex flex-gap UserMedia xs" +
+                            "grid-streamcard UserMedia " +
                             (!this.props.user.streak ||
                             !this.props.user.week_tda
                                 ? "lazy"
@@ -156,119 +225,70 @@ class UserMedia extends React.Component {
                         <div>
                             <Avatar is={32} user={this.props.user} />
                         </div>
-                        <div>
-                            <strong>
-                                <FullName user={this.props.user} />
-                            </strong>
-                        </div>
-                    </div>
-                </Link>
-            );
-        }
-
-        if (this.props.medium) {
-            return (
-                <Link route="profile-page" params={{ username: user.username }}>
-                    <div
-                        className={
-                            "a-unstyled grid-streamcard UserMedia " +
-                            (!this.props.user.streak ||
-                            !this.props.user.week_tda
-                                ? "lazy"
-                                : "")
-                        }
-                    >
-                        <div>
-                            <Avatar is={48} user={this.props.user} />
-                        </div>
-                        <div>
-                            <h5>
+                        <div className={"flex v-center"}>
+                            <span className="name">
                                 <FullName user={user} />
-                            </h5>
-                            <span className={"note"}>{user.description}</span>
+                            </span>
+                            {user.verified ? (
+                                <>
+                                    &nbsp;
+                                    <Tooltip
+                                        html={"Verified"}
+                                        animateFill={false}
+                                        delay={200}
+                                        position={"top"}
+                                        size={"small"}
+                                    >
+                                        <VerifiedIcon />
+                                    </Tooltip>
+                                </>
+                            ) : (
+                                user.gold && (
+                                    <Tooltip
+                                        interactive
+                                        html={
+                                            <OutboundLink to="https://gold.getmakerlog.com">
+                                                <a
+                                                    style={{
+                                                        color: "white",
+                                                        textDecoration:
+                                                            "underline"
+                                                    }}
+                                                >
+                                                    Makerlog Gold Subscriber
+                                                </a>
+                                            </OutboundLink>
+                                        }
+                                        animateFill={false}
+                                        delay={200}
+                                        position={"top"}
+                                        size={"small"}
+                                    >
+                                        &nbsp;
+                                        <GoldIcon />
+                                    </Tooltip>
+                                )
+                            )}
                         </div>
                         <div className={"stats-case"}>
-                            {user.streak > 0 && <Streak days={user.streak} />}
+                            <span className="username">@{user.username}</span>
+                            &nbsp;
+                            {user.streak !== null && (
+                                <Streak days={user.streak} />
+                            )}
                             {user.streak === 100 && <Emoji emoji={"🎉"} />}
-                            <MakerScore score={user.maker_score} />
-                            <Tda tda={user.week_tda} />
+                            &nbsp;
+                            {user.is_live && (
+                                <span>
+                                    <Emoji emoji={"🔴"} />{" "}
+                                    <span className={"has-text-danger"}>
+                                        LIVE
+                                    </span>
+                                </span>
+                            )}
                         </div>
                     </div>
-                </Link>
-            );
-        }
-
-        return (
-            <Link route="profile-page" params={{ username: user.username }}>
-                <div
-                    className={
-                        "grid-streamcard UserMedia " +
-                        (!this.props.user.streak || !this.props.user.week_tda
-                            ? "lazy"
-                            : "")
-                    }
-                >
-                    <div>
-                        <Avatar is={32} user={this.props.user} />
-                    </div>
-                    <div className={"flex v-center"}>
-                        <span className="name">
-                            <FullName user={user} />
-                        </span>
-                        {user.verified ? (
-                            <>
-                                &nbsp;
-                                <Tooltip
-                                    html={"Verified"}
-                                    animateFill={false}
-                                    delay={200}
-                                    position={"top"}
-                                    size={"small"}
-                                >
-                                    <VerifiedIcon />
-                                </Tooltip>
-                            </>
-                        ) : (
-                            user.gold && (
-                                <Tooltip
-                                    interactive
-                                    html={
-                                        <OutboundLink to="https://gold.getmakerlog.com">
-                                            <a
-                                                style={{
-                                                    color: "white",
-                                                    textDecoration: "underline"
-                                                }}
-                                            >
-                                                Makerlog Gold Subscriber
-                                            </a>
-                                        </OutboundLink>
-                                    }
-                                    animateFill={false}
-                                    delay={200}
-                                    position={"top"}
-                                    size={"small"}
-                                >
-                                    &nbsp;
-                                    <GoldIcon />
-                                </Tooltip>
-                            )
-                        )}
-                    </div>
-                    <div className={"stats-case"}>
-                        <span className="username">@{user.username}</span>
-                        &nbsp;
-                        {user.streak !== null && <Streak days={user.streak} />}
-                        {user.streak === 100 && <Emoji emoji={"🎉"} />}
-                        &nbsp;
-                        {user.is_live && (
-                            <span>
-                                <Emoji emoji={"🔴"} />{" "}
-                                <span className={"has-text-danger"}>LIVE</span>
-                            </span>
-                        )}
-                    </div>
-                </div>
+                </a>
             </Link>
         );
     }

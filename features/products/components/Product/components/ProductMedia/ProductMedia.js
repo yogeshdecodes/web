@@ -12,22 +12,24 @@ class ProductMedia extends React.Component {
                 route="product-page"
                 params={{ slug: this.props.product.slug }}
             >
-                <div className={"ProductMedia"}>
-                    <div className={"flex"}>
-                        <ProductIcon is={48} product={this.props.product} />
-                        <div>
-                            <strong>{this.props.product.name} </strong>
-                            <br />
-                            <p>
-                                {truncate(
-                                    this.props.product.description,
-                                    14,
-                                    "..."
-                                )}
-                            </p>
+                <a>
+                    <div className={"ProductMedia"}>
+                        <div className={"flex"}>
+                            <ProductIcon is={48} product={this.props.product} />
+                            <div>
+                                <strong>{this.props.product.name} </strong>
+                                <br />
+                                <p>
+                                    {truncate(
+                                        this.props.product.description,
+                                        14,
+                                        "..."
+                                    )}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </Link>
         );
     }
@@ -50,31 +52,33 @@ class ProductMedia extends React.Component {
                         route="product-page"
                         params={{ slug: this.props.product.slug }}
                     >
-                        <div className={"flex"}>
-                            <div>
-                                <figure className="img-32">
-                                    <img
-                                        src={
-                                            this.props.product.icon
-                                                ? this.props.product.icon
-                                                : "https://via.placeholder.com/200?text=No+icon"
-                                        }
-                                        alt="Product"
-                                    />
-                                </figure>
+                        <a>
+                            <div className={"flex"}>
+                                <div>
+                                    <figure className="img-32">
+                                        <img
+                                            src={
+                                                this.props.product.icon
+                                                    ? this.props.product.icon
+                                                    : "https://via.placeholder.com/200?text=No+icon"
+                                            }
+                                            alt="Product"
+                                        />
+                                    </figure>
+                                </div>
+                                <p>
+                                    <strong>{this.props.product.name}</strong>
+                                    <br />
+                                    <small>
+                                        {truncate(
+                                            this.props.product.description,
+                                            10,
+                                            "..."
+                                        )}
+                                    </small>
+                                </p>
                             </div>
-                            <p>
-                                <strong>{this.props.product.name}</strong>
-                                <br />
-                                <small>
-                                    {truncate(
-                                        this.props.product.description,
-                                        10,
-                                        "..."
-                                    )}
-                                </small>
-                            </p>
-                        </div>
+                        </a>
                     </Link>
                 </div>
             );
@@ -86,34 +90,36 @@ class ProductMedia extends React.Component {
                     route="product-page"
                     params={{ slug: this.props.product.slug }}
                 >
-                    <div className={"flex"}>
-                        <div>
-                            <figure className="img-48">
-                                <img
-                                    src={imageUrl(
-                                        this.props.product.icon
-                                            ? this.props.product.icon
-                                            : "https://via.placeholder.com/200?text=No+icon",
-                                        48
-                                    )}
-                                    alt="Product"
-                                />
-                            </figure>
-                        </div>
-                        <div>
+                    <a>
+                        <div className={"flex"}>
                             <div>
-                                <strong>{this.props.product.name}</strong>
-                                <br />
-                                <small>
-                                    {truncate(
-                                        this.props.product.description,
-                                        10,
-                                        "..."
-                                    )}
-                                </small>
+                                <figure className="img-48">
+                                    <img
+                                        src={imageUrl(
+                                            this.props.product.icon
+                                                ? this.props.product.icon
+                                                : "https://via.placeholder.com/200?text=No+icon",
+                                            48
+                                        )}
+                                        alt="Product"
+                                    />
+                                </figure>
+                            </div>
+                            <div>
+                                <div>
+                                    <strong>{this.props.product.name}</strong>
+                                    <br />
+                                    <small>
+                                        {truncate(
+                                            this.props.product.description,
+                                            10,
+                                            "..."
+                                        )}
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </Link>
             </div>
         );
