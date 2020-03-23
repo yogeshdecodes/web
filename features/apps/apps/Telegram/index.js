@@ -36,6 +36,7 @@ class Telegram extends React.Component {
                 failed: false
             });
         } catch (e) {
+            console.log(e);
             this.setState({
                 linking: false,
                 success: false,
@@ -45,11 +46,6 @@ class Telegram extends React.Component {
     };
 
     render() {
-        const style = {
-            backgroundColor: "#0088cc",
-            color: "white"
-        };
-
         if (this.state.linking) {
             return <Spinner />;
         }

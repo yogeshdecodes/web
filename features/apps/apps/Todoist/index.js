@@ -271,38 +271,36 @@ class Todoist extends React.Component {
     async componentDidMount() {
         if (!this.state.installed) {
             await this.getInstallUrl();
+
+            const params = this.props.query;
+            const code = params.code;
+            if (code) {
+                this.setState({ installing: true });
+                try {
+                    await installApp(code);
+                    window.location = window.location.href.split("?")[0];
+                    this.setState({
+                        ready: true,
+                        installed: true,
+                        installing: false
+                    });
+                } catch (e) {
+                    console.log(e);
+                    this.setState({
+                        ready: true,
+                        installing: false,
+                        installed: false,
+                        failed: true,
+                        errorMessages: errorArray("Failed to link.")
+                    });
+                }
+            }
         } else {
             this.setState({
                 ready: true
             });
         }
     }
-
-    async componentWillMount() {
-        const params = this.props.query;
-        const code = params.code;
-        if (code) {
-            this.setState({ installing: true });
-            try {
-                await installApp(code);
-                window.location = window.location.href.split("?")[0];
-                this.setState({
-                    ready: true,
-                    installed: true,
-                    installing: false
-                });
-            } catch (e) {
-                this.setState({
-                    ready: true,
-                    installing: false,
-                    installed: false,
-                    failed: true,
-                    errorMessages: errorArray("Failed to link.")
-                });
-            }
-        }
-    }
-
     getInstallUrl = async () => {
         try {
             const installUrl = await getInstallUrl(
