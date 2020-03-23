@@ -13,6 +13,7 @@ import { requireAuthed } from "~/lib/auth";
 import "./index.scss";
 import PageNavigation from "~/components/ui/PageNavigation";
 import { loadingClass } from "~/lib/utils/random";
+import { getToken } from "../../lib/admin";
 
 class SecuritySettings extends React.Component {
     state = {
@@ -288,6 +289,77 @@ class EmbedSettings extends React.Component {
     }
 }
 
+class AdminTab extends React.Component {
+    state = {
+        loading: false,
+        u: "",
+        failed: false
+    };
+
+    onSessionBegin = async () => {
+        try {
+            this.setState({
+                failed: false,
+                loading: true
+            });
+            const res = await getToken(this.state.u);
+            this.props.beginSession(res.token);
+            this.setState({ loading: false, failed: false });
+        } catch (e) {
+            this.setState({
+                failed: true,
+                loading: false
+            });
+        }
+    };
+
+    render() {
+        return (
+            <div>
+                <section className={"settings-header"}>
+                    <h2>Admin settings</h2>
+                </section>
+                <div>
+                    <form
+                        onSubmit={e => {
+                            e.preventDefault();
+                        }}
+                    >
+                        <div className={"control"}>
+                            <label>Begin debug session</label>
+                            <input
+                                className="input"
+                                value={this.state.e}
+                                type="text"
+                                onChange={e =>
+                                    this.setState({ u: e.target.value })
+                                }
+                            />
+                        </div>
+                        <div className="control">
+                            <button
+                                onClick={this.onSessionBegin}
+                                className={loadingClass(
+                                    "btn btn-light",
+                                    this.state.loading
+                                )}
+                            >
+                                Begin
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+}
+
+AdminTab = connect(null, dispatch => {
+    return {
+        beginSession: t => dispatch(authActions.login("", "", t))
+    };
+})(AdminTab);
+
 const embedStateToProps = state => {
     return {
         user: state.user.me
@@ -334,6 +406,9 @@ class SettingsPage extends React.Component {
                     {this.renderTabLink("Streaks", 8)}
                     {this.renderTabLink("Developers", 6)}
                     {this.renderTabLink("Data", 3)}
+                    {this.props.user &&
+                        this.props.user.is_staff &&
+                        this.renderTabLink("Admin", 9)}
                 </PageNavigation>
                 <section className={"container"}>
                     <div className={"card"}>
@@ -359,6 +434,8 @@ class SettingsPage extends React.Component {
                             )}
 
                             {this.state.activeTab === 8 && <StreakTab />}
+
+                            {this.state.activeTab === 9 && <AdminTab />}
                         </div>
                     </div>
                 </section>

@@ -18,7 +18,6 @@ const DealsSidebar = ({ isLoggedIn, me, data }) => {
             <DealUnlockProgressCard />
             <DealLevelsCard />
             <AdCard />
-            <SmallFooter />
         </div>
     );
 };

@@ -55,7 +55,7 @@ class DealsPage extends Component {
                         left={
                             <h4 className="subtitle has-text-grey">
                                 Exclusive deals from the community, curated only
-                                for Makerlog members.
+                                for Makerlog members.*
                             </h4>
                         }
                     />
@@ -76,8 +76,9 @@ class DealsPage extends Component {
                     </div>
 
                     <div className="has-text-grey">
-                        Got an offer for the community?{" "}
-                        <a href="https://t.me/matteing">Contact me!</a>
+                        <small className="has-text-grey-light">
+                            *Terms and conditions apply.
+                        </small>
                     </div>
                 </div>
             </StdPageLayout>

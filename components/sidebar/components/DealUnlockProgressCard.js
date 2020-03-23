@@ -12,6 +12,7 @@ import { Link } from "~/routes";
 
 const ProgressText = ({ user }) => {
     const nextTier = getNextTier(user);
+    console.log(nextTier);
     if (user.gold)
         return (
             <p className="help mb0">
@@ -19,7 +20,7 @@ const ProgressText = ({ user }) => {
             </p>
         );
 
-    if (nextTier.id === DealTiers.ALL_UNLOCKED) {
+    if (nextTier.id === DealTiers.ALL_UNLOCKED.id) {
         return (
             <p className="help mb0">
                 You've unlocked all deals. Incredible work!
