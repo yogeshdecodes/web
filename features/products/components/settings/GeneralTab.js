@@ -14,10 +14,12 @@ import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import LaunchedToggle from "~/features/products/components/LaunchedToggle";
 import Dropzone from "react-dropzone";
 import ProductIcon from "~/features/products/components/ProductIcon";
+import HashtagPicker from "~/features/projects/components/HashtagPicker";
 import { loadingClass } from "~/lib/utils/random";
 
 export default class GeneralTab extends Component {
     state = {
+        success: false,
         updating: false,
         name: "",
         description: "",
@@ -37,7 +39,8 @@ export default class GeneralTab extends Component {
         this.setState({
             ...this.props.product,
             icon: null,
-            logoPreviewUrl: this.props.product.icon
+            logoPreviewUrl: this.props.product.icon,
+            selectedProjects: this.props.product.projects
         });
     }
 
@@ -78,7 +81,7 @@ export default class GeneralTab extends Component {
                 this.state.slug,
                 this.state.name,
                 this.state.description,
-                this.state.selectedProjects,
+                this.state.selectedProjects.map(p => p.id),
                 this.state.product_hunt,
                 this.state.twitter,
                 this.state.website,
@@ -88,7 +91,11 @@ export default class GeneralTab extends Component {
                 this.state.accent
             );
 
-            this.setState({ updating: false, errorMessages: null });
+            this.setState({
+                updating: false,
+                success: true,
+                errorMessages: null
+            });
 
             if (isFunction(this.props.onFinish)) {
                 this.props.onFinish(product);
@@ -99,6 +106,13 @@ export default class GeneralTab extends Component {
                 errorMessages: e.field_errors || e.message
             });
         }
+    };
+
+    onHashtagChange = newState => {
+        console.log(newState);
+        this.setState({
+            selectedProjects: newState
+        });
     };
 
     onDelete = async () => {
@@ -217,6 +231,19 @@ export default class GeneralTab extends Component {
                         </div>
                     </div>
                     <div className="control">
+                        <label>
+                            Tracked hashtags
+                            <p className="help">
+                                Makerlog works by logging tasks with #hashtags
+                                and adding the tasks to your product log.
+                            </p>
+                        </label>
+                        <HashtagPicker
+                            projects={this.state.selectedProjects}
+                            onChange={this.onHashtagChange}
+                        />
+                    </div>
+                    <div className="control">
                         <label>Accent color (optional)</label>
                         <p className="help mb-5">
                             Add a little flair to your product!
@@ -229,6 +256,14 @@ export default class GeneralTab extends Component {
                         ></input>
                     </div>
                     <hr />
+                    {this.state.success && (
+                        <>
+                            <div className="alert is-success">
+                                <div className="alert-body">Saved.</div>
+                            </div>{" "}
+                            <br />
+                        </>
+                    )}
                     <button
                         onClick={e => {
                             e.preventDefault();
