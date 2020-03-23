@@ -100,18 +100,6 @@ class TodayView extends React.Component {
                                 <h3 className={"mt0 mb0"}>
                                     You haven't done anything today.
                                 </h3>
-                                <div>
-                                    <button
-                                        className={"btn-small"}
-                                        onClick={this.props.toggleEditor}
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={"plus"}
-                                            color={"white"}
-                                        />{" "}
-                                        Add tasks
-                                    </button>
-                                </div>
                             </div>
                         )}
                         {tasks.length === 0 && this.props.doneToday > 0 && (

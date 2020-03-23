@@ -6,6 +6,7 @@ import { actions as projectsActions } from "../ducks/projects";
 import { checkApiHealth } from "~/lib/app";
 import { syncTimezone } from "~/lib/user";
 import axios from "~/lib/axios";
+import { notificationsActions } from "../ducks/notifications";
 
 // const getAuth = state => state.auth;
 const getStats = state => state.stats;
@@ -32,6 +33,8 @@ function* takeoff(action) {
 
     yield put(tasksActions.loadTasks());
     yield put(projectsActions.fetchProjects());
+    yield put(notificationsActions.fetchNotifications());
+    yield put(notificationsActions.connect());
 
     // Set timezone
     // todo; prevent call by diffing.
