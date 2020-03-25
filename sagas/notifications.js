@@ -15,6 +15,7 @@ import {
 import { socketUrl } from "~/lib/utils/random";
 import { eventChannel } from "redux-saga";
 import RWS from "reconnecting-websocket/dist/reconnecting-websocket";
+import { achievementsActions } from "../ducks/achievements";
 
 function getSocketUrl(token) {
     return socketUrl(`/notifications/?token=${token}`);
@@ -27,7 +28,7 @@ export function* fetchNotifications(action) {
             notificationsActions.fetchNotificationsSuccess(notifications)
         );
     } catch (e) {
-        yield put(notificationsActions.fetchNotificationsFailed(e.message));
+        yield put(notificationsActions.fetchNotificationsFailed(e));
     }
 }
 
@@ -35,7 +36,7 @@ export function* markAllNotificationsRead(action) {
     try {
         yield call(markAllRead);
     } catch (e) {
-        yield put(notificationsActions.fetchNotificationsFailed(e.message));
+        yield put(notificationsActions.fetchNotificationsFailed(e));
     }
 }
 
@@ -78,6 +79,19 @@ function listen(socket) {
                             data.payload
                         ])
                     );
+                    if (
+                        data.payload &&
+                        data.payload.key === "achievement_get"
+                    ) {
+                        emit(
+                            achievementsActions.fetchAchievementsSuccess(
+                                data.payload.target
+                                    ? [data.payload.target]
+                                    : [],
+                                []
+                            )
+                        );
+                    }
                     break;
 
                 default:

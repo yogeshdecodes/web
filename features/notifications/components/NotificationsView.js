@@ -4,6 +4,10 @@ import Spinner from "~/components/Spinner";
 import Notification from "./Notification";
 import { connect } from "react-redux";
 import { notificationsActions } from "../../../ducks/notifications";
+import {
+    getErrorCodeString,
+    getFirstErrorString
+} from "../../../lib/utils/error";
 
 class NotificationsView extends React.Component {
     state = {
@@ -79,26 +83,50 @@ class NotificationsView extends React.Component {
                         />
                     </header>
 
-                    <div className="quickview-body">
-                        {!this.props.ready && <Spinner small />}
+                    {(!this.props.ready || this.props.failed) && (
+                        <div className="full-quickview-body flex flex-column flex-v-gap has-text-centered">
+                            {this.props.failed && (
+                                <>
+                                    <div>
+                                        <h2>Failed to load notifications</h2>
+                                        <h3 className="subtitle has-text-grey">
+                                            {getFirstErrorString(
+                                                this.props.errorMessages
+                                            )}
+                                            &nbsp;
+                                            {getErrorCodeString(
+                                                this.props.errorMessages
+                                            )}
+                                        </h3>
+                                    </div>
+                                    <div>
+                                        <button
+                                            className={"btn btn-light"}
+                                            onClick={
+                                                this.props.fetchNotifications
+                                            }
+                                        >
+                                            Retry
+                                        </button>
+                                    </div>
+                                </>
+                            )}
 
-                        {this.props.failed && (
-                            <div className={"panel-message danger"}>
-                                Failed to load notifications.
-                                <br />
-                                <button
-                                    className={"btn"}
-                                    onClick={this.props.fetchNotifications}
-                                >
-                                    Retry.
-                                </button>
+                            {!this.props.ready && (
+                                <div>
+                                    <Spinner small />
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {this.props.ready &&
+                        !this.props.failed &&
+                        this.props.notifications && (
+                            <div className="quickview-body">
+                                {this.renderNotifications()}
                             </div>
                         )}
-
-                        {this.props.ready &&
-                            this.props.notifications &&
-                            this.renderNotifications()}
-                    </div>
                 </div>
             </>
         );
@@ -114,7 +142,8 @@ const mapStateToProps = state => ({
     open: state.notifications.open,
     ready: state.notifications.ready,
     notifications: state.notifications.notifications,
-    failed: state.notifications.failed
+    failed: state.notifications.failed,
+    errorMessages: state.notifications.errorMessages
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -15,6 +15,7 @@ import { isServer } from "~/config";
 import localForage from "localforage";
 import { Router } from "~/routes";
 import { notificationsReducer } from "./notifications";
+import { achievementsReducer } from "./achievements";
 
 /*
 
@@ -68,7 +69,8 @@ const rootReducer = combineReducers({
     stats: persistReducer(statsPersistConfig, statsReducer),
     notifications: notificationsReducer,
     user: userReducer,
-    auth: authReducer
+    auth: authReducer,
+    achievements: achievementsReducer
 });
 
 export default (state, action) => {

@@ -2,6 +2,7 @@ import React from "react";
 import { UserStream } from "~/features/stream";
 import ProfilePageLayout from "~/layouts/ProfilePage";
 import { getByUsername } from "~/lib/user";
+import { getUserTrophies } from "~/lib/achievements";
 import "./index.scss";
 
 export async function getProfileProps({ query: { username } }) {
@@ -9,7 +10,8 @@ export async function getProfileProps({ query: { username } }) {
 
     try {
         const user = await getByUsername(username);
-        return { user, layout: { ...layout } };
+        const achievements = await getUserTrophies(username);
+        return { user, achievements, layout: { ...layout } };
     } catch (e) {
         if (e.status_code && e.status_code === 404) {
             return { statusCode: 404 };
@@ -21,10 +23,10 @@ export async function getProfileProps({ query: { username } }) {
 
 class ProfilePage extends React.Component {
     render() {
-        const { user } = this.props;
+        const { user, achievements } = this.props;
 
         return (
-            <ProfilePageLayout user={user}>
+            <ProfilePageLayout user={user} achievements={achievements}>
                 <UserStream key={user.id} userId={user.id} />
             </ProfilePageLayout>
         );

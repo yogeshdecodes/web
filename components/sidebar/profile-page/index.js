@@ -14,6 +14,7 @@ import { getNomadLocation } from "../../../lib/integrations/nomadlist";
 import ProductsContainer from "~/features/products/containers/ProductsContainer";
 import { ProductList } from "~/features/products";
 import SpecialTrophy from "../../../features/trophies/SpecialTrophy";
+import { TrophyIcon } from "../../../features/achievements/TrophyMedia";
 
 class MyProductsCard extends Component {
     render() {
@@ -165,18 +166,17 @@ const ActivityCard = ({ user }) => {
     );
 };
 
-const TrophyCaseCard = ({ user }) => {
+const TrophyCaseCard = ({ user, trophies }) => {
     return (
         <div className="TrophyCaseCard sidebar-item">
             <h3>Trophy Case</h3>
             <div className="card">
                 <div className="card-content">
-                    <ul>
-                        <StaffTrophy user={user} />
-                        <StreakTrophy user={user} />
-                        <ClubTrophy user={user} />
-                        <SpecialTrophy user={user} />
-                    </ul>
+                    <div className="grid-thumbnails no-margin auto">
+                        {trophies.map(t => (
+                            <TrophyIcon trophy={t} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
@@ -263,14 +263,19 @@ const BioCard = ({ user }) => {
     );
 };
 
-const ProfileSidebar = ({ user }) => {
+const ProfileSidebar = ({ user, achievements = [] }) => {
     //if (!data || data.failed) return null;
     if (!user) return null;
+    const trophies = achievements
+        .filter(a => a.kind === "TROPHY")
+        .map(a => a.data);
 
     return (
         <div className="ProfileSidebar Sidebar">
             <BioCard user={user} />
-            <TrophyCaseCard user={user} />
+            {trophies.length && (
+                <TrophyCaseCard trophies={trophies} user={user} />
+            )}
             <ActivityCard user={user} />
             <MyProductsCard user={user} />
             {user.nomadlist_handle && <NomadLocationCard user={user} />}
