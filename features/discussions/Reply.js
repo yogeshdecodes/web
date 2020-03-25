@@ -84,7 +84,7 @@ export default connect(mapUserToProps)(
                             )}
                             {!this.state.editing && !this.state.deleted && (
                                 <div>
-                                    <Linkify>
+                                    <Linkify properties={{ target: "_blank" }}>
                                         <Markdown body={this.state.body} />
                                     </Linkify>
                                 </div>

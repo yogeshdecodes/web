@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Spinner from "~/components/Spinner";
-import { getNotifications, markAllRead } from "~/lib/notifications";
-import { actions as appActions } from "~/ducks/app";
 import Notification from "./Notification";
 import { connect } from "react-redux";
+import { notificationsActions } from "../../../ducks/notifications";
+import {
+    getErrorCodeString,
+    getFirstErrorString
+} from "../../../lib/utils/error";
 
 class NotificationsView extends React.Component {
     state = {
@@ -13,35 +16,13 @@ class NotificationsView extends React.Component {
         failed: false
     };
 
-    componentDidMount() {
-        if (this.props.isLoggedIn) {
-            this.fetchNotifications();
-        }
-    }
-
-    fetchNotifications = async () => {
-        try {
-            this.setState({ isLoading: true });
-            const notifications = await getNotifications();
-            this.setState({
-                notifications: notifications,
-                failed: false,
-                isLoading: false
-            });
-        } catch (e) {
-            this.setState({
-                failed: true
-            });
-        }
-    };
-
     isMalformedNotification(n) {
         if (!n.actor) return true;
         return false;
     }
 
     renderNotifications = () => {
-        let notifications = this.state.notifications;
+        let notifications = this.props.notifications;
         notifications = notifications.filter(n => n.target !== null);
         let praiseNotifications = notifications.filter(
             n => n.key === "received_praise"
@@ -72,22 +53,14 @@ class NotificationsView extends React.Component {
     };
 
     async componentDidUpdate(prevProps) {
-        if (prevProps.open === false && this.props.open === true) {
-            await this.fetchNotifications();
+        if (prevProps.open === true && this.props.open === false) {
             this.markAllAsRead();
         }
     }
 
     markAllAsRead = async () => {
         try {
-            await markAllRead();
-            /*
-            let notifications = [...this.state.notifications];
-            notifications.map((n, i) => notifications[i].read = true);
-
-            this.setState({
-                notifications
-            }); */
+            this.props.markAllRead();
         } catch (e) {}
     };
 
@@ -110,25 +83,50 @@ class NotificationsView extends React.Component {
                         />
                     </header>
 
-                    <div className="quickview-body">
-                        {this.state.isLoading && <Spinner small />}
+                    {(!this.props.ready || this.props.failed) && (
+                        <div className="full-quickview-body flex flex-column flex-v-gap has-text-centered">
+                            {this.props.failed && (
+                                <>
+                                    <div>
+                                        <h2>Failed to load notifications</h2>
+                                        <h3 className="subtitle has-text-grey">
+                                            {getFirstErrorString(
+                                                this.props.errorMessages
+                                            )}
+                                            &nbsp;
+                                            {getErrorCodeString(
+                                                this.props.errorMessages
+                                            )}
+                                        </h3>
+                                    </div>
+                                    <div>
+                                        <button
+                                            className={"btn btn-light"}
+                                            onClick={
+                                                this.props.fetchNotifications
+                                            }
+                                        >
+                                            Retry
+                                        </button>
+                                    </div>
+                                </>
+                            )}
 
-                        {this.state.failed && (
-                            <div className={"panel-message danger"}>
-                                Failed to load notifications.{" "}
-                                <button
-                                    className={"btn"}
-                                    onClick={this.fetchNotifications}
-                                >
-                                    Retry.
-                                </button>
+                            {!this.props.ready && (
+                                <div>
+                                    <Spinner small />
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {this.props.ready &&
+                        !this.props.failed &&
+                        this.props.notifications && (
+                            <div className="quickview-body">
+                                {this.renderNotifications()}
                             </div>
                         )}
-
-                        {!this.state.isLoading &&
-                            this.state.notifications &&
-                            this.renderNotifications()}
-                    </div>
                 </div>
             </>
         );
@@ -141,12 +139,18 @@ NotificationsView.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    isLoggedIn: state.auth.loggedIn,
-    open: state.app.notificationsOpen
+    open: state.notifications.open,
+    ready: state.notifications.ready,
+    notifications: state.notifications.notifications,
+    failed: state.notifications.failed,
+    errorMessages: state.notifications.errorMessages
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeHandler: () => dispatch(appActions.toggleNotifications())
+    fetchNotifications: () =>
+        dispatch(notificationsActions.fetchNotifications()),
+    closeHandler: () => dispatch(notificationsActions.toggleView()),
+    markAllRead: () => dispatch(notificationsActions.markAllRead())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationsView);

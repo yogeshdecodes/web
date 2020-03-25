@@ -11,6 +11,7 @@ import orderBy from "lodash/orderBy";
 import InlineCollapse from "../../../components/InlineCollapse";
 import { imageUrl } from "../../../lib/utils/img";
 import { Track } from "../../../vendor/ga";
+import TrophyMedia from "../../achievements/TrophyMedia";
 
 function renderPolymorphicPraise(n, withComments = true) {
     if (n.target_type === "task")
@@ -167,6 +168,9 @@ function renderNotificationVerb(key, notification, grouped = false) {
                     posted a topic titled "{notification.target.title}".
                 </Container>
             );
+
+        case "achievement_get":
+            return <Container>You've unlocked an achievement!</Container>;
 
         case "thread_replied":
             return (
@@ -553,7 +557,7 @@ const Notification = ({
                 break;
 
             case "due_tomorrow":
-                notificationImage = "/assets/img/icon.jpg";
+                notificationImage = "/icons/android-chrome-192x192.png";
                 notificationHtml = (
                     <div>
                         {renderNotificationVerb(key, notification)}
@@ -564,6 +568,23 @@ const Notification = ({
                                 </a>
                             </Link>
                         </div>
+                    </div>
+                );
+                break;
+
+            case "achievement_get":
+                notificationImage = "/icons/android-chrome-192x192.png";
+                notificationHtml = (
+                    <div>
+                        {renderNotificationVerb(key, notification)}
+                        {notification.target.kind === "TROPHY" &&
+                            notification.target.data && (
+                                <div className="actions">
+                                    <TrophyMedia
+                                        trophy={notification.target.data}
+                                    />
+                                </div>
+                            )}
                     </div>
                 );
                 break;

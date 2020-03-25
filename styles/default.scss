@@ -796,6 +796,10 @@ table.is-full {
     display: grid;
     grid-template-columns: repeat(5, 48px);
     grid-gap: 0.4rem;
+
+    &.auto {
+        grid-template-columns: repeat(auto-fill, 48px);
+    }
 }
 
 .grid-c-s {
@@ -2437,4 +2441,19 @@ ul {
     &.mb li {
         margin-bottom: 5px;
     }
+}
+
+.full-quickview-body {
+    background: var(--c-lightest);
+    flex-grow: 1;
+
+    padding: 1rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.no-margin {
+    margin: 0px 0px 0px 0px !important;
 }

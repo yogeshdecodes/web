@@ -26,6 +26,7 @@ import Router from "next/router"; // yes this is correct
 import ThemedContainer from "~/layouts/ThemedContainer";
 import MobileNav from "~/layouts/MobileNav";
 import Editor from "~/features/editor";
+import AchievementsView from "../features/achievements/AchievementsView";
 
 async function onStoreInit(ctx) {
     // only the sagas here are run on the server side; no async dependencies.
@@ -138,6 +139,7 @@ class Artemis extends App {
                     <Reactor />
                     <Editor />
                     <NotificationsView />
+                    <AchievementsView />
                     <MobileNav />
                 </ThemedContainer>
             </Provider>

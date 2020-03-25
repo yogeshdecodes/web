@@ -165,7 +165,9 @@ export default connect(mapUserToProps)(
                                 )}
                                 {!this.state.editing && thread.type !== "LINK" && (
                                     <div>
-                                        <Linkify>
+                                        <Linkify
+                                            properties={{ target: "_blank" }}
+                                        >
                                             <Markdown body={this.state.body} />
                                         </Linkify>
                                     </div>
@@ -173,7 +175,9 @@ export default connect(mapUserToProps)(
 
                                 {!this.state.editing && thread.type === "LINK" && (
                                     <div>
-                                        <Linkify>
+                                        <Linkify
+                                            properties={{ target: "_blank" }}
+                                        >
                                             <Markdown
                                                 body={`[${thread.title}](${this.state.body})`}
                                             />
