@@ -88,9 +88,7 @@ const LoggedInMenu = props => (
 
             <NotificationsLink />
 
-            {
-                // <AchievementsLink />
-            }
+            <AchievementsLink />
 
             <ChatLink />
 

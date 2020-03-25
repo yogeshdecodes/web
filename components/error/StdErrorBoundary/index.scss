@@ -1,0 +1,15 @@
+@import "../../../styles/_variables";
+
+.StdErrorBoundary {
+}
+.StdErrorReporter {
+    @extend %corners;
+    background: var(--c-lightest);
+    border: 1px solid var(--c-border);
+    padding: 1rem;
+    position: fixed;
+    bottom: $navbar-height;
+    left: calc(50% - 500px);
+    max-width: 90vh;
+    min-width: 500px;
+}
