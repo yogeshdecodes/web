@@ -4,13 +4,6 @@ import { isServer } from "~/config";
 import { Track } from "../../vendor/ga";
 import { achievementsActions } from "../../ducks/achievements";
 import { connect } from "react-redux";
-import StdErrorBoundary from "~/components/error/StdErrorBoundary";
-
-const Hello = () => {
-    if (isServer) return null;
-    throw new Error("Hi");
-    return null;
-};
 
 class AchievementsLink extends Component {
     toggle = () => {
@@ -33,9 +26,9 @@ class AchievementsLink extends Component {
                     {this.props.achievements.length === 0 && (
                         <span className="new-dot"></span>
                     )}
-                    <StdErrorBoundary>
-                        <Hello />
-                    </StdErrorBoundary>
+                    {this.props.unreadCount > 0 && (
+                        <div className={"count"}>{this.props.unreadCount}</div>
+                    )}
                 </a>
             </>
         );
@@ -44,7 +37,8 @@ class AchievementsLink extends Component {
 
 const mapStateToProps = state => ({
     open: state.achievements.open,
-    achievements: state.achievements.achievements
+    achievements: state.achievements.achievements,
+    unreadCount: state.achievements.achievements.filter(a => !a.read).length
 });
 
 const mapDispatchToProps = dispatch => ({

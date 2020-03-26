@@ -1,4 +1,4 @@
-import { error } from "~/lib/utils/error";
+import { StdError } from "../lib/utils/error";
 import uniqBy from "lodash/uniqBy";
 
 const initialState = {
@@ -93,7 +93,7 @@ const actions = {
         errorMessages = ["Failed to fetch notifications."]
     ) => ({
         type: types.NOTIFICATIONS_FETCH_FAILED,
-        errorMessages: error(errorMessages)
+        errorMessages: StdError(errorMessages)
     }),
 
     updateUnreadCount: unreadCount => ({
