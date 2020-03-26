@@ -2,14 +2,20 @@ import React, { Component } from "react";
 import "./TrophyMedia.scss";
 import { Line } from "rc-progress";
 import { Tooltip } from "react-tippy";
+import { connect } from "react-redux";
 
 // tooltip
-export const TrophyIcon = ({ trophy, withTooltip = true }) => {
+export const TrophyIcon = connect(
+    state => ({ dark: state.user.me ? state.user.me.dark_mode : false }),
+    null
+)(({ trophy, dark = false, withTooltip = true }) => {
     if (!withTooltip) {
         return (
             <div
                 className="TrophyIcon"
-                style={{ backgroundColor: trophy.color }}
+                style={{
+                    backgroundColor: dark ? "var(--c-bg-light)" : trophy.color
+                }}
             >
                 {trophy.emoji}
             </div>
@@ -28,13 +34,15 @@ export const TrophyIcon = ({ trophy, withTooltip = true }) => {
         >
             <div
                 className="TrophyIcon"
-                style={{ backgroundColor: trophy.color }}
+                style={{
+                    backgroundColor: dark ? "var(--c-bg-light)" : trophy.color
+                }}
             >
                 {trophy.emoji}
             </div>
         </Tooltip>
     );
-};
+});
 
 export default class TrophyMedia extends Component {
     render() {
