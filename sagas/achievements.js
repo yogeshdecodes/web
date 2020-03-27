@@ -1,6 +1,10 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { achievementsTypes, achievementsActions } from "../ducks/achievements";
-import { getAchievements, getAllTrophies } from "../lib/achievements";
+import {
+    getAchievements,
+    getAllTrophies,
+    markAllRead
+} from "../lib/achievements";
 
 function* fetchAchievements(action) {
     try {
@@ -14,6 +18,14 @@ function* fetchAchievements(action) {
     }
 }
 
+export function* markAllAchievementsRead(action) {
+    try {
+        yield call(markAllRead);
+    } catch (e) {
+        yield put(achievementsActions.fetchAchievementsFailed(e));
+    }
+}
+
 function* achievementsSaga() {
     yield takeLatest(
         [achievementsTypes.ACHIEVEMENTS_FETCH_REQUEST],
@@ -21,4 +33,11 @@ function* achievementsSaga() {
     );
 }
 
-export { achievementsSaga };
+function* achievementsMarkAllReadSaga() {
+    yield takeLatest(
+        [achievementsTypes.ACHIEVEMENTS_MARK_ALL_READ],
+        markAllAchievementsRead
+    );
+}
+
+export { achievementsSaga, achievementsMarkAllReadSaga };

@@ -7,6 +7,8 @@ import { achievementsActions } from "../../ducks/achievements";
 import TrophyMedia, { TrophyIcon } from "./TrophyMedia";
 import orderBy from "lodash/orderBy";
 import uniqBy from "lodash/uniqBy";
+import StdErrorBoundary from "~/components/error/StdErrorBoundary";
+import { isServer } from "../../config";
 
 class AchievementsView extends React.Component {
     renderAchievements = () => {
@@ -25,6 +27,12 @@ class AchievementsView extends React.Component {
             </div>
         );
     };
+
+    async componentDidUpdate(prevProps) {
+        if (prevProps.open === true && this.props.open === false) {
+            this.props.markAllRead();
+        }
+    }
 
     render() {
         // Achievements will always mean completion
@@ -51,7 +59,7 @@ class AchievementsView extends React.Component {
         const remaining = orderedTrophies.filter(t => t.progress !== 100);
         const upNext = remaining[0];
         return (
-            <>
+            <StdErrorBoundary tag="achievements-view">
                 {this.props.open && <div className="quickview-overlay"></div>}
                 <div
                     className={
@@ -155,7 +163,7 @@ class AchievementsView extends React.Component {
                             </div>
                         )}
                 </div>
-            </>
+            </StdErrorBoundary>
         );
     }
 }
@@ -177,7 +185,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     fetchNotifications: () =>
         dispatch(achievementsActions.fetchNotifications()),
-    closeHandler: () => dispatch(achievementsActions.toggleView())
+    closeHandler: () => dispatch(achievementsActions.toggleView()),
+    markAllRead: () => dispatch(achievementsActions.markAllRead())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AchievementsView);

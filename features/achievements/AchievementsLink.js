@@ -26,6 +26,9 @@ class AchievementsLink extends Component {
                     {this.props.achievements.length === 0 && (
                         <span className="new-dot"></span>
                     )}
+                    {this.props.unreadCount > 0 && (
+                        <div className={"count"}>{this.props.unreadCount}</div>
+                    )}
                 </a>
             </>
         );
@@ -34,7 +37,8 @@ class AchievementsLink extends Component {
 
 const mapStateToProps = state => ({
     open: state.achievements.open,
-    achievements: state.achievements.achievements
+    achievements: state.achievements.achievements,
+    unreadCount: state.achievements.achievements.filter(a => !a.read).length
 });
 
 const mapDispatchToProps = dispatch => ({

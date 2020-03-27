@@ -4,10 +4,6 @@ import Spinner from "~/components/Spinner";
 import Notification from "./Notification";
 import { connect } from "react-redux";
 import { notificationsActions } from "../../../ducks/notifications";
-import {
-    getErrorCodeString,
-    getFirstErrorString
-} from "../../../lib/utils/error";
 
 class NotificationsView extends React.Component {
     state = {
@@ -90,13 +86,9 @@ class NotificationsView extends React.Component {
                                     <div>
                                         <h2>Failed to load notifications</h2>
                                         <h3 className="subtitle has-text-grey">
-                                            {getFirstErrorString(
-                                                this.props.errorMessages
-                                            )}
+                                            {this.props.errorMessages.message()}
                                             &nbsp;
-                                            {getErrorCodeString(
-                                                this.props.errorMessages
-                                            )}
+                                            {this.props.errorMessages.code()}
                                         </h3>
                                     </div>
                                     <div>

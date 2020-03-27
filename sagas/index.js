@@ -19,7 +19,7 @@ import {
     notificationsSocketWatcher,
     notificationsMarkAllReadSaga
 } from "./notifications";
-import { achievementsSaga } from "./achievements";
+import { achievementsSaga, achievementsMarkAllReadSaga } from "./achievements";
 
 export default function* rootSaga() {
     yield all([
@@ -42,6 +42,7 @@ export default function* rootSaga() {
         notificationsSaga(),
         notificationsMarkAllReadSaga(),
         notificationsSocketWatcher(),
-        achievementsSaga()
+        achievementsSaga(),
+        achievementsMarkAllReadSaga()
     ]);
 }
