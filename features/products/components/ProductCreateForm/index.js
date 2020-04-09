@@ -5,13 +5,22 @@ import ProductIcon from "~/features/products/components/ProductIcon";
 import { handleChange } from "~/lib/utils/random";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import HashtagPicker from "~/features/projects/components/HashtagPicker";
+import { actions as projectsActions } from "~/ducks/projects";
 import TeamSelector from "../TeamSelector";
-import { formatHandle, formatUrl, loadingClass } from "../../../../lib/utils/random";
+import { createProject } from "~/lib/projects";
+import { connect } from "react-redux";
+import {
+    formatHandle,
+    formatUrl,
+    loadingClass
+} from "../../../../lib/utils/random";
 import { createProduct } from "~/lib/products";
 import isFunction from "lodash/isFunction";
 import { Router } from "~/routes";
+import Spinner from "~/components/Spinner";
+import { getOrCreateProject } from "~/lib/utils/projects";
 
-export default class ProductCreateForm extends Component {
+class ProductCreateForm extends Component {
     state = {
         isCreating: false,
         finished: false,
@@ -23,6 +32,7 @@ export default class ProductCreateForm extends Component {
         selectedProjects: [],
         url: "",
         team: [],
+        tagText: "",
         productHunt: "",
         twitter: "",
         accent: "#00a676",
@@ -64,7 +74,7 @@ export default class ProductCreateForm extends Component {
             const product = await createProduct(
                 this.state.name,
                 this.state.description,
-                this.state.selectedProjects.map(p => p.id),
+                await this.handleTagCreation(),
                 this.state.productHunt,
                 this.state.twitter,
                 this.state.url,
@@ -89,6 +99,9 @@ export default class ProductCreateForm extends Component {
             });
         }
     };
+
+    handleTagCreation = async () =>
+        await getOrCreateProject(this.state.tagText, this.props);
 
     onAddTeamMember = team => {
         this.setState({
@@ -131,6 +144,24 @@ export default class ProductCreateForm extends Component {
                         />
                         <p className="help">
                             Make it short and sweet, like a pitch!
+                        </p>
+                    </div>
+                    <div className="control">
+                        <label>Hashtag</label>
+                        {!this.props.projectsReady ? (
+                            <Spinner small text="Loading projects..." />
+                        ) : (
+                            <input
+                                onChange={this.handleChange}
+                                type="text"
+                                name="tagText"
+                                placeholder="#makerlog"
+                                value={this.state.tagText}
+                            ></input>
+                        )}
+                        <p className="help">
+                            Makerlog works by logging tasks with #hashtags and
+                            adding the tasks to your product log.
                         </p>
                     </div>
                     <div className="control">
@@ -199,19 +230,6 @@ export default class ProductCreateForm extends Component {
                     </div>
                     <div className="control">
                         <label>
-                            Tracked hashtags
-                            <p className="help">
-                                Makerlog works by logging tasks with #hashtags
-                                and adding the tasks to your product log.
-                            </p>
-                        </label>
-                        <HashtagPicker
-                            projects={this.state.selectedProjects}
-                            onChange={this.onHashtagChange}
-                        />
-                    </div>
-                    <div className="control">
-                        <label>
                             Add your team (optional)
                             <p className="help">
                                 Add your team usernames and combine your logs!
@@ -249,3 +267,15 @@ export default class ProductCreateForm extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    projectsReady: state.projects.ready,
+    userProjects: state.projects.projects
+});
+
+const mapDispatchToProps = dispatch => ({
+    pushProject: project =>
+        dispatch(projectsActions.fetchProjectsSuccess([project]))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCreateForm);
