@@ -28,6 +28,22 @@
         align-items: center;
         display: flex;
 
+        .count {
+            position: absolute;
+            right: -50%;
+            //top: 1%;
+            top: 25%;
+            font-size: 14px;
+            padding: 0.3em;
+            border-radius: 999px;
+            line-height: 0.75em;
+            color: var(--c-text);
+            background: $c-secondary;
+            text-align: center;
+            min-width: 1.2em;
+            font-weight: bold;
+        }
+
         .tag-up {
             text-transform: uppercase;
             font-size: 10px;

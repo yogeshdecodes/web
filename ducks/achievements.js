@@ -1,5 +1,5 @@
 import uniqBy from "lodash/uniqBy";
-import { error } from "../lib/utils/error";
+import { StdError } from "../lib/utils/error";
 
 const initialState = {
     open: false,
@@ -14,7 +14,8 @@ const types = {
     ACHIEVEMENTS_TOGGLE: "ACHIEVEMENTS_TOGGLE",
     ACHIEVEMENTS_FETCH_REQUEST: "ACHIEVEMENTS_FETCH_REQUEST",
     ACHIEVEMENTS_FETCH_SUCCEED: "ACHIEVEMENTS_FETCH_SUCCEED",
-    ACHIEVEMENTS_FETCH_FAILED: "ACHIEVEMENTS_FETCH_FAILED"
+    ACHIEVEMENTS_FETCH_FAILED: "ACHIEVEMENTS_FETCH_FAILED",
+    ACHIEVEMENTS_MARK_ALL_READ: "ACHIEVEMENTS_MARK_ALL_READ"
 };
 
 const achievementsReducer = (state = initialState, action) => {
@@ -56,6 +57,14 @@ const achievementsReducer = (state = initialState, action) => {
                 errorMessages: action.errorMessages
             };
 
+        case types.ACHIEVEMENTS_MARK_ALL_READ:
+            return {
+                ...state,
+                achievements: state.achievements.map(a => {
+                    return { ...a, read: true };
+                })
+            };
+
         default:
             return state;
     }
@@ -78,7 +87,11 @@ const actions = {
 
     fetchAchievementsFailed: (e = "Couldn't fetch your achievements.") => ({
         type: types.ACHIEVEMENTS_FETCH_FAILED,
-        errorMessages: error(e)
+        errorMessages: StdError(e)
+    }),
+
+    markAllRead: () => ({
+        type: types.ACHIEVEMENTS_MARK_ALL_READ
     })
 };
 
