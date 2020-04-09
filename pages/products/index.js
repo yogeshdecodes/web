@@ -1,40 +1,54 @@
 import React, { Component } from "react";
-import InfiniteResults from "~/components/InfiniteResults";
 import ProductList from "~/features/products/components/ProductList";
 import "./index.scss";
 import ProductsPageLayout from "../../layouts/ProductsPage";
+import { requireAuthed } from "~/lib/auth";
+import { getMyProducts } from "~/lib/products";
 import { Link } from "~/routes";
 
-export default class ProductsPage extends Component {
-    static async getInitialProps() {
-        let layout = { className: "ProductsPage" };
-        return {
-            layout: { ...layout }
-        };
-    }
+export default requireAuthed(
+    class ProductsPage extends Component {
+        static async getInitialProps() {
+            let layout = { className: "ProductsYoursPage" };
+            let products = null;
+            try {
+                products = await getMyProducts();
+                return {
+                    layout,
+                    products
+                };
+            } catch (e) {
+                return {
+                    layout,
+                    statusCode: 500
+                };
+            }
+        }
 
-    render() {
-        return (
-            <ProductsPageLayout>
-                <div className={"flex col-right v-center mbGap"}>
-                    <div>
-                        <h2>Recent launches</h2>
+        renderProducts = () => {
+            if (!this.props.products) return <div>No products found.</div>;
+
+            return <ProductList media medium products={this.props.products} />;
+        };
+
+        render() {
+            return (
+                <ProductsPageLayout>
+                    <div className={"flex col-right v-center mbGap"}>
+                        <div>
+                            <h2>Your products</h2>
+                        </div>
+                        <Link route="products-add">
+                            <a className="btn btn-secondary">Add product</a>
+                        </Link>
                     </div>
-                    <Link route="products-add">
-                        <a className="btn btn-secondary">Add product</a>
-                    </Link>
-                </div>
-                <div className="LaunchStream card">
-                    <div className="card-content">
-                        <InfiniteResults
-                            url={"/launches/"}
-                            component={({ items }) => (
-                                <ProductList media medium products={items} />
-                            )}
-                        />
+                    <div className="LaunchStream card">
+                        <div className="card-content">
+                            {this.renderProducts()}
+                        </div>
                     </div>
-                </div>
-            </ProductsPageLayout>
-        );
+                </ProductsPageLayout>
+            );
+        }
     }
-}
+);

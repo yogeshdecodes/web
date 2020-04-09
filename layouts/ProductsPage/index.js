@@ -10,10 +10,6 @@ export default class ProductsPageLayout extends Component {
             <>
                 <PageNavigation title="Products">
                     <NavLink route="products" activeClassName="is-active">
-                        <a className="navbar-item">Launches</a>
-                    </NavLink>
-
-                    <NavLink route="products-yours" activeClassName="is-active">
                         <a className="navbar-item">Your products</a>
                     </NavLink>
 

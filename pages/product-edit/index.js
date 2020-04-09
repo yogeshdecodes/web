@@ -60,7 +60,7 @@ class ProductEditPage extends Component {
     }
 
     onDelete = () => {
-        Router.pushRoute("products-yours");
+        Router.pushRoute("products");
     };
 
     render() {

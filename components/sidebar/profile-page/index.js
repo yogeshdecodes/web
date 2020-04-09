@@ -255,6 +255,19 @@ const BioCard = ({ user }) => {
                                     </OutboundLink>
                                 </li>
                             )}
+
+                            {user.telegram_handle && (
+                                <li>
+                                    <OutboundLink
+                                        to={`https://t.me/${user.telegram_handle}`}
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={["fab", "telegram"]}
+                                        />{" "}
+                                        {user.telegram_handle}
+                                    </OutboundLink>
+                                </li>
+                            )}
                         </ul>
                     </small>
                 </div>

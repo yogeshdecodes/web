@@ -65,7 +65,7 @@ const rootReducer = combineReducers({
     editor: editorReducer,
     apps: appsReducer,
     tasks: persistReducer(tasksPersistConfig, tasksReducer),
-    projects: persistReducer(projectsPersistConfig, projectsReducer),
+    projects: projectsReducer,
     stats: persistReducer(statsPersistConfig, statsReducer),
     notifications: notificationsReducer,
     user: userReducer,
