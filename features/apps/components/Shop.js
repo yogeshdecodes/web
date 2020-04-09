@@ -177,6 +177,12 @@ const Shop = props => {
                         icon="https://www.alfredapp.com/media/logo4.png"
                         outboundUrl="https://github.com/meSingh/alfred-makerlog"
                     />
+                    <IntegrationMedia
+                        name="BuyMeACoffee for Makerlog"
+                        description="A simple BMC integration for Makerlog."
+                        icon="https://buymeacoffee.netlify.com/assets/coffeebot.png"
+                        outboundUrl="https://buymeacoffee.netlify.com/"
+                    />
                 </div>
             </div>
             <div className={"flex col-right v-center mbGap"}>

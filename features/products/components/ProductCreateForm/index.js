@@ -5,13 +5,28 @@ import ProductIcon from "~/features/products/components/ProductIcon";
 import { handleChange } from "~/lib/utils/random";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import HashtagPicker from "~/features/projects/components/HashtagPicker";
+import { actions as projectsActions } from "~/ducks/projects";
 import TeamSelector from "../TeamSelector";
-import { formatHandle, formatUrl, loadingClass } from "../../../../lib/utils/random";
+import { createProject } from "~/lib/projects";
+import { connect } from "react-redux";
+import {
+    formatHandle,
+    formatUrl,
+    loadingClass
+} from "../../../../lib/utils/random";
 import { createProduct } from "~/lib/products";
 import isFunction from "lodash/isFunction";
 import { Router } from "~/routes";
+import Spinner from "~/components/Spinner";
+import { getOrCreateProject } from "~/lib/utils/projects";
+import {
+    StdErrorCollection,
+    renderHelpOrError,
+    ValidationError
+} from "../../../../lib/utils/error";
+import StdErrorMessages from "~/components/forms/StdErrorMessages";
 
-export default class ProductCreateForm extends Component {
+class ProductCreateForm extends Component {
     state = {
         isCreating: false,
         finished: false,
@@ -23,6 +38,7 @@ export default class ProductCreateForm extends Component {
         selectedProjects: [],
         url: "",
         team: [],
+        tagText: "",
         productHunt: "",
         twitter: "",
         accent: "#00a676",
@@ -60,11 +76,18 @@ export default class ProductCreateForm extends Component {
     onSubmit = async () => {
         try {
             this.setState({ isCreating: true });
+            if (this.state.tagText === "") {
+                throw new ValidationError(
+                    "Hashtag can't be empty.",
+                    "projects"
+                );
+            }
+            const tags = await this.handleTagCreation();
             // returns product instance
             const product = await createProduct(
                 this.state.name,
                 this.state.description,
-                this.state.selectedProjects.map(p => p.id),
+                tags,
                 this.state.productHunt,
                 this.state.twitter,
                 this.state.url,
@@ -82,13 +105,15 @@ export default class ProductCreateForm extends Component {
                 this.props.onFinish();
             }
         } catch (e) {
-            console.log((e.field_errors || e.message).length);
             this.setState({
                 isCreating: false,
-                errorMessages: e.field_errors || e.message
+                errorMessages: new StdErrorCollection(e)
             });
         }
     };
+
+    handleTagCreation = async () =>
+        await getOrCreateProject(this.state.tagText, this.props);
 
     onAddTeamMember = team => {
         this.setState({
@@ -97,7 +122,6 @@ export default class ProductCreateForm extends Component {
     };
 
     onHashtagChange = newState => {
-        console.log(newState);
         this.setState({
             selectedProjects: newState
         });
@@ -108,7 +132,6 @@ export default class ProductCreateForm extends Component {
     render() {
         return (
             <div>
-                <ErrorMessageList fieldErrors={this.state.errorMessages} />
                 <form>
                     <div className="control">
                         <label>Name</label>
@@ -119,6 +142,11 @@ export default class ProductCreateForm extends Component {
                             type="text"
                             placeholder="Makerlog"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "name",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Description</label>
@@ -129,9 +157,30 @@ export default class ProductCreateForm extends Component {
                             type="text"
                             placeholder="The maker community."
                         />
-                        <p className="help">
-                            Make it short and sweet, like a pitch!
-                        </p>
+                        {renderHelpOrError(
+                            "Make it short and sweet, like a pitch!",
+                            "description",
+                            this.state.errorMessages
+                        )}
+                    </div>
+                    <div className="control">
+                        <label>Hashtag</label>
+                        {!this.props.projectsReady ? (
+                            <Spinner small text="Loading projects..." />
+                        ) : (
+                            <input
+                                onChange={this.handleChange}
+                                type="text"
+                                name="tagText"
+                                placeholder="#makerlog"
+                                value={this.state.tagText}
+                            ></input>
+                        )}
+                        {renderHelpOrError(
+                            " Makerlog works by logging tasks with #hashtags and adding the tasks to your product log.",
+                            "projects",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Website (optional)</label>
@@ -142,6 +191,11 @@ export default class ProductCreateForm extends Component {
                             type="text"
                             placeholder="getmakerlog.com"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "url",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Twitter (optional)</label>
@@ -154,6 +208,11 @@ export default class ProductCreateForm extends Component {
                             type="text"
                             placeholder="getmakerlog"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "twitter",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Launched yet?</label>
@@ -199,19 +258,6 @@ export default class ProductCreateForm extends Component {
                     </div>
                     <div className="control">
                         <label>
-                            Tracked hashtags
-                            <p className="help">
-                                Makerlog works by logging tasks with #hashtags
-                                and adding the tasks to your product log.
-                            </p>
-                        </label>
-                        <HashtagPicker
-                            projects={this.state.selectedProjects}
-                            onChange={this.onHashtagChange}
-                        />
-                    </div>
-                    <div className="control">
-                        <label>
                             Add your team (optional)
                             <p className="help">
                                 Add your team usernames and combine your logs!
@@ -231,7 +277,19 @@ export default class ProductCreateForm extends Component {
                             value={this.state.accent}
                         ></input>
                     </div>
+
                     <hr />
+                    {this.state.finished && (
+                        <>
+                            <div className="alert is-success">
+                                <div className="alert-body">
+                                    Saved. Taking you to the product...
+                                </div>
+                            </div>{" "}
+                            <br />
+                        </>
+                    )}
+                    <StdErrorMessages error={this.state.errorMessages} />
                     <button
                         onClick={e => {
                             e.preventDefault();
@@ -249,3 +307,15 @@ export default class ProductCreateForm extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    projectsReady: state.projects.ready,
+    userProjects: state.projects.projects
+});
+
+const mapDispatchToProps = dispatch => ({
+    pushProject: project =>
+        dispatch(projectsActions.fetchProjectsSuccess([project]))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCreateForm);

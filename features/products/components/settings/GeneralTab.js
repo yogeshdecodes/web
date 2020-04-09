@@ -10,14 +10,23 @@ import {
     editProduct,
     leaveProduct
 } from "../../../../lib/products";
-import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import LaunchedToggle from "~/features/products/components/LaunchedToggle";
 import Dropzone from "react-dropzone";
 import ProductIcon from "~/features/products/components/ProductIcon";
-import HashtagPicker from "~/features/projects/components/HashtagPicker";
 import { loadingClass } from "~/lib/utils/random";
+import { actions as projectsActions } from "~/ducks/projects";
+import Spinner from "~/components/Spinner";
+import { getOrCreateProject } from "~/lib/utils/projects";
+import { connect } from "react-redux";
+import orderBy from "lodash/orderBy";
+import {
+    StdErrorCollection,
+    renderHelpOrError,
+    ValidationError
+} from "../../../../lib/utils/error";
+import StdErrorMessages from "~/components/forms/StdErrorMessages";
 
-export default class GeneralTab extends Component {
+class GeneralTab extends Component {
     state = {
         success: false,
         updating: false,
@@ -25,6 +34,7 @@ export default class GeneralTab extends Component {
         description: "",
         launched: false,
         icon: null,
+        tagText: "",
         logoPreviewUrl: null, // use iconpreview rather than icon!
         selectedProjects: [],
         productHunt: "",
@@ -40,7 +50,8 @@ export default class GeneralTab extends Component {
             ...this.props.product,
             icon: null,
             logoPreviewUrl: this.props.product.icon,
-            selectedProjects: this.props.product.projects
+            selectedProjects: this.props.product.projects,
+            tagText: this.prefillTag()
         });
     }
 
@@ -72,16 +83,35 @@ export default class GeneralTab extends Component {
         });
     };
 
+    handleTagCreation = async () =>
+        await getOrCreateProject(this.state.tagText, this.props);
+
+    prefillTag = () => {
+        const projects = orderBy(this.props.product.projects, "id", "desc");
+        if (projects.length > 0) {
+            return projects[0].name;
+        } else {
+            return "";
+        }
+    };
+
     handleChange = e => handleChange(e, this);
 
     onSubmit = async () => {
         try {
+            if (this.state.tagText === "") {
+                throw new ValidationError(
+                    "Hashtag can't be empty.",
+                    "projects"
+                );
+            }
+
             this.setState({ updating: true });
             const product = await editProduct(
                 this.state.slug,
                 this.state.name,
                 this.state.description,
-                this.state.selectedProjects.map(p => p.id),
+                await this.handleTagCreation(),
                 this.state.product_hunt,
                 this.state.twitter,
                 this.state.website,
@@ -103,7 +133,7 @@ export default class GeneralTab extends Component {
         } catch (e) {
             this.setState({
                 updating: false,
-                errorMessages: e.field_errors || e.message
+                errorMessages: new StdErrorCollection(e)
             });
         }
     };
@@ -139,7 +169,6 @@ export default class GeneralTab extends Component {
 
         return (
             <div>
-                <ErrorMessageList fieldErrors={this.state.errorMessages} />
                 <form>
                     <div className="control">
                         <label>Name</label>
@@ -150,6 +179,11 @@ export default class GeneralTab extends Component {
                             type="text"
                             placeholder="Makerlog"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "name",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Description</label>
@@ -160,9 +194,30 @@ export default class GeneralTab extends Component {
                             type="text"
                             placeholder="The maker community."
                         />
-                        <p className="help">
-                            Make it short and sweet, like a pitch!
-                        </p>
+                        {renderHelpOrError(
+                            "Make it short and sweet, like a pitch!",
+                            "description",
+                            this.state.errorMessages
+                        )}
+                    </div>
+                    <div className="control">
+                        <label>Hashtag</label>
+                        {!this.props.projectsReady ? (
+                            <Spinner small text="Loading projects..." />
+                        ) : (
+                            <input
+                                onChange={this.handleChange}
+                                type="text"
+                                name="tagText"
+                                placeholder="#makerlog"
+                                value={this.state.tagText}
+                            ></input>
+                        )}
+                        {renderHelpOrError(
+                            " Makerlog works by logging tasks with #hashtags and adding the tasks to your product log.",
+                            "projects",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Website (optional)</label>
@@ -175,6 +230,11 @@ export default class GeneralTab extends Component {
                             type="text"
                             placeholder="getmakerlog.com"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "url",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Twitter (optional)</label>
@@ -187,6 +247,11 @@ export default class GeneralTab extends Component {
                             type="text"
                             placeholder="getmakerlog"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "twitter",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Launched yet?</label>
@@ -231,19 +296,6 @@ export default class GeneralTab extends Component {
                         </div>
                     </div>
                     <div className="control">
-                        <label>
-                            Tracked hashtags
-                            <p className="help">
-                                Makerlog works by logging tasks with #hashtags
-                                and adding the tasks to your product log.
-                            </p>
-                        </label>
-                        <HashtagPicker
-                            projects={this.state.selectedProjects}
-                            onChange={this.onHashtagChange}
-                        />
-                    </div>
-                    <div className="control">
                         <label>Accent color (optional)</label>
                         <p className="help mb-5">
                             Add a little flair to your product!
@@ -264,6 +316,7 @@ export default class GeneralTab extends Component {
                             <br />
                         </>
                     )}
+                    <StdErrorMessages error={this.state.errorMessages} />
                     <button
                         onClick={e => {
                             e.preventDefault();
@@ -281,3 +334,15 @@ export default class GeneralTab extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    projectsReady: state.projects.ready,
+    userProjects: state.projects.projects
+});
+
+const mapDispatchToProps = dispatch => ({
+    pushProject: project =>
+        dispatch(projectsActions.fetchProjectsSuccess([project]))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GeneralTab);

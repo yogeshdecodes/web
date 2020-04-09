@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "build": "next build",
-        "dev": "DEBUG=axios node server.js",
+        "dev": "NODE_OPTIONS='--inspect' DEBUG=axios node server.js",
         "start": "NODE_ENV=production node server.js",
         "stage": "git push -f heroku develop:master"
     },

@@ -1,5 +1,5 @@
 import uniqBy from "lodash/uniqBy";
-import { StdError } from "../lib/utils/error";
+import { StdErrorCollection } from "../lib/utils/error";
 
 const initialState = {
     open: false,
@@ -87,7 +87,7 @@ const actions = {
 
     fetchAchievementsFailed: (e = "Couldn't fetch your achievements.") => ({
         type: types.ACHIEVEMENTS_FETCH_FAILED,
-        errorMessages: StdError(e)
+        errorMessages: new StdErrorCollection(e)
     }),
 
     markAllRead: () => ({
