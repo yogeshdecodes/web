@@ -19,6 +19,12 @@ import isFunction from "lodash/isFunction";
 import { Router } from "~/routes";
 import Spinner from "~/components/Spinner";
 import { getOrCreateProject } from "~/lib/utils/projects";
+import {
+    StdErrorCollection,
+    renderHelpOrError,
+    ValidationError
+} from "../../../../lib/utils/error";
+import StdErrorMessages from "~/components/forms/StdErrorMessages";
 
 class ProductCreateForm extends Component {
     state = {
@@ -70,11 +76,18 @@ class ProductCreateForm extends Component {
     onSubmit = async () => {
         try {
             this.setState({ isCreating: true });
+            if (this.state.tagText === "") {
+                throw new ValidationError(
+                    "Hashtag can't be empty.",
+                    "projects"
+                );
+            }
+            const tags = await this.handleTagCreation();
             // returns product instance
             const product = await createProduct(
                 this.state.name,
                 this.state.description,
-                await this.handleTagCreation(),
+                tags,
                 this.state.productHunt,
                 this.state.twitter,
                 this.state.url,
@@ -92,10 +105,9 @@ class ProductCreateForm extends Component {
                 this.props.onFinish();
             }
         } catch (e) {
-            console.log((e.field_errors || e.message).length);
             this.setState({
                 isCreating: false,
-                errorMessages: e.field_errors || e.message
+                errorMessages: new StdErrorCollection(e)
             });
         }
     };
@@ -110,7 +122,6 @@ class ProductCreateForm extends Component {
     };
 
     onHashtagChange = newState => {
-        console.log(newState);
         this.setState({
             selectedProjects: newState
         });
@@ -121,7 +132,6 @@ class ProductCreateForm extends Component {
     render() {
         return (
             <div>
-                <ErrorMessageList fieldErrors={this.state.errorMessages} />
                 <form>
                     <div className="control">
                         <label>Name</label>
@@ -132,6 +142,11 @@ class ProductCreateForm extends Component {
                             type="text"
                             placeholder="Makerlog"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "name",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Description</label>
@@ -142,9 +157,11 @@ class ProductCreateForm extends Component {
                             type="text"
                             placeholder="The maker community."
                         />
-                        <p className="help">
-                            Make it short and sweet, like a pitch!
-                        </p>
+                        {renderHelpOrError(
+                            "Make it short and sweet, like a pitch!",
+                            "description",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Hashtag</label>
@@ -159,10 +176,11 @@ class ProductCreateForm extends Component {
                                 value={this.state.tagText}
                             ></input>
                         )}
-                        <p className="help">
-                            Makerlog works by logging tasks with #hashtags and
-                            adding the tasks to your product log.
-                        </p>
+                        {renderHelpOrError(
+                            " Makerlog works by logging tasks with #hashtags and adding the tasks to your product log.",
+                            "projects",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Website (optional)</label>
@@ -173,6 +191,11 @@ class ProductCreateForm extends Component {
                             type="text"
                             placeholder="getmakerlog.com"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "url",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Twitter (optional)</label>
@@ -185,6 +208,11 @@ class ProductCreateForm extends Component {
                             type="text"
                             placeholder="getmakerlog"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "twitter",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Launched yet?</label>
@@ -249,7 +277,19 @@ class ProductCreateForm extends Component {
                             value={this.state.accent}
                         ></input>
                     </div>
+
                     <hr />
+                    {this.state.finished && (
+                        <>
+                            <div className="alert is-success">
+                                <div className="alert-body">
+                                    Saved. Taking you to the product...
+                                </div>
+                            </div>{" "}
+                            <br />
+                        </>
+                    )}
+                    <StdErrorMessages error={this.state.errorMessages} />
                     <button
                         onClick={e => {
                             e.preventDefault();

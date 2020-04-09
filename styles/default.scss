@@ -2432,6 +2432,10 @@ ul.unstyled {
 ul {
     padding-inline-start: 0px;
 
+    li {
+        list-style-position: inside;
+    }
+
     &.unstyled {
         list-style-type: none;
         margin-block-start: 0px;

@@ -10,7 +10,6 @@ import {
     editProduct,
     leaveProduct
 } from "../../../../lib/products";
-import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import LaunchedToggle from "~/features/products/components/LaunchedToggle";
 import Dropzone from "react-dropzone";
 import ProductIcon from "~/features/products/components/ProductIcon";
@@ -20,6 +19,12 @@ import Spinner from "~/components/Spinner";
 import { getOrCreateProject } from "~/lib/utils/projects";
 import { connect } from "react-redux";
 import orderBy from "lodash/orderBy";
+import {
+    StdErrorCollection,
+    renderHelpOrError,
+    ValidationError
+} from "../../../../lib/utils/error";
+import StdErrorMessages from "~/components/forms/StdErrorMessages";
 
 class GeneralTab extends Component {
     state = {
@@ -94,6 +99,13 @@ class GeneralTab extends Component {
 
     onSubmit = async () => {
         try {
+            if (this.state.tagText === "") {
+                throw new ValidationError(
+                    "Hashtag can't be empty.",
+                    "projects"
+                );
+            }
+
             this.setState({ updating: true });
             const product = await editProduct(
                 this.state.slug,
@@ -121,7 +133,7 @@ class GeneralTab extends Component {
         } catch (e) {
             this.setState({
                 updating: false,
-                errorMessages: e.field_errors || e.message
+                errorMessages: new StdErrorCollection(e)
             });
         }
     };
@@ -157,7 +169,6 @@ class GeneralTab extends Component {
 
         return (
             <div>
-                <ErrorMessageList fieldErrors={this.state.errorMessages} />
                 <form>
                     <div className="control">
                         <label>Name</label>
@@ -168,6 +179,11 @@ class GeneralTab extends Component {
                             type="text"
                             placeholder="Makerlog"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "name",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Description</label>
@@ -178,9 +194,11 @@ class GeneralTab extends Component {
                             type="text"
                             placeholder="The maker community."
                         />
-                        <p className="help">
-                            Make it short and sweet, like a pitch!
-                        </p>
+                        {renderHelpOrError(
+                            "Make it short and sweet, like a pitch!",
+                            "description",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Hashtag</label>
@@ -195,10 +213,11 @@ class GeneralTab extends Component {
                                 value={this.state.tagText}
                             ></input>
                         )}
-                        <p className="help">
-                            Makerlog works by logging tasks with #hashtags and
-                            adding the tasks to your product log.
-                        </p>
+                        {renderHelpOrError(
+                            " Makerlog works by logging tasks with #hashtags and adding the tasks to your product log.",
+                            "projects",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Website (optional)</label>
@@ -211,6 +230,11 @@ class GeneralTab extends Component {
                             type="text"
                             placeholder="getmakerlog.com"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "url",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Twitter (optional)</label>
@@ -223,6 +247,11 @@ class GeneralTab extends Component {
                             type="text"
                             placeholder="getmakerlog"
                         />
+                        {renderHelpOrError(
+                            null,
+                            "twitter",
+                            this.state.errorMessages
+                        )}
                     </div>
                     <div className="control">
                         <label>Launched yet?</label>
@@ -287,6 +316,7 @@ class GeneralTab extends Component {
                             <br />
                         </>
                     )}
+                    <StdErrorMessages error={this.state.errorMessages} />
                     <button
                         onClick={e => {
                             e.preventDefault();
