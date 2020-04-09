@@ -171,6 +171,12 @@ const Shop = props => {
                         icon="https://lh3.googleusercontent.com/252TmJBOGuK9gNiubt1D0Q0VgqczU36LaEq-1JFBIL-d_D0wwBYdUOaYZfNUOW9w6Mg=s180-rw"
                         outboundUrl="https://play.google.com/store/apps/details?id=com.brownfingers.getmakerlog"
                     />
+                    <IntegrationMedia
+                        name="Alfred Workflow for Makerlog"
+                        description="A simple Alfred workflow for Makerlog."
+                        icon="https://www.alfredapp.com/media/logo4.png"
+                        outboundUrl="https://github.com/meSingh/alfred-makerlog"
+                    />
                 </div>
             </div>
             <div className={"flex col-right v-center mbGap"}>

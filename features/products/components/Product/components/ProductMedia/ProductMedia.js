@@ -12,7 +12,7 @@ class ProductMedia extends React.Component {
                 route="product-page"
                 params={{ slug: this.props.product.slug }}
             >
-                <a style={{ color: "inherit" }}>
+                <a className="a-unstyled">
                     <div className={"ProductMedia"}>
                         <div className={"flex"}>
                             <ProductIcon is={48} product={this.props.product} />
@@ -52,7 +52,7 @@ class ProductMedia extends React.Component {
                         route="product-page"
                         params={{ slug: this.props.product.slug }}
                     >
-                        <a style={{ color: "inherit" }}>
+                        <a className="a-unstyled">
                             <div className={"flex"}>
                                 <div>
                                     <figure className="img-32">
@@ -90,7 +90,7 @@ class ProductMedia extends React.Component {
                     route="product-page"
                     params={{ slug: this.props.product.slug }}
                 >
-                    <a style={{ color: "inherit" }}>
+                    <a className="a-unstyled">
                         <div className={"flex"}>
                             <div>
                                 <figure className="img-48">

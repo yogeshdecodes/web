@@ -34,13 +34,11 @@ class NotificationsLink extends React.Component {
         let initialTitle = document.title
             .substring(document.title.indexOf(")") + 1)
             .trim();
-        if (count !== this.props.unreadCount || force) {
-            if (count > 0) {
-                // remove any previous parentheses. still a hack.
-                document.title = `(${count}) ${initialTitle}`;
-            } else {
-                document.title = initialTitle;
-            }
+        if (count > 0) {
+            // remove any previous parentheses. still a hack.
+            document.title = `(${count}) ${initialTitle}`;
+        } else {
+            document.title = initialTitle;
         }
     };
 
