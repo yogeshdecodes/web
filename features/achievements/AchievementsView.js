@@ -83,20 +83,16 @@ class AchievementsView extends React.Component {
                                     <div>
                                         <h2>Failed to load achievements</h2>
                                         <h3 className="subtitle has-text-grey">
-                                            {getFirstErrorString(
-                                                this.props.errorMessages
-                                            )}
+                                            {this.props.errorMessages.message}
                                             &nbsp;
-                                            {getErrorCodeString(
-                                                this.props.errorMessages
-                                            )}
+                                            {this.props.errorMessages.code}
                                         </h3>
                                     </div>
                                     <div>
                                         <button
                                             className={"btn btn-light"}
                                             onClick={
-                                                this.props.fetchNotifications
+                                                this.props.fetchAchievements
                                             }
                                         >
                                             Retry
@@ -105,7 +101,7 @@ class AchievementsView extends React.Component {
                                 </>
                             )}
 
-                            {!this.props.ready && (
+                            {!this.props.ready && !this.props.failed && (
                                 <div>
                                     <Spinner small />
                                 </div>
@@ -183,8 +179,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchNotifications: () =>
-        dispatch(achievementsActions.fetchNotifications()),
+    fetchAchievements: () => dispatch(achievementsActions.fetchAchievements()),
     closeHandler: () => dispatch(achievementsActions.toggleView()),
     markAllRead: () => dispatch(achievementsActions.markAllRead())
 });
