@@ -6,6 +6,7 @@ import GoldIcon from "~/components/icons/GoldIcon";
 import GoldCtaButton from "~/components/GoldCtaButton";
 import Spinner from "~/components/Spinner";
 import { getSubscriptionDetails } from "../../../lib/billing";
+import { handleChange, loadingClass } from "../../../lib/utils/random";
 
 class SubscriptionSettings extends React.Component {
     state = {
@@ -89,6 +90,7 @@ class SubscriptionSettings extends React.Component {
 
 class GoldTab extends React.Component {
     state = {
+        saved: false,
         loading: true,
         isPosting: false,
         accent: "",
@@ -104,7 +106,7 @@ class GoldTab extends React.Component {
         if (event.preventDefault) {
             event.preventDefault();
         }
-        this.setState({ loading: true });
+        this.setState({ loading: true, saved: false });
         try {
             const user = await patchSettings({
                 accent: this.state.accent,
@@ -113,7 +115,7 @@ class GoldTab extends React.Component {
             if (this.props.updateUser) {
                 this.props.updateUser(user);
             }
-            this.setState({ loading: false });
+            this.setState({ loading: false, saved: true });
         } catch (e) {}
     };
 
@@ -178,6 +180,8 @@ class GoldTab extends React.Component {
         await this.onSubmit({});
     };
 
+    handleChange = e => handleChange(e, this);
+
     render() {
         return (
             <div>
@@ -207,14 +211,15 @@ class GoldTab extends React.Component {
                         </div>
                     </div>
                 )}
-                <div
+                <form
+                    onSubmit={this.onSubmit}
                     className={
                         "GoldSettings " +
                         (!this.props.user.gold ? "disabled" : "")
                     }
                 >
                     <div className={"control"}>
-                        <h3 className="mt0">Dark mode</h3>
+                        <label>Dark mode</label>
                         <Switch
                             checkedIcon={
                                 <div
@@ -252,13 +257,43 @@ class GoldTab extends React.Component {
                             onChange={this.onChangeDarkMode}
                         />
                     </div>
+                    <div className="control">
+                        <label>Accent color</label>
+                        <p className="help mb-5">
+                            Add a little flair to your profile!
+                        </p>
+                        <input
+                            onChange={this.handleChange}
+                            type="color"
+                            name="accent"
+                            value={this.state.accent}
+                        ></input>
+                    </div>{" "}
+                    {this.state.saved && (
+                        <div className="control">
+                            <div className="alert is-success">
+                                <div className="alert-body">Saved.</div>
+                            </div>
+                        </div>
+                    )}
+                    <div className="control">
+                        <button
+                            onClick={this.onSubmit}
+                            className={loadingClass(
+                                "btn btn-secondary",
+                                this.state.loading
+                            )}
+                        >
+                            Save
+                        </button>
+                    </div>
                     {this.props.user.gold && (
                         <>
                             <hr />
                             <SubscriptionSettings />
                         </>
                     )}
-                </div>
+                </form>
             </div>
         );
     }
