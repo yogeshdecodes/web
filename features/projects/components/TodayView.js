@@ -10,9 +10,13 @@ import Emoji from "../../../components/Emoji";
 import OutboundLink from "../../../components/OutboundLink";
 import { Tooltip } from "react-tippy";
 import { actions as editorActions } from "../../../ducks/editor";
+import format from "date-fns/format";
 import config from "../../../config";
 
 import TaskQueue from "~/features/tasks/components/TaskQueue";
+import { Track } from "../../../vendor/ga";
+import { orderByDate } from "../../../lib/utils/tasks";
+import orderBy from "lodash/orderBy";
 
 const TodayPage = styled.div`
     min-height: ${props => (props.focusMode ? "100vh" : "calc(100vh - 120px)")};
@@ -59,29 +63,37 @@ class TodayView extends React.Component {
         }
     };
 
-    renderTweetButton = () => {
-        const text = `Today I completed ${this.props.doneToday} tasks on @getmakerlog! 💪 \n #TogetherWeMake`;
-        const url = `${config.BASE_URL}/@${this.props.me.username}`;
+    generateTweetText = () => {
+        let text = `Done today on @GetMakerlog:\n`;
 
-        return (
-            <OutboundLink
-                href={`https://twitter.com/share?text=${encodeURIComponent(
-                    text
-                )}&url=${url}`}
-                className={"btn-small btn-twitter"}
-                target="_blank"
-            >
-                <FontAwesomeIcon icon={["fab", "twitter"]} /> Tweet your victory
-            </OutboundLink>
+        orderByDate(
+            this.getTodayTasks().filter(t => t.done),
+            "asc"
+        ).map(task => {
+            text = text + `\n✅ ${task.content}`;
+            return true;
+        });
+
+        return text;
+    };
+
+    getTodayTasks = () => {
+        return this.props.tasks.filter(
+            task =>
+                differenceInHours(new Date(), new Date(task.created_at)) <= 24
         );
+    };
+
+    onTweetClick = () => {
+        new Track().linkClick("tweeted-tasks");
     };
 
     render() {
         if (!this.props.tasks) return null;
-        const tasks = this.props.tasks.filter(
-            task =>
-                differenceInHours(new Date(), new Date(task.created_at)) <=
-                    24 && task.done === false
+        const tasks = orderBy(
+            orderByDate(this.getTodayTasks(), "desc"),
+            "done",
+            "asc"
         );
 
         return (
@@ -90,7 +102,24 @@ class TodayView extends React.Component {
                 focusMode={this.state.focusMode}
                 className={"TodayPage container narrow"}
             >
-                <div className="card" style={{ marginTop: 40 }}>
+                <div className={"flex col-right v-center mb-em mtGap"}>
+                    <div className="stretch">
+                        <h3>{format(Date.now(), "MMMM d, yyyy")}</h3>
+                    </div>
+                    <div>
+                        <a
+                            className="gray-link-with-icon"
+                            target={"_blank"}
+                            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                                this.generateTweetText()
+                            )}`}
+                            onClick={this.onTweetClick}
+                        >
+                            <FontAwesomeIcon icon={["fab", "twitter"]} /> Tweet
+                        </a>
+                    </div>
+                </div>
+                <div className="TodayCard card">
                     <div className="today-input">
                         <TaskQueue />
                     </div>
@@ -108,11 +137,9 @@ class TodayView extends React.Component {
                                     "message-container flex columns center v-center"
                                 }
                             >
-                                <h3 className={"mt0"}>
-                                    <Emoji emoji={"🎉"} />
-                                    All done for today!
+                                <h3 className={"mt0 has-text-grey"}>
+                                    No tasks yet.
                                 </h3>
-                                {this.renderTweetButton()}
                             </div>
                         )}
                         {tasks.map(task => (
