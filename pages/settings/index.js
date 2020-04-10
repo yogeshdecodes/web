@@ -15,6 +15,7 @@ import PageNavigation from "~/components/ui/PageNavigation";
 import { loadingClass } from "~/lib/utils/random";
 import { getToken } from "../../lib/admin";
 import { deleteAccount } from "../../lib/user";
+import { Track } from "../../vendor/ga";
 
 class NuclearButton extends React.Component {
     state = {
@@ -31,6 +32,7 @@ class NuclearButton extends React.Component {
         }
         try {
             this.setState({ loading: true, failed: false });
+            new Track().event("account-deleted");
             await deleteAccount(this.state.username);
             this.props.logout();
             this.setState({ loading: false, failed: false });
