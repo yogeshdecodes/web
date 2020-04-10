@@ -2,7 +2,7 @@ import React from "react";
 import NextDocument, { Head, Html, Main, NextScript } from "next/document";
 
 import { ServerStyleSheet } from "styled-components";
-import config from "../config";
+import config, { isDev } from "../config";
 import { isGaEnabled } from "../vendor/ga";
 
 // Sadly we need this as long as we use styled-components. Fuck that.
