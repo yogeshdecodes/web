@@ -25,6 +25,7 @@ import {
     ValidationError
 } from "../../../../lib/utils/error";
 import StdErrorMessages from "~/components/forms/StdErrorMessages";
+import { Router } from "~/routes";
 
 class GeneralTab extends Component {
     state = {
@@ -124,6 +125,10 @@ class GeneralTab extends Component {
                 this.state.team, // if array of users,
                 this.state.accent
             );
+
+            if (product.slug !== this.props.product.slug) {
+                Router.pushRoute("products");
+            }
 
             this.setState({
                 updating: false,
