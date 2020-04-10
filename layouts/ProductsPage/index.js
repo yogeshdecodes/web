@@ -22,10 +22,12 @@ export default class ProductsPageLayout extends Component {
                         </a>
                     </NavLink>
                 </PageNavigation>
-                <div className="container mtGap grid-c-s">
-                    <div>{this.props.children}</div>
-                    <div>
-                        <ProductsPageSidebar />
+                <div className="container">
+                    <div className="mtGap grid-c-s">
+                        <div>{this.props.children}</div>
+                        <div>
+                            <ProductsPageSidebar />
+                        </div>
                     </div>
                 </div>
             </>
