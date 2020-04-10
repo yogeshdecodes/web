@@ -83,7 +83,18 @@ export default class Document extends NextDocument {
     render() {
         return (
             <Html>
-                <Head>{this.renderAnalytics()}</Head>
+                <Head>
+                    {this.renderAnalytics()}
+                    <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+                    <script
+                        type="text/javascript"
+                        dangerouslySetInnerHTML={{
+                            __html: `Paddle.Setup({ vendor: ${
+                                config.PADDLE_VENDOR
+                            }, debug: ${JSON.stringify(config.isDev)} });`
+                        }}
+                    />
+                </Head>
                 <body>
                     <Main />
                     <NextScript />

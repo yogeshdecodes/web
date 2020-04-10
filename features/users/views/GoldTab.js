@@ -4,6 +4,88 @@ import Emoji from "~/components/Emoji";
 import Switch from "react-switch";
 import GoldIcon from "~/components/icons/GoldIcon";
 import GoldCtaButton from "~/components/GoldCtaButton";
+import Spinner from "~/components/Spinner";
+import { getSubscriptionDetails } from "../../../lib/billing";
+
+class SubscriptionSettings extends React.Component {
+    state = {
+        loading: true,
+        subscription: null,
+        failed: false
+    };
+
+    componentDidMount() {
+        this.load();
+    }
+
+    load = async () => {
+        try {
+            this.setState({ loading: true, failed: false });
+            const subscription = await getSubscriptionDetails();
+            this.setState({
+                subscription,
+                loading: false,
+                failed: false
+            });
+        } catch (e) {
+            this.setState({
+                loading: false,
+                failed: true
+            });
+        }
+    };
+
+    onUpdateSub = () => {
+        Paddle.Checkout.open({
+            override: this.state.subscription.update_url
+        });
+    };
+
+    onCancelSub = () => {
+        Paddle.Checkout.open({
+            override: this.state.subscription.cancel_url
+        });
+    };
+
+    render() {
+        if (this.state.loading)
+            return <Spinner small text="Loading subscription details..." />;
+
+        if (this.state.failed)
+            return (
+                <span className="has-text-danger">
+                    Failed to load.{" "}
+                    <button
+                        className="btn btn-light btn-small"
+                        onClick={this.load}
+                    >
+                        Retry
+                    </button>
+                </span>
+            );
+
+        return (
+            <form onSubmit={e => e.preventDefault()}>
+                <div className="control">
+                    <label>Subscription settings</label>
+                    <button
+                        className="btn btn-light btn-small"
+                        onClick={this.onUpdateSub}
+                    >
+                        Update payment details
+                    </button>
+                    &nbsp;
+                    <button
+                        className="btn btn-delete btn-small"
+                        onClick={this.onCancelSub}
+                    >
+                        Cancel subscription
+                    </button>
+                </div>
+            </form>
+        );
+    }
+}
 
 class GoldTab extends React.Component {
     state = {
@@ -131,47 +213,51 @@ class GoldTab extends React.Component {
                         (!this.props.user.gold ? "disabled" : "")
                     }
                 >
-                    <h3 className="mt0">Dark mode</h3>
-                    <div className={"form-row has-addons"}>
-                        <div className={"control"}>
-                            <Switch
-                                checkedIcon={
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            height: "100%",
-                                            fontSize: 15,
-                                            paddingRight: 2
-                                        }}
-                                    >
-                                        <Emoji emoji="🌑" />
-                                    </div>
-                                }
-                                uncheckedIcon={
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            height: "100%",
-                                            fontSize: 15,
-                                            paddingRight: 2
-                                        }}
-                                    >
-                                        <Emoji emoji="☀️" />
-                                    </div>
-                                }
-                                onColor="#47E0A0"
-                                height={30}
-                                width={60}
-                                handleDiameter={20}
-                                checked={this.state.dark_mode}
-                                onChange={this.onChangeDarkMode}
-                            />
-                        </div>
+                    <div className={"control"}>
+                        <h3 className="mt0">Dark mode</h3>
+                        <Switch
+                            checkedIcon={
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        height: "100%",
+                                        fontSize: 15,
+                                        paddingRight: 2
+                                    }}
+                                >
+                                    <Emoji emoji="🌑" />
+                                </div>
+                            }
+                            uncheckedIcon={
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        height: "100%",
+                                        fontSize: 15,
+                                        paddingRight: 2
+                                    }}
+                                >
+                                    <Emoji emoji="☀️" />
+                                </div>
+                            }
+                            onColor="#47E0A0"
+                            height={30}
+                            width={60}
+                            handleDiameter={20}
+                            checked={this.state.dark_mode}
+                            onChange={this.onChangeDarkMode}
+                        />
                     </div>
+                    {this.props.user.gold && (
+                        <>
+                            <hr />
+                            <SubscriptionSettings />
+                        </>
+                    )}
                 </div>
             </div>
         );

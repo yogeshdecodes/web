@@ -14,6 +14,96 @@ import "./index.scss";
 import PageNavigation from "~/components/ui/PageNavigation";
 import { loadingClass } from "~/lib/utils/random";
 import { getToken } from "../../lib/admin";
+import { deleteAccount } from "../../lib/user";
+
+class NuclearButton extends React.Component {
+    state = {
+        loading: false,
+        username: "",
+        stageOpen: false,
+        failed: false
+    };
+
+    onClick = async () => {
+        if (this.state.username.length === 0) {
+            this.setState({ stageOpen: true });
+            return;
+        }
+        try {
+            this.setState({ loading: true, failed: false });
+            await deleteAccount(this.state.username);
+            this.props.logout();
+            this.setState({ loading: false, failed: false });
+        } catch (e) {
+            this.setState({ loading: false, failed: false, username: "" });
+        }
+    };
+
+    render() {
+        if (this.state.stageOpen) {
+            return (
+                <div>
+                    <div className="mb-5">
+                        <strong>Type your username to confirm:</strong>
+                    </div>
+                    <div className="flex flex-gap">
+                        <div>
+                            <input
+                                type="text"
+                                state={this.state.username}
+                                onChange={e =>
+                                    this.setState({ username: e.target.value })
+                                }
+                                placeholder="Username"
+                            />
+                        </div>
+                        <div>
+                            <button
+                                onClick={this.onClick}
+                                disabled={
+                                    this.state.username !==
+                                    this.props.me.username
+                                }
+                                className={loadingClass(
+                                    "btn btn-delete btn-sm",
+                                    this.state.loading
+                                )}
+                            >
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <div className="control">
+                <button
+                    onClick={this.onClick}
+                    className={loadingClass(
+                        "btn btn-delete mb-5",
+                        this.state.loading
+                    )}
+                >
+                    Delete account
+                </button>
+                <p className="help">
+                    This is irreversible. Make sure you want it.
+                </p>
+            </div>
+        );
+    }
+}
+
+NuclearButton = connect(
+    state => ({ me: state.user.me }),
+    dispatch => {
+        return {
+            logout: t => dispatch(authActions.logout())
+        };
+    }
+)(NuclearButton);
 
 class SecuritySettings extends React.Component {
     state = {
@@ -157,18 +247,10 @@ class DataSettings extends React.Component {
     render() {
         return (
             <div>
-                <h3>
-                    <strong>
-                        We strongly believe in data ownership. Your data is
-                        yours, no matter what.
-                    </strong>{" "}
-                    <br />
-                </h3>
-                <hr />
                 <div className={"content"}>
                     <h3>Data usage policies</h3>
                     <p>
-                        <ol>
+                        <ul>
                             <li>
                                 I treat your personal data with utmost respect
                                 and attention.
@@ -187,30 +269,50 @@ class DataSettings extends React.Component {
                                 In terms of PII, we store your e-mail, full
                                 name, hashed password (PBKDF2).
                             </li>
-                        </ol>
+                        </ul>
                     </p>
                 </div>
-                <hr />
-                <h3>Download your data</h3>
-                <p>
-                    Click the button below to request a copy of all your data on
-                    Makerlog. <br />
-                    It'll be serialized in super-simple, easy to read JSON.{" "}
-                    <br />
-                    No obfuscation. No bullshit.
-                    <br />
-                    <em>
-                        <small>
-                            Note: To prevent server load spikes, Makerlog allows
-                            you to export your data maximum 3 times a day.
-                        </small>
-                    </em>
-                </p>
                 <br />
-                {this.renderErrors()}
-                <button className={"btn"} onClick={this.onSubmit}>
-                    Download your data
-                </button>
+                <div className="content mb-em">
+                    <h3>Download your data</h3>
+                    <p>
+                        Click the button below to request a copy of all your
+                        data on Makerlog. <br />
+                        It'll be serialized in super-simple, easy to read JSON.{" "}
+                        <br />
+                        No obfuscation. No bullshit.
+                        <br />
+                        <em>
+                            <small>
+                                Note: To prevent server load spikes, Makerlog
+                                allows you to export your data maximum 3 times a
+                                day.
+                            </small>
+                        </em>
+                    </p>
+                </div>
+                <div className="control">
+                    {this.renderErrors()}
+                    <button className={"btn"} onClick={this.onSubmit}>
+                        Download your data
+                    </button>
+                </div>
+
+                <br />
+                <div className={"content mb-em"}>
+                    <h3>Delete your account</h3>
+                    <p>
+                        We don't keep your data or mark it as hidden: make sure
+                        you really want this, because{" "}
+                        <strong>there is no going back</strong> - no matter how
+                        much you beg via Crisp for your data to be restored from
+                        a backup.
+                    </p>
+                </div>
+                <div className="control">
+                    {this.renderErrors()}
+                    <NuclearButton />
+                </div>
             </div>
         );
     }
