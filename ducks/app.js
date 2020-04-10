@@ -3,6 +3,7 @@ import { Track } from "../vendor/ga";
 
 const initialState = {
     healthy: true,
+    darkModeOverride: false,
     isNewUser: false,
     feedbackOpen: false,
     notificationsOpen: false,
@@ -16,6 +17,7 @@ export const types = {
     APP_HEALTH_CHECK_FAILED: "APP_HEALTH_CHECK_FAILED",
     APP_NOTIFICATIONS_TOGGLE: "APP_NOTIFICATIONS_TOGGLE",
     APP_TOGGLE_NEW_USER: "APP_TOGGLE_NEW_USER",
+    APP_SET_DARK_OVERRIDE: "APP_SET_DARK_OVERRIDE",
     APP_TOGGLE_FEEDBACK: "APP_TOGGLE_FEEDBACK"
 };
 
@@ -56,6 +58,12 @@ export const appReducer = (state = initialState, action) => {
                 isNewUser: !state.isNewUser
             };
 
+        case types.APP_SET_DARK_OVERRIDE:
+            return {
+                ...state,
+                darkModeOverride: action.dark
+            };
+
         case types.APP_TOGGLE_FEEDBACK:
             return {
                 ...state,
@@ -90,6 +98,8 @@ export const actions = {
     toggleNotifications: () => ({ type: types.APP_NOTIFICATIONS_TOGGLE }),
 
     toggleNewUser: () => ({ type: types.APP_TOGGLE_NEW_USER }),
+
+    forceDark: dark => ({ type: types.APP_SET_DARK_OVERRIDE, dark }),
 
     toggleFeedback: () => ({ type: types.APP_TOGGLE_FEEDBACK })
 };

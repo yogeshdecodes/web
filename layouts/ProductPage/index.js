@@ -6,20 +6,29 @@ import "./index.scss";
 import { connect } from "react-redux";
 import NavLink from "~/components/ActiveLink";
 import { Link } from "~/routes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../ProfilePage/index.scss";
 import ProductIcon from "../../features/products/components/ProductIcon";
 import { isTeamMember } from "~/lib/utils/products";
+import OutboundLink from "~/components/OutboundLink";
+import { normalizeUrl } from "~/lib/utils/products";
 
-function getCoverStyle(product, isBackdrop = false) {
+function getAccentStyle(product, isBackdrop = false) {
     if (product.accent)
         return {
-            background: product.accent,
-            backgroundPosition: "center",
-            backgroundSize: isBackdrop ? "cover" : "contain",
-            backgroundRepeat: "no-repeat"
+            background: `${product.accent}`
         };
 
-    return {};
+    return { background: "#00a676" };
+}
+
+function getContrastYIQ(hexcolor, title = false) {
+    hexcolor = hexcolor.replace("#", "");
+    var r = parseInt(hexcolor.substr(0, 2), 16);
+    var g = parseInt(hexcolor.substr(2, 2), 16);
+    var b = parseInt(hexcolor.substr(4, 2), 16);
+    var yiq = (r * 299 + g * 587 + b * 114) / 1000;
+    return yiq >= 128 ? "var(--c-title)" : "var(--c-lightest)";
 }
 
 const mapStateToProps = state => ({
@@ -35,65 +44,118 @@ export default connect(mapStateToProps)(
                     description={`${product.name} is shipped on Makerlog, the home of the maker community.`}
                     ogImage={product.icon || null}
                 />
-                <section
-                    style={getCoverStyle(product, true)}
-                    className="header-section"
+                <div
+                    className="hero-media"
+                    style={{
+                        ...getAccentStyle(product),
+                        color: getContrastYIQ(
+                            getAccentStyle(product).background
+                        )
+                    }}
                 >
-                    <div
-                        style={getCoverStyle(product)}
-                        className="container"
-                    ></div>
-                    <PageNavigation
-                        title={
-                            <div className="profile-picture">
-                                <ProductIcon product={product} />
+                    <div className="container">
+                        <div className="flex flex-gap">
+                            <div>
+                                <ProductIcon is={64} product={product} />
                             </div>
-                        }
-                        end={
-                            me.id === product.user ||
-                            isTeamMember(product, me) ? (
-                                <div className="navbar-item">
-                                    <Link
-                                        route="product-edit"
-                                        params={{ slug: product.slug }}
-                                    >
-                                        <a className="btn btn-light">Edit</a>
-                                    </Link>
+                            <div className="flex flex-column flex-v-gap">
+                                <div>
+                                    <h2 style={{ color: "inherit" }}>
+                                        {product.name}
+                                    </h2>
+                                    <p>{product.description}</p>
                                 </div>
-                            ) : null
-                        }
-                    >
-                        <h2>{product.name}</h2>
-                        <NavLink
-                            activeClassName="is-active"
-                            route="product-page"
-                            params={{ slug: product.slug }}
-                        >
-                            <a className={"navbar-item"}>Activity</a>
-                        </NavLink>
-                        <NavLink
-                            activeClassName="is-active"
-                            route="product-page-updates"
-                            params={{ slug: product.slug }}
-                        >
-                            <a className={"navbar-item disabled"}>
-                                Updates <span className="tag">Soon</span>
-                            </a>
-                        </NavLink>
-                        <NavLink
-                            activeClassName="is-active"
-                            route="product-page-discussions"
-                            params={{ slug: product.slug }}
-                        >
-                            <a className={"navbar-item disabled"}>
-                                Discussions <span className="tag">Soon</span>
-                            </a>
-                        </NavLink>
-                    </PageNavigation>
-                </section>
+                                <div>
+                                    <div className="flex links-flex">
+                                        {product.website && (
+                                            <div>
+                                                {" "}
+                                                <OutboundLink
+                                                    className="btn btn-link btn-small"
+                                                    to={normalizeUrl(
+                                                        product.website
+                                                    )}
+                                                >
+                                                    <FontAwesomeIcon icon="globe" />{" "}
+                                                    {normalizeUrl(
+                                                        product.website
+                                                    )
+                                                        .replace("http://", "")
+                                                        .replace(
+                                                            "https://",
+                                                            ""
+                                                        )}
+                                                </OutboundLink>
+                                            </div>
+                                        )}
+                                        {product.twitter && (
+                                            <div>
+                                                <OutboundLink
+                                                    className="btn btn-link btn-small"
+                                                    to={`https://twitter.com/${product.twitter}`}
+                                                >
+                                                    <FontAwesomeIcon
+                                                        icon={[
+                                                            "fab",
+                                                            "twitter"
+                                                        ]}
+                                                    />{" "}
+                                                    <span className="is-hidden-mobile">
+                                                        {product.twitter}
+                                                    </span>
+                                                </OutboundLink>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <div className="container">
-                    <div className="grid-c-s">
+                <PageNavigation
+                    end={
+                        me.id === product.user || isTeamMember(product, me) ? (
+                            <div className="navbar-item">
+                                <Link
+                                    route="product-edit"
+                                    params={{ slug: product.slug }}
+                                >
+                                    <a className="btn btn-light">Edit</a>
+                                </Link>
+                            </div>
+                        ) : null
+                    }
+                >
+                    <NavLink
+                        activeClassName="is-active"
+                        route="product-page"
+                        params={{ slug: product.slug }}
+                    >
+                        <a className={"navbar-item"}>Activity</a>
+                    </NavLink>
+                    <NavLink
+                        activeClassName="is-active"
+                        route="product-page-updates"
+                        params={{ slug: product.slug }}
+                    >
+                        <a className={"navbar-item disabled"}>
+                            Updates <span className="tag">Soon</span>
+                        </a>
+                    </NavLink>
+                    <NavLink
+                        activeClassName="is-active"
+                        route="product-page-discussions"
+                        params={{ slug: product.slug }}
+                    >
+                        <a className={"navbar-item disabled"}>
+                            Discussions <span className="tag">Soon</span>
+                        </a>
+                    </NavLink>
+                </PageNavigation>
+
+                <div className="container ">
+                    <div className="mtGap grid-c-s">
                         <div>{props.children}</div>
                         <div>
                             <ProductSidebar people={people} product={product} />

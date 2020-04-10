@@ -285,11 +285,10 @@ const ProfileSidebar = ({ user, achievements = [] }) => {
 
     return (
         <div className="ProfileSidebar Sidebar">
-            <BioCard user={user} />
+            <ActivityCard user={user} />
             {trophies.length && (
                 <TrophyCaseCard trophies={trophies} user={user} />
             )}
-            <ActivityCard user={user} />
             <MyProductsCard user={user} />
             {user.nomadlist_handle && <NomadLocationCard user={user} />}
 
