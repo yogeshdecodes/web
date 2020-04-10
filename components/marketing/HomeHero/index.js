@@ -6,7 +6,7 @@ export default class HomeHero extends Component {
     render() {
         return (
             <div className="HomeHero hero">
-                <h1>The home of the maker community.</h1>
+                <h1>Home of the maker community.</h1>
                 <h3 className="subtitle mb-em">
                     Makerlog is where 4,000+ indie hackers & makers get things
                     done together.
