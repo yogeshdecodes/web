@@ -104,7 +104,7 @@ class TodayView extends React.Component {
             >
                 <div className={"flex col-right v-center mb-em mtGap"}>
                     <div className="stretch">
-                        <h3>{format(Date.now(), "MMMM d, yyyy")}</h3>
+                        <h3>{this.getTodayTasks().length} done today</h3>
                     </div>
                     <div>
                         <a
@@ -124,14 +124,7 @@ class TodayView extends React.Component {
                         <TaskQueue />
                     </div>
                     <div className={"card-content"}>
-                        {this.props.doneToday === 0 && tasks.length === 0 && (
-                            <div className={"message-container flex center"}>
-                                <h3 className={"mt0 mb0"}>
-                                    You haven't done anything today.
-                                </h3>
-                            </div>
-                        )}
-                        {tasks.length === 0 && this.props.doneToday > 0 && (
+                        {tasks.length === 0 && (
                             <div
                                 className={
                                     "message-container flex columns center v-center"
