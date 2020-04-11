@@ -5,15 +5,11 @@ import "./index.scss";
 import OutboundLink from "~/components/OutboundLink";
 import { normalizeUrl } from "~/lib/utils/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import StreakTrophy from "../../../features/trophies/StreakTrophy";
-import ClubTrophy from "../../../features/trophies/ClubTrophy";
-import StaffTrophy from "../../../features/trophies/StaffTrophy";
 import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
 import Spinner from "~/components/Spinner";
 import { getNomadLocation } from "../../../lib/integrations/nomadlist";
 import ProductsContainer from "~/features/products/containers/ProductsContainer";
 import { ProductList } from "~/features/products";
-import SpecialTrophy from "../../../features/trophies/SpecialTrophy";
 import { TrophyIcon } from "../../../features/achievements/TrophyMedia";
 
 class MyProductsCard extends Component {

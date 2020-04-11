@@ -210,7 +210,7 @@ const UpcomingEventsCard = ({ upcomingEvents }) => {
                     <div className="flex flex-column flex-v-gap">
                         {upcomingEvents.map(event => (
                             <div>
-                                <EventMedia small event={event} />
+                                <EventMedia withBar={false} event={event} />
                             </div>
                         ))}
                         {upcomingEvents.length === 0 && (

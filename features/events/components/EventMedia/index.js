@@ -39,7 +39,7 @@ const EventToolbar = ({ event }) => {
 
 class EventMedia extends Component {
     render() {
-        const { large, small, event } = this.props;
+        const { withBar = true, event } = this.props;
 
         return (
             <Link route={"event-page"} params={{ slug: event.slug }}>
@@ -56,7 +56,7 @@ class EventMedia extends Component {
                             <h4>{event.title}</h4>
                             <p>{event.description}</p>
 
-                            <EventToolbar event={event} />
+                            {withBar && <EventToolbar event={event} />}
                         </div>
                     </div>
                 </a>
