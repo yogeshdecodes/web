@@ -44,7 +44,7 @@ class EventMedia extends Component {
         return (
             <Link route={"event-page"} params={{ slug: event.slug }}>
                 <a className="a-unstyled">
-                    <div className="EventMedia flex flex-gap">
+                    <div className="EventMedia std-media flex flex-gap">
                         {event.icon && (
                             <div>
                                 <figure class={"img-48"}>
