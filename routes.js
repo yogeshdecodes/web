@@ -43,16 +43,10 @@ module.exports = routes()
     .add("search", "/search/:view?", "search")
     .add("wellness", "/wellness", "wellness")
     .add("events", "/events", "events")
-    .add("events-past", "/events/past", "events-past")
     .add("about", "/about", "about")
     .add("deals", "/deals", "deals")
     .add("settings", "/settings", "settings")
     .add("events-host", "/events/host/", "events-host")
     .add("event-page", "/events/:slug/", "event-page")
-    .add("event-stream-live", "/events/:slug/live", "event-stream-live")
-    .add(
-        "event-attendee-panel",
-        "/events/:slug/attendance",
-        "event-attendee-panel"
-    )
+    .add("gold-page", "/gold", "gold-page")
     .add("products", "/products", "products");

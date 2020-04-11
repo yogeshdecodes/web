@@ -12,14 +12,7 @@ export default class EventsPageLayout extends Component {
                 nav={
                     <>
                         <NavLink route="events" activeClassName="is-active">
-                            <a className="navbar-item">Soon</a>
-                        </NavLink>
-
-                        <NavLink
-                            route="events-past"
-                            activeClassName="is-active"
-                        >
-                            <a className="navbar-item">Past</a>
+                            <a className="navbar-item">Explore</a>
                         </NavLink>
 
                         <NavLink
