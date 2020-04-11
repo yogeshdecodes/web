@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "~/routes";
 import Markdown from "~/components/Markdown";
-import { truncate } from "~/lib/utils/random";
+import { loadingClass, truncate } from "~/lib/utils/random";
 import { Praisable } from "~/features/stream/components/Task/components/Praise";
 import { mapStateToProps } from "~/ducks/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 
 import "./MilestoneMedia.scss";
 import CommentsBox from "../../comments/components/CommentsBox";
-import { loadingClass } from "~/lib/utils/random";
 
 class MilestoneMediaComponent extends React.Component {
     constructor(props) {

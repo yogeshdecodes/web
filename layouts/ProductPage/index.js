@@ -9,9 +9,8 @@ import { Link } from "~/routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../ProfilePage/index.scss";
 import ProductIcon from "../../features/products/components/ProductIcon";
-import { isTeamMember } from "~/lib/utils/products";
+import { isTeamMember, normalizeUrl } from "~/lib/utils/products";
 import OutboundLink from "~/components/OutboundLink";
-import { normalizeUrl } from "~/lib/utils/products";
 
 function getAccentStyle(product, isBackdrop = false) {
     if (product.accent)

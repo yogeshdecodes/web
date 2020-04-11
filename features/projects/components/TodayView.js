@@ -6,12 +6,8 @@ import differenceInHours from "date-fns/differenceInHours";
 import { Task } from "~/features/stream";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Emoji from "../../../components/Emoji";
-import OutboundLink from "../../../components/OutboundLink";
 import { Tooltip } from "react-tippy";
 import { actions as editorActions } from "../../../ducks/editor";
-import format from "date-fns/format";
-import config from "../../../config";
 
 import TaskQueue from "~/features/tasks/components/TaskQueue";
 import { Track } from "../../../vendor/ga";

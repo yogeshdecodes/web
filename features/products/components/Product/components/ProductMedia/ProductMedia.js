@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "~/routes";
-import Emoji from "../../../../../../components/Emoji";
 import { truncate } from "~/lib/utils/random";
 import { imageUrl } from "../../../../../../lib/utils/img";
 import ProductIcon from "~/features/products/components/ProductIcon";

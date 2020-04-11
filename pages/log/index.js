@@ -3,12 +3,8 @@ import { connect } from "react-redux";
 import NoActivityCard from "~/features/stream/components/NoActivityCard";
 import { requireAuthed } from "../../lib/auth";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
-import GlobalStream, {
-    prefetch as prefetchStream
-} from "~/features/stream/containers/GlobalStream";
-import DiscussionSection, {
-    prefetchData as prefetchThreads
-} from "~/features/discussions/DiscussionSection";
+import GlobalStream, { prefetch as prefetchStream } from "~/features/stream/containers/GlobalStream";
+import DiscussionSection, { prefetchData as prefetchThreads } from "~/features/discussions/DiscussionSection";
 import { Router } from "~/routes";
 
 class StreamPage extends React.Component {

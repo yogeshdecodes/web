@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import { connect } from "react-redux";
-import OutboundLink from "../../components/OutboundLink";
 import GoldIcon from "~/components/icons/GoldIcon";
-import { DealTiers, canRedeem } from "../../lib/utils/deals";
+import { canRedeem, DealTiers } from "../../lib/utils/deals";
 import { loadingClass } from "~/lib/utils/random";
 import { redeemDeal } from "~/lib/deals";
 

@@ -1,13 +1,9 @@
 import React from "react";
-import GlobalStream, {
-    prefetch as prefetchStream
-} from "~/features/stream/containers/GlobalStream";
+import GlobalStream, { prefetch as prefetchStream } from "~/features/stream/containers/GlobalStream";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
-import DiscussionSection, {
-    prefetchData as prefetchThreads
-} from "~/features/discussions/DiscussionSection";
+import DiscussionSection, { prefetchData as prefetchThreads } from "~/features/discussions/DiscussionSection";
 import HomeHero from "../../components/marketing/HomeHero";
 
 function Home(props) {

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
-import SmallFooter from "~/components/sidebar/components/SmallFooter";
 import AdCard from "~/components/sidebar/components/AdCard";
 import "./index.scss";
 import DealUnlockProgressCard from "../components/DealUnlockProgressCard";

@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-    groupIntegrationTasksByEvent,
-    groupTasksByDone,
-    integrationsToCollapse,
-    orderByDate
-} from "~/lib/utils/tasks";
+import { groupIntegrationTasksByEvent, groupTasksByDone, integrationsToCollapse, orderByDate } from "~/lib/utils/tasks";
 import EntryList from "../../../EntryList";
 // import { StreamCard as Card } from "./styled";
 import { UserMedia } from "~/features/users";
@@ -13,7 +8,6 @@ import { MilestoneMedia } from "~/features/milestones";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import InlineCollapse from "../../../../../../components/InlineCollapse";
-import { Tooltip } from "react-tippy";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Track } from "../../../../../../vendor/ga";
 

@@ -2,11 +2,7 @@ import "./index.scss";
 
 import React, { Component } from "react";
 import { format, toDate } from "date-fns-tz";
-import { hasClosed, hasEnded, isOcurring } from "~/lib/utils/events";
-
-import DueCountdown from "~/components/DueCountdown";
-import Emoji from "~/components/Emoji";
-import EventFaces from "../EventFaces";
+import { hasEnded, isOcurring } from "~/lib/utils/events";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
 import { imageUrl } from "../../../../lib/utils/img";

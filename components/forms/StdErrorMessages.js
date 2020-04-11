@@ -1,7 +1,6 @@
 import React from "react";
 import { StdErrorCollection } from "../../lib/utils/error";
 import OutboundLink from "~/components/OutboundLink";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { isDev } from "../../config";
 
 // Test error display

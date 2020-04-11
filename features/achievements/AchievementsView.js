@@ -2,13 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import Spinner from "~/components/Spinner";
 import { connect } from "react-redux";
-import { getErrorCodeString, getFirstErrorString } from "~/lib/utils/error";
 import { achievementsActions } from "../../ducks/achievements";
 import TrophyMedia, { TrophyIcon } from "./TrophyMedia";
 import orderBy from "lodash/orderBy";
 import uniqBy from "lodash/uniqBy";
 import StdErrorBoundary from "~/components/error/StdErrorBoundary";
-import { isServer } from "../../config";
 
 class AchievementsView extends React.Component {
     renderAchievements = () => {

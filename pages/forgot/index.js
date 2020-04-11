@@ -4,7 +4,6 @@ import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import { prettyAxiosError } from "~/lib/utils/error";
 import { requireUnauthed } from "~/lib/auth";
 import "./index.scss";
-import { Router } from "~/routes";
 
 class ResetForm extends React.Component {
     state = {

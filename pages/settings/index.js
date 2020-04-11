@@ -2,7 +2,6 @@ import React from "react";
 import { actions as userActions } from "~/ducks/user";
 import { actions as authActions } from "~/ducks/auth";
 import { connect } from "react-redux";
-import axios from "~/lib/axios";
 import { changePassword, downloadExportedData } from "~/lib/user";
 import { Experiment } from "~/lib/utils/experiment";
 import Embed from "~/components/Embed";

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "~/routes";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { actions as editorActions } from "../../../../ducks/editor";
 import { connect } from "react-redux";
 import Emoji from "../../../../components/Emoji";

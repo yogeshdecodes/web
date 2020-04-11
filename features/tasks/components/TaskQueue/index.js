@@ -9,7 +9,6 @@ import Dropzone from "react-dropzone";
 
 import chrono from "chrono-node";
 import { format } from "date-fns";
-import DueCountdown from "../../../../components/DueCountdown";
 
 /*
 PropTypes:

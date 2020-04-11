@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "~/routes";
-import OutboundLink from "~/components/OutboundLink";
 
 function getErrorMessage(status) {
     console.log(status);

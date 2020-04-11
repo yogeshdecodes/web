@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import { routerReducer } from "react-router-redux";
-import { default as storage } from "localforage";
+import localForage, { default as storage } from "localforage";
 import { authReducer, types as authTypes } from "./auth";
 import { streamReducer } from "./stream";
 import { editorReducer } from "./editor";
@@ -12,7 +12,6 @@ import { appsReducer } from "./apps";
 import { appReducer } from "./app";
 import { projectsReducer } from "./projects";
 import { isServer } from "~/config";
-import localForage from "localforage";
 import { Router } from "~/routes";
 import { notificationsReducer } from "./notifications";
 import { achievementsReducer } from "./achievements";

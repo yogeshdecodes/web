@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import React, { Component } from "react";
 
 import DatePicker from "react-datepicker";
-import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import { createEvent } from "~/lib/events";
 import EventsPageLayout from "../../layouts/EventsPage";
 import { StdErrorCollection } from "../../lib/utils/error";
