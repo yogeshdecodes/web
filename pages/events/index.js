@@ -3,7 +3,7 @@ import "./index.scss";
 import EventMedia from "~/features/events/components/EventMedia";
 import InfiniteResults from "~/components/InfiniteResults";
 import React from "react";
-import { hasEnded, isOcurring } from "~/lib/utils/events";
+import { hasEnded } from "~/lib/utils/events";
 import orderBy from "lodash/orderBy";
 import { Link } from "~/routes";
 import EventsPageLayout from "../../layouts/EventsPage";
