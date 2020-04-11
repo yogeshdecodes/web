@@ -37,14 +37,16 @@ class EventPage extends React.Component {
                         <h2>{item.title}</h2>
                         <p>{item.description}</p>
                     </div>
-                    <div>
-                        <OutboundLink
-                            className="btn btn-secondary"
-                            to={item.website}
-                        >
-                            View website
-                        </OutboundLink>
-                    </div>
+                    {item.website && (
+                        <div>
+                            <OutboundLink
+                                className="btn btn-secondary"
+                                to={item.website}
+                            >
+                                View website
+                            </OutboundLink>
+                        </div>
+                    )}
                 </div>
 
                 <div className="card">
