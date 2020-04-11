@@ -1736,6 +1736,7 @@ figure.img-circle {
     }
 }
 
+a.unstyled,
 .a-unstyled {
     &,
     &:link,
@@ -1743,8 +1744,8 @@ figure.img-circle {
     &:hover,
     &:active,
     &:active:hover {
-        color: inherit;
-        text-decoration: none;
+        color: inherit !important;
+        text-decoration: !important;
         /*font-style: inherit;
       background-color: transparent;
       font-size: inherit;
@@ -1758,6 +1759,23 @@ figure.img-circle {
       box-shadow: inherit;
       padding: inherit;
       vertical-align: inherit;*/
+    }
+
+    p,
+    p:hover,
+    h1,
+    h1:hover,
+    h2,
+    h2:hover,
+    h3,
+    h3:hover,
+    h4,
+    h4:hover,
+    h5,
+    h5:hover,
+    div {
+        color: inherit;
+        text-decoration: none;
     }
 }
 
