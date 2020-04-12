@@ -1,5 +1,9 @@
 import "./index.scss";
-import { groupTasksByDone, isDueSoon, orderByDate } from "../../../../lib/utils/tasks";
+import {
+    groupTasksByDone,
+    isDueSoon,
+    orderByDate
+} from "../../../../lib/utils/tasks";
 import { processTaskString } from "~/lib/utils/parsers";
 
 import CelebratoryThing from "../CelebratoryThing";
@@ -8,7 +12,7 @@ import Emoji from "../../../../components/Emoji";
 import { Link } from "~/routes";
 import React from "react";
 import Spinner from "../../../../components/Spinner";
-import TaskDetailModal from "../../../stream/components/Task/components/TaskDetailModal/TaskDetailModal";
+import TaskDetailModal from "~/features/tasks/components/TaskEditModal";
 import { applySearchTerms } from "~/lib/utils/tasks";
 import { connect } from "react-redux";
 import { actions as editorActions } from "../../../../ducks/editor";

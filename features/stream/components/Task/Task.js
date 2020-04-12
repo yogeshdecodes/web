@@ -10,8 +10,8 @@ import React from "react";
 import { getAppIcon } from "~/lib/apps";
 import { processTaskString } from "~/lib/utils/parsers";
 import startsWith from "lodash/startsWith";
-import CommentsBox from "~/features/comments/components/CommentsBox";
-import TaskDetail from "./components/TaskDetailModal/TaskDetail";
+import { CommentsBox } from "~/features/comments";
+import TaskDetail from "./components/TaskDetail";
 import { imageUrl } from "../../../../lib/utils/img";
 
 function findWord(word, str) {
@@ -75,7 +75,7 @@ class Task extends React.Component {
     };
 
     getClassNames = () => {
-        let baseClass = "Entry";
+        let baseClass = "Task";
         const task = this.props.task;
 
         if (task.done) {
@@ -285,24 +285,7 @@ class Task extends React.Component {
     };
 
     renderLiveButton = () => {
-        if (
-            this.props.task.user.is_live &&
-            this.props.task.in_progress &&
-            this.props.task.event === "shipstreams"
-        ) {
-            return (
-                <span style={{ marginLeft: 5, marginRight: 5 }}>
-                    <Link route={"live"}>
-                        <a className={"button is-small is-primary is-rounded"}>
-                            <FontAwesomeIcon icon={"play"} />{" "}
-                            <span>Watch on Makerlog Live</span>
-                        </a>
-                    </Link>
-                </span>
-            );
-        } else {
-            return null;
-        }
+        return null;
     };
 
     render() {

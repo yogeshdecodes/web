@@ -207,7 +207,10 @@ const UpcomingEventsCard = ({ upcomingEvents }) => {
             </h4>
             <div className="card">
                 <div className="card-content">
-                    <div className="flex flex-column flex-v-gap">
+                    <div
+                        className="flex flex-column flex-v-gap"
+                        style={{ width: "100%" }}
+                    >
                         {upcomingEvents.map(event => (
                             <div>
                                 <EventMedia withBar={false} event={event} />

@@ -1,0 +1,15 @@
+.TaskEditModal {
+    .Modal-Header {
+        display: flex;
+        align-items: center;
+
+        .heading {
+            width: 100%;
+        }
+
+        .Task {
+            padding-left: 10px;
+            border-left: 1px solid var(--c-border);
+        }
+    }
+}

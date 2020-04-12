@@ -2,29 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import ProductThumbnail from "./components/ProductThumbnail/index";
 import ProductMedia from "./components/ProductMedia/index";
-import ProductCard from "./components/ProductCard";
 
 const Product = ({
     product,
     media,
     thumbnail,
-    card,
     hero,
+    card = false,
     linked = true,
     ...props
 }) => {
     let Component = ProductMedia;
 
-    if (media) {
+    if (media || card) {
         Component = ProductMedia;
     }
 
     if (thumbnail) {
         Component = ProductThumbnail;
-    }
-
-    if (card) {
-        Component = ProductCard;
     }
 
     if (hero) {
@@ -37,7 +32,6 @@ const Product = ({
 Product.propTypes = {
     media: PropTypes.bool,
     thumbnail: PropTypes.bool,
-    card: PropTypes.bool,
     hero: PropTypes.bool
 };
 

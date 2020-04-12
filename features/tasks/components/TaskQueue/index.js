@@ -9,6 +9,7 @@ import Dropzone from "react-dropzone";
 
 import chrono from "chrono-node";
 import { format } from "date-fns";
+import { DoneStates, getDoneState } from "../../../../lib/utils/tasks";
 
 /*
 PropTypes:
@@ -23,12 +24,6 @@ const Hashtag = (tag, inText = false) => {
         tag,
         inText
     };
-};
-
-const DoneStates = {
-    DONE: 0,
-    IN_PROGRESS: 1,
-    REMAINING: 2
 };
 
 class TaskQueue extends Component {
@@ -99,19 +94,13 @@ class TaskQueue extends Component {
     cycleDoneStates = () => {
         let task = this.props.queue.find(t => t.id === this.state.currentTask);
 
-        if (this.getDoneState(task) === DoneStates.DONE) {
+        if (getDoneState(task) === DoneStates.DONE) {
             this.setDoneState(DoneStates.IN_PROGRESS);
-        } else if (this.getDoneState(task) === DoneStates.IN_PROGRESS) {
+        } else if (getDoneState(task) === DoneStates.IN_PROGRESS) {
             this.setDoneState(DoneStates.REMAINING);
-        } else if (this.getDoneState(task) === DoneStates.REMAINING) {
+        } else if (getDoneState(task) === DoneStates.REMAINING) {
             this.setDoneState(DoneStates.DONE);
         }
-    };
-
-    getDoneState = task => {
-        if (task.done && !task.in_progress) return DoneStates.DONE;
-        if (!task.done && task.in_progress) return DoneStates.IN_PROGRESS;
-        return DoneStates.REMAINING;
     };
 
     setDoneState = doneState => {
@@ -132,13 +121,13 @@ class TaskQueue extends Component {
                 break;
         }
 
-        console.log(this.getDoneState(task));
+        console.log(getDoneState(task));
 
         this.props.addToQueue(task);
     };
 
     getClassNameForDoneState = task => {
-        switch (this.getDoneState(task)) {
+        switch (getDoneState(task)) {
             case DoneStates.DONE:
                 return "done";
             case DoneStates.IN_PROGRESS:

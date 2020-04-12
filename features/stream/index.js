@@ -6,15 +6,11 @@ import WeeklyStream from "./containers/WeeklyStream";
 import UserStream from "./containers/UserStream";
 import GlobalStream from "./containers/GlobalStream";
 import FollowingStream from "./containers/FollowingStream";
-import TaskDetailModal from "./components/Task/components/TaskDetailModal";
-import EntryDetail from "./components/Task/components/TaskDetailModal/TaskDetail";
 import StreamDateHeader from "./components/Stream/components/StreamSection/StreamDateHeader";
 import EmbedTask from "./components/EmbedTask";
 
 export {
     Entry,
-    EntryDetail,
-    TaskDetailModal,
     EntryList,
     Stream,
     ProductStream,

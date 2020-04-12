@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import Modal from "~/components/Modal";
 import { CommentsBox } from "~/features/comments";
-import EntryDetail from "./TaskDetail";
+import EntryDetail from "../TaskDetail";
 import { mapStateToProps } from "~/ducks/user";
 import { connect } from "react-redux";
 
-class TaskDetailModal extends React.Component {
+class TaskEditModal extends React.Component {
     render() {
         return (
             <Modal
@@ -33,10 +33,10 @@ class TaskDetailModal extends React.Component {
     }
 }
 
-TaskDetailModal.propTypes = {
+TaskEditModal.propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     task: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(TaskDetailModal);
+export default connect(mapStateToProps)(TaskEditModal);
