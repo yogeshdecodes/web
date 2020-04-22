@@ -20,7 +20,7 @@ function ThreadMediaLine({ thread }) {
             </div>
             <div>
                 <Link route={"discussion-page"} params={{ slug: thread.slug }}>
-                    <a className="has-text-grey-light">
+                    <a className="has-text-grey-light is-hidden-mobile">
                         {thread.reply_count ? (
                             <>{thread.reply_count} replies</>
                         ) : (
