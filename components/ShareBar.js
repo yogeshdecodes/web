@@ -43,7 +43,7 @@ class CopyLink extends React.Component {
 
 class ShareBar extends React.Component {
     renderShareButtons = () => (
-        <div className={"flex flex-gap-big"}>
+        <>
             {this.props.permalink && (
                 <div>
                     <CopyLink url={this.props.permalink}>
@@ -72,12 +72,12 @@ class ShareBar extends React.Component {
                     </a>
                 </div>
             )}
-        </div>
+        </>
     );
 
     render() {
         return (
-            <div className={"flex flex-gap-big ShareBar"}>
+            <div className={"flex flex-mobile flex-gap-big ShareBar"}>
                 {this.props.extraItemsFirst && this.props.extraItemsFirst()}
 
                 {!this.props.rightAlignShare && this.renderShareButtons()}

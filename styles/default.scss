@@ -2522,3 +2522,7 @@ select:focus {
 select option {
     font-weight: normal;
 }
+
+.flex-mobile {
+    flex-flow: row wrap;
+}
