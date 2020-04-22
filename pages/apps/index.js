@@ -14,11 +14,15 @@ import Telegram from "~/features/apps/apps/Telegram";
 import "./index.scss";
 import Shop from "~/features/apps/components/Shop";
 import AppsPageLayout from "~/layouts/AppsPage";
+import { Router } from "~/routes";
+import { authed } from "../../lib/auth";
 
 class AppsPage extends React.Component {
-    static async getInitialProps({ query, ...ctx }) {
+    static async getInitialProps({ query, state, ...ctx }) {
         ctx.store.dispatch(appActions.fetchApps());
-
+        if (query.app) {
+            authed(ctx);
+        }
         return {
             app: query.app ? query.app : null,
             query
@@ -26,7 +30,12 @@ class AppsPage extends React.Component {
     }
 
     getCurrentRoute = () => {
-        const { app, query } = this.props;
+        const { app, query, isLoggedIn } = this.props;
+
+        if (app && !isLoggedIn) {
+            Router.pushRoute("begin");
+            return <div></div>;
+        }
 
         switch (app) {
             case "slack":
@@ -62,12 +71,21 @@ class AppsPage extends React.Component {
     };
 
     render() {
-        return <AppsPageLayout>{this.getCurrentRoute()}</AppsPageLayout>;
+        return (
+            <AppsPageLayout
+                ready={
+                    !this.props.appsState.isLoading &&
+                    !this.props.appsState.failed
+                }
+            >
+                {this.getCurrentRoute()}
+            </AppsPageLayout>
+        );
     }
 }
 
 // TODO: make /apps page unauthed, individual views authed
 const passCombinedState = state => {
-    return { ...mapStateToProps(state), ...mapUserToProps(state) };
+    return { appsState: mapStateToProps(state), ...mapUserToProps(state) };
 };
 export default connect(passCombinedState)(AppsPage);

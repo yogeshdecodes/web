@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StdPageLayout from "~/layouts/StdPage";
 import NavLink from "~/components/ActiveLink";
+import Spinner from "~/components/Spinner";
 
 export default class AppsPageLayout extends Component {
     render() {
@@ -21,7 +22,11 @@ export default class AppsPageLayout extends Component {
                     </>
                 }
             >
-                {this.props.children}
+                {this.props.ready ? (
+                    this.props.children
+                ) : (
+                    <Spinner text="Loading your apps..." />
+                )}
             </StdPageLayout>
         );
     }
