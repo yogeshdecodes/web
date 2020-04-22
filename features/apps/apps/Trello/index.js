@@ -216,7 +216,20 @@ class TrelloSettings extends React.Component {
 
     render() {
         if (this.state.errorMessages) {
-            return <StdErrorMessages error={this.state.errorMessages} />;
+            return (
+                <>
+                    <StdErrorMessages error={this.state.errorMessages} />
+                    <br />
+                    <h3>Troubleshooting</h3>
+                    <p className="mb-em">
+                        If things aren't working right, you can try to reset the
+                        Trello integration.
+                    </p>
+                    <button className="btn-delete" onClick={this.resetTrello}>
+                        Reset Trello
+                    </button>
+                </>
+            );
         }
 
         if (this.state.ready) {
