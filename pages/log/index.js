@@ -3,9 +3,14 @@ import { connect } from "react-redux";
 import NoActivityCard from "~/features/stream/components/NoActivityCard";
 import { requireAuthed } from "../../lib/auth";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
-import GlobalStream, { prefetch as prefetchStream } from "~/features/stream/containers/GlobalStream";
-import DiscussionSection, { prefetchData as prefetchThreads } from "~/features/discussions/DiscussionSection";
+import GlobalStream, {
+    prefetch as prefetchStream
+} from "~/features/stream/containers/GlobalStream";
+import DiscussionSection, {
+    prefetchData as prefetchThreads
+} from "~/features/discussions/DiscussionSection";
 import { Router } from "~/routes";
+import ActivityFeed from "../../features/feeds/ActivityFeed";
 
 class StreamPage extends React.Component {
     static async getInitialProps() {
@@ -39,8 +44,7 @@ class StreamPage extends React.Component {
                                     />
                                 </div>
                             </div>
-                            <h3 className="mb-em">Today's log</h3>
-                            <GlobalStream {...this.props.streamPrefetch} />
+                            <ActivityFeed />
                         </div>
 
                         <div className={"sidebar is-hidden-mobile"}>

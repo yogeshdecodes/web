@@ -227,7 +227,7 @@ class UserMedia extends React.Component {
                         </div>
                         <div className={"flex v-center"}>
                             <span className="name">
-                                <FullName user={user} />
+                                <FullName user={user} />{" "}
                             </span>
                             {user.verified ? (
                                 <>
@@ -269,8 +269,12 @@ class UserMedia extends React.Component {
                                     </Tooltip>
                                 )
                             )}
+
+                            {this.props.extra ? (
+                                <>&nbsp;{this.props.extra}</>
+                            ) : null}
                         </div>
-                        <div className={"stats-case"}>
+                        <div className={"stats-case has-text-grey-light"}>
                             <span className="username">@{user.username}</span>
                             &nbsp;
                             {user.streak !== null && (
@@ -286,6 +290,9 @@ class UserMedia extends React.Component {
                                     </span>
                                 </span>
                             )}
+                            {this.props.extraSmall ? (
+                                <>&nbsp;{this.props.extraSmall}</>
+                            ) : null}
                         </div>
                     </div>
                 </a>

@@ -46,81 +46,66 @@ class ProductMedia extends React.Component {
 
         if (this.props.xs) {
             return (
-                <div className={"ProductMedia"}>
-                    <Link
-                        route="product-page"
-                        params={{ slug: this.props.product.slug }}
-                    >
-                        <a className="a-unstyled">
-                            <div className={"flex"}>
-                                <div>
-                                    <figure className="img-32">
-                                        <img
-                                            src={
-                                                this.props.product.icon
-                                                    ? this.props.product.icon
-                                                    : "https://via.placeholder.com/200?text=No+icon"
-                                            }
-                                            alt="Product"
-                                        />
-                                    </figure>
-                                </div>
-                                <p>
-                                    <strong>{this.props.product.name}</strong>
-                                    <br />
-                                    <small>
-                                        {truncate(
-                                            this.props.product.description,
-                                            10,
-                                            "..."
-                                        )}
-                                    </small>
-                                </p>
-                            </div>
-                        </a>
-                    </Link>
-                </div>
-            );
-        }
-
-        return (
-            <div className={"ProductMedia"}>
                 <Link
                     route="product-page"
                     params={{ slug: this.props.product.slug }}
                 >
                     <a className="a-unstyled">
-                        <div className={"flex"}>
-                            <div>
-                                <figure className="img-48">
-                                    <img
-                                        src={imageUrl(
-                                            this.props.product.icon
-                                                ? this.props.product.icon
-                                                : "https://via.placeholder.com/200?text=No+icon",
-                                            48
-                                        )}
-                                        alt="Product"
-                                    />
-                                </figure>
-                            </div>
-                            <div>
+                        <div className={"ProductMedia"}>
+                            <div className={"flex"}>
+                                <ProductIcon
+                                    is={32}
+                                    product={this.props.product}
+                                />
                                 <div>
-                                    <strong>{this.props.product.name}</strong>
+                                    <strong>{this.props.product.name} </strong>
                                     <br />
-                                    <small>
+                                    <p>
                                         {truncate(
                                             this.props.product.description,
-                                            10,
+                                            14,
                                             "..."
                                         )}
-                                    </small>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </Link>
-            </div>
+            );
+        }
+
+        return (
+            <Link
+                route="product-page"
+                params={{ slug: this.props.product.slug }}
+            >
+                <a className="a-unstyled">
+                    <div className={"ProductMedia"}>
+                        <div className={"flex"}>
+                            <ProductIcon is={48} product={this.props.product} />
+                            <div
+                                class="flex flex-column"
+                                style={{ justifyContent: "center" }}
+                            >
+                                <strong>{this.props.product.name} </strong>
+                                {this.props.product.description ? (
+                                    <>
+                                        <br />
+                                        <p>
+                                            {truncate(
+                                                this.props.product.description,
+                                                14,
+                                                "..."
+                                            )}
+                                        </p>
+                                    </>
+                                ) : null}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </Link>
         );
     }
 }

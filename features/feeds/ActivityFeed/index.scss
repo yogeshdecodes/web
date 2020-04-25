@@ -1,0 +1,8 @@
+@import "../../../styles/_variables";
+
+.ActivityItemContainer {
+    @extend %corners;
+    border: 1px solid var(--c-border);
+    background: var(--c-bg-light);
+    padding: 0.5rem;
+}

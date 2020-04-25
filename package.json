@@ -6,7 +6,8 @@
         "build": "next build",
         "dev": "NODE_OPTIONS='--inspect' DEBUG=axios node server.js",
         "start": "NODE_ENV=production node server.js",
-        "stage": "git push -f heroku develop:master"
+        "stage": "git push -f heroku develop:master",
+        "find-dead": "node scripts/detect-unused.js"
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -43,6 +44,7 @@
         "imagemin-svgo": "^7.0.0",
         "localforage": "^1.7.3",
         "lodash": "^4.17.15",
+        "madge": "^3.8.0",
         "markdown-it": "^10.0.0",
         "mobx": "^5.13.0",
         "mobx-persist": "^0.4.1",
