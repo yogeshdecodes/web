@@ -18,6 +18,17 @@ import { loadingClass } from "~/lib/utils/random";
 import { Tooltip } from "react-tippy";
 import MarkdownHelpText from "~/components/MarkdownHelpText";
 import { Track } from "../../vendor/ga";
+import MarkdownIt from "markdown-it";
+// import style manually
+import "react-markdown-editor-lite/lib/index.css";
+import dynamic from "next/dynamic";
+import GoldMessage from "../../components/GoldMessage";
+
+const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
+    ssr: false
+});
+
+const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 class ProductSelectorDropdown extends React.Component {
     state = {
@@ -161,64 +172,64 @@ class MilestoneEditor extends React.Component {
             <>
                 <Modal.Content>
                     <div className={"MilestoneEditor-container"}>
-                        {!this.props.hasGold && (
-                            <div className={"panel-message gold"}>
-                                <div className={"flex"}>
-                                    <div className={"gold-text"}>
-                                        <h2>Milestones is a Gold feature.</h2>
-                                        <h3>
-                                            Get Gold and support the maker
-                                            movement for just $5/mo.
-                                        </h3>
+                        {!this.props.hasGold ? (
+                            <GoldMessage feature="Milestones" />
+                        ) : (
+                            <>
+                                <div
+                                    className={
+                                        "milestone-form" +
+                                        (!this.props.hasGold ? " disabled" : "")
+                                    }
+                                >
+                                    {this.state.failed && (
+                                        <div className={"panel-message danger"}>
+                                            Oops! Something went wrong. Make
+                                            sure the form is all filled up!
+                                        </div>
+                                    )}
+                                    <div className={"form-row"}>
+                                        <label className="label">Title</label>
+                                        <div className={"control"}>
+                                            <input
+                                                type={"text"}
+                                                value={this.state.title}
+                                                onChange={e =>
+                                                    this.setState({
+                                                        title: e.target.value
+                                                    })
+                                                }
+                                                placeholder="First customer!"
+                                            />
+                                        </div>
                                     </div>
-                                    <div>
-                                        <GoldCtaButton />
+                                    <div className={"form-row"}>
+                                        <label className="label">Content</label>
+                                        <div className={"control"}>
+                                            <MdEditor
+                                                style={{ height: 300 }}
+                                                config={{
+                                                    view: {
+                                                        menu: true,
+                                                        md: true,
+                                                        html: false
+                                                    }
+                                                }}
+                                                onChange={({ html, text }) =>
+                                                    this.setState({
+                                                        body: text
+                                                    })
+                                                }
+                                                value={this.state.body}
+                                                renderHTML={text =>
+                                                    mdParser.render(text)
+                                                }
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </>
                         )}
-                        <div
-                            className={
-                                "milestone-form" +
-                                (!this.props.hasGold ? " disabled" : "")
-                            }
-                        >
-                            {this.state.failed && (
-                                <div className={"panel-message danger"}>
-                                    Oops! Something went wrong. Make sure the
-                                    form is all filled up!
-                                </div>
-                            )}
-                            <div className={"form-row"}>
-                                <label className="label">Title</label>
-                                <div className={"control"}>
-                                    <input
-                                        type={"text"}
-                                        value={this.state.title}
-                                        onChange={e =>
-                                            this.setState({
-                                                title: e.target.value
-                                            })
-                                        }
-                                        placeholder="First customer!"
-                                    />
-                                </div>
-                            </div>
-                            <div className={"form-row"}>
-                                <label className="label">Content</label>
-                                <div className={"control"}>
-                                    <textarea
-                                        value={this.state.body}
-                                        onChange={e =>
-                                            this.setState({
-                                                body: e.target.value
-                                            })
-                                        }
-                                        placeholder="Tell the community what happened..."
-                                    />
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </Modal.Content>
                 {this.props.hasGold && (
@@ -399,41 +410,6 @@ class DiscussionEditor extends React.Component {
             <>
                 <Modal.Content>
                     <div className="form">
-                        <div
-                            className={"control thread-selectors flex flex-gap"}
-                        >
-                            <div className="flex-grow">
-                                <ThreadTypeSelect
-                                    isSelected={this.state.type === "TEXT"}
-                                    onClick={e =>
-                                        this.setState({ type: "TEXT" })
-                                    }
-                                >
-                                    <Emoji emoji={"📝"} /> Textpost
-                                </ThreadTypeSelect>
-                            </div>
-                            <div className="flex-grow">
-                                <ThreadTypeSelect
-                                    isSelected={this.state.type === "QUESTION"}
-                                    onClick={e =>
-                                        this.setState({ type: "QUESTION" })
-                                    }
-                                >
-                                    <Emoji emoji={"🤔"} /> Question
-                                </ThreadTypeSelect>
-                            </div>
-                            <div className="flex-grow">
-                                {" "}
-                                <ThreadTypeSelect
-                                    isSelected={this.state.type === "LINK"}
-                                    onClick={e =>
-                                        this.setState({ type: "LINK" })
-                                    }
-                                >
-                                    <Emoji emoji={"🔗"} /> Link
-                                </ThreadTypeSelect>
-                            </div>
-                        </div>
                         {this.state.failed && (
                             <div className={"panel-message danger"}>
                                 Oops! Something went wrong. Make sure the form
@@ -462,14 +438,22 @@ class DiscussionEditor extends React.Component {
                         <div className={"form-row"}>
                             <label className="label">Post</label>
                             <div className={"control"}>
-                                <textarea
-                                    value={this.state.body}
-                                    onChange={e =>
+                                <MdEditor
+                                    style={{ height: 300 }}
+                                    config={{
+                                        view: {
+                                            menu: true,
+                                            md: true,
+                                            html: false
+                                        }
+                                    }}
+                                    onChange={({ html, text }) =>
                                         this.setState({
-                                            body: e.target.value
+                                            body: text
                                         })
                                     }
-                                    placeholder="Write away..."
+                                    value={this.state.body}
+                                    renderHTML={text => mdParser.render(text)}
                                 />
                             </div>
                         </div>
@@ -497,6 +481,76 @@ class DiscussionEditor extends React.Component {
                     </div>
                 </Modal.Footer>
             </>
+        );
+    }
+}
+
+class CardEditor extends Component {
+    state = {
+        open: false
+    };
+
+    switchTab = tab => {
+        this.props.switchTab(tab);
+    };
+
+    render() {
+        if (!this.props.isLoggedIn) return null;
+
+        return (
+            <div
+                className="card"
+                style={{ border: "1px solid var(--c-border)" }}
+            >
+                <Modal.Header>
+                    <div className="Editor flex flex-gap v-center">
+                        <div className="flex-grow">
+                            <a
+                                className={
+                                    "editor-select " +
+                                    (this.props.tab === 0 && "is-active")
+                                }
+                                onClick={e => this.switchTab(0)}
+                            >
+                                Task
+                            </a>
+                            <a
+                                className={
+                                    "editor-select " +
+                                    (this.props.tab === 1 && "is-active")
+                                }
+                                onClick={e => this.switchTab(1)}
+                            >
+                                Milestone
+                            </a>
+                            <a
+                                className={
+                                    "editor-select " +
+                                    (this.props.tab === 2 && "is-active")
+                                }
+                                onClick={e => this.switchTab(2)}
+                            >
+                                Discussion
+                            </a>
+                        </div>
+                    </div>
+                </Modal.Header>
+                {this.props.tab === 0 && (
+                    <TaskEditorTab {...{ ...this.props, onClose: () => {} }} />
+                )}
+                {this.props.tab === 1 && (
+                    <MilestoneEditor
+                        hasGold={this.props.hasGold}
+                        onClose={() => {}}
+                    />
+                )}
+                {this.props.tab === 2 && (
+                    <DiscussionEditor
+                        hasGold={this.props.hasGold}
+                        onClose={() => {}}
+                    />
+                )}
+            </div>
         );
     }
 }
@@ -604,4 +658,6 @@ const mapDispatchToProps = dispatch => ({
 
 Editor.propTypes = {};
 
+CardEditor = connect(mapStateToProps, mapDispatchToProps)(CardEditor);
+export { CardEditor };
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);

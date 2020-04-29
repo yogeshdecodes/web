@@ -106,7 +106,7 @@ class UserMedia extends React.Component {
                         route="profile-page"
                         params={{ username: user.username }}
                     >
-                        <a>
+                        <a target="_blank">
                             <div className={"card"}>
                                 <div className={"card-content"}>
                                     <div className={"flex"}>
@@ -148,7 +148,7 @@ class UserMedia extends React.Component {
         if (this.props.xs) {
             return (
                 <Link route="profile-page" params={{ username: user.username }}>
-                    <a>
+                    <a target="_blank">
                         <div
                             className={
                                 "flex flex-gap UserMedia xs" +
@@ -175,7 +175,7 @@ class UserMedia extends React.Component {
         if (this.props.medium) {
             return (
                 <Link route="profile-page" params={{ username: user.username }}>
-                    <a>
+                    <a target="_blank">
                         <div
                             className={
                                 "a-unstyled grid-streamcard UserMedia " +
@@ -212,7 +212,7 @@ class UserMedia extends React.Component {
 
         return (
             <Link route="profile-page" params={{ username: user.username }}>
-                <a>
+                <a target="_blank">
                     <div
                         className={
                             "grid-streamcard UserMedia " +

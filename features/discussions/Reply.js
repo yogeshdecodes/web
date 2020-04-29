@@ -9,6 +9,8 @@ import UserLine from "~/features/users/components/UserLine";
 import Markdown from "~/components/Markdown";
 import Praisable from "~/features/stream/components/Task/components/Praise/Praisable";
 import ReplyEditor from "./ReplyEditor";
+import Spinner from "~/components/Spinner";
+import { deleteReply } from "~/lib/discussions";
 
 export default connect(mapUserToProps)(
     class Reply extends React.Component {
@@ -60,7 +62,10 @@ export default connect(mapUserToProps)(
             const { reply, child } = this.props;
 
             return (
-                <div className={"flex flex-gap Reply"}>
+                <div
+                    className={"flex flex-gap Reply"}
+                    id={"reply-" + (reply ? reply.id : null)}
+                >
                     <div>
                         <Link
                             route="profile-page"
@@ -75,7 +80,7 @@ export default connect(mapUserToProps)(
                         <div className={"reply-user flex flex-gap"}>
                             <UserLine user={reply.owner} />
                         </div>
-                        <div className="reply-body">
+                        <div className="reply-body mb-em">
                             {this.state.deleting && (
                                 <Spinner small text={"One moment..."} />
                             )}

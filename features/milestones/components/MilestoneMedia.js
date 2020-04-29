@@ -90,13 +90,19 @@ class MilestoneMediaComponent extends React.Component {
             milestone,
             large = true,
             withIcon = true,
-            xs = false
+            xs = false,
+            activityItem = false
         } = this.props;
 
         return (
-            <div className={"flex MilestoneMedia" + (xs ? " xs" : "")}>
+            <div
+                className={
+                    "flex MilestoneMedia" +
+                    (xs ? " xs" : "") +
+                    (activityItem ? " activity-item " : "")
+                }
+            >
                 <div>
-                    <p className={"heading"}>Milestone</p>
                     {!xs && !this.state.editing && (
                         <Link
                             route={"milestone-page"}
@@ -181,52 +187,64 @@ class MilestoneMediaComponent extends React.Component {
                         </p>
                     )}
                     {!xs && (
-                        <div className={"buttons"} onClick={this.onPraise}>
-                            <Praisable
-                                button
-                                indexUrl={`/milestones/${milestone.slug}`}
-                                initialAmount={milestone.praise}
-                                item={milestone}
-                            />
-                            {this.props.me &&
-                                this.props.me.id === milestone.user.id &&
-                                !(this.props.xs || this.props.stream) && (
-                                    <button
-                                        onClick={e =>
-                                            this.setState({
-                                                editing: !this.state.editing
-                                            })
-                                        }
-                                        small
-                                        className={
-                                            "btn btn-link is-rounded btn-small" +
-                                            (this.props.xs || this.props.stream
-                                                ? " hidden-button"
-                                                : "")
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={"edit"} />
-                                    </button>
-                                )}
-                            {this.props.me &&
-                                this.props.me.id === milestone.user.id && (
-                                    <button
-                                        loading={this.state.deleting}
-                                        onClick={this.delete}
-                                        danger={this.state.confirmDelete}
-                                        className={
-                                            "btn btn-link btn-small is-rounded" +
-                                            (this.props.xs || this.props.stream
-                                                ? " hidden-button"
-                                                : "")
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={"trash"} />{" "}
-                                        {this.state.confirmDelete
-                                            ? "Are you sure?"
-                                            : ""}
-                                    </button>
-                                )}
+                        <div
+                            className={"mt-em flex flex-gap"}
+                            onClick={this.onPraise}
+                        >
+                            <div>
+                                <Praisable
+                                    button
+                                    indexUrl={`/milestones/${milestone.slug}`}
+                                    initialAmount={milestone.praise}
+                                    item={milestone}
+                                />
+                            </div>
+                            <div>
+                                {this.props.me &&
+                                    this.props.me.id === milestone.user.id &&
+                                    !(this.props.xs || this.props.stream) && (
+                                        <button
+                                            onClick={e =>
+                                                this.setState({
+                                                    editing: !this.state.editing
+                                                })
+                                            }
+                                            small
+                                            className={
+                                                "btn btn-light btn-small" +
+                                                (this.props.xs ||
+                                                this.props.stream
+                                                    ? " hidden-button"
+                                                    : "")
+                                            }
+                                        >
+                                            <FontAwesomeIcon icon={"edit"} />{" "}
+                                            Edit
+                                        </button>
+                                    )}
+                            </div>
+                            <div>
+                                {this.props.me &&
+                                    this.props.me.id === milestone.user.id && (
+                                        <button
+                                            loading={this.state.deleting}
+                                            onClick={this.delete}
+                                            danger={this.state.confirmDelete}
+                                            className={
+                                                "btn btn-small btn-delete" +
+                                                (this.props.xs ||
+                                                this.props.stream
+                                                    ? " hidden-button"
+                                                    : "")
+                                            }
+                                        >
+                                            <FontAwesomeIcon icon={"trash"} />{" "}
+                                            {this.state.confirmDelete
+                                                ? "Are you sure?"
+                                                : "Delete"}
+                                        </button>
+                                    )}
+                            </div>
                         </div>
                     )}
                 </div>

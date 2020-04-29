@@ -289,7 +289,7 @@ const ExploreSidebar = ({ isLoggedIn, me, data }) => {
     if (!data || data.failed) return null;
 
     return (
-        <div className="Sidebar">
+        <div className="Sidebar mb-em">
             {isLoggedIn && <UserCard me={me} />}
             <TopStreaksCard topUsers={data.topUsers} />
             <UpcomingEventsCard upcomingEvents={data.upcomingEvents} />

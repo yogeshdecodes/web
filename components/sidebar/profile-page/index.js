@@ -282,11 +282,13 @@ const ProfileSidebar = ({ user, achievements = [] }) => {
     return (
         <div className="ProfileSidebar Sidebar">
             <ActivityCard user={user} />
-            {trophies.length && (
+            {trophies.length > 0 && (
                 <TrophyCaseCard trophies={trophies} user={user} />
             )}
             <MyProductsCard user={user} />
-            {user.nomadlist_handle && <NomadLocationCard user={user} />}
+            {user.nomadlist_handle !== null && (
+                <NomadLocationCard user={user} />
+            )}
 
             {!user.gold ? <AdCard /> : null}
             <SmallFooter />

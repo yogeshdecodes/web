@@ -85,7 +85,7 @@ export default (state, action) => {
                     storage.clear();
                     localForage.clear().then(e => {
                         // 3. reload
-                        Router.pushRoute("home");
+                        Router.pushRoute("/");
                         window.location.reload();
                     });
                 }

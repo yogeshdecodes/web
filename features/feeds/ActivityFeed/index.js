@@ -5,10 +5,30 @@ import FullName from "~/components/FullName";
 import pluralize from "pluralize";
 import { UserMedia } from "~/features/users";
 import TimeAgo from "react-timeago";
-import { toDate } from "date-fns-tz";
-import "./index.scss";
+import { toDate, utcToZonedTime } from "date-fns-tz";
 import { Task } from "../../stream";
 import { Product } from "~/features/products/";
+import { Link } from "~/routes";
+
+//import { CSSTransitionGroup } from "react-transition-group";
+import InfiniteScroll from "react-infinite-scroll-component";
+import NoActivityCard from "~/features/stream/components/NoActivityCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import StreamFinished from "~/features/stream/components/Stream/components/StreamFinished";
+import Spinner from "~/components/Spinner";
+import { isServer } from "~/config";
+import { orderByDate } from "../../../lib/utils/tasks";
+import orderBy from "lodash/orderBy";
+import { getTimezone } from "../../../lib/utils/timezone";
+import Markdown from "~/components/Markdown";
+import {
+    orderActivities,
+    normalizeTimezones
+} from "../../../lib/utils/activities";
+import TaskActivityGroup from "../TaskActivityGroup";
+import MilestoneMedia from "../../milestones/components/MilestoneMedia";
+import AdIntersitial from "../AdIntersitial";
+import "./index.scss";
 
 function activityChildrenHaveSameVerb(activity) {
     return (
@@ -23,6 +43,18 @@ function activityChildrenHaveSameActor(activity) {
         activity.type === "aggregated" &&
         activity.activities.every(
             a => a.actor.id === activity.activities[0].actor.id
+        )
+    );
+}
+
+function activityChildrenHaveSameTargetType(activity) {
+    // assumes activity is valid...
+    return (
+        activity.type === "aggregated" &&
+        activity.activities.every(
+            a =>
+                a.target_type === activity.activities[0].target_type &&
+                a.target_type !== null
         )
     );
 }
@@ -48,7 +80,11 @@ const ActivityActionText = ({ activity }) => {
 function getActivityVerb(activity, tense = "past_tense") {
     if (activity.type === "aggregated" && activity.activities.length) {
         const verbs = uniq(activity.activities.map(a => a.verb[tense]));
-        return verbs.join(", ");
+        return activityChildrenHaveSameTargetType(activity)
+            ? `${verbs.join(", ")} to`
+            : verbs.join(", ");
+    } else if (activity.target_type) {
+        return `${activity.verb[tense]} to`;
     } else {
         return activity.verb[tense];
     }
@@ -58,6 +94,50 @@ function countActivityChildren(activity) {
     return activity.type === "aggregated" ? activity.activities.length : 0;
 }
 
+function ItemLink({ type, item, children }) {
+    if (!item) return children;
+    switch (type) {
+        case "task":
+            return (
+                <Link route="task-page" params={{ id: item.id }}>
+                    <a target="_blank" rel="noopener noreferrer">
+                        {children}
+                    </a>
+                </Link>
+            );
+
+        case "thread":
+            return (
+                <Link route="discussion-page" params={{ slug: item.slug }}>
+                    <a target="_blank" rel="noopener noreferrer">
+                        {children}
+                    </a>
+                </Link>
+            );
+
+        case "reply":
+            return (
+                <Link href={`/discussions/${item.parent}/#reply-${item.id}`}>
+                    <a target="_blank" rel="noopener noreferrer">
+                        {children}
+                    </a>
+                </Link>
+            );
+
+        case "milestone":
+            return (
+                <Link route="milestone-page" params={{ slug: item.slug }}>
+                    <a target="_blank" rel="noopener noreferrer">
+                        {children}
+                    </a>
+                </Link>
+            );
+
+        default:
+            return children;
+    }
+}
+
 function getHumanActivityObject(activity) {
     let getPrefix = count => (count == 1 ? "a" : count);
     if (activity.type === "aggregated") {
@@ -65,9 +145,67 @@ function getHumanActivityObject(activity) {
         const objectType = activityChildrenHaveSameObjectType(activity)
             ? activity.activities[0].object_type
             : "thing";
-        return `${getPrefix(count)} ${pluralize(objectType, count)}`;
+        const object = activityChildrenHaveSameObjectType(activity)
+            ? activity.activities[0].object
+            : null;
+        return count == 1 ? (
+            <ItemLink item={object} type={objectType}>
+                {getPrefix(count)} {pluralize(objectType, count)}
+            </ItemLink>
+        ) : (
+            `${getPrefix(count)} ${pluralize(objectType, count)}`
+        );
     } else {
         return `${getPrefix(1)} ${pluralize(activity.object_type, 1)}`;
+    }
+}
+
+function getTargetTitle(type, target) {
+    if (!target) return null;
+
+    if (type === "thread") {
+        return `"${target.title}"`;
+    }
+
+    return null;
+}
+
+function getHumanTargetType(activity) {
+    let getPrefix = count => (count == 1 ? "a" : count);
+    if (activity.type === "aggregated") {
+        const count = countActivityChildren(activity);
+        const targetType = activityChildrenHaveSameTargetType(activity)
+            ? activity.activities[0].target_type
+            : null;
+        const target = activityChildrenHaveSameTargetType(activity)
+            ? activity.activities[0].target
+            : null;
+        if (!targetType) {
+            return null;
+        }
+        const typeText = pluralize(targetType, count);
+        const targetTitle = getTargetTitle(targetType, target);
+        if (targetTitle) {
+            return count == 1 ? (
+                <ItemLink item={target} type={targetType}>
+                    {targetTitle}
+                </ItemLink>
+            ) : (
+                `${targetTitle}`
+            );
+        }
+        return count == 1 ? (
+            <ItemLink item={target} type={targetType}>
+                {getPrefix(count)} {typeText}
+            </ItemLink>
+        ) : (
+            `${getPrefix(count)} ${typeText}`
+        );
+    } else {
+        if (!activity.target_type) {
+            return null;
+        }
+        return `${getPrefix(1)} ${pluralize(activity.target_type, 1)}`;
     }
 }
 
@@ -134,19 +272,68 @@ const ActivityObject = ({ activity }) => {
                 </div>
             );
 
+        case "milestone":
+            return <MilestoneMedia activityItem milestone={object} />;
+
+        case "reply":
+            const otherReplies = activity.target
+                ? activity.target.reply_count - 1
+                : 0;
+            return (
+                <div className="ActivityItemContainer">
+                    <p className="mb-em">
+                        <Markdown body={object.body} />
+                    </p>
+                    <div className="actions">
+                        <ItemLink type="reply" item={object}>
+                            <a className="btn-light btn btn-small">Reply</a>
+                        </ItemLink>
+                    </div>
+                </div>
+            );
+
+        case "thread":
+            return (
+                <div className="ActivityItemContainer">
+                    <ItemLink type="thread" item={object}>
+                        <h3>{object.title}</h3>
+                    </ItemLink>
+                    <p className="mb-em">
+                        <Markdown body={object.body} />
+                    </p>
+                    <div className="actions">
+                        <ItemLink type="thread" item={object}>
+                            <a className="btn-light btn btn-small">Reply</a>
+                        </ItemLink>
+                    </div>
+                </div>
+            );
+
+        /*
+        {otherReplies > 0 && (
+            <small className="has-text-gray">
+                ...{otherReplies} other replies
+            </small>
+        )}
+            */
+
         default:
             return <ActivityTypeUnknown />;
     }
 };
 
 const ActivityObjectGroup = ({ activities }) => {
-    return activities.map(a => <ActivityObject activity={a} />);
+    if (activities.length === 0) return null;
+    if (activities.every(a => a.object_type === "task")) {
+        return <TaskActivityGroup activities={activities} />;
+    }
+    return activities.map(a => <ActivityObject key={a.id} activity={a} />);
 };
 
 const Activity = ({ activity }) => {
     // order matters
     activity = cleanChildren(activity);
-    if (!checkActivity(activity)) return <div>This data was deleted.</div>;
+    if (!checkActivity(activity)) return null;
     return (
         <section className="StreamSection">
             <div className="StreamCard flex">
@@ -158,17 +345,18 @@ const Activity = ({ activity }) => {
                                 extra={
                                     <span className="has-text-gray">
                                         {getActivityVerb(activity)}{" "}
-                                        {getHumanActivityObject(activity)}
+                                        {getHumanTargetType(activity) ||
+                                            getHumanActivityObject(activity)}
                                     </span>
                                 }
                                 extraSmall={
                                     <>
                                         ·{" "}
                                         <TimeAgo
-                                            date={toDate(
+                                            date={
                                                 activity.updated_at ||
-                                                    activity.created_at
-                                            )}
+                                                activity.created_at
+                                            }
                                         />
                                     </>
                                 }
@@ -192,16 +380,74 @@ const Activity = ({ activity }) => {
 
 class ActivityFeed extends React.Component {
     render() {
+        let data = orderActivities(this.props.activities);
+        data = normalizeTimezones(
+            data,
+            this.props.user ? this.props.user.timezone : null
+        );
+
+        if (data.length === 0 && !this.props.hasMore && !this.props.isSyncing) {
+            return this.props.noActivityComponent;
+        }
+
         return (
-            <div className="card">
-                <div className="card-content">
-                    {mock.results.map(a => (
-                        <Activity activity={a} />
-                    ))}
+            <InfiniteScroll
+                next={this.props.loadMore}
+                hasMore={this.props.hasMore}
+                style={{ overflow: "none" }}
+                key={isServer}
+            >
+                <div className="ActivityFeed card">
+                    <div className="card-content">
+                        {Object.entries(data).map(([k, v]) => {
+                            if (k != 0 && k != 1 && k % 10 == 0) {
+                                return (
+                                    <>
+                                        <AdIntersitial />
+                                        <Activity key={v.id} activity={v} />
+                                    </>
+                                );
+                            } else {
+                                return <Activity key={v.id} activity={v} />;
+                            }
+                        })}
+
+                        {this.props.hasMore && (
+                            <div className={"center"}>
+                                <button
+                                    className={
+                                        "btn btn-light" +
+                                        (this.props.isSyncing
+                                            ? " is-loading"
+                                            : "")
+                                    }
+                                    onClick={this.props.loadMore}
+                                >
+                                    <FontAwesomeIcon
+                                        icon={"arrow-circle-down"}
+                                    />{" "}
+                                    Load more tasks...
+                                </button>
+                            </div>
+                        )}
+                        {!this.props.hasMore && this.props.isSyncing && (
+                            <Spinner text="Loading the makerness..." />
+                        )}
+                        {!this.props.hasMore && !this.props.isSyncing && (
+                            <div className="mt-em">
+                                <StreamFinished />
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
+            </InfiniteScroll>
         );
     }
 }
+
+ActivityFeed.defaultProps = {
+    noActivityComponent: <NoActivityCard />,
+    activities: []
+};
 
 export default ActivityFeed;

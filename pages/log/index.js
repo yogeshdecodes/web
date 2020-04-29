@@ -11,19 +11,29 @@ import DiscussionSection, {
 } from "~/features/discussions/DiscussionSection";
 import { Router } from "~/routes";
 import ActivityFeed from "../../features/feeds/ActivityFeed";
+import KeyActivityFeed, {
+    prefetchActivity
+} from "../../features/feeds/KeyActivityFeed";
+import FeedSwitcher from "../../features/feeds/FeedSwitcher";
+import MainFeed from "../../features/feeds/MainFeed";
+import { CardEditor } from "../../features/editor";
+import TodayCard from "../../features/tasks/components/TodayCard";
 
 class StreamPage extends React.Component {
     static async getInitialProps() {
         return {
+            layout: {
+                footer: false
+            },
             ...(await prefetchData()),
-            streamPrefetch: await prefetchStream(),
+            activitiesPrefetch: await prefetchActivity("site:aggregated"),
             discussionPrefetch: await prefetchThreads()
         };
     }
 
     componentDidMount() {
         if (this.props.isNewUser) {
-            Router.pushRoute("welcome");
+            Router.pushRoute("/welcome");
         }
     }
 
@@ -33,18 +43,21 @@ class StreamPage extends React.Component {
         return (
             <>
                 <section className={"container"}>
-                    <div className={"grid-c-s"}>
+                    <div className={"grid-s-c-s"}>
+                        <div className={"sidebar"}>
+                            <FeedSwitcher />
+                        </div>
                         <div>
-                            {this.hasNoTasks() ? <NoActivityCard /> : null}
-                            <h3 className="mb-em">Latest threads</h3>
-                            <div className="card">
-                                <div className="card-content">
-                                    <DiscussionSection
-                                        {...this.props.discussionPrefetch}
-                                    />
-                                </div>
-                            </div>
-                            <ActivityFeed />
+                            {this.hasNoTasks() ? (
+                                <NoActivityCard />
+                            ) : (
+                                <CardEditor />
+                            )}
+                            <TodayCard />
+                            <h3 className="mb-em">Feed</h3>
+                            <MainFeed
+                                prefetchData={this.props.activitiesPrefetch}
+                            />
                         </div>
 
                         <div className={"sidebar is-hidden-mobile"}>

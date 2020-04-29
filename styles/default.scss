@@ -91,6 +91,7 @@
 html {
     font-size: $font-size;
     font-family: "Inter", sans-serif;
+    scroll-behavior: smooth;
 }
 
 @supports (font-variation-settings: normal) {
@@ -341,6 +342,10 @@ a[class^="btn"] {
             background: transparent;
             color: var(--c-lightest) !important;
         }
+    }
+
+    &.is-gold {
+        background: $c-gold;
     }
 
     &.btn-primary,
@@ -779,13 +784,19 @@ table.is-full {
 }
 
 .grid-c-s,
-.grid-s-c {
+.grid-s-c,
+.grid-s-c-s {
     display: grid;
     grid-gap: $gap;
 }
 
 .grid-c-s {
     grid-template-columns: calc(100% - 408px) 376px;
+}
+
+.grid-s-c-s {
+    display: grid;
+    grid-template-columns: 0.4fr 2fr 376px;
 }
 
 .grid-s-c {
@@ -1727,7 +1738,8 @@ figure.img-circle {
     }
 
     .grid-s-c,
-    .grid-c-s {
+    .grid-c-s,
+    .grid-s-c-s {
         grid-template-columns: repeat(1, 100%);
     }
 
@@ -1836,8 +1848,10 @@ a.unstyled,
 
     flex-direction: row;
 
-    a.btn {
-        margin-top: 10px;
+    div.buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .alert-icon {
@@ -1976,6 +1990,7 @@ a.unstyled,
         border-bottom-right-radius: 5px;
         border-bottom-left-radius: 5px;
         text-align: left;
+        width: 100%;
 
         ul {
             padding-left: 0;
@@ -2158,6 +2173,10 @@ a {
     width: 100%;
 }
 
+.mt-0 {
+    margin-top: 0px;
+}
+
 .mt-5 {
     margin-top: 5px;
 }
@@ -2168,6 +2187,14 @@ a {
 
 .mb-em {
     margin-bottom: 1em;
+}
+
+.mb-0 {
+    margin-bottom: 0px;
+}
+
+.mt-em {
+    margin-top: 1em;
 }
 
 .std-media {
@@ -2525,4 +2552,34 @@ select option {
 
 .flex-mobile {
     flex-flow: row wrap;
+}
+
+p {
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.markdown-body p {
+    margin-bottom: 0px !important;
+}
+.info-tag {
+    @extend %corners;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    position: absolute;
+    right: -25px;
+    top: -10px;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
 }

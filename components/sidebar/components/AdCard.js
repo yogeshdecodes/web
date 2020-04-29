@@ -8,7 +8,7 @@ export default () => {
             <h3>Indie ad</h3>
             <h4 className="subtitle has-text-grey">
                 <OutboundLink to="https://makerlog.io/intravert">
-                    Put your product here!
+                    Advertise on Makerlog &raquo;
                 </OutboundLink>
             </h4>
             <div className="card">

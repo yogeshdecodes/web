@@ -3,6 +3,22 @@
 .ActivityItemContainer {
     @extend %corners;
     border: 1px solid var(--c-border);
-    background: var(--c-bg-light);
-    padding: 0.5rem;
+    // background: var(--c-bg-light);
+    padding: 1rem;
+}
+
+.ActivityFeed {
+    .StreamSection {
+        padding-bottom: 0px;
+        margin-top: $gap * 1.25;
+        margin-bottom: $gap * 1.25;
+
+        &:first-of-type {
+            margin-top: 0px;
+        }
+
+        &:last-of-type {
+            margin-bottom: 0px;
+        }
+    }
 }
