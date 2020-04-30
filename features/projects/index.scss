@@ -1,30 +1,9 @@
 @import "../../styles/_variables";
 
-.InProgressCard {
-    @extend %transition-bg;
-    color: var(--c-lightest);
-    background: $c-in-progress;
-
-    * {
-        color: var(--c-lightest);
-    }
-
-    &.empty {
-        background: $c-main;
-    }
-
-    .Entry {
-        background: transparent;
-        cursor: pointer;
-
-        svg {
-            color: var(--c-lightest);
-            height: 1.4rem;
-        }
-
-        .task-content {
-            font-size: 1.4rem;
-        }
+.TodayCard {
+    .card-content {
+        max-height: 70vh;
+        overflow: auto;
     }
 }
 

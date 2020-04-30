@@ -1,7 +1,6 @@
 import React from "react";
 import { getRecentDiscussions, getTrendingThreads } from "~/lib/discussions";
 import ThreadMediaLine from "./ThreadMediaLine";
-import orderBy from "lodash/orderBy";
 
 class DiscussionSection extends React.Component {
     constructor(props) {

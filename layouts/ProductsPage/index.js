@@ -10,10 +10,6 @@ export default class ProductsPageLayout extends Component {
             <>
                 <PageNavigation title="Products">
                     <NavLink route="products" activeClassName="is-active">
-                        <a className="navbar-item">Launches</a>
-                    </NavLink>
-
-                    <NavLink route="products-yours" activeClassName="is-active">
                         <a className="navbar-item">Your products</a>
                     </NavLink>
 
@@ -26,10 +22,12 @@ export default class ProductsPageLayout extends Component {
                         </a>
                     </NavLink>
                 </PageNavigation>
-                <div className="container grid-c-s">
-                    <div>{this.props.children}</div>
-                    <div>
-                        <ProductsPageSidebar />
+                <div className="container">
+                    <div className="mtGap grid-c-s">
+                        <div>{this.props.children}</div>
+                        <div>
+                            <ProductsPageSidebar />
+                        </div>
                     </div>
                 </div>
             </>

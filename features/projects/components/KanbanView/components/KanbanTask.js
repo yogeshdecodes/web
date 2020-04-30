@@ -2,7 +2,7 @@ import React from "react";
 import { processTaskString } from "~/lib/utils/parsers";
 import { connect } from "react-redux";
 import TimeAgo from "react-timeago";
-import { TaskDetailModal } from "~/features/stream";
+import TaskDetailModal from "~/features/tasks/components/TaskEditModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mapDispatchToProps from "~/features/projects/containers/mapDispatchToProps";
 
@@ -59,10 +59,7 @@ class KanbanTask extends React.Component {
 
                 <div className="hover-panel flex center v-center">
                     {this.props.extraButtons}
-                    <a
-                        onClick={this.toggleEditing}
-                        className="edit-button"
-                    >
+                    <a onClick={this.toggleEditing} className="edit-button">
                         <FontAwesomeIcon icon={"edit"} /> Edit
                     </a>
 

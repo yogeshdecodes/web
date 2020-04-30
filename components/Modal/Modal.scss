@@ -8,9 +8,11 @@ $modal-padding: 1rem;
 
     position: absolute;
     min-width: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 50vw;
+    position: fixed; /*or absolute*/
+    margin: 25vh 25vw;
     outline: none;
     animation: fadein 0.5s;
     background-color: var(--c-lightest);
@@ -120,9 +122,6 @@ strong {
     .Modal {
         left: 0;
         width: 100% !important;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
     }
 
     .Modal-Container {
@@ -138,9 +137,8 @@ strong {
     .Modal {
         left: 0;
         width: 100% !important;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        margin-left: 0px;
+        margin-right: 0px;
     }
 
     .Modal-Container {

@@ -1,5 +1,5 @@
 import { errorArray } from "~/lib/utils/error";
-import { destroyCookie } from "nookies";
+import { destroyCookie, setCookie } from "nookies";
 import { Track } from "~/vendor/ga";
 
 const initialState = {
@@ -104,7 +104,9 @@ export const actions = {
     logout: (ctx = null) => {
         // persistor.purge();
         new Track().event("logout");
-        destroyCookie(ctx ? ctx : {}, "token");
+        setCookie(ctx ? ctx : {}, "token", "", {
+            maxAge: 30 * 24 * 60 * 60
+        });
         return {
             type: types.LOGOUT
         };

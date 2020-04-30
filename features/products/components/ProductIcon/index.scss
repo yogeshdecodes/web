@@ -24,6 +24,15 @@
         font-size: 2rem;
     }
 
+    &.is-64 {
+        min-height: 64px;
+        min-width: 64px;
+        max-height: 64px;
+        max-width: 64px;
+        width: 64px;
+        height: 64px;
+    }
+
     &.is-48 {
         min-height: 48px;
         min-width: 48px;

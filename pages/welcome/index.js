@@ -240,7 +240,7 @@ class StepSix extends React.Component {
         const { next, previous } = this.props;
 
         if (this.state.done) {
-            Router.pushRoute("log");
+            Router.pushRoute("/log");
         }
 
         return (

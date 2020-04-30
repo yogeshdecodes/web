@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import OutboundLink from "~/components/OutboundLink";
 import LoggedInOnly from "~/features/users/containers/LoggedInOnly";
 import LoggedOutOnly from "~/features/users/containers/LoggedOutOnly";
 import { Link } from "~/routes";

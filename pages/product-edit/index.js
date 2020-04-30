@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import GeneralTab from "~/features/products/components/settings/GeneralTab";
 import TeamTab from "~/features/products/components/settings/TeamTab";
 import { requireAuthed } from "~/lib/auth";
-import EventsTab from "~/features/products/components/settings/EventsTab";
 import DangerZone from "~/features/products/components/settings/DangerZone";
 import { Router } from "~/routes";
 
@@ -60,7 +59,7 @@ class ProductEditPage extends Component {
     }
 
     onDelete = () => {
-        Router.pushRoute("products-yours");
+        Router.pushRoute("/products");
     };
 
     render() {
@@ -90,9 +89,6 @@ class ProductEditPage extends Component {
                         )}
                         {this.state.tab === 1 && (
                             <TeamTab {...this.getTabProps()} />
-                        )}
-                        {this.state.tab === 2 && (
-                            <EventsTab {...this.getTabProps()} />
                         )}
                         {this.state.tab === 3 && (
                             <DangerZone

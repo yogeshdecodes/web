@@ -86,9 +86,9 @@ class NotificationsView extends React.Component {
                                     <div>
                                         <h2>Failed to load notifications</h2>
                                         <h3 className="subtitle has-text-grey">
-                                            {this.props.errorMessages.message()}
+                                            {this.props.errorMessages.message}
                                             &nbsp;
-                                            {this.props.errorMessages.code()}
+                                            {this.props.errorMessages.code}
                                         </h3>
                                     </div>
                                     <div>
@@ -104,7 +104,7 @@ class NotificationsView extends React.Component {
                                 </>
                             )}
 
-                            {!this.props.ready && (
+                            {!this.props.ready && !this.props.failed && (
                                 <div>
                                     <Spinner small />
                                 </div>

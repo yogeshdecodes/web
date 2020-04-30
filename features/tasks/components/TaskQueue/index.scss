@@ -5,6 +5,15 @@
         margin-top: 10px;
     }
 
+    .attach-controls {
+        div {
+            padding: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
     .attachment-panel {
         background: var(--c-bg);
         border: 1px solid var(--c-border);

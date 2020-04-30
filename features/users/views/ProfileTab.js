@@ -80,7 +80,6 @@ class ProfileTab extends React.Component {
     onAvatarUpload = (acceptedFiles, rejectedFiles) => {
         const file = acceptedFiles[0];
         const reader = new FileReader();
-        reader.readAsDataURL(file);
 
         this.setState({
             avatarUploading: true
@@ -93,6 +92,7 @@ class ProfileTab extends React.Component {
                 avatarUploading: false
             });
         };
+        reader.readAsDataURL(file);
     };
 
     onHeaderUpload = (acceptedFiles, rejectedFiles) => {
@@ -317,32 +317,6 @@ class ProfileTab extends React.Component {
                                         />
                                     </figure>
                                 ) : this.state.avatarUploading ? (
-                                    <Spinner small />
-                                ) : (
-                                    <FontAwesomeIcon icon={"camera"} />
-                                )}
-                            </Dropzone>
-                        </div>
-
-                        <br />
-
-                        <div className={"form-row"}>
-                            <label className="label">Header image</label>
-                            <Dropzone
-                                maxSize={2 * 1024 * 1024}
-                                className={"ProductIconPicker"}
-                                accept="image/*"
-                                multiple={false}
-                                onDrop={this.onHeaderUpload}
-                            >
-                                {this.state.headerPreviewUrl ? (
-                                    <figure className="image is4by3">
-                                        <img
-                                            style={{ height: 100 }}
-                                            src={this.state.headerPreviewUrl}
-                                        />
-                                    </figure>
-                                ) : this.state.headerUploading ? (
                                     <Spinner small />
                                 ) : (
                                     <FontAwesomeIcon icon={"camera"} />

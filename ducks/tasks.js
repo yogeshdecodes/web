@@ -1,11 +1,16 @@
 import uniqBy from "lodash/uniqBy";
 import findIndex from "lodash/findIndex";
 import { errorArray } from "~/lib/utils/error";
+import { StdErrorCollection } from "../lib/utils/error";
 
 const initialState = {
     ready: false,
     isSyncing: true,
     isCreating: false,
+    isUpdating: false,
+    updatingId: null,
+    isDeleting: false,
+    deletingId: null,
     tasks: [],
     lastSynced: null,
     loadDone: false,
@@ -93,13 +98,18 @@ export const tasksReducer = (state = initialState, action) => {
         case types.TASKS_DELETE_REQUEST:
             return {
                 ...state,
+                isDeleting: true,
+                deletingId: action.id,
                 tasks: state.tasks.filter(({ id }) => id !== action.id)
             };
 
         case types.TASKS_DELETE_SUCCEED:
             // do nothing for now.
             return {
-                ...state
+                ...state,
+                isDeleting: false,
+                deletingId: null,
+                errorMessages: null
             };
 
         case types.TASKS_PURGE_BATCH:
@@ -113,7 +123,10 @@ export const tasksReducer = (state = initialState, action) => {
         case types.TASKS_DELETE_FAILED:
             // do nothing for now
             return {
-                ...state
+                ...state,
+                isDeleting: false,
+                deletingId: null,
+                errorMessages: action.errorMessages
             };
 
         case types.TASKS_UPDATE_REQUEST:
@@ -126,6 +139,8 @@ export const tasksReducer = (state = initialState, action) => {
 
             return {
                 ...state,
+                isUpdating: true,
+                updatingId: action.id,
                 tasks: updatedData
             };
 
@@ -139,13 +154,20 @@ export const tasksReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                tasks: receivedTasks
+                isUpdating: false,
+                updatingId: null,
+                tasks: receivedTasks,
+
+                errorMessages: null
             };
 
         case types.TASKS_UPDATE_FAILED:
             // do nothing for now
             return {
-                ...state
+                ...state,
+                isUpdating: false,
+                updatingId: null,
+                errorMessages: action.errorMessages
             };
 
         case types.TASKS_SEARCH:
@@ -247,9 +269,10 @@ export const actions = {
         };
     },
 
-    deleteTaskFailed: (errorMessages = ["Failed to delete task."]) => {
+    deleteTaskFailed: (e = "Failed to delete task.") => {
         return {
-            type: types.TASKS_DELETE_FAILED
+            type: types.TASKS_DELETE_FAILED,
+            errorMessages: new StdErrorCollection(e)
         };
     },
 
@@ -268,7 +291,10 @@ export const actions = {
         type: types.TASKS_UPDATE_SUCCEED,
         task: task
     }),
-    updateTaskFailed: () => ({ type: types.TASKS_UPDATE_FAILED }),
+    updateTaskFailed: (e = "Failed to update task.") => ({
+        type: types.TASKS_UPDATE_FAILED,
+        errorMessages: new StdErrorCollection(e)
+    }),
     updateTask: (id, task = {}) => ({
         type: types.TASKS_UPDATE_REQUEST,
         id: id,

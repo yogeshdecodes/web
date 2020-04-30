@@ -3,7 +3,6 @@ import { Link } from "~/routes";
 import { postComment } from "~/lib/comments";
 import Avatar from "~/features/users/components/Avatar";
 import Spinner from "~/components/Spinner";
-import "./CommentInput.scss";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import dynamic from "next/dynamic";

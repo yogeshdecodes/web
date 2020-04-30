@@ -1,10 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { achievementsTypes, achievementsActions } from "../ducks/achievements";
-import {
-    getAchievements,
-    getAllTrophies,
-    markAllRead
-} from "../lib/achievements";
+import { achievementsActions, achievementsTypes } from "../ducks/achievements";
+import { getAchievements, getAllTrophies, markAllRead } from "../lib/achievements";
 
 function* fetchAchievements(action) {
     try {

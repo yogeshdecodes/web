@@ -377,7 +377,7 @@ class RegisterForm extends React.Component {
                                 repeat_password: e.target.value
                             })
                         }
-                        type={this.state.showPassword ? null : "password"}
+                        type={this.state.showPassword ? "text" : "password"}
                         danger={
                             this.state.errorMessages &&
                             this.state.errorMessages.password

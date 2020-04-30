@@ -5,15 +5,11 @@ import "./index.scss";
 import OutboundLink from "~/components/OutboundLink";
 import { normalizeUrl } from "~/lib/utils/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import StreakTrophy from "../../../features/trophies/StreakTrophy";
-import ClubTrophy from "../../../features/trophies/ClubTrophy";
-import StaffTrophy from "../../../features/trophies/StaffTrophy";
 import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
 import Spinner from "~/components/Spinner";
 import { getNomadLocation } from "../../../lib/integrations/nomadlist";
 import ProductsContainer from "~/features/products/containers/ProductsContainer";
 import { ProductList } from "~/features/products";
-import SpecialTrophy from "../../../features/trophies/SpecialTrophy";
 import { TrophyIcon } from "../../../features/achievements/TrophyMedia";
 
 class MyProductsCard extends Component {
@@ -255,6 +251,19 @@ const BioCard = ({ user }) => {
                                     </OutboundLink>
                                 </li>
                             )}
+
+                            {user.telegram_handle && (
+                                <li>
+                                    <OutboundLink
+                                        to={`https://t.me/${user.telegram_handle}`}
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={["fab", "telegram"]}
+                                        />{" "}
+                                        {user.telegram_handle}
+                                    </OutboundLink>
+                                </li>
+                            )}
                         </ul>
                     </small>
                 </div>
@@ -272,13 +281,14 @@ const ProfileSidebar = ({ user, achievements = [] }) => {
 
     return (
         <div className="ProfileSidebar Sidebar">
-            <BioCard user={user} />
-            {trophies.length && (
+            <ActivityCard user={user} />
+            {trophies.length > 0 && (
                 <TrophyCaseCard trophies={trophies} user={user} />
             )}
-            <ActivityCard user={user} />
             <MyProductsCard user={user} />
-            {user.nomadlist_handle && <NomadLocationCard user={user} />}
+            {user.nomadlist_handle !== null && (
+                <NomadLocationCard user={user} />
+            )}
 
             {!user.gold ? <AdCard /> : null}
             <SmallFooter />

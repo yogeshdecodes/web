@@ -2,12 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import Spinner from "~/components/Spinner";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
-import { validateEmail } from "~/lib/utils/random";
+import { loadingClass, validateEmail } from "~/lib/utils/random";
 import { Tooltip } from "react-tippy";
 import { connect } from "react-redux";
 import { actions as authActions } from "~/ducks/auth";
 import { Link } from "~/routes";
-import { loadingClass } from "~/lib/utils/random";
 
 function getSpinnerText() {
     const strs = [

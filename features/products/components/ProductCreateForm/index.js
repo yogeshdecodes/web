@@ -3,27 +3,16 @@ import LaunchedToggle from "~/features/products/components/LaunchedToggle";
 import Dropzone from "react-dropzone";
 import ProductIcon from "~/features/products/components/ProductIcon";
 import { handleChange } from "~/lib/utils/random";
-import ErrorMessageList from "~/components/forms/ErrorMessageList";
-import HashtagPicker from "~/features/projects/components/HashtagPicker";
 import { actions as projectsActions } from "~/ducks/projects";
 import TeamSelector from "../TeamSelector";
-import { createProject } from "~/lib/projects";
 import { connect } from "react-redux";
-import {
-    formatHandle,
-    formatUrl,
-    loadingClass
-} from "../../../../lib/utils/random";
+import { formatHandle, formatUrl, loadingClass } from "../../../../lib/utils/random";
 import { createProduct } from "~/lib/products";
 import isFunction from "lodash/isFunction";
 import { Router } from "~/routes";
 import Spinner from "~/components/Spinner";
 import { getOrCreateProject } from "~/lib/utils/projects";
-import {
-    StdErrorCollection,
-    renderHelpOrError,
-    ValidationError
-} from "../../../../lib/utils/error";
+import { renderHelpOrError, StdErrorCollection, ValidationError } from "../../../../lib/utils/error";
 import StdErrorMessages from "~/components/forms/StdErrorMessages";
 
 class ProductCreateForm extends Component {
@@ -42,8 +31,15 @@ class ProductCreateForm extends Component {
         productHunt: "",
         twitter: "",
         accent: "#00a676",
-        errorMessages: null
+        errorMessages: null,
+        tagsTooLong: false
     };
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({ tagsTooLong: true });
+        }, 2000);
+    }
 
     setUrl = (key, url) => {
         this.setState({
@@ -166,7 +162,27 @@ class ProductCreateForm extends Component {
                     <div className="control">
                         <label>Hashtag</label>
                         {!this.props.projectsReady ? (
-                            <Spinner small text="Loading projects..." />
+                            <>
+                                <Spinner
+                                    small
+                                    text={
+                                        this.state.tagsTooLong ? (
+                                            <>
+                                                Taking too long?{" "}
+                                                <a
+                                                    onClick={
+                                                        this.props.fetchProjects
+                                                    }
+                                                >
+                                                    Retry
+                                                </a>
+                                            </>
+                                        ) : (
+                                            "Loading tags..."
+                                        )
+                                    }
+                                />
+                            </>
                         ) : (
                             <input
                                 onChange={this.handleChange}
@@ -315,7 +331,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     pushProject: project =>
-        dispatch(projectsActions.fetchProjectsSuccess([project]))
+        dispatch(projectsActions.fetchProjectsSuccess([project])),
+
+    fetchProjects: project => dispatch(projectsActions.fetchProjects([project]))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCreateForm);

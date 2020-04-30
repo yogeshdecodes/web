@@ -1,4 +1,3 @@
-import Spinner from "~/components/Spinner";
 import "./index.scss";
 import OutboundLink from "~/components/OutboundLink";
 

@@ -5,8 +5,12 @@
     box-shadow: none;
     border-top: none !important;
     padding-top: 0 !important;
-    margin-top: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
+
+    &:last-of-type {
+        margin-bottom: 0px;
+    }
 
     &.lazy {
         opacity: 0.6;

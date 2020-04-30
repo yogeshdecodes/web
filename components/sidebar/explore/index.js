@@ -207,10 +207,13 @@ const UpcomingEventsCard = ({ upcomingEvents }) => {
             </h4>
             <div className="card">
                 <div className="card-content">
-                    <div className="flex flex-column flex-v-gap">
+                    <div
+                        className="flex flex-column flex-v-gap"
+                        style={{ width: "100%" }}
+                    >
                         {upcomingEvents.map(event => (
                             <div>
-                                <EventMedia small event={event} />
+                                <EventMedia withBar={false} event={event} />
                             </div>
                         ))}
                         {upcomingEvents.length === 0 && (
@@ -286,7 +289,7 @@ const ExploreSidebar = ({ isLoggedIn, me, data }) => {
     if (!data || data.failed) return null;
 
     return (
-        <div className="Sidebar">
+        <div className="Sidebar mb-em">
             {isLoggedIn && <UserCard me={me} />}
             <TopStreaksCard topUsers={data.topUsers} />
             <UpcomingEventsCard upcomingEvents={data.upcomingEvents} />

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import {
+    formatHandle,
     formatUrl,
-    handleChange,
-    formatHandle
+    handleChange
 } from "../../../../lib/utils/random";
 import isFunction from "lodash/isFunction";
 import {
@@ -20,11 +20,12 @@ import { getOrCreateProject } from "~/lib/utils/projects";
 import { connect } from "react-redux";
 import orderBy from "lodash/orderBy";
 import {
-    StdErrorCollection,
     renderHelpOrError,
+    StdErrorCollection,
     ValidationError
 } from "../../../../lib/utils/error";
 import StdErrorMessages from "~/components/forms/StdErrorMessages";
+import { Router } from "~/routes";
 
 class GeneralTab extends Component {
     state = {
@@ -41,6 +42,7 @@ class GeneralTab extends Component {
         twitter: "",
         errorMessages: null,
         team: [],
+        tagsTooLong: false,
         accent: "#00a676"
     };
 
@@ -53,6 +55,9 @@ class GeneralTab extends Component {
             selectedProjects: this.props.product.projects,
             tagText: this.prefillTag()
         });
+        setTimeout(() => {
+            this.setState({ tagsTooLong: true });
+        }, 2000);
     }
 
     setUrl = (key, url) => {
@@ -120,6 +125,10 @@ class GeneralTab extends Component {
                 this.state.team, // if array of users,
                 this.state.accent
             );
+
+            if (product.slug !== this.props.product.slug) {
+                Router.pushRoute("/products");
+            }
 
             this.setState({
                 updating: false,
@@ -203,7 +212,27 @@ class GeneralTab extends Component {
                     <div className="control">
                         <label>Hashtag</label>
                         {!this.props.projectsReady ? (
-                            <Spinner small text="Loading projects..." />
+                            <>
+                                <Spinner
+                                    small
+                                    text={
+                                        this.state.tagsTooLong ? (
+                                            <>
+                                                Taking too long?{" "}
+                                                <a
+                                                    onClick={
+                                                        this.props.fetchProjects
+                                                    }
+                                                >
+                                                    Retry
+                                                </a>
+                                            </>
+                                        ) : (
+                                            "Loading tags..."
+                                        )
+                                    }
+                                />
+                            </>
                         ) : (
                             <input
                                 onChange={this.handleChange}
@@ -342,7 +371,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     pushProject: project =>
-        dispatch(projectsActions.fetchProjectsSuccess([project]))
+        dispatch(projectsActions.fetchProjectsSuccess([project])),
+    fetchProjects: project => dispatch(projectsActions.fetchProjects([project]))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GeneralTab);

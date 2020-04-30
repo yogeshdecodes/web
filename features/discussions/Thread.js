@@ -132,7 +132,7 @@ export default connect(mapUserToProps)(
             }
 
             if (this.state.deleted) {
-                Router.pushRoute("discussions");
+                Router.pushRoute("/discussions");
             }
 
             return (

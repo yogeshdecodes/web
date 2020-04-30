@@ -1,8 +1,6 @@
 import React from "react";
 import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StdError, getGhIssueUrl } from "../../../lib/utils/error";
-import OutboundLink from "~/components/OutboundLink";
 
 export default class ErrorBoundary extends React.Component {
     constructor(props) {

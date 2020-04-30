@@ -2,10 +2,19 @@ import React from "react";
 import "./CarbonAd.scss";
 
 class CarbonAd extends React.Component {
+    state = {
+        id: "space-0359e0d7b33"
+    };
+
     componentDidMount() {
         const s = document.createElement("script");
+        s.onload = () => {
+            if (this.adSpace) {
+                this.setState({ id: "" });
+            }
+        };
         s.type = "text/javascript";
-        s.async = true;
+        s.async = false;
         // s.id = '_carbonads_js';
         // s.src = `https://cdn.carbonads.com/carbon.js?serve=CK7DC5QJ&placement=${this.props.placement}`;
         s.src = `https://intravert.co/serve/0359e0d7b3.3.js`;
@@ -24,7 +33,11 @@ class CarbonAd extends React.Component {
         return (
             <div className={"nonGold"}>
                 <div ref={el => (this.instance = el)} />
-                <div className="intravert-space" id={"space-0359e0d7b33"} />
+                <div
+                    ref={el => (this.adSpace = el)}
+                    className="intravert-space"
+                    id={this.state.id}
+                />
             </div>
         );
     }

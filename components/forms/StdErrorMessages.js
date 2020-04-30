@@ -1,11 +1,10 @@
 import React from "react";
 import { StdErrorCollection } from "../../lib/utils/error";
 import OutboundLink from "~/components/OutboundLink";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { isDev } from "../../config";
 
 // Test error display
-const messageError = new StdErrorCollection("Something went wrong.");
+/* const messageError = new StdErrorCollection("Something went wrong.");
 const multipleErrors = new StdErrorCollection([
     "Many things went wrong",
     "Multiple things went wrong"
@@ -15,6 +14,7 @@ const fieldErrors = new StdErrorCollection({
     bitches: "Many of them"
 });
 const jsError = new StdErrorCollection(new Error("Hai"));
+*/
 
 function renderError(error) {
     switch (error.type) {

@@ -1,14 +1,5 @@
-import {
-    addProductToEvent,
-    getEventsForProduct,
-    getEventsForUser,
-    removeProductFromEvent
-} from "../../../../lib/events";
-import { Link } from "~/routes";
 import React from "react";
 import Spinner from "~/components/Spinner";
-import { hasEnded } from "../../../../lib/utils/events";
-import { imageUrl } from "../../../../lib/utils/img";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import { deleteProduct, leaveProduct } from "../../../../lib/products";
 import isFunction from "lodash/isFunction";

@@ -2,7 +2,7 @@ import React from "react";
 import NextDocument, { Head, Html, Main, NextScript } from "next/document";
 
 import { ServerStyleSheet } from "styled-components";
-import config from "../config";
+import config, { isDev } from "../config";
 import { isGaEnabled } from "../vendor/ga";
 
 // Sadly we need this as long as we use styled-components. Fuck that.
@@ -83,7 +83,31 @@ export default class Document extends NextDocument {
     render() {
         return (
             <Html>
-                <Head>{this.renderAnalytics()}</Head>
+                <Head>
+                    {this.renderAnalytics()}
+                    <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+                    <script
+                        src="https://browser.sentry-cdn.com/5.15.4/bundle.min.js"
+                        integrity="sha384-Nrg+xiw+qRl3grVrxJtWazjeZmUwoSt0FAVsbthlJ5OMpx0G08bqIq3b/v0hPjhB"
+                        crossorigin="anonymous"
+                    ></script>
+                    <script
+                        type="text/javascript"
+                        dangerouslySetInnerHTML={{
+                            __html: isDev
+                                ? ""
+                                : `Sentry.init({ dsn: 'https://2a9f23af62a74638b4c5c24a7cc132c2@o197126.ingest.sentry.io/3170364' });`
+                        }}
+                    />
+                    <script
+                        type="text/javascript"
+                        dangerouslySetInnerHTML={{
+                            __html: `Paddle.Setup({ vendor: ${
+                                config.PADDLE_VENDOR
+                            }, debug: ${JSON.stringify(config.isDev)} });`
+                        }}
+                    />
+                </Head>
                 <body>
                     <Main />
                     <NextScript />

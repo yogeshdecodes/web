@@ -73,7 +73,6 @@ const ProductSidebar = ({ product, people = null }) => {
 
     return (
         <div className="ProductSidebar Sidebar">
-            <ProductDescriptionCard product={product} people={people} />
             <ProductPeopleCard product={product} people={people} />
 
             <AdCard />

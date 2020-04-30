@@ -17,6 +17,12 @@ import paramParser from "url-param-parser"; // for hash url
 import PageTitle from "~/components/ui/PageTitle";
 import "./index.scss";
 import { loadingClass } from "~/lib/utils/random";
+import {
+    renderHelpOrError,
+    StdErrorCollection,
+    ValidationError
+} from "../../../../lib/utils/error";
+import StdErrorMessages from "~/components/forms/StdErrorMessages";
 
 class TrelloLinkWizard extends React.Component {
     state = {
@@ -165,7 +171,7 @@ class TrelloSettings extends React.Component {
             webhooks: null,
             projects: null,
             failed: false,
-            errorMessages: []
+            errorMessages: null
         };
     }
 
@@ -184,7 +190,8 @@ class TrelloSettings extends React.Component {
             });
         } catch (e) {
             this.setState({
-                failed: true
+                failed: true,
+                errorMessages: new StdErrorCollection(e)
             });
         }
     }
@@ -208,6 +215,23 @@ class TrelloSettings extends React.Component {
     };
 
     render() {
+        if (this.state.errorMessages) {
+            return (
+                <>
+                    <StdErrorMessages error={this.state.errorMessages} />
+                    <br />
+                    <h3>Troubleshooting</h3>
+                    <p className="mb-em">
+                        If things aren't working right, you can try to reset the
+                        Trello integration.
+                    </p>
+                    <button className="btn-delete" onClick={this.resetTrello}>
+                        Reset Trello
+                    </button>
+                </>
+            );
+        }
+
         if (this.state.ready) {
             return (
                 <div>
@@ -243,7 +267,7 @@ class Trello extends React.Component {
                 : false,
             installing: false,
             failed: true,
-            errorMessages: []
+            errorMessages: null
         };
     }
 
@@ -260,7 +284,7 @@ class Trello extends React.Component {
                 this.setState({
                     installing: false,
                     failed: true,
-                    errorMessages: errorArray(e.message)
+                    errorMessages: new StdErrorCollection(e)
                 });
             }
         }
@@ -271,6 +295,10 @@ class Trello extends React.Component {
             backgroundColor: "#0079BF",
             color: "white"
         };
+
+        if (this.state.errorMessages) {
+            return <StdErrorMessages error={this.state.errorMessages} />;
+        }
 
         if (this.props.isLoading && !this.props.apps) {
             return <Spinner />;

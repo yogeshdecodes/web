@@ -4,9 +4,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import React, { Component } from "react";
 
 import DatePicker from "react-datepicker";
-import ErrorMessageList from "~/components/forms/ErrorMessageList";
 import { createEvent } from "~/lib/events";
 import EventsPageLayout from "../../layouts/EventsPage";
+import { StdErrorCollection } from "../../lib/utils/error";
+import StdErrorMessages from "~/components/forms/StdErrorMessages";
 
 class EventHostPage extends Component {
     state = {
@@ -49,7 +50,6 @@ class EventHostPage extends Component {
                 description: this.state.description,
                 details: this.state.details,
                 type: this.state.type,
-                closes_at: this.state.closesAt.toISOString(),
                 starts_at: this.state.startsAt.toISOString(),
                 ends_at: this.state.endsAt.toISOString(),
                 icon: this.state.icon,
@@ -60,14 +60,10 @@ class EventHostPage extends Component {
                 done: true
             });
         } catch (e) {
-            if (e.field_errors) {
-                this.setState({
-                    errorMessages: e.field_errors
-                });
-            }
             this.setState({
                 failed: true,
-                loading: false
+                loading: false,
+                errorMessages: new StdErrorCollection(e)
             });
         }
     };
@@ -126,22 +122,6 @@ class EventHostPage extends Component {
             </div>
 
             <div className="field">
-                <label className="label">Type</label>
-                <div className="control">
-                    <div className="select">
-                        <select
-                            name="type"
-                            value={this.state.type}
-                            onChange={this.handleChange}
-                        >
-                            <option value="MEETUP">Meetup</option>
-                            <option value="HACKATHON">Hackathon</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div className="field">
                 <label className="label">Details</label>
                 <div className="control">
                     <textarea
@@ -150,18 +130,6 @@ class EventHostPage extends Component {
                         value={this.state.details}
                         className="textarea"
                         placeholder="This is the details of the event. You can use Markdown here."
-                    />
-                </div>
-            </div>
-
-            <div className="field">
-                <label className="label">Registrations close at...</label>
-                <div className="control">
-                    <DatePicker
-                        selected={this.state.closesAt}
-                        onChange={d => this.onDatePick(d, "closesAt")}
-                        showTimeSelect
-                        dateFormat="MMMM d, yyyy h:mm aa"
                     />
                 </div>
             </div>
@@ -201,18 +169,9 @@ class EventHostPage extends Component {
                 </div>
             </div>
 
-            <div className="field">
-                <label className="label">Background image</label>
-                <div className="control">
-                    <input
-                        type="file"
-                        name="header"
-                        onChange={this.onHeaderUpload}
-                    />
-                </div>
-            </div>
-
             <hr />
+
+            <StdErrorMessages error={this.state.errorMessages} />
 
             <div className="field is-grouped">
                 <div className="control">
@@ -247,11 +206,6 @@ class EventHostPage extends Component {
                 </div>
                 <div className="card">
                     <div className="card-content">
-                        {this.state.errorMessages && (
-                            <ErrorMessageList
-                                fieldErrors={this.state.errorMessages}
-                            />
-                        )}
                         {this.state.failed && (
                             <div className="message is-danger">
                                 <div className="message-body">

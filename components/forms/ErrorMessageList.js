@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { StdErrorCollection } from "../../lib/utils/error";
+import StdErrorMessages from "~/components/forms/StdErrorMessages";
 
 const renderFieldErrors = fieldErrors => {
     if (fieldErrors !== null && fieldErrors.constructor === Array) {
@@ -49,6 +51,16 @@ const ErrorMessageList = ({
 }) => {
     if (errors !== null && typeof errors === "object" && nonFieldOnly)
         return null;
+
+    if (
+        errors instanceof StdErrorCollection ||
+        errorMessages instanceof StdErrorCollection ||
+        fieldErrors instanceof StdErrorCollection
+    ) {
+        return (
+            <StdErrorMessages errors={errors || errorMessages || fieldErrors} />
+        );
+    }
 
     return errorMessages || fieldErrors || errors ? (
         <div className="alert is-danger" danger>

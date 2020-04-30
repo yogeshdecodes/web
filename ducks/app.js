@@ -3,9 +3,11 @@ import { Track } from "../vendor/ga";
 
 const initialState = {
     healthy: true,
+    darkModeOverride: false,
     isNewUser: false,
     feedbackOpen: false,
     notificationsOpen: false,
+    currentFeed: null,
     errorMessages: null
 };
 
@@ -16,7 +18,9 @@ export const types = {
     APP_HEALTH_CHECK_FAILED: "APP_HEALTH_CHECK_FAILED",
     APP_NOTIFICATIONS_TOGGLE: "APP_NOTIFICATIONS_TOGGLE",
     APP_TOGGLE_NEW_USER: "APP_TOGGLE_NEW_USER",
-    APP_TOGGLE_FEEDBACK: "APP_TOGGLE_FEEDBACK"
+    APP_SET_DARK_OVERRIDE: "APP_SET_DARK_OVERRIDE",
+    APP_TOGGLE_FEEDBACK: "APP_TOGGLE_FEEDBACK",
+    APP_CHANGE_FEED: "APP_CHANGE_FEED"
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -56,10 +60,22 @@ export const appReducer = (state = initialState, action) => {
                 isNewUser: !state.isNewUser
             };
 
+        case types.APP_SET_DARK_OVERRIDE:
+            return {
+                ...state,
+                darkModeOverride: action.dark
+            };
+
         case types.APP_TOGGLE_FEEDBACK:
             return {
                 ...state,
                 feedbackOpen: !state.feedbackOpen
+            };
+
+        case types.APP_CHANGE_FEED:
+            return {
+                ...state,
+                currentFeed: action.currentFeed
             };
 
         default:
@@ -91,5 +107,9 @@ export const actions = {
 
     toggleNewUser: () => ({ type: types.APP_TOGGLE_NEW_USER }),
 
-    toggleFeedback: () => ({ type: types.APP_TOGGLE_FEEDBACK })
+    forceDark: dark => ({ type: types.APP_SET_DARK_OVERRIDE, dark }),
+
+    toggleFeedback: () => ({ type: types.APP_TOGGLE_FEEDBACK }),
+
+    changeFeed: currentFeed => ({ type: types.APP_CHANGE_FEED, currentFeed })
 };

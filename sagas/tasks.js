@@ -1,11 +1,11 @@
 import {
+    all,
     call,
     put,
     race,
     select,
     take,
-    takeLatest,
-    all
+    takeLatest
 } from "redux-saga/effects";
 import { actions as tasksActions, types as tasksTypes } from "../ducks/tasks";
 import {
@@ -65,7 +65,7 @@ function* deleteTask(action) {
         yield put(streamActions.removeTask(action.id));
         yield put(statsActions.fetchStats(true));
     } catch (e) {
-        yield put(tasksActions.deleteTaskFailed(e.message));
+        yield put(tasksActions.deleteTaskFailed(e));
     }
 }
 
@@ -74,7 +74,7 @@ function* updateTask(action) {
         const task = yield call(updateTaskModel, action.id, action.payload);
         yield put(tasksActions.updateTaskSucceed(task));
     } catch (e) {
-        yield put(tasksActions.updateTaskFailed(e.message));
+        yield put(tasksActions.updateTaskFailed(e));
     }
 }
 

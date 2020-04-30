@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "~/routes";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { actions as editorActions } from "../../../../ducks/editor";
 import { connect } from "react-redux";
 import Emoji from "../../../../components/Emoji";
@@ -32,7 +31,7 @@ class NoActivityCard extends React.Component {
                     </div>
                     <div className="flex flex-gap center">
                         <div>
-                            <Link route="products-yours">
+                            <Link route="products">
                                 <a className="btn btn-light">
                                     Add your products
                                 </a>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { checkDarkMode } from "../../lib/utils/random";
 
 export default connect(state => ({
-    darkMode: checkDarkMode(state.user.me)
+    darkMode: checkDarkMode(state.user.me) || state.app.darkModeOverride
 }))(
     class ThemedContainer extends Component {
         state = {

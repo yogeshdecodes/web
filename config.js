@@ -31,6 +31,10 @@ const DEFAULT_TZ = process.env.DEFAULT_TZ
     ? process.env.DEFAULT_TZ
     : "America/New_York";
 
+const PADDLE_VENDOR = process.env.PADDLE_VENDOR
+    ? process.env.PADDLE_VENDOR
+    : "38022";
+
 const config = {
     API_URL,
     WS_URL,
@@ -40,6 +44,7 @@ const config = {
     GO_TAG,
     IMGOPT_ENABLED,
     isDev,
-    DEFAULT_TZ
+    DEFAULT_TZ,
+    PADDLE_VENDOR
 };
 export default config;
