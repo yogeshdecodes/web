@@ -54,6 +54,7 @@ class TodayCard extends Component {
     };
 
     render() {
+        return null;
         if (!this.props.tasks) return null;
         const tasks = this.getTasks();
 
