@@ -80,7 +80,6 @@ class ProfileTab extends React.Component {
     onAvatarUpload = (acceptedFiles, rejectedFiles) => {
         const file = acceptedFiles[0];
         const reader = new FileReader();
-        reader.readAsDataURL(file);
 
         this.setState({
             avatarUploading: true
@@ -93,6 +92,7 @@ class ProfileTab extends React.Component {
                 avatarUploading: false
             });
         };
+        reader.readAsDataURL(file);
     };
 
     onHeaderUpload = (acceptedFiles, rejectedFiles) => {

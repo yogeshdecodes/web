@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Ad from "~/components/Ad";
 import "./index.scss";
 import OutboundLink from "~/components/OutboundLink";
+import { connect } from "react-redux";
+import { mapStateToProps } from "~/ducks/user";
 import GoldIcon from "~/components/icons/GoldIcon";
 
 class AdIntersitial extends Component {
@@ -25,4 +27,6 @@ class AdIntersitial extends Component {
     }
 }
 
-export default AdIntersitial;
+export default connect(mapStateToProps)(props =>
+    props.user && props.user.gold ? null : AdIntersitial
+);

@@ -10,6 +10,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { orderByDate } from "../../../lib/utils/tasks";
 
 class TodayCard extends Component {
+    state = {
+        open: true
+    };
+
+    toggle = () => {
+        this.setState({
+            open: !this.state.open
+        });
+    };
+
     getTasks = () => {
         return this.props.tasks.filter(
             task =>
@@ -49,42 +59,64 @@ class TodayCard extends Component {
 
         return (
             <div>
-                <h3 className="mb-em">Your day</h3>
-                <div className="card">
-                    <div className="card-content">
-                        {this.props.isSyncing ? (
-                            <center>
-                                <Spinner small text="Loading tasks..." />
-                            </center>
-                        ) : (
-                            <EntryList tasks={tasks} />
-                        )}
-                        {!this.props.isSyncing && this.getTasks().length === 0 && (
-                            <center>
-                                <div className="has-text-grey">
-                                    <Emoji emoji="🥭" /> No tasks yet.
-                                </div>
-                            </center>
-                        )}
-                        {this.getTasks().length > 0 ? (
-                            <div style={{ paddingTop: 10 }}>
-                                <a
-                                    className="gray-link-with-icon has-text-grey-light streamcard-tweet-button"
-                                    target={"_blank"}
-                                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                                        this.generateTweetText(this.getTasks())
-                                    )}`}
-                                    onClick={this.onTweetClick}
-                                >
-                                    <FontAwesomeIcon
-                                        icon={["fab", "twitter"]}
-                                    />{" "}
-                                    Tweet your day
-                                </a>
-                            </div>
-                        ) : null}
+                <div className="flex">
+                    <div className="flex-grow">
+                        <h3 className="mb-em">Your day</h3>
+                    </div>
+                    <div>
+                        <button
+                            className="btn-light btn-small"
+                            onClick={this.toggle}
+                        >
+                            {this.state.open ? (
+                                <FontAwesomeIcon icon="caret-up" />
+                            ) : (
+                                <FontAwesomeIcon icon="caret-down" />
+                            )}{" "}
+                            {this.state.open ? "Hide" : "Show"}
+                        </button>
                     </div>
                 </div>
+                {this.state.open && (
+                    <div className="card">
+                        <div className="card-content">
+                            {this.props.isSyncing ? (
+                                <center>
+                                    <Spinner small text="Loading tasks..." />
+                                </center>
+                            ) : (
+                                <EntryList tasks={tasks} />
+                            )}
+                            {!this.props.isSyncing &&
+                                this.getTasks().length === 0 && (
+                                    <center>
+                                        <div className="has-text-grey">
+                                            <Emoji emoji="🥭" /> No tasks yet.
+                                        </div>
+                                    </center>
+                                )}
+                            {this.getTasks().length > 0 ? (
+                                <div style={{ paddingTop: 10 }}>
+                                    <a
+                                        className="gray-link-with-icon has-text-grey-light streamcard-tweet-button"
+                                        target={"_blank"}
+                                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                                            this.generateTweetText(
+                                                this.getTasks()
+                                            )
+                                        )}`}
+                                        onClick={this.onTweetClick}
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={["fab", "twitter"]}
+                                        />{" "}
+                                        Tweet your day
+                                    </a>
+                                </div>
+                            ) : null}
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
