@@ -4,12 +4,14 @@
     display: none;
     flex-direction: row;
     position: fixed;
-    height: $navbar-height;
+    height: calc(#{$navbar-height} + env(safe-area-inset-bottom));
+    // height: $navbar-height;
     width: 100vw;
     background-color: var(--c-lightest);
     border-top: 1px solid var(--c-border);
     bottom: 0;
     z-index: 98;
+    padding-bottom: env(safe-area-inset-bottom);
 
     .item {
         flex: 1;
