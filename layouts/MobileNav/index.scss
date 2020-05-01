@@ -4,8 +4,7 @@
     display: none;
     flex-direction: row;
     position: fixed;
-    height: calc(#{$navbar-height} + env(safe-area-inset-bottom));
-    // height: $navbar-height;
+    height: calc(#{$navbar-height}+env(safe-area-inset-bottom));
     width: 100vw;
     background-color: var(--c-lightest);
     border-top: 1px solid var(--c-border);
