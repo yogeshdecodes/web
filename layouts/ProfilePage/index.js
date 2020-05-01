@@ -42,7 +42,7 @@ export default connect(mapStateToProps)(
                     title={`@${user.username}`}
                     description={`${user.username} is on Makerlog, the home of the maker community.`}
                     ogImage={user.og_image || user.avatar || null}
-                    ogLargeImage={true}
+                    ogLargeImage={user.og_image ? true : false}
                 />
 
                 <div
