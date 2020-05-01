@@ -179,7 +179,10 @@ class KeyActivityFeed extends Component {
                 this.setState({
                     loading: false,
                     failed: false,
-                    activities: [...data.results, ...this.state.activities],
+                    activities: uniqBy(
+                        [...data.results, ...this.state.activities],
+                        "id"
+                    ),
                     initialLoaded: true,
                     nextUrl: data.next
                 });

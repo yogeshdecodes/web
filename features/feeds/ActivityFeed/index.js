@@ -413,7 +413,7 @@ class ActivityFeed extends React.Component {
                         })}
 
                         {this.props.hasMore && (
-                            <div className={"center"}>
+                            <div className={"center mt-em"}>
                                 <button
                                     className={
                                         "btn btn-light" +
