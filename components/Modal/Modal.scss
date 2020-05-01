@@ -12,7 +12,6 @@ $modal-padding: 1rem;
     left: 0;
     width: 50vw;
     position: fixed; /*or absolute*/
-    margin: 25vh 25vw;
     outline: none;
     animation: fadein 0.5s;
     background-color: var(--c-lightest);
@@ -22,6 +21,11 @@ $modal-padding: 1rem;
     overflow: auto;
     width: 50%;
     max-height: 100vh;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
 
     &.panel {
         //top: 0px;

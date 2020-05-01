@@ -2562,7 +2562,7 @@ p {
     margin-inline-end: 0px;
 }
 
-.markdown-body p {
+.markdown-body p:last-of-type {
     margin-bottom: 0px !important;
 }
 .info-tag {
