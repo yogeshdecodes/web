@@ -23,6 +23,7 @@ class Avatar extends React.Component {
     render() {
         return (
             <span
+                style={{ position: "relative" }}
                 data-badge={
                     this.props.user && this.props.user.streak
                         ? `🔥 ${this.props.user.streak}`

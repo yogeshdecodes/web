@@ -54,7 +54,6 @@ class StreamPage extends React.Component {
                                 <CardEditor />
                             )}
                             <TodayCard />
-                            <h3 className="mb-em">Feed</h3>
                             <MainFeed
                                 prefetchData={this.props.activitiesPrefetch}
                             />

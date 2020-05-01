@@ -796,7 +796,7 @@ table.is-full {
 
 .grid-s-c-s {
     display: grid;
-    grid-template-columns: 1fr 55% 1fr;
+    grid-template-columns: 1fr 55% 376px;
 }
 
 .grid-s-c {
@@ -813,7 +813,8 @@ table.is-full {
     }
 }
 
-.grid-c-s {
+.grid-c-s,
+.grid-s-c-s {
     .grid-thumbnails {
         grid-template-columns: repeat(5, 60px);
         grid-gap: 0.5rem;
