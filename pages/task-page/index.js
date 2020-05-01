@@ -35,7 +35,8 @@ class EntryPage extends React.Component {
                     title={`Done by @${task.user.username} |
                     Makerlog`}
                     description={`${task.done ? "✅" : "🕐"} ${task.content}`}
-                    ogImage={task.user.avatar}
+                    ogImage={task.og_image || task.user.avatar}
+                    ogLargeImage={true}
                 />
 
                 <div className="card">
