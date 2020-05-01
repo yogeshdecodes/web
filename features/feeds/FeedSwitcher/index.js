@@ -72,6 +72,10 @@ class FeedSwitcher extends Component {
                                     }}
                                 >
                                     <small className="has-text-grey">
+                                        <FontAwesomeIcon
+                                            icon="arrow-up"
+                                            size="xs"
+                                        />{" "}
                                         Back to top
                                     </small>
                                 </div>
