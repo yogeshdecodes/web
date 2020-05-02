@@ -1,6 +1,7 @@
 import { errorArray } from "~/lib/utils/error";
 import uniqBy from "lodash/uniqBy";
 import { Track } from "../vendor/ga";
+import last from "lodash/last";
 
 const initialState = {
     open: false,
@@ -107,8 +108,17 @@ export const editorReducer = (state = initialState, action) => {
             };
 
         case types.TASK_CREATE_REQUEST:
+            let newQueue = state.queue;
+            if (
+                last(state.queue) &&
+                last(state.queue).content.length === 0 &&
+                state.queue.length > 1
+            ) {
+                newQueue.pop();
+            }
             return {
                 ...state,
+                queue: newQueue,
                 isCreating: true,
                 createFailed: false
             };

@@ -36,7 +36,7 @@ class EntryPage extends React.Component {
                     Makerlog`}
                     description={`${task.done ? "✅" : "🕐"} ${task.content}`}
                     ogImage={task.og_image || task.user.avatar}
-                    ogLargeImage={true}
+                    ogLargeImage={task.og_image ? true : false}
                 />
 
                 <div className="card">

@@ -149,7 +149,7 @@ export default class extends React.Component {
                     title={`${thread.title} | Makerlog`}
                     description={truncate(thread.body, 10, "...")}
                     ogImage={thread.og_image || thread.owner.avatar || null}
-                    ogLargeImage={true}
+                    ogLargeImage={thread.og_image ? true : false}
                 />
 
                 <Thread

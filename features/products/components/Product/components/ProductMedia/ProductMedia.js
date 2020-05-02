@@ -17,7 +17,6 @@ class ProductMedia extends React.Component {
                             <ProductIcon is={48} product={this.props.product} />
                             <div>
                                 <strong>{this.props.product.name} </strong>
-                                <br />
                                 <p>
                                     {truncate(
                                         this.props.product.description,
@@ -59,7 +58,6 @@ class ProductMedia extends React.Component {
                                 />
                                 <div>
                                     <strong>{this.props.product.name} </strong>
-                                    <br />
                                     <p>
                                         {truncate(
                                             this.props.product.description,
@@ -91,7 +89,6 @@ class ProductMedia extends React.Component {
                                 <strong>{this.props.product.name} </strong>
                                 {this.props.product.description ? (
                                     <>
-                                        <br />
                                         <p>
                                             {truncate(
                                                 this.props.product.description,
