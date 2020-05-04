@@ -50,7 +50,7 @@
         .card {
             border-radius: 0px;
             padding: 0px !important;
-            height: calc(100vh - #{$navbar-height});
+            //min-height: calc(100vh - #{$navbar-height});
             align-items: center;
             justify-content: center;
 
