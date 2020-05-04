@@ -11,8 +11,8 @@ class ProductMedia extends React.Component {
                 route="product-page"
                 params={{ slug: this.props.product.slug }}
             >
-                <a className="a-unstyled">
-                    <div className={"ProductMedia"}>
+                <a className="a-unstyled ProductMedia">
+                    <div>
                         <div className={"flex"}>
                             <ProductIcon is={48} product={this.props.product} />
                             <div>
@@ -49,8 +49,8 @@ class ProductMedia extends React.Component {
                     route="product-page"
                     params={{ slug: this.props.product.slug }}
                 >
-                    <a className="a-unstyled">
-                        <div className={"ProductMedia"}>
+                    <a className="a-unstyled ProductMedia">
+                        <div>
                             <div className={"flex"}>
                                 <ProductIcon
                                     is={32}
@@ -78,8 +78,8 @@ class ProductMedia extends React.Component {
                 route="product-page"
                 params={{ slug: this.props.product.slug }}
             >
-                <a className="a-unstyled">
-                    <div className={"ProductMedia"}>
+                <a className="a-unstyled ProductMedia">
+                    <div>
                         <div className={"flex"}>
                             <ProductIcon is={48} product={this.props.product} />
                             <div
