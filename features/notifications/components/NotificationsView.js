@@ -40,6 +40,7 @@ class NotificationsView extends React.Component {
                 )}
                 {notifications.map(n => (
                     <Notification
+                        key={n.id}
                         onClose={this.props.closeHandler}
                         notification={n}
                     />
