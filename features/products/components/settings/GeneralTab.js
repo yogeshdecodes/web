@@ -62,7 +62,7 @@ class GeneralTab extends Component {
 
     setUrl = (key, url) => {
         this.setState({
-            [key]: formatUrl(url)
+            [key]: url
         });
     };
 

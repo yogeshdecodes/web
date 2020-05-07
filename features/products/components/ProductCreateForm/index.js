@@ -51,7 +51,7 @@ class ProductCreateForm extends Component {
 
     setUrl = (key, url) => {
         this.setState({
-            [key]: formatUrl(url)
+            [key]: url
         });
     };
 
