@@ -294,14 +294,7 @@ class MilestoneEditorTab extends Component {
                 </Modal.Content>
                 <Modal.Footer>
                     <div className="flex flex-gap v-center">
-                        <div className="flex-grow v-center flex">
-                            <div>
-                                <p className="help">
-                                    Hit Enter to post, Ctrl/Cmd+Enter to add
-                                    more tasks.
-                                </p>
-                            </div>
-                        </div>
+                        <div className="flex-grow v-center flex"></div>
                         <div>
                             <button className="btn btn-primary">Post</button>
                         </div>
@@ -329,7 +322,7 @@ class TaskEditorTab extends Component {
                                         <div>
                                             Click the checkbox to mark as done,
                                             in progress, or remaining. <br />{" "}
-                                            Hit Ctrl/Cmd+Enter to add multiple
+                                            Hit Shift+Enter to add multiple
                                             tasks.
                                         </div>
                                     }
@@ -338,8 +331,8 @@ class TaskEditorTab extends Component {
                                     size={"small"}
                                 >
                                     <p className="help has-text-grey help-link">
-                                        <FontAwesomeIcon icon="question-circle" />{" "}
-                                        Need help?
+                                        <FontAwesomeIcon icon="lightbulb" />{" "}
+                                        Tips
                                     </p>
                                 </Tooltip>
                             </div>

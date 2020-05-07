@@ -139,20 +139,20 @@ class TaskQueue extends Component {
 
     onTaskKeyDown = e => {
         if (e.key === "Enter" && !e.shiftKey) {
-            this.props.createTasks();
-            setTimeout(
-                () => this.props.addToQueue(this.createTaskObject("", true)),
-                1000
-            );
-        }
-
-        if (e.key === "Enter" && e.shiftKey) {
             // detects cmd
             const newTask = this.createTaskObject();
             this.props.addToQueue(newTask);
             this.setState({
                 currentTask: newTask.id
             });
+        }
+
+        if (e.key === "Enter" && e.shiftKey) {
+            this.props.createTasks();
+            setTimeout(
+                () => this.props.addToQueue(this.createTaskObject("", true)),
+                1000
+            );
         }
 
         let task = this.props.queue.find(t => t.id === this.state.currentTask);
