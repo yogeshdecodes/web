@@ -10,6 +10,7 @@ import Dropzone from "react-dropzone";
 import chrono from "chrono-node";
 import { format } from "date-fns";
 import { DoneStates, getDoneState } from "../../../../lib/utils/tasks";
+import { createQueueItem } from "../../../../ducks/editor";
 
 /*
 PropTypes:
@@ -58,17 +59,7 @@ class TaskQueue extends Component {
     };
 
     createTaskObject = (content = "", initial = false) => {
-        // initial task IDs prevents a nextjs state reconciliation problem
-        // always populate initial state by using setState on client or use this!
-        return {
-            done: true,
-            in_progress: false,
-            content,
-            posting: false,
-            id: initial
-                ? "INIT"
-                : JSON.stringify(new Date().getUTCMilliseconds())
-        };
+        return createQueueItem(content, initial);
     };
 
     setEditorDueAt = e => {
@@ -149,10 +140,7 @@ class TaskQueue extends Component {
 
         if (e.key === "Enter" && e.shiftKey) {
             this.props.createTasks();
-            setTimeout(
-                () => this.props.addToQueue(this.createTaskObject("", true)),
-                1000
-            );
+            // adding initial task moved to duck
         }
 
         let task = this.props.queue.find(t => t.id === this.state.currentTask);
