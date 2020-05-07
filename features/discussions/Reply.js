@@ -87,13 +87,17 @@ export default connect(mapUserToProps)(
                             {this.state.deleted && (
                                 <em>This reply has been deleted.</em>
                             )}
-                            {!this.state.editing && !this.state.deleted && (
-                                <div>
-                                    <Linkify properties={{ target: "_blank" }}>
-                                        <Markdown body={this.state.body} />
-                                    </Linkify>
-                                </div>
-                            )}
+                            {!this.state.editing &&
+                                !this.state.deleted &&
+                                !this.state.deleting && (
+                                    <div>
+                                        <Linkify
+                                            properties={{ target: "_blank" }}
+                                        >
+                                            <Markdown body={this.state.body} />
+                                        </Linkify>
+                                    </div>
+                                )}
                             {this.state.editing && (
                                 <ReplyEditor
                                     reply={reply}

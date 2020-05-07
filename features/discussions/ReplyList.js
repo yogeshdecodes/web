@@ -27,6 +27,7 @@ export default connect(mapUserToProps)(
                 }
             ).map(r => (
                 <ReplyThread
+                    key={r.id}
                     reply={r}
                     thread={thread}
                     childrenReplies={replies.filter(

@@ -37,13 +37,17 @@ export default class extends React.Component {
         return (
             <Reply reply={reply} onClickReply={this.onClickReply}>
                 <div className="reply-children">
-                    {orderBy(childrenReplies, "created_at", "asc").map(ch => (
-                        <Reply
-                            child={true}
-                            onClickReply={this.onClickChildReply}
-                            reply={ch}
-                        />
-                    ))}
+                    {orderBy(childrenReplies, "created_at", "asc").map(
+                        ch =>
+                            console.log(ch.id) || (
+                                <Reply
+                                    key={ch.id}
+                                    child={true}
+                                    onClickReply={this.onClickChildReply}
+                                    reply={ch}
+                                />
+                            )
+                    )}
                 </div>
                 {this.state.replying && (
                     <ReplyForm
