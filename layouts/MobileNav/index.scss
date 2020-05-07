@@ -9,7 +9,7 @@
     background-color: var(--c-lightest);
     border-top: 1px solid var(--c-border);
     bottom: 0;
-    z-index: 98;
+    z-index: 1000;
     padding-bottom: env(safe-area-inset-bottom);
 
     .item {

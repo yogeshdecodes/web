@@ -64,7 +64,12 @@ class NotificationsView extends React.Component {
     render() {
         return (
             <>
-                {this.props.open && <div className="quickview-overlay"></div>}
+                {this.props.open && (
+                    <div
+                        onClick={this.props.closeHandler}
+                        className="quickview-overlay"
+                    ></div>
+                )}
                 <div
                     className={
                         this.props.open

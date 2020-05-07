@@ -23,7 +23,6 @@ const LoggedOutMenu = props => (
             <NavLink route="deals" activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Deals</span>
-                    <span className="tag-up has-text-grey-light">New!</span>
                 </a>
             </NavLink>
 
