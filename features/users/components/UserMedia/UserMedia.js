@@ -225,7 +225,7 @@ class UserMedia extends React.Component {
                         <div>
                             <Avatar is={32} user={this.props.user} />
                         </div>
-                        <div className={"flex v-center"}>
+                        <div>
                             <span className="name">
                                 <FullName user={user} />{" "}
                             </span>

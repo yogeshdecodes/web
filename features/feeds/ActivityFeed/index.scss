@@ -9,16 +9,17 @@
 
 .ActivityFeed {
     .StreamSection {
-        padding-bottom: 0px;
-        margin-top: $gap * 2;
-        margin-bottom: $gap * 2;
+        margin-bottom: 0px;
+        padding-top: $gap;
+        padding-bottom: $gap;
+        border-bottom: 1px solid var(--c-bg-light);
 
         &:first-of-type {
-            margin-top: 0px;
+            padding-top: 0px;
         }
 
         &:last-of-type {
-            margin-bottom: 0px;
+            padding-bottom: 0px;
         }
     }
 }

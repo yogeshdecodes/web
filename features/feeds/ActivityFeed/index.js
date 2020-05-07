@@ -29,6 +29,7 @@ import TaskActivityGroup from "../TaskActivityGroup";
 import MilestoneMedia from "../../milestones/components/MilestoneMedia";
 import AdIntersitial from "../AdIntersitial";
 import "./index.scss";
+import ReplyFaces from "../../discussions/ReplyFaces";
 
 function activityChildrenHaveSameVerb(activity) {
     return (
@@ -284,10 +285,14 @@ const ActivityObject = ({ activity }) => {
                     <p className="mb-em">
                         <Markdown body={object.body} />
                     </p>
-                    <div className="actions">
-                        <ItemLink type="reply" item={object}>
-                            <a className="btn-light btn btn-small">Reply</a>
-                        </ItemLink>
+                    <div className="actions flex flex-gap">
+                        <div>
+                            <ItemLink type="reply" item={object}>
+                                <a className="btn-light btn btn-small">Reply</a>
+                            </ItemLink>
+                        </div>
+                        <div></div>{" "}
+                        {/* <ReplyFaces threadSlug={activity.target.slug} /> */}
                     </div>
                 </div>
             );
@@ -301,10 +306,15 @@ const ActivityObject = ({ activity }) => {
                     <p className="mb-em">
                         <Markdown body={object.body} />
                     </p>
-                    <div className="actions">
-                        <ItemLink type="thread" item={object}>
-                            <a className="btn-light btn btn-small">Reply</a>
-                        </ItemLink>
+                    <div className="actions flex flex-gap">
+                        <div>
+                            <ItemLink type="thread" item={object}>
+                                <a className="btn-light btn btn-small">Reply</a>
+                            </ItemLink>
+                        </div>
+                        <div>
+                            <ReplyFaces threadSlug={object.slug} />
+                        </div>
                     </div>
                 </div>
             );
