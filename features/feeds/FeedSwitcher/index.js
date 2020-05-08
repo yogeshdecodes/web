@@ -54,6 +54,16 @@ class FeedSwitcher extends Component {
                     </div>
                     <div
                         className={
+                            this.props.currentFeed === "discussions"
+                                ? "active"
+                                : ""
+                        }
+                        onClick={e => this.props.changeFeed("discussions")}
+                    >
+                        Discussions
+                    </div>
+                    <div
+                        className={
                             this.props.currentFeed === "tasks" ? "active" : ""
                         }
                         onClick={e => this.props.changeFeed("tasks")}

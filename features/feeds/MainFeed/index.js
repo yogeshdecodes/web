@@ -4,6 +4,15 @@ import KeyActivityFeed from "../KeyActivityFeed";
 
 const MainFeed = ({ currentFeed, activitiesPrefetch }) => {
     switch (currentFeed) {
+        case "discussions": {
+            return (
+                <KeyActivityFeed
+                    key={"discussions:normal"}
+                    feedKey="discussions:normal"
+                />
+            );
+        }
+
         case "tasks": {
             return (
                 <KeyActivityFeed

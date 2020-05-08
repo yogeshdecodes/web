@@ -129,7 +129,7 @@ class TaskQueue extends Component {
     };
 
     onTaskKeyDown = e => {
-        if (e.key === "Enter" && !e.shiftKey) {
+        if (e.key === "Enter" && !e.shiftKey && !(e.ctrlKey || e.metaKey)) {
             // detects cmd
             const newTask = this.createTaskObject();
             this.props.addToQueue(newTask);
@@ -138,7 +138,10 @@ class TaskQueue extends Component {
             });
         }
 
-        if (e.key === "Enter" && e.shiftKey) {
+        if (
+            (e.key === "Enter" && e.shiftKey) ||
+            (e.key === "Enter" && (e.ctrlKey || e.metaKey))
+        ) {
             this.props.createTasks();
             // adding initial task moved to duck
         }

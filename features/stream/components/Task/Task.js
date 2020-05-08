@@ -50,9 +50,14 @@ class Task extends React.Component {
             detailsOpen: this.props.defaultOpen
                 ? this.props.defaultOpen
                 : false,
-            hover: false
+            hover: false,
+            deleted: false
         };
     }
+
+    onDelete = () => {
+        this.setState({ deleted: true });
+    };
 
     onMouseEnter = e => {
         this.setState({
@@ -269,7 +274,10 @@ class Task extends React.Component {
                 <div className="task-details">
                     {this.state.detailsOpen && (
                         <div className="action-bar">
-                            <TaskDetail task={this.props.task} />
+                            <TaskDetail
+                                task={this.props.task}
+                                onDelete={this.onDelete}
+                            />
                         </div>
                     )}
                     {(this.state.detailsOpen ||
@@ -289,7 +297,7 @@ class Task extends React.Component {
     };
 
     render() {
-        if (!this.props.task) {
+        if (!this.props.task || this.state.deleted) {
             return null;
         }
 

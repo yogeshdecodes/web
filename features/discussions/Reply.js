@@ -44,17 +44,24 @@ export default connect(mapUserToProps)(
         };
 
         deleteReply = async () => {
-            await this.setState({
-                deleting: true
-            });
-            await deleteReply(this.props.reply.id, this.props.reply.parent);
-            await this.setState({
-                deleting: false,
-                deleted: true
-            });
+            try {
+                await this.setState({
+                    deleting: true,
+                    failedDeletion: false
+                });
+                await deleteReply(this.props.reply.id, this.props.reply.parent);
+                await this.setState({
+                    deleting: false,
+                    deleted: true
+                });
 
-            if (this.props.onDelete) {
-                this.props.onDelete(this.props.reply.id);
+                if (this.props.onDelete) {
+                    this.props.onDelete(this.props.reply.id);
+                }
+            } catch (e) {
+                this.setState({
+                    failedDeletion: true
+                });
             }
         };
 
@@ -157,12 +164,15 @@ export default connect(mapUserToProps)(
                                         <button
                                             className={"btn-small btn-delete"}
                                             onClick={this.deleteReply}
+                                            disabled={this.state.failedDeletion}
                                         >
                                             <FontAwesomeIcon
                                                 icon={"trash"}
                                                 size={"sm"}
                                             />
-                                            Delete
+                                            {this.state.failedDeletion
+                                                ? "Failed to delete. Try again later."
+                                                : "Delete"}
                                         </button>
                                     </div>
                                 </>
