@@ -1,10 +1,17 @@
 import React from "react";
-import GlobalStream, { prefetch as prefetchStream } from "~/features/stream/containers/GlobalStream";
+import GlobalStream, {
+    prefetch as prefetchStream
+} from "~/features/stream/containers/GlobalStream";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
-import DiscussionSection, { prefetchData as prefetchThreads } from "~/features/discussions/DiscussionSection";
+import DiscussionSection, {
+    prefetchData as prefetchThreads
+} from "~/features/discussions/DiscussionSection";
 import HomeHero from "../../components/marketing/HomeHero";
+import KeyActivityFeed, {
+    prefetchActivity
+} from "../../features/feeds/KeyActivityFeed";
 
 function Home(props) {
     return (
@@ -32,7 +39,11 @@ function Home(props) {
                         <h4 className="subtitle has-text-grey mb-em">
                             Here's what the community is building...
                         </h4>
-                        <GlobalStream {...props.streamPrefetch} />
+                        <KeyActivityFeed
+                            prefetchData={props.activitiesPrefetch}
+                            key="site:aggregated"
+                            feedKey="site:aggregated"
+                        />
                     </div>
                     <div className={"sidebar"}>
                         <ExploreSidebar data={props.data} />
@@ -46,7 +57,7 @@ function Home(props) {
 Home.getInitialProps = async () => {
     return {
         ...(await prefetchData()),
-        streamPrefetch: await prefetchStream(),
+        activitiesPrefetch: await prefetchActivity("site:aggregated"),
         discussionPrefetch: await prefetchThreads(true)
     };
 };

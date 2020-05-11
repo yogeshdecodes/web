@@ -2584,3 +2584,37 @@ p {
 .relative {
     position: relative;
 }
+
+.rc-md-editor {
+    background: var(--c-bg) !important;
+    border: var(--c-border) !important;
+
+    .rc-md-navigation {
+        background: var(--c-lightest) !important;
+        border: 1px solid var(--c-border) !important;
+    }
+    textarea {
+        //@extend %corners;
+        //@extend %shadow-inset;
+        border: none !important;
+        border-bottom: 1px solid var(--c-border) !important;
+        border-left: 1px solid var(--c-border) !important;
+        border-right: 1px solid var(--c-border) !important;
+
+        background: var(--c-bg-input) !important;
+        color: var(--c-text) !important;
+
+        &:hover {
+            border-color: var(--c-border-light) !important;
+        }
+
+        &:focus {
+            border-color: $c-main !important;
+            box-shadow: $input-drop-shadow !important;
+        }
+
+        &::placeholder {
+            color: var(--c-border-light) !important;
+        }
+    }
+}

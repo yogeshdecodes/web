@@ -55,6 +55,9 @@ class StreamPage extends React.Component {
                             )}
                             <TodayCard />
                             <MainFeed
+                                discussionPrefetch={
+                                    this.props.discussionPrefetch
+                                }
                                 activitiesPrefetch={
                                     this.props.activitiesPrefetch
                                 }

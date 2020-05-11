@@ -9,6 +9,8 @@ import { toDate, utcToZonedTime } from "date-fns-tz";
 import { Task } from "../../stream";
 import { Product } from "~/features/products/";
 import { Link } from "~/routes";
+import { mapStateToProps as mapUserToProps } from "~/ducks/user";
+import { connect } from "react-redux";
 
 //import { CSSTransitionGroup } from "react-transition-group";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -95,8 +97,24 @@ function countActivityChildren(activity) {
     return activity.type === "aggregated" ? activity.activities.length : 0;
 }
 
-function ItemLink({ type, item, children }) {
+function ItemLink({
+    type,
+    item,
+    children,
+    loggedInOnly = false,
+    isLoggedIn = true
+}) {
     if (!item) return children;
+
+    if (loggedInOnly && !isLoggedIn) {
+        return (
+            <Link route="begin">
+                <a target="_blank" rel="noopener noreferrer">
+                    {children}
+                </a>
+            </Link>
+        );
+    }
     switch (type) {
         case "task":
             return (
@@ -139,6 +157,8 @@ function ItemLink({ type, item, children }) {
     }
 }
 
+ItemLink = connect(mapUserToProps)(ItemLink);
+
 function getHumanActivityObject(activity) {
     let getPrefix = count => (count == 1 ? "a" : count);
     if (activity.type === "aggregated") {
@@ -157,7 +177,11 @@ function getHumanActivityObject(activity) {
             `${getPrefix(count)} ${pluralize(objectType, count)}`
         );
     } else {
-        return `${getPrefix(1)} ${pluralize(activity.object_type, 1)}`;
+        return (
+            <ItemLink item={activity.object} type={activity.object_type}>
+                {getPrefix(1)} {pluralize(activity.object_type, 1)}
+            </ItemLink>
+        );
     }
 }
 
@@ -206,7 +230,22 @@ function getHumanTargetType(activity) {
         if (!activity.target_type) {
             return null;
         }
-        return `${getPrefix(1)} ${pluralize(activity.target_type, 1)}`;
+        const target = activity.target;
+        const targetType = activity.target_type;
+        const typeText = pluralize(targetType, 1);
+        const targetTitle = getTargetTitle(targetType, target);
+        if (targetTitle) {
+            return (
+                <ItemLink item={target} type={targetType}>
+                    {targetTitle}
+                </ItemLink>
+            );
+        }
+        return (
+            <ItemLink item={target} type={targetType}>
+                {getPrefix(count)} {typeText}
+            </ItemLink>
+        );
     }
 }
 
@@ -287,7 +326,7 @@ const ActivityObject = ({ activity }) => {
                     </p>
                     <div className="actions flex flex-gap">
                         <div>
-                            <ItemLink type="reply" item={object}>
+                            <ItemLink type="reply" item={object} loggedInOnly>
                                 <a className="btn-light btn btn-small">Reply</a>
                             </ItemLink>
                         </div>
@@ -364,8 +403,10 @@ const Activity = ({ activity }) => {
                                         ·{" "}
                                         <TimeAgo
                                             date={
-                                                activity.updated_at ||
+                                                activity.updated_at >
                                                 activity.created_at
+                                                    ? activity.updated_at
+                                                    : activity.created_at
                                             }
                                         />
                                     </>
