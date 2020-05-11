@@ -76,12 +76,19 @@ export default connect(mapStateToProps)(
                                                     )}
                                                 >
                                                     <FontAwesomeIcon icon="globe" />{" "}
-                                                    {normalizeUrl(user.website)
-                                                        .replace("http://", "")
-                                                        .replace(
-                                                            "https://",
-                                                            ""
-                                                        )}
+                                                    <span className="is-hidden-mobile">
+                                                        {normalizeUrl(
+                                                            user.website
+                                                        )
+                                                            .replace(
+                                                                "http://",
+                                                                ""
+                                                            )
+                                                            .replace(
+                                                                "https://",
+                                                                ""
+                                                            )}
+                                                    </span>
                                                 </OutboundLink>
                                             </div>
                                         )}
