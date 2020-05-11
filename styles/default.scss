@@ -804,6 +804,7 @@ table.is-full {
 }
 
 .grid-thumbnails {
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(5, 48px);
     grid-gap: 0.4rem;
