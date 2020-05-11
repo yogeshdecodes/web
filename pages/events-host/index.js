@@ -83,11 +83,9 @@ class EventHostPage extends Component {
             this.state.title.length > 0 &&
             this.state.description.length > 0 &&
             this.state.details.length > 0 &&
-            this.state.closesAt !== null &&
             this.state.endsAt !== null &&
             this.state.startsAt !== null &&
-            this.state.icon !== null &&
-            this.state.header !== null
+            this.state.icon !== null
         );
     };
 

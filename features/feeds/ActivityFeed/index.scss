@@ -1,0 +1,25 @@
+@import "../../../styles/_variables";
+
+.ActivityItemContainer {
+    @extend %corners;
+    border: 1px solid var(--c-border);
+    // background: var(--c-bg-light);
+    padding: 1rem;
+}
+
+.ActivityFeed {
+    .StreamSection {
+        margin-bottom: 0px;
+        padding-top: $gap;
+        padding-bottom: $gap;
+        border-bottom: 1px solid var(--c-bg-light);
+
+        &:first-of-type {
+            padding-top: 0px;
+        }
+
+        &:last-of-type {
+            padding-bottom: 0px;
+        }
+    }
+}

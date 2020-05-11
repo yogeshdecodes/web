@@ -133,7 +133,7 @@
 
 @media only screen and (max-width: 768px) {
     .notifications-quickview {
-        width: 100vw;
+        min-width: 100vw;
     }
 }
 

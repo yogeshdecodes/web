@@ -1,0 +1,32 @@
+@import "../../../styles/_variables";
+
+.AdIntersitial {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $gap;
+    font-size: 10px;
+    text-align: center;
+    border: 1px solid var(--c-border);
+
+    .title {
+        text-transform: uppercase;
+        padding: 1px;
+        background-color: var(--c-bg);
+
+        &:first-child {
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        &:last-child {
+            border-top: 1px solid var(--c-border);
+        }
+    }
+
+    .x-intra {
+        max-width: 100%;
+        padding: 1rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        overflow-x: auto;
+    }
+}

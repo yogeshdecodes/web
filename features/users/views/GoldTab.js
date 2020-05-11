@@ -2,11 +2,10 @@ import React from "react";
 import { me, patchSettings } from "~/lib/user";
 import Emoji from "~/components/Emoji";
 import Switch from "react-switch";
-import GoldIcon from "~/components/icons/GoldIcon";
-import GoldCtaButton from "~/components/GoldCtaButton";
 import Spinner from "~/components/Spinner";
 import { getSubscriptionDetails } from "../../../lib/billing";
 import { handleChange, loadingClass } from "../../../lib/utils/random";
+import GoldMessage from "../../../components/GoldMessage";
 
 class SubscriptionSettings extends React.Component {
     state = {
@@ -185,32 +184,7 @@ class GoldTab extends React.Component {
     render() {
         return (
             <div>
-                {!this.props.user.gold && (
-                    <div>
-                        <h2>
-                            You don't have Makerlog Gold yet. <GoldIcon />
-                        </h2>
-                        <p>
-                            <strong>
-                                Makerlog Gold is the premium plan for Makerlog
-                            </strong>
-                            , with value added features like:
-                            <ul>
-                                <li>Dark Mode</li>
-                                <li>editable accent color</li>
-                                <li>NO ADS</li>
-                                <li>and more</li>
-                            </ul>
-                            <br />
-                            <strong>It's just $5/mo</strong> and you'll support
-                            Makerlog while getting some exclusive perks.
-                        </p>
-                        <br />
-                        <div>
-                            <GoldCtaButton className={"is-medium"} />
-                        </div>
-                    </div>
-                )}
+                {!this.props.user.gold && <GoldMessage />}
                 <form
                     onSubmit={this.onSubmit}
                     className={

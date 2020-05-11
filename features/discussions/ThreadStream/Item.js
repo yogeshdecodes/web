@@ -44,20 +44,14 @@ export default class extends React.Component {
         return (
             <div className={"flex v-center flex-gap"}>
                 <div>
-                    {thread.type === "LINK" ? (
-                        <OutboundLink to={thread.body}>
-                            <h3>{thread.title}</h3>
-                        </OutboundLink>
-                    ) : (
-                        <Link
-                            route={"discussion-page"}
-                            params={{ slug: thread.slug }}
-                        >
-                            <a>
-                                <h4>{thread.title}</h4>
-                            </a>
-                        </Link>
-                    )}
+                    <Link
+                        route={"discussion-page"}
+                        params={{ slug: thread.slug }}
+                    >
+                        <a>
+                            <h4>{thread.title}</h4>
+                        </a>
+                    </Link>
 
                     <div className="note">
                         {truncate(thread.body, 15, "...")}

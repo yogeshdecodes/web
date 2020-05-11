@@ -3,6 +3,18 @@ import uniqBy from "lodash/uniqBy";
 import { Track } from "../vendor/ga";
 import last from "lodash/last";
 
+export const createQueueItem = (content = "", initial = false) => {
+    // initial task IDs prevents a nextjs state reconciliation problem
+    // always populate initial state by using setState on client or use this!
+    return {
+        done: true,
+        in_progress: false,
+        content,
+        posting: false,
+        id: initial ? "INIT" : JSON.stringify(new Date().getUTCMilliseconds())
+    };
+};
+
 const initialState = {
     open: false,
     editorValue: "",
@@ -129,7 +141,7 @@ export const editorReducer = (state = initialState, action) => {
                 isCreating: false,
                 expanded: false,
                 open: false,
-                queue: [],
+                queue: [createQueueItem("", true)],
                 editorValue: "",
                 editorDone: true,
                 editorInProgress: false,

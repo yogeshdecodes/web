@@ -58,7 +58,12 @@ class AchievementsView extends React.Component {
         const upNext = remaining[0];
         return (
             <StdErrorBoundary tag="achievements-view">
-                {this.props.open && <div className="quickview-overlay"></div>}
+                {this.props.open && (
+                    <div
+                        onClick={this.props.closeHandler}
+                        className="quickview-overlay"
+                    ></div>
+                )}
                 <div
                     className={
                         this.props.open

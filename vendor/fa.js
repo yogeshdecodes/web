@@ -82,6 +82,7 @@ import { faCaretUp } from "@fortawesome/free-solid-svg-icons/faCaretUp";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons/faArrowUp";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons/faArrowDown";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons/faLocationArrow";
+import { faLightbulb } from "@fortawesome/free-solid-svg-icons/faLightbulb";
 
 library.add(
     faInstagram,
@@ -166,5 +167,6 @@ library.add(
     faArrowUp,
     faArrowDown,
     faLocationArrow,
-    faCircle
+    faCircle,
+    faLightbulb
 );

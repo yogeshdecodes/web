@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import { formatHandle, formatUrl, handleChange } from "../../../../lib/utils/random";
+import {
+    formatHandle,
+    formatUrl,
+    handleChange
+} from "../../../../lib/utils/random";
 import isFunction from "lodash/isFunction";
-import { deleteProduct, editProduct, leaveProduct } from "../../../../lib/products";
+import {
+    deleteProduct,
+    editProduct,
+    leaveProduct
+} from "../../../../lib/products";
 import LaunchedToggle from "~/features/products/components/LaunchedToggle";
 import Dropzone from "react-dropzone";
 import ProductIcon from "~/features/products/components/ProductIcon";
@@ -11,7 +19,11 @@ import Spinner from "~/components/Spinner";
 import { getOrCreateProject } from "~/lib/utils/projects";
 import { connect } from "react-redux";
 import orderBy from "lodash/orderBy";
-import { renderHelpOrError, StdErrorCollection, ValidationError } from "../../../../lib/utils/error";
+import {
+    renderHelpOrError,
+    StdErrorCollection,
+    ValidationError
+} from "../../../../lib/utils/error";
 import StdErrorMessages from "~/components/forms/StdErrorMessages";
 import { Router } from "~/routes";
 
@@ -50,7 +62,7 @@ class GeneralTab extends Component {
 
     setUrl = (key, url) => {
         this.setState({
-            [key]: formatUrl(url)
+            [key]: url
         });
     };
 
@@ -115,7 +127,7 @@ class GeneralTab extends Component {
             );
 
             if (product.slug !== this.props.product.slug) {
-                Router.pushRoute("products");
+                Router.pushRoute("/products");
             }
 
             this.setState({

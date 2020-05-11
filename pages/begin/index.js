@@ -37,10 +37,12 @@ class RegisterPage extends React.Component {
                     <div className="form-card">
                         <div className="card">
                             <div className="card-content">
-                                <RegisterForm
-                                    preflight={this.props.preflight}
-                                    {...this.props.query}
-                                />
+                                <div>
+                                    <RegisterForm
+                                        preflight={this.props.preflight}
+                                        {...this.props.query}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

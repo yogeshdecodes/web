@@ -79,6 +79,9 @@ class TaskDetail extends React.Component {
     onDelete = () => {
         this.props.deleteTask(this.props.task.id);
         this.props.removeFromStream(this.props.task.id);
+        if (this.props.onDelete) {
+            this.props.onDelete(this.props.task);
+        }
     };
 
     renderActionBar = () => {

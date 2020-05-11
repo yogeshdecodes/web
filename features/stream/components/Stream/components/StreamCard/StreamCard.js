@@ -1,7 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { groupIntegrationTasksByEvent, groupTasksByDone, integrationsToCollapse, orderByDate } from "~/lib/utils/tasks";
-import EntryList from "../../../EntryList";
+import {
+    groupIntegrationTasksByEvent,
+    groupTasksByDone,
+    integrationsToCollapse,
+    orderByDate
+} from "~/lib/utils/tasks";
+import EntryList from "~/features/stream/components/EntryList";
 // import { StreamCard as Card } from "./styled";
 import { UserMedia } from "~/features/users";
 import { MilestoneMedia } from "~/features/milestones";

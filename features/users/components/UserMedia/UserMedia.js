@@ -106,7 +106,7 @@ class UserMedia extends React.Component {
                         route="profile-page"
                         params={{ username: user.username }}
                     >
-                        <a>
+                        <a target="_blank">
                             <div className={"card"}>
                                 <div className={"card-content"}>
                                     <div className={"flex"}>
@@ -148,7 +148,7 @@ class UserMedia extends React.Component {
         if (this.props.xs) {
             return (
                 <Link route="profile-page" params={{ username: user.username }}>
-                    <a>
+                    <a target="_blank">
                         <div
                             className={
                                 "flex flex-gap UserMedia xs" +
@@ -175,7 +175,7 @@ class UserMedia extends React.Component {
         if (this.props.medium) {
             return (
                 <Link route="profile-page" params={{ username: user.username }}>
-                    <a>
+                    <a target="_blank">
                         <div
                             className={
                                 "a-unstyled grid-streamcard UserMedia " +
@@ -212,7 +212,7 @@ class UserMedia extends React.Component {
 
         return (
             <Link route="profile-page" params={{ username: user.username }}>
-                <a>
+                <a target="_blank">
                     <div
                         className={
                             "grid-streamcard UserMedia " +
@@ -225,9 +225,9 @@ class UserMedia extends React.Component {
                         <div>
                             <Avatar is={32} user={this.props.user} />
                         </div>
-                        <div className={"flex v-center"}>
+                        <div>
                             <span className="name">
-                                <FullName user={user} />
+                                <FullName user={user} />{" "}
                             </span>
                             {user.verified ? (
                                 <>
@@ -269,8 +269,12 @@ class UserMedia extends React.Component {
                                     </Tooltip>
                                 )
                             )}
+
+                            {this.props.extra ? (
+                                <>&nbsp;{this.props.extra}</>
+                            ) : null}
                         </div>
-                        <div className={"stats-case"}>
+                        <div className={"stats-case has-text-grey-light"}>
                             <span className="username">@{user.username}</span>
                             &nbsp;
                             {user.streak !== null && (
@@ -286,6 +290,9 @@ class UserMedia extends React.Component {
                                     </span>
                                 </span>
                             )}
+                            {this.props.extraSmall ? (
+                                <>&nbsp;{this.props.extraSmall}</>
+                            ) : null}
                         </div>
                     </div>
                 </a>

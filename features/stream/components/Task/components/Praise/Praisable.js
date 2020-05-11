@@ -60,7 +60,7 @@ class Praisable extends React.Component {
         if (!this.props.isLoggedIn) {
             this.setState({ loggedOutError: true });
             setTimeout(() => {
-                Router.pushRoute("begin");
+                Router.pushRoute("/begin");
             }, 1000);
             this.fadeErr();
             return false;
@@ -204,7 +204,7 @@ class Praisable extends React.Component {
                     : "btn btn-praise btn-gray"
             }
         >
-            <Emoji emoji={"👏"} />
+            <Emoji emoji={"👏"} /> &nbsp;
             {this.state.isPraising &&
                 !this.state.loggedOutError &&
                 !this.state.tooMuchPraise &&

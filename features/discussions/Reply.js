@@ -9,6 +9,8 @@ import UserLine from "~/features/users/components/UserLine";
 import Markdown from "~/components/Markdown";
 import Praisable from "~/features/stream/components/Task/components/Praise/Praisable";
 import ReplyEditor from "./ReplyEditor";
+import Spinner from "~/components/Spinner";
+import { deleteReply } from "~/lib/discussions";
 
 export default connect(mapUserToProps)(
     class Reply extends React.Component {
@@ -42,17 +44,24 @@ export default connect(mapUserToProps)(
         };
 
         deleteReply = async () => {
-            await this.setState({
-                deleting: true
-            });
-            await deleteReply(this.props.reply.id, this.props.reply.parent);
-            await this.setState({
-                deleting: false,
-                deleted: true
-            });
+            try {
+                await this.setState({
+                    deleting: true,
+                    failedDeletion: false
+                });
+                await deleteReply(this.props.reply.id, this.props.reply.parent);
+                await this.setState({
+                    deleting: false,
+                    deleted: true
+                });
 
-            if (this.props.onDelete) {
-                this.props.onDelete(this.props.reply.id);
+                if (this.props.onDelete) {
+                    this.props.onDelete(this.props.reply.id);
+                }
+            } catch (e) {
+                this.setState({
+                    failedDeletion: true
+                });
             }
         };
 
@@ -60,7 +69,10 @@ export default connect(mapUserToProps)(
             const { reply, child } = this.props;
 
             return (
-                <div className={"flex flex-gap Reply"}>
+                <div
+                    className={"flex flex-gap Reply"}
+                    id={"reply-" + (reply ? reply.id : null)}
+                >
                     <div>
                         <Link
                             route="profile-page"
@@ -75,20 +87,24 @@ export default connect(mapUserToProps)(
                         <div className={"reply-user flex flex-gap"}>
                             <UserLine user={reply.owner} />
                         </div>
-                        <div className="reply-body">
+                        <div className="reply-body mb-em">
                             {this.state.deleting && (
                                 <Spinner small text={"One moment..."} />
                             )}
                             {this.state.deleted && (
                                 <em>This reply has been deleted.</em>
                             )}
-                            {!this.state.editing && !this.state.deleted && (
-                                <div>
-                                    <Linkify properties={{ target: "_blank" }}>
-                                        <Markdown body={this.state.body} />
-                                    </Linkify>
-                                </div>
-                            )}
+                            {!this.state.editing &&
+                                !this.state.deleted &&
+                                !this.state.deleting && (
+                                    <div>
+                                        <Linkify
+                                            properties={{ target: "_blank" }}
+                                        >
+                                            <Markdown body={this.state.body} />
+                                        </Linkify>
+                                    </div>
+                                )}
                             {this.state.editing && (
                                 <ReplyEditor
                                     reply={reply}
@@ -148,12 +164,15 @@ export default connect(mapUserToProps)(
                                         <button
                                             className={"btn-small btn-delete"}
                                             onClick={this.deleteReply}
+                                            disabled={this.state.failedDeletion}
                                         >
                                             <FontAwesomeIcon
                                                 icon={"trash"}
                                                 size={"sm"}
                                             />
-                                            Delete
+                                            {this.state.failedDeletion
+                                                ? "Failed to delete. Try again later."
+                                                : "Delete"}
                                         </button>
                                     </div>
                                 </>
