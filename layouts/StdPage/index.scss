@@ -1,7 +1,8 @@
 @import "../../styles/_variables";
 
 .StdPage {
-    &.grid-c-s {
+    &.grid-c-s,
+    &.grid-s-c-s {
         margin-top: $gap;
     }
 }

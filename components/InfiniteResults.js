@@ -167,7 +167,9 @@ class InfiniteResults extends React.Component {
                 style={{ overflow: "none" }}
                 className={this.props.className ? this.props.className : ""}
             >
-                <Component items={this.state.items} />
+                <div className="mb-em">
+                    <Component items={this.state.items} />
+                </div>
 
                 {this.state.hasMore && (
                     <div className={"center"}>
@@ -177,7 +179,7 @@ class InfiniteResults extends React.Component {
                                     ? "btn btn-light is-loading"
                                     : "btn btn-light"
                             }
-                            onClick={this.loadMore}
+                            onClick={() => this.loadMore()}
                         >
                             <FontAwesomeIcon icon={"arrow-circle-down"} />{" "}
                             &nbsp; Load more results...

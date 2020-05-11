@@ -2618,3 +2618,79 @@ p {
         }
     }
 }
+
+.FeedSidebar {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 40px);
+
+    .FeedSwitcher {
+        flex-grow: 1;
+    }
+}
+
+.SidebarTabs {
+    display: flex;
+    flex-direction: column;
+
+    > div {
+        position: relative;
+        display: block;
+        padding: $gap / 3;
+        border-bottom: 0px;
+        list-style-type: none;
+        transition: background-color 0.3s ease;
+        border-right: 1px solid var(--c-border);
+        cursor: pointer;
+        color: var(--c-text) !important;
+
+        &.disabled {
+            cursor: not-allowed;
+            color: var(--c-border) !important;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &.active {
+            border-right: 3px solid var(--c-main);
+
+            font-weight: bold;
+            color: var(--c-main) !important;
+        }
+    }
+
+    .scroll-to-top {
+        //border-right: 0px;
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .SidebarTabs {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        > div {
+            flex: 1;
+            text-align: center;
+            border-right: none;
+            border-bottom: 1px solid var(--c-border);
+            &.active {
+                border-right: none;
+                border-bottom: 3px solid var(--c-main);
+
+                font-weight: bold;
+
+                a {
+                    color: var(--c-main) !important;
+                }
+            }
+        }
+    }
+}

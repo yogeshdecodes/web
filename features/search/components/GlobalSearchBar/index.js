@@ -1,6 +1,11 @@
 import "./index.scss";
 import { Link } from "~/routes";
-import { searchDiscussions, searchProducts, searchTasks, searchUsers } from "../../../../lib/search";
+import {
+    searchDiscussions,
+    searchProducts,
+    searchTasks,
+    searchUsers
+} from "../../../../lib/search";
 
 import Avatar from "../../../users/components/Avatar/Avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -146,7 +151,7 @@ class GlobalSearchBar extends React.Component {
                             </div>
                         </div>
                         <div
-                            className={"container results"}
+                            className={"container results mbGap"}
                             id={"results"}
                             onClick={this.override}
                         >
@@ -216,10 +221,14 @@ class GlobalSearchBar extends React.Component {
                                 <>
                                     <h3 className={"is-6"}>Tasks</h3>
                                     <div className={"card"}>
-                                        <div className={"card-content"}>
+                                        <div
+                                            className={
+                                                "card-content flex flex-column flex-v-gap"
+                                            }
+                                        >
                                             {tasks.map(t => (
                                                 <div
-                                                    className={"flex"}
+                                                    className={"flex flex-gap"}
                                                     key={t.id}
                                                 >
                                                     <div>
@@ -229,7 +238,17 @@ class GlobalSearchBar extends React.Component {
                                                         />
                                                     </div>
                                                     <div>
-                                                        <Task task={t} />
+                                                        <Link
+                                                            route="task-page"
+                                                            params={{
+                                                                id: t.id
+                                                            }}
+                                                        >
+                                                            <Task
+                                                                plain
+                                                                task={t}
+                                                            />
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             ))}
