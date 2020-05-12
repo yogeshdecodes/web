@@ -13,12 +13,6 @@ export default class AppsPageLayout extends Component {
                         <NavLink route="apps" activeClassName="is-active">
                             <a className="navbar-item">Featured</a>
                         </NavLink>
-
-                        <NavLink activeClassName="is-active">
-                            <a className="navbar-item disabled">
-                                Community <p className="tag">Soon</p>
-                            </a>
-                        </NavLink>
                     </>
                 }
             >
