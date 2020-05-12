@@ -820,6 +820,7 @@ table.is-full {
         grid-template-columns: repeat(5, 60px);
         grid-gap: 0.5rem;
         margin: 1rem 0 2rem;
+        max-width: 100%;
 
         > div {
             position: relative;
