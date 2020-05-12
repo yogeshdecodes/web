@@ -65,7 +65,7 @@ export default connect(mapStateToProps)(
                                     <p>{user.description}</p>
                                 </div>
                                 <div>
-                                    <div className="flex links-flex">
+                                    <div className="flex links-flex flex-gap">
                                         {user.website && (
                                             <div>
                                                 {" "}
