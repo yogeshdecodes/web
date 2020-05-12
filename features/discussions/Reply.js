@@ -54,7 +54,6 @@ export default connect(mapUserToProps)(
                     deleting: false,
                     deleted: true
                 });
-
                 if (this.props.onDelete) {
                     this.props.onDelete(this.props.reply.id);
                 }

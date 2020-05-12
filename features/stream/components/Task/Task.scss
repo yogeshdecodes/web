@@ -50,7 +50,9 @@
     }
 
     &.remaining {
-        opacity: 0.8;
+        .task-content {
+            opacity: 0.8;
+        }
     }
 
     &.in-progress .task-content {
