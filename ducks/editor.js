@@ -19,6 +19,7 @@ const initialState = {
     open: false,
     editorValue: "",
     tab: 0,
+    cardTab: 0,
     editorDueAt: null,
     editorDone: true,
     editorInProgress: false,
@@ -66,9 +67,15 @@ export const editorReducer = (state = initialState, action) => {
             };
 
         case types.EDITOR_SWITCH_TAB:
+            let delta = {};
+            if (action.cardTab) {
+                delta["cardTab"] = action.cardTab;
+            } else if (action.tab) {
+                delta["tab"] = action.tab;
+            }
             return {
                 ...state,
-                tab: action.tab
+                ...delta
             };
 
         case types.EDITOR_TOGGLE_MILESTONE:
@@ -247,10 +254,15 @@ export const actions = {
         };
     },
 
-    switchTab: tab => {
-        return {
-            type: types.EDITOR_SWITCH_TAB,
-            tab
+    switchTab: (tab, which = null) => {
+        let action = {
+            type: types.EDITOR_SWITCH_TAB
         };
+        if (which == "card") {
+            action["cardTab"] = tab;
+        } else {
+            action["tab"] = tab;
+        }
+        return action;
     }
 };

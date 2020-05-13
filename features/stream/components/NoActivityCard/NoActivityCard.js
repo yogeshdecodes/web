@@ -26,7 +26,7 @@ class NoActivityCard extends React.Component {
                             onClick={this.props.toggleEditor}
                             className="btn btn-primary"
                         >
-                            Post a thread or task
+                            Post your first task
                         </button>
                     </div>
                     <div className="flex flex-gap center">

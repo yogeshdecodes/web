@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TaskQueue from "~/features/tasks/components/TaskQueue";
 import "./index.scss";
+import GoldIcon from "~/components/icons/GoldIcon";
 
+import { Line } from "rc-progress";
 import { Router } from "~/routes";
 import Emoji from "~/components/Emoji";
 import GoldCtaButton from "~/components/GoldCtaButton";
@@ -23,6 +25,7 @@ import MarkdownIt from "markdown-it";
 import "react-markdown-editor-lite/lib/index.css";
 import dynamic from "next/dynamic";
 import GoldMessage from "../../components/GoldMessage";
+import OutboundLink from "~/components/OutboundLink";
 
 const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
     ssr: false
@@ -399,6 +402,49 @@ class DiscussionEditor extends React.Component {
     };
 
     render() {
+        if (
+            this.props.user &&
+            this.props.user.streak < 7 &&
+            !this.props.user.gold
+        ) {
+            return (
+                <Modal.Content>
+                    <div className="alert is-gold">
+                        <div className="alert-body">
+                            <h3>
+                                You must have a 7 day streak to post a thread.
+                            </h3>
+                            <div className="flex flex-v-gap flex-column">
+                                <div></div>
+                                <div>
+                                    <p className="heading">
+                                        Progress: {this.props.user.streak} days
+                                    </p>
+                                    <Line
+                                        percent={this.props.user.streak / 7}
+                                        strokeWidth="2"
+                                        trailWidth="2"
+                                        trailColor="var(--c-border)"
+                                        strokeColor="var(--c-main)"
+                                    />
+                                </div>
+                                <div>
+                                    <small>
+                                        <strong>Can't wait?</strong> Create
+                                        threads right away with <GoldIcon />{" "}
+                                        <OutboundLink to="https://gold.getmakerlog.com">
+                                            Makerlog Gold
+                                        </OutboundLink>
+                                        .
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Modal.Content>
+            );
+        }
+
         return (
             <>
                 <Modal.Content>
@@ -484,7 +530,7 @@ class CardEditor extends Component {
     };
 
     switchTab = tab => {
-        this.props.switchTab(tab);
+        this.props.switchTab(tab, "card");
     };
 
     render() {
@@ -501,7 +547,7 @@ class CardEditor extends Component {
                             <a
                                 className={
                                     "editor-select " +
-                                    (this.props.tab === 0 && "is-active")
+                                    (this.props.cardTab === 0 && "is-active")
                                 }
                                 onClick={e => this.switchTab(0)}
                             >
@@ -510,7 +556,7 @@ class CardEditor extends Component {
                             <a
                                 className={
                                     "editor-select " +
-                                    (this.props.tab === 1 && "is-active")
+                                    (this.props.cardTab === 1 && "is-active")
                                 }
                                 onClick={e => this.switchTab(1)}
                             >
@@ -519,7 +565,7 @@ class CardEditor extends Component {
                             <a
                                 className={
                                     "editor-select " +
-                                    (this.props.tab === 2 && "is-active")
+                                    (this.props.cardTab === 2 && "is-active")
                                 }
                                 onClick={e => this.switchTab(2)}
                             >
@@ -528,19 +574,20 @@ class CardEditor extends Component {
                         </div>
                     </div>
                 </Modal.Header>
-                {this.props.tab === 0 && (
+                {this.props.cardTab === 0 && (
                     <TaskEditorTab {...{ ...this.props, onClose: () => {} }} />
                 )}
-                {this.props.tab === 1 && (
+                {this.props.cardTab === 1 && (
                     <MilestoneEditor
                         hasGold={this.props.hasGold}
                         onClose={() => {}}
                     />
                 )}
-                {this.props.tab === 2 && (
+                {this.props.cardTab === 2 && (
                     <DiscussionEditor
                         hasGold={this.props.hasGold}
                         onClose={() => {}}
+                        user={this.props.user}
                     />
                 )}
             </div>
@@ -606,6 +653,7 @@ class Editor extends Component {
                     <DiscussionEditor
                         hasGold={this.props.hasGold}
                         onClose={this.props.onClose}
+                        user={this.props.user}
                     />
                 )}
             </Modal>
@@ -615,6 +663,7 @@ class Editor extends Component {
 
 const mapStateToProps = state => ({
     isLoggedIn: state.auth.loggedIn,
+    user: state.user.me,
     hasGold: state.user.me ? state.user.me.gold : false,
     open: state.editor.open,
     queue: state.editor.queue,
@@ -629,7 +678,8 @@ const mapStateToProps = state => ({
     createFailed: state.editor.createFailed,
     errorMessages: state.editor.errorMessages,
     fieldErrors: state.editor.fieldErrors,
-    tab: state.editor.tab
+    tab: state.editor.tab,
+    cardTab: state.editor.cardTab
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -646,7 +696,8 @@ const mapDispatchToProps = dispatch => ({
     markRemaining: () => dispatch(editorActions.markRemaining()),
     openMilestoneEditor: () => dispatch(editorActions.openMilestoneEditor()),
     openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor()),
-    switchTab: tab => dispatch(editorActions.switchTab(tab))
+    switchTab: (tab, which = null) =>
+        dispatch(editorActions.switchTab(tab, which))
 });
 
 Editor.propTypes = {};
