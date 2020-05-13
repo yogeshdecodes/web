@@ -68,9 +68,9 @@ export const editorReducer = (state = initialState, action) => {
 
         case types.EDITOR_SWITCH_TAB:
             let delta = {};
-            if (action.cardTab) {
+            if (action.cardTab !== undefined) {
                 delta["cardTab"] = action.cardTab;
-            } else if (action.tab) {
+            } else if (action.tab !== undefined) {
                 delta["tab"] = action.tab;
             }
             return {
