@@ -11,6 +11,8 @@ import { getNomadLocation } from "../../../lib/integrations/nomadlist";
 import ProductsContainer from "~/features/products/containers/ProductsContainer";
 import { ProductList } from "~/features/products";
 import { TrophyIcon } from "../../../features/achievements/TrophyMedia";
+import routes, { Link } from "~/routes";
+import { connect } from "react-redux";
 
 class MyProductsCard extends Component {
     render() {
@@ -20,17 +22,30 @@ class MyProductsCard extends Component {
             <ProductsContainer
                 user={user.id}
                 component={({ products }) => {
-                    if (!products.length) return null;
-
+                    if (
+                        products.length == 0 &&
+                        (!this.props.me || this.props.me.id !== user.id)
+                    )
+                        return null;
                     return (
                         <div className="MyProductsCard sidebar-item">
                             <h3>Products</h3>
                             <div className="card">
                                 <div className="card-content">
-                                    <ProductList
-                                        thumbnail
-                                        products={products}
-                                    />
+                                    {products.length > 0 ? (
+                                        <ProductList
+                                            thumbnail
+                                            products={products}
+                                        />
+                                    ) : (
+                                        <center>
+                                            <Link route="product-create">
+                                                <a className="btn btn-light">
+                                                    Add a product
+                                                </a>
+                                            </Link>
+                                        </center>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -40,6 +55,8 @@ class MyProductsCard extends Component {
         );
     }
 }
+
+MyProductsCard = connect(state => ({ me: state.user.me }))(MyProductsCard);
 
 class NomadLocationCard extends Component {
     state = {
