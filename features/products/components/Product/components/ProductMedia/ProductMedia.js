@@ -3,8 +3,20 @@ import { Link } from "~/routes";
 import { truncate } from "~/lib/utils/random";
 import { imageUrl } from "../../../../../../lib/utils/img";
 import ProductIcon from "~/features/products/components/ProductIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { mapStateToProps as mapUserToProps } from "~/ducks/user";
+import { connect } from "react-redux";
 
 class ProductMedia extends React.Component {
+    isCurrentUser = () => {
+        // TODO: Add team support
+        return (
+            (this.props.product &&
+                this.props.product.user === this.props.me.id) ||
+            this.props.product.team.includes(this.props.me.id)
+        );
+    };
+
     renderMedium() {
         return (
             <Link
@@ -15,7 +27,7 @@ class ProductMedia extends React.Component {
                     <div>
                         <div className={"flex"}>
                             <ProductIcon is={48} product={this.props.product} />
-                            <div>
+                            <div className="flex-grow">
                                 <strong>{this.props.product.name} </strong>
                                 <p>
                                     {truncate(
@@ -25,6 +37,20 @@ class ProductMedia extends React.Component {
                                     )}
                                 </p>
                             </div>
+                            {this.isCurrentUser() && (
+                                <div>
+                                    <Link
+                                        route="product-edit"
+                                        params={{
+                                            slug: this.props.product.slug
+                                        }}
+                                    >
+                                        <a className="unstyled">
+                                            <FontAwesomeIcon icon="edit" />
+                                        </a>
+                                    </Link>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </a>
@@ -56,7 +82,7 @@ class ProductMedia extends React.Component {
                                     is={32}
                                     product={this.props.product}
                                 />
-                                <div>
+                                <div className="flex-grow">
                                     <strong>{this.props.product.name} </strong>
                                     <p>
                                         {truncate(
@@ -107,4 +133,4 @@ class ProductMedia extends React.Component {
     }
 }
 
-export default ProductMedia;
+export default connect(mapUserToProps)(ProductMedia);
