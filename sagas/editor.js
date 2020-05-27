@@ -28,6 +28,8 @@ function* smartCreateTask(action) {
             yield put(appActions.toggleNewUser());
         }
 
+        yield put(editorActions.createSuccess());
+
         yield put(tasksActions.loadTasksSuccess(tasks));
 
         // Add the task directly to the store for offline use.
