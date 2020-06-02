@@ -401,7 +401,7 @@ a[class^="btn"] {
     }
 
     &.btn-twitter {
-        background: #1b95e0 !important;
+        background: $c-twitter !important;
         color: var(--c-lightest);
         height: 2.25em;
         border: 0;
@@ -946,6 +946,16 @@ table.is-full {
     box-shadow: none;
     background: var(--c-lightest) !important;
 
+    &.blog-card {
+        flex-direction: column;
+        .thumbnail {
+            min-height: 200px;
+            @extend %corners;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+    }
+
     > .flex {
         width: 100%;
     }
@@ -1000,6 +1010,9 @@ table.is-full {
 
     &.PageCard.yellow {
         background: $gradient-card-yellow;
+    }
+
+    &.is-hero {
     }
 }
 
@@ -1234,7 +1247,7 @@ button[disabled] {
 }
 
 .has-text-white {
-    color: #fff;
+    color: #fff !important;
 }
 
 .has-text-grey {
@@ -2135,6 +2148,10 @@ a {
     p {
         //color: white;
     }
+    h2,
+    h3 {
+        line-height: 1.6;
+    }
     h4,
     h5 {
         margin-bottom: 10px;
@@ -2695,4 +2712,12 @@ p {
             }
         }
     }
+}
+
+.brand-underline {
+    display: inline-block;
+    line-height: 20px;
+    color: inherit;
+    border-bottom: 2px solid #2ce28a;
+    margin-right: 3px;
 }

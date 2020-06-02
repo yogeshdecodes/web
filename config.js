@@ -35,6 +35,18 @@ const PADDLE_VENDOR = process.env.PADDLE_VENDOR
     ? process.env.PADDLE_VENDOR
     : "38022";
 
+const GHOST_API_URL = process.env.GHOST_API_URL
+    ? process.env.GHOST_API_URL
+    : "https://blog.getmakerlog.com";
+
+const GHOST_CONTENT_KEY = process.env.GHOST_CONTENT_KEY
+    ? process.env.GHOST_CONTENT_KEY
+    : "5e04d736d2732e4a3456d48ab0";
+
+const GHOST_API_VER = process.env.GHOST_API_VER
+    ? process.env.GHOST_API_VER
+    : "v3";
+
 const config = {
     API_URL,
     WS_URL,
@@ -45,6 +57,9 @@ const config = {
     IMGOPT_ENABLED,
     isDev,
     DEFAULT_TZ,
-    PADDLE_VENDOR
+    PADDLE_VENDOR,
+    GHOST_API_URL,
+    GHOST_API_VER,
+    GHOST_CONTENT_KEY
 };
 export default config;

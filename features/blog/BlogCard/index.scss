@@ -1,0 +1,35 @@
+@import "../../../styles/_variables";
+
+.BlogCard {
+    @extend %corners;
+    // background-blend-mode: multiply;
+    //background-color: rgba(0, 0, 0, 0.7);
+    color: var(--c-lightest);
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    max-width: 100%;
+    cursor: pointer;
+
+    .description-container {
+        @extend %corners;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        padding: 1rem;
+        //background: linear-gradient(
+        //    180deg,
+        //    rgba(0, 0, 0, 0.8) 0%,
+        //    rgba(0, 0, 0, 0.8) 100%
+        //);
+    }
+
+    div {
+        align-self: flex-end;
+        width: 100%;
+    }
+
+    &:hover {
+        transform: scale(1.02);
+    }
+}

@@ -1,0 +1,40 @@
+@import "../../styles/_variables";
+
+.BlogHeader {
+    text-align: center;
+    min-height: 20vh;
+    padding-top: 8vh;
+    padding-bottom: 8vh;
+    // background-color: var(--c-lightest);
+    background: $c-main;
+    background-position: center;
+    background-size: cover;
+}
+
+.SubscribeCta-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px !important;
+    min-height: 200px;
+    // background: $c-main !important;
+    background: url("https://www.transparenttextures.com/patterns/inspiration-geometry.png"),
+        var(--c-lightest);
+    border-top: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-border);
+}
+
+.hero.is-twitter {
+    border-radius: 0px !important;
+    min-height: 30vh;
+    background: url("https://www.transparenttextures.com/patterns/zig-zag.png"),
+        $c-twitter;
+}
+
+@media only screen and (max-width: $breakpoint-mobile) {
+    .BlogPostsRow {
+        > div {
+            width: calc(100vw - 2rem) !important;
+        }
+    }
+}

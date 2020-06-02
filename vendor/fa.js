@@ -83,6 +83,8 @@ import { faArrowUp } from "@fortawesome/free-solid-svg-icons/faArrowUp";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons/faArrowDown";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons/faLocationArrow";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons/faLightbulb";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin";
+import { faHackerNews } from "@fortawesome/free-brands-svg-icons/faHackerNews";
 
 library.add(
     faInstagram,
@@ -168,5 +170,7 @@ library.add(
     faArrowDown,
     faLocationArrow,
     faCircle,
-    faLightbulb
+    faLightbulb,
+    faLinkedin,
+    faHackerNews
 );

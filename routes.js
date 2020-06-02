@@ -49,4 +49,7 @@ module.exports = routes()
     .add("events-host", "/events/host/", "events-host")
     .add("event-page", "/events/:slug/", "event-page")
     .add("gold-page", "/gold", "gold-page")
-    .add("products", "/products", "products");
+    .add("products", "/products", "products")
+    .add("blog", "/stories", "blog")
+    .add("blog-tag", "/stories/tags/:slug", "blog/tag")
+    .add("blog-post", "/stories/:slug?", "blog/post");
