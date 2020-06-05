@@ -137,6 +137,14 @@
                 font-style: italic;
             }
         }
+
+        blockquote {
+            padding: 1rem;
+            background: var(--c-bg);
+            border-left: 2px solid var(--c-border);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
     }
 }
 
