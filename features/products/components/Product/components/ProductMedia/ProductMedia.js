@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import { connect } from "react-redux";
 
-class ProductMedia extends React.Component {
+export class ProductMedia extends React.Component {
     isCurrentUser = () => {
         // TODO: Add team support
         return (
