@@ -4,6 +4,7 @@ import { StdErrorCollection } from "../../../lib/utils/error";
 import { loadingClass } from "~/lib/utils/random";
 import { subscribe } from "../../../vendor/ghost";
 import Emoji from "~/components/Emoji";
+import { Track } from "../../../vendor/ga";
 
 function getLocation() {
     if (isServer) return null;
@@ -33,6 +34,7 @@ class SubscribeForm extends Component {
                 loading: true
             });
             await subscribe(this.state.email);
+            new Track().event("newsletter-subscribe");
             this.setState({
                 subscribed: true,
                 failed: false,
