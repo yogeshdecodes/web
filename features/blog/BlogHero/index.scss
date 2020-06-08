@@ -5,6 +5,7 @@
     padding-top: 15vh;
     padding-bottom: 15vh;
     // background-color: var(--c-lightest);
+    background: var(--c-main);
     background-blend-mode: multiply;
     background-color: rgba(0, 0, 0, 0.7);
     background-position: center;
@@ -26,6 +27,7 @@
 
         .feature-image {
             @extend %corners;
+            background: var(--c-main);
             background-size: cover;
             background-position: center;
             padding-top: calc(591.44 / 1127.34 * 100%);
@@ -62,6 +64,7 @@
     }
 
     .blog-post {
+        max-width: 100%;
         position: relative;
         margin-top: -500px;
         font-size: 1.1rem;

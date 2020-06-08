@@ -9,11 +9,15 @@ const BlogCard = props => {
         <Link route="blog-post" params={{ slug: post.slug }}>
             <div
                 className="BlogCard"
-                style={{
-                    background: `linear-gradient(180deg, rgba(0,0,0,0.2) 30%, rgba(0,0,0,1) 100%), url(${post.feature_image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center"
-                }}
+                style={
+                    post.feature_image
+                        ? {
+                              background: `linear-gradient(180deg, rgba(0,0,0,0.2) 30%, rgba(0,0,0,1) 100%), url(${post.feature_image})`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center"
+                          }
+                        : { background: `var(--c-main)` }
+                }
             >
                 <div style={{ flexGrow: 1 }}></div>
                 <div className="description-container">

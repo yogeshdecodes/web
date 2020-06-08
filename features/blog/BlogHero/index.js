@@ -53,9 +53,13 @@ export const BlogHero = ({ post, single = false, ...props }) => {
                     </div>
                     <div
                         className="feature-image"
-                        style={{
-                            backgroundImage: `url(${post.feature_image})`
-                        }}
+                        style={
+                            post.feature_image
+                                ? {
+                                      backgroundImage: `url(${post.feature_image})`
+                                  }
+                                : { background: "var(--c-main)" }
+                        }
                     ></div>
                     <div className="blog-post-container mbGap">
                         <div className="blog-post">
@@ -113,7 +117,13 @@ export const BlogHero = ({ post, single = false, ...props }) => {
     return (
         <div
             className="BlogHero"
-            style={{ backgroundImage: `url(${post.feature_image})` }}
+            style={
+                post.feature_image
+                    ? {
+                          backgroundImage: `url(${post.feature_image})`
+                      }
+                    : { background: "var(--c-main)" }
+            }
         >
             <div className="container">
                 <p className="heading has-text-grey-light">Featured story</p>
