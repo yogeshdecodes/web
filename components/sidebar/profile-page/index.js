@@ -39,7 +39,7 @@ class MyProductsCard extends Component {
                                         />
                                     ) : (
                                         <center>
-                                            <Link route="product-create">
+                                            <Link route="products">
                                                 <a className="btn btn-light">
                                                     Add a product
                                                 </a>

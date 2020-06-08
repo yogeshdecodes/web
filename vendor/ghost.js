@@ -23,6 +23,13 @@ export async function getPosts(limit = "all") {
     });
 }
 
+export async function getLatestPost(limit = "1") {
+    return await blogApi.posts.browse({
+        limit: limit,
+        include: "tags"
+    });
+}
+
 export async function getNewsPosts(limit = "all") {
     return await blogApi.posts.browse({
         limit: limit,

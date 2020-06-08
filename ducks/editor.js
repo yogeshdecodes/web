@@ -69,8 +69,18 @@ export const editorReducer = (state = initialState, action) => {
         case types.EDITOR_SWITCH_TAB:
             let delta = {};
             if (action.cardTab !== undefined) {
+                new Track().event(
+                    `editor-switch-cardtab-${
+                        state.cardTab ? state.cardTab : 0
+                    }-${action.cardTab ? action.cardTab : 0}`
+                );
                 delta["cardTab"] = action.cardTab;
             } else if (action.tab !== undefined) {
+                new Track().event(
+                    `editor-switch-tab-${state.tab ? state.tab : 0}-${
+                        action.tab ? action.tab : 0
+                    }`
+                );
                 delta["tab"] = action.tab;
             }
             return {
@@ -143,6 +153,9 @@ export const editorReducer = (state = initialState, action) => {
             };
 
         case types.TASK_CREATE_SUCCEED:
+            new Track().event("task-posted", "Task posted", {
+                queueSize: state.queue.length
+            });
             return {
                 ...state,
                 isCreating: false,
@@ -157,6 +170,7 @@ export const editorReducer = (state = initialState, action) => {
             };
 
         case types.TASK_CREATE_FAILED:
+            new Track().event("task-failed-post");
             return {
                 ...state,
                 isCreating: false,
@@ -231,7 +245,6 @@ export const actions = {
     }),
 
     createTasks: () => {
-        new Track().event("task-posted");
         return {
             type: types.TASK_CREATE_REQUEST
         };

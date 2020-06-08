@@ -25,7 +25,8 @@ class KeyActivityFeed extends Component {
         initialLoaded: false,
         nextUrl: null,
         activities: [],
-        failed: false
+        failed: false,
+        pages: 0
     };
 
     constructor(props) {
@@ -159,12 +160,12 @@ class KeyActivityFeed extends Component {
     loadMore = async () => {
         try {
             let nextUrl = this.state.nextUrl;
-
-            this.setState({ loading: true });
+            const depth = this.state.pages + 1;
+            this.setState({ loading: true, pages: depth });
 
             if (this.state.initialLoaded && nextUrl) {
                 new Track().event(
-                    "activityfeed-more-loaded",
+                    `activityfeed-loadmore-${depth}-${this.props.feedKey}`,
                     "Infinite scroll load"
                 );
             } else {

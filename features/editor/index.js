@@ -309,6 +309,10 @@ class MilestoneEditorTab extends Component {
 }
 
 class TaskEditorTab extends Component {
+    onHoverTips = () => {
+        new Track().event("editor-tips-hover");
+    };
+
     render() {
         return (
             <>
@@ -319,7 +323,7 @@ class TaskEditorTab extends Component {
                 <Modal.Footer>
                     <div className="flex flex-gap v-center">
                         <div className="flex-grow v-center flex">
-                            <div>
+                            <div onMouseEnter={this.onHoverTips}>
                                 <Tooltip
                                     html={
                                         <div>

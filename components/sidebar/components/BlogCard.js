@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import OutboundLink from "~/components/OutboundLink";
+import { Link } from "~/routes";
 import Spinner from "~/components/Spinner";
 import { getLatestBlogEntry } from "~/lib/stats";
 import { truncate } from "~/lib/utils/random";
+import { getLatestPost } from "../../../vendor/ghost";
 
 export default class BlogCard extends Component {
     state = {
@@ -21,13 +23,16 @@ export default class BlogCard extends Component {
             failed: false
         });
         try {
-            let data = await getLatestBlogEntry();
+            let data = await getLatestPost();
+            console.log(data[0]);
+            data = data[0];
             this.setState({
                 loading: false,
                 failed: false,
                 data
             });
         } catch (e) {
+            console.log(e);
             this.setState({
                 failed: true
             });
@@ -43,12 +48,10 @@ export default class BlogCard extends Component {
                         <h4>{data.title}</h4>
                     </OutboundLink>
                     <small>
-                        <p>{truncate(data.description, 14, "...")}</p>
-                        <OutboundLink to={data.link}>
-                            <span className="outbound">
-                                Read on the MakerBlog &raquo;
-                            </span>
-                        </OutboundLink>
+                        <p>{truncate(data.excerpt, 14, "...")}</p>
+                        <Link route="blog-post" params={{ slug: data.slug }}>
+                            <a>Read on the MakerBlog &raquo;</a>
+                        </Link>
                     </small>
                 </div>
             </div>
@@ -58,9 +61,9 @@ export default class BlogCard extends Component {
     getCss = () => {
         const { data, loading, failed } = this.state;
 
-        if (!loading && !failed && data) {
+        if (!loading && !failed && data && data.feature_image) {
             return {
-                background: `url(${data.thumbnail})`,
+                background: `url(${data.feature_image})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center"
             };

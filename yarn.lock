@@ -8779,6 +8779,11 @@ react-onclickoutside@^6.9.0:
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.9.0.tgz#a54bc317ae8cf6131a5d78acea55a11067f37a1f"
   integrity sha512-8ltIY3bC7oGhj2nPAvWOGi+xGFybPNhJM0V1H8hY/whNcXgmDeaeoCMPPd8VatrpTsUWjb/vGzrmu6SrXVty3A==
 
+react-optimize@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/react-optimize/-/react-optimize-2.2.2.tgz#1c675bdf7e43dbbe339d2d8a77c3e3a94ec6c0c6"
+  integrity sha512-/u51ZUDxrj5muQc5AebJ4x+p2caePkJ009VsjtBq1r2Q1gb5aYUYQMtATozdHk9M/Da1pibNIsZyz0S36vK8hw==
+
 react-overlays@^0.7.0:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.7.4.tgz#ef2ec652c3444ab8aa014262b18f662068e56d5c"

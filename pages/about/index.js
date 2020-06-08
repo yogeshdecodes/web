@@ -191,8 +191,8 @@ const FrequentlyAsked = props => (
         <p>Take days off without breaking your streak!</p>
         <p>
             You can access the Wellness features in{" "}
-            <Link to={"wellness"}>
-                <a>Tasks > Wellness</a>
+            <Link to={"settings"}>
+                <a>Streaks</a>
             </Link>
             .
         </p>
@@ -212,8 +212,8 @@ const FrequentlyAsked = props => (
                     If you don't want rest days to be automatically applied
                 </strong>
                 , you can enable Hardcore mode in{" "}
-                <Link to={"wellness"}>
-                    <a>Tasks > Wellness</a>
+                <Link to={"settings"}>
+                    <a>Tasks > Streaks</a>
                 </Link>
             </li>
         </ul>
