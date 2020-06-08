@@ -64,7 +64,6 @@
     }
 
     .blog-post {
-        max-width: 100%;
         position: relative;
         margin-top: -500px;
         font-size: 1.1rem;
@@ -161,6 +160,7 @@
         }
     }
     .blog-post-container .blog-post {
+        max-width: 100%;
         margin-top: 0px;
         padding: 1rem;
     }
