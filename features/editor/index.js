@@ -403,6 +403,7 @@ class DiscussionEditor extends React.Component {
 
     render() {
         if (
+            false &&
             this.props.user &&
             this.props.user.streak < 7 &&
             !this.props.user.gold
