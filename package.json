@@ -107,6 +107,7 @@
         "react-transition-group": "1.x",
         "react-trend": "^1.2.5",
         "react-twitter-embed": "^3.0.3",
+        "react-youtube": "^7.11.2",
         "reactbulma": "^3.0.4",
         "recompose": "^0.30.0",
         "reconnecting-websocket": "^4.2.0",
