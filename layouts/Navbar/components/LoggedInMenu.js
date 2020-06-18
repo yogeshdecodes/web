@@ -21,11 +21,18 @@ const LoggedInMenu = props => (
                 </a>
             </NavLink>
 
+            <NavLink route="blog" iexact activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Stories</span>
+                </a>
+            </NavLink>
+
             <NavLink route="discussions-top" iexact activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Discuss</span>
                 </a>
             </NavLink>
+
             <NavLink route="products" iexact activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Products</span>
@@ -37,12 +44,6 @@ const LoggedInMenu = props => (
                 </a>
             </NavLink>
 
-            <NavLink route="deals" activeClassName="is-active">
-                <a className="navbar-item">
-                    <span>Deals</span>
-                </a>
-            </NavLink>
-
             <NavbarDropdown
                 hoverable
                 link={() => (
@@ -51,6 +52,12 @@ const LoggedInMenu = props => (
                     </>
                 )}
             >
+                <NavLink route="deals" activeClassName="is-active">
+                    <a className="navbar-item">
+                        <span>Deals</span>
+                    </a>
+                </NavLink>
+
                 <NavLink route="events" activeClassName="is-active">
                     <a className="navbar-item">
                         <span>Events</span>

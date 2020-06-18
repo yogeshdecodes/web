@@ -13,6 +13,7 @@ import startsWith from "lodash/startsWith";
 import { CommentsBox } from "~/features/comments";
 import TaskDetail from "./components/TaskDetail";
 import { imageUrl } from "../../../../lib/utils/img";
+import YouTube from "react-youtube";
 
 function findWord(word, str) {
     return str
@@ -30,6 +31,16 @@ function isProductLaunch(task) {
             task.content.toLowerCase().includes("#launched") &&
             task.project_set.length > 0)
     );
+}
+
+function findVideoId(str) {
+    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = str.match(regExp);
+    if (match && match[2].length == 11) {
+        return match[2];
+    } else {
+        return null;
+    }
 }
 
 /*
@@ -194,6 +205,17 @@ class Task extends React.Component {
                             onClose={this.toggleAttachment}
                         />
                     )}
+                </div>
+            );
+        } else if (findVideoId(this.props.task.content)) {
+            return (
+                <div className="attachments-container ">
+                    <div className="youtube-preview">
+                        <YouTube
+                            opts={{ height: "300" }}
+                            videoId={findVideoId(this.props.task.content)}
+                        />
+                    </div>
                 </div>
             );
         } else {

@@ -5,6 +5,7 @@ import Sticky from "react-stickynode";
 import "./index.scss";
 import { isServer } from "../../../config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Track } from "../../../vendor/ga";
 
 class FeedSwitcher extends Component {
     state = {
@@ -29,6 +30,16 @@ class FeedSwitcher extends Component {
         window.removeEventListener("scroll", this.onScroll);
     }
 
+    onClickItem = tab => {
+        new Track().event(
+            `activityfeed-switch-${tab ? tab : "default"}`,
+            `Switched from ${
+                this.props.currentFeed ? this.props.currentFeed : "default"
+            } to ${tab ? tab : "default"}`
+        );
+        this.props.changeFeed(tab);
+    };
+
     render() {
         return (
             <Sticky
@@ -37,7 +48,7 @@ class FeedSwitcher extends Component {
             >
                 <div className="FeedSwitcher">
                     <div
-                        onClick={e => this.props.changeFeed(null)}
+                        onClick={e => this.onClickItem(null)}
                         className={
                             this.props.currentFeed === null ? "active" : ""
                         }
@@ -45,7 +56,7 @@ class FeedSwitcher extends Component {
                         Everyone
                     </div>
                     <div
-                        onClick={e => this.props.changeFeed("following")}
+                        onClick={e => this.onClickItem("following")}
                         className="disabled"
                     >
                         <span className="relative">
@@ -58,7 +69,7 @@ class FeedSwitcher extends Component {
                                 ? "active"
                                 : ""
                         }
-                        onClick={e => this.props.changeFeed("discussions")}
+                        onClick={e => this.onClickItem("discussions")}
                     >
                         Discussions
                     </div>
@@ -66,7 +77,7 @@ class FeedSwitcher extends Component {
                         className={
                             this.props.currentFeed === "tasks" ? "active" : ""
                         }
-                        onClick={e => this.props.changeFeed("tasks")}
+                        onClick={e => this.onClickItem("tasks")}
                     >
                         Tasks
                     </div>

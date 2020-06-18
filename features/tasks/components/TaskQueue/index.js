@@ -129,6 +129,12 @@ class TaskQueue extends Component {
     };
 
     onTaskKeyDown = e => {
+        if (this.props.withoutQueue && e.key === "Enter") {
+            // Skip the queue.
+            this.props.createTasks();
+            return;
+        }
+
         if (e.key === "Enter" && !e.shiftKey && !(e.ctrlKey || e.metaKey)) {
             // detects cmd
             const newTask = this.createTaskObject();

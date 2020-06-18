@@ -3,7 +3,7 @@ import { Tooltip } from "react-tippy";
 import { getRelatedData } from "~/lib/projects";
 import Spinner from "./Spinner";
 import styled from "styled-components";
-import ProductMedia from "../features/products/components/Product/components/ProductMedia";
+import { ProductMedia } from "~/features/products/components/Product/components/ProductMedia/ProductMedia";
 
 export const UnderlinedText = styled.span`
     display: inline-block;

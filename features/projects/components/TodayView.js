@@ -117,7 +117,7 @@ class TodayView extends React.Component {
                 </div>
                 <div className="TodayCard card">
                     <div className="today-input">
-                        <TaskQueue />
+                        <TaskQueue withoutQueue />
                     </div>
                     <div className={"card-content"}>
                         {tasks.length === 0 && (

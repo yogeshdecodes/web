@@ -115,7 +115,7 @@ class InfiniteSearch extends React.Component {
                                 "btn rounded",
                                 this.state.loading
                             )}
-                            onClick={this.loadMore}
+                            onClick={() => this.loadMore()}
                         >
                             <FontAwesomeIcon icon={"arrow-circle-down"} />{" "}
                             &nbsp; Load more results...

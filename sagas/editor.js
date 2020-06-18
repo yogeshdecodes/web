@@ -2,6 +2,7 @@ import { call, put, select, takeLatest } from "redux-saga/effects";
 import { actions as editorActions, types as editorTypes } from "~/ducks/editor";
 import { actions as statsActions } from "~/ducks/stats";
 import { smartCreateTask as createTaskModel } from "~/lib/tasks";
+import { actions as tasksActions } from "~/ducks/tasks";
 import { actions as appActions } from "~/ducks/app";
 
 export const getEditorState = state => state.editor;
@@ -20,7 +21,7 @@ function* smartCreateTask(action) {
         }
 
         // returns created task
-        yield call(createTaskModel, editorState.queue);
+        const tasks = yield call(createTaskModel, editorState.queue);
 
         let appState = yield select(getAppState);
         if (appState.isNewUser) {
@@ -28,6 +29,12 @@ function* smartCreateTask(action) {
         }
 
         yield put(editorActions.createSuccess());
+
+        yield put(tasksActions.loadTasksSuccess(tasks));
+
+        // Add the task directly to the store for offline use.
+        // yield put(tasksActions.createTaskSuccess(task));
+
         // refresh stats
         yield put(statsActions.fetchStats(true));
     } catch (e) {

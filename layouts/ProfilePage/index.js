@@ -27,7 +27,7 @@ function getContrastYIQ(hexcolor) {
     var g = parseInt(hexcolor.substr(2, 2), 16);
     var b = parseInt(hexcolor.substr(4, 2), 16);
     var yiq = (r * 299 + g * 587 + b * 114) / 1000;
-    return yiq >= 128 ? "var(--c-title)" : "var(--c-lightest)";
+    return yiq >= 128 ? "var(--c-text)" : "var(--c-lightest)";
 }
 
 const mapStateToProps = state => ({
@@ -65,7 +65,7 @@ export default connect(mapStateToProps)(
                                     <p>{user.description}</p>
                                 </div>
                                 <div>
-                                    <div className="flex links-flex">
+                                    <div className="flex links-flex flex-gap">
                                         {user.website && (
                                             <div>
                                                 {" "}
@@ -76,12 +76,19 @@ export default connect(mapStateToProps)(
                                                     )}
                                                 >
                                                     <FontAwesomeIcon icon="globe" />{" "}
-                                                    {normalizeUrl(user.website)
-                                                        .replace("http://", "")
-                                                        .replace(
-                                                            "https://",
-                                                            ""
-                                                        )}
+                                                    <span className="is-hidden-mobile">
+                                                        {normalizeUrl(
+                                                            user.website
+                                                        )
+                                                            .replace(
+                                                                "http://",
+                                                                ""
+                                                            )
+                                                            .replace(
+                                                                "https://",
+                                                                ""
+                                                            )}
+                                                    </span>
                                                 </OutboundLink>
                                             </div>
                                         )}

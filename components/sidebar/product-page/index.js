@@ -9,7 +9,7 @@ import UserRow from "~/features/users/components/UserRow";
 import orderBy from "lodash/orderBy";
 
 const ProductPeopleCard = ({ product, people }) => {
-    if (!product || !people) return null;
+    if (!product || !people || !people.length) return null;
 
     return (
         <div className="ProductPeopleCard sidebar-item">

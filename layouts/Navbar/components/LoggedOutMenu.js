@@ -16,20 +16,25 @@ const LoggedOutMenu = props => (
                 <a className="navbar-item">Explore</a>
             </NavLink>
 
-            <NavLink iexact activeClassName="is-active" route="discussions-top">
-                <a className="navbar-item">Discuss</a>
+            <NavLink route="blog" iexact activeClassName="is-active">
+                <a className="navbar-item">
+                    <span>Stories</span>
+                </a>
             </NavLink>
 
-            <NavLink route="deals" activeClassName="is-active">
-                <a className="navbar-item">
-                    <span>Deals</span>
-                </a>
+            <NavLink iexact activeClassName="is-active" route="discussions-top">
+                <a className="navbar-item">Discuss</a>
             </NavLink>
 
             <NavbarDropdown
                 hoverable
                 link={() => <FontAwesomeIcon icon="ellipsis-v" />}
             >
+                <NavLink route="deals" activeClassName="is-active">
+                    <a className="navbar-item">
+                        <span>Deals</span>
+                    </a>
+                </NavLink>
                 <NavLink activeClassName="is-active" route="events">
                     <a className="navbar-item">
                         <span>Events</span>

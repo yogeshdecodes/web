@@ -1,17 +1,21 @@
 import React from "react";
 // import { StreamCard as Card } from "features/stream/components/Stream/components/StreamCard/styled";
 import InfiniteSearch from "~/features/search/components/InfiniteSearch";
-import { searchDiscussions, searchProducts, searchTasks, searchUsers } from "~/lib/search";
+import {
+    searchDiscussions,
+    searchProducts,
+    searchTasks,
+    searchUsers
+} from "~/lib/search";
 import { ProductList } from "~/features/products";
 import Avatar from "~/features/users/components/Avatar";
 import Task from "~/features/stream/components/Task";
 import UserMediaList from "~/features/users/components/UserMediaList";
-import Sticky from "react-stickynode";
-import SidebarLink from "~/components/SidebarLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ThreadList from "~/features/discussions/ThreadList";
 import ActiveLink from "~/components/ActiveLink";
 import { isServer } from "~/config";
+import StdPageSidebar from "~/components/sidebar/std-page";
 
 function makeKey(length) {
     var result = "";
@@ -42,14 +46,6 @@ class SearchPage extends React.Component {
         };
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.getQuery() !== "" && this.getQuery() !== this.state.query) {
-            this.setState({
-                query: this.getQuery() ? this.getQuery() : ""
-            });
-        }
-    }
-
     getQuery = () => {
         return this.props.query ? this.props.query : "";
     };
@@ -76,9 +72,9 @@ class SearchPage extends React.Component {
                         query={this.state.query}
                         searchFunc={searchTasks}
                         component={props => (
-                            <div>
+                            <div className="flex flex-column flex-v-gap ">
                                 {props.items.map(t => (
-                                    <div className={"flex"} key={t.id}>
+                                    <div className={"flex flex-gap"} key={t.id}>
                                         <div>
                                             <Avatar user={t.user} is={32} />
                                         </div>
@@ -120,79 +116,47 @@ class SearchPage extends React.Component {
 
     render() {
         return (
-            <div className="container SearchPage">
-                <br />
-                <div className={"grid-s-c"}>
-                    <div>
-                        <Sticky
-                            enabled={
-                                !isServer ? window.innerWidth >= 728 : true
-                            }
-                            top={30}
+            <div className="container">
+                <div className=" mtGap grid-s-c-s">
+                    <div className="SidebarTabs">
+                        <ActiveLink
+                            activeClassName="active"
+                            route="search"
+                            params={{ view: "products" }}
                         >
-                            <div className={"card"}>
-                                <div className={"card-content"}>
-                                    <ActiveLink
-                                        activeClassName="active"
-                                        route="search"
-                                        params={{ view: "products" }}
-                                    >
-                                        <SidebarLink>
-                                            <span className={"menu-icon"}>
-                                                <FontAwesomeIcon
-                                                    icon={"ship"}
-                                                />
-                                            </span>
-                                            <span>Products</span>
-                                        </SidebarLink>
-                                    </ActiveLink>
-                                    <ActiveLink
-                                        activeClassName="active"
-                                        route="search"
-                                        params={{ view: "makers" }}
-                                    >
-                                        <SidebarLink>
-                                            <span className={"menu-icon"}>
-                                                <FontAwesomeIcon
-                                                    icon={"users"}
-                                                />
-                                            </span>
-                                            <span>Makers</span>
-                                        </SidebarLink>
-                                    </ActiveLink>
-                                    <ActiveLink
-                                        activeClassName="active"
-                                        route="search"
-                                        params={{ view: "tasks" }}
-                                    >
-                                        <SidebarLink>
-                                            <span className={"menu-icon"}>
-                                                <FontAwesomeIcon
-                                                    icon={"check-circle"}
-                                                />
-                                            </span>
-                                            <span>Tasks</span>
-                                        </SidebarLink>
-                                    </ActiveLink>
-                                    <ActiveLink
-                                        activeClassName="active"
-                                        route="search"
-                                        params={{ view: "discussions" }}
-                                    >
-                                        <SidebarLink>
-                                            <span className={"menu-icon"}>
-                                                <FontAwesomeIcon
-                                                    icon={"comment"}
-                                                />
-                                            </span>
-                                            <span>Discussions</span>
-                                        </SidebarLink>
-                                    </ActiveLink>
-                                </div>
+                            <div>
+                                <span>Products</span>
                             </div>
-                        </Sticky>
+                        </ActiveLink>
+                        <ActiveLink
+                            activeClassName="active"
+                            route="search"
+                            params={{ view: "makers" }}
+                        >
+                            <div>
+                                <span>Makers</span>
+                            </div>
+                        </ActiveLink>
+                        <ActiveLink
+                            activeClassName="active"
+                            route="search"
+                            params={{ view: "tasks" }}
+                        >
+                            <div>
+                                <span>Tasks</span>
+                            </div>
+                        </ActiveLink>
+                        <ActiveLink
+                            activeClassName="active"
+                            route="search"
+                            params={{ view: "discussions" }}
+                        >
+                            <div>
+                                <span>Discussions</span>
+                            </div>
+                        </ActiveLink>
                     </div>
-                    <div className={"column"}>
+                    <div>
                         <div className={"card"}>
                             <header>
                                 <input
@@ -209,6 +173,9 @@ class SearchPage extends React.Component {
                                 {this.renderRoute()}
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <StdPageSidebar />
                     </div>
                 </div>
             </div>

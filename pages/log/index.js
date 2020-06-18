@@ -49,7 +49,10 @@ class StreamPage extends React.Component {
                         </div>
                         <div>
                             {this.hasNoTasks() ? (
-                                <NoActivityCard />
+                                <>
+                                    <NoActivityCard />
+                                    <CardEditor />
+                                </>
                             ) : (
                                 <CardEditor />
                             )}

@@ -1,0 +1,7 @@
+.BlogPostsRow {
+    width: 100%;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    // grid-template-rows: 12px 12px 12px;
+}
