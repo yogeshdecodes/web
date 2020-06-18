@@ -27,6 +27,11 @@ import dynamic from "next/dynamic";
 import GoldMessage from "../../components/GoldMessage";
 import OutboundLink from "~/components/OutboundLink";
 
+import { Experiment, Variant } from "react-optimize";
+import { DoneStates } from "../../lib/utils/tasks";
+import experiments from "../../experiments";
+import { isDev } from "../../config";
+
 const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
     ssr: false
 });
@@ -317,7 +322,26 @@ class TaskEditorTab extends Component {
         return (
             <>
                 <Modal.Content>
-                    <TaskQueue />
+                    {isDev ? (
+                        <TaskQueue fixedDoneState={DoneStates.DONE} />
+                    ) : (
+                        <Experiment
+                            loader={
+                                <Spinner
+                                    small
+                                    text="Loading the task editor..."
+                                />
+                            }
+                            id={experiments.NEW_TASK_EXPERIENCE.id}
+                        >
+                            <Variant id="0">
+                                <TaskQueue />
+                            </Variant>
+                            <Variant id="1">
+                                <TaskQueue fixedDoneState={DoneStates.DONE} />
+                            </Variant>
+                        </Experiment>
+                    )}
                 </Modal.Content>
 
                 <Modal.Footer>
@@ -538,6 +562,29 @@ class CardEditor extends Component {
         this.props.switchTab(tab, "card");
     };
 
+    renderNewTabExperience = () => {
+        return (
+            <>
+                <a
+                    className={
+                        "editor-select " + (this.props.tab === 0 && "is-active")
+                    }
+                    onClick={e => this.switchTab(0)}
+                >
+                    To-do
+                </a>
+                <a
+                    className={
+                        "editor-select " + (this.props.tab === 4 && "is-active")
+                    }
+                    onClick={e => this.switchTab(4)}
+                >
+                    Completed task
+                </a>
+            </>
+        );
+    };
+
     render() {
         if (!this.props.isLoggedIn) return null;
 
@@ -549,15 +596,29 @@ class CardEditor extends Component {
                 <Modal.Header>
                     <div className="Editor flex flex-gap v-center">
                         <div className="flex-grow">
-                            <a
-                                className={
-                                    "editor-select " +
-                                    (this.props.cardTab === 0 && "is-active")
-                                }
-                                onClick={e => this.switchTab(0)}
-                            >
-                                Task
-                            </a>
+                            {isDev ? (
+                                this.renderNewTabExperience()
+                            ) : (
+                                <Experiment
+                                    id={experiments.NEW_TASK_EXPERIENCE.id}
+                                >
+                                    <Variant id="0">
+                                        <a
+                                            className={
+                                                "editor-select " +
+                                                (this.props.tab === 0 &&
+                                                    "is-active")
+                                            }
+                                            onClick={e => this.switchTab(0)}
+                                        >
+                                            Task
+                                        </a>
+                                    </Variant>
+                                    <Variant id="1">
+                                        {this.renderNewTabExperience()}
+                                    </Variant>
+                                </Experiment>
+                            )}
                             <a
                                 className={
                                     "editor-select " +
@@ -605,6 +666,29 @@ class Editor extends Component {
         this.props.switchTab(tab);
     };
 
+    renderNewTabExperience = () => {
+        return (
+            <>
+                <a
+                    className={
+                        "editor-select " + (this.props.tab === 0 && "is-active")
+                    }
+                    onClick={e => this.switchTab(0)}
+                >
+                    To-do
+                </a>
+                <a
+                    className={
+                        "editor-select " + (this.props.tab === 4 && "is-active")
+                    }
+                    onClick={e => this.switchTab(4)}
+                >
+                    Completed task
+                </a>
+            </>
+        );
+    };
+
     render() {
         if (!this.props.isLoggedIn) return null;
 
@@ -617,15 +701,29 @@ class Editor extends Component {
                 <Modal.Header>
                     <div className="Editor flex flex-gap v-center">
                         <div className="flex-grow">
-                            <a
-                                className={
-                                    "editor-select " +
-                                    (this.props.tab === 0 && "is-active")
-                                }
-                                onClick={e => this.switchTab(0)}
-                            >
-                                Task
-                            </a>
+                            {isDev ? (
+                                this.renderNewTabExperience()
+                            ) : (
+                                <Experiment
+                                    id={experiments.NEW_TASK_EXPERIENCE.id}
+                                >
+                                    <Variant id="0">
+                                        <a
+                                            className={
+                                                "editor-select " +
+                                                (this.props.tab === 0 &&
+                                                    "is-active")
+                                            }
+                                            onClick={e => this.switchTab(0)}
+                                        >
+                                            Task
+                                        </a>
+                                    </Variant>
+                                    <Variant id="1">
+                                        {this.renderNewTabExperience()}
+                                    </Variant>
+                                </Experiment>
+                            )}
                             <a
                                 className={
                                     "editor-select " +

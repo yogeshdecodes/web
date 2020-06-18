@@ -2,13 +2,55 @@ import { errorArray } from "~/lib/utils/error";
 import uniqBy from "lodash/uniqBy";
 import { Track } from "../vendor/ga";
 import last from "lodash/last";
+import { DoneStates } from "../lib/utils/tasks";
 
-export const createQueueItem = (content = "", initial = false) => {
+export const deriveWithDoneState = (task, doneState) => {
+    let newState = {};
+    switch (doneState) {
+        case DoneStates.DONE:
+            newState.done = true;
+            newState.in_progress = false;
+            break;
+        case DoneStates.IN_PROGRESS:
+            newState.done = false;
+            newState.in_progress = true;
+            break;
+        case DoneStates.REMAINING:
+            newState.done = false;
+            newState.in_progress = false;
+            break;
+    }
+    return { ...task, ...newState };
+};
+
+export const getStateForDoneState = doneState => {
+    let newState = {};
+    switch (doneState) {
+        case DoneStates.DONE:
+            newState.done = true;
+            newState.in_progress = false;
+            break;
+        case DoneStates.IN_PROGRESS:
+            newState.done = false;
+            newState.in_progress = true;
+            break;
+        case DoneStates.REMAINING:
+            newState.done = false;
+            newState.in_progress = false;
+            break;
+    }
+    return newState;
+};
+
+export const createQueueItem = (
+    content = "",
+    initial = false,
+    defaultDoneState = DoneStates.DONE
+) => {
     // initial task IDs prevents a nextjs state reconciliation problem
     // always populate initial state by using setState on client or use this!
     return {
-        done: true,
-        in_progress: false,
+        ...getStateForDoneState(defaultDoneState),
         content,
         posting: false,
         id: initial ? "INIT" : JSON.stringify(new Date().getUTCMilliseconds())

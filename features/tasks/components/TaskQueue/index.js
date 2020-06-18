@@ -18,6 +18,7 @@ onChange => control onTaskAdd, remove -> returns newState
 onAdd(t) => queue control
 onRemove(t) => queue control
 queue => controlled component state
+fixedDoneState={DoneState.STATE}
 */
 
 const Hashtag = (tag, inText = false) => {
@@ -59,7 +60,13 @@ class TaskQueue extends Component {
     };
 
     createTaskObject = (content = "", initial = false) => {
-        return createQueueItem(content, initial);
+        return createQueueItem(
+            content,
+            initial,
+            this.props.fixedDoneState
+                ? this.props.fixedDoneState
+                : DoneStates.DONE
+        );
     };
 
     setEditorDueAt = e => {
@@ -83,6 +90,7 @@ class TaskQueue extends Component {
     };
 
     cycleDoneStates = () => {
+        if (this.props.fixedDoneState) return;
         let task = this.props.queue.find(t => t.id === this.state.currentTask);
 
         if (getDoneState(task) === DoneStates.DONE) {
@@ -111,8 +119,6 @@ class TaskQueue extends Component {
                 task.in_progress = false;
                 break;
         }
-
-        console.log(getDoneState(task));
 
         this.props.addToQueue(task);
     };
