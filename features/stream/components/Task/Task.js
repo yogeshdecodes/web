@@ -14,6 +14,7 @@ import { CommentsBox } from "~/features/comments";
 import TaskDetail from "./components/TaskDetail";
 import { imageUrl } from "../../../../lib/utils/img";
 import YouTube from "react-youtube";
+import { getHumanStateFromTask } from "../../../../lib/utils/tasks";
 
 function findWord(word, str) {
     return str
@@ -223,8 +224,11 @@ class Task extends React.Component {
         }
     };
 
-    renderCounts = () => {
+    renderCounts = (force = false) => {
         if (!this.props.withCounts) return null;
+
+        let hover = this.state.hover;
+        if (force) hover = true;
 
         return (
             <span
@@ -236,13 +240,13 @@ class Task extends React.Component {
                         <Praisable
                             indexUrl={`/tasks/${this.props.task.id}`}
                             initialAmount={this.props.task.praise}
-                            expanded={this.state.hover}
+                            expanded={hover}
                             item={this.props.task}
                         />{" "}
                         &nbsp;
                     </>
                 )}
-                {this.state.hover ? (
+                {hover ? (
                     <button
                         className={"btn-praise btn-gray"}
                         onClick={this.toggleDetails}
@@ -270,6 +274,30 @@ class Task extends React.Component {
                 )}
      */
 
+    renderLargeItemCounts = () => {
+        return (
+            <span
+                style={{ display: "inline-block" }}
+                className={"PraiseIndicator has-text-grey-light flex flex-gap"}
+            >
+                <div>
+                    <Praisable
+                        indexUrl={`/tasks/${this.props.task.id}`}
+                        initialAmount={this.props.task.praise}
+                        button={true}
+                        item={this.props.task}
+                    />
+                </div>
+                <div>
+                    <span>
+                        <Emoji emoji={"💬"} />
+                        {this.props.task.comment_count}
+                    </span>
+                </div>
+            </span>
+        );
+    };
+
     renderExtras = () => {
         return (
             <>
@@ -294,6 +322,11 @@ class Task extends React.Component {
                         </div>
                     )}
                 <div className="task-details">
+                    {this.props.task.description !== null && (
+                        <div className="description-text">
+                            {this.props.task.description}
+                        </div>
+                    )}
                     {this.state.detailsOpen && (
                         <div className="action-bar">
                             <TaskDetail
@@ -334,6 +367,45 @@ class Task extends React.Component {
                         {this.props.withAttachment && this.renderAttachments()}
                     </div>
                 </Link>
+            );
+        }
+
+        if (false && this.props.task.description) {
+            // This is a prototype for a larger card.
+            return (
+                <div className={this.getClassNames() + " large"}>
+                    <div className="task-container">
+                        <h3>
+                            <span className={"task-content"}>
+                                <p className="heading">
+                                    {this.renderIcon()}
+                                    {getHumanStateFromTask(
+                                        this.props.task
+                                    )}{" "}
+                                    task
+                                </p>
+                                {this.renderContent()}
+                            </span>
+                        </h3>
+                        <p style={{ marginBottom: "1rem" }}>
+                            {this.props.task.description}
+                        </p>
+                        {this.props.withAttachment && this.renderAttachments()}
+                        <div>{this.renderLargeItemCounts(true)}</div>
+                    </div>
+                    <div className="task-details">
+                        <div className="action-bar">
+                            <TaskDetail
+                                task={this.props.task}
+                                onDelete={this.onDelete}
+                            />
+                        </div>
+                        <CommentsBox
+                            initialCommentCount={this.props.task.comment_count}
+                            task={this.props.task}
+                        />
+                    </div>
+                </div>
             );
         }
 

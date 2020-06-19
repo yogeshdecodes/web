@@ -40,9 +40,52 @@
 .Task {
     cursor: pointer;
 
+    &.large {
+        @extend %corners;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        background-color: var(--c-lightest);
+        border: 1px solid var(--c-border);
+
+        .task-container {
+            padding: 1rem;
+        }
+
+        &:last-child {
+            margin-bottom: 0px;
+        }
+        &:first-child {
+            margin-top: 0px;
+        }
+
+        .task-details {
+            margin-left: 0px;
+            border-left: none;
+        }
+
+        .action-bar {
+            // border-top: 1px solid var(--c-border);
+        }
+
+        .comments-box {
+            border-bottom: none;
+            border-right: none;
+            margin-bottom: 0px;
+        }
+    }
+
     .fa {
         margin-right: 8px;
         font-size: 0.813rem;
+    }
+
+    .description-container {
+        //margin-top: 0.5rem;
+        margin-left: 7px;
+        // @extend %corners;
+        background-color: var(--c-lightest);
+        padding: 0.5rem;
+        // border: 1px solid var(--c-border);
     }
 
     .done {
@@ -131,6 +174,16 @@
 
         .comments-box {
             border-left: none;
+            margin-top: 0px;
+        }
+
+        .action-bar {
+            margin-bottom: 7px;
+        }
+
+        .description-text {
+            padding: 1rem;
+            //border-bottom: 1px solid var(--c-border);
         }
     }
 

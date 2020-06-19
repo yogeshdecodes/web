@@ -109,6 +109,9 @@ class TaskDetail extends React.Component {
                     extraItemsFirst={() => (
                         <>
                             <div>
+                                {this.props.extraItemsFirst
+                                    ? this.props.extraItemsFirst
+                                    : null}
                                 <a
                                     className={"gray-link-with-icon"}
                                     onClick={this.toggleEditing}

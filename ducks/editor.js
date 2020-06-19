@@ -2,7 +2,7 @@ import { errorArray } from "~/lib/utils/error";
 import uniqBy from "lodash/uniqBy";
 import { Track } from "../vendor/ga";
 import last from "lodash/last";
-import { DoneStates } from "../lib/utils/tasks";
+import { DoneStates, getDeltaFromDoneState } from "../lib/utils/tasks";
 
 export const deriveWithDoneState = (task, doneState) => {
     let newState = {};
@@ -50,7 +50,7 @@ export const createQueueItem = (
     // initial task IDs prevents a nextjs state reconciliation problem
     // always populate initial state by using setState on client or use this!
     return {
-        ...getStateForDoneState(defaultDoneState),
+        ...getDeltaFromDoneState(defaultDoneState),
         content,
         posting: false,
         id: initial ? "INIT" : JSON.stringify(new Date().getUTCMilliseconds())
@@ -92,7 +92,8 @@ export const types = {
     EDITOR_OPEN_DISCUSSIONS: "EDITOR_OPEN_DISCUSSIONS",
     EDITOR_TOGGLE_DISCUSSIONS: "EDITOR_TOGGLE_DISCUSSIONS",
     EDITOR_SET_DUE_AT: "EDITOR_SET_DUE_AT",
-    EDITOR_SWITCH_TAB: "EDITOR_SWITCH_TAB"
+    EDITOR_SWITCH_TAB: "EDITOR_SWITCH_TAB",
+    UPDATE_QUEUE_ITEM: "UPDATE_QUEUE_ITEM"
 };
 
 export const editorReducer = (state = initialState, action) => {
@@ -154,10 +155,19 @@ export const editorReducer = (state = initialState, action) => {
                 ...state,
                 editorValue: "",
                 editorDueAt: null,
-                editorDone: true,
-                editorInProgress: false,
+                // editorDone: true,
+                //editorInProgress: false,
                 editorAttachment: null,
                 queue: uniqBy([...state.queue, action.task], "id")
+            };
+
+        case types.UPDATE_QUEUE_ITEM:
+            // This allows for simple edits to properties (e.g. setting a due date invalid.)
+            return {
+                ...state,
+                queue: state.queue.map(x =>
+                    x.id === action.task.id ? action.task : x
+                )
             };
 
         case types.REMOVE_FROM_QUEUE:
@@ -203,7 +213,7 @@ export const editorReducer = (state = initialState, action) => {
                 isCreating: false,
                 expanded: false,
                 open: false,
-                queue: [createQueueItem("", true)],
+                //queue: [createQueueItem("", true)],
                 editorValue: "",
                 editorDone: true,
                 editorInProgress: false,
@@ -265,6 +275,7 @@ export const actions = {
     },
 
     addToQueue: task => ({ type: types.ADD_TO_QUEUE, task }),
+    updateQueueItem: task => ({ type: types.UPDATE_QUEUE_ITEM, task }),
     removeFromQueue: task => ({ type: types.REMOVE_FROM_QUEUE, task: task }),
     setEditorDueAt: value => ({
         type: types.EDITOR_SET_DUE_AT,
