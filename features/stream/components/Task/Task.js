@@ -14,7 +14,13 @@ import { CommentsBox } from "~/features/comments";
 import TaskDetail from "./components/TaskDetail";
 import { imageUrl } from "../../../../lib/utils/img";
 import YouTube from "react-youtube";
-import { getHumanStateFromTask } from "../../../../lib/utils/tasks";
+import {
+    getHumanStateFromTask,
+    DoneStates,
+    getDeltaFromDoneState
+} from "../../../../lib/utils/tasks";
+import { actions as tasksActions } from "~/ducks/tasks";
+import { connect } from "react-redux";
 
 function findWord(word, str) {
     return str
@@ -63,7 +69,8 @@ class Task extends React.Component {
                 ? this.props.defaultOpen
                 : false,
             hover: false,
-            deleted: false
+            deleted: false,
+            task: this.props.task
         };
     }
 
@@ -93,7 +100,7 @@ class Task extends React.Component {
 
     getClassNames = () => {
         let baseClass = "Task";
-        const task = this.props.task;
+        const task = this.state.task;
 
         if (task.done) {
             baseClass += " done";
@@ -108,6 +115,34 @@ class Task extends React.Component {
         }
 
         return baseClass;
+    };
+
+    onTaskIconClick = () => {
+        if (this.isOwnedByCurrentUser()) {
+            if (!this.state.task.done) {
+                console.log(getDeltaFromDoneState(DoneStates.DONE));
+                this.setState({
+                    task: {
+                        ...this.state.task,
+                        ...getDeltaFromDoneState(DoneStates.DONE)
+                    }
+                });
+                this.props.markDone(this.props.task.id);
+            } else {
+                this.setState({
+                    task: {
+                        ...this.state.task,
+                        ...getDeltaFromDoneState(DoneStates.REMAINING)
+                    }
+                });
+                this.props.markRemaining(this.props.task.id);
+            }
+        }
+    };
+
+    isOwnedByCurrentUser = () => {
+        if (!this.props.user) return;
+        return this.props.user.id === this.props.task.user.id;
     };
 
     renderIcon = () => {
@@ -125,12 +160,29 @@ class Task extends React.Component {
             return <Emoji emoji={"🚀"} />;
         }
 
-        return this.props.task.done ? (
-            <FontAwesomeIcon icon={doneIcon} color={doneColor} />
-        ) : this.props.task.in_progress ? (
-            <FontAwesomeIcon icon={"dot-circle"} color="#f39c12" />
-        ) : (
-            <FontAwesomeIcon icon={["far", "circle"]} color="#f39c12" />
+        return (
+            <div
+                className={
+                    "task-icon" +
+                    (this.isOwnedByCurrentUser() ? " is-user" : "")
+                }
+                style={{ display: "inline-block" }}
+                onClick={this.onTaskIconClick}
+            >
+                {this.state.task.done ? (
+                    <FontAwesomeIcon icon={doneIcon} color={doneColor} />
+                ) : this.state.task.in_progress ? (
+                    <FontAwesomeIcon
+                        icon={remainingIcon}
+                        color={remainingColor}
+                    />
+                ) : (
+                    <FontAwesomeIcon
+                        icon={["far", "circle"]}
+                        color={remainingColor}
+                    />
+                )}
+            </div>
         );
     };
 
@@ -439,4 +491,12 @@ Task.defaultProps = {
     plain: false
 };
 
-export default Task;
+export default connect(
+    state => ({
+        user: state.user.me
+    }),
+    dispatch => ({
+        markDone: id => dispatch(tasksActions.markDone(id)),
+        markRemaining: id => dispatch(tasksActions.markRemaining(id))
+    })
+)(Task);

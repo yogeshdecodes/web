@@ -166,6 +166,7 @@ export const editorReducer = (state = initialState, action) => {
                 // editorDone: true,
                 //editorInProgress: false,
                 editorAttachment: null,
+                activeTask: action.task.id,
                 queue: uniqBy([...state.queue, action.task], "id")
             };
 

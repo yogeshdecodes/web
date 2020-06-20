@@ -163,6 +163,21 @@
         }
     }
 
+    .task-icon.is-user {
+        svg {
+            transition: transform 0.3s ease;
+            &:hover {
+                border: 1px solid var(--c-border);
+                border-radius: 50%;
+                transform: scale(1.8);
+            }
+
+            &:active {
+                transform: scale(1.2);
+            }
+        }
+    }
+
     .task-details {
         //margin-left: 8px;
         //border-left: 1px solid var(--c-border);

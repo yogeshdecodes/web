@@ -64,22 +64,26 @@ class TaskQueue extends Component {
     constructor(props) {
         super(props);
 
-        const defaultTask = this.createTaskObject("", true);
+        let currentTask = this.getCurrentTask();
+
+        /*if (this.props.queue.length === 0) {
+            currentTask = ;
+        } else {
+            currentTask = this.getCurrentTask();
+        }*/
 
         this.state = {
-            currentTask: defaultTask.id,
             hashtags: [],
             uploadHover: false,
             editorNaturalDate: "",
             tooLarge: false,
-            content: defaultTask.content,
+            content: currentTask.content,
             showDescriptionEditor: false
         };
         this.dropRef = React.createRef();
 
         if (this.props.queue.length === 0) {
-            this.props.addToQueue(defaultTask);
-        } else {
+            this.props.addToQueue(currentTask);
         }
     }
 
@@ -98,6 +102,14 @@ class TaskQueue extends Component {
                 showDescriptionEditor: false,
                 showDueEditor: false
             });
+        }
+
+        if (
+            this.props.isCreating === false &&
+            prevProps.isCreating !== this.props.isCreating &&
+            !prevProps.isCreating
+        ) {
+            this.setState({ content: " " });
         }
 
         if (this.props.queue.length == 0 && prevProps.queue.length > 0) {
@@ -135,7 +147,7 @@ class TaskQueue extends Component {
         let parsed = chrono.parseDate(e.target.value);
         if (parsed) {
             let task = this.props.queue.find(
-                t => t.id === this.state.currentTask
+                t => t.id === this.props.activeTask
             );
             task.due_at = parsed;
             this.props.addToQueue(task);
@@ -150,7 +162,7 @@ class TaskQueue extends Component {
 
     cycleDoneStates = () => {
         if (this.props.doneState !== undefined) return;
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        let task = this.getCurrentTask();
 
         if (getDoneState(task) === DoneStates.DONE) {
             this.setDoneState(DoneStates.IN_PROGRESS);
@@ -162,7 +174,7 @@ class TaskQueue extends Component {
     };
 
     setDoneState = doneState => {
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        let task = this.getCurrentTask();
         if (!task) return;
 
         switch (doneState) {
@@ -219,7 +231,7 @@ class TaskQueue extends Component {
             // adding initial task moved to duck
         }
 
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        let task = this.getCurrentTask();
         if (e.key == "Backspace" && task.content === "") {
             if (this.props.queue.length > 1) {
                 const prevTask = this.props.queue
@@ -246,9 +258,10 @@ class TaskQueue extends Component {
         this.setState({ content: task.content });
     };
 
-    setActiveTask = (currentTask, content) => {
+    setActiveTask = (activeTask, content) => {
+        this.props.setActiveTask(activeTask);
         this.setState({
-            currentTask,
+            // currentTask,
             content
         });
     };
@@ -282,7 +295,7 @@ class TaskQueue extends Component {
 
     onDrop = (acceptedFiles, rejectedFiles) => {
         this.onHoverUpload(false);
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        let task = this.getCurrentTask();
         if (!acceptedFiles.length) {
             this.setState({ tooLarge: true });
             return;
@@ -297,7 +310,9 @@ class TaskQueue extends Component {
     };
 
     getCurrentTask = () => {
-        return this.props.queue.find(t => t.id === this.state.currentTask);
+        const task = this.props.queue.find(t => t.id === this.props.activeTask);
+        if (!task) return this.createTaskObject("", true);
+        return task;
     };
 
     toggleDueEditor = () => {
@@ -316,7 +331,7 @@ class TaskQueue extends Component {
     };
 
     removeAttachment = e => {
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        let task = this.getCurrentTask();
         delete task.attachment;
         this.props.addToQueue(task);
     };
@@ -345,10 +360,10 @@ class TaskQueue extends Component {
     }, 200);
 
     render() {
-        const open = this.state.currentTask !== null;
-        let currentTask = this.props.queue.find(
-            t => t.id === this.state.currentTask
-        );
+        const open = this.props.activeTask !== null;
+        let currentTask = this.getCurrentTask();
+
+        if (!currentTask) return null;
 
         if (this.state.uploadHover)
             return (
@@ -407,9 +422,9 @@ class TaskQueue extends Component {
                                     <div
                                         className={
                                             "task-input " +
-                                            ((this.state.currentTask ===
+                                            ((this.props.activeTask ===
                                                 task.id ||
-                                                this.state.currentTask ===
+                                                this.props.activeTask ===
                                                     null) &&
                                             !this.props.isCreating
                                                 ? "active "
@@ -440,7 +455,7 @@ class TaskQueue extends Component {
                                         <div className="input">
                                             <input
                                                 disabled={
-                                                    this.state.currentTask ===
+                                                    this.props.activeTask ===
                                                     null
                                                 }
                                                 autocomplete="off"
@@ -453,9 +468,9 @@ class TaskQueue extends Component {
                                                     );
                                                 }}
                                                 value={
-                                                    this.state.currentTask ===
+                                                    this.props.activeTask ===
                                                         task.id ||
-                                                    this.state.currentTask ===
+                                                    this.props.activeTask ===
                                                         null
                                                         ? this.state.content
                                                         : task.content
@@ -467,8 +482,8 @@ class TaskQueue extends Component {
                                             ></input>
                                         </div>
                                     </div>
-                                    {(this.state.currentTask === task.id ||
-                                        this.state.currentTask === null) &&
+                                    {(this.props.activeTask === task.id ||
+                                        this.props.activeTask === null) &&
                                     !this.props.isCreating ? (
                                         <div className="task-controls">
                                             <div className="buttons flex flex-gap">
@@ -620,6 +635,7 @@ const mapStateToProps = state => ({
     isLoggedIn: state.auth.loggedIn,
     hasGold: state.user.me ? state.user.me.gold : false,
     open: state.editor.open,
+    activeTask: state.editor.activeTask,
     queue: state.editor.queue,
     creatingMilestone: state.editor.creatingMilestone,
     creatingDiscussion: state.editor.creatingDiscussion,
@@ -648,7 +664,10 @@ const mapDispatchToProps = dispatch => ({
     markInProgress: () => dispatch(editorActions.markInProgress()),
     markRemaining: () => dispatch(editorActions.markRemaining()),
     openMilestoneEditor: () => dispatch(editorActions.openMilestoneEditor()),
-    openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor())
+    openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor()),
+
+    setActiveTask: activeTask =>
+        dispatch(editorActions.setActiveTask(activeTask))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskQueue);
