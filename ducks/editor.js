@@ -59,6 +59,7 @@ export const createQueueItem = (
 
 const initialState = {
     open: false,
+    activeTask: null,
     editorValue: "",
     tab: 0,
     cardTab: 0,
@@ -93,7 +94,8 @@ export const types = {
     EDITOR_TOGGLE_DISCUSSIONS: "EDITOR_TOGGLE_DISCUSSIONS",
     EDITOR_SET_DUE_AT: "EDITOR_SET_DUE_AT",
     EDITOR_SWITCH_TAB: "EDITOR_SWITCH_TAB",
-    UPDATE_QUEUE_ITEM: "UPDATE_QUEUE_ITEM"
+    UPDATE_QUEUE_ITEM: "UPDATE_QUEUE_ITEM",
+    SET_ACTIVE_TASK: "SET_ACTIVE_TASK"
 };
 
 export const editorReducer = (state = initialState, action) => {
@@ -148,6 +150,12 @@ export const editorReducer = (state = initialState, action) => {
                 ...state,
                 open: true,
                 creatingDiscussion: true
+            };
+
+        case types.SET_ACTIVE_TASK:
+            return {
+                ...state,
+                activeTask: action.activeTask
             };
 
         case types.ADD_TO_QUEUE:
@@ -330,5 +338,12 @@ export const actions = {
             action["tab"] = tab;
         }
         return action;
+    },
+
+    setActiveTask: activeTask => {
+        return {
+            type: types.SET_ACTIVE_TASK,
+            activeTask
+        };
     }
 };

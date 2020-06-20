@@ -72,11 +72,21 @@ class TaskQueue extends Component {
             uploadHover: false,
             editorNaturalDate: "",
             tooLarge: false,
+            content: defaultTask.content,
             showDescriptionEditor: false
         };
         this.dropRef = React.createRef();
 
-        this.props.addToQueue(defaultTask);
+        if (this.props.queue.length === 0) {
+            this.props.addToQueue(defaultTask);
+        } else {
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.queue.length > 0 && this.props.doneState !== undefined) {
+            this.setDoneState(this.props.doneState);
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -139,7 +149,7 @@ class TaskQueue extends Component {
     };
 
     cycleDoneStates = () => {
-        if (this.props.doneState) return;
+        if (this.props.doneState !== undefined) return;
         let task = this.props.queue.find(t => t.id === this.state.currentTask);
 
         if (getDoneState(task) === DoneStates.DONE) {
@@ -170,7 +180,7 @@ class TaskQueue extends Component {
                 break;
         }
 
-        this.props.addToQueue(task);
+        this.props.updateQueueItem(task);
     };
 
     getClassNameForDoneState = task => {
@@ -196,7 +206,8 @@ class TaskQueue extends Component {
             const newTask = this.createTaskObject();
             this.props.addToQueue(newTask);
             this.setState({
-                currentTask: newTask.id
+                currentTask: newTask.id,
+                content: ""
             });
         }
 
@@ -211,10 +222,12 @@ class TaskQueue extends Component {
         let task = this.props.queue.find(t => t.id === this.state.currentTask);
         if (e.key == "Backspace" && task.content === "") {
             if (this.props.queue.length > 1) {
+                const prevTask = this.props.queue
+                    .filter(t => t.id !== task.id)
+                    .slice(-1)[0];
                 this.setState({
-                    currentTask: this.props.queue
-                        .filter(t => t.id !== task.id)
-                        .slice(-1)[0].id
+                    currentTask: prevTask.id,
+                    content: prevTask.content
                 });
                 this.props.removeFromQueue(task);
             } else {
@@ -224,19 +237,19 @@ class TaskQueue extends Component {
     };
 
     handleChange = e => {
-        this.onTaskInput(e.target.value);
+        //this.onTaskInput(e.target.value);
 
         this.setActiveTask(e.target.name);
 
-        let task = this.props.queue.find(t => t.id === e.target.name);
+        let task = this.getCurrentTask();
         task.content = e.target.value;
-
-        this.props.addToQueue(task);
+        this.setState({ content: task.content });
     };
 
-    setActiveTask = currentTask => {
+    setActiveTask = (currentTask, content) => {
         this.setState({
-            currentTask
+            currentTask,
+            content
         });
     };
 
@@ -245,12 +258,12 @@ class TaskQueue extends Component {
     };
 
     onTaskInput = debounce(value => {
-        this.setState({
+        /*this.setState({
             hashtags: [
                 ...findHashtags(value).map(x => Hashtag(x, true)),
                 ...this.state.hashtags.filter(tag => !tag.inText)
             ]
-        });
+        });*/
     }, 300);
 
     changeType = type => {
@@ -322,6 +335,14 @@ class TaskQueue extends Component {
             description: e.target.value.length ? e.target.value : null
         });
     };
+
+    syncTaskContent = debounce(val => {
+        // Sync for performance reasons.
+        this.props.updateQueueItem({
+            ...this.getCurrentTask,
+            content: val
+        });
+    }, 200);
 
     render() {
         const open = this.state.currentTask !== null;
@@ -396,7 +417,10 @@ class TaskQueue extends Component {
                                             (task.posting ? "posting " : " ")
                                         }
                                         onClick={e => {
-                                            this.setActiveTask(task.id);
+                                            this.setActiveTask(
+                                                task.id,
+                                                task.content
+                                            );
                                         }}
                                         key={task.id}
                                     >
@@ -422,8 +446,20 @@ class TaskQueue extends Component {
                                                 autocomplete="off"
                                                 onKeyDown={this.onTaskKeyDown}
                                                 name={task.id}
-                                                onChange={this.handleChange}
-                                                value={task.content}
+                                                onChange={e => {
+                                                    this.handleChange(e);
+                                                    this.syncTaskContent(
+                                                        e.target.value
+                                                    );
+                                                }}
+                                                value={
+                                                    this.state.currentTask ===
+                                                        task.id ||
+                                                    this.state.currentTask ===
+                                                        null
+                                                        ? this.state.content
+                                                        : task.content
+                                                }
                                                 placeholder={
                                                     "Start typing a task..."
                                                 }
