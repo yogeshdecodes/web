@@ -32,7 +32,23 @@
             background-position: center;
             padding-top: calc(591.44 / 1127.34 * 100%);
             width: 100%;
+            position: relative;
             // margin-bottom: $gap * 3;
+
+            &::after {
+                -webkit-backdrop-filter: blur(
+                    8px
+                ); /* Use for Safari 9+, Edge 17+ (not a mistake) and iOS Safari 9.2+ */
+                backdrop-filter: blur(8px); /* Supported in Chrome 76 */
+                left: 0;
+                top: 0;
+
+                content: "";
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 
