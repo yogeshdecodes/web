@@ -40,7 +40,7 @@ export default class WallOfLove extends Component {
                     columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
                 >
                     <Masonry gutter="1rem">
-                        <img src="/img/cool-pictures/image9.jpeg" alt="" />
+                        <img src="/img/cool-pictures/image10.jpeg" alt="" />
                         <div>
                             <Tweet id={"1126918454676561920"} />
                         </div>
@@ -58,7 +58,7 @@ export default class WallOfLove extends Component {
                         <div>
                             <Tweet id={"1126895968010539008"} />
                         </div>
-                        <img src="/img/cool-pictures/image10.jpeg" alt="" />
+                        <img src="/img/cool-pictures/image9.jpeg" alt="" />
                         <div>
                             <Tweet id={"1102240619903307777"} />
                         </div>
