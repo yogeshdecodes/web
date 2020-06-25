@@ -14,17 +14,22 @@ const UserChip = props => (
             // eslint-disable-next-line
         }{" "}
         <a className="navbar-link">
-            <Chip id={"navbarUserChip"}>
-                <img alt={props.user.username} src={props.user.avatar} />
-                <div>
+            <NavLink
+                route="profile-page"
+                params={{ username: props.user.username }}
+            >
+                <Chip id={"navbarUserChip"}>
+                    <img alt={props.user.username} src={props.user.avatar} />
                     <div>
-                        <Streak days={props.user.streak} />
+                        <div>
+                            <Streak days={props.user.streak} />
+                        </div>
+                        <div>
+                            <RestDays days={props.restDayBalance} />
+                        </div>
                     </div>
-                    <div>
-                        <RestDays days={props.restDayBalance} />
-                    </div>
-                </div>
-            </Chip>
+                </Chip>
+            </NavLink>
         </a>
         <div className="navbar-dropdown is-right">
             {!props.user.gold && (

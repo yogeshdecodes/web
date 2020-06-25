@@ -8,13 +8,13 @@ import "./index.scss";
 // TODO: thread sidebar
 // props passed, just check
 
-const StdPageSidebar = ({ isLoggedIn, me, data }) => {
+const StdPageSidebar = ({ isLoggedIn, me, data, footer = false }) => {
     //if (!data || data.failed) return null;
 
     return (
         <div className="Sidebar">
             <AdCard />
-            <SmallFooter />
+            {footer ? <SmallFooter /> : null}
         </div>
     );
 };

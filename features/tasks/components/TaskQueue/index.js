@@ -100,7 +100,8 @@ class TaskQueue extends Component {
         ) {
             this.setState({
                 showDescriptionEditor: false,
-                showDueEditor: false
+                showDueEditor: false,
+                content: ""
             });
         }
 

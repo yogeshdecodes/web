@@ -3,6 +3,7 @@ import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
 import RegisterForm from "~/features/users/components/RegisterForm";
 import WallOfLove from "../../components/WallOfLove";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "~/lib/axios";
 
 function getLoveTweetId() {
@@ -45,6 +46,12 @@ class RegisterPage extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <center>
+                            <div className="testimonial-arrow">
+                                ...or scroll to read why people love Makerlog{" "}
+                                <FontAwesomeIcon icon="arrow-down" />
+                            </div>
+                        </center>
                     </div>
                 </div>
 

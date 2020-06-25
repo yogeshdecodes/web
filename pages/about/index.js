@@ -1,263 +1,278 @@
 import React from "react";
 import { Link } from "~/routes";
 import "./index.scss";
-
-const FrequentlyAsked = props => (
-    <div className={"card-content"}>
-        <h2 className={"topic-title"}>What is Makerlog?</h2>
-        <p>
-            Makerlog is a community of 3000+ makers achieving their goals
-            together, created by{" "}
-            <Link route="profile-page" params={{ username: "sergio" }}>
-                <a>Sergio Mattei</a>
-            </Link>
-            .
-        </p>
-        <h2 className={"topic-title"}>How do I add tasks on Makerlog?</h2>
-        <p>
-            You can add a task on GetMakerlog.com using the{" "}
-            <strong>"Add a new task" button</strong>. To change the task's
-            status, use the icon in front of the text field you type the task
-            on:
-        </p>
-        <ul>
-            <li>
-                The default status is <strong>"done"</strong> and it appears as
-                a green tick icon.
-            </li>
-            <li>
-                Click on it and it will change to an orange circle (which sets
-                status <strong>"todo"</strong>).
-            </li>
-            <li>
-                Click one more time and you will get the orange circle to
-                pulsate (which sets task as <strong>"in progress"</strong>).
-            </li>
-        </ul>
-        <h2 className={"topic-title"}>How do I add tasks from Telegram?</h2>
-        <p>You can also add tasks easily from Telegram.</p>
-        <p>
-            Join the <a href="https://t.me/Makerlog">Makerlog Telegram group</a>{" "}
-            and then pair your account with Makebot by typing <code>/pair</code>{" "}
-            to <a href="https://t.me/Makerlogbot">MakerlogBot</a>.
-        </p>
-        <p>
-            After pairing you can add tasks by using <code>/done</code> or{" "}
-            <code>/todo</code> or <code>/now</code> followed by the task text.
-        </p>
-        <ul>
-            <li>
-                <code>/done</code> will set the task as done
-            </li>
-            <li>
-                <code>/todo</code> will set the task as todo
-            </li>
-            <li>
-                <code>/now</code> will set the task as in progress
-            </li>
-        </ul>
-        <p>
-            You can always type <code>/help</code> to see all available
-            commands.
-        </p>
-        <h2 className={"topic-title"}>How do I add tasks from other apps?</h2>
-        <p>
-            To see Makerlog integrations, check out the{" "}
-            <strong>Integrations/Apps Page</strong> at{" "}
-            <Link route={"apps"}>
-                <a>Tasks > Integrations</a>
-            </Link>
-            .
-        </p>
-        <p>Currently you can log from:</p>
-        <ul>
-            <li>Github</li>
-            <li>Gitlab</li>
-            <li>Telegram</li>
-            <li>Todoist</li>
-            <li>Trello</li>
-            <li>NodeHost</li>
-            <li>Slack</li>
-            <li>Shipstreams</li>
-            <li>... or generate a webhook to log from other apps.</li>
-        </ul>
-        There's also:
-        <ul>
-            <li>
-                a{" "}
-                <a
-                    href="https://play.google.com/store/apps/details?id=com.brownfingers.getmakerlog"
-                    rel={"noopener noreferrer"}
-                    target={"_blank"}
-                >
-                    mobile client for Android
-                </a>{" "}
-                by{" "}
-                <Link route="profile-page" params={{ username: "arnav" }}>
-                    <a>Arnav</a>
-                </Link>
-            </li>
-            <li>
-                a{" "}
-                <a href="https://menubar.getmakerlog.com/">
-                    Mac OS menubar app
-                </a>{" "}
-                by{" "}
-                <Link route="profile-page" params={{ username: "Booligoosh" }}>
-                    <a>Ethan</a>
-                </Link>
-            </li>
-            <li>
-                <a href="https://today.jipfr.nl/">Today for Makerlog</a> by{" "}
-                <Link route="profile-page" params={{ username: "jip" }}>
-                    <a>Jip</a>
-                </Link>
-            </li>
-            <li>
-                a{" "}
-                <a
-                    href="https://makerlog-buymeacoffee.netlify.com/"
-                    rel={"noopener noreferrer"}
-                    target={"_blank"}
-                >
-                    BuyMeACoffee integration
-                </a>{" "}
-                by{" "}
-                <Link route="profile-page" params={{ username: "voinea" }}>
-                    <a>Mihai Voinea</a>
-                </Link>
-            </li>
-            <li>
-                <a
-                    href="https://github.com/MihaiVoinea/makerlog-cli/"
-                    rel={"noopener noreferrer"}
-                    target={"_blank"}
-                >
-                    Makerlog CLI
-                </a>{" "}
-                by{" "}
-                <Link route="profile-page" params={{ username: "voinea" }}>
-                    <a>Mihai Voinea</a>
-                </Link>
-            </li>
-            <li>
-                <a href="https://assistant.getmakerlog.com/">
-                    Makerlog for Google Assistant
-                </a>{" "}
-                by{" "}
-                <Link route="profile-page" params={{ username: "arturs" }}>
-                    <a>Arturs Dobrecovs</a>
-                </Link>
-            </li>
-        </ul>
-        <h2 className={"topic-title"}>How does the streak work?</h2>
-        <ul>
-            <li>
-                You must add at least one task{" "}
-                <strong>before 12AM in your CURRENT timezone.</strong> (please
-                be aware of this when traveling)
-            </li>
-            <li>In progress and todo tasks are not counted.</li>
-            <li>
-                <strong>
-                    A task counts for the day it was marked as done, not when it
-                    was created.
-                </strong>{" "}
-                If you added a task yesterday and completed it today, it was
-                marked as done today and counts for today's streak. It will
-                however remain in your log in the day you added it.
-            </li>
-        </ul>
-        <h2 className={"topic-title"}>Help, I lost my streak!</h2>
-        Possible reasons:
-        <ul>
-            <li>
-                <strong>Travel</strong> (check out "How does the streak work?"
-                above)
-            </li>
-            <li>
-                <strong>Algorithm issues</strong>
-            </li>
-        </ul>
-        If you believe this was an error,{" "}
-        <a href="https://pm.mattei.dev/issues/">add a support ticket here</a>.
-        <h2 className={"topic-title"}>What are wellness features?</h2>
-        <p>
-            <strong>
-                Resting is very important in preventing burnout. We know that,
-                so Makerlog has Rest Days and Weekend Mode as wellness feature.
-            </strong>
-        </p>
-        <p>Take days off without breaking your streak!</p>
-        <p>
-            You can access the Wellness features in{" "}
-            <Link to={"settings"}>
-                <a>Streaks</a>
-            </Link>
-            .
-        </p>
-        <h2 className={"topic-title"}>How do rest days work?</h2>
-        <ul>
-            <li>You get 1 rest day for each 10 days of streak</li>
-            <li>
-                Rest days are automatically applied for the days when you don't
-                log any tasks
-            </li>
-            <li>
-                Rest days will not break your streak, but they will not count
-                towards it
-            </li>
-            <li>
-                <strong>
-                    If you don't want rest days to be automatically applied
-                </strong>
-                , you can enable Hardcore mode in{" "}
-                <Link to={"settings"}>
-                    <a>Tasks > Streaks</a>
-                </Link>
-            </li>
-        </ul>
-        <h2 className={"topic-title"}>How does weekend mode work?</h2>
-        <p>Take the weekends off without breaking your streak!</p>
-        <p>
-            If weekends are resting time for you and don't ship, activate
-            weekend mode.
-        </p>
-        With weekend mode enabled:
-        <ul>
-            <li>
-                Weekend days will not break your streak, but they will not count
-                towards it
-            </li>
-            <li>
-                <strong>Note that Weekend Mode works retroactively!</strong>{" "}
-                Means that when you activate it, it will subtract from your
-                current streak all previous weekend days, so in some cases a
-                decrease of the streak is possible. Turning it off and adding a
-                new task will reset that to the previousl value.
-            </li>
-        </ul>
-    </div>
-);
+import CompanyPageLayout from "../../layouts/CompanyPage";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import WallOfLove from "../../components/WallOfLove";
+import { TwitterTimelineEmbed } from "react-twitter-embed";
 
 class AboutPage extends React.Component {
+    static async getInitialProps(ctx) {
+        return {
+            layout: {
+                className: "AboutPage"
+            }
+        };
+    }
+
     render() {
         return (
-            <div className="AboutPage">
-                <div className={"hero"}>
-                    <div className={"container"}>
-                        <h2 className={"topic-title"}>
-                            Frequently Asked Questions
-                        </h2>
+            <CompanyPageLayout>
+                <div className="hero">
+                    <div className="container">
+                        <img src="/img/logo-white.svg" alt="" />
+                        <h1>Empowering makers around the world to create</h1>
+                        <p>
+                            We develop platforms to help makers stay productive
+                            and motivated while creating side projects.
+                        </p>
                     </div>
                 </div>
-                <br />
-                <section className={"container"}>
-                    <div className="card">
-                        <FrequentlyAsked />
+                <div className="maker-definition sect">
+                    <div className="container">
+                        <div>
+                            <h2>maker</h2>
+                            <small>
+                                <em>noun · /ˈmeɪ.kər/</em>
+                            </small>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    someone who creates or invents things,
+                                    either using traditional crafts or
+                                    technology
+                                </li>
+                                <li>
+                                    the people or company that make something
+                                </li>
+                                <li>an avid Makerlog user</li>
+                            </ul>
+                        </div>
                     </div>
-                </section>
-            </div>
+                </div>
+                <div className="container">
+                    <div className="grid-c-s mtGap">
+                        <div>
+                            <div>
+                                <h2 className="mb-em">What is Makerlog?</h2>
+                                <div className="card">
+                                    <div className="card-content">
+                                        <p>
+                                            Makerlog is a community of over
+                                            5,000 entrepreneurs in tech shipping
+                                            side projects together. These
+                                            entrepreneurs, makers, can post
+                                            their daily tasks and grow a network
+                                            of supportive, like-minded people!
+                                            Which, is pretty awesome.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 className="mb-em">How does it work?</h2>
+                                <div className="card">
+                                    <div className="card-content">
+                                        <p>
+                                            Makerlog works by logging your daily
+                                            project-related tasks, earning
+                                            streaks (consecutive days of work),
+                                            and interacting with other makers to
+                                            get feedback or early users.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 className="mb-em">Umm... why?</h2>
+                                <div className="card">
+                                    <div className="card-content">
+                                        <p>
+                                            Making can be a really lonely thing.
+                                            Depending on where you are, you
+                                            might not have access to a
+                                            supportive environment for your
+                                            entrepreneurship endeavors. We
+                                            believe every maker could benefit
+                                            from a group of like-minded peers to
+                                            help them in their journey!
+                                            <br />
+                                            <br />
+                                            Also... Traditional social media is
+                                            all about consumption. We're all
+                                            about productivity first. Makerlog's
+                                            the platform that makes you more
+                                            productive rather than less!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 className="mb-em">How'd it begin?</h2>
+                                <div className="card">
+                                    <div className="card-content">
+                                        <p>
+                                            I started Makerlog in 2018, while in
+                                            high school. I've been a maker since
+                                            childhood, and throughout that
+                                            entire time I never really felt
+                                            anyone understood what I did. I
+                                            never had a support network until I
+                                            found the maker community. I grew to
+                                            love the community and developed a
+                                            huge passion for this really weird,
+                                            yet amazing group of people... I
+                                            then decided to make Makerlog to
+                                            help push this movement forward.
+                                        </p>
+
+                                        <Link
+                                            route="profile-page"
+                                            params={{ username: "sergio" }}
+                                        >
+                                            <a>
+                                                <div className="user-signoff">
+                                                    <div>
+                                                        <img
+                                                            src="https://pbs.twimg.com/profile_images/1234753414762024962/EoVhb0jK_400x400.jpg"
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        Sergio Mattei, student
+                                                        founder
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="Sidebar">
+                                <div className="AdCard sidebar-item">
+                                    <h3>Quick stats</h3>
+                                    <h4 className="subtitle has-text-grey">
+                                        Here's a little bit of how we've grown
+                                    </h4>
+                                    <div className="card">
+                                        <div className="card-content">
+                                            <div className="level">
+                                                <div>
+                                                    <h2>200k+</h2>
+                                                    <small>Tasks created</small>
+                                                </div>
+                                                <div>
+                                                    <h2>5,000+</h2>
+                                                    <small>Users</small>
+                                                </div>
+                                                <div>
+                                                    <h2>100k+</h2>
+                                                    <small>Reach</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="sidebar-item">
+                                    <h3 className="mb-em">Social</h3>
+                                    <TwitterTimelineEmbed
+                                        sourceType="profile"
+                                        screenName="getmakerlog"
+                                        options={{ height: 400 }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="gallery sect">
+                    <div className="container">
+                        <div className="mbGap">
+                            <h1>The Team</h1>
+                            <p>
+                                We're a brilliant, diverse team ready to
+                                challenge the status quo.
+                            </p>
+                        </div>
+                        <div className="team-sect flex flex-gap">
+                            <div className="member">
+                                <img src="/img/team/sergio.png" alt="" />
+                                <div>
+                                    <h3>Sergio Mattei</h3>
+                                    <p>Founder, Makerlogger in Chief</p>
+                                    <small>
+                                        <em>the hacker</em>
+                                    </small>
+                                </div>
+                            </div>
+                            <div className="member">
+                                <img src="/img/team/hector.png" alt="" />
+                                <div>
+                                    <h3>Hector Soto</h3>
+                                    <p>Creative director, user experience</p>
+                                    <small>
+                                        <em>the hipster</em>
+                                    </small>
+                                </div>
+                            </div>
+                            <div className="member">
+                                <img src="/img/team/wharton.png" alt="" />
+                                <div>
+                                    <h3>Jose Carlos Wharton</h3>
+                                    <p>Head of research, data analysis</p>
+                                    <small>
+                                        <em>the hustler</em>
+                                    </small>
+                                </div>
+                            </div>
+                            <div className="member">
+                                <img src="/img/team/kerr.jpg" alt="" />
+                                <div>
+                                    <h3>Kerr Travers</h3>
+                                    <p>Community outreach intern</p>
+                                    <small>
+                                        <em>the meme master</em>
+                                    </small>
+                                </div>
+                            </div>
+                            <div className="member">
+                                <img src="/img/team/monday.png" alt="" />
+                                <div>
+                                    <h3>Monday</h3>
+                                    <p>Head of cats</p>
+                                    <small>
+                                        <em>the mascot</em>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div className=" mbGap mtGap">
+                            <hr />
+                        </div>
+                        <div className="mbGap">
+                            <h1>Wall of Love</h1>
+                            <p>This is the maker community. </p>
+                        </div>
+                        <WallOfLove />
+                    </div>
+                </div>
+                <div className="container">
+                    <div className="mtGap">
+                        <h2>Get in touch</h2>
+                        <p>
+                            We're very reachable people, and open to discussing
+                            any business or maker related matters!
+                        </p>
+                        <br />
+                        <Link route="contact">
+                            <a className="btn btn-secondary">Contact us</a>
+                        </Link>
+                    </div>
+                </div>
+            </CompanyPageLayout>
         );
     }
 }

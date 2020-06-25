@@ -55,6 +55,9 @@ function Home(props) {
 
 Home.getInitialProps = async () => {
     return {
+        layout: {
+            footer: false
+        },
         ...(await prefetchData()),
         //activitiesPrefetch: await prefetchActivity("site:aggregated"),
         discussionPrefetch: await prefetchThreads(true)

@@ -2,10 +2,35 @@
 
 .Footer {
     margin-top: 1.5em;
-    border-top: 1px solid var(--c-border-lightest);
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
-    font-size: 13.5px;
+    border-top: 1px solid var(--c-border);
+    background: var(--c-lightest);
+    padding-top: $gap * 2;
+    padding-bottom: $gap * 2;
+
+    > .container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .brand-column {
+        img {
+            height: 20px;
+        }
+        span {
+            // padding: 1rem;
+        }
+    }
+
+    .spacer {
+        flex-grow: 1;
+    }
+
+    .link-list {
+        margin-right: $gap * 2;
+        &:last-of-type {
+            margin-right: 0px;
+        }
+    }
 
     ul {
         margin: 0px !important;
@@ -15,10 +40,31 @@
         padding-top: 0px !important;
 
         li {
-            display: inline-block;
+            //display: inline-block;
+            list-style-type: none;
             flex-grow: 1;
             padding-right: 13px;
-            font-size: 13.5px;
+            //font-size: 13.5px;
+        }
+    }
+}
+
+@media only screen and (max-width: $breakpoint-mobile) {
+    .Footer {
+        .container {
+            flex-direction: column;
+
+            .brand-column {
+                margin-bottom: $gap;
+            }
+
+            .link-list {
+                margin-bottom: $gap;
+                margin-right: 0px;
+                &:last-of-type {
+                    margin-bottom: 0px;
+                }
+            }
         }
     }
 }
