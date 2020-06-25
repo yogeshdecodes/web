@@ -4,7 +4,8 @@ import Emoji from "./Emoji";
 
 const RestDays = ({ days, endingSoon = false }) => (
     <>
-        <Emoji emoji={"🛌"} /> {days}
+        <Emoji emoji={"🛌"} />
+        &nbsp;{days}
     </>
 );
 

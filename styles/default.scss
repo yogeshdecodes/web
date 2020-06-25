@@ -850,7 +850,7 @@ table.is-full {
     padding: 3rem $gap;
     background: $c-secondary;
     z-index: 3;
-    font-weight: 600;
+    //font-weight: 600;
 
     * {
         color: var(--c-lightest);
@@ -2720,4 +2720,9 @@ p {
     color: inherit;
     border-bottom: 2px solid #2ce28a;
     margin-right: 3px;
+}
+
+.unstyled-textarea {
+    background: transparent !important;
+    border: none !important;
 }

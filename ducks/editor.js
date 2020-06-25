@@ -2,13 +2,55 @@ import { errorArray } from "~/lib/utils/error";
 import uniqBy from "lodash/uniqBy";
 import { Track } from "../vendor/ga";
 import last from "lodash/last";
+import { DoneStates, getDeltaFromDoneState } from "../lib/utils/tasks";
 
-export const createQueueItem = (content = "", initial = false) => {
+export const deriveWithDoneState = (task, doneState) => {
+    let newState = {};
+    switch (doneState) {
+        case DoneStates.DONE:
+            newState.done = true;
+            newState.in_progress = false;
+            break;
+        case DoneStates.IN_PROGRESS:
+            newState.done = false;
+            newState.in_progress = true;
+            break;
+        case DoneStates.REMAINING:
+            newState.done = false;
+            newState.in_progress = false;
+            break;
+    }
+    return { ...task, ...newState };
+};
+
+export const getStateForDoneState = doneState => {
+    let newState = {};
+    switch (doneState) {
+        case DoneStates.DONE:
+            newState.done = true;
+            newState.in_progress = false;
+            break;
+        case DoneStates.IN_PROGRESS:
+            newState.done = false;
+            newState.in_progress = true;
+            break;
+        case DoneStates.REMAINING:
+            newState.done = false;
+            newState.in_progress = false;
+            break;
+    }
+    return newState;
+};
+
+export const createQueueItem = (
+    content = "",
+    initial = false,
+    defaultDoneState = DoneStates.DONE
+) => {
     // initial task IDs prevents a nextjs state reconciliation problem
     // always populate initial state by using setState on client or use this!
     return {
-        done: true,
-        in_progress: false,
+        ...getDeltaFromDoneState(defaultDoneState),
         content,
         posting: false,
         id: initial ? "INIT" : JSON.stringify(new Date().getUTCMilliseconds())
@@ -17,6 +59,7 @@ export const createQueueItem = (content = "", initial = false) => {
 
 const initialState = {
     open: false,
+    activeTask: null,
     editorValue: "",
     tab: 0,
     cardTab: 0,
@@ -50,7 +93,9 @@ export const types = {
     EDITOR_OPEN_DISCUSSIONS: "EDITOR_OPEN_DISCUSSIONS",
     EDITOR_TOGGLE_DISCUSSIONS: "EDITOR_TOGGLE_DISCUSSIONS",
     EDITOR_SET_DUE_AT: "EDITOR_SET_DUE_AT",
-    EDITOR_SWITCH_TAB: "EDITOR_SWITCH_TAB"
+    EDITOR_SWITCH_TAB: "EDITOR_SWITCH_TAB",
+    UPDATE_QUEUE_ITEM: "UPDATE_QUEUE_ITEM",
+    SET_ACTIVE_TASK: "SET_ACTIVE_TASK"
 };
 
 export const editorReducer = (state = initialState, action) => {
@@ -107,15 +152,31 @@ export const editorReducer = (state = initialState, action) => {
                 creatingDiscussion: true
             };
 
+        case types.SET_ACTIVE_TASK:
+            return {
+                ...state,
+                activeTask: action.activeTask
+            };
+
         case types.ADD_TO_QUEUE:
             return {
                 ...state,
                 editorValue: "",
                 editorDueAt: null,
-                editorDone: true,
-                editorInProgress: false,
+                // editorDone: true,
+                //editorInProgress: false,
                 editorAttachment: null,
+                activeTask: action.task.id,
                 queue: uniqBy([...state.queue, action.task], "id")
+            };
+
+        case types.UPDATE_QUEUE_ITEM:
+            // This allows for simple edits to properties (e.g. setting a due date invalid.)
+            return {
+                ...state,
+                queue: state.queue.map(x =>
+                    x.id === action.task.id ? action.task : x
+                )
             };
 
         case types.REMOVE_FROM_QUEUE:
@@ -161,7 +222,7 @@ export const editorReducer = (state = initialState, action) => {
                 isCreating: false,
                 expanded: false,
                 open: false,
-                queue: [createQueueItem("", true)],
+                //queue: [createQueueItem("", true)],
                 editorValue: "",
                 editorDone: true,
                 editorInProgress: false,
@@ -223,6 +284,7 @@ export const actions = {
     },
 
     addToQueue: task => ({ type: types.ADD_TO_QUEUE, task }),
+    updateQueueItem: task => ({ type: types.UPDATE_QUEUE_ITEM, task }),
     removeFromQueue: task => ({ type: types.REMOVE_FROM_QUEUE, task: task }),
     setEditorDueAt: value => ({
         type: types.EDITOR_SET_DUE_AT,
@@ -277,5 +339,12 @@ export const actions = {
             action["tab"] = tab;
         }
         return action;
+    },
+
+    setActiveTask: activeTask => {
+        return {
+            type: types.SET_ACTIVE_TASK,
+            activeTask
+        };
     }
 };

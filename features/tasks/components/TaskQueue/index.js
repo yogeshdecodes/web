@@ -9,8 +9,14 @@ import Dropzone from "react-dropzone";
 
 import chrono from "chrono-node";
 import { format } from "date-fns";
-import { DoneStates, getDoneState } from "../../../../lib/utils/tasks";
+import {
+    DoneStates,
+    getDoneState,
+    getDeltaFromDoneState
+} from "../../../../lib/utils/tasks";
 import { createQueueItem } from "../../../../ducks/editor";
+import DueCountdown from "~/components/DueCountdown";
+import omit from "lodash/omit";
 
 /*
 PropTypes:
@@ -18,7 +24,34 @@ onChange => control onTaskAdd, remove -> returns newState
 onAdd(t) => queue control
 onRemove(t) => queue control
 queue => controlled component state
+doneState={DoneState.STATE}
 */
+
+// Optimize performance for attachment previews
+class AttachmentPreview extends React.Component {
+    shouldComponentUpdate(nextProps) {
+        return (
+            this.props.attachment !== nextProps.attachment &&
+            (nextProps !== null || nextProps !== undefined)
+        );
+    }
+
+    render() {
+        if (!this.props.attachment) return null;
+        return (
+            <div
+                className="attachment-panel"
+                style={{
+                    background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.attachment.preview})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center"
+                }}
+            >
+                <span onClick={this.props.onRemove} className="delete"></span>
+            </div>
+        );
+    }
+}
 
 const Hashtag = (tag, inText = false) => {
     return {
@@ -31,18 +64,58 @@ class TaskQueue extends Component {
     constructor(props) {
         super(props);
 
-        const defaultTask = this.createTaskObject("", true);
+        let currentTask = this.getCurrentTask();
+
+        /*if (this.props.queue.length === 0) {
+            currentTask = ;
+        } else {
+            currentTask = this.getCurrentTask();
+        }*/
 
         this.state = {
-            currentTask: defaultTask.id,
             hashtags: [],
             uploadHover: false,
             editorNaturalDate: "",
-            tooLarge: false
+            tooLarge: false,
+            content: currentTask.content,
+            showDescriptionEditor: false
         };
         this.dropRef = React.createRef();
 
-        this.props.addToQueue(defaultTask);
+        if (this.props.queue.length === 0) {
+            this.props.addToQueue(currentTask);
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.queue.length > 0 && this.props.doneState !== undefined) {
+            this.setDoneState(this.props.doneState);
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (
+            this.props.isCreating == true &&
+            prevProps.isCreating !== this.props.isCreating
+        ) {
+            this.setState({
+                showDescriptionEditor: false,
+                showDueEditor: false,
+                content: ""
+            });
+        }
+
+        if (
+            this.props.isCreating === false &&
+            prevProps.isCreating !== this.props.isCreating &&
+            !prevProps.isCreating
+        ) {
+            this.setState({ content: " " });
+        }
+
+        if (this.props.queue.length == 0 && prevProps.queue.length > 0) {
+            this.props.addToQueue(this.createTaskObject("", true));
+        }
     }
 
     onHoverUpload = s => {
@@ -59,7 +132,13 @@ class TaskQueue extends Component {
     };
 
     createTaskObject = (content = "", initial = false) => {
-        return createQueueItem(content, initial);
+        return createQueueItem(
+            content,
+            initial,
+            this.props.doneState !== undefined
+                ? this.props.doneState
+                : DoneStates.DONE
+        );
     };
 
     setEditorDueAt = e => {
@@ -69,7 +148,7 @@ class TaskQueue extends Component {
         let parsed = chrono.parseDate(e.target.value);
         if (parsed) {
             let task = this.props.queue.find(
-                t => t.id === this.state.currentTask
+                t => t.id === this.props.activeTask
             );
             task.due_at = parsed;
             this.props.addToQueue(task);
@@ -83,7 +162,8 @@ class TaskQueue extends Component {
     };
 
     cycleDoneStates = () => {
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        if (this.props.doneState !== undefined) return;
+        let task = this.getCurrentTask();
 
         if (getDoneState(task) === DoneStates.DONE) {
             this.setDoneState(DoneStates.IN_PROGRESS);
@@ -95,7 +175,8 @@ class TaskQueue extends Component {
     };
 
     setDoneState = doneState => {
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        let task = this.getCurrentTask();
+        if (!task) return;
 
         switch (doneState) {
             case DoneStates.DONE:
@@ -112,9 +193,7 @@ class TaskQueue extends Component {
                 break;
         }
 
-        console.log(getDoneState(task));
-
-        this.props.addToQueue(task);
+        this.props.updateQueueItem(task);
     };
 
     getClassNameForDoneState = task => {
@@ -140,7 +219,8 @@ class TaskQueue extends Component {
             const newTask = this.createTaskObject();
             this.props.addToQueue(newTask);
             this.setState({
-                currentTask: newTask.id
+                currentTask: newTask.id,
+                content: ""
             });
         }
 
@@ -152,35 +232,38 @@ class TaskQueue extends Component {
             // adding initial task moved to duck
         }
 
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        let task = this.getCurrentTask();
         if (e.key == "Backspace" && task.content === "") {
             if (this.props.queue.length > 1) {
+                const prevTask = this.props.queue
+                    .filter(t => t.id !== task.id)
+                    .slice(-1)[0];
                 this.setState({
-                    currentTask: this.props.queue
-                        .filter(t => t.id !== task.id)
-                        .slice(-1)[0].id
+                    currentTask: prevTask.id,
+                    content: prevTask.content
                 });
                 this.props.removeFromQueue(task);
             } else {
-                this.setState({ currentTask: null });
+                //this.setState({ currentTask: null });
             }
         }
     };
 
     handleChange = e => {
-        this.onTaskInput(e.target.value);
+        //this.onTaskInput(e.target.value);
 
         this.setActiveTask(e.target.name);
 
-        let task = this.props.queue.find(t => t.id === e.target.name);
+        let task = this.getCurrentTask();
         task.content = e.target.value;
-
-        this.props.addToQueue(task);
+        this.setState({ content: task.content });
     };
 
-    setActiveTask = currentTask => {
+    setActiveTask = (activeTask, content) => {
+        this.props.setActiveTask(activeTask);
         this.setState({
-            currentTask
+            // currentTask,
+            content
         });
     };
 
@@ -189,12 +272,12 @@ class TaskQueue extends Component {
     };
 
     onTaskInput = debounce(value => {
-        this.setState({
+        /*this.setState({
             hashtags: [
                 ...findHashtags(value).map(x => Hashtag(x, true)),
                 ...this.state.hashtags.filter(tag => !tag.inText)
             ]
-        });
+        });*/
     }, 300);
 
     changeType = type => {
@@ -213,7 +296,7 @@ class TaskQueue extends Component {
 
     onDrop = (acceptedFiles, rejectedFiles) => {
         this.onHoverUpload(false);
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        let task = this.getCurrentTask();
         if (!acceptedFiles.length) {
             this.setState({ tooLarge: true });
             return;
@@ -227,21 +310,61 @@ class TaskQueue extends Component {
         this.props.addToQueue(task);
     };
 
+    getCurrentTask = () => {
+        const task = this.props.queue.find(t => t.id === this.props.activeTask);
+        if (!task) return this.createTaskObject("", true);
+        return task;
+    };
+
     toggleDueEditor = () => {
-        this.setState({ showDueEditor: !this.state.showDueEditor });
+        if (!this.state.showDueEditor && this.getCurrentTask()) {
+            // Delete on second open.
+            this.props.updateQueueItem({
+                ...this.getCurrentTask(),
+                due_at: null
+            });
+        }
+        this.setState({
+            showDueEditor: !this.state.showDueEditor,
+            showDescriptionEditor: false,
+            editorNaturalDate: ""
+        });
     };
 
     removeAttachment = e => {
-        let task = this.props.queue.find(t => t.id === this.state.currentTask);
+        let task = this.getCurrentTask();
         delete task.attachment;
         this.props.addToQueue(task);
     };
 
+    toggleDescriptionEditor = () => {
+        this.setState({
+            showDescriptionEditor: !this.state.showDescriptionEditor,
+            showDueEditor: false
+        });
+    };
+
+    onDescriptionChange = e => {
+        let task = this.getCurrentTask();
+        this.props.updateQueueItem({
+            ...task,
+            description: e.target.value.length ? e.target.value : null
+        });
+    };
+
+    syncTaskContent = debounce(val => {
+        // Sync for performance reasons.
+        this.props.updateQueueItem({
+            ...this.getCurrentTask,
+            content: val
+        });
+    }, 200);
+
     render() {
-        const open = this.state.currentTask !== null;
-        let currentTask = this.props.queue.find(
-            t => t.id === this.state.currentTask
-        );
+        const open = this.props.activeTask !== null;
+        let currentTask = this.getCurrentTask();
+
+        if (!currentTask) return null;
 
         if (this.state.uploadHover)
             return (
@@ -296,123 +419,212 @@ class TaskQueue extends Component {
                                 </div>
                             )}
                             {this.props.queue.map(task => (
-                                <div
-                                    className={
-                                        "task-input " +
-                                        ((this.state.currentTask === task.id ||
-                                            this.state.currentTask === null) &&
-                                        !this.props.isCreating
-                                            ? "active "
-                                            : " ") +
-                                        (task.posting ? "posting " : " ")
-                                    }
-                                    onClick={e => {
-                                        this.setActiveTask(task.id);
-                                    }}
-                                    key={task.id}
-                                >
+                                <>
                                     <div
                                         className={
-                                            "check-case " +
-                                            this.getClassNameForDoneState(task)
+                                            "task-input " +
+                                            ((this.props.activeTask ===
+                                                task.id ||
+                                                this.props.activeTask ===
+                                                    null) &&
+                                            !this.props.isCreating
+                                                ? "active "
+                                                : " ") +
+                                            (task.posting ? "posting " : " ")
                                         }
-                                        onClick={e => this.cycleDoneStates()}
+                                        onClick={e => {
+                                            this.setActiveTask(
+                                                task.id,
+                                                task.content
+                                            );
+                                        }}
+                                        key={task.id}
                                     >
-                                        {this.getFaIcon(task)}
-                                    </div>
-                                    <div className="input">
-                                        <input
-                                            disabled={
-                                                this.state.currentTask === null
-                                            }
-                                            autocomplete="off"
-                                            onKeyDown={this.onTaskKeyDown}
-                                            name={task.id}
-                                            onChange={this.handleChange}
-                                            value={task.content}
-                                            placeholder={
-                                                "Start typing a task..."
-                                            }
-                                            autoFocus
-                                        ></input>
-                                    </div>
-                                    <div className="flex attach-controls flex-gap end inline">
-                                        {task.due_at && (
-                                            <div>
-                                                <small
-                                                    className="has-text-grey"
-                                                    style={{ display: "block" }}
-                                                >
-                                                    {format(
-                                                        task.due_at,
-                                                        "MMMM d, yyyy (h:mm aa)"
-                                                    )}
-                                                </small>
-                                            </div>
-                                        )}
                                         <div
-                                            className="cursor-pointer"
-                                            onClick={e => {
-                                                if (this.dropRef.current) {
-                                                    this.dropRef.current.open();
+                                            className={
+                                                "check-case " +
+                                                this.getClassNameForDoneState(
+                                                    task
+                                                )
+                                            }
+                                            onClick={e =>
+                                                this.cycleDoneStates()
+                                            }
+                                        >
+                                            {this.getFaIcon(task)}
+                                        </div>
+                                        <div className="input">
+                                            <input
+                                                disabled={
+                                                    this.props.activeTask ===
+                                                    null
                                                 }
-                                            }}
-                                        >
-                                            <FontAwesomeIcon
-                                                icon="camera"
-                                                color="var(--c-text)"
-                                            />
-                                        </div>
-                                        <div
-                                            className="cursor-pointer"
-                                            onClick={this.toggleDueEditor}
-                                        >
-                                            <FontAwesomeIcon
-                                                icon="clock"
-                                                color="var(--c-text)"
-                                            />
+                                                autocomplete="off"
+                                                onKeyDown={this.onTaskKeyDown}
+                                                name={task.id}
+                                                onChange={e => {
+                                                    this.handleChange(e);
+                                                    this.syncTaskContent(
+                                                        e.target.value
+                                                    );
+                                                }}
+                                                value={
+                                                    this.props.activeTask ===
+                                                        task.id ||
+                                                    this.props.activeTask ===
+                                                        null
+                                                        ? this.state.content
+                                                        : task.content
+                                                }
+                                                placeholder={
+                                                    "Start typing a task..."
+                                                }
+                                                autoFocus
+                                            ></input>
                                         </div>
                                     </div>
-                                </div>
+                                    {(this.props.activeTask === task.id ||
+                                        this.props.activeTask === null) &&
+                                    !this.props.isCreating ? (
+                                        <div className="task-controls">
+                                            <div className="buttons flex flex-gap">
+                                                <div>
+                                                    <button
+                                                        onClick={
+                                                            this
+                                                                .toggleDescriptionEditor
+                                                        }
+                                                        className={
+                                                            "btn btn-light btn-small" +
+                                                            (currentTask.description
+                                                                ? " btn-selected"
+                                                                : "")
+                                                        }
+                                                    >
+                                                        <FontAwesomeIcon
+                                                            icon="align-justify"
+                                                            color="var(--c-text)"
+                                                        />{" "}
+                                                        Add a description
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        onClick={e => {
+                                                            if (
+                                                                this.dropRef
+                                                                    .current
+                                                            ) {
+                                                                this.dropRef.current.open();
+                                                            }
+                                                        }}
+                                                        className={
+                                                            "btn btn-light btn-small" +
+                                                            (currentTask.attachment
+                                                                ? " btn-selected"
+                                                                : "")
+                                                        }
+                                                    >
+                                                        <FontAwesomeIcon
+                                                            icon="camera"
+                                                            color="var(--c-text)"
+                                                        />{" "}
+                                                        {currentTask.attachment
+                                                            ? "Image attached"
+                                                            : "Attach an image"}
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        className={
+                                                            "btn btn-light btn-small" +
+                                                            (currentTask.due_at
+                                                                ? " btn-selected"
+                                                                : "")
+                                                        }
+                                                        onClick={
+                                                            this.toggleDueEditor
+                                                        }
+                                                    >
+                                                        <FontAwesomeIcon
+                                                            icon="clock"
+                                                            color="var(--c-text)"
+                                                        />{" "}
+                                                        {currentTask.due_at ? (
+                                                            <DueCountdown
+                                                                date={
+                                                                    currentTask.due_at
+                                                                }
+                                                            />
+                                                        ) : (
+                                                            "Add a due date"
+                                                        )}
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            {this.state.showDueEditor && (
+                                                <div className="flex flex-column flex-v-gap attachment-panel dyn-height">
+                                                    <div>
+                                                        <div className="control">
+                                                            <input
+                                                                type="Text"
+                                                                autoFocus
+                                                                value={
+                                                                    this.state
+                                                                        .editorNaturalDate
+                                                                }
+                                                                onChange={
+                                                                    this
+                                                                        .setEditorDueAt
+                                                                }
+                                                                autoComplete={
+                                                                    "off"
+                                                                }
+                                                                placeholder={
+                                                                    "When is this task due? Type things like in 6 hours, in 2 days, at 6:30..."
+                                                                }
+                                                                onKeyPress={
+                                                                    this
+                                                                        .onDueKeypress
+                                                                }
+                                                            />
+                                                            <p className="help">
+                                                                Hit Enter to set
+                                                                the date.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {this.state
+                                                .showDescriptionEditor && (
+                                                <div className="description-editor flex flex-column flex-v-gap attachment-panel dyn-height">
+                                                    <textarea
+                                                        value={
+                                                            currentTask.description
+                                                        }
+                                                        onChange={
+                                                            this
+                                                                .onDescriptionChange
+                                                        }
+                                                        className="unstyled-textarea"
+                                                        placeholder="Write about what you're doing..."
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
+                                    ) : null}
+                                </>
                             ))}
                         </div>
-                        {currentTask && currentTask.attachment && (
-                            <div
-                                className="attachment-panel"
-                                style={{
-                                    background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${currentTask.attachment.preview})`,
-                                    backgroundSize: "cover",
-                                    backgroundPosition: "center"
-                                }}
-                            >
-                                <span
-                                    onClick={this.removeAttachment}
-                                    className="delete"
-                                ></span>
-                            </div>
-                        )}
-                        {currentTask && this.state.showDueEditor && (
-                            <div className="flex flex-column flex-v-gap attachment-panel dyn-height">
-                                <div>
-                                    <div className="control">
-                                        <input
-                                            type="Text"
-                                            autoFocus
-                                            value={this.state.editorNaturalDate}
-                                            onChange={this.setEditorDueAt}
-                                            autoComplete={"off"}
-                                            placeholder={
-                                                "When is this task due? Type things like in 6 hours, in 2 days, at 6:30..."
-                                            }
-                                            onKeyPress={this.onDueKeypress}
-                                        />
-                                        <p className="help">
-                                            Hit Enter to set the date.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                        <AttachmentPreview
+                            attachment={
+                                currentTask ? currentTask.attachment : null
+                            }
+                            onRemove={this.removeAttachment}
+                        />
                     </Dropzone>
                 </div>
             </div>
@@ -424,6 +636,7 @@ const mapStateToProps = state => ({
     isLoggedIn: state.auth.loggedIn,
     hasGold: state.user.me ? state.user.me.gold : false,
     open: state.editor.open,
+    activeTask: state.editor.activeTask,
     queue: state.editor.queue,
     creatingMilestone: state.editor.creatingMilestone,
     creatingDiscussion: state.editor.creatingDiscussion,
@@ -441,6 +654,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onClose: () => dispatch(editorActions.toggleEditor()),
     addToQueue: t => dispatch(editorActions.addToQueue(t)),
+    updateQueueItem: t => dispatch(editorActions.updateQueueItem(t)),
     removeFromQueue: t => dispatch(editorActions.removeFromQueue(t)),
     createTasks: () => dispatch(editorActions.createTasks()),
     setEditorValue: v => dispatch(editorActions.setEditorValue(v)),
@@ -451,7 +665,10 @@ const mapDispatchToProps = dispatch => ({
     markInProgress: () => dispatch(editorActions.markInProgress()),
     markRemaining: () => dispatch(editorActions.markRemaining()),
     openMilestoneEditor: () => dispatch(editorActions.openMilestoneEditor()),
-    openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor())
+    openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor()),
+
+    setActiveTask: activeTask =>
+        dispatch(editorActions.setActiveTask(activeTask))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskQueue);

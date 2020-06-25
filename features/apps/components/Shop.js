@@ -145,7 +145,7 @@ const Shop = props => {
                         name="Makerlog Menubar"
                         description="A super fast menubar app for macOS."
                         outboundUrl="https://menubar.getmakerlog.com/"
-                        icon="https://makerlog.imgix.net/media/uploads/2019/09/18/twitter.png"
+                        icon="https://ik.imagekit.io/makerlog/media/uploads/2019/09/18/twitter.png"
                     />
                     <IntegrationMedia
                         name="Today for Makerlog"
@@ -158,12 +158,6 @@ const Shop = props => {
                         description="Log straight from Terminal. It's seamless."
                         icon="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/terminal-icon.png"
                         outboundUrl="https://github.com/MihaiVoinea/makerlog-cli/"
-                    />
-                    <IntegrationMedia
-                        name="Makerlog for Google Assistant"
-                        description="Productivity right from your assistant."
-                        icon="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Google_Assistant_logo.svg/1200px-Google_Assistant_logo.svg.png"
-                        outboundUrl="https://assistant.getmakerlog.com/"
                     />
                     <IntegrationMedia
                         name="Logger for Makerlog"

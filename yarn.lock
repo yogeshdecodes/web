@@ -8873,6 +8873,11 @@ react-repeatable@^2.0.1:
     chained-function "^0.5.0"
     prop-types "^15.6.0"
 
+react-responsive-masonry@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-responsive-masonry/-/react-responsive-masonry-2.1.0.tgz#5ef1c38c0ac542776ab29ff97a0adfa7f8bc929c"
+  integrity sha512-sAMV04NcanmusNdCMRmLoT6YJU/kQ7s1PEG1Ycnx1aQU4iqZfmADlcletEhEBl5jT0EPatHrgW5/d3LNTy37oQ==
+
 react-responsive-ui@^0.14.177:
   version "0.14.180"
   resolved "https://registry.yarnpkg.com/react-responsive-ui/-/react-responsive-ui-0.14.180.tgz#2560ce70158f8d65cb29a8ee317018c8fe01e8d6"

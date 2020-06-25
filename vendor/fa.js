@@ -85,6 +85,7 @@ import { faLocationArrow } from "@fortawesome/free-solid-svg-icons/faLocationArr
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons/faLightbulb";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin";
 import { faHackerNews } from "@fortawesome/free-brands-svg-icons/faHackerNews";
+import { faAlignJustify } from "@fortawesome/free-solid-svg-icons/faAlignJustify";
 
 library.add(
     faInstagram,
@@ -172,5 +173,6 @@ library.add(
     faCircle,
     faLightbulb,
     faLinkedin,
-    faHackerNews
+    faHackerNews,
+    faAlignJustify
 );

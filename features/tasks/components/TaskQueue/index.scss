@@ -14,15 +14,39 @@
         }
     }
 
-    .attachment-panel {
+    .buttons {
+        .due-at {
+            color: var(--c-text) !important;
+        }
+
+        .btn-selected {
+            border: 2px solid $c-main !important;
+        }
+    }
+
+    .task-controls {
+        @extend %corners;
+        // border: 1px solid var(--c-border);
         background: var(--c-bg);
+        padding: 0.5rem;
+    }
+
+    .attachment-panel {
+        @extend %corners;
+        background-color: var(--c-lightest);
         border: 1px solid var(--c-border);
-        margin-top: 1rem;
+        //margin: 1rem;
+        margin-top: 0.5rem;
         padding: 10px;
         background-size: cover;
         background-position: center;
         height: 150px;
         position: relative;
+
+        textarea {
+            min-height: 120px;
+        }
+
         .delete {
             position: absolute;
             right: 10px;
@@ -111,7 +135,8 @@
         flex-direction: row;
         align-items: center;
         // padding: 1rem;
-        padding-top: 1rem;
+        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
         position: relative;
         opacity: 0.5;
 
@@ -119,6 +144,9 @@
 
         &.active {
             opacity: 1;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            //padding-bottom: 1rem;
         }
 
         &:first-of-type {

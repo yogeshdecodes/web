@@ -14,6 +14,13 @@ import { CommentsBox } from "~/features/comments";
 import TaskDetail from "./components/TaskDetail";
 import { imageUrl } from "../../../../lib/utils/img";
 import YouTube from "react-youtube";
+import {
+    getHumanStateFromTask,
+    DoneStates,
+    getDeltaFromDoneState
+} from "../../../../lib/utils/tasks";
+import { actions as tasksActions } from "~/ducks/tasks";
+import { connect } from "react-redux";
 
 function findWord(word, str) {
     return str
@@ -62,7 +69,8 @@ class Task extends React.Component {
                 ? this.props.defaultOpen
                 : false,
             hover: false,
-            deleted: false
+            deleted: false,
+            task: this.props.task
         };
     }
 
@@ -92,7 +100,7 @@ class Task extends React.Component {
 
     getClassNames = () => {
         let baseClass = "Task";
-        const task = this.props.task;
+        const task = this.state.task;
 
         if (task.done) {
             baseClass += " done";
@@ -107,6 +115,34 @@ class Task extends React.Component {
         }
 
         return baseClass;
+    };
+
+    onTaskIconClick = () => {
+        if (this.isOwnedByCurrentUser()) {
+            if (!this.state.task.done) {
+                console.log(getDeltaFromDoneState(DoneStates.DONE));
+                this.setState({
+                    task: {
+                        ...this.state.task,
+                        ...getDeltaFromDoneState(DoneStates.DONE)
+                    }
+                });
+                this.props.markDone(this.props.task.id);
+            } else {
+                this.setState({
+                    task: {
+                        ...this.state.task,
+                        ...getDeltaFromDoneState(DoneStates.REMAINING)
+                    }
+                });
+                this.props.markRemaining(this.props.task.id);
+            }
+        }
+    };
+
+    isOwnedByCurrentUser = () => {
+        if (!this.props.user) return;
+        return this.props.user.id === this.props.task.user.id;
     };
 
     renderIcon = () => {
@@ -124,12 +160,29 @@ class Task extends React.Component {
             return <Emoji emoji={"🚀"} />;
         }
 
-        return this.props.task.done ? (
-            <FontAwesomeIcon icon={doneIcon} color={doneColor} />
-        ) : this.props.task.in_progress ? (
-            <FontAwesomeIcon icon={"dot-circle"} color="#f39c12" />
-        ) : (
-            <FontAwesomeIcon icon={["far", "circle"]} color="#f39c12" />
+        return (
+            <div
+                className={
+                    "task-icon" +
+                    (this.isOwnedByCurrentUser() ? " is-user" : "")
+                }
+                style={{ display: "inline-block" }}
+                onClick={this.onTaskIconClick}
+            >
+                {this.state.task.done ? (
+                    <FontAwesomeIcon icon={doneIcon} color={doneColor} />
+                ) : this.state.task.in_progress ? (
+                    <FontAwesomeIcon
+                        icon={remainingIcon}
+                        color={remainingColor}
+                    />
+                ) : (
+                    <FontAwesomeIcon
+                        icon={["far", "circle"]}
+                        color={remainingColor}
+                    />
+                )}
+            </div>
         );
     };
 
@@ -223,8 +276,11 @@ class Task extends React.Component {
         }
     };
 
-    renderCounts = () => {
+    renderCounts = (force = false) => {
         if (!this.props.withCounts) return null;
+
+        let hover = this.state.hover;
+        if (force) hover = true;
 
         return (
             <span
@@ -236,13 +292,13 @@ class Task extends React.Component {
                         <Praisable
                             indexUrl={`/tasks/${this.props.task.id}`}
                             initialAmount={this.props.task.praise}
-                            expanded={this.state.hover}
+                            expanded={hover}
                             item={this.props.task}
                         />{" "}
                         &nbsp;
                     </>
                 )}
-                {this.state.hover ? (
+                {hover ? (
                     <button
                         className={"btn-praise btn-gray"}
                         onClick={this.toggleDetails}
@@ -270,6 +326,30 @@ class Task extends React.Component {
                 )}
      */
 
+    renderLargeItemCounts = () => {
+        return (
+            <span
+                style={{ display: "inline-block" }}
+                className={"PraiseIndicator has-text-grey-light flex flex-gap"}
+            >
+                <div>
+                    <Praisable
+                        indexUrl={`/tasks/${this.props.task.id}`}
+                        initialAmount={this.props.task.praise}
+                        button={true}
+                        item={this.props.task}
+                    />
+                </div>
+                <div>
+                    <span>
+                        <Emoji emoji={"💬"} />
+                        {this.props.task.comment_count}
+                    </span>
+                </div>
+            </span>
+        );
+    };
+
     renderExtras = () => {
         return (
             <>
@@ -294,6 +374,11 @@ class Task extends React.Component {
                         </div>
                     )}
                 <div className="task-details">
+                    {this.props.task.description !== null && (
+                        <div className="description-text">
+                            {this.props.task.description}
+                        </div>
+                    )}
                     {this.state.detailsOpen && (
                         <div className="action-bar">
                             <TaskDetail
@@ -337,6 +422,45 @@ class Task extends React.Component {
             );
         }
 
+        if (false && this.props.task.description) {
+            // This is a prototype for a larger card.
+            return (
+                <div className={this.getClassNames() + " large"}>
+                    <div className="task-container">
+                        <h3>
+                            <span className={"task-content"}>
+                                <p className="heading">
+                                    {this.renderIcon()}
+                                    {getHumanStateFromTask(
+                                        this.props.task
+                                    )}{" "}
+                                    task
+                                </p>
+                                {this.renderContent()}
+                            </span>
+                        </h3>
+                        <p style={{ marginBottom: "1rem" }}>
+                            {this.props.task.description}
+                        </p>
+                        {this.props.withAttachment && this.renderAttachments()}
+                        <div>{this.renderLargeItemCounts(true)}</div>
+                    </div>
+                    <div className="task-details">
+                        <div className="action-bar">
+                            <TaskDetail
+                                task={this.props.task}
+                                onDelete={this.onDelete}
+                            />
+                        </div>
+                        <CommentsBox
+                            initialCommentCount={this.props.task.comment_count}
+                            task={this.props.task}
+                        />
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div
                 onMouseEnter={this.onMouseEnter}
@@ -367,4 +491,12 @@ Task.defaultProps = {
     plain: false
 };
 
-export default Task;
+export default connect(
+    state => ({
+        user: state.user.me
+    }),
+    dispatch => ({
+        markDone: id => dispatch(tasksActions.markDone(id)),
+        markRemaining: id => dispatch(tasksActions.markRemaining(id))
+    })
+)(Task);
