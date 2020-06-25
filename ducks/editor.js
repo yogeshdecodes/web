@@ -222,7 +222,7 @@ export const editorReducer = (state = initialState, action) => {
                 isCreating: false,
                 expanded: false,
                 open: false,
-                //queue: [createQueueItem("", true)],
+                queue: [],
                 editorValue: "",
                 editorDone: true,
                 editorInProgress: false,
