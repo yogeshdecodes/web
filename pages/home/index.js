@@ -40,7 +40,6 @@ function Home(props) {
                             Here's what the community is building...
                         </h4>
                         <KeyActivityFeed
-                            prefetchData={props.activitiesPrefetch}
                             key="site:aggregated"
                             feedKey="site:aggregated"
                         />
@@ -57,7 +56,7 @@ function Home(props) {
 Home.getInitialProps = async () => {
     return {
         ...(await prefetchData()),
-        activitiesPrefetch: await prefetchActivity("site:aggregated"),
+        //activitiesPrefetch: await prefetchActivity("site:aggregated"),
         discussionPrefetch: await prefetchThreads(true)
     };
 };
