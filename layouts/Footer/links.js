@@ -38,7 +38,9 @@ export default function FooterLinks() {
                 </OutboundLink>
             </li>
             <li>
-                <OutboundLink href={"https://pm.mattei.dev/"}>
+                <OutboundLink
+                    href={"https://pm.mattei.dev/projects/makerlog/issues/new"}
+                >
                     Bugs
                 </OutboundLink>
             </li>
