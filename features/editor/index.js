@@ -613,7 +613,7 @@ class CardEditor extends Component {
                     }
                     onClick={e => this.switchTab(0)}
                 >
-                    To-do
+                    Completed task
                 </a>
                 <a
                     className={
@@ -622,7 +622,7 @@ class CardEditor extends Component {
                     }
                     onClick={e => this.switchTab(4)}
                 >
-                    Completed task
+                    To-do
                 </a>
             </>
         );
@@ -641,13 +641,13 @@ class CardEditor extends Component {
     renderNewTaskEditingExperience = () => {
         return (
             <>
-                {this.props.cardTab === 0 && (
+                {this.props.cardTab === 4 && (
                     <NextEditorTab
                         {...{ ...this.props, onClose: () => {} }}
                         doneState={DoneStates.REMAINING}
                     />
                 )}
-                {this.props.cardTab === 4 && (
+                {this.props.cardTab === 0 && (
                     <NextEditorTab
                         {...{ ...this.props, onClose: () => {} }}
                         doneState={DoneStates.DONE}
