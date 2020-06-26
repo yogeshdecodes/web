@@ -60,7 +60,7 @@ class TodayList extends Component {
                         </div>
                         <div className="tasks">
                             {grouped.in_progress.map(t => (
-                                <Task task={t} />
+                                <Task key={t.id} task={t} />
                             ))}
                         </div>
                     </div>
@@ -79,7 +79,7 @@ class TodayList extends Component {
                         </div>
                         <div className="tasks">
                             {grouped.remaining.map(t => (
-                                <Task task={t} />
+                                <Task key={t.id} task={t} />
                             ))}
                         </div>
                     </div>
