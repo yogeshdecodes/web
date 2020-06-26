@@ -41,7 +41,8 @@ class TaskEditModal extends Component {
     getInitialState = task => {
         return {
             content: task.content,
-            doneState: getDoneState(task)
+            doneState: getDoneState(task),
+            description: task.description ? task.description : ""
         };
     };
 
@@ -51,6 +52,10 @@ class TaskEditModal extends Component {
         if (e.preventDefault) e.preventDefault();
         this.props.updateTask(this.props.task.id, {
             content: this.state.content,
+            description:
+                this.state.description.length > 0
+                    ? this.state.description
+                    : null,
             ...getDeltaFromDoneState(this.state.doneState)
         });
     };
@@ -103,6 +108,16 @@ class TaskEditModal extends Component {
                                 name="content"
                                 onChange={this.handleChange}
                                 value={this.state.content}
+                                placeholder="Task content"
+                            />
+                        </div>
+                        <div className="control">
+                            <label>Description</label>
+                            <textarea
+                                type="text"
+                                name="description"
+                                onChange={this.handleChange}
+                                value={this.state.description}
                                 placeholder="Task content"
                             />
                         </div>

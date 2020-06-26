@@ -15,6 +15,9 @@ class CompanyPageLayout extends Component {
                     <NavLink route="faq" activeClassName="is-active">
                         <a className="navbar-item">FAQ</a>
                     </NavLink>
+                    <NavLink route="legal" activeClassName="is-active">
+                        <a className="navbar-item">Legal</a>
+                    </NavLink>
                     <NavLink route="contact" activeClassName="is-active">
                         <a className="navbar-item">Contact</a>
                     </NavLink>

@@ -613,7 +613,16 @@ class CardEditor extends Component {
                     }
                     onClick={e => this.switchTab(0)}
                 >
-                    Completed task
+                    Completed
+                </a>
+                <a
+                    className={
+                        "editor-select " +
+                        (this.props.cardTab === 5 && "is-active")
+                    }
+                    onClick={e => this.switchTab(5)}
+                >
+                    In-progress
                 </a>
                 <a
                     className={
@@ -645,6 +654,12 @@ class CardEditor extends Component {
                     <NextEditorTab
                         {...{ ...this.props, onClose: () => {} }}
                         doneState={DoneStates.REMAINING}
+                    />
+                )}
+                {this.props.cardTab === 5 && (
+                    <NextEditorTab
+                        {...{ ...this.props, onClose: () => {} }}
+                        doneState={DoneStates.IN_PROGRESS}
                     />
                 )}
                 {this.props.cardTab === 0 && (

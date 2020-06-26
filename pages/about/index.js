@@ -239,7 +239,7 @@ class AboutPage extends React.Component {
                                 </div>
                             </div>
                             <div className="member">
-                                <img src="/img/team/monday.png" alt="" />
+                                <img src="/img/team/monday.jpeg" alt="" />
                                 <div>
                                     <h3>Monday</h3>
                                     <p>Head of cats</p>

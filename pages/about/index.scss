@@ -2,7 +2,8 @@
 
 .AboutPage,
 .FaqPage,
-.ContactPage {
+.ContactPage,
+.LegalPage {
     .hero {
         @extend %people-bg;
         min-height: 40vh;
@@ -126,7 +127,8 @@
 }
 
 .FaqPage,
-.ContactPage {
+.ContactPage,
+.LegalPage {
     .hero {
         min-height: 20vh;
         max-height: 20vh;

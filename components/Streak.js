@@ -5,7 +5,8 @@ import Emoji from "./Emoji";
 const Streak = ({ days, endingSoon = false }) => (
     <>
         <Emoji emoji={"🔥"} />
-        &nbsp;{days}
+        <span style={{ marginRight: 5 }}></span>
+        {days}
         {endingSoon ? <Emoji emoji="⌛" /> : null}
     </>
 );
