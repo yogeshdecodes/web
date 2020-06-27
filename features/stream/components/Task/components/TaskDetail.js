@@ -59,6 +59,11 @@ class TaskDetail extends React.Component {
     };
 
     generateTweetText = () => {
+        if (this.props.task.description) {
+            return `✅ ${this.props.task.content} \n ${
+                this.props.task.description
+            } \n ${this.getPermalink()}`;
+        }
         return `✅ ${this.props.task.content} \n ${this.getPermalink()}`;
     };
 
