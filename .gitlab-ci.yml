@@ -12,12 +12,13 @@ deploy:
         url: https://getmakerlog.com/
     only:
         - master
+    variables:
+        LC_CTYPE: "en_US.UTF-8"
+        LANG: "en_US.UTF-8"
     script:
         - apt update
         - apt install -y python3-setuptools python3-pip git python3
-        - pip3 install virtualenv
-        - git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git ~/aws
-        - python3 ~/aws/scripts/ebcli_installer.py
+        - pip install awsebcli --upgrade --user
         - npm install
         - npm run build
         - eb init $EB_APP_NAME
