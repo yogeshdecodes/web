@@ -16,7 +16,7 @@ deploy:
         - npm install
         - npm run build
         - apt update
-        - apt install python3-setuptools
+        - apt install python3-setuptools -y
         - easy_install3 pip
         - export PATH=$PATH:~/.local/bin/
         - pip install --upgrade --user awsebcli
