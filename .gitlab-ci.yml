@@ -18,7 +18,7 @@ deploy:
     script:
         - apt update
         - apt install -y python3-setuptools python3-pip git python3
-        - pip install awsebcli --upgrade --user
+        - pip3 install awsebcli --upgrade --user
         - npm install
         - npm run build
         - eb init $EB_APP_NAME
