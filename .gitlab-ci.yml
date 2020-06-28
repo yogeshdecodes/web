@@ -13,6 +13,7 @@ deploy:
     only:
         - master
     script:
+        - apt update
         - apt install -y python3-setuptools python3-pip
         - export PATH=$PATH:~/.local/bin/
         - pip3 install --upgrade --user awsebcli==3.10.0
