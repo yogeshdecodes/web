@@ -11,6 +11,12 @@ jobs:
     
     - name: Checkout source code
       uses: actions/checkout@v1
+      
+    - name: Build the slug
+      run: |
+        curl -sL https://deb.nodesource.com/setup_12.x | bash - apt-get install -y nodejs
+        npm install
+        npm run build
 
     - name: Generate deployment package
       run: zip -r deploy.zip .
