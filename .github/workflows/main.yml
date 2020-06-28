@@ -29,3 +29,11 @@ jobs:
         version_label: ${{github.SHA}}
         region: ${{ secrets.AWS_DEFAULT_REGION }}
         deployment_package: deploy.zip
+
+    - name: Send message on Telegram
+      if: cancelled() == false
+      uses: xinthink/action-telegram@v1.1
+      with:
+        botToken: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        chatId: ${{ secrets.TELEGRAM_CHAT_ID }}
+        jobStatus: ${{ job.status }}
