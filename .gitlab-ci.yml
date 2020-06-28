@@ -15,6 +15,7 @@ deploy:
     script:
         - apt update
         - apt install -y python3-setuptools python3-pip git python3
+        - pip3 install virtualenv
         - git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git ~/aws
         - python3 ~/aws/scripts/ebcli_installer.py
         - npm install
