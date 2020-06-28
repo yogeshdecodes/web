@@ -7,7 +7,9 @@
         "dev": "NODE_OPTIONS='--inspect' DEBUG=axios node server.js",
         "start": "NODE_ENV=production node server.js",
         "stage": "git push -f heroku develop:master",
-        "find-dead": "node scripts/detect-unused.js"
+        "find-dead": "node scripts/detect-unused.js",
+        "deploy-staging": "NODE_ENV=staging next build && NODE_ENV=staging node ./server.js",
+        "deploy-production": "NODE_ENV=production next build && NODE_ENV=production node ./server.js"
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.5.5",
