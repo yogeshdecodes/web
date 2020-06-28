@@ -15,5 +15,9 @@ deploy:
     script:
         - npm install
         - npm run build
-        - pip install awsebcli --upgrade --user
+        - sudo apt update
+        - sudo apt install python3-setuptools
+        - sudo easy_install3 pip
+        - export PATH=$PATH:~/.local/bin/
+        - pip install --upgrade --user awsebcli
         - eb deploy $EB_APP_NAME
