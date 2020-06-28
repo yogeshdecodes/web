@@ -14,7 +14,7 @@ deploy:
         - master
     script:
         - apt update
-        - apt install -y python3-setuptools python3-pip
+        - apt install -y python3-setuptools python3-pip python3-dev
         - export PATH=$PATH:~/.local/bin/
         - pip3 install --upgrade --user awsebcli
         - npm install
