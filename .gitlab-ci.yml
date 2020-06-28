@@ -14,9 +14,9 @@ deploy:
         - master
     script:
         - apt update
-        - apt install -y python3-setuptools python3-pip
-        - export PATH=$PATH:~/.local/bin/
-        - pip3 install --upgrade --user awsebcli==3.10.0
+        - apt install -y python3-setuptools python3-pip git python3
+        - git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git ~/aws
+        - python3 ~/aws/scripts/ebcli_installer.py
         - npm install
         - npm run build
         - eb init $EB_APP_NAME
