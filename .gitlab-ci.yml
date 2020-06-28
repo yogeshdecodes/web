@@ -13,10 +13,10 @@ deploy:
     only:
         - master
     script:
-        - apt update
-        - apt install -y python3-setuptools python3-pip python3-dev
+        - apt install -y python3-setuptools python3-pip
         - export PATH=$PATH:~/.local/bin/
         - pip3 install --upgrade --user awsebcli==3.10.0
         - npm install
         - npm run build
+        - eb init $EB_APP_NAME
         - eb deploy $EB_APP_NAME
