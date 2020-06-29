@@ -31,9 +31,9 @@ jobs:
         deployment_package: deploy.zip
 
     - name: Send message on Telegram
-      if: cancelled() == false
       uses: xinthink/action-telegram@v1.1
       with:
+        skipSuccess: false
         botToken: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         chatId: ${{ secrets.TELEGRAM_CHAT_ID }}
         jobStatus: ${{ job.status }}
