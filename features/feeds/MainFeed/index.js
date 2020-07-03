@@ -6,8 +6,14 @@ import DiscussionSection, {
 } from "~/features/discussions/DiscussionSection";
 import TodayList from "../../tasks/components/TodayList";
 import DoneTodayCount from "../../tasks/DoneTodayCount";
+import Spinner from "~/components/Spinner";
 
-const MainFeed = ({ currentFeed, discussionPrefetch, activitiesPrefetch }) => {
+const MainFeed = ({
+    currentFeed,
+    discussionPrefetch,
+    activitiesPrefetch,
+    ...props
+}) => {
     switch (currentFeed) {
         case "discussions": {
             return (
@@ -49,7 +55,16 @@ const MainFeed = ({ currentFeed, discussionPrefetch, activitiesPrefetch }) => {
                     </h4>
                     <div className="card">
                         <div className="card-content">
-                            <TodayList />
+                            {!props.ready && !props.failed ? (
+                                <center>
+                                    <Spinner
+                                        small
+                                        text="Loading your tasks..."
+                                    />
+                                </center>
+                            ) : (
+                                <TodayList />
+                            )}
                         </div>
                     </div>
                     <h3 className="mb-em">Latest discussions</h3>
@@ -72,6 +87,8 @@ const MainFeed = ({ currentFeed, discussionPrefetch, activitiesPrefetch }) => {
 
 export default connect(state => {
     return {
+        ready: state.tasks.ready,
+        failed: state.tasks.failed,
         currentFeed: state.app.currentFeed
     };
 })(MainFeed);
