@@ -729,6 +729,31 @@ class Editor extends Component {
         this.props.switchTab(tab);
     };
 
+    renderTaskEditor = () => {
+        return (
+            <>
+                {this.props.tab === 4 && (
+                    <NextEditorTab
+                        {...{ ...this.props, onClose: () => {} }}
+                        doneState={DoneStates.REMAINING}
+                    />
+                )}
+                {this.props.tab === 5 && (
+                    <NextEditorTab
+                        {...{ ...this.props, onClose: () => {} }}
+                        doneState={DoneStates.IN_PROGRESS}
+                    />
+                )}
+                {this.props.tab === 0 && (
+                    <NextEditorTab
+                        {...{ ...this.props, onClose: () => {} }}
+                        doneState={DoneStates.DONE}
+                    />
+                )}
+            </>
+        );
+    };
+
     renderNewTabExperience = () => {
         return (
             <>
@@ -738,7 +763,15 @@ class Editor extends Component {
                     }
                     onClick={e => this.switchTab(0)}
                 >
-                    To-do
+                    Completed
+                </a>
+                <a
+                    className={
+                        "editor-select " + (this.props.tab === 5 && "is-active")
+                    }
+                    onClick={e => this.switchTab(5)}
+                >
+                    In-progress
                 </a>
                 <a
                     className={
@@ -746,7 +779,7 @@ class Editor extends Component {
                     }
                     onClick={e => this.switchTab(4)}
                 >
-                    Completed task
+                    To-do
                 </a>
             </>
         );
@@ -786,7 +819,7 @@ class Editor extends Component {
                         </div>
                     </div>
                 </Modal.Header>
-                {this.props.tab === 0 && <TaskEditorTab {...this.props} />}
+                {this.renderTaskEditor()}
                 {this.props.tab === 1 && (
                     <MilestoneEditor
                         hasGold={this.props.hasGold}
