@@ -6,8 +6,6 @@ import DiscussionSection, {
 } from "~/features/discussions/DiscussionSection";
 import TodayList from "../../tasks/components/TodayList";
 import DoneTodayCount from "../../tasks/DoneTodayCount";
-import { Experiment, Variant } from "react-optimize";
-import experiments from "../../../experiments";
 
 const MainFeed = ({ currentFeed, discussionPrefetch, activitiesPrefetch }) => {
     switch (currentFeed) {
@@ -45,22 +43,15 @@ const MainFeed = ({ currentFeed, discussionPrefetch, activitiesPrefetch }) => {
         default: {
             return (
                 <>
-                    <Experiment id={experiments.NEW_TASK_EXPERIENCE.id}>
-                        <Variant id="0"></Variant>
-                        <Variant id="1">
-                            <>
-                                <h3>Today</h3>
-                                <h4 className="subtitle has-text-grey mb-em">
-                                    <DoneTodayCount /> tasks completed today
-                                </h4>
-                                <div className="card">
-                                    <div className="card-content">
-                                        <TodayList />
-                                    </div>
-                                </div>
-                            </>
-                        </Variant>
-                    </Experiment>
+                    <h3>Today</h3>
+                    <h4 className="subtitle has-text-grey mb-em">
+                        <DoneTodayCount /> tasks completed today
+                    </h4>
+                    <div className="card">
+                        <div className="card-content">
+                            <TodayList />
+                        </div>
+                    </div>
                     <h3 className="mb-em">Latest discussions</h3>
                     <div className="card">
                         <div className="card-content">

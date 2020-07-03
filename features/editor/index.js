@@ -27,11 +27,7 @@ import dynamic from "next/dynamic";
 import GoldMessage from "../../components/GoldMessage";
 import OutboundLink from "~/components/OutboundLink";
 
-import { Experiment, Variant } from "react-optimize";
 import { DoneStates } from "../../lib/utils/tasks";
-import experiments from "../../experiments";
-import { isDev } from "../../config";
-import NextEditor from "./NextEditor";
 
 const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
     ssr: false
@@ -673,18 +669,7 @@ class CardEditor extends Component {
     };
 
     renderTaskEditor = () => {
-        return isDev ? (
-            this.renderNewTaskEditingExperience()
-        ) : (
-            <Experiment id={experiments.NEW_TASK_EXPERIENCE.id}>
-                <Variant id="0">
-                    {this.renderOldTaskEditingExperience()}
-                </Variant>
-                <Variant id="1">
-                    {this.renderNewTaskEditingExperience()}
-                </Variant>
-            </Experiment>
-        );
+        return this.renderNewTaskEditingExperience();
     };
 
     render() {
@@ -698,29 +683,7 @@ class CardEditor extends Component {
                 <Modal.Header>
                     <div className="Editor flex flex-gap v-center">
                         <div className="flex-grow">
-                            {isDev ? (
-                                this.renderNewTabExperience()
-                            ) : (
-                                <Experiment
-                                    id={experiments.NEW_TASK_EXPERIENCE.id}
-                                >
-                                    <Variant id="0">
-                                        <a
-                                            className={
-                                                "editor-select " +
-                                                (this.props.cardTab === 0 &&
-                                                    "is-active")
-                                            }
-                                            onClick={e => this.switchTab(0)}
-                                        >
-                                            Task
-                                        </a>
-                                    </Variant>
-                                    <Variant id="1">
-                                        {this.renderNewTabExperience()}
-                                    </Variant>
-                                </Experiment>
-                            )}
+                            {this.renderNewTabExperience()}
                             <a
                                 className={
                                     "editor-select " +
@@ -801,29 +764,7 @@ class Editor extends Component {
                 <Modal.Header>
                     <div className="Editor flex flex-gap v-center">
                         <div className="flex-grow">
-                            {isDev ? (
-                                this.renderNewTabExperience()
-                            ) : (
-                                <Experiment
-                                    id={experiments.NEW_TASK_EXPERIENCE.id}
-                                >
-                                    <Variant id="0">
-                                        <a
-                                            className={
-                                                "editor-select " +
-                                                (this.props.tab === 0 &&
-                                                    "is-active")
-                                            }
-                                            onClick={e => this.switchTab(0)}
-                                        >
-                                            Task
-                                        </a>
-                                    </Variant>
-                                    <Variant id="1">
-                                        {this.renderNewTabExperience()}
-                                    </Variant>
-                                </Experiment>
-                            )}
+                            {this.renderNewTabExperience()}
                             <a
                                 className={
                                     "editor-select " +
