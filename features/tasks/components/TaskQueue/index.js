@@ -100,7 +100,13 @@ class TaskQueue extends Component {
         ) {
             this.setState({
                 showDescriptionEditor: false,
-                showDueEditor: false,
+                showDueEditor: false
+                // content: ""
+            });
+        }
+
+        if (prevProps.isCreating == true && !this.props.isCreating) {
+            this.setState({
                 content: ""
             });
         }
@@ -110,7 +116,7 @@ class TaskQueue extends Component {
             prevProps.isCreating !== this.props.isCreating &&
             !prevProps.isCreating
         ) {
-            this.setState({ content: " " });
+            this.setState({ content: "" });
         }
 
         if (this.props.queue.length == 0 && prevProps.queue.length > 0) {
