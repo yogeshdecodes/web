@@ -14,6 +14,7 @@ import { Link } from "~/routes";
 
 import "./index.scss";
 import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
+import UserMediaList from "~/features/users/components/UserMediaList/UserMediaList";
 import BlogCard from "../components/BlogCard";
 import { getLatestDeals } from "../../../lib/deals";
 import { getQuote } from "../../Quote";
@@ -21,13 +22,41 @@ import { getQuote } from "../../Quote";
 const TopStreaksCard = ({ topUsers }) => {
     return (
         <div className="TopStreaksCard sidebar-item">
-            <h3>Top Streaks</h3>
+            <h3>Top streaks</h3>
             <h4 className="subtitle has-text-grey">
-                Every week we rank the most productive makers.
+                The highest making streaks in the community.
             </h4>
             <div className="card">
                 <div className="card-content">
-                    <UserRow users={topUsers} />
+                    <div style={{ width: "100%" }}>
+                        <UserRow users={topUsers} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const RisingCard = ({ risingUsers }) => {
+    return (
+        <div className="TopStreaksCard sidebar-item">
+            <h3>Rising makers</h3>
+            <h4 className="subtitle has-text-grey">
+                The freshest makers rising in the community.
+            </h4>
+            <div className="card">
+                <div className="card-content flex-column">
+                    <div>
+                        <div>
+                            <UserMediaList ranked users={risingUsers} />
+                        </div>
+                        <hr className="mb-em" />
+                        <p className="help">
+                            <strong>You can be here!</strong> Earn a streak,
+                            comment on posts, help other makers in discussions —
+                            you'll rise up the ranks quick!{" "}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,6 +157,7 @@ const ExploreSidebar = ({ isLoggedIn, me, data }) => {
         <div className="Sidebar mb-em">
             {isLoggedIn && <UserCard me={me} />}
             <TopStreaksCard topUsers={data.topUsers} />
+            <RisingCard risingUsers={data.risingUsers} />
             <UpcomingEventsCard upcomingEvents={data.upcomingEvents} />
             <AdCard />
             <LatestDealsCard latestDeals={data.latestDeals} />
@@ -145,11 +175,13 @@ export async function prefetchData() {
         let latestDeals = await getLatestDeals();
         let topUsers = worldStats.top_users;
         let newUsers = worldStats.new_users;
+        let risingUsers = worldStats.rising_makers || worldStats.rising_users;
 
         return {
             data: {
                 topUsers,
                 newUsers,
+                risingUsers,
                 upcomingEvents,
                 latestDeals
             }
