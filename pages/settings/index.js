@@ -15,6 +15,8 @@ import { loadingClass } from "~/lib/utils/random";
 import { getToken } from "../../lib/admin";
 import { deleteAccount } from "../../lib/user";
 import { Track } from "../../vendor/ga";
+import config from "../../config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class NuclearButton extends React.Component {
     state = {
@@ -174,6 +176,33 @@ class SecuritySettings extends React.Component {
     render() {
         return (
             <div>
+                <div>
+                    <h2>Social login</h2>
+                    <p className="mbGap">
+                        Link your social accounts and authenticate faster.
+                    </p>
+                    <div className="flex flex-v-gap-half flex-column">
+                        <div>
+                            <a
+                                href={`${config.API_URL}/login/twitter/`}
+                                className="btn btn-lg btn-twitter"
+                            >
+                                <FontAwesomeIcon icon={["fab", "twitter"]} />{" "}
+                                Sign in with Twitter
+                            </a>
+                        </div>
+                        <div>
+                            <a
+                                href={`${config.API_URL}/login/facebook/`}
+                                className="btn btn-lg btn-facebook"
+                            >
+                                <FontAwesomeIcon icon={["fab", "facebook"]} />{" "}
+                                Sign in with Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr />
                 <section className={"settings-header mb-5"}>
                     <h2>Change your password</h2>
                     <p>
