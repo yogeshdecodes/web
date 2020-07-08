@@ -16,7 +16,7 @@ const AppList = props => {
                         <h2 className={"has-text-grey"}>
                             You must be signed in to use the following apps.
                         </h2>
-                        <Link route={"begin"}>
+                        <Link route={"start"}>
                             <a className={"btn-primary"}>Get started</a>
                         </Link>
                     </div>

@@ -89,7 +89,7 @@ export default connect(mapStateToProps)(({ me, isLoggedIn }) => {
                                     strokeColor="var(--c-main)"
                                 />
                                 <p className="help mb0">
-                                    <Link route="begin">
+                                    <Link route="start">
                                         <a>Create a Makerlog account</a>
                                     </Link>{" "}
                                     to become more productive and earn some

@@ -33,7 +33,7 @@ class StreamPage extends React.Component {
 
     componentDidMount() {
         if (this.props.isNewUser) {
-            Router.pushRoute("/welcome");
+            Router.pushRoute("/start/setup/");
         }
     }
 

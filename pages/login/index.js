@@ -18,10 +18,14 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div className="form-section">
-                <div className="form-card">
-                    <div className="card">
-                        <div className="card-content">
+            <div>
+                <div className="FullHeightPage fullpage">
+                    <div className="bg-container">
+                        <div className="actionable-section-bg"></div>
+                        <div className="copy-section-bg"></div>
+                    </div>
+                    <div className="container dual-column">
+                        <div>
                             <LoginForm
                                 username={this.state.username}
                                 password={this.state.password}
@@ -39,6 +43,7 @@ class LoginPage extends React.Component {
                                 errorMessages={this.props.errorMessages}
                             />
                         </div>
+                        <div className="is-hidden-mobile"></div>
                     </div>
                 </div>
             </div>

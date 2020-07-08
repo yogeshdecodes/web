@@ -60,7 +60,7 @@ class Praisable extends React.Component {
         if (!this.props.isLoggedIn) {
             this.setState({ loggedOutError: true });
             setTimeout(() => {
-                Router.pushRoute("/begin");
+                Router.pushRoute("/start");
             }, 1000);
             this.fadeErr();
             return false;

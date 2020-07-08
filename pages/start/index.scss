@@ -1,0 +1,201 @@
+@import "../../styles/_variables";
+
+.StartPage {
+    #page-content {
+        //margin-top: calc(25vh - 80px);
+    }
+
+    div.form-section {
+        @extend %people-bg;
+        @extend %transition-bg;
+        min-height: 80vh;
+        max-height: 100vh;
+        margin-bottom: 3rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+
+        .container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card {
+            flex-grow: 1;
+            height: 100%;
+            width: 100%;
+            margin-bottom: 0px;
+        }
+    }
+
+    .Footer {
+        margin-top: 0px;
+    }
+
+    .bottom-cta {
+        margin-top: $gap;
+        padding-top: $gap;
+        padding-bottom: $gap;
+        background-color: var(--c-lightest);
+        border-top: 1px solid var(--c-border);
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.RegisterCard {
+    display: flex;
+    flex-direction: row;
+    //margin-right: $gap;
+
+    .card-content {
+        div {
+            flex: 1;
+        }
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .register-copy {
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 1em;
+
+            &:last-of-type {
+                margin-bottom: 0em;
+            }
+        }
+
+        span.emoji {
+            margin-right: 0.5em;
+        }
+    }
+}
+
+.pitch {
+    margin-top: 3rem;
+}
+
+.FullHeightOnboarding {
+    display: flex;
+    min-height: 80vh;
+    position: relative;
+    border-bottom: 1px solid var(--c-border);
+
+    &.fullpage {
+        min-height: calc(100vh - #{$navbar-height});
+    }
+
+    > div {
+        flex: 1;
+    }
+
+    .dual-column {
+        > div {
+            &:first-of-type {
+                padding-right: $gap;
+            }
+
+            &:last-of-type {
+                padding-left: $gap;
+            }
+        }
+    }
+
+    .bg-container {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        .actionable-section-bg {
+            flex: 1;
+            background: var(--c-lightest);
+        }
+
+        .copy-section-bg {
+            flex: 1;
+            @extend %people-bg;
+            @extend %transition-bg;
+        }
+    }
+
+    .dual-column {
+        display: flex;
+
+        > div {
+            display: flex;
+            flex-direction: column;
+            // align-items: center;
+            justify-content: center;
+            flex: 1;
+            width: 100%;
+
+            .card {
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+
+.ProfileSetupForm {
+    .UserIconPicker {
+        height: 50px;
+        width: 50px;
+    }
+}
+
+@media (max-width: $breakpoint-tablet) {
+    .dual-column {
+        > div {
+            &:first-of-type {
+                padding: $gap;
+            }
+
+            &:last-of-type {
+                padding: $gap;
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .dual-column,
+    .bg-container {
+        > div {
+            min-height: 60vh;
+        }
+        flex-direction: column;
+    }
+
+    .dual-column {
+        > div:last-of-type {
+            background: linear-gradient(
+                    63deg,
+                    rgba(17, 180, 107, 0.9) 0%,
+                    rgba(17, 180, 107, 0.9) 100%
+                ),
+                $i-people !important;
+        }
+    }
+
+    .bg-container,
+    .actionable-section-bg,
+    .copy-section-bg {
+        display: none;
+    }
+
+    .copy-section-bg {
+    }
+}

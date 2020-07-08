@@ -7,6 +7,7 @@ import React from "react";
 import Spinner from "~/components/Spinner";
 import omit from "lodash/omit";
 import { loadingClass } from "../../../lib/utils/random";
+import { getPrivilegedUser } from "../../../lib/user";
 
 class ProfileTab extends React.Component {
     state = {
@@ -115,7 +116,7 @@ class ProfileTab extends React.Component {
 
     prefillFields = async () => {
         try {
-            const data = await me();
+            const data = await getPrivilegedUser();
             this.setState({
                 isLoading: false,
                 first_name: data.first_name || "",
@@ -134,7 +135,7 @@ class ProfileTab extends React.Component {
                 avatarPreviewUrl: data.avatar,
                 headerPreviewUrl: data.header,
                 digest: data.digest,
-                email_notifications: data.email_notifications || true
+                email_notifications: data.email_notifications
             });
         } catch (e) {}
     };

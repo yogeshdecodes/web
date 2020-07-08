@@ -86,6 +86,10 @@ export const actions = {
     },
 
     loginSuccess: (token, user) => {
+        setCookie(null, "token", token, {
+            maxAge: 30 * 24 * 60 * 60,
+            path: "/"
+        });
         new Track().event("login");
         return {
             type: types.LOGIN_SUCCEEDED,
@@ -104,8 +108,9 @@ export const actions = {
     logout: (ctx = null) => {
         // persistor.purge();
         new Track().event("logout");
-        setCookie(ctx ? ctx : {}, "token", "", {
-            maxAge: 30 * 24 * 60 * 60
+        setCookie(ctx ? ctx : null, "token", "", {
+            maxAge: 30 * 24 * 60 * 60,
+            path: "/"
         });
         return {
             type: types.LOGOUT

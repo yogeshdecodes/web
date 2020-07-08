@@ -11,7 +11,7 @@ export default class HomeHero extends Component {
                     Makerlog is where 5,000+ indie hackers & makers get things
                     done together.
                 </h3>
-                <Link route={"begin"}>
+                <Link route={"start"}>
                     <a>Get started</a>
                 </Link>
             </div>

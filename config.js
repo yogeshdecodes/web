@@ -47,6 +47,10 @@ const GHOST_API_VER = process.env.GHOST_API_VER
     ? process.env.GHOST_API_VER
     : "v3";
 
+const TWITTER_CLIENT_KEY = process.env.TWITTER_CLIENT_KEY
+    ? process.env.TWITTER_CLIENT_KEY
+    : "tCAkPBXqJB2AkiEhNlDpWW18Z";
+
 const config = {
     API_URL,
     WS_URL,
@@ -60,6 +64,7 @@ const config = {
     PADDLE_VENDOR,
     GHOST_API_URL,
     GHOST_API_VER,
-    GHOST_CONTENT_KEY
+    GHOST_CONTENT_KEY,
+    TWITTER_CLIENT_KEY
 };
 export default config;

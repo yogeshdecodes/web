@@ -33,7 +33,7 @@ class AppsPage extends React.Component {
         const { app, query, isLoggedIn } = this.props;
 
         if (app && !isLoggedIn) {
-            Router.pushRoute("/begin");
+            Router.pushRoute("/start");
             return <div></div>;
         }
 

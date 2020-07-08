@@ -1,15 +1,12 @@
 @import "../../../../styles/_variables";
 
-.NoActivityCard {
-	.CtaButton {
-		@extend %bold;
-		margin-bottom: 10px;
-		border: none !important;
-		background: #3ed194;
-
-		&:hover {
-			background: #32bc83;
-		}
-	}
+@media (max-width: $breakpoint-mobile) {
+    .NoActivityCard {
+        .buttons {
+            flex-direction: column !important;
+            > div:not(:last-child) {
+                margin-bottom: 1rem !important;
+            }
+        }
+    }
 }
-

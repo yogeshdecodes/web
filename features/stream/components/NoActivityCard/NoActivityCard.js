@@ -5,12 +5,13 @@ import { connect } from "react-redux";
 import Emoji from "../../../../components/Emoji";
 import FullName from "../../../../components/FullName";
 import OutboundLink from "../../../../components/OutboundLink";
+import "./NoActivityCard.scss";
 
 class NoActivityCard extends React.Component {
     render() {
         if (!this.props.user) return null;
         return (
-            <div className="card">
+            <div className="NoActivityCard card">
                 <div className="card-content flex flex-v-gap flex-column has-text-centered">
                     <div>
                         <h1>
@@ -21,15 +22,7 @@ class NoActivityCard extends React.Component {
                             <Emoji emoji="💚" />
                         </h4>
                     </div>
-                    <div>
-                        <button
-                            onClick={this.props.toggleEditor}
-                            className="btn btn-primary"
-                        >
-                            Post your first task
-                        </button>
-                    </div>
-                    <div className="flex flex-gap center">
+                    <div className="buttons flex flex-gap center">
                         <div>
                             <Link route="products">
                                 <a className="btn btn-light">

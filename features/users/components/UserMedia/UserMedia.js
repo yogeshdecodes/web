@@ -15,6 +15,13 @@ import { Tooltip } from "react-tippy";
 import OutboundLink from "~/components/OutboundLink";
 import VerifiedIcon from "../../../../components/icons/VerifiedIcon";
 
+function isNewUser(user) {
+    if (user.date_joined) {
+        const joined = new Date(user.date_joined);
+        return Math.round((new Date() - joined) / (1000 * 60 * 60 * 24)) <= 1;
+    }
+}
+
 const Badge = props => (
     <span
         className={`Badge tag is-rounded ${
@@ -203,6 +210,11 @@ class UserMedia extends React.Component {
                                 {user.streak === 100 && <Emoji emoji={"🎉"} />}
                                 <MakerScore score={user.maker_score} />
                                 <Tda tda={user.week_tda} />
+                                {isNewUser(user) && (
+                                    <span className="new-user">
+                                        NEW <Emoji emoji="👋" />
+                                    </span>
+                                )}
                             </div>
                         </div>
                     </a>
@@ -276,11 +288,24 @@ class UserMedia extends React.Component {
                         </div>
                         <div className={"stats-case has-text-grey-light"}>
                             <span className="username">@{user.username}</span>
+                            {isNewUser(user) && (
+                                <span className="new-user">
+                                    <Emoji emoji="👋" />
+                                    &nbsp;
+                                    <strong>NEW</strong>
+                                </span>
+                            )}
                             &nbsp;
                             {user.streak !== null && (
-                                <Streak days={user.streak} />
+                                <span>
+                                    <Streak days={user.streak} />
+                                </span>
                             )}
-                            {user.streak === 100 && <Emoji emoji={"🎉"} />}
+                            {user.streak === 100 && (
+                                <span>
+                                    <Emoji emoji={"🎉"} />
+                                </span>
+                            )}
                             &nbsp;
                             {user.is_live && (
                                 <span>

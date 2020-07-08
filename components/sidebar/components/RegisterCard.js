@@ -10,7 +10,7 @@ export default () => (
             </p>
             Join Makerlog to post tasks, share your work, and meet fellow
             makers.
-            <Link route="begin">
+            <Link route="start">
                 <a className={"btn-primary"}>Get started</a>
             </Link>
         </div>

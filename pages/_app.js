@@ -27,6 +27,7 @@ import ThemedContainer from "~/layouts/ThemedContainer";
 import MobileNav from "~/layouts/MobileNav";
 import Editor from "~/features/editor";
 import AchievementsView from "../features/achievements/AchievementsView";
+import ProfileSetupPage from "~/pages/start/setup";
 
 async function onStoreInit(ctx) {
     // only the sagas here are run on the server side; no async dependencies.

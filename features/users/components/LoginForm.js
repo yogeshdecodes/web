@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Spinner from "~/components/Spinner";
 import ErrorMessageList from "~/components/forms/ErrorMessageList";
@@ -7,6 +7,8 @@ import { Tooltip } from "react-tippy";
 import { connect } from "react-redux";
 import { actions as authActions } from "~/ducks/auth";
 import { Link } from "~/routes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import config from "../../../config";
 
 function getSpinnerText() {
     const strs = [
@@ -36,6 +38,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 const LoginForm = props => {
+    const [showEmail, setShowEmail] = useState(false);
+
     if (props.isLoading) {
         return (
             <center>
@@ -53,18 +57,128 @@ const LoginForm = props => {
     }
 
     return (
-        <form
-            onSubmit={e => {
-                e.preventDefault();
-                props.onClickLogin(props.username, props.password);
-            }}
-        >
+        <div>
             <h1>Sign in</h1>
+            <p className="mbGap">Welcome back to the maker community.</p>
             {props.errorMessages && (
                 <ErrorMessageList errorMessages={props.errorMessages} />
             )}
+            <div className="flex flex-v-gap-half flex-column">
+                <form
+                    className="LoginForm"
+                    onSubmit={e => {
+                        e.preventDefault();
+                        props.onClickLogin(props.username, props.password);
+                    }}
+                >
+                    <div className="flex flex-v-gap-half flex-column">
+                        <div>
+                            <a
+                                href={`${config.API_URL}/login/twitter/`}
+                                className="btn btn-lg btn-twitter btn-block"
+                            >
+                                <FontAwesomeIcon icon={["fab", "twitter"]} />{" "}
+                                Sign in with Twitter
+                            </a>
+                        </div>
+                        <div>
+                            <a
+                                href={`${config.API_URL}/login/facebook/`}
+                                className="btn btn-lg btn-facebook btn-block"
+                            >
+                                <FontAwesomeIcon icon={["fab", "facebook"]} />{" "}
+                                Sign in with Facebook
+                            </a>
+                        </div>
+                    </div>
+                    <div className="mb-em"></div>
 
-            <section>
+                    <div className="text-divider flex flex-gap">
+                        <div className="flex-grow">
+                            <hr />
+                        </div>
+                        <div>
+                            <p className="heading">or</p>
+                        </div>
+                        <div className="flex-grow">
+                            <hr />
+                        </div>
+                    </div>
+                    <div className="mb-em"></div>
+                    <div>
+                        <div className="field">
+                            <div className="control">
+                                <Tooltip
+                                    // options
+                                    open={validateEmail(props.username)}
+                                    html={
+                                        <small className={"has-text-white"}>
+                                            <strong
+                                                className={"is-brand-green"}
+                                            >
+                                                Heads up!
+                                            </strong>
+                                            <br /> This field is your{" "}
+                                            <strong>username</strong>, not
+                                            email.
+                                        </small>
+                                    }
+                                    position="bottom"
+                                    trigger="click"
+                                >
+                                    <input
+                                        type="text"
+                                        value={props.username}
+                                        onChange={props.onUsernameChange}
+                                        placeholder="Username"
+                                    />
+                                </Tooltip>
+                            </div>
+                        </div>
+                        <div className="field">
+                            <div className="control">
+                                <input
+                                    type="password"
+                                    value={props.password}
+                                    onChange={props.onPasswordChange}
+                                    placeholder="Password"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="control flex">
+                        <div className="flex v-center">
+                            <Link route={"forgot"}>Forgot?</Link>
+                        </div>
+                        <div className="stretch"></div>
+                        <div>
+                            <button
+                                className={loadingClass(
+                                    "btn is-secondary",
+                                    props.isLoading
+                                )}
+                                onClick={() =>
+                                    props.onClickLogin(
+                                        props.username,
+                                        props.password
+                                    )
+                                }
+                                type="submit"
+                            >
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+/*
+
+
+            <div>
                 <div className="control">
                     <Tooltip
                         // options
@@ -97,7 +211,7 @@ const LoginForm = props => {
                         placeholder="Password"
                     />
                 </div>
-            </section>
+            </div>
             <div className="control flex">
                 <div className="v-center">
                     <Link route={"forgot"}>Forgot?</Link>
@@ -118,9 +232,7 @@ const LoginForm = props => {
                     </button>
                 </div>
             </div>
-        </form>
-    );
-};
+*/
 
 LoginForm.propTypes = {
     isLoading: PropTypes.bool.isRequired,

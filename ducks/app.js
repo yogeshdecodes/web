@@ -20,7 +20,8 @@ export const types = {
     APP_TOGGLE_NEW_USER: "APP_TOGGLE_NEW_USER",
     APP_SET_DARK_OVERRIDE: "APP_SET_DARK_OVERRIDE",
     APP_TOGGLE_FEEDBACK: "APP_TOGGLE_FEEDBACK",
-    APP_CHANGE_FEED: "APP_CHANGE_FEED"
+    APP_CHANGE_FEED: "APP_CHANGE_FEED",
+    APP_SET_NEW_USER: "APP_SET_NEW_USER"
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -58,6 +59,12 @@ export const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isNewUser: !state.isNewUser
+            };
+
+        case types.APP_SET_NEW_USER:
+            return {
+                ...state,
+                isNewUser: action.isNewUser
             };
 
         case types.APP_SET_DARK_OVERRIDE:
@@ -106,6 +113,7 @@ export const actions = {
     toggleNotifications: () => ({ type: types.APP_NOTIFICATIONS_TOGGLE }),
 
     toggleNewUser: () => ({ type: types.APP_TOGGLE_NEW_USER }),
+    setNewUser: isNewUser => ({ type: types.APP_SET_NEW_USER, isNewUser }),
 
     forceDark: dark => ({ type: types.APP_SET_DARK_OVERRIDE, dark }),
 

@@ -108,7 +108,7 @@ function ItemLink({
 
     if (loggedInOnly && !isLoggedIn) {
         return (
-            <Link route="begin">
+            <Link route="start">
                 <a target="_blank" rel="noopener noreferrer">
                     {children}
                 </a>

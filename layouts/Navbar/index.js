@@ -75,7 +75,7 @@ class Navbar extends React.Component {
                             <div className="navbar-start"></div>
                             <div className="navbar-end">
                                 <div className="navbar-item">
-                                    <Link route="begin">
+                                    <Link route="start">
                                         <button className="has-text-bold is-rounded is-primary">
                                             Get started
                                         </button>

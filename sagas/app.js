@@ -1,4 +1,11 @@
-import { call, put, select, take, takeEvery } from "redux-saga/effects";
+import {
+    call,
+    put,
+    select,
+    take,
+    takeEvery,
+    takeLatest
+} from "redux-saga/effects";
 import { actions as appActions, types as appTypes } from "../ducks/app";
 import { actions as statsActions } from "../ducks/stats";
 import { actions as tasksActions } from "../ducks/tasks";
@@ -8,6 +15,9 @@ import { syncTimezone } from "~/lib/user";
 import axios from "~/lib/axios";
 import { notificationsActions } from "../ducks/notifications";
 import { achievementsActions } from "../ducks/achievements";
+import { Router } from "~/routes";
+import { action } from "mobx";
+import { isServer } from "../config";
 
 // const getAuth = state => state.auth;
 const getStats = state => state.stats;
@@ -66,12 +76,29 @@ function* checkHealth() {
     }
 }
 
+function* onNewUser(action) {
+    if (action.isNewUser) {
+        if (!isServer) {
+            Router.pushRoute("start-setup");
+        }
+    } else {
+        if (!isServer) Router.pushRoute("log");
+    }
+}
+
 function* appSaga() {
     yield takeEvery(appTypes.APP_INIT, takeoff);
+}
+
+function* newUserSaga() {
+    yield takeLatest(
+        [appTypes.APP_SET_NEW_USER, appTypes.APP_TOGGLE_NEW_USER],
+        onNewUser
+    );
 }
 
 function* apiHealthSaga() {
     yield takeEvery(appTypes.APP_HEALTH_CHECK, checkHealth);
 }
 
-export { appSaga, apiHealthSaga };
+export { appSaga, apiHealthSaga, newUserSaga };

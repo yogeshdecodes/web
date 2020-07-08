@@ -58,7 +58,7 @@ const LoggedOutMenu = props => (
                 <a className="navbar-item">Sign in</a>
             </NavLink>
             <div className="navbar-item">
-                <Link route="begin">
+                <Link route="start">
                     <button className="has-text-bold is-rounded is-primary">
                         Get started
                     </button>

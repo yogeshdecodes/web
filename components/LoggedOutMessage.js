@@ -13,11 +13,13 @@ const LoggedOutMessage = props => (
                 <Emoji emoji={"✌"} /> Welcome, guest!
             </div>
             <div className="message-body">
-                <p><strong>Makerlog</strong> is a{" "}
-                <strong>community of makers</strong> helping each other{" "}
-                <strong>ship faster</strong> through <strong>feedback</strong>{" "}
-                and <strong>good vibes.</strong></p>
-                <Link route={"begin"}>
+                <p>
+                    <strong>Makerlog</strong> is a{" "}
+                    <strong>community of makers</strong> helping each other{" "}
+                    <strong>ship faster</strong> through{" "}
+                    <strong>feedback</strong> and <strong>good vibes.</strong>
+                </p>
+                <Link route={"start"}>
                     <button
                         className={
                             "button is-primary has-text-weight-bold is-rounded"

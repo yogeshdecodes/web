@@ -5,6 +5,7 @@ import CompanyPageLayout from "../../layouts/CompanyPage";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import WallOfLove from "../../components/WallOfLove";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
+import MakerDefinition from "../../components/MakerDefinition";
 
 class AboutPage extends React.Component {
     static async getInitialProps(ctx) {
@@ -28,29 +29,7 @@ class AboutPage extends React.Component {
                         </p>
                     </div>
                 </div>
-                <div className="maker-definition sect">
-                    <div className="container">
-                        <div>
-                            <h2>maker</h2>
-                            <small>
-                                <em>noun · /ˈmeɪ.kər/</em>
-                            </small>
-                        </div>
-                        <div>
-                            <ul>
-                                <li>
-                                    someone who creates or invents things,
-                                    either using traditional crafts or
-                                    technology
-                                </li>
-                                <li>
-                                    the people or company that make something
-                                </li>
-                                <li>an avid Makerlog user</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <MakerDefinition />
                 <div className="container">
                     <div className="grid-c-s mtGap">
                         <div>

@@ -56,7 +56,7 @@ export default connect(mapUserToProps)(
                     <div className={"alert is-info"} id={"ReplyForm"}>
                         <div className="alert-body">
                             <h4>You must be signed in to reply.</h4>
-                            <Link route="begin">
+                            <Link route="start">
                                 <a className="btn btn-light btn-small is-rounded">
                                     Get started
                                 </a>

@@ -1,11 +1,13 @@
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import { actions as authActions, types as authTypes } from "../ducks/auth";
+import { actions as appActions } from "../ducks/app";
 import axios from "~/lib/axios";
 import { getToken } from "~/lib/auth";
 import { setCookie } from "nookies";
 import { isServer } from "~/config";
 import { fetchUser } from "./user";
 import { gaSetUserId } from "../vendor/ga";
+import { Router } from "~/routes";
 
 const getUserState = state => state.user;
 
@@ -39,9 +41,22 @@ function* fetchToken(action) {
                 userState.me.timezone;
             yield put(authActions.loginSuccess(token));
 
+            if (
+                userState.me.needs_setup ||
+                !userState.me.email ||
+                userState.me.email.length === 0
+            ) {
+                console.log("Makerlog: is new user.");
+                yield put(appActions.setNewUser(true));
+            } else {
+                yield put(appActions.setNewUser(false));
+            }
+
             if (!isServer) {
-                setCookie({}, "token", token, {
-                    maxAge: 30 * 24 * 60 * 60
+                console.log("Set cookie.");
+                setCookie(null, "token", token, {
+                    maxAge: 30 * 24 * 60 * 60,
+                    path: "/"
                 });
                 //sync auth across windows
                 window.localStorage.setItem("authSync_login", Date.now());

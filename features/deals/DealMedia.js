@@ -33,7 +33,7 @@ export default class DealMedia extends Component {
                     {!this.props.small && (
                         <>
                             <LoggedOutOnly>
-                                <Link route="begin">
+                                <Link route="start">
                                     <a className="btn btn-light">
                                         Grab this deal
                                     </a>

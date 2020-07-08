@@ -14,7 +14,7 @@ const NewTopicButton = connect(
 )(props => {
     if (!props.isLoggedIn) {
         return (
-            <Link route={"begin"}>
+            <Link route={"start"}>
                 <a className={"btn-secondary btn-big"}>
                     <FontAwesomeIcon icon={"plus-square"} /> New topic
                 </a>

@@ -1,0 +1,14 @@
+@import "../../styles/_variables";
+
+.MakerDefinition {
+    border-top: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-border);
+    background-color: var(--c-lightest);
+    padding-top: $gap * 2;
+    padding-bottom: $gap * 2;
+
+    hr {
+        margin-top: $gap * 2;
+        margin-bottom: $gap * 2;
+    }
+}

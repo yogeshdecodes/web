@@ -154,7 +154,6 @@ class CommentsBox extends React.Component {
                             this.state.comments.length === 0 && (
                                 <h4 className={"center"}>
                                     No comments yet.{" "}
-                                    <Link route={"begin"}>
                                         <a>Sign in or join</a>
                                     </Link>{" "}
                                     to post a comment!
