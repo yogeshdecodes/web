@@ -23,9 +23,7 @@ const TopStreaksCard = ({ topUsers }) => {
     return (
         <div className="TopStreaksCard sidebar-item">
             <h3>Top streaks</h3>
-            <h4 className="subtitle has-text-grey">
-                The highest making streaks in the community.
-            </h4>
+            <h4 className="subtitle has-text-grey">The highest streaks.</h4>
             <div className="card">
                 <div className="card-content">
                     <div style={{ width: "100%" }}>
@@ -42,7 +40,7 @@ const RisingCard = ({ risingUsers }) => {
         <div className="TopStreaksCard sidebar-item">
             <h3>Rising makers</h3>
             <h4 className="subtitle has-text-grey">
-                The freshest makers rising in the community.
+                The freshest up-and-coming makers.
             </h4>
             <div className="card">
                 <div className="card-content flex-column">
