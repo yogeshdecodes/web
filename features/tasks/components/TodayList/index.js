@@ -11,6 +11,7 @@ import { actions as editorActions } from "~/ducks/editor";
 import "./index.scss";
 import Emoji from "~/components/Emoji";
 import { orderByDate, groupTasksByDone } from "../../../../lib/utils/tasks";
+import InlineCollapse from "../../../../components/InlineCollapse";
 
 class TodayList extends Component {
     renderEmpty = () => {
@@ -44,6 +45,9 @@ class TodayList extends Component {
 
     renderTasks = () => {
         const grouped = groupTasksByDone(this.props.tasks);
+        const doneTasksUncollapsed = grouped.done.slice(0, 3);
+        const doneTasksCollapsed = grouped.done.slice(3, -1);
+
         return (
             <div>
                 {grouped.in_progress && grouped.in_progress.length > 0 && (
@@ -81,6 +85,33 @@ class TodayList extends Component {
                             {grouped.remaining.map(t => (
                                 <Task key={t.id} task={t} />
                             ))}
+                        </div>
+                    </div>
+                )}
+
+                {grouped.done && grouped.done.length > 0 && (
+                    <div className="TaskGroup done">
+                        <div className="top flex flex-gap">
+                            <div>
+                                <p className="heading">
+                                    {grouped.done.length} done
+                                </p>
+                            </div>
+                            <div className="flex-grow">
+                                <hr />
+                            </div>
+                        </div>
+                        <div className="tasks">
+                            {doneTasksUncollapsed.map(t => (
+                                <Task key={t.id} task={t} />
+                            ))}
+                            <InlineCollapse
+                                text={`${doneTasksCollapsed.length} tasks collapsed`}
+                            >
+                                {doneTasksCollapsed.map(t => (
+                                    <Task key={t.id} task={t} />
+                                ))}
+                            </InlineCollapse>
                         </div>
                     </div>
                 )}
