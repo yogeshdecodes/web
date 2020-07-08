@@ -28,6 +28,7 @@ jobs:
         environment_name: ${{ secrets.EB_APP_NAME }}-prod
         version_label: ${{github.SHA}}
         region: ${{ secrets.AWS_DEFAULT_REGION }}
+        use_existing_version_if_available: true
         deployment_package: deploy.zip
 
     - name: Send message on Telegram
