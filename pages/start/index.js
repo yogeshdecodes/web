@@ -9,6 +9,7 @@ import OutboundLink from "~/components/OutboundLink";
 import Spinner from "~/components/Spinner";
 import { getPreflightConfig } from "../../lib/accounts";
 import FaceStack from "~/features/users/components/FaceStack";
+import { requireUnauthed } from "~/lib/auth";
 
 class RegisterForm extends React.Component {
     render() {
@@ -39,7 +40,7 @@ class RegisterForm extends React.Component {
     }
 }
 
-export default class StartPage extends Component {
+class StartPage extends Component {
     static async getInitialProps({ query }) {
         const layout = { className: "StartPage" };
         let preflight = null;
@@ -768,3 +769,5 @@ export default class StartPage extends Component {
         );
     }
 }
+
+export default requireUnauthed(StartPage);

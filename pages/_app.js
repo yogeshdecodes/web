@@ -14,7 +14,7 @@ import Reactor from "~/components/Reactor";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
 import config, { isServer } from "~/config";
-import nookies, { parseCookies } from "nookies";
+import nookies, { parseCookies, destroyCookie } from "nookies";
 import { actions as authActions } from "~/ducks/auth";
 import { actions as appActions } from "~/ducks/app";
 import axios from "~/lib/axios";
