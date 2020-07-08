@@ -27,7 +27,7 @@ const LoggedOutLinks = props => (
             </a>
         </NavLink>
 
-        <NavLink activeClassName="is-active" to="begin">
+        <NavLink activeClassName="is-active" to="start">
             <a className="item">
                 <span className={"icon"}>
                     <FontAwesomeIcon icon={"rocket"} />
