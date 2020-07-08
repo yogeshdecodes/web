@@ -243,7 +243,7 @@ class Task extends React.Component {
                         }}
                     >
                         <div className="attachment-overlay">
-                            Click to open image
+                            Click to view image
                         </div>
                     </div>
                     {this.state.attachmentOpen && (
