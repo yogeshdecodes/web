@@ -77,7 +77,7 @@ const MainFeed = ({
                     <KeyActivityFeed
                         prefetchData={activitiesPrefetch}
                         userId={-1}
-                        feed="timeline_aggregated"
+                        feed="timeline"
                     />
                 </>
             );

@@ -60,7 +60,7 @@ Home.getInitialProps = async () => {
             footer: false
         },
         ...(await prefetchData()),
-        activitiesPrefetch: await prefetchActivity("timeline_aggregated", "-1"),
+        activitiesPrefetch: await prefetchActivity("timeline", "-1"),
         discussionPrefetch: await prefetchThreads(true)
     };
 };
