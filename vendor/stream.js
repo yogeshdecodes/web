@@ -93,6 +93,25 @@ export class Activity {
     }
 
     check = () => {
+        if (this.getType() === "aggregated") {
+            // If aggregate task wihout children...
+            if (this.activity.actor_count > 1) {
+                return false;
+                //throw new Error("Unsupported.");
+            }
+            this.activity.activities = this.activity.activities.filter(a =>
+                new Activity(a).check()
+            );
+            if (this.activity.activities.length === 0) return false;
+        } else {
+            if (!this.activity.actor) return false;
+            if (!this.activity.object) return false;
+            if (
+                !parseCollectionItem(this.activity.actor) ||
+                !parseCollectionItem(this.activity.object)
+            )
+                return false;
+        }
         if (
             typeof this.activity.actor === "string" ||
             this.activity.actor instanceof String
@@ -106,17 +125,6 @@ export class Activity {
             return false;
         }
         if (this.activity.verb === null) return false;
-        if (this.getType() === "aggregated") {
-            // If aggregate task wihout children...
-            if (this.activity.actor_count > 1) {
-                return false;
-                //throw new Error("Unsupported.");
-            }
-            if (this.activity.activities.length === 0) return false;
-        } else {
-            if (this.activity.actor === null) return false;
-            if (this.activity.object === null) return false;
-        }
 
         return true; // :)
     };
@@ -130,7 +138,7 @@ export class Activity {
 
     getRawChildren = () => {
         if (!this.getType() === "aggregated") return [];
-        return this.activity.activities;
+        return this.activity.activities.filter(a => new Activity(a).check());
     };
 
     getType = () => {
