@@ -168,11 +168,7 @@ export class Activity {
             if (ordered.length === 0) return null;
             return ordered[ordered.length - 1].time + "Z";
         }
-        return (
-            this.activity.updated_at ||
-            this.activity.created_at ||
-            this.activity.time
-        );
+        return this.activity.time;
     };
 
     childrenHaveSameTargetType = () => {
