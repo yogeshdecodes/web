@@ -10,6 +10,17 @@ import { socketUrl } from "../../../lib/utils/random";
 import uniqBy from "lodash/uniqBy";
 import { orderByDate } from "../../../lib/utils/tasks";
 import orderBy from "lodash/orderBy";
+import {
+    getStreamClient,
+    normalizeTimezones,
+    orderActivities,
+    getStreamClientAndToken
+} from "../../../vendor/stream";
+
+const INITIAL_QUERY = {
+    limit: 25,
+    enriched: true
+};
 
 function getFeedUrl(key, following = false, token = "") {
     let extra = "";
@@ -35,9 +46,8 @@ class KeyActivityFeed extends Component {
         if (this.props.prefetchData) {
             // Prefetched? Override.
             const prefetched = this.props.prefetchData;
-            const { nextUrl, activities } = prefetched;
-
-            console.log(nextUrl, activities);
+            const { nextUrl, activities, token } = prefetched;
+            this.token = token;
 
             this.state = {
                 ...this.initialState,
@@ -53,6 +63,19 @@ class KeyActivityFeed extends Component {
     }
 
     async componentDidMount() {
+        if (this.token) {
+            this.streamClient = await getStreamClient(this.token);
+            this.feed = this.streamClient.feed(
+                this.props.feed,
+                this.props.userId
+            );
+        } else {
+            this.streamClient = await getStreamClient();
+            this.feed = this.streamClient.feed(
+                this.props.feed,
+                this.props.userId
+            );
+        }
         if (!this.state.initialLoaded) {
             await this.loadMore();
         } else {
@@ -62,7 +85,7 @@ class KeyActivityFeed extends Component {
             // this.forceUpdate();
         }
 
-        this.connect();
+        // this.connect();
     }
 
     componentWillUnmount() {
@@ -70,26 +93,28 @@ class KeyActivityFeed extends Component {
     }
 
     connect = () => {
-        this.socket = new ReconnectingWebSocket(
-            socketUrl(getFeedUrl(this.props.feedKey))
-        );
-        this.socket.onopen = () => {
-            console.log(
-                `Makerlog: Established connection to ${getFeedUrl(
-                    this.props.feedKey
-                )}.`
-            );
-        };
-        this.socket.onmessage = this.onWsEvent;
-        this.socket.onclose = () => {
-            console.log(
-                `Makerlog: Closed connection to ${getFeedUrl(
-                    this.props.feedKey
-                )}.`
-            );
-        };
+        this.socket = this.feed.subscribe(data => {
+            console.log(data);
+            if (data.deleted.length > 0) {
+                this.setState({
+                    activities: this.state.activities.filter(a => {
+                        return !data.deleted.find(x => x === a.id);
+                    })
+                });
+            }
+
+            if (data.new.length > 0) {
+                this.setState({
+                    activities: uniqBy(
+                        [...data.new, ...this.state.activities],
+                        "id"
+                    )
+                });
+            }
+        });
     };
 
+    /*
     onWsEvent = event => {
         const data = JSON.parse(event.data);
         switch (data.type) {
@@ -150,18 +175,25 @@ class KeyActivityFeed extends Component {
                 return;
         }
     };
+    */
 
     disconnect = () => {
         if (this.socket) {
-            this.socket.close();
+            this.socket.cancel();
         }
     };
 
     loadMore = async () => {
+        const feed = this.feed;
         try {
             let nextUrl = this.state.nextUrl;
             const depth = this.state.pages + 1;
             this.setState({ loading: true, pages: depth });
+
+            let query = {
+                ...INITIAL_QUERY,
+                id_lt: nextUrl
+            };
 
             if (this.state.initialLoaded && nextUrl) {
                 new Track().event(
@@ -169,13 +201,13 @@ class KeyActivityFeed extends Component {
                     "Infinite scroll load"
                 );
             } else {
-                nextUrl = getFeedUrl(this.props.feedKey);
+                delete query["id_lt"];
             }
 
             // we now have metadata. go ahead, let's ROLL!
-            if (nextUrl) {
+            if (nextUrl || !this.state.initialLoaded) {
                 // get the stream data
-                const { data } = await axiosWrapper(axios.get, nextUrl);
+                const data = await feed.get(query);
 
                 this.setState({
                     loading: false,
@@ -185,14 +217,14 @@ class KeyActivityFeed extends Component {
                         "id"
                     ),
                     initialLoaded: true,
-                    nextUrl: data.next
+                    nextUrl:
+                        data.results.length > 0
+                            ? data.results[data.results.length - 1].id
+                            : null
                 });
             }
-
-            if (!hasMore) {
-                this.setState({ loading: false });
-            }
         } catch (e) {
+            console.log(e);
             this.setState({
                 failed: true,
                 loading: false
@@ -222,10 +254,19 @@ class KeyActivityFeed extends Component {
     }
 }
 
-async function prefetchActivity(key) {
+async function prefetchActivity(feedId, userId) {
     try {
-        const { data } = await axiosWrapper(axios.get, getFeedUrl(key));
-        return { nextUrl: data.next, activities: data.results };
+        const { client, token } = await getStreamClientAndToken();
+        const feed = client.feed(feedId, userId);
+        const data = await feed.get(INITIAL_QUERY);
+        return {
+            nextUrl:
+                data.results.length > 0
+                    ? data.results[data.results.length - 1].id
+                    : null,
+            activities: data.results,
+            token
+        };
     } catch (e) {
         console.log("Unable to preload stream.", e);
         return {};

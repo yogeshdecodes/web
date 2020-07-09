@@ -51,6 +51,14 @@ const TWITTER_CLIENT_KEY = process.env.TWITTER_CLIENT_KEY
     ? process.env.TWITTER_CLIENT_KEY
     : "tCAkPBXqJB2AkiEhNlDpWW18Z";
 
+const STREAM_API_KEY = process.env.STREAM_API_KEY
+    ? process.env.STREAM_API_KEY
+    : "jm5g6jqjv3f8";
+
+const STREAM_APP_ID = process.env.STREAM_APP_ID
+    ? process.env.STREAM_APP_ID
+    : "84850";
+
 const config = {
     API_URL,
     WS_URL,
@@ -65,6 +73,8 @@ const config = {
     GHOST_API_URL,
     GHOST_API_VER,
     GHOST_CONTENT_KEY,
-    TWITTER_CLIENT_KEY
+    TWITTER_CLIENT_KEY,
+    STREAM_API_KEY,
+    STREAM_APP_ID
 };
 export default config;

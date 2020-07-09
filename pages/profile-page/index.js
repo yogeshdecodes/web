@@ -4,6 +4,7 @@ import ProfilePageLayout from "~/layouts/ProfilePage";
 import { getByUsername } from "~/lib/user";
 import { getUserTrophies } from "~/lib/achievements";
 import "./index.scss";
+import KeyActivityFeed from "../../features/feeds/KeyActivityFeed";
 
 export async function getProfileProps({ query: { username } }) {
     const layout = { className: "UserPage" };
@@ -27,7 +28,7 @@ class ProfilePage extends React.Component {
 
         return (
             <ProfilePageLayout user={user} achievements={achievements}>
-                <UserStream key={user.id} userId={user.id} />
+                <KeyActivityFeed userId={user.id} feed="user" />
             </ProfilePageLayout>
         );
     }

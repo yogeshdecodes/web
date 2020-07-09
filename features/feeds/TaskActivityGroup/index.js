@@ -34,13 +34,13 @@ class TaskActivityGroup extends React.Component {
     };
 
     getUser = () => {
-        return this.props.activities[0].actor;
+        return this.props.activities[0].getActorObject();
     };
 
     getTasks = (tagLifeLogs = false, tagToCollapse = true) => {
         let tasks = this.props.activities
-            .filter(o => o.object_type === "task")
-            .map(o => o.object);
+            .filter(o => o.getObjectType() === "task")
+            .map(o => o.getObject().object);
         if (tagLifeLogs) tasks = this.tagLifeLogs(tasks);
         if (tagToCollapse) tasks = this.tagToCollapse(tasks);
         return orderByDate(tasks);

@@ -23,25 +23,78 @@ import { orderByDate } from "../../../lib/utils/tasks";
 import orderBy from "lodash/orderBy";
 import { getTimezone } from "../../../lib/utils/timezone";
 import Markdown from "~/components/Markdown";
+import {
+    orderActivities,
+    normalizeTimezones
+} from "../../../lib/utils/activities";
 import TaskActivityGroup from "../TaskActivityGroup";
 import MilestoneMedia from "../../milestones/components/MilestoneMedia";
 import AdIntersitial from "../AdIntersitial";
 import "./index.scss";
 import ReplyFaces from "../../discussions/ReplyFaces";
-import {
-    Activity as ActivityContainer,
-    orderActivities,
-    normalizeTimezones
-} from "~/vendor/stream";
 
-function getTargetTitle(type, target) {
-    if (!target) return null;
+function activityChildrenHaveSameVerb(activity) {
+    return (
+        activity.type === "aggregated" &&
+        activity.activities.every(a => a.verb.id === activity.verb.id)
+    );
+}
 
-    if (type === "thread") {
-        return `"${target.title}"`;
+function activityChildrenHaveSameActor(activity) {
+    // assumes activity is valid...
+    return (
+        activity.type === "aggregated" &&
+        activity.activities.every(
+            a => a.actor.id === activity.activities[0].actor.id
+        )
+    );
+}
+
+function activityChildrenHaveSameTargetType(activity) {
+    // assumes activity is valid...
+    return (
+        activity.type === "aggregated" &&
+        activity.activities.every(
+            a =>
+                a.target_type === activity.activities[0].target_type &&
+                a.target_type !== null
+        )
+    );
+}
+
+function activityChildrenHaveSameObjectType(activity) {
+    // assumes activity is valid...
+    return (
+        activity.type === "aggregated" &&
+        activity.activities.every(
+            a => a.object_type === activity.activities[0].object_type
+        )
+    );
+}
+
+const ActivityActionText = ({ activity }) => {
+    // If is not aggregated...
+    // Just use the verb, target, actor.
+    // If is aggregated...
+    // Check if they have the same verb.
+    // If they don't, use an amalgam: liked, shared (all past tenses)
+};
+
+function getActivityVerb(activity, tense = "past_tense") {
+    if (activity.type === "aggregated" && activity.activities.length) {
+        const verbs = uniq(activity.activities.map(a => a.verb[tense]));
+        return activityChildrenHaveSameTargetType(activity)
+            ? `${verbs.join(", ")} to`
+            : verbs.join(", ");
+    } else if (activity.target_type) {
+        return `${activity.verb[tense]} to`;
+    } else {
+        return activity.verb[tense];
     }
+}
 
-    return null;
+function countActivityChildren(activity) {
+    return activity.type === "aggregated" ? activity.activities.length : 0;
 }
 
 function ItemLink({
@@ -106,15 +159,51 @@ function ItemLink({
 
 ItemLink = connect(mapUserToProps)(ItemLink);
 
+function getHumanActivityObject(activity) {
+    let getPrefix = count => (count == 1 ? "a" : count);
+    if (activity.type === "aggregated") {
+        const count = countActivityChildren(activity);
+        const objectType = activityChildrenHaveSameObjectType(activity)
+            ? activity.activities[0].object_type
+            : "thing";
+        const object = activityChildrenHaveSameObjectType(activity)
+            ? activity.activities[0].object
+            : null;
+        return count == 1 ? (
+            <ItemLink item={object} type={objectType}>
+                {getPrefix(count)} {pluralize(objectType, count)}
+            </ItemLink>
+        ) : (
+            `${getPrefix(count)} ${pluralize(objectType, count)}`
+        );
+    } else {
+        return (
+            <ItemLink item={activity.object} type={activity.object_type}>
+                {getPrefix(1)} {pluralize(activity.object_type, 1)}
+            </ItemLink>
+        );
+    }
+}
+
+function getTargetTitle(type, target) {
+    if (!target) return null;
+
+    if (type === "thread") {
+        return `"${target.title}"`;
+    }
+
+    return null;
+}
+
 function getHumanTargetType(activity) {
     let getPrefix = count => (count == 1 ? "a" : count);
-    if (activity.getType() === "aggregated") {
-        const count = activity.getRawChildren().length;
-        const targetType = activity.childrenHaveSameTargetType()
-            ? activity.getRawChildren()[0].target_type
+    if (activity.type === "aggregated") {
+        const count = countActivityChildren(activity);
+        const targetType = activityChildrenHaveSameTargetType(activity)
+            ? activity.activities[0].target_type
             : null;
-        const target = activity.childrenHaveSameTargetType()
-            ? activity.getTargetObject()
+        const target = activityChildrenHaveSameTargetType(activity)
+            ? activity.activities[0].target
             : null;
         if (!targetType) {
             return null;
@@ -141,7 +230,7 @@ function getHumanTargetType(activity) {
         if (!activity.target_type) {
             return null;
         }
-        const target = activity.getTargetObject();
+        const target = activity.target;
         const targetType = activity.target_type;
         const typeText = pluralize(targetType, 1);
         const targetTitle = getTargetTitle(targetType, target);
@@ -160,33 +249,38 @@ function getHumanTargetType(activity) {
     }
 }
 
-function getHumanActivityObject(activity) {
-    let getPrefix = count => (count == 1 ? "a" : count);
-    if (activity.getType() === "aggregated") {
-        const count = activity.getRawChildren().length;
-        const objectType = activity.childrenHaveSameObjectType()
-            ? activity.getObject().type
-            : "thing";
-        const object = activity.childrenHaveSameObjectType()
-            ? activity.getObject().object
-            : null;
-        return count == 1 ? (
-            <ItemLink item={object} type={objectType}>
-                {getPrefix(count)} {pluralize(objectType, count)}
-            </ItemLink>
-        ) : (
-            `${getPrefix(count)} ${pluralize(objectType, count)}`
-        );
+function checkActivity(activity) {
+    // this checks for any errors in enrichment
+    // if aggregated, make sure to check children too!
+    if (activity.verb === null) return false;
+
+    if (activity.type === "aggregated") {
+        // If aggregate task wihout children...
+        if (activity.activities.length === 0) return false;
     } else {
-        return (
-            <ItemLink
-                item={activity.getObject().object}
-                type={activity.getObjectType()}
-            >
-                {getPrefix(1)} {pluralize(activity.getObjectType(), 1)}
-            </ItemLink>
-        );
+        if (activity.actor === null) return false;
+        if (activity.object === null) return false;
     }
+
+    return true; // :)
+}
+
+function cleanChildren(activity) {
+    // We don't need to dump an entire activity because one child activity was deleted.
+    // TODO: Rebuild behavior for Aggregated Activities
+    if (activity.type === "normal" || activity.activities === undefined)
+        return activity;
+    return {
+        ...activity,
+        activities: activity.activities.filter(a => checkActivity(a))
+    };
+}
+
+function getActor(activity) {
+    if (activityChildrenHaveSameActor(activity))
+        return activity.activities[0].actor;
+
+    return activity.actor;
 }
 
 const ActivityTypeUnknown = ({ activity }) => {
@@ -206,10 +300,10 @@ const ActivityDeleted = ({ activity }) => {
 };
 
 const ActivityObject = ({ activity }) => {
-    if (!activity.getObject()) return <ActivityDeleted />;
-    const { object, type } = activity.getObject();
+    const object = activity.object;
+    if (!object) return <ActivityDeleted />;
 
-    switch (type) {
+    switch (activity.object_type) {
         case "task":
             return <Task task={object} />;
 
@@ -224,6 +318,9 @@ const ActivityObject = ({ activity }) => {
             return <MilestoneMedia activityItem milestone={object} />;
 
         case "reply":
+            const otherReplies = activity.target
+                ? activity.target.reply_count - 1
+                : 0;
             return (
                 <div className="ActivityItemContainer">
                     <p className="mb-em">
@@ -278,7 +375,7 @@ const ActivityObject = ({ activity }) => {
 
 const ActivityObjectGroup = ({ activities }) => {
     if (activities.length === 0) return null;
-    if (activities.every(a => a.getObjectType() === "task")) {
+    if (activities.every(a => a.object_type === "task")) {
         return <TaskActivityGroup activities={activities} />;
     }
     return activities.map(a => <ActivityObject key={a.id} activity={a} />);
@@ -286,9 +383,8 @@ const ActivityObjectGroup = ({ activities }) => {
 
 const Activity = ({ activity }) => {
     // order matters
-    activity = new ActivityContainer(activity);
-    if (!activity.check()) return null;
-    // activity = cleanChildren(activity);
+    activity = cleanChildren(activity);
+    if (!checkActivity(activity)) return null;
     return (
         <section className="StreamSection">
             <div className="StreamCard flex">
@@ -296,35 +392,38 @@ const Activity = ({ activity }) => {
                     <div className="user-info-container flex">
                         <div className="flex-grow">
                             <UserMedia
-                                user={activity.getActorObject()}
+                                user={getActor(activity)}
                                 extra={
                                     <span className="has-text-gray">
-                                        {activity.getVerb()}{" "}
+                                        {getActivityVerb(activity)}{" "}
                                         {getHumanTargetType(activity) ||
                                             getHumanActivityObject(activity)}
                                     </span>
                                 }
                                 extraSmall={
                                     <>
-                                        · <TimeAgo date={activity.getTime()} />
+                                        ·{" "}
+                                        <TimeAgo
+                                            date={
+                                                activity.updated_at >
+                                                activity.created_at
+                                                    ? activity.updated_at
+                                                    : activity.created_at
+                                            }
+                                        />
                                     </>
                                 }
                             />
                         </div>
                     </div>
-                    <div
-                        className={"tasks-container"}
-                        style={{ width: "100%" }}
-                    >
-                        <small>
-                            {activity.getType() === "aggregated" ? (
-                                <ActivityObjectGroup
-                                    activities={activity.getChildren()}
-                                />
-                            ) : (
-                                <ActivityObject activity={activity} />
-                            )}
-                        </small>
+                    <div className={"tasks-container"}>
+                        {activity.type === "aggregated" ? (
+                            <ActivityObjectGroup
+                                activities={activity.activities}
+                            />
+                        ) : (
+                            <ActivityObject activity={activity} />
+                        )}
                     </div>
                 </div>
             </div>

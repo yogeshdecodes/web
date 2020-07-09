@@ -15,7 +15,7 @@ const MainFeed = ({
     ...props
 }) => {
     switch (currentFeed) {
-        case "discussions": {
+        /*case "discussions": {
             return (
                 <>
                     <h3 className="mb-em">Latest discussions</h3>
@@ -44,7 +44,7 @@ const MainFeed = ({
                     />
                 </>
             );
-        }
+        }*/
 
         default: {
             return (
@@ -76,8 +76,8 @@ const MainFeed = ({
                     <h3 className="mb-em">Log</h3>
                     <KeyActivityFeed
                         prefetchData={activitiesPrefetch}
-                        key="site:aggregated"
-                        feedKey="site:aggregated"
+                        userId={-1}
+                        feed="timeline_aggregated"
                     />
                 </>
             );

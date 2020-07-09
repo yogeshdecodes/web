@@ -40,8 +40,9 @@ function Home(props) {
                             Here's what the community is building...
                         </h4>
                         <KeyActivityFeed
-                            key="site:aggregated"
-                            feedKey="site:aggregated"
+                            userId={-1}
+                            feed="timeline_aggregated"
+                            prefetchData={props.activitiesPrefetch}
                         />
                     </div>
                     <div className={"sidebar"}>
@@ -59,7 +60,7 @@ Home.getInitialProps = async () => {
             footer: false
         },
         ...(await prefetchData()),
-        //activitiesPrefetch: await prefetchActivity("site:aggregated"),
+        activitiesPrefetch: await prefetchActivity("timeline_aggregated", "-1"),
         discussionPrefetch: await prefetchThreads(true)
     };
 };
