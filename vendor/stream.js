@@ -109,7 +109,8 @@ export class Activity {
         if (this.getType() === "aggregated") {
             // If aggregate task wihout children...
             if (this.activity.actor_count > 1) {
-                throw new Error("Unsupported.");
+                return false;
+                //throw new Error("Unsupported.");
             }
             if (this.activity.activities.length === 0) return false;
         } else {
