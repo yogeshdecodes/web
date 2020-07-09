@@ -259,6 +259,7 @@ async function prefetchActivity(feedId, userId) {
         const { client, token } = await getStreamClientAndToken();
         const feed = client.feed(feedId, userId);
         const data = await feed.get(INITIAL_QUERY);
+        console.log(JSON.stringify(data.results, "", "\t"));
         return {
             nextUrl:
                 data.results.length > 0

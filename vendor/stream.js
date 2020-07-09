@@ -37,8 +37,16 @@ export function normalizeTimezones(activities, tzname = null) {
             activity.time = toDate(activity.time + "Z", {
                 timeZone: tzname
             });
+            activity.created_at = toDate(activity.created_at + "Z", {
+                timeZone: tzname
+            });
+            activity.updated_at = toDate(activity.updated_at + "Z", {
+                timeZone: tzname
+            });
         } else {
             activity.time = toDate(activity.time + "Z");
+            activity.created_at = toDate(activity.created_at + "Z");
+            activity.updated_at = toDate(activity.updated_at + "Z");
         }
         return activity;
     });
@@ -155,7 +163,16 @@ export class Activity {
     };
 
     getTime = () => {
-        return this.activity.time;
+        if (this.getType() === "aggregated") {
+            const ordered = orderBy(this.activity.activities, "time", "desc");
+            if (ordered.length === 0) return null;
+            return ordered[ordered.length - 1].time + "Z";
+        }
+        return (
+            this.activity.updated_at ||
+            this.activity.created_at ||
+            this.activity.time
+        );
     };
 
     childrenHaveSameTargetType = () => {
@@ -254,6 +271,14 @@ export class Activity {
             type: this.activity.target_type,
             object: parseCollectionItem(this.activity.target)
         };
+    };
+
+    getTargetType = () => {
+        return this.getTarget().type;
+    };
+
+    getTargetObject = () => {
+        return this.getTarget().object;
     };
 
     getRawActivity = () => this.activity;
