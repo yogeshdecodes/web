@@ -57,7 +57,7 @@ const STREAM_API_KEY = process.env.STREAM_API_KEY
 
 const STREAM_APP_ID = process.env.STREAM_APP_ID
     ? process.env.STREAM_APP_ID
-    : "84850";
+    : "85601";
 
 const config = {
     API_URL,

@@ -85,7 +85,7 @@ class KeyActivityFeed extends Component {
             // this.forceUpdate();
         }
 
-        // this.connect();
+        this.connect();
     }
 
     componentWillUnmount() {

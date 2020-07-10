@@ -41,7 +41,7 @@ function Home(props) {
                         </h4>
                         <KeyActivityFeed
                             userId={-1}
-                            feed="timeline_aggregated"
+                            feed="timeline"
                             prefetchData={props.activitiesPrefetch}
                         />
                     </div>
