@@ -209,11 +209,13 @@ class KeyActivityFeed extends Component {
                 // get the stream data
                 const data = await feed.get(query);
 
+                console.log(data);
+
                 this.setState({
                     loading: false,
                     failed: false,
                     activities: uniqBy(
-                        [...data.results, ...this.state.activities],
+                        [...this.state.activities, ...data.results],
                         "id"
                     ),
                     initialLoaded: true,

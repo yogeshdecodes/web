@@ -31,29 +31,40 @@ export async function getStreamClientAndToken() {
     };
 }
 
+function fixUtcDate(d) {
+    if ((typeof d === "string" || d instanceof String) && !d.endsWith("Z")) {
+        return d + "Z";
+    }
+    return d;
+}
+
 export function normalizeTimezones(activities, tzname = null) {
     return activities.map(activity => {
         if (tzname) {
-            activity.time = toDate(activity.time + "Z", {
+            activity.time = toDate(fixUtcDate(activity.time), {
                 timeZone: tzname
             });
-            activity.created_at = toDate(activity.created_at + "Z", {
+            activity.created_at = toDate(fixUtcDate(activity.created_at), {
                 timeZone: tzname
             });
-            activity.updated_at = toDate(activity.updated_at + "Z", {
+            activity.updated_at = toDate(fixUtcDate(activity.updated_at), {
                 timeZone: tzname
             });
         } else {
-            activity.time = toDate(activity.time + "Z");
-            activity.created_at = toDate(activity.created_at + "Z");
-            activity.updated_at = toDate(activity.updated_at + "Z");
+            activity.time = toDate(fixUtcDate(activity.time));
+            activity.created_at = toDate(fixUtcDate(activity.created_at));
+            activity.updated_at = toDate(fixUtcDate(activity.updated_at));
         }
         return activity;
     });
 }
 
 export function orderActivities(activities, tz = null) {
-    return orderBy(activities, "time", "desc");
+    return orderBy(
+        activities,
+        ["time", "created_at", "updated_at"],
+        ["desc", "desc", "desc"]
+    );
 }
 
 const exceptions = {
@@ -166,9 +177,9 @@ export class Activity {
         if (this.getType() === "aggregated") {
             const ordered = orderBy(this.activity.activities, "time", "desc");
             if (ordered.length === 0) return null;
-            return ordered[ordered.length - 1].time + "Z";
+            return fixUtcDate(ordered[ordered.length - 1].time);
         }
-        return this.activity.time;
+        return fixUtcDate(this.activity.time);
     };
 
     childrenHaveSameTargetType = () => {

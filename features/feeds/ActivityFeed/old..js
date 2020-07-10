@@ -445,6 +445,7 @@ class ActivityFeed extends React.Component {
 
         return (
             <InfiniteScroll
+                dataLength={data.length}
                 next={this.props.loadMore}
                 hasMore={this.props.hasMore}
                 style={{ overflow: "none" }}

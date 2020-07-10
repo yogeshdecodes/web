@@ -334,11 +334,11 @@ const Activity = ({ activity }) => {
 
 class ActivityFeed extends React.Component {
     render() {
-        let data = orderActivities(this.props.activities);
-        data = normalizeTimezones(
-            data,
+        let data = normalizeTimezones(
+            this.props.activities,
             this.props.user ? this.props.user.timezone : null
         );
+        data = orderActivities(data);
 
         if (data.length === 0 && !this.props.hasMore && !this.props.isSyncing) {
             return this.props.noActivityComponent;
@@ -346,6 +346,7 @@ class ActivityFeed extends React.Component {
 
         return (
             <InfiniteScroll
+                dataLength={data.length}
                 next={this.props.loadMore}
                 hasMore={this.props.hasMore}
                 style={{ overflow: "none" }}

@@ -102,6 +102,7 @@ class InfiniteSearch extends React.Component {
 
         return (
             <InfiniteScroll
+                dataLength={this.state.items.length}
                 next={this.loadMore}
                 hasMore={this.state.hasMore}
                 style={{ overflow: "none" }}
