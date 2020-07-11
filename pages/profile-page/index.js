@@ -28,7 +28,7 @@ class ProfilePage extends React.Component {
 
         return (
             <ProfilePageLayout user={user} achievements={achievements}>
-                <KeyActivityFeed userId={user.id} feed="user" />
+                <UserStream userId={user.id} />
             </ProfilePageLayout>
         );
     }
