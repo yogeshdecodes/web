@@ -53,11 +53,11 @@ const TWITTER_CLIENT_KEY = process.env.TWITTER_CLIENT_KEY
 
 const STREAM_API_KEY = process.env.STREAM_API_KEY
     ? process.env.STREAM_API_KEY
-    : "3teqn3y4embw";
+    : "4z2628xa23yy";
 
 const STREAM_APP_ID = process.env.STREAM_APP_ID
     ? process.env.STREAM_APP_ID
-    : "85601";
+    : "85688";
 
 const config = {
     API_URL,
