@@ -7,7 +7,6 @@ import DiscussionSection, {
 import TodayList from "../../tasks/components/TodayList";
 import DoneTodayCount from "../../tasks/DoneTodayCount";
 import Spinner from "~/components/Spinner";
-import { GlobalStream } from "../../stream";
 
 const MainFeed = ({
     currentFeed,
@@ -75,20 +74,16 @@ const MainFeed = ({
                         </div>
                     </div>
                     <h3 className="mb-em">Log</h3>
-                    <GlobalStream />
+                    <KeyActivityFeed
+                        prefetchData={activitiesPrefetch}
+                        userId={-1}
+                        feed="timeline"
+                    />
                 </>
             );
         }
     }
 };
-
-/**
- * <KeyActivityFeed
-                        prefetchData={activitiesPrefetch}
-                        userId={-1}
-                        feed="timeline"
-                    />
- */
 
 export default connect(state => {
     return {

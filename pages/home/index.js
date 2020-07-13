@@ -39,7 +39,11 @@ function Home(props) {
                         <h4 className="subtitle has-text-grey mb-em">
                             Here's what the community is building...
                         </h4>
-                        <GlobalStream />
+                        <KeyActivityFeed
+                            userId={-1}
+                            feed="timeline"
+                            prefetchData={props.activitiesPrefetch}
+                        />
                     </div>
                     <div className={"sidebar"}>
                         <ExploreSidebar data={props.data} />
@@ -49,14 +53,6 @@ function Home(props) {
         </div>
     );
 }
-/*
-
-                        <KeyActivityFeed
-                            userId={-1}
-                            feed="timeline"
-                            prefetchData={props.activitiesPrefetch}
-                        />
-*/
 
 Home.getInitialProps = async () => {
     return {
