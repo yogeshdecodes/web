@@ -470,8 +470,8 @@ class Task extends React.Component {
                 {this.renderIcon()}{" "}
                 <span className={"task-content"}>{this.renderContent()}</span>{" "}
                 {this.renderLiveButton()} {this.renderCounts()}
-                {this.props.withAttachment && this.renderAttachments()}
                 {this.renderExtras()}
+                {this.props.withAttachment && this.renderAttachments()}
             </div>
         );
     }

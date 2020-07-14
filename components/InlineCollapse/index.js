@@ -13,25 +13,51 @@ export default class InlineCollapse extends Component {
         });
     };
 
+    renderCollapseControl = () => {
+        if (this.props.hr) {
+            return (
+                <div className="top flex flex-gap">
+                    <div>
+                        <a className="heading unstyled" onClick={this.toggle}>
+                            {this.props.text} &nbsp;
+                            {this.state.open ? (
+                                <FontAwesomeIcon icon="caret-up" />
+                            ) : (
+                                <FontAwesomeIcon icon="caret-down" />
+                            )}
+                        </a>
+                    </div>
+                    <div className="flex-grow">
+                        <hr />
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <a
+                    className={
+                        this.props.className
+                            ? this.props.className
+                            : "has-text-grey-light"
+                    }
+                    onClick={this.toggle}
+                >
+                    {this.props.text} &nbsp;
+                    {this.state.open ? (
+                        <FontAwesomeIcon icon="caret-up" />
+                    ) : (
+                        <FontAwesomeIcon icon="caret-down" />
+                    )}
+                </a>
+            );
+        }
+    };
+
     render() {
         return (
             <div className="InlineCollapse">
                 <div className="collapse-control">
-                    <a
-                        className={
-                            this.props.className
-                                ? this.props.className
-                                : "has-text-grey-light"
-                        }
-                        onClick={this.toggle}
-                    >
-                        {this.props.text} &nbsp;
-                        {this.state.open ? (
-                            <FontAwesomeIcon icon="caret-up" />
-                        ) : (
-                            <FontAwesomeIcon icon="caret-down" />
-                        )}
-                    </a>
+                    {this.renderCollapseControl()}
                 </div>
                 {this.state.open && (
                     <div className="collapse-content">

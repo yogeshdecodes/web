@@ -45,8 +45,6 @@ class TodayList extends Component {
 
     renderTasks = () => {
         const grouped = groupTasksByDone(this.props.tasks);
-        const doneTasksUncollapsed = grouped.done.slice(0, 3);
-        const doneTasksCollapsed = grouped.done.slice(3, -1);
 
         return (
             <div>
@@ -91,24 +89,12 @@ class TodayList extends Component {
 
                 {grouped.done && grouped.done.length > 0 && (
                     <div className="TaskGroup done">
-                        <div className="top flex flex-gap">
-                            <div>
-                                <p className="heading">
-                                    {grouped.done.length} done
-                                </p>
-                            </div>
-                            <div className="flex-grow">
-                                <hr />
-                            </div>
-                        </div>
                         <div className="tasks">
-                            {doneTasksUncollapsed.map(t => (
-                                <Task key={t.id} task={t} />
-                            ))}
                             <InlineCollapse
-                                text={`${doneTasksCollapsed.length} tasks collapsed`}
+                                hr
+                                text={`${grouped.done.length} done`}
                             >
-                                {doneTasksCollapsed.map(t => (
+                                {grouped.done.map(t => (
                                     <Task key={t.id} task={t} />
                                 ))}
                             </InlineCollapse>
