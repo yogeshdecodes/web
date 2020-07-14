@@ -76,7 +76,7 @@ const exceptions = {
     is: "was",
     run: "ran",
     sit: "sat",
-    visit: "visited"
+    visit: "visited",
     reply: "replied"
 };
 
