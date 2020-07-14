@@ -26,6 +26,10 @@
     --c-heatmap-2: #{$c-heatmap-2};
     --c-heatmap-3: #{$c-heatmap-3};
     --c-heatmap-4: #{$c-heatmap-4};
+
+    // Other
+    --c-up: #{$c-up};
+    --c-down: #{$c-down};
 }
 
 [data-theme="dark"] {
