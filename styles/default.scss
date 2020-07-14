@@ -554,6 +554,10 @@ h1.page-title,
     margin: 0;
 }
 
+h3 {
+    font-size: 1.1rem;
+}
+
 h2 {
     font-size: 1.3rem;
 }
@@ -1484,7 +1488,6 @@ button[disabled] {
     margin-right: 3px;
     background: $gradient-underline;
 }
-
 
 .center {
     display: flex;
