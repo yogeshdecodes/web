@@ -77,6 +77,7 @@ const exceptions = {
     run: "ran",
     sit: "sat",
     visit: "visited"
+    reply: "replied"
 };
 
 function getPastTense(verb) {
