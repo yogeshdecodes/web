@@ -88,6 +88,9 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin";
 import { faHackerNews } from "@fortawesome/free-brands-svg-icons/faHackerNews";
 import { faAlignJustify } from "@fortawesome/free-solid-svg-icons/faAlignJustify";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
+import { faThumbsUp as faThumbsUpRegular } from "@fortawesome/free-regular-svg-icons/faThumbsUp";
 
 library.add(
     faInstagram,
@@ -178,5 +181,7 @@ library.add(
     faHackerNews,
     faAlignJustify,
     faEnvelope,
-    faFacebook
+    faHeart,
+    faThumbsUp,
+    faThumbsUpRegular
 );

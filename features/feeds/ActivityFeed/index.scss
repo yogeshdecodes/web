@@ -3,23 +3,101 @@
 .ActivityItemContainer {
     @extend %corners;
     border: 1px solid var(--c-border);
-    // background: var(--c-bg-light);
     padding: 1rem;
+    // background: var(--c-bg-light);
 }
 
 .ActivityFeed {
-    .StreamSection {
-        margin-bottom: 0px;
-        padding-top: $gap;
-        padding-bottom: $gap;
+    .ActivityFeed--section {
         border-bottom: 1px solid var(--c-bg-light);
+    }
 
-        &:first-of-type {
-            padding-top: 0px;
+    .ActivityFeed--content {
+        padding: 1.5rem;
+
+        &:not(:only-child) {
+            padding-bottom: 0px;
         }
 
-        &:last-of-type {
-            //padding-bottom: 0px;
+        .user-info-container {
+            //padding-top: 1rem;
+            //padding-left: 1rem;
+            padding-bottom: 1rem;
+            font-size: 14px;
+            color: $c-gray;
+
+            .name {
+                font-weight: bold;
+                color: var(--c-title);
+            }
+        }
+    }
+
+    .ActivityFeed--controls {
+        padding-top: 1.5rem;
+
+        .btn-praise {
+            border-left: 0px !important;
+            border-right: 0px !important;
+            border-top: 0px !important;
+            border-right: 1px solid var(--c-bg-light) !important;
+            line-height: 24px !important;
+
+            &.praised {
+                color: #de900e !important;
+            }
+
+            &:active {
+                border-color: var(--c-bg-light) !important;
+                color: var(--c-text);
+                font-weight: bold;
+                background-color: var(--c-lightest) !important;
+                transform: scale(0.95);
+            }
+
+            &:hover {
+                background-color: var(--c-bg-light) !important;
+            }
+
+            &:active {
+                font-weight: bold;
+                background-color: var(--c-lightest) !important;
+                transform: scale(0.95);
+            }
+
+            &:focus {
+                background-color: var(--c-lightest) !important;
+            }
+
+            &:focus {
+                color: var(--c-text);
+                background-color: var(--c-lightest) !important;
+            }
+        }
+
+        > button {
+            font-size: 0.75em !important;
+            flex-grow: 1;
+            width: 100%;
+            border: none !important;
+            border-radius: 0px !important;
+            background: var(--c-lightest) !important;
+            padding: 0.5rem !important;
+            border-right: 1px solid var(--c-bg-light) !important;
+            color: var(--c-text) !important;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: var(--c-bg-light);
+            }
+
+            &:first-child {
+                border-left: none;
+            }
+
+            &:last-child {
+                border-right: none;
+            }
         }
     }
 }

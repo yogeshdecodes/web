@@ -300,14 +300,19 @@ class Task extends React.Component {
                 )}
                 {hover ? (
                     <button
-                        className={"btn-praise btn-gray"}
+                        className={"btn-light btn-small"}
                         onClick={this.toggleDetails}
                     >
-                        <Emoji emoji={"💬"} /> {this.props.task.comment_count}
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"comments"} />
+                        </span>{" "}
+                        {this.props.task.comment_count}
                     </button>
                 ) : this.props.task.comment_count > 0 ? (
                     <span>
-                        <Emoji emoji={"💬"} />
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"comments"} />
+                        </span>
                         {this.props.task.comment_count}
                     </span>
                 ) : null}

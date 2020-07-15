@@ -33,6 +33,8 @@ import {
     orderActivities,
     normalizeTimezones
 } from "~/vendor/stream";
+import { Praisable } from "../../stream/components/Task/components/Praise";
+import { Button } from "react-scroll";
 
 function getTargetTitle(type, target) {
     if (!target) return null;
@@ -284,14 +286,56 @@ const ActivityObjectGroup = ({ activities }) => {
     return activities.map(a => <ActivityObject key={a.id} activity={a} />);
 };
 
+const ActivityControls = ({ activity }) => {
+    if (!activity.getObject() || activity.getType() === "aggregated")
+        return null;
+    const { object, type } = activity.getObject();
+
+    switch (type) {
+        case "task":
+            return (
+                <div className="ActivityFeed--controls flex">
+                    <Praisable
+                        withFaces
+                        expanded
+                        className="flex-grow has-text-centered flex-v-center"
+                        indexUrl={`/tasks/${object.id}`}
+                        initialAmount={object.praise}
+                        button={true}
+                        clickable
+                        item={object}
+                    />
+                    <button className="flex-grow has-text-centered flex-v-center">
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"comments"} />
+                        </span>
+                        {object.comment_count ? (
+                            <>{object.comment_count} comments</>
+                        ) : (
+                            "Comment"
+                        )}
+                    </button>
+                    <button className="flex-grow has-text-centered flex-v-center">
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"ellipsis-v"} />
+                        </span>
+                        More
+                    </button>
+                </div>
+            );
+        default:
+            return null;
+    }
+};
+
 const Activity = ({ activity }) => {
     // order matters
     activity = new ActivityContainer(activity);
     if (!activity.check()) return null;
     // activity = cleanChildren(activity);
     return (
-        <section className="StreamSection">
-            <div className="StreamCard flex">
+        <section className="ActivityFeed--section">
+            <div className="ActivityFeed--content flex">
                 <div className="flex-grow">
                     <div className="user-info-container flex">
                         <div className="flex-grow">
@@ -328,6 +372,7 @@ const Activity = ({ activity }) => {
                     </div>
                 </div>
             </div>
+            <ActivityControls activity={activity} />
         </section>
     );
 };
@@ -353,47 +398,41 @@ class ActivityFeed extends React.Component {
                 key={isServer}
             >
                 <div className="ActivityFeed card">
-                    <div className="card-content">
-                        {Object.entries(data).map(([k, v]) => {
-                            if (k != 0 && k != 1 && k % 10 == 0) {
-                                return (
-                                    <>
-                                        <AdIntersitial />
-                                        <Activity key={v.id} activity={v} />
-                                    </>
-                                );
-                            } else {
-                                return <Activity key={v.id} activity={v} />;
-                            }
-                        })}
+                    {Object.entries(data).map(([k, v]) => {
+                        if (k != 0 && k != 1 && k % 10 == 0) {
+                            return (
+                                <>
+                                    <AdIntersitial />
+                                    <Activity key={v.id} activity={v} />
+                                </>
+                            );
+                        } else {
+                            return <Activity key={v.id} activity={v} />;
+                        }
+                    })}
 
-                        {this.props.hasMore && (
-                            <div className={"center mt-em"}>
-                                <button
-                                    className={
-                                        "btn btn-light" +
-                                        (this.props.isSyncing
-                                            ? " is-loading"
-                                            : "")
-                                    }
-                                    onClick={this.props.loadMore}
-                                >
-                                    <FontAwesomeIcon
-                                        icon={"arrow-circle-down"}
-                                    />{" "}
-                                    Load more tasks...
-                                </button>
-                            </div>
-                        )}
-                        {!this.props.hasMore && this.props.isSyncing && (
-                            <Spinner text="Loading the makerness..." />
-                        )}
-                        {!this.props.hasMore && !this.props.isSyncing && (
-                            <div className="mt-em">
-                                <StreamFinished />
-                            </div>
-                        )}
-                    </div>
+                    {this.props.hasMore && (
+                        <div className={"center mt-em"}>
+                            <button
+                                className={
+                                    "btn btn-light" +
+                                    (this.props.isSyncing ? " is-loading" : "")
+                                }
+                                onClick={this.props.loadMore}
+                            >
+                                <FontAwesomeIcon icon={"arrow-circle-down"} />{" "}
+                                Load more tasks...
+                            </button>
+                        </div>
+                    )}
+                    {!this.props.hasMore && this.props.isSyncing && (
+                        <Spinner text="Loading the makerness..." />
+                    )}
+                    {!this.props.hasMore && !this.props.isSyncing && (
+                        <div className="mt-em">
+                            <StreamFinished />
+                        </div>
+                    )}
                 </div>
             </InfiniteScroll>
         );
