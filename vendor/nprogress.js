@@ -1,6 +1,7 @@
 import React from "react";
 import NProgress from "nprogress";
 import Router from "next/router";
+import { isServer } from "../config";
 
 class NProgressContainer extends React.Component {
     static defaultProps = {
@@ -15,6 +16,9 @@ class NProgressContainer extends React.Component {
         const { showAfterMs } = this.props;
         clearTimeout(this.timer);
         this.timer = setTimeout(NProgress.start, showAfterMs);
+        if (!isServer) {
+            //window.scrollTo(0, 0);
+        }
     };
 
     routeChangeEnd = () => {

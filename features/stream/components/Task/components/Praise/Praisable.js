@@ -68,7 +68,11 @@ class Praisable extends React.Component {
     onClick = async () => {
         if (!this.props.isLoggedIn) {
             this.setState({ redirecting: true });
-            Router.pushRoute("start");
+            Router.pushRoute("start").then(e => {
+                if (!isServer) {
+                    window.scrollTo(0, 0);
+                }
+            });
             return;
         }
 
