@@ -33,7 +33,11 @@ class CopyLink extends React.Component {
                 {!this.state.copied && <>{this.props.children}</>}
                 {this.state.copied && (
                     <>
-                        <Emoji emoji={"💫"} /> Copied!
+                        <FontAwesomeIcon icon={"check"} size={"sm"} />
+                        Copied to clipboard
+                        {this.props.extraPermalinkText
+                            ? this.props.extraPermalinkText
+                            : null}
                     </>
                 )}
             </a>
@@ -48,7 +52,7 @@ class ShareBar extends React.Component {
                 <div>
                     <CopyLink url={this.props.permalink}>
                         <FontAwesomeIcon icon={"link"} size={"sm"} />
-                        {!this.props.compact && "Permalink"}
+                        {!this.props.compact && "Copy Permalink"}
                         {this.props.extraPermalinkText
                             ? this.props.extraPermalinkText
                             : null}

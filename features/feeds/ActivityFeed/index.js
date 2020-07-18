@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { mock } from "../mock";
 import uniq from "lodash/uniq";
 import FullName from "~/components/FullName";
@@ -35,6 +35,8 @@ import {
 } from "~/vendor/stream";
 import { Praisable } from "../../stream/components/Task/components/Praise";
 import { Button } from "react-scroll";
+import CommentsBox from "../../comments/components/CommentsBox";
+import TaskDetail from "../../stream/components/Task/components/TaskDetail";
 
 function getTargetTitle(type, target) {
     if (!target) return null;
@@ -213,7 +215,7 @@ const ActivityObject = ({ activity }) => {
 
     switch (type) {
         case "task":
-            return <Task task={object} />;
+            return <Task plain task={object} />;
 
         case "product":
             return (
@@ -286,6 +288,66 @@ const ActivityObjectGroup = ({ activities }) => {
     return activities.map(a => <ActivityObject key={a.id} activity={a} />);
 };
 
+let TaskActivityControls = ({ task, me = {} }) => {
+    const [detailsOpen, setDetailsOpen] = useState(false);
+    const [commentsOpen, setCommentsOpen] = useState(task.comment_count > 0);
+
+    return (
+        <div className="ActivityFeed--controls  flex flex-column TaskActivityControls">
+            <div className="control-group flex">
+                <Praisable
+                    withFaces
+                    expanded
+                    className="flex-grow has-text-centered flex-v-center unstyled-btn"
+                    indexUrl={`/tasks/${task.id}`}
+                    initialAmount={task.praise}
+                    button={true}
+                    clickable
+                    item={task}
+                />
+                <button
+                    className="flex-grow has-text-centered flex-v-center"
+                    onClick={e => setCommentsOpen(true)}
+                >
+                    <span className="mr-qt">
+                        <FontAwesomeIcon icon={"comments"} />
+                    </span>
+                    {task.comment_count ? (
+                        <>{task.comment_count} comments</>
+                    ) : (
+                        "Comment"
+                    )}
+                </button>
+                <button
+                    className="flex-grow has-text-centered flex-v-center"
+                    onClick={e => setDetailsOpen(true)}
+                >
+                    {me.id === task.user.id ? (
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"edit"} />
+                        </span>
+                    ) : (
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"ellipsis-v"} />
+                        </span>
+                    )}
+
+                    {me.id === task.user.id ? "Edit" : "More"}
+                </button>
+            </div>
+            {detailsOpen && <TaskDetail task={task} onDelete={() => {}} />}
+            {commentsOpen && (
+                <CommentsBox
+                    initialCommentCount={task.comment_count}
+                    task={task}
+                />
+            )}
+        </div>
+    );
+};
+
+TaskActivityControls = connect(mapUserToProps)(TaskActivityControls);
+
 const ActivityControls = ({ activity }) => {
     if (!activity.getObject() || activity.getType() === "aggregated")
         return null;
@@ -293,36 +355,7 @@ const ActivityControls = ({ activity }) => {
 
     switch (type) {
         case "task":
-            return (
-                <div className="ActivityFeed--controls flex">
-                    <Praisable
-                        withFaces
-                        expanded
-                        className="flex-grow has-text-centered flex-v-center"
-                        indexUrl={`/tasks/${object.id}`}
-                        initialAmount={object.praise}
-                        button={true}
-                        clickable
-                        item={object}
-                    />
-                    <button className="flex-grow has-text-centered flex-v-center">
-                        <span className="mr-qt">
-                            <FontAwesomeIcon icon={"comments"} />
-                        </span>
-                        {object.comment_count ? (
-                            <>{object.comment_count} comments</>
-                        ) : (
-                            "Comment"
-                        )}
-                    </button>
-                    <button className="flex-grow has-text-centered flex-v-center">
-                        <span className="mr-qt">
-                            <FontAwesomeIcon icon={"ellipsis-v"} />
-                        </span>
-                        More
-                    </button>
-                </div>
-            );
+            return <TaskActivityControls task={object} />;
         default:
             return null;
     }
@@ -412,7 +445,7 @@ class ActivityFeed extends React.Component {
                     })}
 
                     {this.props.hasMore && (
-                        <div className={"center mt-em"}>
+                        <div className={"center ActivityFeed--section"}>
                             <button
                                 className={
                                     "btn btn-light" +
@@ -421,15 +454,17 @@ class ActivityFeed extends React.Component {
                                 onClick={this.props.loadMore}
                             >
                                 <FontAwesomeIcon icon={"arrow-circle-down"} />{" "}
-                                Load more tasks...
+                                Load more activity...
                             </button>
                         </div>
                     )}
                     {!this.props.hasMore && this.props.isSyncing && (
-                        <Spinner text="Loading the makerness..." />
+                        <div className={"center ActivityFeed--section"}>
+                            <Spinner text="Loading the makerness..." />
+                        </div>
                     )}
                     {!this.props.hasMore && !this.props.isSyncing && (
-                        <div className="mt-em">
+                        <div className="ActivityFeed--section">
                             <StreamFinished />
                         </div>
                     )}

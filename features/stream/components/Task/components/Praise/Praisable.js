@@ -86,10 +86,11 @@ class Praisable extends React.Component {
                 }
             }
             this.setState(payload);
-            const { praised, user } = await praise(this.props.indexUrl);
+            const { praised, user, total } = await praise(this.props.indexUrl);
             this.setState({
                 praising: false,
-                praised
+                praised,
+                total
             });
         } catch (e) {}
     };
@@ -107,11 +108,7 @@ class Praisable extends React.Component {
             >
                 <span className="mr-qt">
                     <FontAwesomeIcon
-                        icon={
-                            this.state.praised
-                                ? "thumbs-up"
-                                : ["far", "thumbs-up"]
-                        }
+                        icon={this.state.praised ? "star" : ["far", "star"]}
                     />
                 </span>{" "}
                 {this.state.praised ? (
