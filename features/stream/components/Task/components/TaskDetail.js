@@ -99,7 +99,6 @@ class TaskDetail extends React.Component {
                     tweetText={this.generateTweetText()}
                     permalink={this.getPermalink()}
                     rightAlignShare
-                    extraPermalinkText={` #${this.props.task.id}`}
                     extraItemsRight={() => (
                         <div>
                             <a
@@ -150,7 +149,6 @@ class TaskDetail extends React.Component {
                 <ShareBar
                     tweetText={this.generateTweetText()}
                     permalink={this.getPermalink()}
-                    extraPermalinkText={` #${this.props.task.id}`}
                     extraItemsLeft={() => (
                         <div>
                             <a
@@ -169,7 +167,7 @@ class TaskDetail extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="TaskDetail">
                 {this.renderActionBar()}
                 {this.state.editing && (
                     <TaskEditModal

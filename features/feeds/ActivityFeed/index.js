@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { mock } from "../mock";
 import uniq from "lodash/uniq";
 import FullName from "~/components/FullName";
@@ -33,6 +33,10 @@ import {
     orderActivities,
     normalizeTimezones
 } from "~/vendor/stream";
+import { Praisable } from "../../stream/components/Task/components/Praise";
+import { Button } from "react-scroll";
+import CommentsBox from "../../comments/components/CommentsBox";
+import TaskDetail from "../../stream/components/Task/components/TaskDetail";
 
 function getTargetTitle(type, target) {
     if (!target) return null;
@@ -211,7 +215,7 @@ const ActivityObject = ({ activity }) => {
 
     switch (type) {
         case "task":
-            return <Task task={object} />;
+            return <Task plain task={object} />;
 
         case "product":
             return (
@@ -284,14 +288,87 @@ const ActivityObjectGroup = ({ activities }) => {
     return activities.map(a => <ActivityObject key={a.id} activity={a} />);
 };
 
+let TaskActivityControls = ({ task, me = {} }) => {
+    const [detailsOpen, setDetailsOpen] = useState(false);
+    const [commentsOpen, setCommentsOpen] = useState(task.comment_count > 0);
+
+    return (
+        <div className="ActivityFeed--controls  flex flex-column TaskActivityControls">
+            <div className="control-group flex">
+                <Praisable
+                    withFaces
+                    expanded
+                    className="flex-grow has-text-centered flex-v-center unstyled-btn"
+                    indexUrl={`/tasks/${task.id}`}
+                    initialAmount={task.praise}
+                    button={true}
+                    clickable
+                    item={task}
+                />
+                <button
+                    className="flex-grow has-text-centered flex-v-center"
+                    onClick={e => setCommentsOpen(true)}
+                >
+                    <span className="mr-qt">
+                        <FontAwesomeIcon icon={"comments"} />
+                    </span>
+                    {task.comment_count ? (
+                        <>{task.comment_count} comments</>
+                    ) : (
+                        "Comment"
+                    )}
+                </button>
+                <button
+                    className="flex-grow has-text-centered flex-v-center"
+                    onClick={e => setDetailsOpen(true)}
+                >
+                    {me.id === task.user.id ? (
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"edit"} />
+                        </span>
+                    ) : (
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"ellipsis-v"} />
+                        </span>
+                    )}
+
+                    {me.id === task.user.id ? "Edit" : "More"}
+                </button>
+            </div>
+            {detailsOpen && <TaskDetail task={task} onDelete={() => {}} />}
+            {commentsOpen && (
+                <CommentsBox
+                    initialCommentCount={task.comment_count}
+                    task={task}
+                />
+            )}
+        </div>
+    );
+};
+
+TaskActivityControls = connect(mapUserToProps)(TaskActivityControls);
+
+const ActivityControls = ({ activity }) => {
+    if (!activity.getObject() || activity.getType() === "aggregated")
+        return null;
+    const { object, type } = activity.getObject();
+
+    switch (type) {
+        case "task":
+            return <TaskActivityControls task={object} />;
+        default:
+            return null;
+    }
+};
+
 const Activity = ({ activity }) => {
     // order matters
     activity = new ActivityContainer(activity);
     if (!activity.check()) return null;
     // activity = cleanChildren(activity);
     return (
-        <section className="StreamSection">
-            <div className="StreamCard flex">
+        <section className="ActivityFeed--section">
+            <div className="ActivityFeed--content flex">
                 <div className="flex-grow">
                     <div className="user-info-container flex">
                         <div className="flex-grow">
@@ -328,6 +405,7 @@ const Activity = ({ activity }) => {
                     </div>
                 </div>
             </div>
+            <ActivityControls activity={activity} />
         </section>
     );
 };
@@ -353,47 +431,43 @@ class ActivityFeed extends React.Component {
                 key={isServer}
             >
                 <div className="ActivityFeed card">
-                    <div className="card-content">
-                        {Object.entries(data).map(([k, v]) => {
-                            if (k != 0 && k != 1 && k % 10 == 0) {
-                                return (
-                                    <>
-                                        <AdIntersitial />
-                                        <Activity key={v.id} activity={v} />
-                                    </>
-                                );
-                            } else {
-                                return <Activity key={v.id} activity={v} />;
-                            }
-                        })}
+                    {Object.entries(data).map(([k, v]) => {
+                        if (k != 0 && k != 1 && k % 10 == 0) {
+                            return (
+                                <>
+                                    <AdIntersitial />
+                                    <Activity key={v.id} activity={v} />
+                                </>
+                            );
+                        } else {
+                            return <Activity key={v.id} activity={v} />;
+                        }
+                    })}
 
-                        {this.props.hasMore && (
-                            <div className={"center mt-em"}>
-                                <button
-                                    className={
-                                        "btn btn-light" +
-                                        (this.props.isSyncing
-                                            ? " is-loading"
-                                            : "")
-                                    }
-                                    onClick={this.props.loadMore}
-                                >
-                                    <FontAwesomeIcon
-                                        icon={"arrow-circle-down"}
-                                    />{" "}
-                                    Load more tasks...
-                                </button>
-                            </div>
-                        )}
-                        {!this.props.hasMore && this.props.isSyncing && (
+                    {this.props.hasMore && (
+                        <div className={"center ActivityFeed--section"}>
+                            <button
+                                className={
+                                    "btn btn-light" +
+                                    (this.props.isSyncing ? " is-loading" : "")
+                                }
+                                onClick={this.props.loadMore}
+                            >
+                                <FontAwesomeIcon icon={"arrow-circle-down"} />{" "}
+                                Load more activity...
+                            </button>
+                        </div>
+                    )}
+                    {!this.props.hasMore && this.props.isSyncing && (
+                        <div className={"center ActivityFeed--section"}>
                             <Spinner text="Loading the makerness..." />
-                        )}
-                        {!this.props.hasMore && !this.props.isSyncing && (
-                            <div className="mt-em">
-                                <StreamFinished />
-                            </div>
-                        )}
-                    </div>
+                        </div>
+                    )}
+                    {!this.props.hasMore && !this.props.isSyncing && (
+                        <div className="ActivityFeed--section">
+                            <StreamFinished />
+                        </div>
+                    )}
                 </div>
             </InfiniteScroll>
         );

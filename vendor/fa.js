@@ -59,7 +59,6 @@ import { faMarkdown } from "@fortawesome/free-brands-svg-icons/faMarkdown";
 import { faEye } from "@fortawesome/free-solid-svg-icons/faEye";
 import { faArrowsAlt } from "@fortawesome/free-solid-svg-icons/faArrowsAlt";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons/faTrophy";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import { faLock } from "@fortawesome/free-solid-svg-icons/faLock";
 import { faBullhorn } from "@fortawesome/free-solid-svg-icons/faBullhorn";
@@ -88,6 +87,11 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin";
 import { faHackerNews } from "@fortawesome/free-brands-svg-icons/faHackerNews";
 import { faAlignJustify } from "@fortawesome/free-solid-svg-icons/faAlignJustify";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
+import { faThumbsUp as faThumbsUpRegular } from "@fortawesome/free-regular-svg-icons/faThumbsUp";
+import { faStar } from "@fortawesome/free-solid-svg-icons/faStar";
+import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons/faStar";
 
 library.add(
     faInstagram,
@@ -150,7 +154,6 @@ library.add(
     faEye,
     faArrowsAlt,
     faTrophy,
-    faStar,
     faUserCircle,
     faLock,
     faBullhorn,
@@ -178,5 +181,10 @@ library.add(
     faHackerNews,
     faAlignJustify,
     faEnvelope,
-    faFacebook
+    faHeart,
+    faThumbsUp,
+    faThumbsUpRegular,
+    faFacebook,
+    faStar,
+    faStarRegular
 );

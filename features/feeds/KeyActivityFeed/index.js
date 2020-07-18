@@ -32,7 +32,7 @@ function getFeedUrl(key, following = false, token = "") {
 
 class KeyActivityFeed extends Component {
     initialState = {
-        loading: false,
+        loading: true,
         initialLoaded: false,
         nextUrl: null,
         activities: [],
@@ -208,8 +208,6 @@ class KeyActivityFeed extends Component {
             if (nextUrl || !this.state.initialLoaded) {
                 // get the stream data
                 const data = await feed.get(query);
-
-                console.log(data);
 
                 this.setState({
                     loading: false,

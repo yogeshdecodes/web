@@ -74,6 +74,13 @@ class Task extends React.Component {
         };
     }
 
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.task.updated_at !== prevProps.task.updated_at) {
+            this.setState({ task: this.props.task });
+        }
+    }
+
     onDelete = () => {
         this.setState({ deleted: true });
     };
@@ -300,14 +307,19 @@ class Task extends React.Component {
                 )}
                 {hover ? (
                     <button
-                        className={"btn-praise btn-gray"}
+                        className={"btn-light btn-small"}
                         onClick={this.toggleDetails}
                     >
-                        <Emoji emoji={"💬"} /> {this.props.task.comment_count}
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"comments"} />
+                        </span>{" "}
+                        {this.props.task.comment_count}
                     </button>
                 ) : this.props.task.comment_count > 0 ? (
                     <span>
-                        <Emoji emoji={"💬"} />
+                        <span className="mr-qt">
+                            <FontAwesomeIcon icon={"comments"} />
+                        </span>
                         {this.props.task.comment_count}
                     </span>
                 ) : null}

@@ -452,16 +452,26 @@ a[class^="btn"] {
         color: var(--c-text);
         font-size: 0.75rem;
 
+        .svg-inline--fa {
+            // color: #ffd157;
+        }
+
         &:hover {
             border-color: var(--c-border-light);
         }
 
-        &.praising {
+        &:active {
             font-weight: bold;
-            background-color: #ffd157 !important;
-            border-color: #de900e !important;
+            background-color: #ffd157;
+            border-color: #de900e;
             transform: scale(0.95);
-            color: white !important;
+            color: var(--c-text);
+        }
+
+        &:focus {
+            color: var(--c-text);
+            background-color: #ffd157;
+            border-color: #de900e;
         }
     }
 
@@ -2223,6 +2233,18 @@ a {
 
 .mb-em {
     margin-bottom: 1em;
+}
+
+.ml-qt {
+    margin-left: 0.25em;
+}
+
+.ml-em-half {
+    margin-left: 0.5em;
+}
+
+.mr-qt {
+    margin-right: 0.25em;
 }
 
 .mb-0 {

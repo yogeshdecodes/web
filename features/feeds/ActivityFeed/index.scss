@@ -3,23 +3,143 @@
 .ActivityItemContainer {
     @extend %corners;
     border: 1px solid var(--c-border);
-    // background: var(--c-bg-light);
     padding: 1rem;
+    // background: var(--c-bg-light);
 }
 
 .ActivityFeed {
-    .StreamSection {
-        margin-bottom: 0px;
-        padding-top: $gap;
-        padding-bottom: $gap;
+    .ActivityFeed--section {
+        padding: 1.5rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        //padding-top: 1rem;
+        //padding-bottom: 1rem;
         border-bottom: 1px solid var(--c-bg-light);
+    }
 
-        &:first-of-type {
-            padding-top: 0px;
+    .ActivityFeed--content {
+        &:not(:only-child) {
+            // padding-bottom: 0px;
         }
 
-        &:last-of-type {
-            //padding-bottom: 0px;
+        .user-info-container {
+            //padding-top: 1rem;
+            //padding-left: 1rem;
+            padding-bottom: 1rem;
+            font-size: 14px;
+            color: $c-gray;
+
+            .name {
+                font-weight: bold;
+                color: var(--c-title);
+            }
+        }
+
+        .Task .task-content {
+            font-size: 1.3rem;
+        }
+    }
+
+    .ActivityFeed--controls {
+        margin-top: 1rem;
+        @extend %corners;
+        border: 1px solid var(--c-border);
+        //border-right: 1px solid var(--c-bg-light);
+
+        &.TaskActivityControls {
+            .comments-box {
+                border: none !important;
+                //border-left: 1px solid var(--c-border) !important;
+                //border-right: 1px solid var(--c-border) !important;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+
+            .TaskDetail {
+                padding: 1rem;
+            }
+        }
+
+        .control-group {
+            border-radius: 5px;
+            border: 1px solid transparent;
+            &:not(:only-child) {
+                border-bottom: 1px solid var(--c-border) !important;
+            }
+
+            .btn-praise {
+                border-left: 0px !important;
+                border-right: 0px !important;
+                border-top: 0px !important;
+                border-right: 1px solid var(--c-bg-light) !important;
+                line-height: 24px !important;
+                cursor: pointer;
+                flex-direction: row;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.praised {
+                    color: #de900e !important;
+                }
+
+                &:active {
+                    border-color: var(--c-bg-light) !important;
+                    color: var(--c-text);
+                    font-weight: bold;
+                    background-color: var(--c-lightest) !important;
+                    transform: scale(0.95);
+                }
+
+                &:hover {
+                    background-color: var(--c-bg-light) !important;
+                }
+
+                &:active {
+                    font-weight: bold;
+                    background-color: var(--c-lightest) !important;
+                    transform: scale(0.95);
+                }
+
+                &:focus {
+                    color: var(--c-text);
+                    background-color: var(--c-lightest) !important;
+                }
+            }
+
+            > button {
+                font-size: 0.75em !important;
+                flex-grow: 1;
+                width: 100%;
+                border: none !important;
+                border-radius: 0px !important;
+                background: var(--c-lightest) !important;
+                padding: 0.5rem !important;
+                border-right: 1px solid var(--c-bg-light) !important;
+                color: var(--c-text) !important;
+                transition: all 0.3s ease !important;
+
+                &:disabled {
+                    // opacity: 1 !important;
+                    // color: #de900e !important;
+                }
+
+                &:active {
+                    transform: scale(0.95);
+                }
+
+                &:hover {
+                    background-color: var(--c-bg-light) !important;
+                }
+
+                &:first-of-type {
+                    border-left: none !important;
+                }
+
+                &:last-of-type {
+                    border-right: none !important;
+                }
+            }
         }
     }
 }

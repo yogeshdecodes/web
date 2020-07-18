@@ -4,6 +4,13 @@
     display: inline-block;
 }
 
+.PraiseButton,
+.PraiseCount {
+    .emoji {
+        // padding-right: 0.25em;
+    }
+}
+
 .PraiseIndicator {
     display: inline-flex !important;
     justify-content: center;

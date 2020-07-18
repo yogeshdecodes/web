@@ -2,188 +2,33 @@ import React from "react";
 import debounce from "lodash/debounce";
 import PraiseCount from "./PraiseCount";
 import { mapStateToProps } from "~/ducks/user";
-import { setPraise } from "~/lib/praise";
-import Repeatable from "react-repeatable";
 import Emoji from "../../../../../../components/Emoji";
-import { incrementPraise } from "../../../../../../lib/praise";
 import styled from "styled-components";
 import { Router } from "~/routes";
 import { connect } from "react-redux";
 import { isServer } from "~/config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { prefetch, praise } from "~/lib/praise";
+import FaceStack from "~/features/users/components/FaceStack";
+import uniqBy from "lodash/uniqBy";
 
 const PraiseButton = styled.button``;
 
 class Praisable extends React.Component {
-    maxPraise = 100;
-    praiseToAdd = 5;
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            checked: false,
-            isPraising: false,
-            canPraise: false,
-            amount: 0,
-            total: this.props.initialAmount,
-            failed: false,
-            loggedOutError: false,
-            redirecting: false,
-            tooMuchPraise: false,
-            clicked: false,
-            done: false
-        };
-    }
-
-    getUserPraise = () => {
-        return 0;
+    state = {
+        loading: true,
+        praising: false,
+        total: this.props.initialAmount,
+        praised: false,
+        praised_by: [],
+        praiseStatus: null
     };
-
-    componentDidMount() {}
-
-    onStart = async () => {
-        await this.canPraise();
-        this.setState({
-            checked: true,
-            clicked: true,
-            done: false
-        });
-    };
-
-    onRelease = () => {
-        this.setState({
-            clicked: false
-        });
-    };
-
-    checkPraiseStatus = () => {
-        if (!this.props.isLoggedIn) {
-            this.setState({ loggedOutError: true });
-            setTimeout(() => {
-                Router.pushRoute("/start");
-            }, 1000);
-            this.fadeErr();
-            return false;
-        }
-
-        if (this.props.user.id === this.getUserObject().id) {
-            return false;
-        }
-
-        if (
-            this.getUserPraise() > this.maxPraise ||
-            this.state.amount + 1 > this.maxPraise ||
-            this.getUserPraise() + this.state.amount + this.praiseToAdd >
-                this.maxPraise ||
-            this.getUserPraise() + this.praiseToAdd > this.maxPraise
-        ) {
-            this.setState({ tooMuchPraise: true });
-            this.fadeErr();
-            return false;
-        }
-
-        return true;
-    };
-
-    fadeErr = debounce(() => {
-        setTimeout(
-            () =>
-                this.setState({
-                    tooMuchPraise: false,
-                    loggedOutError: false,
-                    isPraising: false
-                }),
-            2000
-        );
-    }, 300);
-
-    beginPraise = async () => {
-        const canPraise = this.checkPraiseStatus();
-        if (canPraise) {
-            this.triggerIncrement();
-        }
-    };
-
-    endPraise = async () => {
-        await this.setState({
-            isPraising: false,
-            done: true
-        });
-
-        setTimeout(e => this.setState({ done: false }), 500);
-        await this.setPraise();
-    };
-
-    setPraise = debounce(async () => {
-        try {
-            const task = await setPraise(
-                this.props.indexUrl,
-                this.state.amount
-            );
-            const total = task.praise - task.user_praised;
-            this.setState({
-                done: true,
-                isPraising: false,
-                total,
-                amount: task.user_praised
-            });
-        } catch (e) {
-            this.setState({ failed: true, amount: 0 });
-        }
-    }, 500);
-
-    stopPropagation = () => {
-        if (this.click) {
-            this.click.stopPropagation();
-        }
-    };
-
-    getUserObject = () => {
-        if (this.props.item.user) return this.props.item.user;
-        if (this.props.item.owner) return this.props.item.owner;
-    };
-
-    warn = () => {
-        this.incrementPraise();
-        this.setState({
-            clicked: true
-        });
-        setTimeout(() => this.setState({ clicked: false }), 500);
-    };
-
-    triggerIncrement = () => {
-        this.setState({
-            isPraising: true,
-            amount: this.state.amount + this.praiseToAdd
-        });
-        this.incrementPraise();
-    };
-
-    shouldAlwaysShowButton = () => {
-        if (isServer) return true;
-        return window.matchMedia("only screen and (max-width: 760px)").matches;
-    };
-
-    incrementPraise = debounce(async () => {
-        try {
-            const praise = await incrementPraise(
-                this.props.indexUrl,
-                this.state.amount
-            );
-            const total = praise.total;
-            this.setState({ done: true, isPraising: false, total, amount: 0 });
-        } catch (e) {
-            this.setState({ failed: true, tooMuchPraise: true, amount: 0 });
-            this.fadeErr();
-        }
-    }, 300);
 
     componentDidUpdate(prevProps) {
         if (
             this.props.indexUrl &&
             prevProps.indexUrl &&
-            this.props.initialAmount !== prevProps.initialAmount &&
-            !this.state.isPraising
+            this.props.initialAmount !== prevProps.initialAmount
         ) {
             // reset praise on update
             this.setState({
@@ -192,41 +37,99 @@ class Praisable extends React.Component {
         }
     }
 
-    renderPraiseButton = () => (
-        <Repeatable
-            repeatDelay={100}
-            onPress={this.beginPraise}
-            repeatInterval={50}
-            componentClass={PraiseButton}
-            className={
-                this.state.isPraising
-                    ? "btn btn-praise praising"
-                    : "btn btn-praise btn-gray"
+    componentDidMount() {
+        if (this.props.initialAmount > 0) {
+            this.prefetch();
+        }
+    }
+
+    prefetch = async () => {
+        try {
+            this.setState({ loading: true, praised: false, praised_by: [] });
+            const { total, praised, praised_by } = await prefetch(
+                this.props.indexUrl
+            );
+            this.setState({
+                loading: false,
+                total,
+                praised,
+                praised_by
+            });
+        } catch (e) {}
+    };
+
+    getUserObject = () => {
+        if (this.props.item.user) return this.props.item.user;
+        if (this.props.item.owner) return this.props.item.owner;
+        return { id: false };
+    };
+
+    onClick = async () => {
+        try {
+            const payload = { praising: true };
+            if (this.state.praised) {
+                payload.praised = false;
+                payload.total = this.state.total - 1;
+                if (this.props.me) {
+                    payload.praised_by = this.state.praised_by.filter(
+                        u => u.id !== this.props.me.id
+                    );
+                }
+            } else {
+                payload.praised = true;
+                payload.total = this.state.total + 1;
+                if (this.props.me) {
+                    payload.praised_by = uniqBy(
+                        [...this.state.praised_by, this.props.me],
+                        "id"
+                    );
+                }
             }
-        >
-            <Emoji emoji={"👏"} /> &nbsp;
-            {this.state.isPraising &&
-                !this.state.loggedOutError &&
-                !this.state.tooMuchPraise &&
-                "Yay! "}
-            {!this.state.loggedOutError && !this.state.tooMuchPraise
-                ? this.state.total + this.state.amount
-                : null}
-            {this.state.tooMuchPraise &&
-                this.props.isLoggedIn &&
-                "Too much praise!"}
-            {this.state.loggedOutError &&
-                "You must login to praise. Taking you there..."}
-        </Repeatable>
-    );
+            this.setState(payload);
+            const { praised, user, total } = await praise(this.props.indexUrl);
+            this.setState({
+                praising: false,
+                praised,
+                total
+            });
+        } catch (e) {}
+    };
+
+    renderPraiseButton = (clickable = false) => {
+        return (
+            <button
+                onClick={this.onClick}
+                className={
+                    "PraiseButton btn-small btn-praise" +
+                    (this.state.praised ? " praised" : "") +
+                    " " +
+                    (this.props.className ? this.props.className : "")
+                }
+            >
+                <span className="mr-qt">
+                    <FontAwesomeIcon
+                        icon={this.state.praised ? "star" : ["far", "star"]}
+                    />
+                </span>{" "}
+                {this.state.praised ? (
+                    <strong>Praised</strong>
+                ) : (
+                    <>{this.state.total} praise</>
+                )}
+                {this.props.withFaces && this.state.praised_by.length > 0 ? (
+                    <div className="ml-em-half" style={{ height: 24 }}>
+                        <FaceStack users={this.state.praised_by} />
+                    </div>
+                ) : null}
+            </button>
+        );
+    };
 
     render() {
         return (
             <>
                 {!this.props.button && <>{this.props.children} &nbsp;</>}{" "}
-                {(this.props.expanded ||
-                    this.props.button ||
-                    this.shouldAlwaysShowButton()) &&
+                {(this.props.expanded || this.props.button) &&
                 this.props.me &&
                 this.props.me.id !== this.getUserObject().id ? (
                     this.renderPraiseButton()
