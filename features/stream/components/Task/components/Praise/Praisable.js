@@ -17,6 +17,7 @@ const PraiseButton = styled.button``;
 class Praisable extends React.Component {
     state = {
         loading: true,
+        redirecting: false,
         praising: false,
         total: this.props.initialAmount,
         praised: false,
@@ -65,6 +66,12 @@ class Praisable extends React.Component {
     };
 
     onClick = async () => {
+        if (!this.props.isLoggedIn) {
+            this.setState({ redirecting: true });
+            Router.pushRoute("start");
+            return;
+        }
+
         try {
             const payload = { praising: true };
             if (this.state.praised) {
@@ -96,6 +103,32 @@ class Praisable extends React.Component {
     };
 
     renderPraiseButton = (clickable = false) => {
+        if (this.state.redirecting) {
+            return (
+                <button
+                    className={
+                        "PraiseButton btn-small btn-praise has-text-warning" +
+                        (this.state.praised ? " praised" : "") +
+                        " " +
+                        (this.props.className ? this.props.className : "")
+                    }
+                >
+                    <span className="mr-qt">
+                        <FontAwesomeIcon
+                            icon={this.state.praised ? "star" : ["far", "star"]}
+                        />
+                    </span>{" "}
+                    <span>You must join to praise.</span>
+                    {this.props.withFaces &&
+                    this.state.praised_by.length > 0 ? (
+                        <div className="ml-em-half" style={{ height: 24 }}>
+                            <FaceStack users={this.state.praised_by} />
+                        </div>
+                    ) : null}
+                </button>
+            );
+        }
+
         return (
             <button
                 onClick={this.onClick}
