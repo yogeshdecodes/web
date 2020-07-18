@@ -365,33 +365,36 @@ class Task extends React.Component {
     renderExtras = () => {
         return (
             <>
-                {this.props.task.user.is_live &&
-                    this.props.task.in_progress &&
-                    this.props.task.event === "shipstreams" && (
-                        <div style={{ paddingTop: 10, paddingBottom: 10 }}>
-                            <div
-                                className="twitchWrapper"
-                                style={{ paddingTop: 10, paddingBottom: 10 }}
-                            >
-                                <div className="twitchStream">
-                                    <iframe
-                                        title={
-                                            this.props.task.user
-                                                .shipstreams_handle
-                                        }
-                                        src={`https://player.twitch.tv/?channel=${this.props.task.user.shipstreams_handle}&autoplay=false`}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    )}
                 <div className="task-details">
                     {this.props.task.description !== null && (
                         <div className="description-text">
                             {this.props.task.description}
                         </div>
                     )}
-                    {this.state.detailsOpen && (
+                    {this.props.task.user.is_live &&
+                        this.props.task.in_progress &&
+                        this.props.task.event === "shipstreams" && (
+                            <div style={{ paddingTop: 10, paddingBottom: 10 }}>
+                                <div
+                                    className="twitchWrapper"
+                                    style={{
+                                        paddingTop: 10,
+                                        paddingBottom: 10
+                                    }}
+                                >
+                                    <div className="twitchStream">
+                                        <iframe
+                                            title={
+                                                this.props.task.user
+                                                    .shipstreams_handle
+                                            }
+                                            src={`https://player.twitch.tv/?channel=${this.props.task.user.shipstreams_handle}&autoplay=false`}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    {!this.props.plain && this.state.detailsOpen && (
                         <div className="action-bar">
                             <TaskDetail
                                 task={this.props.task}
@@ -399,13 +402,16 @@ class Task extends React.Component {
                             />
                         </div>
                     )}
-                    {(this.state.detailsOpen ||
-                        this.props.task.comment_count > 0) && (
-                        <CommentsBox
-                            initialCommentCount={this.props.task.comment_count}
-                            task={this.props.task}
-                        />
-                    )}
+                    {!this.props.plain &&
+                        (this.state.detailsOpen ||
+                            this.props.task.comment_count > 0) && (
+                            <CommentsBox
+                                initialCommentCount={
+                                    this.props.task.comment_count
+                                }
+                                task={this.props.task}
+                            />
+                        )}
                 </div>
             </>
         );
@@ -428,6 +434,7 @@ class Task extends React.Component {
                         <span className={"task-content"}>
                             {this.renderContent()}
                         </span>{" "}
+                        {this.renderExtras()}
                         {this.props.withAttachment && this.renderAttachments()}
                     </div>
                 </Link>
