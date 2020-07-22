@@ -37,7 +37,7 @@ export class Track {
             transport_type: "beacon",
             event_callback: function() {
                 if (!document || !document.location) return "";
-                document.location = url;
+                document.location = to;
             }
         });
     };
