@@ -19,6 +19,9 @@ import { actions as editorActions } from "../../../../ducks/editor";
 import { getMyProducts } from "../../../../lib/products";
 import { actions as tasksActions } from "~/ducks/tasks";
 import ProductIcon from "~/features/products/components/ProductIcon";
+import Task from "~/features/stream/components/Task";
+import DoneTodayCount from "../../../tasks/DoneTodayCount";
+import TodayList from "../../../tasks/components/TodayList";
 
 const mapStateToProps = state => {
     return {
@@ -50,7 +53,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const DoneToggle = ({ onClick, showDone }) => (
-    <button className={"btn-small"} onClick={onClick}>
+    <button className={"btn-small btn-light"} onClick={onClick}>
         {showDone ? "Hide" : "Show"} completed tasks
     </button>
 );
@@ -202,13 +205,13 @@ const Tasks = ({ tasks, showDone, toggleDoneTasks, me }) => {
     return (
         <div className={"Tasks"}>
             <div className={"flex v-center col-right"}>
-                <div className={"has-text-grey-light"}>
-                    <strong>
+                <div>
+                    <h3>All tasks</h3>
+                    <h4 className="subtitle has-text-grey">
                         {groupedTasks.remaining.length +
                             groupedTasks.in_progress.length}{" "}
-                        remaining
-                    </strong>
-                    , {groupedTasks.done.length} done
+                        remaining, {groupedTasks.done.length} done
+                    </h4>
                 </div>
                 <div>
                     <DoneToggle onClick={toggleDoneTasks} showDone={showDone} />
@@ -224,7 +227,7 @@ const Tasks = ({ tasks, showDone, toggleDoneTasks, me }) => {
                             </h3>
                             {dueSoon &&
                                 dueSoon.map(task => (
-                                    <CheckableTask key={task.id} task={task} />
+                                    <Task plain key={task.id} task={task} />
                                 ))}
                             <hr />
                         </>
@@ -234,17 +237,17 @@ const Tasks = ({ tasks, showDone, toggleDoneTasks, me }) => {
                             <CelebratoryThing me={me} />
                         )}
                     {groupedTasks.in_progress.map(task => (
-                        <CheckableTask key={task.id} task={task} />
+                        <Task plain key={task.id} task={task} />
                     ))}
                     {groupedTasks.in_progress.length !== 0 &&
                         groupedTasks.remaining.length !== 0 && <hr />}
                     {groupedTasks.remaining.map(task => (
-                        <CheckableTask key={task.id} task={task} />
+                        <Task plain key={task.id} task={task} />
                     ))}
                     {showDone && groupedTasks.done.length !== 0 && <hr />}
                     {showDone
                         ? groupedTasks.done.map(task => (
-                              <CheckableTask key={task.id} task={task} />
+                              <Task plain key={task.id} task={task} />
                           ))
                         : null}
                 </div>
@@ -382,6 +385,24 @@ class ListView extends React.Component {
                     </div>
 
                     <div>
+                        <h3>Today</h3>
+                        <h4 className="subtitle has-text-grey mb-em">
+                            <DoneTodayCount /> tasks completed today
+                        </h4>
+                        <div className="card">
+                            <div className="card-content">
+                                {loading ? (
+                                    <center>
+                                        <Spinner
+                                            small
+                                            text="Loading your tasks..."
+                                        />
+                                    </center>
+                                ) : (
+                                    <TodayList />
+                                )}
+                            </div>
+                        </div>
                         <Tasks
                             me={me}
                             tasks={tasks}

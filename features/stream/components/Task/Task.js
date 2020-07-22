@@ -428,16 +428,16 @@ class Task extends React.Component {
 
         if (this.props.plain) {
             return (
-                <Link route="task-page" params={{ id: this.props.task.id }}>
-                    <div className={this.getClassNames()}>
-                        {this.renderIcon()}{" "}
+                <div className={this.getClassNames()}>
+                    {this.renderIcon()}{" "}
+                    <Link route="task-page" params={{ id: this.props.task.id }}>
                         <span className={"task-content"}>
                             {this.renderContent()}
-                        </span>{" "}
-                        {this.renderExtras()}
-                        {this.props.withAttachment && this.renderAttachments()}
-                    </div>
-                </Link>
+                        </span>
+                    </Link>
+                    {this.renderExtras()}
+                    {this.props.withAttachment && this.renderAttachments()}
+                </div>
             );
         }
 

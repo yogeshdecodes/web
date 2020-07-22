@@ -28,9 +28,6 @@ class TasksPage extends React.Component {
         }
 
         switch (this.props.view) {
-            case "list":
-                return <ListView />;
-
             case "kanban":
                 return (
                     <section className={"container"}>
@@ -39,7 +36,7 @@ class TasksPage extends React.Component {
                 );
 
             default:
-                return <TodayView tasks={this.props.tasks} />;
+                return <ListView />;
         }
     };
 

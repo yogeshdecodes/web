@@ -18,11 +18,7 @@ export default class TasksPageLayout extends Component {
                     }
                 >
                     <NavLink route="tasks" activeClassName="is-active">
-                        <a className="navbar-item">Today</a>
-                    </NavLink>
-
-                    <NavLink route="tasks-list" activeClassName="is-active">
-                        <a className="navbar-item">List</a>
+                        <a className="navbar-item">All</a>
                     </NavLink>
 
                     <NavLink route="tasks-kanban" activeClassName="is-active">
