@@ -227,7 +227,11 @@ const Tasks = ({ tasks, showDone, toggleDoneTasks, me }) => {
                             </h3>
                             {dueSoon &&
                                 dueSoon.map(task => (
-                                    <Task plain key={task.id} task={task} />
+                                    <Task
+                                        withCounts={false}
+                                        key={task.id}
+                                        task={task}
+                                    />
                                 ))}
                             <hr />
                         </>
@@ -237,17 +241,21 @@ const Tasks = ({ tasks, showDone, toggleDoneTasks, me }) => {
                             <CelebratoryThing me={me} />
                         )}
                     {groupedTasks.in_progress.map(task => (
-                        <Task plain key={task.id} task={task} />
+                        <Task withCounts={false} key={task.id} task={task} />
                     ))}
                     {groupedTasks.in_progress.length !== 0 &&
                         groupedTasks.remaining.length !== 0 && <hr />}
                     {groupedTasks.remaining.map(task => (
-                        <Task plain key={task.id} task={task} />
+                        <Task withCounts={false} key={task.id} task={task} />
                     ))}
                     {showDone && groupedTasks.done.length !== 0 && <hr />}
                     {showDone
                         ? groupedTasks.done.map(task => (
-                              <Task plain key={task.id} task={task} />
+                              <Task
+                                  withCounts={false}
+                                  key={task.id}
+                                  task={task}
+                              />
                           ))
                         : null}
                 </div>
