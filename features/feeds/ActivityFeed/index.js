@@ -142,13 +142,14 @@ function getHumanTargetType(activity) {
             `${getPrefix(count)} ${typeText}`
         );
     } else {
-        if (!activity.target_type) {
+        if (!activity.getTarget() || !activity.getTargetType()) {
             return null;
         }
         const target = activity.getTargetObject();
-        const targetType = activity.target_type;
+        const targetType = activity.getTargetType();
         const typeText = pluralize(targetType, 1);
         const targetTitle = getTargetTitle(targetType, target);
+        console.log(activity, targetType);
         if (targetTitle) {
             return (
                 <ItemLink item={target} type={targetType}>
