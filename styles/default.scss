@@ -777,6 +777,12 @@ table.is-full {
         }
     }
 
+    &.flex-gap-half {
+        > div:not(:last-child) {
+            margin-right: 0.5rem;
+        }
+    }
+
     &.flex-gap-big {
         > div:not(:last-child) {
             margin-right: 2rem;
