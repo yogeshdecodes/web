@@ -176,8 +176,8 @@ class AboutPage extends React.Component {
                                 challenge the status quo.
                             </p>
                         </div>
-                        <div className="team-sect flex flex-gap">
-                            <div className="member">
+                        <div className="large-user-list flex flex-gap">
+                            <div className="user">
                                 <img src="/img/team/sergio.png" alt="" />
                                 <div>
                                     <h3>Sergio Mattei</h3>
@@ -187,7 +187,7 @@ class AboutPage extends React.Component {
                                     </small>
                                 </div>
                             </div>
-                            <div className="member">
+                            <div className="user">
                                 <img src="/img/team/hector.png" alt="" />
                                 <div>
                                     <h3>Hector Soto</h3>
@@ -197,7 +197,7 @@ class AboutPage extends React.Component {
                                     </small>
                                 </div>
                             </div>
-                            <div className="member">
+                            <div className="user">
                                 <img src="/img/team/wharton.png" alt="" />
                                 <div>
                                     <h3>Jose Carlos Wharton</h3>
@@ -207,7 +207,7 @@ class AboutPage extends React.Component {
                                     </small>
                                 </div>
                             </div>
-                            <div className="member">
+                            <div className="user">
                                 <img src="/img/team/kerr.jpg" alt="" />
                                 <div>
                                     <h3>Kerr Travers</h3>
@@ -217,7 +217,7 @@ class AboutPage extends React.Component {
                                     </small>
                                 </div>
                             </div>
-                            <div className="member">
+                            <div className="user">
                                 <img src="/img/team/monday.jpeg" alt="" />
                                 <div>
                                     <h3>Monday</h3>

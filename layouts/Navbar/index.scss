@@ -240,6 +240,10 @@
             //    rgba(0, 173, 113, 0) 100%
             //);
             color: $c-main;
+
+            &.gold {
+                color: $c-gold;
+            }
         }
 
         .navbar-link {

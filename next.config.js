@@ -14,6 +14,9 @@ let config = {
     webpack: config => {
         // Fixes npm packages that depend on `fs` module
         config.plugins = config.plugins || [];
+        config.node = {
+            fs: "empty"
+        };
         config.stats = {
             ...config.stats,
             warningsFilter: warn =>

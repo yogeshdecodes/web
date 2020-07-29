@@ -33,6 +33,10 @@ const LoggedInMenu = props => (
                 </a>
             </NavLink>
 
+            <NavLink iexact activeClassName="is-active" route="gold">
+                <a className="navbar-item gold">Gold</a>
+            </NavLink>
+
             <NavLink route="products" iexact activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Products</span>
