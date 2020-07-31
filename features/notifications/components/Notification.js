@@ -6,7 +6,6 @@ import { Entry } from "~/features/stream";
 import TimeAgo from "react-timeago";
 import { Product } from "~/features/products";
 import uniqBy from "lodash/uniqBy";
-import MilestoneMedia from "../../milestones/components/MilestoneMedia";
 import orderBy from "lodash/orderBy";
 import InlineCollapse from "../../../components/InlineCollapse";
 import { imageUrl } from "../../../lib/utils/img";
@@ -20,15 +19,6 @@ function renderPolymorphicPraise(n, withComments = true) {
                 plain={!withComments}
                 withAttachment={false}
                 task={n.target}
-            />
-        );
-    if (n.target_type === "milestone")
-        return (
-            <MilestoneMedia
-                plain={!withComments}
-                xs
-                withIcon={false}
-                milestone={n.target}
             />
         );
 }
@@ -211,25 +201,6 @@ function renderNotificationVerb(key, notification, grouped = false) {
                 </Container>
             );
 
-        case "milestone_commented":
-            return (
-                <Container>
-                    <Link
-                        route="profile-page"
-                        params={{ username: notification.actor.username }}
-                    >
-                        <a>@{notification.actor.username}</a>
-                    </Link>{" "}
-                    replied to{" "}
-                    <Link
-                        route={"milestone-page"}
-                        params={{ slug: notification.target.slug }}
-                    >
-                        <a>a milestone.</a>
-                    </Link>{" "}
-                </Container>
-            );
-
         case "product_launched":
             return (
                 <Container>
@@ -350,9 +321,6 @@ const Notification = ({
                     let tasks = notification.filter(
                         n => n.target_type === "task"
                     );
-                    let milestones = notification.filter(
-                        n => n.target_type === "milestone"
-                    );
 
                     let collapsedTasks = [];
                     const taskMax = 3;
@@ -376,9 +344,6 @@ const Notification = ({
                                             renderPolymorphicPraise(n, false)
                                         )}
                                     </InlineCollapse>
-                                )}
-                                {milestones.map(n =>
-                                    renderPolymorphicPraise(n, false)
                                 )}
                             </div>
                         </div>
@@ -489,22 +454,6 @@ const Notification = ({
                         {renderNotificationVerb(key, notification)}
                         <div className="content-case">
                             <Entry task={notification.target} />
-                        </div>
-                    </div>
-                );
-                break;
-
-            case "milestone_commented":
-                notificationImage = notification.actor.avatar;
-                notificationHtml = (
-                    <div>
-                        {renderNotificationVerb(key, notification)}
-                        <div className="content-case">
-                            <MilestoneMedia
-                                xs
-                                withIcon={false}
-                                milestone={notification.target}
-                            />
                         </div>
                     </div>
                 );

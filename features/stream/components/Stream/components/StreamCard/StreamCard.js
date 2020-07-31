@@ -9,7 +9,6 @@ import {
 import EntryList from "~/features/stream/components/EntryList";
 // import { StreamCard as Card } from "./styled";
 import { UserMedia } from "~/features/users";
-import { MilestoneMedia } from "~/features/milestones";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import InlineCollapse from "../../../../../../components/InlineCollapse";
@@ -44,10 +43,6 @@ class StreamCard extends React.Component {
         if (tagLifeLogs) tasks = this.tagLifeLogs(tasks);
         if (tagToCollapse) tasks = this.tagToCollapse(tasks);
         return orderByDate(tasks);
-    };
-
-    getMilestones = () => {
-        return this.props.activity.filter(o => o.type === "milestones");
     };
 
     getGroupedTasks = (filterCollapsed = true) => {
@@ -156,7 +151,6 @@ class StreamCard extends React.Component {
 
     render() {
         let tasks = this.getGroupedTasks();
-        let milestones = this.getMilestones();
         let user = this.getUser();
         let collapsedTasks = this.getCollapsedTasks();
         let groupedCollapsedTasks = groupTasksByDone(collapsedTasks);
@@ -171,15 +165,6 @@ class StreamCard extends React.Component {
                     <div className="user-info-container">
                         <UserMedia user={user} />
                     </div>
-
-                    {milestones.map(m => (
-                        <MilestoneMedia
-                            key={m.id}
-                            linked={false}
-                            stream
-                            milestone={m}
-                        />
-                    ))}
 
                     {this.getTasks().length > 0 && (
                         <div className={"tasks-container"}>

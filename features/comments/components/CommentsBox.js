@@ -44,8 +44,6 @@ class CommentsBox extends React.Component {
         let indexUrl = this.props.indexUrl;
         if (!indexUrl && this.props.task) {
             indexUrl = `/tasks/${this.props.task.id}/`;
-        } else if (!indexUrl && this.props.milestone) {
-            indexUrl = `/milestones/${this.props.milestone.id}/`;
         }
         return indexUrl;
     };

@@ -8,7 +8,6 @@ import debounce from "lodash/debounce";
 const PostTypes = {
     TASK: 1,
     QUESTION: 2,
-    MILESTONE: 3,
     RFF: 4
 };
 
@@ -201,7 +200,6 @@ const mapStateToProps = state => ({
     hasGold: state.user.me ? state.user.me.gold : false,
     open: state.editor.open,
     queue: state.editor.queue,
-    creatingMilestone: state.editor.creatingMilestone,
     creatingDiscussion: state.editor.creatingDiscussion,
     editorDueAt: state.editor.editorDueAt,
     editorAttachment: state.editor.editorAttachment,
@@ -226,7 +224,6 @@ const mapDispatchToProps = dispatch => ({
     markDone: () => dispatch(editorActions.markDone()),
     markInProgress: () => dispatch(editorActions.markInProgress()),
     markRemaining: () => dispatch(editorActions.markRemaining()),
-    openMilestoneEditor: () => dispatch(editorActions.openMilestoneEditor()),
     openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor())
 });
 

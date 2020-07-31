@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import OutboundLink from "./OutboundLink";
+import OutboundLink from "../../components/OutboundLink";
 
 export default props => (
     <OutboundLink

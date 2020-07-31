@@ -128,9 +128,9 @@ const GoldLanding = ({ onClickBuy, users, products, purchased }) => (
                     <div className="text-case left">
                         <h3>Features that empower you.</h3>
                         <p>
-                            Tell your achievements to the community with{" "}
-                            <strong>milestones</strong>.<br /> Reach more makers
-                            by <strong>featuring your product</strong>.
+                            Tell your progress to the community with{" "}
+                            <strong>updates</strong>.<br /> Reach more makers by{" "}
+                            <strong>featuring your product</strong>.
                             <br />
                             Save time with <strong>recurring tasks</strong>.
                             <br /> Share more with <strong>video</strong>.

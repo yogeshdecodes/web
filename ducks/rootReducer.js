@@ -49,7 +49,6 @@ const streamPersistConfig = {
         "isSyncing",
         "fetchFailed",
         "tasks",
-        "milestones",
         "allLoaded",
         "nextUrl",
         "lastUpdatedTime",

@@ -1,17 +1,14 @@
 import React from "react";
-import GlobalStream, {
-    prefetch as prefetchStream
-} from "~/features/stream/containers/GlobalStream";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
 import DiscussionSection, {
     prefetchData as prefetchThreads
 } from "~/features/discussions/DiscussionSection";
-import HomeHero from "../../components/marketing/HomeHero";
 import KeyActivityFeed, {
     prefetchActivity
 } from "../../features/feeds/KeyActivityFeed";
+import { Link } from "~/routes";
 
 function Home(props) {
     return (
@@ -20,7 +17,16 @@ function Home(props) {
                 <div className="grid-c-s">
                     <div>
                         <div className="mbGap">
-                            <HomeHero />
+                            <div className="HomeHero hero">
+                                <h1>Home of the maker community</h1>
+                                <h3 className="subtitle mb-em">
+                                    Makerlog is where 5,000+ indie hackers & makers get things
+                                    done together.
+                                </h3>
+                                <Link route={"start"}>
+                                    <a>Get started</a>
+                                </Link>
+                            </div>
                         </div>
                         <h3>Top threads this week</h3>
                         <h4 className="subtitle has-text-grey mb-em">

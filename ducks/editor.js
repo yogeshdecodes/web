@@ -67,7 +67,6 @@ const initialState = {
     editorDone: true,
     editorInProgress: false,
     editorAttachment: null,
-    creatingMilestone: false,
     creatingDiscussion: false,
     queue: [],
     isCreating: false,
@@ -89,7 +88,6 @@ export const types = {
     TASK_CREATE_REQUEST: "TASK_CREATE_REQUEST",
     TASK_CREATE_SUCCEED: "TASK_CREATE_SUCCEED",
     TASK_CREATE_FAILED: "TASK_CREATE_FAILED",
-    EDITOR_TOGGLE_MILESTONE: "EDITOR_TOGGLE_MILESTONE",
     EDITOR_OPEN_DISCUSSIONS: "EDITOR_OPEN_DISCUSSIONS",
     EDITOR_TOGGLE_DISCUSSIONS: "EDITOR_TOGGLE_DISCUSSIONS",
     EDITOR_SET_DUE_AT: "EDITOR_SET_DUE_AT",
@@ -106,7 +104,6 @@ export const editorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 open: nextOpen,
-                creatingMilestone: false,
                 creatingDiscussion: false,
                 tab: action.tab || 0
             };
@@ -131,12 +128,6 @@ export const editorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...delta
-            };
-
-        case types.EDITOR_TOGGLE_MILESTONE:
-            return {
-                ...state,
-                creatingMilestone: !state.creatingMilestone
             };
 
         case types.EDITOR_TOGGLE_DISCUSSIONS:
@@ -299,7 +290,6 @@ export const actions = {
     markDone: () => ({ type: types.EDITOR_MARK_DONE }),
     markInProgress: () => ({ type: types.EDITOR_MARK_IN_PROGRESS }),
     markRemaining: () => ({ type: types.EDITOR_MARK_REMAINING }),
-    openMilestoneEditor: () => ({ type: types.EDITOR_TOGGLE_MILESTONE }),
     openDiscussionEditor: (toggle = true) => ({
         type: toggle
             ? types.EDITOR_TOGGLE_DISCUSSIONS

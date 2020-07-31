@@ -24,7 +24,6 @@ import orderBy from "lodash/orderBy";
 import { getTimezone } from "../../../lib/utils/timezone";
 import Markdown from "~/components/Markdown";
 import TaskActivityGroup from "../TaskActivityGroup";
-import MilestoneMedia from "../../milestones/components/MilestoneMedia";
 import AdIntersitial from "../AdIntersitial";
 import "./index.scss";
 import ReplyFaces from "../../discussions/ReplyFaces";
@@ -88,15 +87,6 @@ function ItemLink({
         case "reply":
             return (
                 <Link href={`/discussions/${item.parent}/#reply-${item.id}`}>
-                    <a target="_blank" rel="noopener noreferrer">
-                        {children}
-                    </a>
-                </Link>
-            );
-
-        case "milestone":
-            return (
-                <Link route="milestone-page" params={{ slug: item.slug }}>
                     <a target="_blank" rel="noopener noreferrer">
                         {children}
                     </a>
@@ -224,9 +214,6 @@ const ActivityObject = ({ activity }) => {
                     <Product media product={object} />
                 </div>
             );
-
-        case "milestone":
-            return <MilestoneMedia activityItem milestone={object} />;
 
         case "reply":
             return (

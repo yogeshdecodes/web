@@ -14,10 +14,7 @@ const BASE_URL = process.env.BASE_URL
     : "https://getmakerlog.com";
 
 const STREAM_TYPES = (following = true) => ({
-    tasks: following ? "/stream" : "/explore/stream/",
-    milestones: following
-        ? "/stream/milestones/"
-        : "/explore/stream/milestones/"
+    tasks: following ? "/stream" : "/explore/stream/"
 });
 
 const IMGOPT_ENABLED = process.env.IMGOPT_ENABLED

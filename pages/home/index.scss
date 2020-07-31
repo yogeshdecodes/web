@@ -1,45 +1,18 @@
 @import "../../styles/_variables";
 
-/*
+.HomeHero {
+  @extend %corners;
+  @extend %hero-gradient;
+  padding: 3rem;
+  padding-left: 1rem;
 
-    .ThumbnailCover {
-        display: flex;
-        position: absolute;
-        right: 0px;
-        width: 100%;
-        flex-wrap: wrap;
-        top: 0px;
-        overflow: hidden;
-        height: 100%;
-        z-index: 6;
-        background-color: rgba(83, 175, 135, 0.9);
-    }
-
-    .ThumbnailGrid {
-        display: flex;
-        position: absolute;
-        right: 0px;
-        width: 100%;
-        flex-wrap: wrap;
-        top: 0px;
-        height: 100%;
-        z-index: 4;
-        background-image: url(https://i.imgur.com/llKaQpR.jpg);
-        background-position: center;
-        overflow: hidden;
-
-        .image {
-            flex: 1;
-            min-height: 40px;
-            min-width: 40px;
-            max-height: 40px;
-            max-width: 40px;
-            height: auto;
-            overflow: hidden;
-        }
-        .image > img {
-            min-height: 40px;
-            min-width: 40px;
-            height: auto;
-        }
-    }*/
+  h1 {
+    font-size: 1.8rem;
+  }
+  a {
+    @extend %rounded;
+    padding: 0.5rem 1rem;
+    background: var(--c-lightest);
+    color: var(--c-title);
+  }
+}

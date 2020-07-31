@@ -6,7 +6,6 @@ class UserStream extends React.Component {
         return (
             <WeeklyStream
                 tasksIndexUrl={`/users/${this.props.userId}/stream/`}
-                milestonesIndexUrl={`/users/${this.props.userId}/stream/milestones/`}
             />
         );
     }

@@ -24,8 +24,7 @@ class Stream extends React.Component {
         let data = this.props.tasks;
 
         data = assignModelType({
-            tasks: this.props.tasks ? this.props.tasks : [],
-            milestones: this.props.milestones ? this.props.milestones : []
+            tasks: this.props.tasks ? this.props.tasks : []
         });
 
         data = sortStreamByActivity(
@@ -98,7 +97,6 @@ class Stream extends React.Component {
 
 Stream.propTypes = {
     tasks: PropTypes.array.isRequired,
-    milestones: PropTypes.array,
     loadMore: PropTypes.func.isRequired,
     isSyncing: PropTypes.bool.isRequired,
     hasMore: PropTypes.bool.isRequired

@@ -644,7 +644,6 @@ const mapStateToProps = state => ({
     open: state.editor.open,
     activeTask: state.editor.activeTask,
     queue: state.editor.queue,
-    creatingMilestone: state.editor.creatingMilestone,
     creatingDiscussion: state.editor.creatingDiscussion,
     editorDueAt: state.editor.editorDueAt,
     editorAttachment: state.editor.editorAttachment,
@@ -670,7 +669,6 @@ const mapDispatchToProps = dispatch => ({
     markDone: () => dispatch(editorActions.markDone()),
     markInProgress: () => dispatch(editorActions.markInProgress()),
     markRemaining: () => dispatch(editorActions.markRemaining()),
-    openMilestoneEditor: () => dispatch(editorActions.openMilestoneEditor()),
     openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor()),
 
     setActiveTask: activeTask =>

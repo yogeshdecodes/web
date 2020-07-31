@@ -1,7 +1,6 @@
 //import { Link as NavLink } from "~/routes";
 import NavLink from "~/components/ActiveLink";
 
-import Chip from "~/components/Chip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Streak from "~/components/Streak";
@@ -18,7 +17,7 @@ const UserChip = props => (
                 route="profile-page"
                 params={{ username: props.user.username }}
             >
-                <Chip id={"navbarUserChip"}>
+                <div id={"navbarUserChip"}>
                     <img alt={props.user.username} src={props.user.avatar} />
                     <div>
                         <div>
@@ -28,7 +27,7 @@ const UserChip = props => (
                             <RestDays days={props.restDayBalance} />
                         </div>
                     </div>
-                </Chip>
+                </div>
             </NavLink>
         </a>
         <div className="navbar-dropdown is-right">
