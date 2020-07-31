@@ -408,7 +408,7 @@ class TaskQueue extends Component {
                                     <div className="input">
                                         <input
                                             disabled={true}
-                                            autocomplete="off"
+                                            autoComplete="off"
                                             placeholder={
                                                 "Start typing a task..."
                                             }
@@ -458,7 +458,7 @@ class TaskQueue extends Component {
                                                     this.props.activeTask ===
                                                     null
                                                 }
-                                                autocomplete="off"
+                                                autoComplete="off"
                                                 onKeyDown={this.onTaskKeyDown}
                                                 name={task.id}
                                                 onChange={e => {

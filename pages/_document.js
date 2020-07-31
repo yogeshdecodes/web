@@ -89,7 +89,7 @@ export default class Document extends NextDocument {
                     <script
                         src="https://browser.sentry-cdn.com/5.15.4/bundle.min.js"
                         integrity="sha384-Nrg+xiw+qRl3grVrxJtWazjeZmUwoSt0FAVsbthlJ5OMpx0G08bqIq3b/v0hPjhB"
-                        crossorigin="anonymous"
+                        crossOrigin="anonymous"
                     ></script>
                     <script
                         type="text/javascript"

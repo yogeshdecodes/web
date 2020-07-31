@@ -23,9 +23,9 @@ const UserChip = props => (
                         <div>
                             <Streak days={props.user.streak} />
                         </div>
-                        <div>
+                        {props.restDayBalance ? <div>
                             <RestDays days={props.restDayBalance} />
-                        </div>
+                        </div> : null}
                     </div>
                 </div>
             </NavLink>

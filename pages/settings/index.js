@@ -212,7 +212,7 @@ class SecuritySettings extends React.Component {
                 {this.renderSuccess()}
                 {this.renderErrors()}
                 <label className="label">Old password</label>
-                <div class={"form-row has-addons"}>
+                <div className={"form-row has-addons"}>
                     <div className={"control"}>
                         <input
                             type="password"
@@ -223,7 +223,7 @@ class SecuritySettings extends React.Component {
                     </div>
                 </div>
                 <label className="label">New password</label>
-                <div class={"form-row has-addons"}>
+                <div className={"form-row has-addons"}>
                     <div className={"control"}>
                         <input
                             type="password"

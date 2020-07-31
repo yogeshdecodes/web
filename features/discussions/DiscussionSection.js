@@ -40,10 +40,10 @@ class DiscussionSection extends React.Component {
         return (
             <div className="flex flex-v-gap-half flex-column">
                 {pinned.map(t => (
-                    <ThreadMediaLine thread={t} />
+                    <ThreadMediaLine key={t.slug} thread={t} />
                 ))}
                 {discussions.map(t => (
-                    <ThreadMediaLine thread={t} />
+                    <ThreadMediaLine key={t.slug} thread={t} />
                 ))}
             </div>
         );

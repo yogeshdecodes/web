@@ -47,7 +47,7 @@ class EventMedia extends Component {
                     <div className="EventMedia std-media flex flex-gap">
                         {event.icon && (
                             <div>
-                                <figure class={"img-48"}>
+                                <figure className={"img-48"}>
                                     <img src={imageUrl(event.icon, 48)} />
                                 </figure>
                             </div>

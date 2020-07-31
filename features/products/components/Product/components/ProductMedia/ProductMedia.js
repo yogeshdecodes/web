@@ -108,7 +108,7 @@ export class ProductMedia extends React.Component {
                         <div className={"flex"}>
                             <ProductIcon is={48} product={this.props.product} />
                             <div
-                                class="flex flex-column"
+                                className="flex flex-column"
                                 style={{ justifyContent: "center" }}
                             >
                                 <strong>{this.props.product.name} </strong>

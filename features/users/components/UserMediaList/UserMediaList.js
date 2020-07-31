@@ -46,7 +46,7 @@ const UserMediaList = ({ users, large = false, ranked = false }) => (
 );
 
 UserMediaList.propTypes = {
-    users: PropTypes.object.isRequired
+    users: PropTypes.array.isRequired
 };
 
 export default UserMediaList;

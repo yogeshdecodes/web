@@ -54,7 +54,7 @@ class Modal extends React.Component {
     static Content = ModalContent;
     static Footer = ModalFooter;
 
-    componentWillMount() {
+    componentDidMount() {
         ReactModal.setAppElement("body");
     }
 

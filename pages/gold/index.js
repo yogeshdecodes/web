@@ -25,14 +25,14 @@ const GoldHero = ({ items, onClickBuy, purchased }) => (
                 switch (i.type) {
                     case "user":
                         return (
-                            <div>
+                            <div key={i.id}>
                                 <Avatar key={i.id} is={128} user={i} />
                             </div>
                         );
 
                     case "product":
                         return (
-                            <div>
+                            <div key={i.id}>
                                 <ProductIcon
                                     key={i.slug}
                                     is={128}
@@ -163,7 +163,7 @@ const GoldLanding = ({ onClickBuy, users, products, purchased }) => (
 
                     <div className="large-user-list flex flex-gap">
                         {users.map(u => (
-                            <div className="user">
+                            <div key={u.id} className="user">
                                 <Link
                                     route="profile-page"
                                     params={{ username: u.username }}
