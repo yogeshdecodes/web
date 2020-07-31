@@ -2952,6 +2952,7 @@ p {
             margin-bottom: 1rem;
             border-radius: 50% !important;
             height: 200px;
+            width: 200px;
         }
     }
 }
@@ -2966,7 +2967,7 @@ p {
         .user {
             flex-direction: row;
             text-align: left;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
 
             &:last-of-type {
                 margin-bottom: 0px;
@@ -2974,8 +2975,13 @@ p {
         }
         img {
             border-radius: 50% !important;
-            margin-right: 10px;
+            margin-right: 10px !important;
             height: 50px !important;
+            width: 50px !important;
+        }
+
+        .user .user-socials {
+            justify-content: left;
         }
     }
 }

@@ -167,3 +167,39 @@
         text-align: center;
     }
 }
+
+@media only screen and (max-width: $breakpoint-mobile) {
+    .hero-container {
+        padding: 1rem;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .people-grid-bg {
+            display: none;
+        }
+
+        .flex {
+            .col:last-of-type,
+            .real-svg {
+                display: none;
+            }
+        }
+
+        & > .container {
+            > .flex {
+                background: var(--c-lightest);
+            }
+        }
+    }
+
+    .feature-showcase {
+        flex-direction: column;
+        margin-bottom: $gap;
+        div {
+            width: 100%;
+            flex: 1;
+        }
+    }
+}

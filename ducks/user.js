@@ -33,7 +33,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 failed: false,
-                me: action.user
+                me: action.patch ? { ...state.me, ...action.user } : action.user
             };
 
         case types.USER_FAILED:
@@ -70,10 +70,11 @@ export const actions = {
         };
     },
 
-    updateUser: user => {
+    updateUser: (user, patch = false) => {
         return {
             type: types.USER_UPDATE,
-            user: user
+            user: user,
+            patch
         };
     }
 };
@@ -91,3 +92,11 @@ export const mapStateToProps = state => {
         isLoggedIn: state.auth.loggedIn
     };
 };
+
+export const mapGoldStateToProps = state => {
+    return {
+        hasGold: state.user.me ? state.user.me.gold : false
+    };
+};
+
+export const mapGoldDispatchToProps = dispatch => {};
