@@ -1,4 +1,4 @@
-import { isLocalEnv } from "../lib/utils/local";
+import { isLocalEnv } from "../lib/utils/random";
 
 const LocalOnly = ({ children }) => {
     if (isLocalEnv()) {

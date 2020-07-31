@@ -7,10 +7,9 @@ import config from "../../config";
 import OutboundLink from "~/components/OutboundLink";
 import Spinner from "~/components/Spinner";
 import {
-    getPreflightConfig,
     loginWithTwitterToken,
     loginWithFacebookToken
-} from "../../lib/accounts";
+} from "../../lib/auth";
 import { StdErrorCollection } from "../../lib/utils/error";
 import StdErrorMessages from "~/components/forms/StdErrorMessages";
 import { Track } from "../../vendor/ga";

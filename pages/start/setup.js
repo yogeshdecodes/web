@@ -7,14 +7,12 @@ import WallOfLove from "../../components/WallOfLove";
 import config, { isServer } from "../../config";
 import OutboundLink from "~/components/OutboundLink";
 import Spinner from "~/components/Spinner";
-import { getPreflightConfig, loginWithTwitterToken } from "../../lib/accounts";
 import { StdErrorCollection } from "../../lib/utils/error";
 import StdErrorMessages from "~/components/forms/StdErrorMessages";
 import { Track } from "../../vendor/ga";
 import { actions as userActions } from "~/ducks/user";
 import { actions as appActions } from "~/ducks/app";
 import { connect } from "react-redux";
-import { actions as authActions } from "~/ducks/auth";
 
 import omit from "lodash/omit";
 import Dropzone from "react-dropzone";

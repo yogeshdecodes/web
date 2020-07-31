@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import GoldIcon from "~/components/icons/GoldIcon";
-import GoldCtaButton from "~/components/GoldCtaButton";
+import GoldCtaButton from "./GoldCtaButton";
 
 class GoldMessage extends Component {
     render() {

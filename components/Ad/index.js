@@ -1,7 +1,10 @@
 import React from "react";
 import Emoji from "~/components/Emoji";
+import GoldIcon from "~/components/icons/GoldIcon";
+import { connect } from "react-redux";
+import { mapStateToProps } from "~/ducks/user";
 import OutboundLink from "~/components/OutboundLink";
-import "./CarbonAd.scss";
+import "./index.scss";
 
 class AdblockDetect extends React.Component {
     state = {
@@ -32,7 +35,7 @@ class AdblockDetect extends React.Component {
     }
 }
 
-class CarbonAd extends React.Component {
+class IntravertAd extends React.Component {
     state = {
         id: "space-0359e0d7b33"
     };
@@ -46,15 +49,12 @@ class CarbonAd extends React.Component {
         };
         s.type = "text/javascript";
         s.async = false;
-        // s.id = '_carbonads_js';
-        // s.src = `https://cdn.carbonads.com/carbon.js?serve=CK7DC5QJ&placement=${this.props.placement}`;
         s.src = `https://intravert.co/serve/0359e0d7b3.3.js`;
         this.instance.appendChild(s);
         this.sc = s;
     }
 
     componentWillUnmount() {
-        //this.instance.innerHTML = "";
         if (this.sc) {
             this.instance.removeChild(this.sc);
         }
@@ -96,21 +96,17 @@ class CarbonAd extends React.Component {
     }
 }
 
-/*
-               <div className={"intravert-card"}>
-                    <Level style={{width: "100%"}}>
-                        <Level.Left>
-                            Reach thousands of makers monthly.
-                        </Level.Left>
-                        <Level.Right>
-                            <OutboundLink className={"button is-small is-primary is-rounded"} href={"https://intravert.co/book/0359e0d7b3/3/"}>Advertise here!</OutboundLink>
-                        </Level.Right>
-                    </Level>
-                </div>
- */
-
-CarbonAd.defaultProps = {
+IntravertAd.defaultProps = {
     placement: "getmakerlogcom"
 };
 
-export default CarbonAd;
+export default connect(mapStateToProps)(props =>
+    props.user && props.user.gold ? (
+        <div className={"note"}>
+            No ads here! Thanks for buying Makerlog Gold. <GoldIcon />{" "}
+            <Emoji emoji={"✌️"} />
+        </div>
+    ) : (
+        <IntravertAd />
+    )
+);

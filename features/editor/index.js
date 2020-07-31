@@ -9,9 +9,7 @@ import GoldIcon from "~/components/icons/GoldIcon";
 import { Line } from "rc-progress";
 import { Router } from "~/routes";
 import Emoji from "~/components/Emoji";
-import GoldCtaButton from "~/components/GoldCtaButton";
 import Spinner from "~/components/Spinner";
-import { ThreadTypeSelect } from "~/features/discussions/ThreadTypeSelect";
 import { createThread } from "~/lib/discussions";
 import { actions as editorActions } from "~/ducks/editor";
 import { getMyProducts } from "~/lib/products";
@@ -23,7 +21,6 @@ import MarkdownIt from "markdown-it";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
 import dynamic from "next/dynamic";
-import GoldMessage from "../gold/GoldMessage";
 import OutboundLink from "~/components/OutboundLink";
 
 import { DoneStates } from "../../lib/utils/tasks";

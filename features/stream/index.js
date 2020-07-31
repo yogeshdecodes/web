@@ -7,7 +7,6 @@ import UserStream from "./containers/UserStream";
 import GlobalStream from "./containers/GlobalStream";
 import FollowingStream from "./containers/FollowingStream";
 import StreamDateHeader from "./components/Stream/components/StreamSection/StreamDateHeader";
-import EmbedTask from "./components/EmbedTask";
 
 export {
     Entry,
@@ -19,6 +18,5 @@ export {
     GlobalStream,
     FollowingStream,
     StreamDateHeader,
-    EmbedTask,
     Entry as Task
 };

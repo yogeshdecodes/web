@@ -17,7 +17,6 @@ import KeyActivityFeed, {
 import FeedSwitcher from "../../features/feeds/FeedSwitcher";
 import MainFeed from "../../features/feeds/MainFeed";
 import { CardEditor } from "../../features/editor";
-import TodayCard from "../../features/tasks/components/TodayCard";
 
 class StreamPage extends React.Component {
     static async getInitialProps() {
@@ -56,7 +55,6 @@ class StreamPage extends React.Component {
                             ) : (
                                 <CardEditor />
                             )}
-                            <TodayCard />
                             <MainFeed
                                 discussionPrefetch={
                                     this.props.discussionPrefetch

@@ -3,7 +3,6 @@ import { actions as userActions } from "~/ducks/user";
 import { actions as authActions } from "~/ducks/auth";
 import { connect } from "react-redux";
 import { changePassword, downloadExportedData } from "~/lib/user";
-import { Experiment } from "~/lib/utils/experiment";
 import Embed from "~/components/Embed";
 import ProfileTab from "../../features/users/views/ProfileTab";
 import GoldTab from "../../features/users/views/GoldTab";
@@ -342,46 +341,6 @@ class DataSettings extends React.Component {
                 <div className="control">
                     {this.renderErrors()}
                     <NuclearButton />
-                </div>
-            </div>
-        );
-    }
-}
-
-class ExperimentalSettings extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.experiment = new Experiment("headerAsBackground");
-
-        this.state = {
-            headerAsBackground: this.experiment.isEnabled()
-        };
-    }
-
-    headerAsBackground = bool => {
-        this.setState({ headerAsBackground: bool });
-        this.experiment.setStatus(bool);
-    };
-
-    render() {
-        return (
-            <div>
-                <h2>Labs</h2>
-                <div className={"content"}>
-                    Here's a few experimental features we're testing.
-                </div>
-                <hr />
-                <div class={"form-row"}>
-                    <input
-                        type={"checkbox"}
-                        checked={this.state.headerAsBackground}
-                        onChange={e =>
-                            this.headerAsBackground(e.target.checked)
-                        }
-                    >
-                        Header image as background
-                    </input>
                 </div>
             </div>
         );

@@ -18,7 +18,7 @@ import { getStreamMetadata } from "~/lib/tasks";
 import RWS from "reconnecting-websocket";
 import { fetchNextUrl } from "../lib/tasks";
 import pickBy from "lodash/pickBy";
-import { getTimezone } from "../lib/utils/timezone";
+import { getTimezone } from "../lib/utils/random";
 import { socketUrl } from "../lib/utils/random";
 
 export const getStreamState = state => state.stream;

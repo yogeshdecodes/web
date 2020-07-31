@@ -1,27 +1,19 @@
 import React, { useState } from "react";
-import { mock } from "../mock";
-import uniq from "lodash/uniq";
-import FullName from "~/components/FullName";
 import pluralize from "pluralize";
 import { UserMedia } from "~/features/users";
 import TimeAgo from "react-timeago";
-import { toDate, utcToZonedTime } from "date-fns-tz";
 import { Task } from "../../stream";
 import { Product } from "~/features/products/";
 import { Link } from "~/routes";
 import { mapStateToProps as mapUserToProps } from "~/ducks/user";
 import { connect } from "react-redux";
 
-//import { CSSTransitionGroup } from "react-transition-group";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NoActivityCard from "~/features/stream/components/NoActivityCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import StreamFinished from "~/features/stream/components/Stream/components/StreamFinished";
 import Spinner from "~/components/Spinner";
 import { isServer } from "~/config";
-import { orderByDate } from "../../../lib/utils/tasks";
-import orderBy from "lodash/orderBy";
-import { getTimezone } from "../../../lib/utils/timezone";
 import Markdown from "~/components/Markdown";
 import TaskActivityGroup from "../TaskActivityGroup";
 import AdIntersitial from "../AdIntersitial";
@@ -33,7 +25,6 @@ import {
     normalizeTimezones
 } from "~/vendor/stream";
 import { Praisable } from "../../stream/components/Task/components/Praise";
-import { Button } from "react-scroll";
 import CommentsBox from "../../comments/components/CommentsBox";
 import TaskDetail from "../../stream/components/Task/components/TaskDetail";
 
