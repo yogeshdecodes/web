@@ -7,7 +7,6 @@ import { setCookie } from "nookies";
 import { isServer } from "~/config";
 import { fetchUser } from "./user";
 import { gaSetUserId } from "../vendor/ga";
-import { Router } from "~/routes";
 
 const getUserState = state => state.user;
 

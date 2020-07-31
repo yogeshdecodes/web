@@ -3,17 +3,8 @@ import { connect } from "react-redux";
 import NoActivityCard from "~/features/stream/components/NoActivityCard";
 import { requireAuthed } from "../../lib/auth";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
-import GlobalStream, {
-    prefetch as prefetchStream
-} from "~/features/stream/containers/GlobalStream";
-import DiscussionSection, {
-    prefetchData as prefetchThreads
-} from "~/features/discussions/DiscussionSection";
+import { prefetchData as prefetchThreads } from "~/features/discussions/DiscussionSection";
 import { Router } from "~/routes";
-import ActivityFeed from "../../features/feeds/ActivityFeed";
-import KeyActivityFeed, {
-    prefetchActivity
-} from "../../features/feeds/KeyActivityFeed";
 import FeedSwitcher from "../../features/feeds/FeedSwitcher";
 import MainFeed from "../../features/feeds/MainFeed";
 import { CardEditor } from "../../features/editor";

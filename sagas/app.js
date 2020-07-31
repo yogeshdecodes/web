@@ -1,11 +1,4 @@
-import {
-    call,
-    put,
-    select,
-    take,
-    takeEvery,
-    takeLatest
-} from "redux-saga/effects";
+import { call, put, select, take, takeEvery, takeLatest } from "redux-saga/effects";
 import { actions as appActions, types as appTypes } from "../ducks/app";
 import { actions as statsActions } from "../ducks/stats";
 import { actions as tasksActions } from "../ducks/tasks";
@@ -16,7 +9,6 @@ import axios from "~/lib/axios";
 import { notificationsActions } from "../ducks/notifications";
 import { achievementsActions } from "../ducks/achievements";
 import { Router } from "~/routes";
-import { action } from "mobx";
 import { isServer } from "../config";
 
 // const getAuth = state => state.auth;

@@ -1,20 +1,13 @@
 import React from "react";
 // import { StreamCard as Card } from "features/stream/components/Stream/components/StreamCard/styled";
 import InfiniteSearch from "~/features/search/components/InfiniteSearch";
-import {
-    searchDiscussions,
-    searchProducts,
-    searchTasks,
-    searchUsers
-} from "~/lib/search";
+import { searchDiscussions, searchProducts, searchTasks, searchUsers } from "~/lib/search";
 import { ProductList } from "~/features/products";
 import Avatar from "~/features/users/components/Avatar";
 import Task from "~/features/stream/components/Task";
 import UserMediaList from "~/features/users/components/UserMediaList";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ThreadList from "~/features/discussions/ThreadList";
 import ActiveLink from "~/components/ActiveLink";
-import { isServer } from "~/config";
 import StdPageSidebar from "~/components/sidebar/std-page";
 
 function makeKey(length) {

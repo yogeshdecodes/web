@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { actions as tasksActions } from "~/ducks/tasks";
 import { applySearchTerms } from "~/lib/utils/tasks";
-import { KanbanView, ListView, TodayView } from "~/features/projects";
+import { KanbanView, ListView } from "~/features/projects";
 import Spinner from "~/components/Spinner";
 import TasksPageLayout from "~/layouts/TasksPage";
 import { requireAuthed } from "~/lib/auth";

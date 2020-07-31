@@ -1,8 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { actions as userActions, types as userTypes } from "../ducks/user";
 import { getPrivilegedUser } from "~/lib/user";
-import { actions as appActions } from "../ducks/app";
-import { isServer } from "../config";
 
 export function* fetchUser(action) {
     try {

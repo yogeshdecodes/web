@@ -1,19 +1,6 @@
 import React, { Component } from "react";
 import "./index.scss";
-import StdPageLayout from "~/layouts/StdPage";
-import Emoji from "~/components/Emoji";
-import NavLink from "~/components/ActiveLink";
-import PageNavigation from "~/components/ui/PageNavigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getQuote } from "../../components/Quote";
-import {
-    getPosts,
-    getNewsPosts,
-    getInterviews,
-    getFeature
-} from "../../vendor/ghost";
-import { truncate } from "~/lib/utils/random";
-import { Link } from "~/routes";
+import { getFeature, getInterviews, getNewsPosts, getPosts } from "../../vendor/ghost";
 import { BlogHero } from "../../features/blog/BlogHero";
 import BlogPageLayout from "../../layouts/BlogPage";
 import SubscribeForm from "../../features/blog/SubscribeForm";

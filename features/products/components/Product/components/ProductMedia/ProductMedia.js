@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "~/routes";
 import { truncate } from "~/lib/utils/random";
-import { imageUrl } from "../../../../../../lib/utils/img";
 import ProductIcon from "~/features/products/components/ProductIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mapStateToProps as mapUserToProps } from "~/ducks/user";

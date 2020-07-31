@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "~/routes";
 import "./index.scss";
 import CompanyPageLayout from "../../layouts/CompanyPage";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import WallOfLove from "../../components/WallOfLove";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 import MakerDefinition from "../../components/MakerDefinition";

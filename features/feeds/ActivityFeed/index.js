@@ -19,11 +19,7 @@ import TaskActivityGroup from "../TaskActivityGroup";
 import AdIntersitial from "../AdIntersitial";
 import "./index.scss";
 import ReplyFaces from "../../discussions/ReplyFaces";
-import {
-    Activity as ActivityContainer,
-    orderActivities,
-    normalizeTimezones
-} from "~/vendor/stream";
+import { Activity as ActivityContainer, normalizeTimezones, orderActivities } from "~/vendor/stream";
 import { Praisable } from "../../stream/components/Task/components/Praise";
 import CommentsBox from "../../comments/components/CommentsBox";
 import TaskDetail from "../../stream/components/Task/components/TaskDetail";

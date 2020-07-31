@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import findHashtags from "find-hashtags";
 import debounce from "lodash/debounce";
 import { connect } from "react-redux";
 import { actions as editorActions } from "~/ducks/editor";
 import Dropzone from "react-dropzone";
 
 import chrono from "chrono-node";
-import { format } from "date-fns";
-import {
-    DoneStates,
-    getDoneState,
-    getDeltaFromDoneState
-} from "../../../../lib/utils/tasks";
+import { DoneStates, getDoneState } from "../../../../lib/utils/tasks";
 import { createQueueItem } from "../../../../ducks/editor";
 import DueCountdown from "~/components/DueCountdown";
-import omit from "lodash/omit";
 
 /*
 PropTypes:

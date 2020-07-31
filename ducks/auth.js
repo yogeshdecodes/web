@@ -1,5 +1,5 @@
 import { errorArray } from "~/lib/utils/error";
-import { destroyCookie, setCookie } from "nookies";
+import { setCookie } from "nookies";
 import { Track } from "~/vendor/ga";
 
 const initialState = {

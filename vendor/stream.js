@@ -3,7 +3,7 @@ import config from "../config";
 import { axiosWrapper } from "~/lib/utils/error";
 import axios from "~/lib/axios";
 import orderBy from "lodash/orderBy";
-import { toDate, utcToZonedTime } from "date-fns-tz";
+import { toDate } from "date-fns-tz";
 import { uniq } from "lodash";
 
 export async function getStreamClient(token = null) {

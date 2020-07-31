@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { Task } from "../../../stream";
 import Modal from "~/components/Modal";
 import "./index.scss";
-import {
-    DoneStates,
-    getDoneState,
-    getDeltaFromDoneState
-} from "../../../../lib/utils/tasks";
+import { DoneStates, getDeltaFromDoneState, getDoneState } from "../../../../lib/utils/tasks";
 import { handleChange, loadingClass } from "../../../../lib/utils/random";
 import { connect } from "react-redux";
 import { actions as tasksActions } from "~/ducks/tasks";

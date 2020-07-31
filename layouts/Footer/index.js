@@ -1,5 +1,4 @@
 import React from "react";
-import FooterLinks from "~/layouts/Footer/links";
 import Emoji from "~/components/Emoji";
 import { Link } from "~/routes";
 import OutboundLink from "~/components/OutboundLink";

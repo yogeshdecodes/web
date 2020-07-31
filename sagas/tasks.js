@@ -1,12 +1,4 @@
-import {
-    all,
-    call,
-    put,
-    race,
-    select,
-    take,
-    takeLatest
-} from "redux-saga/effects";
+import { all, call, put, race, select, take, takeLatest } from "redux-saga/effects";
 import { actions as tasksActions, types as tasksTypes } from "../ducks/tasks";
 import {
     createTask as createTaskModel,

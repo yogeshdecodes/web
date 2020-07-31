@@ -8,7 +8,6 @@ import GoldIcon from "~/components/icons/GoldIcon";
 
 import { Line } from "rc-progress";
 import { Router } from "~/routes";
-import Emoji from "~/components/Emoji";
 import Spinner from "~/components/Spinner";
 import { createThread } from "~/lib/discussions";
 import { actions as editorActions } from "~/ducks/editor";

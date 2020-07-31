@@ -14,11 +14,7 @@ import { CommentsBox } from "~/features/comments";
 import TaskDetail from "./components/TaskDetail";
 import { imageUrl } from "../../../../lib/utils/img";
 import YouTube from "react-youtube";
-import {
-    getHumanStateFromTask,
-    DoneStates,
-    getDeltaFromDoneState
-} from "../../../../lib/utils/tasks";
+import { DoneStates, getDeltaFromDoneState, getHumanStateFromTask } from "../../../../lib/utils/tasks";
 import { actions as tasksActions } from "~/ducks/tasks";
 import { connect } from "react-redux";
 

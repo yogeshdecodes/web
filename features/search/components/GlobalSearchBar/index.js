@@ -1,11 +1,6 @@
 import "./index.scss";
 import { Link } from "~/routes";
-import {
-    searchDiscussions,
-    searchProducts,
-    searchTasks,
-    searchUsers
-} from "../../../../lib/search";
+import { searchDiscussions, searchProducts, searchTasks, searchUsers } from "../../../../lib/search";
 
 import Avatar from "../../../users/components/Avatar/Avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

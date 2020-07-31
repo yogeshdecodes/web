@@ -1,21 +1,10 @@
 import React, { Component } from "react";
 import { Track } from "../../../vendor/ga";
-import axios from "~/lib/axios";
-import { axiosWrapper } from "../../../lib/utils/error";
 import ActivityFeed from "../ActivityFeed";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
-import ReconnectingWebSocket from "reconnecting-websocket";
-import { socketUrl } from "../../../lib/utils/random";
 import uniqBy from "lodash/uniqBy";
-import { orderByDate } from "../../../lib/utils/tasks";
-import orderBy from "lodash/orderBy";
-import {
-    getStreamClient,
-    normalizeTimezones,
-    orderActivities,
-    getStreamClientAndToken
-} from "../../../vendor/stream";
+import { getStreamClient, getStreamClientAndToken } from "../../../vendor/stream";
 
 const INITIAL_QUERY = {
     limit: 25,

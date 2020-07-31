@@ -3,7 +3,6 @@ import "./index.scss";
 import { isServer } from "../../../config";
 import { TwitterShareButton } from "react-twitter-embed";
 import format from "date-fns/format";
-import Sticky from "react-stickynode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SubscribeCta from "../SubscribeCta";
 import OutboundLink from "../../../components/OutboundLink";

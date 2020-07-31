@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { truncate } from "~/lib/utils/random";
 import { Link } from "~/routes";
 import "./index.scss";

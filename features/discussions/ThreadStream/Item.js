@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
 import { truncate } from "~/lib/utils/random";
 import { getThreadInfoBar } from "../utils";
-import OutboundLink from "~/components/OutboundLink";
 
 /**
                 <div className="upvote-arrows">

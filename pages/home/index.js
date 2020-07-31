@@ -2,12 +2,8 @@ import React from "react";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
-import DiscussionSection, {
-    prefetchData as prefetchThreads
-} from "~/features/discussions/DiscussionSection";
-import KeyActivityFeed, {
-    prefetchActivity
-} from "../../features/feeds/KeyActivityFeed";
+import DiscussionSection, { prefetchData as prefetchThreads } from "~/features/discussions/DiscussionSection";
+import KeyActivityFeed, { prefetchActivity } from "../../features/feeds/KeyActivityFeed";
 import { Link } from "~/routes";
 
 function Home(props) {

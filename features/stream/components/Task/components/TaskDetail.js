@@ -6,7 +6,6 @@ import { actions as streamActions } from "~/ducks/stream";
 import Embed from "~/components/Embed";
 import config from "~/config";
 import ShareBar from "~/components/ShareBar";
-import { handleChange, onEnter } from "../../../../../lib/utils/random";
 import TaskEditModal from "../../../../tasks/components/TaskEditModal";
 
 class TaskDetail extends React.Component {

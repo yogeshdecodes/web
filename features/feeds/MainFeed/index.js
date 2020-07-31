@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import KeyActivityFeed from "../KeyActivityFeed";
-import DiscussionSection, {
-    prefetchData as prefetchThreads
-} from "~/features/discussions/DiscussionSection";
+import DiscussionSection from "~/features/discussions/DiscussionSection";
 import TodayList from "../../tasks/components/TodayList";
 import DoneTodayCount from "../../tasks/DoneTodayCount";
 import Spinner from "~/components/Spinner";
