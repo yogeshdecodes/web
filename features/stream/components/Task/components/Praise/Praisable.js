@@ -1,7 +1,6 @@
 import React from "react";
 import PraiseCount from "./PraiseCount";
 import { mapStateToProps } from "~/ducks/user";
-import styled from "styled-components";
 import { Router } from "~/routes";
 import { connect } from "react-redux";
 import { isServer } from "~/config";
@@ -9,8 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { praise, prefetch } from "~/lib/praise";
 import FaceStack from "~/features/users/components/FaceStack";
 import uniqBy from "lodash/uniqBy";
-
-const PraiseButton = styled.button``;
 
 class Praisable extends React.Component {
     state = {

@@ -12,8 +12,11 @@ const formatter = function(time, unit, suffix) {
     }
 };
 
-export default ({ date, className = "has-text-grey-light " }) => (
+const DueCountdown = ({ date, className = "has-text-grey-light " }) => (
     <span className={"due-at " + className}>
         <TimeAgo formatter={formatter} live={true} date={date} />
     </span>
 );
+
+
+export default DueCountdown

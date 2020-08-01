@@ -2,16 +2,16 @@ import Nav from "./Navbar";
 import React from "react";
 import Footer from "~/layouts/Footer";
 
-export default ({
-    nav = true,
-    transparent = false,
-    invertedNav = false,
-    gradient = false,
-    className = "",
-    showNavItems = true,
-    footer = true,
-    ...props
-}) => (
+const Page = ({
+                  nav = true,
+                  transparent = false,
+                  invertedNav = false,
+                  gradient = false,
+                  className = "",
+                  showNavItems = true,
+                  footer = true,
+                  ...props
+              }) => (
     <div
         className={"Page " + className + (gradient ? " hero-gradient" : "")}
         id="page"
@@ -29,3 +29,6 @@ export default ({
         {footer && <Footer />}
     </div>
 );
+
+
+export default Page
