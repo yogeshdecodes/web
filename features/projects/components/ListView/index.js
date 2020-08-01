@@ -1,9 +1,8 @@
 import "./index.scss";
-import { groupTasksByDone, isDueSoon, orderByDate } from "../../../../lib/utils/tasks";
+import { groupTasksByDone, orderByDate } from "../../../../lib/utils/tasks";
 import { processTaskString } from "~/lib/utils/parsers";
 
 import CelebratoryThing from "../CelebratoryThing";
-import DueCountdown from "../../../../components/DueCountdown";
 import Emoji from "../../../../components/Emoji";
 import { Link } from "~/routes";
 import React from "react";
@@ -151,10 +150,7 @@ class CheckableTask extends React.Component {
                         }
                         checked={task.done}
                     />
-                    <label htmlFor="test1">
-                        {processTaskString(task)}{" "}
-                        {task.due_at && <DueCountdown task={task} />}
-                    </label>
+                    <label htmlFor="test1">{processTaskString(task)} </label>
                 </div>
                 <div className={"controls buttons"}>
                     {!task.done && !task.in_progress && (
@@ -196,7 +192,6 @@ CheckableTask = connect(mapStateToProps, mapDispatchToProps)(CheckableTask);
 
 const Tasks = ({ tasks, showDone, toggleDoneTasks, me }) => {
     const groupedTasks = groupTasksByDone(tasks);
-    const dueSoon = tasks && tasks.filter(task => isDueSoon(task));
 
     return (
         <div className={"Tasks"}>
@@ -216,22 +211,6 @@ const Tasks = ({ tasks, showDone, toggleDoneTasks, me }) => {
 
             <div className="card">
                 <div className={"card-content"}>
-                    {dueSoon && dueSoon.length > 0 && (
-                        <>
-                            <h3>
-                                Due soon <Emoji emoji={"🚨"} />{" "}
-                            </h3>
-                            {dueSoon &&
-                                dueSoon.map(task => (
-                                    <Task
-                                        withCounts={false}
-                                        key={task.id}
-                                        task={task}
-                                    />
-                                ))}
-                            <hr />
-                        </>
-                    )}
                     {groupedTasks.in_progress.length === 0 &&
                         groupedTasks.remaining.length === 0 && (
                             <CelebratoryThing me={me} />

@@ -63,7 +63,6 @@ const initialState = {
     editorValue: "",
     tab: 0,
     cardTab: 0,
-    editorDueAt: null,
     editorDone: true,
     editorInProgress: false,
     editorAttachment: null,
@@ -90,7 +89,6 @@ export const types = {
     TASK_CREATE_FAILED: "TASK_CREATE_FAILED",
     EDITOR_OPEN_DISCUSSIONS: "EDITOR_OPEN_DISCUSSIONS",
     EDITOR_TOGGLE_DISCUSSIONS: "EDITOR_TOGGLE_DISCUSSIONS",
-    EDITOR_SET_DUE_AT: "EDITOR_SET_DUE_AT",
     EDITOR_SWITCH_TAB: "EDITOR_SWITCH_TAB",
     UPDATE_QUEUE_ITEM: "UPDATE_QUEUE_ITEM",
     SET_ACTIVE_TASK: "SET_ACTIVE_TASK"
@@ -153,7 +151,6 @@ export const editorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 editorValue: "",
-                editorDueAt: null,
                 // editorDone: true,
                 //editorInProgress: false,
                 editorAttachment: null,
@@ -180,12 +177,6 @@ export const editorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 editorAttachment: action.attachment
-            };
-
-        case types.EDITOR_SET_DUE_AT:
-            return {
-                ...state,
-                editorDueAt: action.editorDueAt
             };
 
         case types.TASK_CREATE_REQUEST:
@@ -277,10 +268,6 @@ export const actions = {
     addToQueue: task => ({ type: types.ADD_TO_QUEUE, task }),
     updateQueueItem: task => ({ type: types.UPDATE_QUEUE_ITEM, task }),
     removeFromQueue: task => ({ type: types.REMOVE_FROM_QUEUE, task: task }),
-    setEditorDueAt: value => ({
-        type: types.EDITOR_SET_DUE_AT,
-        editorDueAt: value
-    }),
     setEditorValue: value => ({ type: types.SET_EDITOR_VALUE, value: value }),
     setEditorAttachment: attachment => ({
         type: types.SET_EDITOR_ATTACHMENT,

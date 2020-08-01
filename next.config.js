@@ -9,14 +9,16 @@ const withProgressBar = require("next-progressbar");
 const withOptimizedImages = require("next-optimized-images");
 const withFonts = require("next-fonts");
 const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
-
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true"
+});
 
 let config = {
     webpack: config => {
         // Fixes npm packages that depend on `fs` module
         config.plugins = config.plugins || [];
         config.node = {
-            fs: "empty"
+            //   fs: "empty"
         };
         config.stats = {
             ...config.stats,
@@ -62,5 +64,6 @@ config = withOptimizedImages(config);
 config = withFonts(config);
 config = withSass(config);
 config = withCss(config);
+config = withBundleAnalyzer(config);
 
 module.exports = config;
