@@ -27,6 +27,9 @@ class SocialActivationForm extends React.Component {
                 errorMessages: null
             });
             const { method, params } = this.getAuthProvider();
+            if (!method) {
+                throw new Error("No method found for this provider.");
+            }
             const { token } = await method(...params);
             if (this.props.onToken) {
                 this.props.onToken(token);
@@ -51,7 +54,7 @@ class SocialActivationForm extends React.Component {
         const query = this.props.query;
         switch (query.provider) {
             case "twitter":
-                if (!query.oauth_token || !query.oauth_verifier) return null;
+                if (!query.oauth_token || !query.oauth_verifier) return {};
                 return {
                     method: loginWithTwitterToken,
                     params: [query.oauth_token, query.oauth_verifier]
@@ -59,12 +62,15 @@ class SocialActivationForm extends React.Component {
                 break;
 
             case "facebook":
-                if (!query.code) return null;
+                if (!query.code) return {};
                 return {
                     method: loginWithFacebookToken,
                     params: [query.code, `${config.API_URL}/complete/facebook/`]
                 };
                 break;
+
+            default:
+                return {};
         }
     };
 

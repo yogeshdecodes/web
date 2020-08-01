@@ -5,7 +5,7 @@ import { groupTasksByDone } from "~/lib/utils/tasks";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Scrollbars } from "react-custom-scrollbars";
 import Spinner from "~/components/Spinner";
-import mapDispatchToProps from "../../containers/mapDispatchToProps";
+import mapDispatchToProps from "../../../projects/containers/mapDispatchToProps";
 import KanbanTask from "./components/KanbanTask";
 import isEqual from "lodash/isEqual";
 import "./index.scss";

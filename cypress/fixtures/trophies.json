@@ -1,0 +1,122 @@
+[
+  {
+    "key": "first-task",
+    "name": "First steps",
+    "description": "Posted their first completed task",
+    "verb": "Post your first completed task",
+    "emoji": "✅",
+    "color": "#87E791",
+    "progress": 0.0,
+    "order": 1
+  },
+  {
+    "key": "week-streak-trophy",
+    "name": "7 day streak",
+    "description": "A week of shipping consecutively",
+    "verb": "Ship for 7 consecutive days",
+    "emoji": "🔥",
+    "color": "#F8E3C4",
+    "progress": 0.0,
+    "order": 2
+  },
+  {
+    "key": "month-streak-trophy",
+    "name": "30 day streak",
+    "description": "A month of shipping consecutively",
+    "verb": "Ship for 30 consecutive days",
+    "emoji": "🔥",
+    "color": "#F8E3C4",
+    "progress": 0.0,
+    "order": 3
+  },
+  {
+    "key": "fifty-streak-trophy",
+    "name": "50 day streak",
+    "description": "50 days of shipping consecutively",
+    "verb": "Ship for 50 consecutive days",
+    "emoji": "🔥",
+    "color": "#F8E3C4",
+    "progress": 0.0,
+    "order": 4
+  },
+  {
+    "key": "hundred-streak-trophy",
+    "name": "100 day streak",
+    "description": "100 days of shipping",
+    "verb": "Ship for 100 consecutive days",
+    "emoji": "💯",
+    "color": "#ffbaba",
+    "progress": 0.0,
+    "order": 5
+  },
+  {
+    "key": "year-streak-trophy",
+    "name": "A year of shipping",
+    "description": "365 days of shipping like a legend",
+    "verb": "Ship for 365 consecutive days",
+    "emoji": "🎖",
+    "color": "#ffbaba",
+    "progress": 0.0,
+    "order": 6
+  },
+  {
+    "key": "helping-hand-trophy",
+    "name": "Helping hand️",
+    "description": "Posted a reply to a thread",
+    "verb": "Post your first reply to a thread",
+    "emoji": "✍️",
+    "color": "#fae6a7",
+    "progress": 0.0,
+    "order": 2
+  },
+  {
+    "key": "helpful-trophy",
+    "name": "Helpful️",
+    "description": "Replied 30 times to discussions",
+    "verb": "Reply 30 times to discussions",
+    "emoji": "⭐️️",
+    "color": "#fae6a7",
+    "progress": 0.0,
+    "order": 3
+  },
+  {
+    "key": "contributor-trophy",
+    "name": "Contributor",
+    "description": "100 replies to discussions",
+    "verb": "Reply 100 times to discussions",
+    "emoji": "💚️️",
+    "color": "#ffbaba",
+    "progress": 0.0,
+    "order": 4
+  },
+  {
+    "key": "top-contributor-trophy",
+    "name": "Top Contributor",
+    "description": "500 replies to discussions",
+    "verb": "Reply 500 times to discussions",
+    "emoji": "💎️️",
+    "color": "#70AFD3",
+    "progress": 0.0,
+    "order": 5
+  },
+  {
+    "key": "one-year-registered-trophy",
+    "name": "One Year of Logging",
+    "description": "Signed up to Makerlog a year ago",
+    "verb": "Spend a year on Makerlog",
+    "emoji": "🎆️️",
+    "color": "#492F53",
+    "progress": 0.0,
+    "order": 6
+  },
+  {
+    "key": "new-beginnings-trophy",
+    "name": "New beginnings",
+    "description": "Posted your first thread",
+    "verb": "Post your first thread",
+    "emoji": "🤔️",
+    "color": "#fae6a7",
+    "progress": 0.0,
+    "order": 1
+  }
+]

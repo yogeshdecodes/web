@@ -1,6 +1,7 @@
 import React from "react";
 import { getRecentDiscussions, getTrendingThreads } from "~/lib/discussions";
 import ThreadMediaLine from "./ThreadMediaLine";
+import Spinner from "../../components/Spinner";
 
 class DiscussionSection extends React.Component {
     constructor(props) {
@@ -35,6 +36,8 @@ class DiscussionSection extends React.Component {
     }
 
     render() {
+        if (!this.state.data)
+            return <Spinner small text="Loading discussions..." />;
         let discussions = this.state.data.filter(t => t.pinned === false);
         let pinned = this.state.data.filter(t => t.pinned);
         return (

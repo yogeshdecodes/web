@@ -2,7 +2,7 @@ import React from "react";
 import Ad from "~/components/Ad";
 import OutboundLink from "~/components/OutboundLink";
 
-export default () => {
+const AdCard = () => {
     return (
         <div className="AdCard sidebar-item">
             <h3>Indie ad</h3>
@@ -19,3 +19,6 @@ export default () => {
         </div>
     );
 };
+
+
+export default AdCard
