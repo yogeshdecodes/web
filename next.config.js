@@ -8,7 +8,8 @@ const withCss = require("@zeit/next-css");
 const withProgressBar = require("next-progressbar");
 const withOptimizedImages = require("next-optimized-images");
 const withFonts = require("next-fonts");
-const CircularDependencyPlugin = require("circular-dependency-plugin");
+const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
+
 
 let config = {
     webpack: config => {
@@ -44,6 +45,13 @@ let config = {
                 systemvars: true
             })
         ];
+
+        config.plugins.push(
+            new FilterWarningsPlugin({
+                exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
+            })
+        );
+        return config;
 
         return config;
     }
