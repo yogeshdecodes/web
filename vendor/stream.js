@@ -4,7 +4,7 @@ import { axiosWrapper } from "~/lib/utils/error";
 import axios from "~/lib/axios";
 import orderBy from "lodash/orderBy";
 import { toDate } from "date-fns-tz";
-import { uniq } from "lodash";
+import uniq from "lodash/uniq";
 
 export async function getStreamClient(token = null) {
     if (!token) {

@@ -7,6 +7,7 @@
         "dev": "NODE_OPTIONS='--inspect' DEBUG=axios node server.js",
         "start": "NODE_ENV=production node server.js",
         "stage": "git push -f heroku develop:master",
+        "analzye-bundle": "ANALYZE=true yarn build",
         "deploy": "NODE_ENV=production API_URL=https://api.getmakerlog.com next build && eb deploy"
     },
     "dependencies": {
