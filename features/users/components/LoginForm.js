@@ -127,6 +127,7 @@ const LoginForm = props => {
                                     trigger="click"
                                 >
                                     <input
+                                        name="username"
                                         type="text"
                                         value={props.username}
                                         onChange={props.onUsernameChange}
@@ -138,6 +139,7 @@ const LoginForm = props => {
                         <div className="field">
                             <div className="control">
                                 <input
+                                    name="password"
                                     type="password"
                                     value={props.password}
                                     onChange={props.onPasswordChange}

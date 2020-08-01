@@ -8,7 +8,8 @@
         "start": "NODE_ENV=production node server.js",
         "stage": "git push -f heroku develop:master",
         "analzye-bundle": "ANALYZE=true yarn build",
-        "cypress:open": "cypress open",
+        "cypress:open": "concurrently --kill-others \"npm run dev\" \"cypress open\"",
+        "cypress:test": "concurrently --kill-others \"npm run dev >/dev/null\" \"cypress run --headless\"",
         "deploy": "NODE_ENV=production API_URL=https://api.getmakerlog.com next build && eb deploy"
     },
     "dependencies": {
@@ -35,6 +36,7 @@
         "circular-dependency-plugin": "^5.2.0",
         "clipboard-copy": "^3.1.0",
         "color-hash": "^1.0.3",
+        "concurrently": "^5.2.0",
         "cypress": "^4.11.0",
         "darkmode-js": "^1.5.4",
         "date-fns": "^2.4.1",

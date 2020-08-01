@@ -41,7 +41,7 @@ class DiscussionSection extends React.Component {
         let discussions = this.state.data.filter(t => t.pinned === false);
         let pinned = this.state.data.filter(t => t.pinned);
         return (
-            <div className="flex flex-v-gap-half flex-column">
+            <div className="DiscussionSection flex flex-v-gap-half flex-column">
                 {pinned.map(t => (
                     <ThreadMediaLine key={t.slug} thread={t} />
                 ))}
