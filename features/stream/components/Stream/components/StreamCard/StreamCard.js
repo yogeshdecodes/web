@@ -6,7 +6,7 @@ import EntryList from "~/features/stream/components/EntryList";
 import { UserMedia } from "~/features/users";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
-import InlineCollapse from "../../../../../../components/InlineCollapse";
+import InlineCollapse from "../../../../../../components/ui/InlineCollapse";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Track } from "../../../../../../vendor/ga";
 

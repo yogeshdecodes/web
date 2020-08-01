@@ -8,7 +8,7 @@ import { actions as editorActions } from "~/ducks/editor";
 import "./index.scss";
 import Emoji from "~/components/Emoji";
 import { groupTasksByDone, orderByDate } from "../../../../lib/utils/tasks";
-import InlineCollapse from "../../../../components/InlineCollapse";
+import InlineCollapse from "../../../../components/ui/InlineCollapse";
 
 class TodayList extends Component {
     renderEmpty = () => {

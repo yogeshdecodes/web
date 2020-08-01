@@ -7,7 +7,7 @@ import TimeAgo from "react-timeago";
 import { Product } from "~/features/products";
 import uniqBy from "lodash/uniqBy";
 import orderBy from "lodash/orderBy";
-import InlineCollapse from "../../../components/InlineCollapse";
+import InlineCollapse from "../../../components/ui/InlineCollapse";
 import { imageUrl } from "../../../lib/utils/img";
 import { Track } from "../../../vendor/ga";
 import TrophyMedia from "../../achievements/TrophyMedia";

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavLink from "~/components/ActiveLink";
-import { NavbarDropdown } from "~/components/Dropdown";
+import { NavbarDropdown } from "~/components/ui/Dropdown";
 import React from "react";
 import { Link } from "~/routes";
 import OutboundLink from "~/components/OutboundLink";

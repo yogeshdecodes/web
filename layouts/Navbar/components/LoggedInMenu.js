@@ -2,7 +2,7 @@
 import NavLink from "~/components/ActiveLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GlobalSearchBar from "~/features/search/components/GlobalSearchBar";
-import { NavbarDropdown } from "~/components/Dropdown";
+import { NavbarDropdown } from "~/components/ui/Dropdown";
 import { NotificationsLink } from "~/features/notifications";
 import PropTypes from "prop-types";
 import React from "react";
