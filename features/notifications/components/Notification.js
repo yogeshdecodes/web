@@ -272,13 +272,6 @@ function renderNotificationVerb(key, notification, grouped = false) {
                 </Container>
             );
 
-        case "due_tomorrow":
-            return (
-                <Container>
-                    <Emoji emoji={"✅"} /> You have tasks due tomorrow.
-                </Container>
-            );
-
         default:
             return <Container>No verb configured.</Container>;
     }
@@ -501,22 +494,6 @@ const Notification = ({
                 notificationHtml = (
                     <div onClick={onClose}>
                         {renderNotificationVerb(key, notification)}
-                    </div>
-                );
-                break;
-
-            case "due_tomorrow":
-                notificationImage = "/icons/android-chrome-192x192.png";
-                notificationHtml = (
-                    <div>
-                        {renderNotificationVerb(key, notification)}
-                        <div className="actions">
-                            <Link route={`tasks`}>
-                                <a className="btn btn-small btn-light">
-                                    Check your tasks
-                                </a>
-                            </Link>
-                        </div>
                     </div>
                 );
                 break;
