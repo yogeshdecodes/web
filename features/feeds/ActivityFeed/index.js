@@ -19,7 +19,11 @@ import TaskActivityGroup from "../TaskActivityGroup";
 import AdIntersitial from "../AdIntersitial";
 import "./index.scss";
 import ReplyFaces from "../../discussions/ReplyFaces";
-import { Activity as ActivityContainer, normalizeTimezones, orderActivities } from "~/vendor/stream";
+import {
+    Activity as ActivityContainer,
+    normalizeTimezones,
+    orderActivities
+} from "~/vendor/stream";
 import { Praisable } from "../../stream/components/Task/components/Praise";
 import CommentsBox from "../../comments/components/CommentsBox";
 import TaskDetail from "../../stream/components/Task/components/TaskDetail";
@@ -342,7 +346,10 @@ const Activity = ({ activity }) => {
     if (!activity.check()) return null;
     // activity = cleanChildren(activity);
     return (
-        <section className="ActivityFeed--section">
+        <section
+            className="ActivityFeed--section Activity"
+            data-object-type={activity.getObjectType()}
+        >
             <div className="ActivityFeed--content flex">
                 <div className="flex-grow">
                     <div className="user-info-container flex">
@@ -406,6 +413,28 @@ class ActivityFeed extends React.Component {
                 key={isServer}
             >
                 <div className="ActivityFeed card">
+                    {this.props.failed && (
+                        <div
+                            className="ActivityFeed--section"
+                            id="ActivityFeed--failed"
+                        >
+                            <center>
+                                <div className="flex flex-v-gap flex-column">
+                                    <div>
+                                        <h3>Failed to load the feed.</h3>
+                                    </div>
+                                    <div>
+                                        <button
+                                            className="btn btn-light "
+                                            onClick={this.props.loadMore}
+                                        >
+                                            Retry
+                                        </button>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+                    )}
                     {Object.entries(data).map(([k, v]) => {
                         if (k != 0 && k != 1 && k % 10 == 0) {
                             return (
@@ -438,11 +467,13 @@ class ActivityFeed extends React.Component {
                             <Spinner text="Loading the makerness..." />
                         </div>
                     )}
-                    {!this.props.hasMore && !this.props.isSyncing && (
-                        <div className="ActivityFeed--section">
-                            <StreamFinished />
-                        </div>
-                    )}
+                    {!this.props.hasMore &&
+                        !this.props.isSyncing &&
+                        !this.props.failed && (
+                            <div className="ActivityFeed--section">
+                                <StreamFinished />
+                            </div>
+                        )}
                 </div>
             </InfiniteScroll>
         );

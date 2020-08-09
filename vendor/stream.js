@@ -17,6 +17,11 @@ export async function getStreamClient(token = null) {
     return client.connect(config.STREAM_API_KEY, token, config.STREAM_APP_ID);
 }
 
+export async function getCachedFeed(feedKey) {
+    const { data } = await axiosWrapper(axios.get, `/feeds/get/${feedKey}`);
+    return data;
+}
+
 export async function getStreamClientAndToken() {
     const {
         data: { token }

@@ -6,7 +6,8 @@ import { mapStateToProps } from "~/ducks/user";
 import uniqBy from "lodash/uniqBy";
 import {
     getStreamClient,
-    getStreamClientAndToken
+    getStreamClientAndToken,
+    getCachedFeed
 } from "../../../vendor/stream";
 
 const INITIAL_QUERY = {
@@ -239,6 +240,7 @@ class KeyActivityFeed extends Component {
                 hasMore={this.state.nextUrl !== null}
                 activities={this.state.activities}
                 user={this.props.me}
+                failed={this.state.failed}
                 noActivityComponent={
                     this.props.noActivityComponent ? (
                         this.props.noActivityComponent
@@ -253,12 +255,24 @@ class KeyActivityFeed extends Component {
     }
 }
 
-async function prefetchActivity(feedId, userId) {
+async function prefetchActivity(feedId, userId, useCache = true) {
     try {
         const { client, token } = await getStreamClientAndToken();
-        const feed = client.feed(feedId, userId);
-        const data = await feed.get(INITIAL_QUERY);
-        console.log(JSON.stringify(data.results, "", "\t"));
+        // Implement a caching strategy with the backend (for emergencies).
+        let data = null;
+        if (useCache) {
+            try {
+                data = await getCachedFeed(`${feedId}:${userId}`);
+                console.log("Fetched cached feed.");
+            } catch (e) {
+                // fall back to the other part
+                const feed = client.feed(feedId, userId);
+                data = await feed.get(INITIAL_QUERY);
+            }
+        } else {
+            const feed = client.feed(feedId, userId);
+            data = await feed.get(INITIAL_QUERY);
+        }
         return {
             nextUrl:
                 data.results.length > 0
