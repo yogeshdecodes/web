@@ -26,7 +26,7 @@ class StreamPage extends React.Component {
                 footer: false
             },
             ...(await prefetchData()),
-            //activitiesPrefetch: await prefetchActivity("site:aggregated"),
+            activitiesPrefetch: await prefetchActivity("timeline", "-1"),
             discussionPrefetch: await prefetchThreads()
         };
     }
@@ -58,6 +58,9 @@ class StreamPage extends React.Component {
                             )}
                             <TodayCard />
                             <MainFeed
+                                activitiesPrefetch={
+                                    this.props.activitiesPrefetch
+                                }
                                 discussionPrefetch={
                                     this.props.discussionPrefetch
                                 }
