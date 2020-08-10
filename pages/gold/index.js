@@ -7,7 +7,7 @@ import Avatar from "~/features/users/components/Avatar";
 import "./index.scss";
 import shuffle from "lodash/shuffle";
 import ProductIcon from "~features/products/components/ProductIcon";
-import GoldPageLayout from "~layouts/GoldPage";
+import GoldPageLayout from "~/layouts/GoldPage";
 import orderBy from "lodash/orderBy";
 
 import FullName from "~/components/FullName";
@@ -17,6 +17,7 @@ import Spinner from "~/components/Spinner";
 import { Link, Router } from "~/routes";
 import config from "../../config";
 import { getGoldHeroItems } from "../../lib/gold";
+import KeyActivityFeed from "../../features/feeds/KeyActivityFeed";
 
 const GoldHero = ({ items, onClickBuy, purchased }) => (
     <div className="hero-container">
@@ -267,10 +268,8 @@ const GoldWelcomeLetter = connect(state => ({ user: state.user.me }))(
 
 const GoldDashboard = props => (
     <GoldPageLayout>
-        <div className="container">
-            <GoldWelcomeLetter />
-            <div></div>
-        </div>
+        <GoldWelcomeLetter />
+        <KeyActivityFeed userId={-1} feed="timeline_gold" />
     </GoldPageLayout>
 );
 
@@ -296,7 +295,7 @@ class GoldPage extends React.Component {
     };
 
     componentDidMount() {
-        this.props.forceDark(true);
+        this.props.forceDark(this.props.hasGold ? this.props.userDark : true);
     }
 
     componentWillUnmount() {
@@ -306,13 +305,13 @@ class GoldPage extends React.Component {
     onClickBuy = () => {
         if (!this.props.isLoggedIn) {
             Router.pushRoute("start");
+        } else {
+            Paddle.Checkout.open({
+                product: config.PADDLE_PRODUCT,
+                email: this.props.email,
+                successCallback: this.onPurchase
+            });
         }
-
-        Paddle.Checkout.open({
-            product: config.PADDLE_PRODUCT,
-            email: this.props.email,
-            successCallback: this.onPurchase
-        });
     };
 
     getItems = () => {
@@ -362,8 +361,10 @@ class GoldPage extends React.Component {
 
 export default connect(
     state => ({
+        isLoggedIn: state.auth.loggedIn,
         hasGold: state.user.me ? state.user.me.gold : false,
         userGold: state.user.me ? state.user.me.dark_mode : false,
+        userDark: state.user.me ? state.user.me.dark_mode : false,
         email: state.user.me ? state.user.me.email : null
     }),
     dispatch => ({

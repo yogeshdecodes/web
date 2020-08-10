@@ -16,6 +16,10 @@ const LoggedOutMenu = props => (
                 <a className="navbar-item">Explore</a>
             </NavLink>
 
+            <NavLink iexact activeClassName="is-active" route="gold">
+                <a className="navbar-item">Gold</a>
+            </NavLink>
+
             <NavLink route="blog" iexact activeClassName="is-active">
                 <a className="navbar-item">
                     <span>Stories</span>
@@ -24,10 +28,6 @@ const LoggedOutMenu = props => (
 
             <NavLink iexact activeClassName="is-active" route="discussions-top">
                 <a className="navbar-item">Discuss</a>
-            </NavLink>
-
-            <NavLink iexact activeClassName="is-active" route="gold">
-                <a className="navbar-item">Gold</a>
             </NavLink>
 
             <NavbarDropdown

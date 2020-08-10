@@ -14,7 +14,7 @@ export default function Footer() {
                     <small className="has-text-grey">
                         Crafted with love in Puerto Rico <Emoji emoji="🇵🇷" />
                         <br />
-                        &copy; Makerlog
+                        &copy; Makerlog, LLC
                     </small>
                 </div>
                 <div className="spacer"></div>

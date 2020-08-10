@@ -41,6 +41,7 @@ class ProjectRelated extends React.Component {
 
         return (
             <div
+                className="ProjectLink--content"
                 style={{
                     width: 300,
                     fontSize: 16,
@@ -67,7 +68,11 @@ class ProjectRelated extends React.Component {
 }
 
 const ProjectLink = props => {
-    const tag = <span className={"brand-underline"}>{props.children}</span>;
+    const tag = (
+        <span className={"ProjectLink--tag brand-underline"}>
+            {props.children}
+        </span>
+    );
 
     if (!props.project) {
         return tag;
@@ -75,6 +80,7 @@ const ProjectLink = props => {
 
     return (
         <Tooltip
+            className="ProjectLink"
             interactive
             useContext
             html={<ProjectRelated project={props.project} />}

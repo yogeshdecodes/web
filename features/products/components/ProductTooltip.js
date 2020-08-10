@@ -3,7 +3,7 @@ import { Tooltip } from "react-tippy";
 import ProductMedia from "./Product/components/ProductMedia";
 
 const ProductTooltipHtml = ({ product }) => (
-    <div className={"panel-tooltip"}>
+    <div className={"panel-tooltip"} data-product={product.slug}>
         <ProductMedia product={product} />
     </div>
 );

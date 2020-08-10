@@ -8,6 +8,7 @@ import { Router } from "~/routes";
 import FeedSwitcher from "../../features/feeds/FeedSwitcher";
 import MainFeed from "../../features/feeds/MainFeed";
 import { CardEditor } from "../../features/editor";
+import { prefetchActivity } from "../../features/feeds/KeyActivityFeed";
 
 class StreamPage extends React.Component {
     static async getInitialProps() {

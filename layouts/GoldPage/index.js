@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import StdPageLayout from "~/layouts/StdPage";
 import NavLink from "~/components/ActiveLink";
 import "./index.scss";
+import DarkModeToggle from "../../features/gold/DarkModeToggle";
+import GoldPageSidebar from "~/components/sidebar/gold-page";
 
 export default class GoldPageLayout extends Component {
     render() {
         return (
             <StdPageLayout
                 title="Gold"
+                withSidebar
+                sidebar={<GoldPageSidebar footer />}
                 nav={
                     <>
                         <NavLink route="gold-page" activeClassName="is-active">
@@ -26,6 +30,11 @@ export default class GoldPageLayout extends Component {
                             <a className="navbar-item">Settings</a>
                         </NavLink>
                     </>
+                }
+                navRight={
+                    <div className="navbar-item">
+                        <DarkModeToggle />
+                    </div>
                 }
             >
                 {this.props.children}

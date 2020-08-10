@@ -2,8 +2,12 @@ import React from "react";
 import ExploreSidebar, { prefetchData } from "~/components/sidebar/explore";
 import "./index.scss";
 import { requireUnauthed } from "~/lib/auth";
-import DiscussionSection, { prefetchData as prefetchThreads } from "~/features/discussions/DiscussionSection";
-import KeyActivityFeed, { prefetchActivity } from "../../features/feeds/KeyActivityFeed";
+import DiscussionSection, {
+    prefetchData as prefetchThreads
+} from "~/features/discussions/DiscussionSection";
+import KeyActivityFeed, {
+    prefetchActivity
+} from "../../features/feeds/KeyActivityFeed";
 import { Link } from "~/routes";
 
 function Home(props) {
@@ -16,8 +20,8 @@ function Home(props) {
                             <div className="HomeHero hero">
                                 <h1>Home of the maker community</h1>
                                 <h3 className="subtitle mb-em">
-                                    Makerlog is where 5,000+ indie hackers & makers get things
-                                    done together.
+                                    Makerlog is where 5,000+ indie hackers &
+                                    makers get things done together.
                                 </h3>
                                 <Link route={"start"}>
                                     <a>Get started</a>

@@ -8,8 +8,8 @@
         "start": "NODE_ENV=production node server.js",
         "stage": "git push -f heroku develop:master",
         "analzye-bundle": "ANALYZE=true yarn build",
-        "cypress:open": "concurrently --kill-others \"npm run dev\" \"cypress open\"",
-        "cypress:test": "concurrently --kill-others \"npm run dev >/dev/null\" \"cypress run --headless\"",
+        "cypress:open": "concurrently --success last --kill-others \"npm run dev\" \"cypress open\"",
+        "cypress:test": "yarn build; concurrently --success last --kill-others \"yarn start >/dev/null\" \"cypress run --headless\"",
         "deploy": "NODE_ENV=production API_URL=https://api.getmakerlog.com next build && eb deploy"
     },
     "dependencies": {

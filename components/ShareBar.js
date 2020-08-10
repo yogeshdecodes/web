@@ -25,7 +25,7 @@ class CopyLink extends React.Component {
 
     render() {
         return (
-            <a
+            <button
                 onClick={this.onClick}
                 className={"gray-link-with-icon " + this.state.copied}
             >
@@ -39,7 +39,7 @@ class CopyLink extends React.Component {
                             : null}
                     </>
                 )}
-            </a>
+            </button>
         );
     }
 }

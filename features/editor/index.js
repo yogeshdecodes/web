@@ -447,7 +447,7 @@ class CardEditor extends Component {
 
         return (
             <div
-                className="card"
+                className="CardEditor Editor card"
                 style={{ border: "1px solid var(--c-border)" }}
             >
                 <Modal.Header>
@@ -545,7 +545,7 @@ class Editor extends Component {
 
         return (
             <Modal
-                modalClassName="Modal panel"
+                modalClassName="ModalEditor Editor Modal panel"
                 open={this.props.open}
                 onClose={this.props.onClose}
             >
