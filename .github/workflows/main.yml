@@ -35,5 +35,5 @@ jobs:
       with:
         status: ${{ job.status }}
         steps: ${{ toJson(steps) }}
-        channel: '#workflows'
+        channel: '#ops'
       if: always()
