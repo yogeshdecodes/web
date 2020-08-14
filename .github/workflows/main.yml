@@ -31,10 +31,9 @@ jobs:
         use_existing_version_if_available: true
         deployment_package: deploy.zip
 
-    - name: Send message on Telegram
-      uses: xinthink/action-telegram@v1.1
+    - uses: act10ns/slack@v1
       with:
-        skipSuccess: false
-        botToken: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        chatId: ${{ secrets.TELEGRAM_CHAT_ID }}
-        jobStatus: ${{ job.status }}
+        status: ${{ job.status }}
+        steps: ${{ toJson(steps) }}
+        channel: '#workflows'
+      if: always()
