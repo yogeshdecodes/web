@@ -28,7 +28,7 @@ class SlackInstallCard extends React.Component {
         };
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         if (this.props.code) {
             this.setState({ isRegistering: true });
             try {
