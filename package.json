@@ -82,6 +82,7 @@
         "react-datepicker": "^2.10.1",
         "react-dom": "^16.13.1",
         "react-dropzone": "4.2.13",
+        "react-error-boundary": "^2.3.1",
         "react-ga": "^2.6.0",
         "react-giphy-selector": "^0.0.1",
         "react-google-recaptcha": "^2.0.1",

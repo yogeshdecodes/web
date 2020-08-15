@@ -18,10 +18,7 @@ import NoActivityCard from "~/features/stream/components/NoActivityCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import StreamFinished from "~/features/stream/components/Stream/components/StreamFinished";
 import Spinner from "~/components/Spinner";
-import { isServer } from "~/config";
-import { orderByDate } from "../../../lib/utils/tasks";
-import orderBy from "lodash/orderBy";
-import { getTimezone } from "../../../lib/utils/timezone";
+import { isServer, isDev } from "~/config";
 import Markdown from "~/components/Markdown";
 import TaskActivityGroup from "../TaskActivityGroup";
 import MilestoneMedia from "../../milestones/components/MilestoneMedia";
@@ -37,6 +34,12 @@ import { Praisable } from "../../stream/components/Task/components/Praise";
 import { Button } from "react-scroll";
 import CommentsBox from "../../comments/components/CommentsBox";
 import TaskDetail from "../../stream/components/Task/components/TaskDetail";
+
+import { ErrorBoundary } from "react-error-boundary";
+
+function ErrorFallback({ error, componentStack, resetErrorBoundary }) {
+    return isDev ? <div>An activity broke the site.</div> : null;
+}
 
 function getTargetTitle(type, target) {
     if (!target) return null;
@@ -363,55 +366,69 @@ const ActivityControls = ({ activity }) => {
 };
 
 const Activity = ({ activity }) => {
-    // order matters
-    activity = new ActivityContainer(activity);
-    if (!activity.check()) return null;
-    // activity = cleanChildren(activity);
-    return (
-        <section
-            className="ActivityFeed--section Activity"
-            data-object-type={activity.getObjectType()}
-        >
-            <div className="ActivityFeed--content flex">
-                <div className="flex-grow">
-                    <div className="user-info-container flex">
-                        <div className="flex-grow">
-                            <UserMedia
-                                user={activity.getActorObject()}
-                                extra={
-                                    <span className="has-text-gray">
-                                        {activity.getVerb()}{" "}
-                                        {getHumanTargetType(activity) ||
-                                            getHumanActivityObject(activity)}
-                                    </span>
-                                }
-                                extraSmall={
-                                    <>
-                                        · <TimeAgo date={activity.getTime()} />
-                                    </>
-                                }
-                            />
+    try {
+        // order matters
+        activity = new ActivityContainer(activity);
+        if (!activity.check()) return null;
+        // activity = cleanChildren(activity);
+        return (
+            <section
+                className="ActivityFeed--section Activity"
+                data-object-type={activity.getObjectType()}
+            >
+                <div className="ActivityFeed--content flex">
+                    <div className="flex-grow">
+                        <div className="user-info-container flex">
+                            <div className="flex-grow">
+                                {activity.getActorObject() &&
+                                    activity.getActorObject().username && (
+                                        <UserMedia
+                                            user={activity.getActorObject()}
+                                            extra={
+                                                <span className="has-text-gray">
+                                                    {activity.getVerb()}{" "}
+                                                    {getHumanTargetType(
+                                                        activity
+                                                    ) ||
+                                                        getHumanActivityObject(
+                                                            activity
+                                                        )}
+                                                </span>
+                                            }
+                                            extraSmall={
+                                                <>
+                                                    ·{" "}
+                                                    <TimeAgo
+                                                        date={activity.getTime()}
+                                                    />
+                                                </>
+                                            }
+                                        />
+                                    )}
+                            </div>
+                        </div>
+                        <div
+                            className={"tasks-container"}
+                            style={{ width: "100%" }}
+                        >
+                            <small>
+                                {activity.getType() === "aggregated" ? (
+                                    <ActivityObjectGroup
+                                        activities={activity.getChildren()}
+                                    />
+                                ) : (
+                                    <ActivityObject activity={activity} />
+                                )}
+                            </small>
                         </div>
                     </div>
-                    <div
-                        className={"tasks-container"}
-                        style={{ width: "100%" }}
-                    >
-                        <small>
-                            {activity.getType() === "aggregated" ? (
-                                <ActivityObjectGroup
-                                    activities={activity.getChildren()}
-                                />
-                            ) : (
-                                <ActivityObject activity={activity} />
-                            )}
-                        </small>
-                    </div>
                 </div>
-            </div>
-            <ActivityControls activity={activity} />
-        </section>
-    );
+                <ActivityControls activity={activity} />
+            </section>
+        );
+    } catch (e) {
+        return null;
+    }
 };
 
 class ActivityFeed extends React.Component {
@@ -457,18 +474,26 @@ class ActivityFeed extends React.Component {
                             </center>
                         </div>
                     )}
-                    {Object.entries(data).map(([k, v]) => {
-                        if (k != 0 && k != 1 && k % 10 == 0) {
-                            return (
-                                <>
-                                    <AdIntersitial />
-                                    <Activity key={v.id} activity={v} />
-                                </>
-                            );
-                        } else {
-                            return <Activity key={v.id} activity={v} />;
-                        }
-                    })}
+
+                    <ErrorBoundary
+                        FallbackComponent={ErrorFallback}
+                        onReset={() => {
+                            // reset the state of your app so the error doesn't happen again
+                        }}
+                    >
+                        {Object.entries(data).map(([k, v]) => {
+                            if (k != 0 && k != 1 && k % 10 == 0) {
+                                return (
+                                    <>
+                                        <AdIntersitial />
+                                        <Activity key={v.id} activity={v} />
+                                    </>
+                                );
+                            } else {
+                                return <Activity key={v.id} activity={v} />;
+                            }
+                        })}
+                    </ErrorBoundary>
 
                     {this.props.hasMore && (
                         <div className={"center ActivityFeed--section"}>
