@@ -5,6 +5,10 @@
     border: 1px solid var(--c-border);
     padding: 1rem;
     // background: var(--c-bg-light);
+
+    .ProductMedia:only-of-type {
+        margin-bottom: 0px !important;
+    }
 }
 
 .ActivityFeed {
