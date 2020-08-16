@@ -43,10 +43,7 @@ class StreamPage extends React.Component {
         return (
             <>
                 <section className={"container"}>
-                    <div className={"grid-s-c-s"}>
-                        <div className={"sidebar"}>
-                            <FeedSwitcher />
-                        </div>
+                    <div className={"grid-c-s"}>
                         <div>
                             {this.hasNoTasks() ? (
                                 <>
