@@ -9,12 +9,19 @@ function hasErrors(errorMessages, name) {
     );
 }
 
-const InputField = ({ errorMessages = null, helpText = null, ...props }) => {
+const InputField = ({
+    errorMessages = null,
+    helpText = null,
+    className = "",
+    type = "text",
+    ...props
+}) => {
     return (
-        <div className="field">
+        <div className={"field " + className}>
             {props.label && <label className="label">{props.label}</label>}
             <div className="control">
                 <input
+                    type={type}
                     className={
                         "input " +
                         props.className +

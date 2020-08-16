@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import OutboundLink from "~/components/OutboundLink";
 import "./index.scss";
+import Ad from "../../features/ads/Ad";
 
 class AdblockDetect extends React.Component {
     state = {
@@ -35,34 +36,10 @@ class AdblockDetect extends React.Component {
     }
 }
 
-class IntravertAd extends React.Component {
-    state = {
-        id: "space-0359e0d7b33"
-    };
-
-    componentDidMount() {
-        const s = document.createElement("script");
-        s.onload = () => {
-            if (this.adSpace) {
-                this.setState({ id: "" });
-            }
-        };
-        s.type = "text/javascript";
-        s.async = false;
-        s.src = `https://intravert.co/serve/0359e0d7b3.3.js`;
-        this.instance.appendChild(s);
-        this.sc = s;
-    }
-
-    componentWillUnmount() {
-        if (this.sc) {
-            this.instance.removeChild(this.sc);
-        }
-    }
-
+class AdSpace extends React.Component {
     render() {
         return (
-            <div className={"nonGold"}>
+            <div className={"nonGold"} style={{ width: "100%" }}>
                 <AdblockDetect>
                     <small>
                         <div className="flex flex-column flex-v-gap">
@@ -85,20 +62,11 @@ class IntravertAd extends React.Component {
                         </div>
                     </small>
                 </AdblockDetect>
-                <div ref={el => (this.instance = el)} />
-                <div
-                    ref={el => (this.adSpace = el)}
-                    className="intravert-space"
-                    id={this.state.id}
-                />
+                <Ad />
             </div>
         );
     }
 }
-
-IntravertAd.defaultProps = {
-    placement: "getmakerlogcom"
-};
 
 export default connect(mapStateToProps)(props =>
     props.user && props.user.gold ? (
@@ -107,6 +75,6 @@ export default connect(mapStateToProps)(props =>
             <Emoji emoji={"✌️"} />
         </div>
     ) : (
-        <IntravertAd />
+        <AdSpace />
     )
 );

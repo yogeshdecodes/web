@@ -55,4 +55,5 @@ module.exports = routes()
     .add("products", "/products", "products")
     .add("blog", "/stories", "blog")
     .add("blog-tag", "/stories/tags/:slug", "blog/tag")
-    .add("blog-post", "/stories/:slug?", "blog/post");
+    .add("blog-post", "/stories/:slug?", "blog/post")
+    .add("ads", "/ads", "ads");

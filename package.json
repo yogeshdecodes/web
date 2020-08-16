@@ -129,6 +129,7 @@
         "shortid": "^2.2.15",
         "showdown": "^1.9.1",
         "styled-components": "^4.4.0",
+        "swr": "^0.3.0",
         "url-param-parser": "^0.0.2",
         "url-parse": "^1.4.7",
         "webpack-filter-warnings-plugin": "^1.2.1"

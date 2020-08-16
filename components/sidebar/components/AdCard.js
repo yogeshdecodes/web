@@ -1,15 +1,14 @@
 import React from "react";
 import Ad from "~/components/Ad";
 import OutboundLink from "~/components/OutboundLink";
+import { Link } from "~/routes";
 
 const AdCard = () => {
     return (
         <div className="AdCard sidebar-item">
             <h3>Indie ad</h3>
             <h4 className="subtitle has-text-grey">
-                <OutboundLink to="https://makerlog.io/intravert">
-                    Advertise on Makerlog &raquo;
-                </OutboundLink>
+                <Link route="ads">Advertise on Makerlog &raquo;</Link>
             </h4>
             <div className="card">
                 <div className="card-content">
@@ -20,5 +19,4 @@ const AdCard = () => {
     );
 };
 
-
-export default AdCard
+export default AdCard;

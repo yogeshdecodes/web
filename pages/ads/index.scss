@@ -1,0 +1,67 @@
+@import "../../styles/_variables";
+
+.AdCard {
+    .ads-cta {
+        font-size: 14px;
+    }
+}
+
+.Booking.banner {
+    div.image {
+        display: flex;
+        align-items: center;
+
+        figure {
+            flex-grow: 1;
+            @extend %corners;
+            border: 1px solid var(--c-border);
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding-top: 56.25%;
+            position: relative;
+        }
+        figure img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    div.text {
+        margin-top: 1rem;
+        word-wrap: break-word;
+    }
+}
+
+.Booking.icon {
+    display: flex;
+    flex-direction: row;
+
+    div.image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 64px !important;
+        min-height: 64px !important;
+        width: 64px !important;
+        height: 64px !important;
+
+        img {
+            @extend %corners;
+            border: 1px solid var(--c-border);
+            width: 64px !important;
+            height: 64px !important;
+        }
+    }
+
+    div.text {
+        margin-left: 1rem;
+        display: flex;
+        align-items: center;
+        flex: auto;
+        word-wrap: break-word;
+    }
+}

@@ -154,10 +154,11 @@ const ExploreSidebar = ({ isLoggedIn, me, data }) => {
     return (
         <div className="Sidebar mb-em">
             {isLoggedIn && <UserCard me={me} />}
+            {isLoggedIn && <AdCard />}
             <TopStreaksCard topUsers={data.topUsers} />
+            {!isLoggedIn && <AdCard />}
             <RisingCard risingUsers={data.risingUsers} />
             <UpcomingEventsCard upcomingEvents={data.upcomingEvents} />
-            <AdCard />
             <LatestDealsCard latestDeals={data.latestDeals} />
             <BlogCard />
             <SocialCard />

@@ -2985,3 +2985,30 @@ p {
         }
     }
 }
+
+
+.TileSelect {
+    display: flex;
+    width: 100%;
+
+    > div {
+        flex-grow: 1;
+
+        a.unstyled-a {
+            display: block;
+            text-align: center;
+            @extend %corners;
+            background-color: var(--c-lightest) !important;
+            padding: 1rem !important;
+            color: var(--c-text) !important;
+            border: 1px solid var(--c-border) !important;
+        }
+
+        &.active {
+            a.unstyled-a {
+                border: 2px solid var(--c-main) !important;
+                //background-color: var(--c-bg-light) !important;
+            }
+        }
+    }
+}
