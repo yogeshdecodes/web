@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "~/routes";
 import "./index.scss";
 import CompanyPageLayout from "../../layouts/CompanyPage";
 import StdPageSidebar from "~/components/sidebar/std-page";
-import { OutboundLink } from "react-ga";
 
 class LegalPage extends Component {
     static async getInitialProps(ctx) {

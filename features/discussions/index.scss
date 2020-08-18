@@ -108,10 +108,18 @@
 }
 
 .ThreadStreamItem {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 1rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 0.5rem;
     //border-bottom: 1px solid var(--c-border);
     //cursor: pointer;
+
+    &.gold {
+        @extend %corners;
+        @extend %gold-highlight;
+    }
 
     h4 {
         cursor: pointer;

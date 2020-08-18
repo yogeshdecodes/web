@@ -139,7 +139,7 @@ class AppWebhookCreator extends React.Component {
             return (
                 <div className={"has-text-centered"}>
                     <div className="field">
-                        <label class="label">
+                        <label className="label">
                             Here's your webhook for {this.props.appName}. Keep
                             it secret; we won't show it to you again.
                         </label>

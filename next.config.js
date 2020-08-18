@@ -8,12 +8,18 @@ const withCss = require("@zeit/next-css");
 const withProgressBar = require("next-progressbar");
 const withOptimizedImages = require("next-optimized-images");
 const withFonts = require("next-fonts");
-const CircularDependencyPlugin = require("circular-dependency-plugin");
+const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true"
+});
 
 let config = {
     webpack: config => {
         // Fixes npm packages that depend on `fs` module
         config.plugins = config.plugins || [];
+        config.node = {
+            //   fs: "empty"
+        };
         config.stats = {
             ...config.stats,
             warningsFilter: warn =>
@@ -42,6 +48,13 @@ let config = {
             })
         ];
 
+        config.plugins.push(
+            new FilterWarningsPlugin({
+                exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
+            })
+        );
+        return config;
+
         return config;
     }
 };
@@ -51,5 +64,6 @@ config = withOptimizedImages(config);
 config = withFonts(config);
 config = withSass(config);
 config = withCss(config);
+config = withBundleAnalyzer(config);
 
 module.exports = config;

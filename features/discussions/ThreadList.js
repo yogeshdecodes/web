@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "~/routes";
 import ReplyFaces from "./ReplyFaces";
 
-export default props => {
+const ThreadList = props => {
     return (
         <div className={"RecentQuestionsList"}>
             {props.threads.map(thread => (
@@ -29,3 +29,6 @@ export default props => {
         </div>
     );
 };
+
+
+export default ThreadList

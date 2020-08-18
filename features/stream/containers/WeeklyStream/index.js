@@ -18,7 +18,6 @@ class WeeklyStream extends React.Component {
         allLoaded: false,
         isSyncing: true,
         tasks: [],
-        milestones: [],
         nextUrl: null,
         failed: false
     };
@@ -37,7 +36,6 @@ class WeeklyStream extends React.Component {
                 failed: false,
                 hasMore: hasMore(nextUrls),
                 tasks: dataStores.tasks ? dataStores.tasks : [],
-                milestones: dataStores.milestones ? dataStores.milestones : [],
                 initialLoaded: true,
                 nextUrl: nextUrls
             };
@@ -99,24 +97,6 @@ class WeeklyStream extends React.Component {
                 });
                 break;
 
-            case "milestone.created":
-            case "milestone.updated":
-                this.setState({
-                    milestones: uniqBy(
-                        [data.payload, ...this.state.milestones],
-                        "id"
-                    )
-                });
-                break;
-
-            case "milestone.deleted":
-                this.setState({
-                    milestones: this.state.milestones.filter(
-                        t => t.id !== data.payload.id
-                    )
-                });
-                break;
-
             default:
                 return;
         }
@@ -139,10 +119,6 @@ class WeeklyStream extends React.Component {
                 // get initial link
                 if (this.props.tasksIndexUrl) {
                     nextUrl["tasks"] = this.props.tasksIndexUrl;
-                }
-
-                if (this.props.milestonesIndexUrl) {
-                    nextUrl["milestones"] = this.props.milestonesIndexUrl;
                 }
             } else {
                 new Track().event("stream-more-loaded", "Infinite scroll load");
@@ -176,15 +152,6 @@ class WeeklyStream extends React.Component {
                               "id"
                           )
                         : this.state.tasks,
-                    milestones: dataStores.milestones
-                        ? uniqBy(
-                              [
-                                  ...this.state.milestones,
-                                  ...dataStores.milestones
-                              ],
-                              "id"
-                          )
-                        : this.state.milestones,
                     initialLoaded: true,
                     nextUrl: nextUrls
                 });
@@ -210,7 +177,6 @@ class WeeklyStream extends React.Component {
                 loadMore={this.loadMore}
                 hasMore={this.state.hasMore}
                 tasks={this.state.tasks}
-                milestones={this.state.milestones}
                 noActivityComponent={
                     this.props.noActivityComponent ? (
                         this.props.noActivityComponent
@@ -225,16 +191,12 @@ class WeeklyStream extends React.Component {
     }
 }
 
-async function prefetchStream(tasksIndexUrl, milestonesIndexUrl) {
+async function prefetchStream(tasksIndexUrl) {
     try {
         let nextUrl = {};
 
         if (tasksIndexUrl) {
             nextUrl["tasks"] = tasksIndexUrl;
-        }
-
-        if (milestonesIndexUrl) {
-            nextUrl["milestones"] = milestonesIndexUrl;
         }
 
         // get the stream data

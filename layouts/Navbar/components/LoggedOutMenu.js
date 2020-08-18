@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavLink from "~/components/ActiveLink";
-import { NavbarDropdown } from "~/components/Dropdown";
+import { NavbarDropdown } from "~/components/ui/Dropdown";
 import React from "react";
 import { Link } from "~/routes";
 import OutboundLink from "~/components/OutboundLink";
@@ -14,6 +14,10 @@ const LoggedOutMenu = props => (
         <div className="navbar-start">
             <NavLink activeClassName="is-active" route="home">
                 <a className="navbar-item">Explore</a>
+            </NavLink>
+
+            <NavLink iexact activeClassName="is-active" route="gold">
+                <a className="navbar-item">Gold</a>
             </NavLink>
 
             <NavLink route="blog" iexact activeClassName="is-active">

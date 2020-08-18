@@ -14,10 +14,7 @@ const BASE_URL = process.env.BASE_URL
     : "https://getmakerlog.com";
 
 const STREAM_TYPES = (following = true) => ({
-    tasks: following ? "/stream" : "/explore/stream/",
-    milestones: following
-        ? "/stream/milestones/"
-        : "/explore/stream/milestones/"
+    tasks: following ? "/stream" : "/explore/stream/"
 });
 
 const IMGOPT_ENABLED = process.env.IMGOPT_ENABLED
@@ -34,6 +31,10 @@ const DEFAULT_TZ = process.env.DEFAULT_TZ
 const PADDLE_VENDOR = process.env.PADDLE_VENDOR
     ? process.env.PADDLE_VENDOR
     : "38022";
+
+const PADDLE_PRODUCT = process.env.PADDLE_PRODUCT
+    ? process.env.PADDLE_PRODUCT
+    : "547895";
 
 const GHOST_API_URL = process.env.GHOST_API_URL
     ? process.env.GHOST_API_URL
@@ -75,6 +76,7 @@ const config = {
     GHOST_CONTENT_KEY,
     TWITTER_CLIENT_KEY,
     STREAM_API_KEY,
-    STREAM_APP_ID
+    STREAM_APP_ID,
+    PADDLE_PRODUCT
 };
 export default config;

@@ -1,22 +1,13 @@
 import React, { Component } from "react";
 import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import findHashtags from "find-hashtags";
 import debounce from "lodash/debounce";
 import { connect } from "react-redux";
 import { actions as editorActions } from "~/ducks/editor";
 import Dropzone from "react-dropzone";
 
-import chrono from "chrono-node";
-import { format } from "date-fns";
-import {
-    DoneStates,
-    getDoneState,
-    getDeltaFromDoneState
-} from "../../../../lib/utils/tasks";
+import { DoneStates, getDoneState } from "../../../../lib/utils/tasks";
 import { createQueueItem } from "../../../../ducks/editor";
-import DueCountdown from "~/components/DueCountdown";
-import omit from "lodash/omit";
 
 /*
 PropTypes:
@@ -99,8 +90,7 @@ class TaskQueue extends Component {
             prevProps.isCreating !== this.props.isCreating
         ) {
             this.setState({
-                showDescriptionEditor: false,
-                showDueEditor: false
+                showDescriptionEditor: false
                 // content: ""
             });
         }
@@ -145,26 +135,6 @@ class TaskQueue extends Component {
                 ? this.props.doneState
                 : DoneStates.DONE
         );
-    };
-
-    setEditorDueAt = e => {
-        this.setState({
-            editorNaturalDate: e.target.value
-        });
-        let parsed = chrono.parseDate(e.target.value);
-        if (parsed) {
-            let task = this.props.queue.find(
-                t => t.id === this.props.activeTask
-            );
-            task.due_at = parsed;
-            this.props.addToQueue(task);
-        }
-    };
-
-    onDueKeypress = e => {
-        if (e.key === "Enter") {
-            this.toggleDueEditor();
-        }
     };
 
     cycleDoneStates = () => {
@@ -322,21 +292,6 @@ class TaskQueue extends Component {
         return task;
     };
 
-    toggleDueEditor = () => {
-        if (!this.state.showDueEditor && this.getCurrentTask()) {
-            // Delete on second open.
-            this.props.updateQueueItem({
-                ...this.getCurrentTask(),
-                due_at: null
-            });
-        }
-        this.setState({
-            showDueEditor: !this.state.showDueEditor,
-            showDescriptionEditor: false,
-            editorNaturalDate: ""
-        });
-    };
-
     removeAttachment = e => {
         let task = this.getCurrentTask();
         delete task.attachment;
@@ -345,8 +300,7 @@ class TaskQueue extends Component {
 
     toggleDescriptionEditor = () => {
         this.setState({
-            showDescriptionEditor: !this.state.showDescriptionEditor,
-            showDueEditor: false
+            showDescriptionEditor: !this.state.showDescriptionEditor
         });
     };
 
@@ -415,7 +369,7 @@ class TaskQueue extends Component {
                                     <div className="input">
                                         <input
                                             disabled={true}
-                                            autocomplete="off"
+                                            autoComplete="off"
                                             placeholder={
                                                 "Start typing a task..."
                                             }
@@ -465,7 +419,7 @@ class TaskQueue extends Component {
                                                     this.props.activeTask ===
                                                     null
                                                 }
-                                                autocomplete="off"
+                                                autoComplete="off"
                                                 onKeyDown={this.onTaskKeyDown}
                                                 name={task.id}
                                                 onChange={e => {
@@ -540,69 +494,7 @@ class TaskQueue extends Component {
                                                             : "Attach an image"}
                                                     </button>
                                                 </div>
-                                                <div>
-                                                    <button
-                                                        className={
-                                                            "btn btn-light btn-small" +
-                                                            (currentTask.due_at
-                                                                ? " btn-selected"
-                                                                : "")
-                                                        }
-                                                        onClick={
-                                                            this.toggleDueEditor
-                                                        }
-                                                    >
-                                                        <FontAwesomeIcon
-                                                            icon="clock"
-                                                            color="var(--c-text)"
-                                                        />{" "}
-                                                        {currentTask.due_at ? (
-                                                            <DueCountdown
-                                                                date={
-                                                                    currentTask.due_at
-                                                                }
-                                                            />
-                                                        ) : (
-                                                            "Add a due date"
-                                                        )}
-                                                    </button>
-                                                </div>
                                             </div>
-
-                                            {this.state.showDueEditor && (
-                                                <div className="flex flex-column flex-v-gap attachment-panel dyn-height">
-                                                    <div>
-                                                        <div className="control">
-                                                            <input
-                                                                type="Text"
-                                                                autoFocus
-                                                                value={
-                                                                    this.state
-                                                                        .editorNaturalDate
-                                                                }
-                                                                onChange={
-                                                                    this
-                                                                        .setEditorDueAt
-                                                                }
-                                                                autoComplete={
-                                                                    "off"
-                                                                }
-                                                                placeholder={
-                                                                    "When is this task due? Type things like in 6 hours, in 2 days, at 6:30..."
-                                                                }
-                                                                onKeyPress={
-                                                                    this
-                                                                        .onDueKeypress
-                                                                }
-                                                            />
-                                                            <p className="help">
-                                                                Hit Enter to set
-                                                                the date.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
 
                                             {this.state
                                                 .showDescriptionEditor && (
@@ -644,9 +536,7 @@ const mapStateToProps = state => ({
     open: state.editor.open,
     activeTask: state.editor.activeTask,
     queue: state.editor.queue,
-    creatingMilestone: state.editor.creatingMilestone,
     creatingDiscussion: state.editor.creatingDiscussion,
-    editorDueAt: state.editor.editorDueAt,
     editorAttachment: state.editor.editorAttachment,
     isCreating: state.editor.isCreating,
     editorValue: state.editor.editorValue,
@@ -664,13 +554,11 @@ const mapDispatchToProps = dispatch => ({
     removeFromQueue: t => dispatch(editorActions.removeFromQueue(t)),
     createTasks: () => dispatch(editorActions.createTasks()),
     setEditorValue: v => dispatch(editorActions.setEditorValue(v)),
-    setEditorDueAt: v => dispatch(editorActions.setEditorDueAt(v)),
     toggleEditorDone: () => dispatch(editorActions.toggleEditorDone()),
     setEditorAttachment: a => dispatch(editorActions.setEditorAttachment(a)),
     markDone: () => dispatch(editorActions.markDone()),
     markInProgress: () => dispatch(editorActions.markInProgress()),
     markRemaining: () => dispatch(editorActions.markRemaining()),
-    openMilestoneEditor: () => dispatch(editorActions.openMilestoneEditor()),
     openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor()),
 
     setActiveTask: activeTask =>

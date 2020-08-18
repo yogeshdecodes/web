@@ -6,7 +6,6 @@ import User from "./components/User";
 import UserMediaList from "./components/UserMediaList";
 import FullName from "./components/FullName";
 import UserRow from "./components/UserRow";
-import MakerList from "./containers/MakerList";
 import UserContainer from "./containers/UserContainer";
 import FollowingList from "./components/FollowingList";
 import LoggedInOnly from "./containers/LoggedInOnly";
@@ -20,7 +19,6 @@ export {
     UserMediaList,
     UserRow,
     FullName,
-    MakerList,
     UserContainer,
     FollowingList,
     FaceStack,

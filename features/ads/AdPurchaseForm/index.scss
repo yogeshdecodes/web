@@ -1,0 +1,12 @@
+@import "../../../styles/_variables";
+
+.AdPurchaseForm {
+    .step {
+        margin-bottom: 2rem;
+
+        .step-form {
+            padding: 1rem;
+            border-left: 1px solid var(--c-border);
+        }
+    }
+}

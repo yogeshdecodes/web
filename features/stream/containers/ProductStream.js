@@ -7,7 +7,6 @@ class ProductStream extends React.Component {
         return (
             <WeeklyStream
                 tasksIndexUrl={`/products/${this.props.productSlug}/stream/`}
-                milestonesIndexUrl={`/products/${this.props.productSlug}/stream/milestones/`}
             />
         );
     }

@@ -2,22 +2,15 @@ import React from "react";
 import WeeklyStream, { prefetchStream } from "../WeeklyStream";
 
 const tasksIndexUrl = `/explore/stream/`;
-const milestonesIndexUrl = `/explore/stream/milestones/`;
 
 class GlobalStream extends React.Component {
     render() {
-        return (
-            <WeeklyStream
-                tasksIndexUrl={tasksIndexUrl}
-                milestonesIndexUrl={milestonesIndexUrl}
-                {...this.props}
-            />
-        );
+        return <WeeklyStream tasksIndexUrl={tasksIndexUrl} {...this.props} />;
     }
 }
 
 export async function prefetch() {
-    return await prefetchStream(tasksIndexUrl, milestonesIndexUrl);
+    return await prefetchStream(tasksIndexUrl);
 }
 
 GlobalStream.propTypes = {};

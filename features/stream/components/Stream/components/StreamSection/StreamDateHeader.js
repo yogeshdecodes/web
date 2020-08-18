@@ -1,9 +1,6 @@
 import React from "react";
 import format from "date-fns/format";
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
-import styled from "styled-components";
-
-const SubheaderButton = styled.a``;
 
 function getRelativeDate(date) {
     const diff = differenceInCalendarDays(new Date(), date);
@@ -17,7 +14,7 @@ function getRelativeDate(date) {
     return null;
 }
 
-export default ({ date, ...props }) => {
+const StreamDateHeader = ({ date, ...props }) => {
     const mmd = date ? new Date(date) : new Date();
     const humanDate = getRelativeDate(mmd);
 
@@ -50,3 +47,6 @@ export default ({ date, ...props }) => {
         </h4>
     );
 };
+
+
+export default StreamDateHeader

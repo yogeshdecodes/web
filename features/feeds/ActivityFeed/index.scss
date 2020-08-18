@@ -9,6 +9,11 @@
     .ProductMedia:only-of-type {
         margin-bottom: 0px !important;
     }
+
+    &.gold {
+        @extend %gold-highlight;
+        border: 1px solid transparent;
+    }
 }
 
 .ActivityFeed {

@@ -1,0 +1,9 @@
+@import "../../../styles/_variables";
+
+.GoldPage {
+    .ThreadStreamItem {
+        &.gold {
+            background-color: transparent;
+        }
+    }
+}

@@ -7,8 +7,7 @@ import { getStreamMetadata } from "~/lib/tasks";
 import RWS from "reconnecting-websocket";
 import { fetchNextUrl } from "../lib/tasks";
 import pickBy from "lodash/pickBy";
-import { getTimezone } from "../lib/utils/timezone";
-import { socketUrl } from "../lib/utils/random";
+import { getTimezone, socketUrl } from "../lib/utils/random";
 
 export const getStreamState = state => state.stream;
 export const getUserState = state => state.user;
@@ -190,15 +189,6 @@ function listen(socket, user) {
 
                 case "task.deleted":
                     emit(streamActions.removeTask(data.payload.id));
-                    break;
-
-                case "milestone.created":
-                case "milestone.updated":
-                    emit(streamActions.mergeMilestones([data.payload]));
-                    break;
-
-                case "milestone.deleted":
-                    emit(streamActions.removeMilestone(data.payload.id));
                     break;
 
                 default:

@@ -2,9 +2,13 @@ import React from "react";
 import InfiniteResults from "~/components/InfiniteResults";
 import ThreadStreamItem from "./Item";
 
-export default ({ prefetchedData = null, compact = false }) => (
+export default ({
+    prefetchedData = null,
+    compact = false,
+    url = "/discussions/"
+}) => (
     <InfiniteResults
-        url={"/discussions/"}
+        url={url}
         withSockets
         prefetchedData={prefetchedData}
         socketTypePrefix={"thread"}

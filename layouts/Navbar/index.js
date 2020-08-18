@@ -52,10 +52,10 @@ class Navbar extends React.Component {
                                         x2="-0.37%"
                                         y2="0.38%"
                                     >
-                                        <stop stop-color="#00ad71" />
+                                        <stop stopColor="#00ad71" />
                                         <stop
                                             offset="1.24"
-                                            stop-color="#47e0a0"
+                                            stopColor="#47e0a0"
                                         />
                                     </linearGradient>
                                 </svg>

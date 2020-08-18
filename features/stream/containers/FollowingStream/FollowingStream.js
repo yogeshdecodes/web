@@ -41,7 +41,6 @@ class FollowingStream extends React.Component {
                 loadMore={this.props.loadMore}
                 hasMore={this.props.hasMore}
                 tasks={this.props.tasks}
-                milestones={this.props.milestones}
                 canSwitchType={true}
                 isFollowingFeed={this.props.isFollowingFeed}
                 onSwitch={this.props.toggleStreamType}
@@ -59,7 +58,6 @@ const mapStateToProps = state => {
         isSyncing: state.stream.isSyncing,
         errorMessages: state.stream.errorMessages,
         tasks: state.stream.tasks,
-        milestones: state.stream.milestones,
         fetchFailed: state.stream.fetchFailed,
         initialLoaded: state.stream.initialLoaded,
         allLoaded: state.stream.allLoaded,

@@ -1,18 +1,205 @@
 @import "../../styles/_variables";
 
 .hero-container {
-    background: var(--c-bg);
+    background: var(--c-lightest);
     min-height: 60vh;
+    max-height: 60vh;
     border-bottom: 1px solid var(--c-border);
+    //text-align: center;
+    overflow: hidden;
+    position: relative;
 
     & > .container {
+        position: relative;
         min-height: 60vh;
         display: flex;
         align-items: center;
-        justify-content: center;
+        //justify-content: center;
+
+        > .flex {
+            min-height: 60vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            background: linear-gradient(
+                90deg,
+                var(--c-lightest) 50%,
+                rgba(0, 0, 0, 0) 100%
+            );
+
+            .col {
+                min-height: 60vh;
+                flex: 1;
+                width: 50%;
+                display: flex;
+                align-items: center;
+                max-height: 60vh;
+                height: 100%;
+
+                &:first-of-type {
+                    /*background: linear-gradient(
+                        90deg,
+                        var(--c-lightest) 90%,
+                        rgba(0, 0, 0, 0) 100%
+                    );*/
+
+                    z-index: 1;
+                }
+            }
+        }
     }
 
-    h1 {
-        font-size: 4rem;
+    h1.gold-color {
+        font-size: 3rem;
+        color: white;
+        //color: var(--c-lightest);
+    }
+
+    p {
+        color: var(--c-title);
+    }
+
+    .gold-color {
+        color: $c-gold !important;
+    }
+
+    .logo-giant {
+        height: 100%;
+    }
+
+    .logo-giant svg {
+        overflow: hidden;
+        position: absolute;
+        height: 50vh;
+        width: 50vw;
+        top: 50%;
+    }
+
+    .people-grid-bg {
+        position: absolute;
+        display: grid;
+        grid-gap: 25px;
+        grid-template-columns: repeat(6, 128px);
+        grid-template-rows: repeat(6, 128px);
+        grid-auto-flow: column;
+        left: 50%;
+        top: -10%;
+        opacity: 0.6;
+    }
+
+    .real-svg {
+        position: absolute;
+        bottom: 40px;
+        right: 55%;
+    }
+}
+
+.explanation-hero,
+.goldclub-hero {
+    padding-top: $gap * 2;
+    padding-bottom: $gap * 2;
+    border-top: 1px solid var(--c-border);
+
+    .top-copy {
+        padding-bottom: $gap * 2;
+    }
+
+    &.bg {
+        background-color: var(--c-lightest);
+    }
+}
+
+.goldclub-hero {
+}
+
+.feature-showcase {
+    display: flex;
+    max-height: 500px;
+
+    .text-case {
+        background-color: var(--c-lightest);
+        //border: 1px solid var(--c-border);
+        padding: $gap * 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &.right {
+            text-align: right;
+            align-items: flex-end;
+        }
+
+        &.left {
+            text-align: left;
+        }
+    }
+
+    .image-case {
+        img {
+            max-height: 100%;
+        }
+        padding: $gap * 2;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("https://www.transparenttextures.com/patterns/dark-dot.png");
+    }
+
+    > div {
+        width: 50%;
+        flex: 1;
+    }
+}
+
+.final-cta {
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+
+    > .container {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: $breakpoint-mobile) {
+    .hero-container {
+        padding: 1rem;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .people-grid-bg {
+            display: none;
+        }
+
+        .flex {
+            .col:last-of-type,
+            .real-svg {
+                display: none;
+            }
+        }
+
+        & > .container {
+            > .flex {
+                background: var(--c-lightest);
+            }
+        }
+    }
+
+    .feature-showcase {
+        flex-direction: column;
+        margin-bottom: $gap;
+        div {
+            width: 100%;
+            flex: 1;
+        }
     }
 }

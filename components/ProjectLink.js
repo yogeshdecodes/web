@@ -2,22 +2,7 @@ import React from "react";
 import { Tooltip } from "react-tippy";
 import { getRelatedData } from "~/lib/projects";
 import Spinner from "./Spinner";
-import styled from "styled-components";
 import { ProductMedia } from "~/features/products/components/Product/components/ProductMedia/ProductMedia";
-
-export const UnderlinedText = styled.span`
-    display: inline-block;
-    line-height: 20px;
-    color: inherit;
-    border-bottom: 2px solid #2ce28a;
-    margin-right: 3px;
-`;
-
-const LinkedProductsDiv = styled.div`
-    background: #363636;
-    border-radius: 5px;
-    padding: 1rem !important;
-`;
 
 class ProjectRelated extends React.Component {
     state = {
@@ -55,12 +40,15 @@ class ProjectRelated extends React.Component {
         }
 
         return (
-            <LinkedProductsDiv
+            <div
+                className="ProjectLink--content"
                 style={{
                     width: 300,
-                    padding: 10,
                     fontSize: 16,
-                    textAlign: "left"
+                    textAlign: "left",
+                    background: "#363636",
+                    borderRadius: 5,
+                    padding: "1rem"
                 }}
             >
                 <h3 className={"heading has-text-white"}>Linked products</h3>
@@ -74,13 +62,17 @@ class ProjectRelated extends React.Component {
                 {this.state.products && this.state.products.length === 0 && (
                     <span>No products linked.</span>
                 )}
-            </LinkedProductsDiv>
+            </div>
         );
     }
 }
 
 const ProjectLink = props => {
-    const tag = <UnderlinedText>{props.children}</UnderlinedText>;
+    const tag = (
+        <span className={"ProjectLink--tag brand-underline"}>
+            {props.children}
+        </span>
+    );
 
     if (!props.project) {
         return tag;
@@ -88,6 +80,7 @@ const ProjectLink = props => {
 
     return (
         <Tooltip
+            className="ProjectLink"
             interactive
             useContext
             html={<ProjectRelated project={props.project} />}

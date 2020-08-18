@@ -1,38 +1,12 @@
 import React from "react";
 import NextDocument, { Head, Html, Main, NextScript } from "next/document";
 
-import { ServerStyleSheet } from "styled-components";
 import config, { isDev } from "../config";
 import { isGaEnabled } from "../vendor/ga";
 
 // Sadly we need this as long as we use styled-components. Fuck that.
 
 export default class Document extends NextDocument {
-    static async getInitialProps(ctx) {
-        const sheet = new ServerStyleSheet();
-        const originalRenderPage = ctx.renderPage;
-
-        try {
-            ctx.renderPage = () =>
-                originalRenderPage({
-                    enhanceApp: App => props =>
-                        sheet.collectStyles(<App {...props} />)
-                });
-
-            const initialProps = await NextDocument.getInitialProps(ctx);
-            return {
-                ...initialProps,
-                styles: (
-                    <>
-                        {initialProps.styles}
-                        {sheet.getStyleElement()}
-                    </>
-                )
-            };
-        } finally {
-            sheet.seal();
-        }
-    }
 
     renderAnalytics = () => {
         if (!isGaEnabled) return null;
@@ -89,7 +63,7 @@ export default class Document extends NextDocument {
                     <script
                         src="https://browser.sentry-cdn.com/5.15.4/bundle.min.js"
                         integrity="sha384-Nrg+xiw+qRl3grVrxJtWazjeZmUwoSt0FAVsbthlJ5OMpx0G08bqIq3b/v0hPjhB"
-                        crossorigin="anonymous"
+                        crossOrigin="anonymous"
                     ></script>
                     <script
                         type="text/javascript"

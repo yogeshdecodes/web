@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import OutboundLink from "~/components/OutboundLink";
 import { Link } from "~/routes";
 import Spinner from "~/components/Spinner";
-import { getLatestBlogEntry } from "~/lib/stats";
 import { truncate } from "~/lib/utils/random";
 import { getLatestPost } from "../../../vendor/ghost";
 

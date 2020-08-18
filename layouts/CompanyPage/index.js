@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import NavLink from "~/components/ActiveLink";
 import PageNavigation from "~/components/ui/PageNavigation";
-import SubscribeModal from "../../features/blog/SubscribeModal";
-import Head from "~/components/Head";
 
 class CompanyPageLayout extends Component {
     render() {

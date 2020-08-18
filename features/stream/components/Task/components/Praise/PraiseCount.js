@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Emoji from "~/components/Emoji";
 
 const PraiseCount = ({ amount, button = false }) => {
     if (button) {

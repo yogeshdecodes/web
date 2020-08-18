@@ -19,18 +19,30 @@ export default class extends React.Component {
         failed: false
     };
 
-    static async getInitialProps({ query }) {
+    static async getInitialProps({ query, res }) {
         const layout = { className: "DiscussionsPage" };
-
+        let thread = null;
         try {
             if (query.slug) {
-                const thread = await getThread(query.slug);
+                thread = await getThread(query.slug);
                 const replies = await getThreadReplies(query.slug);
                 return { thread, replies, layout };
             } else {
                 return { layout };
             }
         } catch (e) {
+            if (e.status_code === 403 && thread && thread.gold) {
+                res.writeHead(301, {
+                    Location: "/gold"
+                });
+                res.end();
+                return {
+                    thread,
+                    layout,
+                    replies: [],
+                    requiresGold: true
+                };
+            }
             if (e.status_code && e.status_code === 404) {
                 return { statusCode: 404 };
             } else {
@@ -153,6 +165,7 @@ export default class extends React.Component {
                 />
 
                 <Thread
+                    requiresGold={this.props.requiresGold}
                     thread={thread}
                     showActions={false}
                     replies={replies}

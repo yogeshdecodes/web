@@ -1,4 +1,3 @@
-import DueCountdown from "../../../../components/DueCountdown";
 import Emoji from "~/components/Emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Lightbox } from "react-modal-image";
@@ -15,9 +14,9 @@ import TaskDetail from "./components/TaskDetail";
 import { imageUrl } from "../../../../lib/utils/img";
 import YouTube from "react-youtube";
 import {
-    getHumanStateFromTask,
     DoneStates,
-    getDeltaFromDoneState
+    getDeltaFromDoneState,
+    getHumanStateFromTask
 } from "../../../../lib/utils/tasks";
 import { actions as tasksActions } from "~/ducks/tasks";
 import { connect } from "react-redux";
@@ -201,17 +200,6 @@ class Task extends React.Component {
         }
         if (this.props.withDetailModal) {
             task = <span onClick={this.toggleDetails}>{task}</span>;
-        }
-
-        if (this.props.withDueDates) {
-            task = (
-                <>
-                    {task}{" "}
-                    {this.props.task.due_at && (
-                        <DueCountdown date={this.props.task.due_at} />
-                    )}
-                </>
-            );
         }
 
         task = (
@@ -506,7 +494,6 @@ Task.defaultProps = {
     withCounts: true,
     withPraise: true,
     withAttachment: true,
-    withDueDates: true,
     plain: false
 };
 

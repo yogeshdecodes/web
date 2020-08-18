@@ -1,5 +1,4 @@
 import React from "react";
-import { UserStream } from "~/features/stream";
 import ProfilePageLayout from "~/layouts/ProfilePage";
 import { getByUsername } from "~/lib/user";
 import { getUserTrophies } from "~/lib/achievements";

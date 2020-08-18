@@ -8,11 +8,7 @@ import GoldIcon from "~/components/icons/GoldIcon";
 
 import { Line } from "rc-progress";
 import { Router } from "~/routes";
-import Emoji from "~/components/Emoji";
-import GoldCtaButton from "~/components/GoldCtaButton";
 import Spinner from "~/components/Spinner";
-import { ThreadTypeSelect } from "~/features/discussions/ThreadTypeSelect";
-import { createMilestone } from "~/lib/milestones";
 import { createThread } from "~/lib/discussions";
 import { actions as editorActions } from "~/ducks/editor";
 import { getMyProducts } from "~/lib/products";
@@ -24,8 +20,9 @@ import MarkdownIt from "markdown-it";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
 import dynamic from "next/dynamic";
-import GoldMessage from "../../components/GoldMessage";
 import OutboundLink from "~/components/OutboundLink";
+import GoldCtaButton from "~/features/gold/GoldCtaButton";
+import { Link } from "~/routes";
 
 import { DoneStates } from "../../lib/utils/tasks";
 
@@ -81,231 +78,6 @@ class ProductSelectorDropdown extends React.Component {
                     ))}
                 </select>
             </div>
-        );
-    }
-}
-
-class MilestoneEditor extends React.Component {
-    state = {
-        loading: false,
-        title: "",
-        body: "",
-        product: null,
-        failed: false,
-        icon: null,
-        iconPreview: null
-    };
-
-    onSubmit = async () => {
-        this.setState({
-            loading: true
-        });
-        try {
-            await createMilestone({
-                title: this.state.title,
-                body: this.state.body,
-                product: this.state.product,
-                icon: this.state.icon
-            });
-            this.setState({
-                title: "",
-                body: "",
-                product: null,
-                icon: null,
-                iconPreview: null,
-                loading: false
-            });
-
-            new Track().event("milestone-posted");
-            if (this.props.onClose) this.props.onClose();
-            if (this.props.onBack) this.props.onBack();
-        } catch (e) {
-            this.setState({
-                failed: true,
-                loading: false
-            });
-        }
-    };
-
-    onIconUpload = (acceptedFiles, rejectedFiles) => {
-        const file = acceptedFiles[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-
-        reader.onloadend = e => {
-            this.setState({
-                icon: file,
-                iconPreview: reader.result
-            });
-        };
-    };
-
-    render() {
-        /*if (!this.props.hasGold) {
-            return (
-
-                <Modal
-                    open={this.props.open}
-                    onClose={this.props.onClose}
-                    background={'transparent'}>
-                    <div className={"MilestoneEditor-container"}>
-                        <Level>
-                            <Level.Left>
-                                <Title is={"5"} className={"has-text-white"}>
-                                    Add a milestone
-                                </Title>
-                            </Level.Left>
-                            <Level.Right>
-                                <Button text small className={"has-text-white is-rounded"} onClick={this.props.onBack}>
-                                    ← Go back
-                                </Button>
-                            </Level.Right>
-                        </Level>
-                        <div className="card">
-                            <div className={"card-content"}>
-                                <div className={"content"}>
-                                    <h2>Milestones is a Gold-only feature.</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Modal>
-            )
-        }*/
-
-        return (
-            <>
-                <Modal.Content>
-                    <div className={"MilestoneEditor-container"}>
-                        {!this.props.hasGold ? (
-                            <GoldMessage feature="Milestones" />
-                        ) : (
-                            <>
-                                <div
-                                    className={
-                                        "milestone-form" +
-                                        (!this.props.hasGold ? " disabled" : "")
-                                    }
-                                >
-                                    {this.state.failed && (
-                                        <div className={"panel-message danger"}>
-                                            Oops! Something went wrong. Make
-                                            sure the form is all filled up!
-                                        </div>
-                                    )}
-                                    <div className={"form-row"}>
-                                        <label className="label">Title</label>
-                                        <div className={"control"}>
-                                            <input
-                                                type={"text"}
-                                                value={this.state.title}
-                                                onChange={e =>
-                                                    this.setState({
-                                                        title: e.target.value
-                                                    })
-                                                }
-                                                placeholder="First customer!"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className={"form-row"}>
-                                        <label className="label">Content</label>
-                                        <div className={"control"}>
-                                            <MdEditor
-                                                style={{ height: 300 }}
-                                                config={{
-                                                    view: {
-                                                        menu: true,
-                                                        md: true,
-                                                        html: false
-                                                    }
-                                                }}
-                                                onChange={({ html, text }) =>
-                                                    this.setState({
-                                                        body: text
-                                                    })
-                                                }
-                                                value={this.state.body}
-                                                renderHTML={text =>
-                                                    mdParser.render(text)
-                                                }
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </Modal.Content>
-                {this.props.hasGold && (
-                    <Modal.Footer>
-                        <div className="flex flex-gap v-center">
-                            <div className="flex-grow v-center flex">
-                                <ProductSelectorDropdown
-                                    value={this.state.product}
-                                    onChange={e =>
-                                        this.setState({
-                                            product: e.target.value
-                                        })
-                                    }
-                                />
-                            </div>
-                            <div>
-                                <button
-                                    className={loadingClass(
-                                        "btn btn-primary",
-                                        this.state.loading
-                                    )}
-                                    onClick={this.onSubmit}
-                                >
-                                    Post
-                                </button>
-                            </div>
-                        </div>
-                    </Modal.Footer>
-                )}
-            </>
-        );
-    }
-}
-
-/**
- *         if (this.props.creatingDiscussion)
-            return (
-                <DiscussionEditor
-                    open={this.props.open}
-                    onClose={this.props.onClose}
-                    onBack={this.props.openDiscussionEditor}
-                />
-            );
-
-        if (this.props.creatingMilestone)
-            return (
-                <MilestoneEditor
-                    hasGold={this.props.hasGold}
-                    open={this.props.open}
-                    onClose={this.props.onClose}
-                    onBack={this.props.openMilestoneEditor}
-                />
-            );
- */
-
-class MilestoneEditorTab extends Component {
-    render() {
-        return (
-            <>
-                <Modal.Content>
-                    <MilestoneEditor {...this.props} />
-                </Modal.Content>
-                <Modal.Footer>
-                    <div className="flex flex-gap v-center">
-                        <div className="flex-grow v-center flex"></div>
-                        <div>
-                            <button className="btn btn-primary">Post</button>
-                        </div>
-                    </div>
-                </Modal.Footer>
-            </>
         );
     }
 }
@@ -429,6 +201,7 @@ class DiscussionEditor extends React.Component {
         type: "TEXT",
         title: "",
         body: "",
+        gold: false,
         thread: null,
         failed: false
     };
@@ -446,7 +219,8 @@ class DiscussionEditor extends React.Component {
             const thread = await createThread(
                 this.state.type,
                 this.state.title,
-                this.state.body
+                this.state.body,
+                this.state.gold
             );
 
             this.setState({
@@ -467,50 +241,6 @@ class DiscussionEditor extends React.Component {
     };
 
     render() {
-        if (
-            false &&
-            this.props.user &&
-            this.props.user.streak < 7 &&
-            !this.props.user.gold
-        ) {
-            return (
-                <Modal.Content>
-                    <div className="alert is-gold">
-                        <div className="alert-body">
-                            <h3>
-                                You must have a 7 day streak to post a thread.
-                            </h3>
-                            <div className="flex flex-v-gap flex-column">
-                                <div></div>
-                                <div>
-                                    <p className="heading">
-                                        Progress: {this.props.user.streak} days
-                                    </p>
-                                    <Line
-                                        percent={this.props.user.streak / 7}
-                                        strokeWidth="2"
-                                        trailWidth="2"
-                                        trailColor="var(--c-border)"
-                                        strokeColor="var(--c-main)"
-                                    />
-                                </div>
-                                <div>
-                                    <small>
-                                        <strong>Can't wait?</strong> Create
-                                        threads right away with <GoldIcon />{" "}
-                                        <OutboundLink to="https://gold.getmakerlog.com">
-                                            Makerlog Gold
-                                        </OutboundLink>
-                                        .
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Modal.Content>
-            );
-        }
-
         return (
             <>
                 <Modal.Content>
@@ -560,6 +290,40 @@ class DiscussionEditor extends React.Component {
                                     value={this.state.body}
                                     renderHTML={text => mdParser.render(text)}
                                 />
+                            </div>
+                        </div>
+                        <div className="flex flex-gap">
+                            <div className="form-row">
+                                <label className="label">
+                                    <input
+                                        name="gold"
+                                        disabled={!this.props.user.gold}
+                                        type="checkbox"
+                                        value={this.state.gold}
+                                        onChange={e => {
+                                            this.setState({
+                                                gold: e.target.checked
+                                            });
+                                        }}
+                                    />
+                                    &nbsp; Gold Club only
+                                </label>
+                                {!this.props.user.gold ? (
+                                    <p className="help">
+                                        <strong>
+                                            <Link route="gold">
+                                                <a target="_blank">Get Gold</a>
+                                            </Link>{" "}
+                                        </strong>
+                                        to limit this post to Gold members only
+                                        for higher quality discussions.
+                                    </p>
+                                ) : (
+                                    <p className="help">
+                                        Limit this post to Gold members only for
+                                        higher quality discussions.
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -677,22 +441,13 @@ class CardEditor extends Component {
 
         return (
             <div
-                className="card"
+                className="CardEditor Editor card"
                 style={{ border: "1px solid var(--c-border)" }}
             >
                 <Modal.Header>
                     <div className="Editor flex flex-gap v-center">
                         <div className="flex-grow">
                             {this.renderNewTabExperience()}
-                            <a
-                                className={
-                                    "editor-select " +
-                                    (this.props.cardTab === 1 && "is-active")
-                                }
-                                onClick={e => this.switchTab(1)}
-                            >
-                                Milestone
-                            </a>
                             <a
                                 className={
                                     "editor-select " +
@@ -706,12 +461,6 @@ class CardEditor extends Component {
                     </div>
                 </Modal.Header>
                 {this.renderTaskEditor()}
-                {this.props.cardTab === 1 && (
-                    <MilestoneEditor
-                        hasGold={this.props.hasGold}
-                        onClose={() => {}}
-                    />
-                )}
                 {this.props.cardTab === 2 && (
                     <DiscussionEditor
                         hasGold={this.props.hasGold}
@@ -790,7 +539,7 @@ class Editor extends Component {
 
         return (
             <Modal
-                modalClassName="Modal panel"
+                modalClassName="ModalEditor Editor Modal panel"
                 open={this.props.open}
                 onClose={this.props.onClose}
             >
@@ -798,15 +547,6 @@ class Editor extends Component {
                     <div className="Editor flex flex-gap v-center">
                         <div className="flex-grow">
                             {this.renderNewTabExperience()}
-                            <a
-                                className={
-                                    "editor-select " +
-                                    (this.props.tab === 1 && "is-active")
-                                }
-                                onClick={e => this.switchTab(1)}
-                            >
-                                Milestone
-                            </a>
                             <a
                                 className={
                                     "editor-select " +
@@ -820,12 +560,7 @@ class Editor extends Component {
                     </div>
                 </Modal.Header>
                 {this.renderTaskEditor()}
-                {this.props.tab === 1 && (
-                    <MilestoneEditor
-                        hasGold={this.props.hasGold}
-                        onClose={this.props.onClose}
-                    />
-                )}
+
                 {this.props.tab === 2 && (
                     <DiscussionEditor
                         hasGold={this.props.hasGold}
@@ -844,9 +579,7 @@ const mapStateToProps = state => ({
     hasGold: state.user.me ? state.user.me.gold : false,
     open: state.editor.open,
     queue: state.editor.queue,
-    creatingMilestone: state.editor.creatingMilestone,
     creatingDiscussion: state.editor.creatingDiscussion,
-    editorDueAt: state.editor.editorDueAt,
     editorAttachment: state.editor.editorAttachment,
     isCreating: state.editor.isCreating,
     editorValue: state.editor.editorValue,
@@ -865,13 +598,11 @@ const mapDispatchToProps = dispatch => ({
     removeFromQueue: t => dispatch(editorActions.removeFromQueue(t)),
     createTasks: () => dispatch(editorActions.createTasks()),
     setEditorValue: v => dispatch(editorActions.setEditorValue(v)),
-    setEditorDueAt: v => dispatch(editorActions.setEditorDueAt(v)),
     toggleEditorDone: () => dispatch(editorActions.toggleEditorDone()),
     setEditorAttachment: a => dispatch(editorActions.setEditorAttachment(a)),
     markDone: () => dispatch(editorActions.markDone()),
     markInProgress: () => dispatch(editorActions.markInProgress()),
     markRemaining: () => dispatch(editorActions.markRemaining()),
-    openMilestoneEditor: () => dispatch(editorActions.openMilestoneEditor()),
     openDiscussionEditor: () => dispatch(editorActions.openDiscussionEditor()),
     switchTab: (tab, which = null) =>
         dispatch(editorActions.switchTab(tab, which))

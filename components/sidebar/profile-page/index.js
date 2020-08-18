@@ -11,7 +11,7 @@ import { getNomadLocation } from "../../../lib/integrations/nomadlist";
 import ProductsContainer from "~/features/products/containers/ProductsContainer";
 import { ProductList } from "~/features/products";
 import { TrophyIcon } from "../../../features/achievements/TrophyMedia";
-import routes, { Link } from "~/routes";
+import { Link } from "~/routes";
 import { connect } from "react-redux";
 
 class MyProductsCard extends Component {

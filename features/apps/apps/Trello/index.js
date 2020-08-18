@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { errorArray } from "~/lib/utils/error";
 import { mapDispatchToProps, mapStateToProps } from "~/ducks/apps";
 import Spinner from "~/components/Spinner";
 import TrelloInstallCard from "./components/TrelloInstallCard";
@@ -17,11 +16,7 @@ import paramParser from "url-param-parser"; // for hash url
 import PageTitle from "~/components/ui/PageTitle";
 import "./index.scss";
 import { loadingClass } from "~/lib/utils/random";
-import {
-    renderHelpOrError,
-    StdErrorCollection,
-    ValidationError
-} from "../../../../lib/utils/error";
+import { StdErrorCollection } from "../../../../lib/utils/error";
 import StdErrorMessages from "~/components/forms/StdErrorMessages";
 
 class TrelloLinkWizard extends React.Component {

@@ -49,7 +49,6 @@ const streamPersistConfig = {
         "isSyncing",
         "fetchFailed",
         "tasks",
-        "milestones",
         "allLoaded",
         "nextUrl",
         "lastUpdatedTime",
@@ -72,7 +71,7 @@ const rootReducer = combineReducers({
     achievements: achievementsReducer
 });
 
-export default (state, action) => {
+const storeConfig = (state, action) => {
     try {
         if (action.type === authTypes.LOGOUT) {
             state = undefined;
@@ -97,4 +96,6 @@ export default (state, action) => {
     }
 
     return rootReducer(state, action);
-};
+}
+
+export default storeConfig;

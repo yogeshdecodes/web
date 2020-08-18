@@ -1,4 +1,4 @@
-import { me, updateSettings } from "~/lib/user";
+import { updateSettings } from "~/lib/user";
 import { Link } from "~/routes";
 
 import Dropzone from "react-dropzone";

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "~/routes";
 import { truncate } from "~/lib/utils/random";
-import { imageUrl } from "../../../../../../lib/utils/img";
 import ProductIcon from "~/features/products/components/ProductIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mapStateToProps as mapUserToProps } from "~/ducks/user";
@@ -109,7 +108,7 @@ export class ProductMedia extends React.Component {
                         <div className={"flex"}>
                             <ProductIcon is={48} product={this.props.product} />
                             <div
-                                class="flex flex-column"
+                                className="flex flex-column"
                                 style={{ justifyContent: "center" }}
                             >
                                 <strong>{this.props.product.name} </strong>

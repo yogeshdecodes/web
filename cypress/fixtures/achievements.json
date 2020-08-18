@@ -1,0 +1,22 @@
+
+[
+  {
+    "id": 5485,
+    "user": 1,
+    "kind": "TROPHY",
+    "key": "first-task",
+    "ephemeral": false,
+    "created_at": "2020-03-24T22:56:05.924564-04:00",
+    "data": {
+      "key": "first-task",
+      "name": "First steps",
+      "description": "Posted their first completed task",
+      "verb": "Post your first completed task",
+      "emoji": "✅",
+      "color": "#87E791",
+      "progress": 100,
+      "order": 1
+    },
+    "read": true
+  }
+]

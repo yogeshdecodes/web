@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OutboundLink from "~/components/OutboundLink";
 import Head from "~/components/Head";
 
-export default props => (
+const DownPage = props => (
     <div className={"DownOverlay"}>
         <Head />
         <h2 className={"brand"}>Makerlog</h2>
@@ -58,3 +58,6 @@ export default props => (
         </div>
     </div>
 );
+
+
+export default DownPage

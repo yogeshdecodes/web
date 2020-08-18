@@ -105,7 +105,7 @@ class ProductEditPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.auth.isLoggedIn,
+        isLoggedIn: state.auth.loggedIn,
         me: state.user.me
     };
 };

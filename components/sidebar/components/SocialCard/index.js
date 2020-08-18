@@ -4,7 +4,7 @@ import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OutboundLink from "~/components/OutboundLink";
 
-export default () => {
+const SocialCard = () => {
     return (
         <div className="SocialCard sidebar-item">
             <h3>Social</h3>
@@ -39,3 +39,5 @@ export default () => {
         </div>
     );
 };
+
+export default SocialCard

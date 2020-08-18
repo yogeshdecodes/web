@@ -1,35 +1,12 @@
 import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Emoji from "~/components/Emoji";
-import MakerDefinition from "../../components/MakerDefinition";
-import WallOfLove from "../../components/WallOfLove";
 import config from "../../config";
-import OutboundLink from "~/components/OutboundLink";
 import Spinner from "~/components/Spinner";
-import {
-    getPreflightConfig,
-    loginWithTwitterToken,
-    loginWithFacebookToken
-} from "../../lib/accounts";
+import { loginWithFacebookToken, loginWithTwitterToken } from "../../lib/auth";
 import { StdErrorCollection } from "../../lib/utils/error";
 import StdErrorMessages from "~/components/forms/StdErrorMessages";
 import { Track } from "../../vendor/ga";
-import { actions as userActions } from "~/ducks/user";
-import { actions as appActions } from "~/ducks/app";
 import { connect } from "react-redux";
 import { actions as authActions } from "~/ducks/auth";
-
-import omit from "lodash/omit";
-import Dropzone from "react-dropzone";
-import {
-    handleChange,
-    validateEmail,
-    loadingClass
-} from "../../lib/utils/random";
-import { updatePrivilegedSettings } from "~/lib/user";
-import { getPrivilegedUser } from "../../lib/user";
-import { Router } from "~/routes";
-import { setCookie } from "nookies";
 
 class SocialActivationForm extends React.Component {
     state = {
@@ -50,6 +27,9 @@ class SocialActivationForm extends React.Component {
                 errorMessages: null
             });
             const { method, params } = this.getAuthProvider();
+            if (!method) {
+                throw new Error("No method found for this provider.");
+            }
             const { token } = await method(...params);
             if (this.props.onToken) {
                 this.props.onToken(token);
@@ -74,7 +54,7 @@ class SocialActivationForm extends React.Component {
         const query = this.props.query;
         switch (query.provider) {
             case "twitter":
-                if (!query.oauth_token || !query.oauth_verifier) return null;
+                if (!query.oauth_token || !query.oauth_verifier) return {};
                 return {
                     method: loginWithTwitterToken,
                     params: [query.oauth_token, query.oauth_verifier]
@@ -82,12 +62,15 @@ class SocialActivationForm extends React.Component {
                 break;
 
             case "facebook":
-                if (!query.code) return null;
+                if (!query.code) return {};
                 return {
                     method: loginWithFacebookToken,
                     params: [query.code, `${config.API_URL}/complete/facebook/`]
                 };
                 break;
+
+            default:
+                return {};
         }
     };
 

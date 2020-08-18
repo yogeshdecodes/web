@@ -1,0 +1,62 @@
+{
+  "remaining_tasks": 538,
+  "done_today": 0,
+  "tda": 7,
+  "done_week": {
+    "labels": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "datasets": [
+      {
+        "label": "Done",
+        "backgroundColor": "#7FC7AF",
+        "data": [
+          11,
+          19,
+          2,
+          1,
+          11,
+          0,
+          0
+        ]
+      },
+      {
+        "label": "Remaining",
+        "backgroundColor": "#DAD8A7",
+        "data": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "streak": 637,
+  "activity_trend": [
+    1,
+    1,
+    2,
+    1,
+    0,
+    12,
+    12,
+    9,
+    1,
+    11,
+    1
+  ],
+  "praise_received": 30866,
+  "follower_count": 338,
+  "maker_score": 2290,
+  "rest_day_balance": 137
+}

@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actions as tasksActions } from "~/ducks/tasks";
-import { applySearchTerms } from "~/lib/utils/tasks";
 import differenceInHours from "date-fns/differenceInHours";
 import { Task } from "~/features/stream";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Tooltip } from "react-tippy";
 import { actions as editorActions } from "~/ducks/editor";
 import "./index.scss";
 import Emoji from "~/components/Emoji";
-import { orderByDate, groupTasksByDone } from "../../../../lib/utils/tasks";
-import InlineCollapse from "../../../../components/InlineCollapse";
+import { groupTasksByDone, orderByDate } from "../../../../lib/utils/tasks";
+import InlineCollapse from "../../../../components/ui/InlineCollapse";
 
 class TodayList extends Component {
     renderEmpty = () => {

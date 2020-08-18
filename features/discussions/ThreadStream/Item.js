@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "~/routes";
 import { truncate } from "~/lib/utils/random";
 import { getThreadInfoBar } from "../utils";
-import OutboundLink from "~/components/OutboundLink";
 
 /**
                 <div className="upvote-arrows">
@@ -17,28 +16,6 @@ import OutboundLink from "~/components/OutboundLink";
  */
 
 export default class extends React.Component {
-    renderActions = () => (
-        <footer>
-            <Link
-                route={"discussion-page"}
-                params={{ slug: this.props.thread.slug }}
-            >
-                <a className={"has-text-grey"}>
-                    <FontAwesomeIcon icon={"reply"} />
-                    <strong>Discuss</strong>
-                    <span className={"has-text-grey-light"}>
-                        {this.props.thread.reply_count} replies
-                    </span>
-                </a>
-            </Link>
-            {this.props.thread.reply_count > 0 && (
-                <div className={"has-text-grey "}>
-                    <ReplyFaces size={32} threadSlug={this.props.thread.slug} />
-                </div>
-            )}
-        </footer>
-    );
-
     renderThread = () => {
         let thread = this.props.thread;
         return (
@@ -67,6 +44,10 @@ export default class extends React.Component {
     render() {
         let thread = this.props.thread;
 
-        return <div className={"ThreadStreamItem"}>{this.renderThread()}</div>;
+        return (
+            <div className={"ThreadStreamItem" + (thread.gold ? " gold" : "")}>
+                {this.renderThread()}
+            </div>
+        );
     }
 }

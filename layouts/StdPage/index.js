@@ -19,18 +19,22 @@ export default class StdPageLayout extends Component {
                 >
                     {props.nav}
                 </PageNavigation>
-                <div className="StdPage container grid-c-s">
-                    <div>{props.children}</div>
-                    {this.props.withSidebar ? (
-                        <div>
-                            {this.props.sidebar ? (
-                                this.props.sidebar
-                            ) : (
-                                <StdPageSidebar />
-                            )}
-                        </div>
-                    ) : null}
-                </div>
+                {props.fullWidth ? (
+                    this.props.children
+                ) : (
+                    <div className="StdPage container grid-c-s">
+                        <div>{props.children}</div>
+                        {this.props.withSidebar ? (
+                            <div>
+                                {this.props.sidebar ? (
+                                    this.props.sidebar
+                                ) : (
+                                    <StdPageSidebar />
+                                )}
+                            </div>
+                        ) : null}
+                    </div>
+                )}
             </>
         );
     }

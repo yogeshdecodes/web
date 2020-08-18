@@ -9,7 +9,6 @@ const initialState = {
     isSyncing: true,
     fetchFailed: false,
     tasks: [],
-    milestones: [],
     allLoaded: false,
     nextUrl: null,
     lastUpdatedTime: null,
@@ -32,9 +31,7 @@ export const types = {
     STREAM_UPDATE_TASK: "STREAM_UPDATE_TASK",
     STREAM_REMOVE_TASK: "STREAM_REMOVE_TASK",
     STREAM_SET_LAST_UPDATED: "STREAM_SET_LAST_UPDATED",
-    STREAM_TOGGLE_FOLLOWING: "STREAM_TOGGLE_FOLLOWING",
-    STREAM_REMOVE_MILESTONE: "STREAM_REMOVE_MILESTONE",
-    STREAM_MERGE_MILESTONES: "STREAM_MERGE_MILESTONES"
+    STREAM_TOGGLE_FOLLOWING: "STREAM_TOGGLE_FOLLOWING"
 };
 
 export const streamReducer = (state = initialState, action) => {
@@ -72,12 +69,6 @@ export const streamReducer = (state = initialState, action) => {
                     uniqBy([...action.tasks, ...state.tasks], "id")
                 );
             }
-            if (action.milestones) {
-                newState.milestones = uniqBy(
-                    [...action.milestones, ...state.milestones],
-                    "id"
-                );
-            }
             return newState;
 
         case types.STREAM_UPDATE_TASK:
@@ -97,15 +88,6 @@ export const streamReducer = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: removedTasks
-            };
-
-        case types.STREAM_REMOVE_MILESTONE:
-            const removedMilestones = state.milestones.filter(
-                t => t.id !== action.id
-            );
-            return {
-                ...state,
-                milestones: removedMilestones
             };
 
         case types.STREAM_FETCH_FAILED:
@@ -147,17 +129,6 @@ export const streamReducer = (state = initialState, action) => {
                 )
             };
 
-        case types.STREAM_MERGE_MILESTONES:
-            return {
-                ...state,
-                initialLoaded: true,
-                fetchFailed: false,
-                allLoaded: false,
-                milestones: orderByDate(
-                    uniqBy([...action.milestones, ...state.milestones], "id")
-                )
-            };
-
         case types.STREAM_SET_LAST_UPDATED:
             return {
                 ...state,
@@ -195,7 +166,6 @@ export const actions = {
         };
     },
     removeTask: id => ({ type: types.STREAM_REMOVE_TASK, id: id }),
-    removeMilestone: id => ({ type: types.STREAM_REMOVE_MILESTONE, id: id }),
     updateTask: (id, payload = {}) => ({
         type: types.STREAM_UPDATE_TASK,
         id: id,
@@ -209,10 +179,6 @@ export const actions = {
     sync: () => ({ type: types.STREAM_SOCKET_SYNC }),
     disconnect: () => ({ type: types.STREAM_SOCKET_CLOSE }),
     mergeTasks: tasks => ({ type: types.STREAM_MERGE_TASKS, tasks: tasks }),
-    mergeMilestones: milestones => ({
-        type: types.STREAM_MERGE_MILESTONES,
-        milestones
-    }),
     setLastUpdatedTime: lastUpdatedTime => ({
         type: types.STREAM_SET_LAST_UPDATED,
         lastUpdatedTime: lastUpdatedTime

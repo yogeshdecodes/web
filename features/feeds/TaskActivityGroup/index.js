@@ -1,16 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-    groupIntegrationTasksByEvent,
-    groupTasksByDone,
-    integrationsToCollapse,
-    orderByDate
-} from "~/lib/utils/tasks";
+import { groupIntegrationTasksByEvent, groupTasksByDone, integrationsToCollapse, orderByDate } from "~/lib/utils/tasks";
 import EntryList from "~/features/stream/components/EntryList";
 // import { StreamCard as Card } from "./styled";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
-import InlineCollapse from "~/components/InlineCollapse";
+import InlineCollapse from "~/components/ui/InlineCollapse";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Track } from "~/vendor/ga";
 

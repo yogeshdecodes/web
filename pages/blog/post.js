@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import BlogPageLayout from "../../layouts/BlogPage";
 import { BlogHero } from "../../features/blog/BlogHero";
 import { getPost } from "../../vendor/ghost";
-import StdPageSidebar from "~/components/sidebar/std-page";
 import Head from "~/components/Head";
 
 class BlogPostPage extends Component {

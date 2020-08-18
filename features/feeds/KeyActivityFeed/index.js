@@ -1,15 +1,9 @@
 import React, { Component } from "react";
 import { Track } from "../../../vendor/ga";
-import axios from "~/lib/axios";
-import { axiosWrapper } from "../../../lib/utils/error";
 import ActivityFeed from "../ActivityFeed";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
-import ReconnectingWebSocket from "reconnecting-websocket";
-import { socketUrl } from "../../../lib/utils/random";
 import uniqBy from "lodash/uniqBy";
-import { orderByDate } from "../../../lib/utils/tasks";
-import orderBy from "lodash/orderBy";
 import {
     getStreamClient,
     getStreamClientAndToken,
@@ -62,29 +56,36 @@ class KeyActivityFeed extends Component {
     }
 
     async componentDidMount() {
-        if (this.token) {
-            this.streamClient = await getStreamClient(this.token);
-            this.feed = this.streamClient.feed(
-                this.props.feed,
-                this.props.userId
-            );
-        } else {
-            this.streamClient = await getStreamClient();
-            this.feed = this.streamClient.feed(
-                this.props.feed,
-                this.props.userId
-            );
-        }
-        if (!this.state.initialLoaded) {
-            await this.loadMore();
-        } else {
-            // We are server side rendered. However, the server timezone is not the local one.
-            // Show the user the data, then reorder it. Prevents later issues when commenting.
-            // This sucks. I don't want to show a spinner because the whole SSR magic is gone.
-            // this.forceUpdate();
-        }
+        try {
+            if (this.token) {
+                this.streamClient = await getStreamClient(this.token);
+                this.feed = this.streamClient.feed(
+                    this.props.feed,
+                    this.props.userId
+                );
+            } else {
+                this.streamClient = await getStreamClient();
+                this.feed = this.streamClient.feed(
+                    this.props.feed,
+                    this.props.userId
+                );
+            }
+            if (!this.state.initialLoaded) {
+                await this.loadMore();
+            } else {
+                // We are server side rendered. However, the server timezone is not the local one.
+                // Show the user the data, then reorder it. Prevents later issues when commenting.
+                // This sucks. I don't want to show a spinner because the whole SSR magic is gone.
+                // this.forceUpdate();
+            }
 
-        this.connect();
+            this.connect();
+        } catch (e) {
+            this.setState({
+                failed: true,
+                loading: false
+            });
+        }
     }
 
     componentWillUnmount() {

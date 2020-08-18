@@ -14,7 +14,7 @@ import Reactor from "~/components/Reactor";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
 import config, { isServer } from "~/config";
-import nookies, { parseCookies, destroyCookie } from "nookies";
+import nookies, { parseCookies } from "nookies";
 import { actions as authActions } from "~/ducks/auth";
 import { actions as appActions } from "~/ducks/app";
 import axios from "~/lib/axios";
@@ -27,7 +27,6 @@ import ThemedContainer from "~/layouts/ThemedContainer";
 import MobileNav from "~/layouts/MobileNav";
 import Editor from "~/features/editor";
 import AchievementsView from "../features/achievements/AchievementsView";
-import ProfileSetupPage from "~/pages/start/setup";
 
 async function onStoreInit(ctx) {
     // only the sagas here are run on the server side; no async dependencies.

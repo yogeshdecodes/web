@@ -1,5 +1,4 @@
 import React from "react";
-import FooterLinks from "~/layouts/Footer/links";
 import Emoji from "~/components/Emoji";
 import { Link } from "~/routes";
 import OutboundLink from "~/components/OutboundLink";
@@ -15,7 +14,7 @@ export default function Footer() {
                     <small className="has-text-grey">
                         Crafted with love in Puerto Rico <Emoji emoji="🇵🇷" />
                         <br />
-                        &copy; Makerlog
+                        &copy; Makerlog, LLC
                     </small>
                 </div>
                 <div className="spacer"></div>
@@ -33,9 +32,7 @@ export default function Footer() {
                             </OutboundLink>
                         </li>
                         <li>
-                            <OutboundLink to="https://makerlog.io/intravert">
-                                Advertise
-                            </OutboundLink>
+                            <Link route={"ads"}>Advertise</Link>
                         </li>
                     </ul>
                 </div>

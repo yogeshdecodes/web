@@ -1,0 +1,15 @@
+@import "../../../styles/variables";
+
+.InlineCollapse {
+    .collapse-control {
+        //font-size: smaller;
+        font-size: $font-size;
+        font-weight: normal !important;
+    }
+
+    .collapse-content {
+        border-left: 1px solid var(--c-border);
+        padding: 0.5rem;
+        margin-bottom: 5px;
+    }
+}

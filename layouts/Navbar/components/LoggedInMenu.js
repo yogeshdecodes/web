@@ -2,7 +2,7 @@
 import NavLink from "~/components/ActiveLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GlobalSearchBar from "~/features/search/components/GlobalSearchBar";
-import { NavbarDropdown } from "~/components/Dropdown";
+import { NavbarDropdown } from "~/components/ui/Dropdown";
 import { NotificationsLink } from "~/features/notifications";
 import PropTypes from "prop-types";
 import React from "react";
@@ -19,6 +19,10 @@ const LoggedInMenu = props => (
                 <a className="navbar-item">
                     <span>Explore</span>
                 </a>
+            </NavLink>
+
+            <NavLink iexact activeClassName="is-active" route="gold">
+                <a className="navbar-item gold">Gold</a>
             </NavLink>
 
             <NavLink route="blog" iexact activeClassName="is-active">

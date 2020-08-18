@@ -2,12 +2,8 @@ import React, { Component } from "react";
 import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Emoji from "~/components/Emoji";
-import MakerDefinition from "../../components/MakerDefinition";
 import WallOfLove from "../../components/WallOfLove";
 import config from "../../config";
-import OutboundLink from "~/components/OutboundLink";
-import Spinner from "~/components/Spinner";
-import { getPreflightConfig } from "../../lib/accounts";
 import FaceStack from "~/features/users/components/FaceStack";
 import { requireUnauthed } from "~/lib/auth";
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import copy from "clipboard-copy";
-import Emoji from "./Emoji";
 
 class CopyLink extends React.Component {
     state = {
@@ -26,7 +25,7 @@ class CopyLink extends React.Component {
 
     render() {
         return (
-            <a
+            <button
                 onClick={this.onClick}
                 className={"gray-link-with-icon " + this.state.copied}
             >
@@ -40,7 +39,7 @@ class CopyLink extends React.Component {
                             : null}
                     </>
                 )}
-            </a>
+            </button>
         );
     }
 }

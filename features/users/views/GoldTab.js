@@ -5,7 +5,7 @@ import Switch from "react-switch";
 import Spinner from "~/components/Spinner";
 import { getSubscriptionDetails } from "../../../lib/billing";
 import { handleChange, loadingClass } from "../../../lib/utils/random";
-import GoldMessage from "../../../components/GoldMessage";
+import GoldMessage from "../../gold/GoldMessage";
 
 class SubscriptionSettings extends React.Component {
     state = {

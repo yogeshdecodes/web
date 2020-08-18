@@ -1,8 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { actions as userActions, types as userTypes } from "../ducks/user";
-import { getPrivilegedUser } from "~/lib/user";
-import { actions as appActions } from "../ducks/app";
-import { isServer } from "../config";
+import { getPrivilegedUser, patchSettings } from "~/lib/user";
 
 export function* fetchUser(action) {
     try {
@@ -16,8 +14,22 @@ export function* fetchUser(action) {
     }
 }
 
+export function* updateUser(action) {
+    try {
+        if (action.patch) {
+            yield call(patchSettings, action.user);
+        }
+    } catch (e) {
+        console.log(e);
+        let action = null;
+        action = userActions.userFailed(e.message);
+        yield put(action);
+    }
+}
+
 function* userSaga() {
     yield takeLatest(userTypes.USER_REQUESTED, fetchUser);
+    yield takeLatest(userTypes.USER_UPDATE, updateUser);
 }
 
 export { userSaga };

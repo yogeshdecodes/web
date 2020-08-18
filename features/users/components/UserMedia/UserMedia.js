@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FullName from "../FullName";
-import Tda from "../../../../components/Tda";
 import Streak from "../../../../components/Streak";
 import "./UserMedia.scss";
 import Emoji from "~/components/Emoji";
 import Avatar from "../Avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MakerScore from "../../../../components/MakerScore";
 import { Link } from "~/routes";
 import { imageUrl } from "../../../../lib/utils/img";
 import GoldIcon from "~/components/icons/GoldIcon";
@@ -86,20 +84,7 @@ const StatBar = ({ user, showUsername = false }) => (
         <div className={"tag"}>
             <Streak days={user.streak} />
         </div>
-        <div className={"tag"}>
-            <Tda tda={user.week_tda} />
-        </div>
         <UserBadges user={user} />
-    </div>
-);
-const StatText = ({ user }) => (
-    <div className={"flex inline"}>
-        <div className={"tag"}>
-            <Streak days={user.streak} />
-        </div>
-        <div className={"tag"}>
-            <Tda tda={user.week_tda} />
-        </div>
     </div>
 );
 
@@ -208,7 +193,6 @@ class UserMedia extends React.Component {
                                     <Streak days={user.streak} />
                                 )}
                                 {user.streak === 100 && <Emoji emoji={"🎉"} />}
-                                <MakerScore score={user.maker_score} />
                                 <Tda tda={user.week_tda} />
                                 {isNewUser(user) && (
                                     <span className="new-user">

@@ -65,20 +65,20 @@ class SubscribeForm extends Component {
                 method="post"
                 action="https://blog.getmakerlog.com/subscribe/"
                 id=""
-                class="gh-signin"
+                className="gh-signin"
                 onSubmit={this.submit}
             >
                 <div className="flex flex-gap">
                     <div>
-                        <input class="confirm" type="hidden" name="confirm" />
+                        <input className="confirm" type="hidden" name="confirm" />
                         <input
-                            class="location"
+                            className="location"
                             type="hidden"
                             name="location"
                             value={getLocation()}
                         />
                         <input
-                            class="referrer"
+                            className="referrer"
                             type="hidden"
                             name="referrer"
                             value={getReferrer()}
