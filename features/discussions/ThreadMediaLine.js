@@ -6,12 +6,11 @@ import GoldIcon from "~/components/icons/GoldIcon";
 
 function ThreadMediaLine({ thread }) {
     return (
-        <div className=" ThreadMediaLine flex flex-gap">
-            {thread.gold && (
-                <div>
-                    <GoldIcon />
-                </div>
-            )}
+        <div
+            className={
+                "ThreadMediaLine flex flex-gap" + (thread.gold ? " gold" : "")
+            }
+        >
             {thread.pinned && (
                 <div>
                     <FontAwesomeIcon size="xs" icon={"thumbtack"} />

@@ -2481,12 +2481,20 @@ ul.unstyled {
 }
 
 .ThreadMediaLine {
+    display: flex;
+    align-items: center;
+
     h4 {
         cursor: pointer;
 
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    &.gold {
+        @extend %corners;
+        @extend %gold-highlight;
     }
 }
 

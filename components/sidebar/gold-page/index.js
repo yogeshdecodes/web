@@ -12,7 +12,7 @@ const GoldUsersCard = ({ latestUsers = null, me }) => {
     return (
         <div className="UserCard sidebar-item">
             <h3>Public Roadmap</h3>
-            <h4 className="subtitle has-text-grey ">
+            <h4 className="subtitle has-text-grey">
                 We're building this with you!
             </h4>
             <div className="card">
