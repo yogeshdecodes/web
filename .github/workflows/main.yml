@@ -38,12 +38,11 @@ jobs:
                   region: ${{ secrets.AWS_DEFAULT_REGION }}
                   use_existing_version_if_available: true
                   deployment_package: deploy.zip
-
-    - uses: act10ns/slack@v1
-      with:
-        status: ${{ job.status }}
-        steps: ${{ toJson(steps) }}
-        channel: '#ops'
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: always()
+            - uses: act10ns/slack@v1
+              with:
+                status: ${{ job.status }}
+                steps: ${{ toJson(steps) }}
+                channel: '#ops'
+              env:
+                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+              if: always()
