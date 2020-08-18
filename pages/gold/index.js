@@ -122,12 +122,38 @@ const GoldLanding = ({ onClickBuy, users, products, purchased }) => (
                         </p>
                     </center>
                 </div>
+
+                <div className="feature-showcase">
+                    <div className="image-case">
+                        <img
+                            src="/img/gold/ship.png"
+                            style={{ maxHeight: 80 }}
+                            alt=""
+                        />
+                    </div>
+                    <div className="text-case left">
+                        <h3>A community that has your back.</h3>
+                        <p>
+                            Makerlog Gold is the{" "}
+                            <strong>heart of the maker community</strong>.
+                            <br />
+                            We're an exclusive club of makers that has your
+                            back, 24/7 -- from development, support, to launch
+                            -- we're with you.
+                        </p>
+                    </div>
+                </div>
                 <div className="feature-showcase">
                     <div className="text-case right">
-                        <h3>A kickass dark mode.</h3>
+                        <h3>Features to drool over.</h3>
                         <p>
-                            Join the dark side with an absolutely stunning,
-                            handcrafted dark mode.
+                            A gorgeous <strong>dark mode</strong>. <br />{" "}
+                            Thoughtful discussions in{" "}
+                            <strong>the Gold Lounge</strong>. <br />
+                            Save time with{" "}
+                            <strong>recurring tasks (soon!)</strong>.
+                            <br /> Share more with{" "}
+                            <strong>video (soon!)</strong>.
                         </p>
                     </div>
                     <div className="image-case" style={{ paddingBottom: 0 }}>
@@ -136,31 +162,19 @@ const GoldLanding = ({ onClickBuy, users, products, purchased }) => (
                 </div>
 
                 <div className="feature-showcase">
-                    <div className="image-case">placeholder</div>
-                    <div className="text-case left">
-                        <h3>Features that empower you.</h3>
-                        <p>
-                            Tell your progress to the community with{" "}
-                            <strong>updates</strong>.<br /> Reach more makers by{" "}
-                            <strong>featuring your product</strong>.
-                            <br />
-                            Save time with <strong>recurring tasks</strong>.
-                            <br /> Share more with <strong>video</strong>.
-                        </p>
+                    <div className="image-case picture">
+                        <img src="/img/cool-pictures/image4.jpeg" alt="" />
                     </div>
-                </div>
-
-                <div className="feature-showcase">
-                    <div className="text-case right">
-                        <h3>Supports the maker movement.</h3>
+                    <div className="text-case left">
+                        <h3>Built in public by humans.</h3>
                         <p>
-                            Makerlog is shipped by people just like you.
+                            Makerlog is{" "}
+                            <strong>shipped by makers just like you</strong>.
                             <br />
                             Your support helps an indie startup empower makers
                             from all over the world.
                         </p>
                     </div>
-                    <div className="image-case">photographer pic</div>
                 </div>
             </div>
         </div>
@@ -289,7 +303,7 @@ const GoldWelcomeLetter = connect(state => ({ user: state.user.me }))(
 );
 
 const GoldDashboard = props => (
-    <GoldPageLayout>
+    <GoldPageLayout latestUsers={props.latestUsers}>
         {props.purchased ? <GoldWelcomeLetter /> : null}
         <KeyActivityFeed userId={-1} feed="timeline_gold" />
     </GoldPageLayout>
@@ -305,7 +319,9 @@ class GoldPage extends React.Component {
             };
         } catch (e) {
             console.log(e);
-            return { heroItems: { users: [], products: [] } };
+            return {
+                heroItems: { users: [], products: [], latest_users: [] }
+            };
         }
     }
 
@@ -367,12 +383,18 @@ class GoldPage extends React.Component {
 
     render() {
         if (
-            false &&
             this.props.hasGold &&
-            this.props.userId &&
-            [1].includes(this.props.userId)
+            this.props.username &&
+            ["sergio", "hector", "fajarsiddiq", "madscordes"].includes(
+                this.props.username
+            )
         ) {
-            return <GoldDashboard purchased={this.state.purchased} />;
+            return (
+                <GoldDashboard
+                    latestUsers={this.props.heroItems.latest_users}
+                    purchased={this.state.purchased}
+                />
+            );
         } else {
             return (
                 <GoldLanding
@@ -391,7 +413,7 @@ export default connect(
         isLoggedIn: state.auth.loggedIn,
         hasGold: state.user.me ? state.user.me.gold : false,
         userGold: state.user.me ? state.user.me.dark_mode : false,
-        userId: state.user.me ? state.user.me.id : false,
+        username: state.user.me ? state.user.me.username : null,
         userDark: state.user.me ? state.user.me.dark_mode : false,
         email: state.user.me ? state.user.me.email : null
     }),

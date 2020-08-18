@@ -11,7 +11,12 @@ export default class GoldPageLayout extends Component {
             <StdPageLayout
                 title="Gold"
                 withSidebar
-                sidebar={<GoldPageSidebar footer />}
+                sidebar={
+                    <GoldPageSidebar
+                        footer
+                        latestUsers={this.props.latestUsers}
+                    />
+                }
                 nav={
                     <>
                         <NavLink route="gold-page" activeClassName="is-active">
@@ -25,10 +30,14 @@ export default class GoldPageLayout extends Component {
                             <a className="navbar-item">Discussions</a>
                         </NavLink>
                         <NavLink route="tasks" activeClassName="is-active">
-                            <a className="navbar-item">Makers</a>
+                            <a className="navbar-item disabled">
+                                Makers <span className="tag">Soon</span>
+                            </a>
                         </NavLink>
                         <NavLink route="tasks" activeClassName="is-active">
-                            <a className="navbar-item">Ads</a>
+                            <a className="navbar-item disabled">
+                                Ads <span className="tag">Soon</span>
+                            </a>
                         </NavLink>
                         <NavLink route="settings" activeClassName="is-active">
                             <a className="navbar-item">Settings</a>

@@ -3,18 +3,33 @@ import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import SmallFooter from "~/components/sidebar/components/SmallFooter";
 import "./index.scss";
+import UserMedia from "~/features/users/components/UserMedia";
 import { getTip } from "~/features/gold/GoldTip";
+import OutboundLink from "../../OutboundLink";
 
-const GoldUsersCard = ({ latestMembers = null, me }) => {
+const GoldUsersCard = ({ latestUsers = null, me }) => {
+    if (!latestUsers) return null;
     return (
         <div className="UserCard sidebar-item">
-            <h3>New To The Club</h3>
+            <h3>Public Roadmap</h3>
             <h4 className="subtitle has-text-grey ">
-                This is the exclusive tribe.
+                We're building this with you!
             </h4>
             <div className="card">
                 <div className="card-content">
-                    <div>x</div>
+                    <div>
+                        <p>
+                            Makerlog Gold is just getting started, and we're
+                            building it with you.
+                        </p>
+                        <br />
+                        <OutboundLink
+                            to="https://trello.com/invite/b/kPevmmtD/b4896c4b18d7572be90835c7bf474ae7/makerlog-gold"
+                            className="btn btn-light"
+                        >
+                            View roadmap
+                        </OutboundLink>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,12 +58,18 @@ const GoldTipsCard = ({ me }) => {
     );
 };
 
-const GoldPageSidebar = ({ isLoggedIn, me, data, footer = false }) => {
+const GoldPageSidebar = ({
+    isLoggedIn,
+    me,
+    data,
+    latestUsers = null,
+    footer = false
+}) => {
     //if (!data || data.failed) return null;
 
     return (
         <div className="Sidebar">
-            <GoldUsersCard />
+            <GoldUsersCard latestUsers={latestUsers} />
             <GoldTipsCard />
             {footer ? <SmallFooter /> : null}
         </div>

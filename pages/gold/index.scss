@@ -115,7 +115,8 @@
 
 .feature-showcase {
     display: flex;
-    max-height: 500px;
+    min-height: 387px;
+    max-height: 387px;
 
     .text-case {
         background-color: var(--c-lightest);
@@ -136,6 +137,12 @@
     }
 
     .image-case {
+        max-height: 500px;
+
+        &.picture img {
+            @extend %corners;
+        }
+
         img {
             max-height: 100%;
         }
