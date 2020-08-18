@@ -27,9 +27,7 @@ export default function Footer() {
                             </Link>
                         </li>
                         <li>
-                            <OutboundLink to={"https://gold.getmakerlog.com"}>
-                                Makerlog Gold
-                            </OutboundLink>
+                            <Link route="gold">Makerlog Gold</Link>
                         </li>
                         <li>
                             <Link route={"ads"}>Advertise</Link>

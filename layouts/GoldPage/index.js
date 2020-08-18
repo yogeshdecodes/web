@@ -50,7 +50,17 @@ export default class GoldPageLayout extends Component {
                     </div>
                 }
             >
-                <div className="GoldPage">{this.props.children}</div>
+                <div className="GoldPage">
+                    <Head
+                        title={`Gold`}
+                        description={
+                            "Makerlog Gold is the heart of the maker community."
+                        }
+                        ogImage={`/img/og/gold-og.png`}
+                        ogLargeImage={true}
+                    />
+                    {this.props.children}
+                </div>
             </StdPageLayout>
         );
     }

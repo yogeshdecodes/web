@@ -21,9 +21,7 @@ export default function FooterLinks() {
                 </OutboundLink>
             </li>
             <li>
-                <OutboundLink to={"https://gold.getmakerlog.com"}>
-                    Gold
-                </OutboundLink>
+                <Link route="gold">Gold</Link>
             </li>
             <li>
                 <OutboundLink href={"https://api.getmakerlog.com/"}>

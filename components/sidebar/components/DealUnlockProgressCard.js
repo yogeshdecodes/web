@@ -71,9 +71,9 @@ export default connect(mapStateToProps)(({ me, isLoggedIn }) => {
                                         <p className="help mb0 has-text-grey-light">
                                             Pssst! You can instantly unlock all
                                             deals and much more by&nbsp;
-                                            <OutboundLink to="https://gold.getmakerlog.com">
-                                                getting Gold.
-                                            </OutboundLink>{" "}
+                                            <Link to="gold">
+                                                <a>getting Gold.</a>
+                                            </Link>
                                         </p>
                                     </>
                                 )}

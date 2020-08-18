@@ -5,7 +5,6 @@ import FullName from "~/features/users/components/FullName";
 
 import GoldIcon from "~/components/icons/GoldIcon";
 import { Tooltip } from "react-tippy";
-import OutboundLink from "~/components/OutboundLink";
 import VerifiedIcon from "../../../../components/icons/VerifiedIcon";
 
 export default class UserLine extends Component {
@@ -34,7 +33,7 @@ export default class UserLine extends Component {
                                 <Tooltip
                                     interactive
                                     html={
-                                        <OutboundLink to="https://gold.getmakerlog.com">
+                                        <Link to="gold">
                                             <a
                                                 style={{
                                                     color: "white",
@@ -43,7 +42,7 @@ export default class UserLine extends Component {
                                             >
                                                 Makerlog Gold Subscriber
                                             </a>
-                                        </OutboundLink>
+                                        </Link>
                                     }
                                     animateFill={false}
                                     delay={200}

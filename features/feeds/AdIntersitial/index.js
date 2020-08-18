@@ -5,6 +5,7 @@ import OutboundLink from "~/components/OutboundLink";
 import { connect } from "react-redux";
 import { mapStateToProps } from "~/ducks/user";
 import GoldIcon from "~/components/icons/GoldIcon";
+import { Link } from "~/routes";
 
 class AdIntersitial extends Component {
     render() {
@@ -15,12 +16,10 @@ class AdIntersitial extends Component {
                     <Ad />
                 </div>
                 <div className="title">
-                    <OutboundLink
-                        to="https://gold.getmakerlog.com"
-                        className="unstyled"
-                    >
+                    <Link to="gold">
                         <GoldIcon /> Get rid of ads with Makerlog Gold &raquo;
-                    </OutboundLink>
+                        <a>getting Gold.</a>
+                    </Link>
                 </div>
             </div>
         );

@@ -243,7 +243,7 @@ class UserMedia extends React.Component {
                                     <Tooltip
                                         interactive
                                         html={
-                                            <OutboundLink to="https://gold.getmakerlog.com">
+                                            <Link route="gold">
                                                 <a
                                                     style={{
                                                         color: "white",
@@ -253,7 +253,7 @@ class UserMedia extends React.Component {
                                                 >
                                                     Makerlog Gold Subscriber
                                                 </a>
-                                            </OutboundLink>
+                                            </Link>
                                         }
                                         animateFill={false}
                                         delay={200}
