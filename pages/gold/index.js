@@ -124,7 +124,7 @@ const GoldLanding = ({ onClickBuy, users, products, purchased }) => (
                 </div>
 
                 <div className="feature-showcase">
-                    <div className="image-case">
+                    <div className="image-case is-hidden-mobile">
                         <img
                             src="/img/gold/ship.png"
                             style={{ maxHeight: 80 }}
@@ -156,13 +156,16 @@ const GoldLanding = ({ onClickBuy, users, products, purchased }) => (
                             <strong>video (soon!)</strong>.
                         </p>
                     </div>
-                    <div className="image-case" style={{ paddingBottom: 0 }}>
+                    <div
+                        className="image-case is-hidden-mobile"
+                        style={{ paddingBottom: 0 }}
+                    >
                         <img src="/img/gold/dark-mode.png" alt="" />
                     </div>
                 </div>
 
                 <div className="feature-showcase">
-                    <div className="image-case picture">
+                    <div className="image-case picture is-hidden-mobile">
                         <img src="/img/cool-pictures/image4.jpeg" alt="" />
                     </div>
                     <div className="text-case left">
