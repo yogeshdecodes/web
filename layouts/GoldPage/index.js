@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StdPageLayout from "~/layouts/StdPage";
 import NavLink from "~/components/ActiveLink";
+import Head from "~/components/Head";
 import "./index.scss";
 import DarkModeToggle from "../../features/gold/DarkModeToggle";
 import GoldPageSidebar from "~/components/sidebar/gold-page";
