@@ -55,7 +55,7 @@ const AdPreview = ({ booking }) => {
         <Sticky enabled={!isServer ? window.innerWidth >= 728 : false} top={20}>
             <div className="AdCard sidebar-item">
                 <h3>Your ad preview</h3>
-                <h4 className="subtitle has-text-grey">
+                <h4 className="subtitle has-text-grey mb-em">
                     Here's how your ad will be displayed.
                 </h4>
                 <div className="card" style={{ marginBottom: "1rem" }}>
