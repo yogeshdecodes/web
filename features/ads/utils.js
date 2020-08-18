@@ -21,13 +21,14 @@ export function getPlansForType(type) {
                 {
                     id: 621678,
                     title: "Three months",
-                    price: "$207",
+                    price: "$186",
                     offering: () => (
                         <>
                             <strong>Three months</strong> <br />
                             <Emoji emoji="✅" /> Live for 90 days <br />
                             <Emoji emoji="❌" /> No social media posts
-                            <h1>$207</h1>
+                            <h1>$186</h1>
+                            <p className="help">10% off!</p>
                         </>
                     )
                 },
@@ -35,13 +36,14 @@ export function getPlansForType(type) {
                 {
                     id: 621681,
                     title: "Six months",
-                    price: "$414",
+                    price: "$351",
                     offering: () => (
                         <>
                             <strong>Six months</strong> <br />
                             <Emoji emoji="✅" /> Live for 180 days <br />
                             <Emoji emoji="✅" /> Posts on our socials
-                            <h1>$414</h1>
+                            <h1>$351</h1>
+                            <p className="help">15% off!</p>
                         </>
                     )
                 }
@@ -66,13 +68,14 @@ export function getPlansForType(type) {
                 {
                     id: 621684,
                     title: "Three months",
-                    price: "$414",
+                    price: "$372",
                     offering: () => (
                         <>
                             <strong>Three months</strong> <br />
                             <Emoji emoji="✅" /> Live for 90 days <br />
                             <Emoji emoji="✅" /> Posts on our socials
-                            <h1>$414</h1>
+                            <h1>$372</h1>
+                            <p className="help">10% off!</p>
                         </>
                     )
                 },
@@ -80,13 +83,14 @@ export function getPlansForType(type) {
                 {
                     id: 621685,
                     title: "Six months",
-                    price: "$828",
+                    price: "$703",
                     offering: () => (
                         <>
                             <strong>Six months</strong> <br />
                             <Emoji emoji="✅" /> Live for 180 days <br />
                             <Emoji emoji="✅" /> Posts on our socials
-                            <h1>$828</h1>
+                            <h1>$703</h1>
+                            <p className="help">15% off!</p>
                         </>
                     )
                 }
