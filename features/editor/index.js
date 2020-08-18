@@ -21,6 +21,8 @@ import MarkdownIt from "markdown-it";
 import "react-markdown-editor-lite/lib/index.css";
 import dynamic from "next/dynamic";
 import OutboundLink from "~/components/OutboundLink";
+import GoldCtaButton from "~/features/gold/GoldCtaButton";
+import { Link } from "~/routes";
 
 import { DoneStates } from "../../lib/utils/tasks";
 
@@ -199,6 +201,7 @@ class DiscussionEditor extends React.Component {
         type: "TEXT",
         title: "",
         body: "",
+        gold: false,
         thread: null,
         failed: false
     };
@@ -216,7 +219,8 @@ class DiscussionEditor extends React.Component {
             const thread = await createThread(
                 this.state.type,
                 this.state.title,
-                this.state.body
+                this.state.body,
+                this.state.gold
             );
 
             this.setState({
@@ -237,50 +241,6 @@ class DiscussionEditor extends React.Component {
     };
 
     render() {
-        if (
-            false &&
-            this.props.user &&
-            this.props.user.streak < 7 &&
-            !this.props.user.gold
-        ) {
-            return (
-                <Modal.Content>
-                    <div className="alert is-gold">
-                        <div className="alert-body">
-                            <h3>
-                                You must have a 7 day streak to post a thread.
-                            </h3>
-                            <div className="flex flex-v-gap flex-column">
-                                <div></div>
-                                <div>
-                                    <p className="heading">
-                                        Progress: {this.props.user.streak} days
-                                    </p>
-                                    <Line
-                                        percent={this.props.user.streak / 7}
-                                        strokeWidth="2"
-                                        trailWidth="2"
-                                        trailColor="var(--c-border)"
-                                        strokeColor="var(--c-main)"
-                                    />
-                                </div>
-                                <div>
-                                    <small>
-                                        <strong>Can't wait?</strong> Create
-                                        threads right away with <GoldIcon />{" "}
-                                        <OutboundLink to="https://gold.getmakerlog.com">
-                                            Makerlog Gold
-                                        </OutboundLink>
-                                        .
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Modal.Content>
-            );
-        }
-
         return (
             <>
                 <Modal.Content>
@@ -330,6 +290,40 @@ class DiscussionEditor extends React.Component {
                                     value={this.state.body}
                                     renderHTML={text => mdParser.render(text)}
                                 />
+                            </div>
+                        </div>
+                        <div className="flex flex-gap">
+                            <div className="form-row">
+                                <label className="label">
+                                    <input
+                                        name="gold"
+                                        disabled={!this.props.user.gold}
+                                        type="checkbox"
+                                        value={this.state.gold}
+                                        onChange={e => {
+                                            this.setState({
+                                                gold: e.target.checked
+                                            });
+                                        }}
+                                    />
+                                    &nbsp; Gold Club only
+                                </label>
+                                {!this.props.user.gold ? (
+                                    <p className="help">
+                                        <strong>
+                                            <Link route="gold">
+                                                <a target="_blank">Get Gold</a>
+                                            </Link>{" "}
+                                        </strong>
+                                        to limit this post to Gold members only
+                                        for higher quality discussions.
+                                    </p>
+                                ) : (
+                                    <p className="help">
+                                        Limit this post to Gold members only for
+                                        higher quality discussions.
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>

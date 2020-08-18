@@ -18,6 +18,22 @@ import { Link, Router } from "~/routes";
 import config from "../../config";
 import { getGoldHeroItems } from "../../lib/gold";
 import KeyActivityFeed from "../../features/feeds/KeyActivityFeed";
+import Countdown from "react-countdown";
+
+/*
+{purchased ? (
+    <Spinner small text="Activating your Gold..." />
+) : (
+    <div>
+        <button
+            onClick={onClickBuy}
+            className="btn is-gold"
+        >
+            Get Gold
+        </button>
+    </div>
+)}
+*/
 
 const GoldHero = ({ items, onClickBuy, purchased }) => (
     <div className="hero-container">
@@ -49,7 +65,7 @@ const GoldHero = ({ items, onClickBuy, purchased }) => (
                 <div className="col">
                     <div className="flex flex-column flex-v-gap">
                         <div>
-                            <h1 className="gold-color animated fadeInDown">
+                            <h1 className="gold-logo gold-color animated fadeInDown">
                                 <GoldIcon /> Gold
                             </h1>
                         </div>
@@ -63,18 +79,15 @@ const GoldHero = ({ items, onClickBuy, purchased }) => (
                                 $5/mo.
                             </p>
                         </div>
-                        {purchased ? (
-                            <Spinner small text="Activating your Gold..." />
-                        ) : (
-                            <div>
-                                <button
-                                    onClick={onClickBuy}
-                                    className="btn is-gold"
-                                >
-                                    Get Gold
-                                </button>
-                            </div>
-                        )}
+                        <h1>
+                            <Countdown
+                                date={new Date("2020-08-25T18:00:00-04:00")}
+                            />
+                        </h1>
+                        <p className="help">
+                            We're launching an all-new Gold soon. Stay tuned on
+                            our socials.
+                        </p>
                     </div>
                     <img
                         className="real-svg"
@@ -224,9 +237,11 @@ const GoldLanding = ({ onClickBuy, users, products, purchased }) => (
                         <p>Come ship with us.</p>
                     </div>
                     <div>
-                        <button onClick={onClickBuy} className="btn is-gold">
-                            Get Gold
-                        </button>
+                        <h1>
+                            <Countdown
+                                date={new Date("2020-08-25T18:00:00-04:00")}
+                            />
+                        </h1>
                     </div>
                     <div>
                         <p className="help">
@@ -242,6 +257,13 @@ const GoldLanding = ({ onClickBuy, users, products, purchased }) => (
         </div>
     </div>
 );
+
+/*
+
+<button onClick={onClickBuy} className="btn is-gold">
+    Get Gold
+</button>
+*/
 
 const GoldWelcomeLetter = connect(state => ({ user: state.user.me }))(
     ({ user, ...props }) => (
@@ -268,7 +290,7 @@ const GoldWelcomeLetter = connect(state => ({ user: state.user.me }))(
 
 const GoldDashboard = props => (
     <GoldPageLayout>
-        <GoldWelcomeLetter />
+        {props.purchased ? <GoldWelcomeLetter /> : null}
         <KeyActivityFeed userId={-1} feed="timeline_gold" />
     </GoldPageLayout>
 );
@@ -344,7 +366,12 @@ class GoldPage extends React.Component {
     };
 
     render() {
-        if (this.props.hasGold) {
+        if (
+            false &&
+            this.props.hasGold &&
+            this.props.userId &&
+            [1].includes(this.props.userId)
+        ) {
             return <GoldDashboard purchased={this.state.purchased} />;
         } else {
             return (
@@ -364,6 +391,7 @@ export default connect(
         isLoggedIn: state.auth.loggedIn,
         hasGold: state.user.me ? state.user.me.gold : false,
         userGold: state.user.me ? state.user.me.dark_mode : false,
+        userId: state.user.me ? state.user.me.id : false,
         userDark: state.user.me ? state.user.me.dark_mode : false,
         email: state.user.me ? state.user.me.email : null
     }),

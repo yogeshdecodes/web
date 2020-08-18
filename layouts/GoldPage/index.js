@@ -17,7 +17,11 @@ export default class GoldPageLayout extends Component {
                         <NavLink route="gold-page" activeClassName="is-active">
                             <a className="navbar-item">Lounge</a>
                         </NavLink>
-                        <NavLink route="tasks" activeClassName="is-active">
+                        <NavLink
+                            route="gold-discussions"
+                            activeClassName="is-active"
+                            exact
+                        >
                             <a className="navbar-item">Discussions</a>
                         </NavLink>
                         <NavLink route="tasks" activeClassName="is-active">
@@ -37,7 +41,7 @@ export default class GoldPageLayout extends Component {
                     </div>
                 }
             >
-                {this.props.children}
+                <div className="GoldPage">{this.props.children}</div>
             </StdPageLayout>
         );
     }

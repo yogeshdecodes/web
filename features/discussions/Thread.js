@@ -13,6 +13,7 @@ import { deleteThread, updateThread } from "~/lib/discussions";
 import Spinner from "~/components/Spinner";
 import { Router } from "~/routes";
 import BodyEditor from "./BodyEditor";
+import GoldMessage from "~/features/gold/GoldMessage";
 
 class ThreadEditor extends React.Component {
     state = {
@@ -132,7 +133,11 @@ export default connect(mapUserToProps)(
             }
 
             if (this.state.deleted) {
-                Router.pushRoute("/discussions");
+                Router.pushRoute("discussions");
+            }
+
+            if (this.props.requiresGold) {
+                Router.pushRoute("gold");
             }
 
             return (

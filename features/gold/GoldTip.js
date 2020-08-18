@@ -24,11 +24,11 @@ const tips = [
             "Gold members have access to a private Telegram group. Check this sidebar to join."
     },
 
-    {
+    /*{
         title: "Keep things on the down low 🤫",
         text:
             "You can mark products as private and their tasks will only be shown to you."
-    },
+    },*/
     {
         title: "Keep makers informed 🚨",
         text:

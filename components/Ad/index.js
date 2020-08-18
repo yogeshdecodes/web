@@ -40,28 +40,6 @@ class AdSpace extends React.Component {
     render() {
         return (
             <div className={"nonGold"} style={{ width: "100%" }}>
-                <AdblockDetect>
-                    <small>
-                        <div className="flex flex-column flex-v-gap">
-                            <div>
-                                Hi! I see you're using an ad blocker. Ads pay
-                                for Makerlog's bills and I promise they're
-                                unintrusive.
-                            </div>
-                            <div>
-                                Consider{" "}
-                                <OutboundLink to="https://blog.getadmiral.com/ultimate-guide-whitelisting">
-                                    making an exception
-                                </OutboundLink>{" "}
-                                or{" "}
-                                <OutboundLink to="https://patreon.com/matteing">
-                                    supporting me on Patreon
-                                </OutboundLink>
-                                . <Emoji emoji="💚" />
-                            </div>
-                        </div>
-                    </small>
-                </AdblockDetect>
                 <Ad />
             </div>
         );

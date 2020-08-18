@@ -13,9 +13,7 @@ export default function FooterLinks() {
             </li>
 
             <li>
-                <OutboundLink to="https://makerlog.io/intravert">
-                    Advertise
-                </OutboundLink>
+                <Link route={"ads"}>Advertise</Link>
             </li>
             <li>
                 <OutboundLink href={"https://status.getmakerlog.com/"}>

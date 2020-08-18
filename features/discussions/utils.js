@@ -18,6 +18,15 @@ export function getThreadInfoBar(thread) {
                     </strong>
                 </div>
             )}
+
+            {thread.gold && (
+                <div className={"has-text-gold"}>
+                    <strong>
+                        <FontAwesomeIcon icon="check-circle" /> Gold only
+                    </strong>
+                </div>
+            )}
+
             <div>
                 <Link route={"discussion-page"} params={{ slug: thread.slug }}>
                     <a>{thread.reply_count} comments</a>

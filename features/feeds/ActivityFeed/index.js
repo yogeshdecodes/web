@@ -29,6 +29,7 @@ import CommentsBox from "../../comments/components/CommentsBox";
 import TaskDetail from "../../stream/components/Task/components/TaskDetail";
 
 import { ErrorBoundary } from "react-error-boundary";
+import FullName from "../../../components/FullName";
 
 function ErrorFallback({ error, componentStack, resetErrorBoundary }) {
     return isDev ? <div>An activity broke the site.</div> : null;
@@ -197,9 +198,10 @@ const ActivityDeleted = ({ activity }) => {
     return <div className="ActivityItemContainer">Content deleted.</div>;
 };
 
-const ActivityObject = ({ activity }) => {
+let ActivityObject = ({ activity, ...props }) => {
     if (!activity.getObject()) return <ActivityDeleted />;
     const { object, type } = activity.getObject();
+    const target = activity.getTarget();
 
     switch (type) {
         case "task":
@@ -215,8 +217,28 @@ const ActivityObject = ({ activity }) => {
         case "reply":
             return (
                 <div className="ActivityItemContainer">
+                    {target &&
+                    target.type === "thread" &&
+                    target.object.gold ? (
+                        <div className={"has-text-gold heading"}>
+                            <strong>
+                                <FontAwesomeIcon icon="check-circle" />{" "}
+                                #GoldClub only
+                            </strong>
+                        </div>
+                    ) : null}
                     <p className="mb-em">
-                        <Markdown body={object.body} />
+                        {target &&
+                        target.type === "thread" &&
+                        target.object.gold &&
+                        (!props.me || !props.me.gold) ? (
+                            <>
+                                <FullName user={object.owner} /> replied to a
+                                Gold thread.
+                            </>
+                        ) : (
+                            <Markdown body={object.body} />
+                        )}
                     </p>
                     <div className="actions flex flex-gap">
                         <div>
@@ -232,14 +254,25 @@ const ActivityObject = ({ activity }) => {
 
         case "thread":
             return (
-                <div className="ActivityItemContainer">
+                <div className={"ActivityItemContainer"}>
+                    {object.gold ? (
+                        <div className={"has-text-gold heading"}>
+                            <strong>
+                                <FontAwesomeIcon icon="check-circle" />{" "}
+                                #GoldClub only
+                            </strong>
+                        </div>
+                    ) : null}
                     <ItemLink type="thread" item={object}>
-                        <h3>{object.title}</h3>
+                        <h2>{object.title}</h2>
                     </ItemLink>
                     <p className="mb-em">
                         <Markdown body={object.body} />
                     </p>
-                    <div className="actions flex flex-gap">
+                    <div
+                        className="actions flex flex-gap v-center"
+                        style={{ width: "100%" }}
+                    >
                         <div>
                             <ItemLink type="thread" item={object}>
                                 <a className="btn-light btn btn-small">Reply</a>
@@ -264,6 +297,8 @@ const ActivityObject = ({ activity }) => {
             return <ActivityTypeUnknown />;
     }
 };
+
+ActivityObject = connect(state => ({ me: state.user.me }))(ActivityObject);
 
 const ActivityObjectGroup = ({ activities }) => {
     if (activities.length === 0) return null;

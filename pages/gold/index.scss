@@ -50,7 +50,7 @@
         }
     }
 
-    h1 {
+    h1.gold-color {
         font-size: 3rem;
         color: white;
         //color: var(--c-lightest);
@@ -61,7 +61,7 @@
     }
 
     .gold-color {
-        color: $c-gold;
+        color: $c-gold !important;
     }
 
     .logo-giant {

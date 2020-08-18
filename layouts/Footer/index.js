@@ -32,9 +32,7 @@ export default function Footer() {
                             </OutboundLink>
                         </li>
                         <li>
-                            <OutboundLink to="https://makerlog.io/intravert">
-                                Advertise
-                            </OutboundLink>
+                            <Link route={"ads"}>Advertise</Link>
                         </li>
                     </ul>
                 </div>

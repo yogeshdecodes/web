@@ -3,6 +3,7 @@ import Spinner from "~/components/Spinner";
 import useSWR from "swr";
 import { serveAd } from "../../../lib/ads";
 import OutboundLink from "~/components/OutboundLink";
+import "./index.scss";
 
 const Ad = ({ booking }) => {
     if (!booking) {

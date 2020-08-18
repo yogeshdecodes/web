@@ -1467,7 +1467,7 @@ button[disabled] {
 
 .gold-icon,
 .has-text-gold {
-    color: $c-gold;
+    color: $c-gold !important;
 }
 
 .tag {
@@ -2986,7 +2986,6 @@ p {
     }
 }
 
-
 .TileSelect {
     display: flex;
     width: 100%;
@@ -3011,4 +3010,9 @@ p {
             }
         }
     }
+}
+
+label {
+    display: inline-flex;
+    justify-content: center;
 }
