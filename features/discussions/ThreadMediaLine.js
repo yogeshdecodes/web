@@ -2,10 +2,16 @@ import React from "react";
 import { Link } from "~/routes";
 import ReplyFaces from "./ReplyFaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import GoldIcon from "~/components/icons/GoldIcon";
 
 function ThreadMediaLine({ thread }) {
     return (
         <div className=" ThreadMediaLine flex flex-gap">
+            {thread.gold && (
+                <div>
+                    <GoldIcon />
+                </div>
+            )}
             {thread.pinned && (
                 <div>
                     <FontAwesomeIcon size="xs" icon={"thumbtack"} />
