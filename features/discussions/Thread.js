@@ -138,6 +138,11 @@ export default connect(mapUserToProps)(
 
             if (this.props.requiresGold) {
                 Router.pushRoute("gold");
+                return (
+                    <center>
+                        <Spinner text="Taking you to the Gold home..." />
+                    </center>
+                );
             }
 
             return (
