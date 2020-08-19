@@ -18,6 +18,7 @@ import { loadingClass } from "~/lib/utils/random";
 import { StdErrorCollection } from "~/lib/utils/error";
 import StdErrorMessages from "~/components/forms/StdErrorMessages";
 import { createBooking } from "~/lib/ads";
+import { AdblockDetect } from "../../../components/Ad";
 
 function makeBookingMock(type, text, image, url) {
     return {
@@ -249,6 +250,15 @@ class AdPurchaseForm extends Component {
                     />
                     <div className="card">
                         <div className="card-content">
+                            <AdblockDetect>
+                                <div className="alert is-warning mb-em">
+                                    <div className="alert-body">
+                                        <strong>Heads up!</strong> You have your
+                                        ad blocker on and it may break the ad
+                                        purchase form.
+                                    </div>
+                                </div>
+                            </AdblockDetect>
                             <div className="AdPurchaseForm">
                                 <div className="step">
                                     <h4>1. Pick a format</h4>

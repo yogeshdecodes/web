@@ -32,10 +32,14 @@ export default class extends React.Component {
             }
         } catch (e) {
             if (e.status_code === 403 && thread && thread.gold) {
-                res.writeHead(301, {
-                    Location: "/gold"
-                });
-                res.end();
+                if (res && res.writeHead) {
+                    res.writeHead(301, {
+                        Location: "/gold"
+                    });
+                    res.end();
+                } else if (res && res.redirect) {
+                    res.redirect("/gold");
+                }
                 return {
                     thread,
                     layout,

@@ -7,7 +7,7 @@ import OutboundLink from "~/components/OutboundLink";
 import "./index.scss";
 import Ad from "../../features/ads/Ad";
 
-class AdblockDetect extends React.Component {
+export class AdblockDetect extends React.Component {
     state = {
         usingAdblock: false
     };

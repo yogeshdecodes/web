@@ -386,6 +386,7 @@ class GoldPage extends React.Component {
 
     render() {
         if (
+            false &&
             this.props.hasGold &&
             this.props.username &&
             ["sergio", "hector", "fajarsiddiq", "madscordes"].includes(
