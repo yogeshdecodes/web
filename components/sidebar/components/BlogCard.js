@@ -43,9 +43,9 @@ export default class BlogCard extends Component {
         return (
             <div className="blog-media flex">
                 <div className="flex-grow">
-                    <OutboundLink to={data.link}>
+                    <Link route="blog-post" params={{ slug: data.slug }}>
                         <h4>{data.title}</h4>
-                    </OutboundLink>
+                    </Link>
                     <small>
                         <p>{truncate(data.excerpt, 14, "...")}</p>
                         <Link route="blog-post" params={{ slug: data.slug }}>
