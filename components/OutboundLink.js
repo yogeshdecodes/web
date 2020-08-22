@@ -15,7 +15,8 @@ const OutboundLink = ({
         rel="noopener noreferrer"
         className={className}
         style={style}
-        onClick={() => {
+        onClick={(e) => {
+            e.preventDefault();
             new Track().outbound(to || href);
         }}
     >
