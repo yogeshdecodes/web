@@ -390,7 +390,7 @@ class GoldPage extends React.Component {
     };
 
     render() {
-        if (=
+        if (
             this.props.hasGold
             )
         ) {
