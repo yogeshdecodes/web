@@ -392,7 +392,7 @@ class GoldPage extends React.Component {
     render() {
         if (
             this.props.hasGold
-            )
+            
         ) {
             return (
                 <GoldDashboard
