@@ -79,11 +79,18 @@ const GoldHero = ({ items, onClickBuy, purchased }) => (
                                 $5/mo.
                             </p>
                         </div>
-                        <h1>
-                            <Countdown
-                                date={new Date("2020-08-25T18:00:00-04:00")}
-                            />
-                        </h1>
+                       {purchased ? (
+                            <Spinner small text="Activating your Gold..." />
+                        ) : (
+                            <div>
+                                <button
+                                    onClick={onClickBuy}
+                                    className="btn is-gold"
+                                >
+                                    Get Gold
+                                </button>
+                            </div>
+                        )}
                         <p className="help">
                             We're launching an all-new Gold soon. Stay tuned on
                             our socials.
@@ -254,11 +261,9 @@ const GoldLanding = ({ onClickBuy, users, products, purchased }) => (
                         <p>Come ship with us.</p>
                     </div>
                     <div>
-                        <h1>
-                            <Countdown
-                                date={new Date("2020-08-25T18:00:00-04:00")}
-                            />
-                        </h1>
+                       <button onClick={onClickBuy} className="btn is-gold">
+                            Get Gold
+                        </button>
                     </div>
                     <div>
                         <p className="help">
