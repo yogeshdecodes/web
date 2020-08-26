@@ -21,7 +21,7 @@ const Ad = ({ booking }) => {
     }
     return (
         <OutboundLink
-            href={`https://api.getmakerlog.com/ads/${booking.id}/click/`}
+            to={`https://api.getmakerlog.com/ads/${booking.id}/click/`}
         >
             <div className={"Booking " + booking.type.toLowerCase()}>
                 <div className="image">
