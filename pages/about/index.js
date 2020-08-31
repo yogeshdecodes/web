@@ -38,7 +38,7 @@ class AboutPage extends React.Component {
                                     <div className="card-content">
                                         <p>
                                             Makerlog is a community of over
-                                            5,000 entrepreneurs in tech shipping
+                                            6,000 entrepreneurs in tech shipping
                                             side projects together. These
                                             entrepreneurs, makers, can post
                                             their daily tasks and grow a network
@@ -143,7 +143,7 @@ class AboutPage extends React.Component {
                                                     <small>Tasks created</small>
                                                 </div>
                                                 <div>
-                                                    <h2>5,000+</h2>
+                                                    <h2>6,000+</h2>
                                                     <small>Users</small>
                                                 </div>
                                                 <div>
@@ -175,7 +175,10 @@ class AboutPage extends React.Component {
                                 challenge the status quo.
                             </p>
                         </div>
-                        <div className="large-user-list flex flex-gap">
+                        <div
+                            className="large-user-list flex flex-gap"
+                            style={{ gridTemplateColumns: " repeat(5, 1fr)" }}
+                        >
                             <div className="user">
                                 <img src="/img/team/sergio.png" alt="" />
                                 <div>
@@ -203,6 +206,16 @@ class AboutPage extends React.Component {
                                     <p>Head of research, data analysis</p>
                                     <small>
                                         <em>the hustler</em>
+                                    </small>
+                                </div>
+                            </div>
+                            <div className="user">
+                                <img src="/img/team/leilany.png" alt="" />
+                                <div>
+                                    <h3>Leilany Casillas</h3>
+                                    <p>Storytelling & Community</p>
+                                    <small>
+                                        <em>the storyteller</em>
                                     </small>
                                 </div>
                             </div>
