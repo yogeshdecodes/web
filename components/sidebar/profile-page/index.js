@@ -35,6 +35,7 @@ class MyProductsCard extends Component {
                                     {products.length > 0 ? (
                                         <ProductList
                                             thumbnail
+                                            is={48}
                                             products={products}
                                         />
                                     ) : (

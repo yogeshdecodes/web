@@ -4,11 +4,11 @@ import { Link } from "~/routes";
 import ProductTooltip from "../../../ProductTooltip";
 import ProductIcon from "../../../ProductIcon";
 
-const ProductThumbnail = ({ product }) => {
+const ProductThumbnail = ({ product, ...props }) => {
     return (
         <Link route="product-page" params={{ slug: product.slug }}>
             <ProductTooltip product={product}>
-                <ProductIcon product={product} />
+                <ProductIcon product={product} {...props} />
             </ProductTooltip>
         </Link>
     );

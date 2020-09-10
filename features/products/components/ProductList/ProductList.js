@@ -39,7 +39,7 @@ class ProductList extends React.Component {
 
         if (this.props.thumbnail) {
             elems = products.map(p => (
-                <Product key={p.id} thumbnail product={p} />
+                <Product key={p.id} thumbnail product={p} {...this.props} />
             ));
         }
 
