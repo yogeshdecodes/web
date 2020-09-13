@@ -20,8 +20,9 @@ const Ad = ({ booking }) => {
         booking = data;
     }
     return (
-        <OutboundLink
-            to={`https://api.getmakerlog.com/ads/${booking.id}/click/`}
+        <a
+            href={`https://api.getmakerlog.com/ads/${booking.id}/click/`}
+            target="_blank"
         >
             <div className={"Booking " + booking.type.toLowerCase()}>
                 <div className="image">
@@ -31,7 +32,7 @@ const Ad = ({ booking }) => {
                 </div>
                 <div className="text">{booking.text}</div>
             </div>
-        </OutboundLink>
+        </a>
     );
 };
 
