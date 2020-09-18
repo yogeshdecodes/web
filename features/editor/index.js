@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TaskQueue from "~/features/tasks/components/TaskQueue";
 import "./index.scss";
 import GoldIcon from "~/components/icons/GoldIcon";
+import { StdErrorCollection } from "../../lib/utils/error";
 
 import { Line } from "rc-progress";
 import { Router } from "~/routes";
@@ -25,6 +26,7 @@ import GoldCtaButton from "~/features/gold/GoldCtaButton";
 import { Link } from "~/routes";
 
 import { DoneStates } from "../../lib/utils/tasks";
+import ErrorMessageList from "../../components/forms/ErrorMessageList";
 
 const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
     ssr: false
@@ -203,7 +205,8 @@ class DiscussionEditor extends React.Component {
         body: "",
         gold: false,
         thread: null,
-        failed: false
+        failed: false,
+        errorMessages: null
     };
 
     onSubmit = async () => {
@@ -235,7 +238,8 @@ class DiscussionEditor extends React.Component {
         } catch (e) {
             this.setState({
                 loading: false,
-                failed: true
+                failed: true,
+                errorMessages: new StdErrorCollection(e)
             });
         }
     };
@@ -245,11 +249,10 @@ class DiscussionEditor extends React.Component {
             <>
                 <Modal.Content>
                     <div className="form">
-                        {this.state.failed && (
-                            <div className={"panel-message danger"}>
-                                Oops! Something went wrong. Make sure the form
-                                is all filled up!
-                            </div>
+                        {this.state.errorMessages && (
+                            <ErrorMessageList
+                                errors={this.state.errorMessages}
+                            />
                         )}
                         <div className={"form-row"}>
                             <label className="label">Title</label>
