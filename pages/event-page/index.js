@@ -8,6 +8,7 @@ import Head from "~/components/Head";
 
 class EventPage extends React.Component {
     static async getInitialProps({ query }) {
+        console.log(query.slug);
         const layout = { className: "EventsPage" };
 
         try {
