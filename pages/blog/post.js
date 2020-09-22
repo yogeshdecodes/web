@@ -25,9 +25,7 @@ class BlogPostPage extends Component {
                 <Head
                     title={post.title}
                     description={post.excerpt}
-                    ogImage={`https://placid.app/u/ebzycl5jl?&img=${encodeURIComponent(
-                        post.feature_image
-                    )}&title=${encodeURIComponent(post.title)}`}
+                    ogImage={post.feature_image}
                     ogLargeImage={true}
                 />
                 <BlogHero single post={this.props.post} />
