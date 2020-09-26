@@ -97,11 +97,13 @@ export default connect(mapUserToProps)(
                                 !this.state.deleted &&
                                 !this.state.deleting && (
                                     <div>
-                                        <Linkify
-                                            properties={{ target: "_blank" }}
-                                        >
-                                            <Markdown body={this.state.body} />
-                                        </Linkify>
+                                        {reply.hidden ? "This reply was hidden by a moderator." : (
+                                            <Linkify
+                                                properties={{ target: "_blank" }}
+                                            >
+                                                <Markdown body={this.state.body} />
+                                            </Linkify>
+                                        )}
                                     </div>
                                 )}
                             {this.state.editing && (

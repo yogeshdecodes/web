@@ -175,11 +175,13 @@ export default connect(mapUserToProps)(
                                 )}
                                 {!this.state.editing && thread.type !== "LINK" && (
                                     <div>
-                                        <Linkify
-                                            properties={{ target: "_blank" }}
-                                        >
-                                            <Markdown body={this.state.body} />
-                                        </Linkify>
+                                        {thread.hidden ? "This thread was hidden by a moderator." : (
+                                            <Linkify
+                                                properties={{ target: "_blank" }}
+                                            >
+                                                <Markdown body={this.state.body} />
+                                            </Linkify>
+                                        )}
                                     </div>
                                 )}
 
