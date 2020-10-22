@@ -9,6 +9,7 @@ import FeedSwitcher from "../../features/feeds/FeedSwitcher";
 import MainFeed from "../../features/feeds/MainFeed";
 import { CardEditor } from "../../features/editor";
 import { prefetchActivity } from "../../features/feeds/KeyActivityFeed";
+import { GlobalStream } from "../../features/stream";
 
 class StreamPage extends React.Component {
     static async getInitialProps() {
@@ -44,14 +45,7 @@ class StreamPage extends React.Component {
                             ) : (
                                 <CardEditor />
                             )}
-                            <MainFeed
-                                activitiesPrefetch={
-                                    this.props.activitiesPrefetch
-                                }
-                                discussionPrefetch={
-                                    this.props.discussionPrefetch
-                                }
-                            />
+                            <GlobalStream />
                         </div>
 
                         <div className={"sidebar is-hidden-mobile"}>
