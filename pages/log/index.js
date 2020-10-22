@@ -45,6 +45,17 @@ class StreamPage extends React.Component {
                             ) : (
                                 <CardEditor />
                             )}
+                            <div className="alert is-warning">
+                                <div className="alert-body">
+                                    <strong>Important note</strong>
+                                    <p>
+                                        Makerlog's undergoing an outage with the
+                                        feed functionality, so we've temporarily
+                                        reverted to basic feeds. <br />
+                                        Your tasks are fine, log away!
+                                    </p>
+                                </div>
+                            </div>
                             <GlobalStream />
                         </div>
 
