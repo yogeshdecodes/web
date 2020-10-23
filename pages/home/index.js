@@ -45,11 +45,7 @@ function Home(props) {
                         <h4 className="subtitle has-text-grey mb-em">
                             Here's what the community is building...
                         </h4>
-                        <KeyActivityFeed
-                            userId={-1}
-                            feed="timeline"
-                            prefetchData={props.activitiesPrefetch}
-                        />
+                        <KeyActivityFeed userId={-1} feed="timeline" />
                     </div>
                     <div className={"sidebar"}>
                         <ExploreSidebar data={props.data} />
@@ -66,7 +62,6 @@ Home.getInitialProps = async () => {
             footer: false
         },
         ...(await prefetchData()),
-        activitiesPrefetch: await prefetchActivity("timeline", "-1"),
         discussionPrefetch: await prefetchThreads(true)
     };
 };
