@@ -75,7 +75,7 @@ const MainFeed = ({
                     <KeyActivityFeed
                         prefetchData={activitiesPrefetch}
                         userId={-1}
-                        feed="timeline"
+                        feed="site"
                     />
                 </>
             );

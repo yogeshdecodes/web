@@ -45,7 +45,7 @@ function Home(props) {
                         <h4 className="subtitle has-text-grey mb-em">
                             Here's what the community is building...
                         </h4>
-                        <KeyActivityFeed userId={-1} feed="timeline" />
+                        <KeyActivityFeed userId={-1} feed="site" />
                     </div>
                     <div className={"sidebar"}>
                         <ExploreSidebar data={props.data} />
