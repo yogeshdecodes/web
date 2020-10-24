@@ -8,7 +8,6 @@ import { Router } from "~/routes";
 import FeedSwitcher from "../../features/feeds/FeedSwitcher";
 import MainFeed from "../../features/feeds/MainFeed";
 import { CardEditor } from "../../features/editor";
-import { prefetchActivity } from "../../features/feeds/KeyActivityFeed";
 import { GlobalStream } from "../../features/stream";
 
 class StreamPage extends React.Component {
@@ -18,7 +17,6 @@ class StreamPage extends React.Component {
                 footer: false
             },
             ...(await prefetchData()),
-            activitiesPrefetch: await prefetchActivity("timeline", "-1"),
             discussionPrefetch: await prefetchThreads()
         };
     }
@@ -45,18 +43,11 @@ class StreamPage extends React.Component {
                             ) : (
                                 <CardEditor />
                             )}
-                            <div className="alert is-warning">
-                                <div className="alert-body">
-                                    <strong>Important note</strong>
-                                    <p>
-                                        Makerlog's undergoing an outage with the
-                                        feed functionality, so we've temporarily
-                                        reverted to basic feeds. <br />
-                                        Your tasks are fine, log away!
-                                    </p>
-                                </div>
-                            </div>
-                            <GlobalStream />
+                            <MainFeed
+                                discussionPrefetch={
+                                    this.props.discussionPrefetch
+                                }
+                            />
                         </div>
 
                         <div className={"sidebar is-hidden-mobile"}>
