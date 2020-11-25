@@ -90,19 +90,13 @@ export const actions = {
         setCookie(null, "token", token, {
             maxAge: 30 * 24 * 60 * 60,
             path: "/",
+            ...(!config.isDev && !isServer
+                ? {
+                      domain: `.${window.location.hostname}`,
+                      // eslint-disable-next-line no-mixed-spaces-and-tabs
+                  }
+                : {}),
         });
-        if (!config.isDev && !isServer) {
-            setCookie(null, "token", token, {
-                maxAge: 30 * 24 * 60 * 60,
-                path: "/",
-                ...(!config.isDev && !isServer
-                    ? {
-                          domain: `beta.getmakerlog.com`,
-                          // eslint-disable-next-line no-mixed-spaces-and-tabs
-                      }
-                    : {}),
-            });
-        }
         new Track().event("login");
         return {
             type: types.LOGIN_SUCCEEDED,

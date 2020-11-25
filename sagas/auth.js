@@ -63,19 +63,6 @@ function* fetchToken(action) {
                           }
                         : {}),
                 });
-
-                if (!config.isDev && !isServer) {
-                    setCookie(null, "token", token, {
-                        maxAge: 30 * 24 * 60 * 60,
-                        path: "/",
-                        ...(!config.isDev && !isServer
-                            ? {
-                                  domain: `beta.getmakerlog.com`,
-                                  // eslint-disable-next-line no-mixed-spaces-and-tabs
-                              }
-                            : {}),
-                    });
-                }
                 //sync auth across windows
                 window.localStorage.setItem("authSync_login", Date.now());
             }
