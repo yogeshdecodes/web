@@ -1,6 +1,7 @@
 import { errorArray } from "~/lib/utils/error";
 import { setCookie } from "nookies";
 import { Track } from "~/vendor/ga";
+import config, { isServer } from "../config";
 
 const initialState = {
     authModalOpen: false,
@@ -9,7 +10,7 @@ const initialState = {
     isLoading: false,
     failed: false,
     token: "",
-    errorMessages: null
+    errorMessages: null,
 };
 
 export const types = {
@@ -17,7 +18,7 @@ export const types = {
     LOGIN_SUCCEEDED: "LOGIN_SUCCEEDED",
     LOGIN_FAILED: "LOGIN_FAILED",
     LOGOUT: "LOGOUT",
-    AUTH_TOGGLE_MODAL: "AUTH_TOGGLE_MODAL"
+    AUTH_TOGGLE_MODAL: "AUTH_TOGGLE_MODAL",
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -26,7 +27,7 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: true,
-                loggedIn: false
+                loggedIn: false,
             };
 
         case types.LOGIN_SUCCEEDED:
@@ -35,7 +36,7 @@ export const authReducer = (state = initialState, action) => {
                 isLoading: false,
                 loggedIn: true,
                 failed: false,
-                token: action.token
+                token: action.token,
             };
 
         case types.LOGIN_FAILED:
@@ -44,7 +45,7 @@ export const authReducer = (state = initialState, action) => {
                 failed: true,
                 isLoading: false,
                 loggedIn: false,
-                errorMessages: action.errorMessages
+                errorMessages: action.errorMessages,
             };
 
         case types.AUTH_TOGGLE_MODAL:
@@ -59,7 +60,7 @@ export const authReducer = (state = initialState, action) => {
                         : true,
                 authModalType: action.authModalType
                     ? action.authModalType
-                    : null
+                    : null,
             };
 
         case types.LOGOUT:
@@ -75,7 +76,7 @@ export const actions = {
         let action = {
             type: types.LOGIN_REQUESTED,
             username: username,
-            password: password
+            password: password,
         };
         if (token) {
             // token overrides.
@@ -88,12 +89,18 @@ export const actions = {
     loginSuccess: (token, user) => {
         setCookie(null, "token", token, {
             maxAge: 30 * 24 * 60 * 60,
-            path: "/"
+            path: "/",
+            ...(!config.isDev && !isServer
+                ? {
+                      domain: `.${window.location.hostname}`,
+                      // eslint-disable-next-line no-mixed-spaces-and-tabs
+                  }
+                : {}),
         });
         new Track().event("login");
         return {
             type: types.LOGIN_SUCCEEDED,
-            token: token
+            token: token,
         };
     },
 
@@ -101,7 +108,7 @@ export const actions = {
         new Track().event("login-failed");
         return {
             type: types.LOGIN_FAILED,
-            errorMessages: errorArray(errorMessages)
+            errorMessages: errorArray(errorMessages),
         };
     },
 
@@ -110,17 +117,23 @@ export const actions = {
         new Track().event("logout");
         setCookie(ctx ? ctx : null, "token", "", {
             maxAge: 30 * 24 * 60 * 60,
-            path: "/"
+            path: "/",
+            ...(!config.isDev && !isServer
+                ? {
+                      domain: `.${window.location.hostname}`,
+                      // eslint-disable-next-line no-mixed-spaces-and-tabs
+                  }
+                : {}),
         });
         return {
-            type: types.LOGOUT
+            type: types.LOGOUT,
         };
     },
 
     toggleModal: (authModalType = null) => {
         return {
             type: types.AUTH_TOGGLE_MODAL,
-            authModalType
+            authModalType,
         };
-    }
+    },
 };

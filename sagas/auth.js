@@ -4,11 +4,11 @@ import { actions as appActions } from "../ducks/app";
 import axios from "~/lib/axios";
 import { getToken } from "~/lib/auth";
 import { setCookie } from "nookies";
-import { isServer } from "~/config";
+import config, { isServer } from "~/config";
 import { fetchUser } from "./user";
 import { gaSetUserId } from "../vendor/ga";
 
-const getUserState = state => state.user;
+const getUserState = (state) => state.user;
 
 function* fetchToken(action) {
     try {
@@ -55,7 +55,13 @@ function* fetchToken(action) {
                 console.log("Set cookie.");
                 setCookie(null, "token", token, {
                     maxAge: 30 * 24 * 60 * 60,
-                    path: "/"
+                    path: "/",
+                    ...(!config.isDev && !isServer
+                        ? {
+                              domain: `.${window.location.hostname}`,
+                              // eslint-disable-next-line no-mixed-spaces-and-tabs
+                          }
+                        : {}),
                 });
                 //sync auth across windows
                 window.localStorage.setItem("authSync_login", Date.now());
