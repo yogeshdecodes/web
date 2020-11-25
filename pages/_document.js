@@ -61,19 +61,6 @@ export default class Document extends NextDocument {
                     {this.renderAnalytics()}
                     <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
                     <script
-                        src="https://browser.sentry-cdn.com/5.15.4/bundle.min.js"
-                        integrity="sha384-Nrg+xiw+qRl3grVrxJtWazjeZmUwoSt0FAVsbthlJ5OMpx0G08bqIq3b/v0hPjhB"
-                        crossOrigin="anonymous"
-                    ></script>
-                    <script
-                        type="text/javascript"
-                        dangerouslySetInnerHTML={{
-                            __html: isDev
-                                ? ""
-                                : `Sentry.init({ dsn: 'https://2a9f23af62a74638b4c5c24a7cc132c2@o197126.ingest.sentry.io/3170364' });`
-                        }}
-                    />
-                    <script
                         dangerouslySetInnerHTML={{
                             __html: `(function(h,o,t,j,a,r){
                                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
