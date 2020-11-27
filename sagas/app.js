@@ -1,4 +1,11 @@
-import { call, put, select, take, takeEvery, takeLatest } from "redux-saga/effects";
+import {
+    call,
+    put,
+    select,
+    take,
+    takeEvery,
+    takeLatest
+} from "redux-saga/effects";
 import { actions as appActions, types as appTypes } from "../ducks/app";
 import { actions as statsActions } from "../ducks/stats";
 import { actions as tasksActions } from "../ducks/tasks";
@@ -7,7 +14,6 @@ import { checkApiHealth } from "~/lib/app";
 import { syncTimezone } from "~/lib/user";
 import axios from "~/lib/axios";
 import { notificationsActions } from "../ducks/notifications";
-import { achievementsActions } from "../ducks/achievements";
 import { Router } from "~/routes";
 import { isServer } from "../config";
 
@@ -38,7 +44,6 @@ function* takeoff(action) {
     yield put(projectsActions.fetchProjects());
     yield put(notificationsActions.fetchNotifications());
     yield put(notificationsActions.connect());
-    yield put(achievementsActions.fetchAchievements());
 
     // Set timezone
     // todo; prevent call by diffing.

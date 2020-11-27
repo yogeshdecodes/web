@@ -1,10 +1,20 @@
-import { all, call, put, race, select, take, takeLatest } from "redux-saga/effects";
+import {
+    all,
+    call,
+    put,
+    race,
+    select,
+    take,
+    takeLatest
+} from "redux-saga/effects";
 import { getNotifications, markAllRead } from "../lib/notifications";
-import { notificationsActions, notificationsTypes } from "../ducks/notifications";
+import {
+    notificationsActions,
+    notificationsTypes
+} from "../ducks/notifications";
 import { socketUrl } from "~/lib/utils/random";
 import { eventChannel } from "redux-saga";
 import RWS from "reconnecting-websocket/dist/reconnecting-websocket";
-import { achievementsActions } from "../ducks/achievements";
 
 function getSocketUrl(token) {
     return socketUrl(`/notifications/?token=${token}`);
@@ -68,19 +78,6 @@ function listen(socket) {
                             data.payload
                         ])
                     );
-                    if (
-                        data.payload &&
-                        data.payload.key === "achievement_get"
-                    ) {
-                        emit(
-                            achievementsActions.fetchAchievementsSuccess(
-                                data.payload.target
-                                    ? [data.payload.target]
-                                    : [],
-                                []
-                            )
-                        );
-                    }
                     break;
 
                 default:

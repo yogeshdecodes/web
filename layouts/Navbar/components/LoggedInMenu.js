@@ -10,7 +10,6 @@ import OutboundLink from "../../../components/OutboundLink";
 import UserChip from "./UserChip";
 import Spinner from "~/components/Spinner";
 import ChatLink from "../../../features/chat/ChatLink";
-import AchievementsLink from "../../../features/achievements/AchievementsLink";
 
 const LoggedInMenu = props => (
     <div className={"navbar-menu"} onClick={props.onToggleExpand}>
@@ -97,8 +96,6 @@ const LoggedInMenu = props => (
             </div>
 
             <NotificationsLink />
-
-            <AchievementsLink />
 
             <ChatLink />
 

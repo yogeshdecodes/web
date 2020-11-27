@@ -10,7 +10,6 @@ import Spinner from "~/components/Spinner";
 import { getNomadLocation } from "../../../lib/integrations/nomadlist";
 import ProductsContainer from "~/features/products/containers/ProductsContainer";
 import { ProductList } from "~/features/products";
-import { TrophyIcon } from "../../../features/achievements/TrophyMedia";
 import { Link } from "~/routes";
 import { connect } from "react-redux";
 
@@ -180,23 +179,6 @@ const ActivityCard = ({ user }) => {
     );
 };
 
-const TrophyCaseCard = ({ user, trophies }) => {
-    return (
-        <div className="TrophyCaseCard sidebar-item">
-            <h3>Trophy Case</h3>
-            <div className="card">
-                <div className="card-content">
-                    <div className="grid-thumbnails no-margin auto">
-                        {trophies.map(t => (
-                            <TrophyIcon trophy={t} />
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
 const BioCard = ({ user }) => {
     return (
         <div className="BioCard sidebar-item">
@@ -293,16 +275,10 @@ const BioCard = ({ user }) => {
 const ProfileSidebar = ({ user, achievements = [] }) => {
     //if (!data || data.failed) return null;
     if (!user) return null;
-    const trophies = achievements
-        .filter(a => a.kind === "TROPHY")
-        .map(a => a.data);
 
     return (
         <div className="ProfileSidebar Sidebar">
             <ActivityCard user={user} />
-            {trophies.length > 0 && (
-                <TrophyCaseCard trophies={trophies} user={user} />
-            )}
             <MyProductsCard user={user} />
             {user.nomadlist_handle !== null && (
                 <NomadLocationCard user={user} />

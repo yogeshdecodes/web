@@ -233,11 +233,7 @@ export default connect(mapStateToProps)(
                     <div className="mtGap grid-c-s">
                         <div>{props.children}</div>
                         <div>
-                            <ProfileSidebar
-                                achievements={achievements}
-                                key={user.id}
-                                user={user}
-                            />
+                            <ProfileSidebar key={user.id} user={user} />
                         </div>
                     </div>
                 </div>

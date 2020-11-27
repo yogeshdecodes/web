@@ -1,7 +1,6 @@
 import React from "react";
 import ProfilePageLayout from "~/layouts/ProfilePage";
 import { getByUsername } from "~/lib/user";
-import { getUserTrophies } from "~/lib/achievements";
 import "./index.scss";
 import KeyActivityFeed from "../../features/feeds/KeyActivityFeed";
 
@@ -10,8 +9,7 @@ export async function getProfileProps({ query: { username } }) {
 
     try {
         const user = await getByUsername(username);
-        const achievements = await getUserTrophies(username);
-        return { user, achievements, layout: { ...layout } };
+        return { user, layout: { ...layout } };
     } catch (e) {
         if (e.status_code && e.status_code === 404) {
             return { statusCode: 404 };
@@ -23,10 +21,10 @@ export async function getProfileProps({ query: { username } }) {
 
 class ProfilePage extends React.Component {
     render() {
-        const { user, achievements } = this.props;
+        const { user } = this.props;
 
         return (
-            <ProfilePageLayout user={user} achievements={achievements}>
+            <ProfilePageLayout user={user}>
                 <KeyActivityFeed key={user.id} userId={user.id} feed="user" />
             </ProfilePageLayout>
         );
