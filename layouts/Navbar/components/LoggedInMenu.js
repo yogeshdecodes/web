@@ -55,12 +55,6 @@ const LoggedInMenu = props => (
                     </>
                 )}
             >
-                <NavLink route="deals" activeClassName="is-active">
-                    <a className="navbar-item">
-                        <span>Deals</span>
-                    </a>
-                </NavLink>
-
                 <NavLink route="events" activeClassName="is-active">
                     <a className="navbar-item">
                         <span>Events</span>

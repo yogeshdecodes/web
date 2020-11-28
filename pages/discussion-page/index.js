@@ -109,7 +109,7 @@ export default class extends React.Component {
             replies: this.props.replies
         });
 
-        this.connect();
+        //this.connect();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -118,13 +118,13 @@ export default class extends React.Component {
             prevProps.thread &&
             this.props.thread.slug !== prevProps.thread.slug
         ) {
-            this.disconnect();
+            //this.disconnect();
             this.componentDidMount();
         }
     }
 
     componentWillUnmount() {
-        this.disconnect();
+        // this.disconnect();
     }
 
     onCreateReply = reply => {

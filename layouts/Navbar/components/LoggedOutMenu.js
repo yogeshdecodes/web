@@ -34,11 +34,6 @@ const LoggedOutMenu = props => (
                 hoverable
                 link={() => <FontAwesomeIcon icon="ellipsis-v" />}
             >
-                <NavLink route="deals" activeClassName="is-active">
-                    <a className="navbar-item">
-                        <span>Deals</span>
-                    </a>
-                </NavLink>
                 <NavLink activeClassName="is-active" route="events">
                     <a className="navbar-item">
                         <span>Events</span>
