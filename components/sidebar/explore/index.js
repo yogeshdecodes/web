@@ -16,7 +16,6 @@ import "./index.scss";
 import UserActivityGraph from "../../../features/stats/components/UserActivityGraph";
 import UserMediaList from "~/features/users/components/UserMediaList/UserMediaList";
 import BlogCard from "../components/BlogCard";
-import { getLatestDeals } from "../../../lib/deals";
 import { getQuote } from "../../Quote";
 
 const TopStreaksCard = ({ topUsers }) => {
@@ -159,7 +158,6 @@ const ExploreSidebar = ({ isLoggedIn, me, data }) => {
             {!isLoggedIn && <AdCard />}
             <RisingCard risingUsers={data.risingUsers} />
             <UpcomingEventsCard upcomingEvents={data.upcomingEvents} />
-            <LatestDealsCard latestDeals={data.latestDeals} />
             <BlogCard />
             <SocialCard />
             <SmallFooter />
@@ -171,7 +169,6 @@ export async function prefetchData() {
     try {
         let worldStats = await getWorldStats();
         let upcomingEvents = await getUpcomingEvents();
-        let latestDeals = await getLatestDeals();
         let topUsers = worldStats.top_users;
         let newUsers = worldStats.new_users;
         let risingUsers = worldStats.rising_makers || worldStats.rising_users;
@@ -181,8 +178,7 @@ export async function prefetchData() {
                 topUsers,
                 newUsers,
                 risingUsers,
-                upcomingEvents,
-                latestDeals
+                upcomingEvents
             }
         };
     } catch (e) {
